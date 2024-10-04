@@ -3,10 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Ignore all installed directories, but not vcpkg_installed
-!/vcpkg_installed/
+# Ignore vcpkg_installed directories in specific projects
+Framework/vcpkg_installed/
+UnitTest/vcpkg_installed/
 
+# Ignore _Out files and directories
+_Out/
 
+# Ignore .temp folder
+.temp/
 
 # User-specific files
 *.rsuser
