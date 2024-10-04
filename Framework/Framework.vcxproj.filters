@@ -32,7 +32,7 @@
     <ClInclude Include="Scenes\SceneList.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01_Geometry.h">
+    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01.h">
       <Filter>Scenes\Scene_01_Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Base_Object\Drawable.h">
@@ -92,6 +92,7 @@
     <ClInclude Include="Scenes\SceneManager.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\Scene_00_Test\Scene_00.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Systems\Window.cpp">
@@ -119,7 +120,7 @@
     <ClCompile Include="Utilities\HelpMe.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01_Geometry.cpp">
+    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01.cpp">
       <Filter>Scenes\Scene_01_Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Base_Object\Drawable.cpp">
@@ -146,6 +147,7 @@
     <ClCompile Include="Scenes\SceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\Scene_00_Test\Scene_00.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Systems">

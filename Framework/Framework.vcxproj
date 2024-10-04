@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\SceneManager.h" />
+    <ClInclude Include="Scenes\Scene_00_Test\Scene_00.h" />
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Objects\ColorLine.h" />
     <ClInclude Include="Objects\ColorCircle.h" />
@@ -172,7 +173,7 @@
     <ClInclude Include="Objects\Base_Object\Object.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\SceneList.h" />
-    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01_Geometry.h" />
+    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01.h" />
     <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Objects\ColorRect.h" />
     <ClInclude Include="Renders\Resources\GlobalBuffers.h" />
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scenes\SceneManager.cpp" />
+    <ClCompile Include="Scenes\Scene_00_Test\Scene_00.cpp" />
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Objects\ColorLine.cpp" />
     <ClCompile Include="Objects\ColorCircle.cpp" />
@@ -203,7 +205,7 @@
     <ClCompile Include="Objects\Base_Object\Drawable.cpp" />
     <ClCompile Include="Objects\Base_Object\Object.cpp" />
     <ClCompile Include="Renders\Resources\VertexType.cpp" />
-    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01_Geometry.cpp" />
+    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Objects\ColorRect.cpp" />
     <ClCompile Include="Framework.cpp">

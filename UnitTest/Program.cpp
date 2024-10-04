@@ -21,9 +21,10 @@ void Program::Start()
 
 	//Scene ¼¼ÆÃ
 	{
+		SCENE->AddScene(make_shared<Scene_00>());
 		SCENE->AddScene(make_shared<Scene_01>());
 
-		SCENE->LoadScene(0);
+		SCENE->LoadScene(1);
 	}
 }
 

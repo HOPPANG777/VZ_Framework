@@ -1,5 +1,5 @@
 #include "Framework.h"
-#include "Scene_01_Geometry.h"
+#include "Scene_01.h"
 
 void Scene_01::Awake()
 {
