@@ -129,21 +129,17 @@ extern HWND gHandle;
 #define UVRT Vector2(1, 0)
 #define	UVRB Vector2(1, 1)
 
-
 //Interface
 #include "Interfaces/IObject.h"
-
 
 //Systems
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 #include "Systems/Graphics.h"
 
-
 //Utilities
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
-
 
 //Renders
 #include "Renders/Resources/ConstantBuffer.h"
@@ -158,11 +154,9 @@ extern HWND gHandle;
 #include "Renders/Shaders/PixelShader.h"
 #include "Renders/Shaders/VertexShader.h"
 
-
 //Components
 #include "Components/Component.h"
 #include "Components/MoveComponent.h"
-
 
 //Object
 #include "Objects/Base_Object/Object.h"
