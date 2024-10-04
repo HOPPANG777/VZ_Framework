@@ -19,9 +19,6 @@ void Program::Start()
 	//카메라 세팅
 	CAMERA->Init();
 
-	//씬 매니저 세팅
-
-
 	//Scene 세팅
 	{
 		SCENE->AddScene(make_shared<Scene_01>());

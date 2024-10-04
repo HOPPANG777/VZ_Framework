@@ -7,11 +7,8 @@
 Framework/vcpkg_installed/
 UnitTest/vcpkg_installed/
 
-# Ignore _Out files and directories
-_Out/
-
-# Ignore .temp folder
-.temp/
+# Ignore _Build files and directories
+_Build/
 
 # User-specific files
 *.rsuser

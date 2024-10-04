@@ -86,8 +86,12 @@
     <ClInclude Include="Components\MoveComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\DirectHelper.h" />
-    <ClInclude Include="Scenes\SceneManager.h" />
+    <ClInclude Include="Utilities\DirectHelper.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\SceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Systems\Window.cpp">
@@ -136,8 +140,12 @@
     <ClCompile Include="Components\MoveComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\DirectHelper.cpp" />
-    <ClCompile Include="Scenes\SceneManager.cpp" />
+    <ClCompile Include="Utilities\DirectHelper.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\SceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Systems">
