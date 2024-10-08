@@ -83,7 +83,9 @@
     <ClInclude Include="Interfaces\IScene.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\SceneManager.h" />
+    <ClInclude Include="Utilities\SceneManager.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Systems\Window.cpp">
@@ -132,7 +134,9 @@
     <ClCompile Include="Utilities\DirectHelper.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\SceneManager.cpp" />
+    <ClCompile Include="Utilities\SceneManager.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Systems">

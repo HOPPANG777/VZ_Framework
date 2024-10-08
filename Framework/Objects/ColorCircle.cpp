@@ -6,16 +6,14 @@ ColorCircle::ColorCircle(const Vector2& position, const Vector2& scale, const fl
 {
 	//vertices
 	{
-		vertices.assign(4, VertexColor());
+		vertices.assign(segments + 1, VertexColor());
 
-		// 좌 하단
-		vertices[0].position = { -0.5f, -0.5f };
-		// 좌 상단
-		vertices[1].position = { -0.5f, 0.5f };
-		// 우 하단
-		vertices[2].position = { 0.5f, -0.5f };
-		// 우 상단
-		vertices[3].position = { 0.5f, 0.5f };
+		for (size_t i = 0; i <= segments; ++i)
+		{
+			float theta = 2 * Values::PI * i / segments;
+
+			vertices[i].position = Vector2(sinf(theta), cosf(theta)) * 0.5f;
+		}
 
 		for (auto& vertex : vertices) vertex.color = color;
 	}
@@ -56,5 +54,5 @@ void ColorCircle::Render()
 {
 	BASE::Render();
 
-	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP, false);
 }
