@@ -17,9 +17,7 @@ void Scene_01::Start()
 
 void Scene_01::Destroy()
 {
-	objects[0].reset();
-	objects[0].reset();
-	objects[0].reset();
+	for (auto& obj : objects) obj.reset();
 }
 
 void Scene_01::FixedUpdate()
