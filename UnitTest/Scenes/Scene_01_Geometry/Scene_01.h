@@ -4,6 +4,7 @@
 #include "Objects/ColorRect.h"
 #include "Objects/ColorLine.h"
 #include "Objects/ColorCircle.h"
+#include "Objects/ColorFilledCircle.h"
 
 class Scene_01 : public Scene
 {

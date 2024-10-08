@@ -86,6 +86,9 @@
     <ClInclude Include="Utilities\SceneManager.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\ColorFilledCircle.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Systems\Window.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="Utilities\SceneManager.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ColorFilledCircle.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

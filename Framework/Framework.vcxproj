@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\ColorFilledCircle.h" />
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Objects\ColorLine.h" />
     <ClInclude Include="Objects\ColorCircle.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\ColorFilledCircle.cpp" />
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Objects\ColorLine.cpp" />
     <ClCompile Include="Objects\ColorCircle.cpp" />
