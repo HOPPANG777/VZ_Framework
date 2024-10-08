@@ -2,13 +2,14 @@
 #include "ColorFilledCircle.h"
 
 ColorFilledCircle::ColorFilledCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color)
-	: 
+	: Drawable("ColorFilledCircle", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), segments(segments), color(color)
 {
 	//vertices
 	{
 		vertices.assign(segments + 1, VertexColor());
+		vertices[0].position = Vector2();
 
-		for (size_t i = 0; i <= segments; ++i)
+		for (size_t i = 1; i <= segments; ++i)
 		{
 			float theta = 2 * Values::PI * i / segments;
 
@@ -20,18 +21,26 @@ ColorFilledCircle::ColorFilledCircle(const Vector2& position, const Vector2& sca
 
 	//vertexBuffer
 	{
-		//객체를 만들어 주어야 한다.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 
 	//indices
 	{
-		//indices = { 0, 1, 2, 2, 1, 3 };
+		indices.assign(segments * 3, 0);
+
+		for (size_t i = 0; i < segments; ++i)
+		{
+			indices[i * 3] = 0;
+			indices[i * 3 + 1] = UINT(i) + 1;
+			indices[i * 3 + 2] = UINT(i) + 2;
+		}
+
+		indices.back() = 1;
 	}
 
 	//indexBuffer
 	{
-		//indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
+		indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
 	}
 
 	//inputLayout

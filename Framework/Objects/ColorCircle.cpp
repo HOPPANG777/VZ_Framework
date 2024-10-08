@@ -2,7 +2,7 @@
 #include "ColorCircle.h"
 
 ColorCircle::ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color)
-	: Drawable("ColorLine", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), segments(segments), color(color)
+	: Drawable("ColorCircle", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), segments(segments), color(color)
 {
 	//vertices
 	{

@@ -5,6 +5,7 @@ void Scene_01::Awake() {}
 
 void Scene_01::Start()
 {
+	objects.push_back(make_shared<ColorFilledCircle>(CENTER + Vector2(-250, 0), Vector2(100, 100), 0.0f, 100, YELLOW));
 	objects.push_back(make_shared<ColorCircle>(CENTER + Vector2(-100, 0), Vector2(100, 100), 0.0f, 100, GREEN));
 	objects.push_back(make_shared<ColorLine>(CENTER + Vector2(150, 0), 300.0f, 0.0f, BLUE));
 	objects.push_back(make_shared<ColorRect>(CENTER + Vector2(50, 0), Vector2(100, 100), 0.0f, RED));

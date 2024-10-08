@@ -5,7 +5,7 @@ class ColorFilledCircle : public Drawable
 private:
 	vector<VertexColor> vertices;
 
-	//vector<UINT> indices;
+	vector<UINT> indices;
 
 	size_t segments = 0;
 
