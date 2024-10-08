@@ -113,22 +113,6 @@ extern HWND gHandle;
 #define WHITE Color(1, 1, 1, 1)
 #define BLACK Color(0, 0, 0, 1)
 
-//ValuesMacros
-#define ZEROVEC3 Vector3(0, 0, 0)
-#define ONEVEC3 Vector3(1, 1, 1)
-#define LEFTVEC Vector3(-1, 0, 0)
-#define RIGHTVEC Vector3(1, 0, 0)
-#define UPVEC Vector3(0, 1, 0)
-#define DOWNVEC Vector3(0, -1, 0)
-#define FORWARDVEC Vector3(0, 0, 1)
-#define SCREENSIZE Vector3((float)WIN_DEFAULT_WIDTH, (float)WIN_DEFAULT_HEIGHT, 1)
-#define ZEROVEC2 Vector2(0, 0)
-#define ONEVEC2 Vector2(1, 1)
-#define UVLT Vector2(0, 0)
-#define	UVLB Vector2(0, 1)
-#define UVRT Vector2(1, 0)
-#define	UVRB Vector2(1, 1)
-
 //Interface
 #include "Interfaces/IObject.h"
 
@@ -138,8 +122,10 @@ extern HWND gHandle;
 #include "Systems/Graphics.h"
 
 //Utilities
+#include "Utilities/DirectHelper.h"
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
+#include "Utilities/SceneManager.h"
 
 //Renders
 #include "Renders/Resources/ConstantBuffer.h"
@@ -162,13 +148,8 @@ extern HWND gHandle;
 #include "Objects/Base_Object/Object.h"
 #include "Objects/Base_Object/Drawable.h"
 
-//Scenes
-#include "Scenes/Scene.h"
-#include "Scenes/SceneManager.h"
-
 //Camera
 #include "Systems/Camera.h"
-
 
 //const wstring ShaderPath = L"../_Shaders/";
 //const wstring TexturePath = L"../_Textures/";

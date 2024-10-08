@@ -1,0 +1,61 @@
+#include "stdafx.h"
+#include "Scene_01.h"
+
+void Scene_01::Awake()
+{
+
+}
+
+void Scene_01::Start()
+{
+	objects.push_back(make_shared<ColorCircle>(CENTER, Vector2(100, 100), 0.0f, RED));
+	objects.push_back(make_shared<ColorLine>(CENTER, 300.0f, 0.0f, BLUE));
+	objects.push_back(make_shared<ColorRect>(CENTER, Vector2(100, 100), 0.0f, RED));
+
+	objects[0]->AddComponent(make_shared<MoveComponent>());
+}
+
+void Scene_01::Destroy()
+{
+	objects[0].reset();
+	objects[0].reset();
+	objects[0].reset();
+}
+
+void Scene_01::FixedUpdate()
+{
+
+}
+
+void Scene_01::Update()
+{
+	auto rect = dynamic_pointer_cast<ColorRect>(objects.back());
+
+	if (INPUT->Down('Q'))
+	{
+		if (rect->GetColor() == BLUE) rect->SetColor(RED);
+		else if (rect->GetColor() == RED) rect->SetColor(BLUE);
+	}
+
+	for (const auto& obj : objects) obj->Update();
+}
+
+void Scene_01::LateUpdate()
+{
+
+}
+
+void Scene_01::Render()
+{
+	for (const auto& obj : objects) obj->Render();
+}
+
+void Scene_01::PostRender()
+{
+
+}
+
+void Scene_01::ImGUI()
+{
+
+}

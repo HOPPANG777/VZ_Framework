@@ -3,8 +3,37 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Program.h" />
+    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01.h">
+      <Filter>Scenes\Scene_01_Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_00_Test\Scene_00.h">
+      <Filter>Scenes\Scene_00_Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\SceneList.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01.cpp">
+      <Filter>Scenes\Scene_01_Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_00_Test\Scene_00.cpp">
+      <Filter>Scenes\Scene_00_Test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{6e840d11-01dd-463d-9a2e-80f40c05183e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{cb72a80c-538c-474e-8634-95e7782128ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_00_Test">
+      <UniqueIdentifier>{df1ec8f8-778d-4b89-98c4-ab72bb50dda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_01_Geometry">
+      <UniqueIdentifier>{415a3204-2afb-4564-ae02-e7062b6da81a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -26,15 +26,6 @@
     <ClInclude Include="Utilities\Random.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\SceneList.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01.h">
-      <Filter>Scenes\Scene_01_Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\Base_Object\Drawable.h">
       <Filter>Objects\Base_Object</Filter>
     </ClInclude>
@@ -89,10 +80,10 @@
     <ClInclude Include="Utilities\DirectHelper.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\SceneManager.h">
-      <Filter>Scenes</Filter>
+    <ClInclude Include="Interfaces\IScene.h">
+      <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_00_Test\Scene_00.h" />
+    <ClInclude Include="Utilities\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Systems\Window.cpp">
@@ -120,9 +111,6 @@
     <ClCompile Include="Utilities\HelpMe.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01.cpp">
-      <Filter>Scenes\Scene_01_Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\Base_Object\Drawable.cpp">
       <Filter>Objects\Base_Object</Filter>
     </ClCompile>
@@ -144,10 +132,7 @@
     <ClCompile Include="Utilities\DirectHelper.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\SceneManager.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\Scene_00_Test\Scene_00.cpp" />
+    <ClCompile Include="Utilities\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Systems">
@@ -176,12 +161,6 @@
     </Filter>
     <Filter Include="Objects">
       <UniqueIdentifier>{603ec321-ddfd-4a36-b204-f8c7f566263f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{3a5275e5-63c1-4214-8615-a9b515292bc4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_01_Geometry">
-      <UniqueIdentifier>{4514a445-0bfc-4370-ad9a-3ce3a9e504d7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\Base_Object">
       <UniqueIdentifier>{c9d40783-4e48-42fd-ad2e-d5e42fe78745}</UniqueIdentifier>

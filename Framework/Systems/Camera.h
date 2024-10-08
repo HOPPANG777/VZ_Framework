@@ -13,8 +13,6 @@ public:
 	void Move();
 	const Vector3 Drag();
 
-
-
 private:
 	Matrix view, proj;
 	unique_ptr<ViewProjectionBuffer> VPBuffer;

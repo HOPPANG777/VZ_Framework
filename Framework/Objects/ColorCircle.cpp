@@ -56,5 +56,5 @@ void ColorCircle::Render()
 {
 	BASE::Render();
 
-	DrawCall(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }

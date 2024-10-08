@@ -13,9 +13,9 @@ public:
 	ColorRect(const Vector2& position, const Vector2& scale, const float rotation, const Color& color = RED);
 	~ColorRect();
 
+public:
 	void Update();
 	void Render();
-
 
 public:
 	Color GetColor() const { return color; }

@@ -14,6 +14,7 @@ public:
 	ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const Color& color = RED);
 	~ColorCircle();
 
+public:
 	void Update();
 	void Render();
 
