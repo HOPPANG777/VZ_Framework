@@ -14,8 +14,8 @@ public:
 	~ColorLine();
 	
 public:
-	void Update();
-	void Render();
+	void Update() override;
+	void Render() override;
 
 public:
 	Color GetColor() const { return color; }

@@ -1,8 +1,8 @@
 #include "Framework.h"
 #include "ColorCircle.h"
 
-ColorCircle::ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const Color& color)
-	: Drawable("ColorLine", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), color(color)
+ColorCircle::ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color)
+	: Drawable("ColorLine", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), segments(segments), color(color)
 {
 	//vertices
 	{
@@ -28,12 +28,12 @@ ColorCircle::ColorCircle(const Vector2& position, const Vector2& scale, const fl
 
 	//indices
 	{
-		indices = { 0, 1, 2, 2, 1, 3 };
+		//indices = { 0, 1, 2, 2, 1, 3 };
 	}
 
 	//indexBuffer
 	{
-		indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
+		//indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
 	}
 
 	//inputLayout
