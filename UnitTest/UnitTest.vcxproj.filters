@@ -12,6 +12,12 @@
     <ClInclude Include="Scenes\SceneList.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\Scene_02_Clock\Scene_02.h">
+      <Filter>Scenes\Scene_02_Clock</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
@@ -20,6 +26,12 @@
     </ClCompile>
     <ClCompile Include="Scenes\Scene_00_Test\Scene_00.cpp">
       <Filter>Scenes\Scene_00_Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_02_Clock\Scene_02.cpp">
+      <Filter>Scenes\Scene_02_Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +46,9 @@
     </Filter>
     <Filter Include="Scenes\Scene_01_Geometry">
       <UniqueIdentifier>{415a3204-2afb-4564-ae02-e7062b6da81a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_02_Clock">
+      <UniqueIdentifier>{3647449d-fc72-4a57-9c60-25a6f7d0d123}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
