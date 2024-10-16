@@ -89,6 +89,7 @@
     <ClInclude Include="Objects\ColorFilledCircle.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities\SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Systems\Window.cpp">
@@ -143,6 +144,7 @@
     <ClCompile Include="Objects\ColorFilledCircle.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Systems">

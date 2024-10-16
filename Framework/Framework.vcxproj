@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Objects\ColorFilledCircle.h" />
+    <ClInclude Include="Utilities\SoundManager.h" />
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Objects\ColorLine.h" />
     <ClInclude Include="Objects\ColorCircle.h" />
@@ -195,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\ColorFilledCircle.cpp" />
+    <ClCompile Include="Utilities\SoundManager.cpp" />
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Objects\ColorLine.cpp" />
     <ClCompile Include="Objects\ColorCircle.cpp" />
