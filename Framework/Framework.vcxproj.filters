@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="Utilities\SoundManager.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\BaseObject\Object.cpp">
       <Filter>Objects\BaseObject</Filter>
     </ClCompile>
@@ -59,12 +56,12 @@
     <ClCompile Include="Utilities\SceneManager.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\Sound.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
-    <ClInclude Include="Utilities\SoundManager.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Component.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -154,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="Utilities\SceneManager.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Sound.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -149,7 +149,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./;../;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;../_Libraries/;</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
@@ -164,8 +164,8 @@
   <ItemGroup>
     <ClInclude Include="Renders\RenderStates.h" />
     <ClInclude Include="Objects\ColorObject\ColorFilledCircle.h" />
+    <ClInclude Include="Systems\Sound.h" />
     <ClInclude Include="Utilities\SceneManager.h" />
-    <ClInclude Include="Utilities\SoundManager.h" />
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Objects\ColorObject\ColorLine.h" />
     <ClInclude Include="Objects\ColorObject\ColorCircle.h" />
@@ -198,8 +198,8 @@
   <ItemGroup>
     <ClCompile Include="Renders\RenderStates.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorFilledCircle.cpp" />
+    <ClCompile Include="Systems\Sound.cpp" />
     <ClCompile Include="Utilities\SceneManager.cpp" />
-    <ClCompile Include="Utilities\SoundManager.cpp" />
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorLine.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorCircle.cpp" />

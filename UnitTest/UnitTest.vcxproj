@@ -106,6 +106,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>if "$(Platform)" == "x64" (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+) else (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -124,6 +131,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>if "$(Platform)" == "x64" (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+) else (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,6 +152,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>if "$(Platform)" == "x64" (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+) else (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -156,6 +177,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>if "$(Platform)" == "x64" (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+) else (
+    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ObjectManager.h" />
