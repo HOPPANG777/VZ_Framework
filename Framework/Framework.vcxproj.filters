@@ -56,8 +56,11 @@
     <ClCompile Include="Utilities\SceneManager.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\Sound.cpp">
+    <ClCompile Include="Systems\Sounds.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\String.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +155,11 @@
     <ClInclude Include="Utilities\SceneManager.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\Sound.h">
+    <ClInclude Include="Systems\Sounds.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\String.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

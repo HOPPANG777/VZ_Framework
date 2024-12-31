@@ -15,7 +15,7 @@
     <ClInclude Include="Scenes\Scene_02_Clock\Scene_02.h">
       <Filter>Scenes\Scene_02_Clock</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectManager.h">
+    <ClInclude Include="Manager\ObjectManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,7 +30,7 @@
     <ClCompile Include="Scenes\Scene_02_Clock\Scene_02.cpp">
       <Filter>Scenes\Scene_02_Clock</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
+    <ClCompile Include="Manager\ObjectManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>

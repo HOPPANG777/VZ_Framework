@@ -16,6 +16,9 @@ void Program::Awake() {}
 
 void Program::Start()
 {
+	//다이렉트 싱글톤 세팅
+	RenderStates::Init();
+
 	//카메라 세팅
 	CAMERA->Init();
 

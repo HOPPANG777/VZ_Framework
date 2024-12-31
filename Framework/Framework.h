@@ -31,31 +31,50 @@
 
 using namespace std;
 
+//////////////////////////////////////////
 //DirectX D3D11
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
+//////////////////////////////////////////
 
+//////////////////////////////////////////
 //WRL
 #include <wrl.h>
 using namespace Microsoft;
 using namespace WRL;
+//////////////////////////////////////////
 
+//////////////////////////////////////////
 //DirectXTK
 #include <directxtk/SimpleMath.h>
 using namespace DirectX;
 using namespace SimpleMath;
+//////////////////////////////////////////
 
+//////////////////////////////////////////
 // DirectXTex
 #include <DirectXTex.h>
+//////////////////////////////////////////
 
+//////////////////////////////////////////
 //IMGUI
 #include <imgui.h>
 #include <imgui_impl_win32.h>
 #include <imgui_impl_dx11.h>
+//////////////////////////////////////////
 
+//////////////////////////////////////////
+// FMOD
+#include "FMOD/inc/fmod.hpp"
+#ifdef _WIN64
+#pragma comment(lib, "FMOD/lib/x64/fmod_vc.lib")
+#else
+#pragma comment(lib, "FMOD/lib/x86/fmod_vc.lib")
+#endif
+//////////////////////////////////////////
 
 #define WIN_DEFAULT_WIDTH 1280
 #define WIN_DEFAULT_HEIGHT 720
@@ -102,6 +121,7 @@ extern HWND gHandle;
 #define DEBUG HelpMe::Get()
 #define CAMERA Camera::Get()
 #define SCENE SceneManager::Get()
+#define SOUNDS Sounds::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
@@ -126,6 +146,7 @@ extern HWND gHandle;
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
 #include "Utilities/SceneManager.h"
+#include "Utilities/String.h"
 
 //Renders
 #include "Renders/Resources/ConstantBuffer.h"
@@ -135,6 +156,7 @@ extern HWND gHandle;
 #include "Renders/IA/IndexBuffer.h"
 #include "Renders/IA/InputLayout.h"
 #include "Renders/IA/VertexBuffer.h"
+#include "Renders/RenderStates.h"
 
 #include "Renders/Shaders/IShader.h"
 #include "Renders/Shaders/PixelShader.h"
@@ -150,6 +172,9 @@ extern HWND gHandle;
 
 //Camera
 #include "Systems/Camera.h"
+
+//Sounds
+#include "Systems/Sounds.h"
 
 const wstring ShaderPath = L"../_Shaders/";
 const wstring TexturePath = L"../_Textures/";

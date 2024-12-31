@@ -114,6 +114,7 @@ void Window::MainRender()
 {
 	INPUT->Update();
 	TIME->Update();
+	SOUNDS->Update();
 
 	program->Update();
 
