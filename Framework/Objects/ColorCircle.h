@@ -6,16 +6,19 @@ class ColorCircle : public Drawable
 private:
 	vector<VertexColor> vertices;
 
-	vector<UINT> indices;
+	//vector<UINT> indices;
+
+	size_t segments = 0;
 
 	Color color;
 
 public:
-	ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const Color& color = RED);
+	ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color = RED);
 	~ColorCircle();
 
-	void Update();
-	void Render();
+public:
+	void Update()override;
+	void Render()override;
 
 public:
 	Color GetColor() const { return color; }

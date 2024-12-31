@@ -162,8 +162,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="RenderStates.h" />
     <ClInclude Include="Scenes\SceneManager.h" />
+=======
+    <ClInclude Include="Objects\ColorFilledCircle.h" />
+    <ClInclude Include="Utilities\SoundManager.h" />
+>>>>>>> 0.0.1-alpha
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Objects\ColorLine.h" />
     <ClInclude Include="Objects\ColorCircle.h" />
@@ -171,9 +176,7 @@
     <ClInclude Include="Components\MoveComponent.h" />
     <ClInclude Include="Objects\Base_Object\Drawable.h" />
     <ClInclude Include="Objects\Base_Object\Object.h" />
-    <ClInclude Include="Scenes\Scene.h" />
-    <ClInclude Include="Scenes\SceneList.h" />
-    <ClInclude Include="Scenes\Scene_01_Geometry\Scene_01_Geometry.h" />
+    <ClInclude Include="Interfaces\IScene.h" />
     <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Objects\ColorRect.h" />
     <ClInclude Include="Renders\Resources\GlobalBuffers.h" />
@@ -192,12 +195,18 @@
     <ClInclude Include="Systems\Input.h" />
     <ClInclude Include="Systems\Time.h" />
     <ClInclude Include="Systems\Window.h" />
+    <ClInclude Include="Utilities\SceneManager.h" />
     <ClInclude Include="Utilities\targetver.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="RenderStates.cpp" />
     <ClCompile Include="Scenes\SceneManager.cpp" />
+=======
+    <ClCompile Include="Objects\ColorFilledCircle.cpp" />
+    <ClCompile Include="Utilities\SoundManager.cpp" />
+>>>>>>> 0.0.1-alpha
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Objects\ColorLine.cpp" />
     <ClCompile Include="Objects\ColorCircle.cpp" />
@@ -205,7 +214,6 @@
     <ClCompile Include="Objects\Base_Object\Drawable.cpp" />
     <ClCompile Include="Objects\Base_Object\Object.cpp" />
     <ClCompile Include="Renders\Resources\VertexType.cpp" />
-    <ClCompile Include="Scenes\Scene_01_Geometry\Scene_01_Geometry.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Objects\ColorRect.cpp" />
     <ClCompile Include="Framework.cpp">
@@ -219,6 +227,7 @@
     <ClCompile Include="Systems\Input.cpp" />
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
+    <ClCompile Include="Utilities\SceneManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

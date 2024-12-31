@@ -10,11 +10,12 @@ private:
 	Color color;
 
 public:
-	ColorLine(const Vector2& position, const Vector2& scale, const float rotation, const Color& color = RED);
+	ColorLine(const Vector2& position, const float& length, const float rotation, const Color& color = RED);
 	~ColorLine();
-
-	void Update();
-	void Render();
+	
+public:
+	void Update() override;
+	void Render() override;
 
 public:
 	Color GetColor() const { return color; }
