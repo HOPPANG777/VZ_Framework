@@ -1,21 +1,17 @@
 #include "Framework.h"
 #include "ColorLine.h"
 
-ColorLine::ColorLine(const Vector2& position, const Vector2& scale, const float rotation, const Color& color)
-	: Drawable("ColorLine", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), color(color)
+ColorLine::ColorLine(const Vector2& position, const float& length, const float rotation, const Color& color)
+	: Drawable("ColorLine", position, Vector2(length, 0), rotation, L"../_Shaders/VertexColor.hlsl"), color(color)
 {
 	//vertices
 	{
-		vertices.assign(4, VertexColor());
+		vertices.assign(2, VertexColor());
 
 		// 좌 하단
-		vertices[0].position = { -0.5f, -0.5f };
+		vertices[0].position = Vector2();
 		// 좌 상단
-		vertices[1].position = { -0.5f, 0.5f };
-		// 우 하단
-		vertices[2].position = { 0.5f, -0.5f };
-		// 우 상단
-		vertices[3].position = { 0.5f, 0.5f };
+		vertices[1].position = Vector2(1, 0);
 
 		for (auto& vertex : vertices) vertex.color = color;
 	}
@@ -28,12 +24,12 @@ ColorLine::ColorLine(const Vector2& position, const Vector2& scale, const float 
 
 	//indices
 	{
-		indices = { 0, 1, 2, 2, 1, 3 };
+		//indices = { 0, 1, 2, 2, 1, 3 };
 	}
 
 	//indexBuffer
 	{
-		indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
+		//indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
 	}
 
 	//inputLayout
@@ -55,5 +51,5 @@ void ColorLine::Render()
 {
 	BASE::Render();
 
-	DrawCall(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_LINELIST, false);
 }

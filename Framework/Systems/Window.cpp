@@ -121,7 +121,6 @@ void Window::MainRender()
 	{
 		program->Render();
 		program->PostRender();
-
 	}
 	GRAPHICS->End();
 }
