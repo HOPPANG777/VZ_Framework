@@ -18,7 +18,8 @@
 #include <time.h>
 #include <chrono>
 #include <stdlib.h>
-#include <Windows.h>
+#include <windows.h>
+#include <commdlg.h>
 #include <string>
 #include <map>
 #include <unordered_map>
@@ -26,7 +27,6 @@
 #include <random>
 #include <functional>
 #include <fstream>
-#include <windows.h>
 #include <windowsx.h>
 
 using namespace std;
@@ -62,8 +62,9 @@ using namespace SimpleMath;
 //////////////////////////////////////////
 //IMGUI
 #include <imgui.h>
-#include <imgui_impl_win32.h>
+#include <imgui_internal.h>
 #include <imgui_impl_dx11.h>
+#include <imgui_impl_win32.h>
 //////////////////////////////////////////
 
 //////////////////////////////////////////
@@ -141,12 +142,16 @@ extern HWND gHandle;
 #include "Systems/Time.h"
 #include "Systems/Graphics.h"
 
+#include "Utilities/Gui.h"
+
 //Utilities
 #include "Utilities/DirectHelper.h"
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
 #include "Utilities/SceneManager.h"
 #include "Utilities/String.h"
+#include "Utilities/Path.h"
+#include "Utilities/FileStream.h"
 
 //Renders
 #include "Renders/Resources/ConstantBuffer.h"

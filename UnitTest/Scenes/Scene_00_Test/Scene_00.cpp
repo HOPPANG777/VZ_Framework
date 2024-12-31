@@ -7,6 +7,7 @@ void Scene_00::Awake()
 
 void Scene_00::Start()
 {
+	
 }
 
 void Scene_00::Destroy()

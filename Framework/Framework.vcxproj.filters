@@ -62,6 +62,11 @@
     <ClCompile Include="Utilities\String.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\Path.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Gui.cpp" />
+    <ClCompile Include="Utilities\FileStream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -161,6 +166,11 @@
     <ClInclude Include="Utilities\String.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities\Path.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Gui.h" />
+    <ClInclude Include="Utilities\FileStream.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

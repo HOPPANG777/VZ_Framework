@@ -174,6 +174,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Utilities\FileStream.h" />
+    <ClInclude Include="Utilities\Gui.h" />
+    <ClInclude Include="Utilities\Path.h" />
     <ClInclude Include="Renders\RenderStates.h" />
     <ClInclude Include="Objects\ColorObject\ColorFilledCircle.h" />
     <ClInclude Include="Utilities\String.h" />
@@ -209,6 +212,9 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Utilities\FileStream.cpp" />
+    <ClCompile Include="Utilities\Gui.cpp" />
+    <ClCompile Include="Utilities\Path.cpp" />
     <ClCompile Include="Renders\RenderStates.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorFilledCircle.cpp" />
     <ClCompile Include="Utilities\String.cpp" />
