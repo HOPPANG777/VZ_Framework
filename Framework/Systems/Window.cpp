@@ -95,7 +95,7 @@ WPARAM Window::Run()
 			// 메세지 변역
 			TranslateMessage(&msg);
 
-			INPUT->InputProc(msg.message, msg.lParam);
+			INPUT->InputProc(msg.message, msg.wParam, msg.lParam);
 
 			// 메시지 처리함수로 전달
 			DispatchMessage(&msg);
@@ -112,7 +112,11 @@ WPARAM Window::Run()
 
 void Window::MainRender()
 {
-	INPUT->Update();
+	if (ImGui::GetIO().WantCaptureMouse == false)
+	{
+		INPUT->Update();
+	}
+
 	TIME->Update();
 	SOUNDS->Update();
 
@@ -122,12 +126,17 @@ void Window::MainRender()
 	{
 		program->Render();
 		program->PostRender();
+
+		program->ImGUI();
+		Gui::Get()->Render();
 	}
 	GRAPHICS->End();
 }
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	Gui::Get()->MsgProc(handle, message, wParam, lParam);
+
 	switch (message)
 	{
 	case WM_CREATE:
