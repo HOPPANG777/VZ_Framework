@@ -32,7 +32,7 @@ void Gui::Init()
 
 LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	return ImGui_ImplWin32_Proc(handle, message, wParam, lParam);
+	return LRESULT();
 }
 
 void Gui::Resize()
