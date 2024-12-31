@@ -1,24 +1,90 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Systems\Window.h">
+    <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Utilities\SoundManager.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\BaseObject\Object.cpp">
+      <Filter>Objects\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Window.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Time.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Input.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Graphics.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\DirectHelper.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\HelpMe.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Random.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\BaseObject\Drawable.cpp">
+      <Filter>Objects\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\MoveComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\Resources\VertexType.cpp">
+      <Filter>Renders\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\RenderStates.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\Camera.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ColorObject\ColorCircle.cpp">
+      <Filter>Objects\ColorObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ColorObject\ColorFilledCircle.cpp">
+      <Filter>Objects\ColorObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ColorObject\ColorLine.cpp">
+      <Filter>Objects\ColorObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\ColorObject\ColorRect.cpp">
+      <Filter>Objects\ColorObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\SceneManager.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Utilities\SoundManager.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\Input.h">
+    <ClInclude Include="Components\Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\BaseObject\Object.h">
+      <Filter>Objects\BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Window.h">
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\Time.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Systems\Input.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
     <ClInclude Include="Systems\Graphics.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="Systems\Camera.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\ColorRect.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="Utilities\DirectHelper.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\HelpMe.h">
       <Filter>Utilities</Filter>
@@ -26,31 +92,31 @@
     <ClInclude Include="Utilities\Random.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Base_Object\Drawable.h">
-      <Filter>Objects\Base_Object</Filter>
+    <ClInclude Include="Objects\BaseObject\Drawable.h">
+      <Filter>Objects\BaseObject</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Base_Object\Object.h">
-      <Filter>Objects\Base_Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Component.h">
+    <ClInclude Include="Components\MoveComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces\IObject.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\IA\IndexBuffer.h">
-      <Filter>Renders\IA</Filter>
+    <ClInclude Include="Interfaces\IScene.h">
+      <Filter>Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="Renders\IA\InputLayout.h">
+      <Filter>Renders\IA</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\IA\IndexBuffer.h">
       <Filter>Renders\IA</Filter>
     </ClInclude>
     <ClInclude Include="Renders\IA\VertexBuffer.h">
       <Filter>Renders\IA</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\Resources\ConstantBuffer.h">
+    <ClInclude Include="Renders\Resources\GlobalBuffers.h">
       <Filter>Renders\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\Resources\GlobalBuffers.h">
+    <ClInclude Include="Renders\Resources\ConstantBuffer.h">
       <Filter>Renders\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Renders\Resources\VertexType.h">
@@ -65,129 +131,64 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h">
       <Filter>Renders\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="Renders\RenderStates.h">
+      <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\Camera.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
     <ClInclude Include="Utilities\targetver.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\ColorCircle.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="Objects\ColorObject\ColorCircle.h">
+      <Filter>Objects\ColorObject</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\ColorLine.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="Objects\ColorObject\ColorFilledCircle.h">
+      <Filter>Objects\ColorObject</Filter>
     </ClInclude>
-    <ClInclude Include="Components\MoveComponent.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Objects\ColorObject\ColorLine.h">
+      <Filter>Objects\ColorObject</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\DirectHelper.h">
-      <Filter>Utilities</Filter>
+    <ClInclude Include="Objects\ColorObject\ColorRect.h">
+      <Filter>Objects\ColorObject</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\IScene.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="RenderStates.h">
-      <Filter>Renders</Filter>
-    </ClInclude>
-=======
     <ClInclude Include="Utilities\SceneManager.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\ColorFilledCircle.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\SoundManager.h" />
->>>>>>> 0.0.1-alpha
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Systems\Window.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\Input.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\Time.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\Graphics.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="Systems\Camera.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\ColorRect.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\Random.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\HelpMe.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Base_Object\Drawable.cpp">
-      <Filter>Objects\Base_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\Base_Object\Object.cpp">
-      <Filter>Objects\Base_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Renders\Resources\VertexType.cpp">
-      <Filter>Renders\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\ColorCircle.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\ColorLine.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\MoveComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\DirectHelper.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\SceneManager.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="RenderStates.cpp">
-      <Filter>Renders</Filter>
-    </ClCompile>
-=======
-    <ClCompile Include="Objects\ColorFilledCircle.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities\SoundManager.cpp" />
->>>>>>> 0.0.1-alpha
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Systems">
-      <UniqueIdentifier>{48be011b-557e-41fe-911a-aea4aee03c30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{f512ba69-8885-4b55-8e85-73d1cf853226}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders">
-      <UniqueIdentifier>{87cb027e-a700-4f64-929c-67e2f7ba50fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders\IA">
-      <UniqueIdentifier>{1a85ed4f-eedf-4054-9d42-3652d5316f70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders\Resources">
-      <UniqueIdentifier>{bfe833ff-bf36-4e3a-bda7-962f69bc8762}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders\Shaders">
-      <UniqueIdentifier>{51ed31b5-0513-442b-a6f0-2cdd839ecd7d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
-      <UniqueIdentifier>{2b604930-9731-42d4-8226-94d37fc6ba99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interfaces">
-      <UniqueIdentifier>{478f196f-7b6b-4a6d-b4c2-b163c9d439f2}</UniqueIdentifier>
+      <UniqueIdentifier>{5c3433e4-3736-4ae9-a24d-0e553185f100}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects">
-      <UniqueIdentifier>{603ec321-ddfd-4a36-b204-f8c7f566263f}</UniqueIdentifier>
+      <UniqueIdentifier>{9ef5644d-24a1-4723-a264-7b3be7a3c2cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Base_Object">
-      <UniqueIdentifier>{c9d40783-4e48-42fd-ad2e-d5e42fe78745}</UniqueIdentifier>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{5e7cecb5-5193-427a-bdec-c1581a2969f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{fe66446a-6749-422d-b817-14ad2adf72e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders">
+      <UniqueIdentifier>{6caefbae-bb90-4468-8a73-26849cc5c884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{8532e353-f2c4-4ad3-8761-1204cb1f4aee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\IA">
+      <UniqueIdentifier>{4c80fe29-4578-44c6-a710-a7b12d6e52db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\Resources">
+      <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\Shaders">
+      <UniqueIdentifier>{41fa61ae-9ae0-46dd-b1c5-b3f14b916782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\ColorObject">
+      <UniqueIdentifier>{c8e1254e-9e05-466a-a2c9-4a0472baa715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\BaseObject">
+      <UniqueIdentifier>{e121b46d-0206-4c42-9432-6541d40372c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

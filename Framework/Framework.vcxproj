@@ -162,23 +162,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="RenderStates.h" />
-    <ClInclude Include="Scenes\SceneManager.h" />
-=======
-    <ClInclude Include="Objects\ColorFilledCircle.h" />
+    <ClInclude Include="Renders\RenderStates.h" />
+    <ClInclude Include="Objects\ColorObject\ColorFilledCircle.h" />
+    <ClInclude Include="Utilities\SceneManager.h" />
     <ClInclude Include="Utilities\SoundManager.h" />
->>>>>>> 0.0.1-alpha
     <ClInclude Include="Utilities\DirectHelper.h" />
-    <ClInclude Include="Objects\ColorLine.h" />
-    <ClInclude Include="Objects\ColorCircle.h" />
+    <ClInclude Include="Objects\ColorObject\ColorLine.h" />
+    <ClInclude Include="Objects\ColorObject\ColorCircle.h" />
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\MoveComponent.h" />
-    <ClInclude Include="Objects\Base_Object\Drawable.h" />
-    <ClInclude Include="Objects\Base_Object\Object.h" />
+    <ClInclude Include="Objects\BaseObject\Drawable.h" />
+    <ClInclude Include="Objects\BaseObject\Object.h" />
     <ClInclude Include="Interfaces\IScene.h" />
     <ClInclude Include="Systems\Camera.h" />
-    <ClInclude Include="Objects\ColorRect.h" />
+    <ClInclude Include="Objects\ColorObject\ColorRect.h" />
     <ClInclude Include="Renders\Resources\GlobalBuffers.h" />
     <ClInclude Include="Renders\Resources\ConstantBuffer.h" />
     <ClInclude Include="Framework.h" />
@@ -195,27 +192,23 @@
     <ClInclude Include="Systems\Input.h" />
     <ClInclude Include="Systems\Time.h" />
     <ClInclude Include="Systems\Window.h" />
-    <ClInclude Include="Utilities\SceneManager.h" />
     <ClInclude Include="Utilities\targetver.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClCompile Include="RenderStates.cpp" />
-    <ClCompile Include="Scenes\SceneManager.cpp" />
-=======
-    <ClCompile Include="Objects\ColorFilledCircle.cpp" />
+    <ClCompile Include="Renders\RenderStates.cpp" />
+    <ClCompile Include="Objects\ColorObject\ColorFilledCircle.cpp" />
+    <ClCompile Include="Utilities\SceneManager.cpp" />
     <ClCompile Include="Utilities\SoundManager.cpp" />
->>>>>>> 0.0.1-alpha
     <ClCompile Include="Utilities\DirectHelper.cpp" />
-    <ClCompile Include="Objects\ColorLine.cpp" />
-    <ClCompile Include="Objects\ColorCircle.cpp" />
+    <ClCompile Include="Objects\ColorObject\ColorLine.cpp" />
+    <ClCompile Include="Objects\ColorObject\ColorCircle.cpp" />
     <ClCompile Include="Components\MoveComponent.cpp" />
-    <ClCompile Include="Objects\Base_Object\Drawable.cpp" />
-    <ClCompile Include="Objects\Base_Object\Object.cpp" />
+    <ClCompile Include="Objects\BaseObject\Drawable.cpp" />
+    <ClCompile Include="Objects\BaseObject\Object.cpp" />
     <ClCompile Include="Renders\Resources\VertexType.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
-    <ClCompile Include="Objects\ColorRect.cpp" />
+    <ClCompile Include="Objects\ColorObject\ColorRect.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Framework.h</PrecompiledHeaderFile>
@@ -227,7 +220,6 @@
     <ClCompile Include="Systems\Input.cpp" />
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
-    <ClCompile Include="Utilities\SceneManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -145,21 +145,13 @@ extern HWND gHandle;
 #include "Components/MoveComponent.h"
 
 //Object
-#include "Objects/Base_Object/Object.h"
-#include "Objects/Base_Object/Drawable.h"
+#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/Drawable.h"
 
 //Camera
 #include "Systems/Camera.h"
-
-<<<<<<< HEAD
 
 const wstring ShaderPath = L"../_Shaders/";
 const wstring TexturePath = L"../_Textures/";
 const wstring SoundPath = L"../_Sounds/";
 const string TilePath = "../_TileData/";
-=======
-//const wstring ShaderPath = L"../_Shaders/";
-//const wstring TexturePath = L"../_Textures/";
-//const wstring SoundPath = L"../_Sounds/";
-//const string TilePath = "../_TileData/";
->>>>>>> 0.0.1-alpha

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Objects/ColorRect.h"
-#include "Objects/ColorLine.h"
-#include "Objects/ColorCircle.h"
-#include "Objects/ColorFilledCircle.h"
+#include "Objects/ColorObject/ColorRect.h"
+#include "Objects/ColorObject/ColorLine.h"
+#include "Objects/ColorObject/ColorCircle.h"
+#include "Objects/ColorObject/ColorFilledCircle.h"
 
 class ObjectManager
 {
