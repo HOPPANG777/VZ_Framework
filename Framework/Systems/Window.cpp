@@ -96,6 +96,7 @@ WPARAM Window::Run()
 			TranslateMessage(&msg);
 
 			INPUT->InputProc(msg.message, msg.lParam);
+			if (IMGUI->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
 
 			// 메시지 처리함수로 전달
 			DispatchMessage(&msg);
@@ -115,6 +116,7 @@ void Window::MainRender()
 	INPUT->Update();
 	TIME->Update();
 	SOUNDS->Update();
+	IMGUI->Update();
 
 	program->Update();
 
@@ -122,12 +124,15 @@ void Window::MainRender()
 	{
 		program->Render();
 		program->PostRender();
+
+		program->ImGUI();
+		IMGUI->Render();
 	}
 	GRAPHICS->End();
 }
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
-{
+{	
 	switch (message)
 	{
 	case WM_CREATE:

@@ -2,7 +2,7 @@
 
 class Gui
 {
-	DECLARE_SINGLETON(Gui)
+	DECLARE_SINGLETON(Gui);
 public:
 	void Init();
 

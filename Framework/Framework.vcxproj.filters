@@ -65,8 +65,12 @@
     <ClCompile Include="Utilities\Path.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\Gui.cpp" />
-    <ClCompile Include="Utilities\FileStream.cpp" />
+    <ClCompile Include="Utilities\Gui.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\FileStream.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -169,8 +173,12 @@
     <ClInclude Include="Utilities\Path.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Gui.h" />
-    <ClInclude Include="Utilities\FileStream.h" />
+    <ClInclude Include="Utilities\Gui.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\FileStream.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

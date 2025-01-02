@@ -123,6 +123,7 @@ extern HWND gHandle;
 #define CAMERA Camera::Get()
 #define SCENE SceneManager::Get()
 #define SOUNDS Sounds::Get()
+#define IMGUI Gui::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)

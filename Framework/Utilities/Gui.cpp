@@ -1,6 +1,14 @@
 #include "Framework.h"
 #include "Gui.h"
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// ImGui가 메시지를 처리한 경우
+	return ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam);
+}
+
 Gui::Gui() 
 {
 	Init();
@@ -28,11 +36,6 @@ void Gui::Init()
 	ImGui_ImplDX11_Init(DEVICE, DC);
 
 	ApplyStyle();
-}
-
-LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	return LRESULT();
 }
 
 void Gui::Resize()
