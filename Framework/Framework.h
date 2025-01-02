@@ -37,6 +37,7 @@ using namespace std;
 #include <d3dcompiler.h>
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dx11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 //////////////////////////////////////////
 
@@ -151,6 +152,7 @@ extern HWND gHandle;
 #include "Utilities/Gui.h"
 
 //Utilities
+#include "Utilities/Animator.h"
 #include "Utilities/DirectHelper.h"
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
@@ -163,6 +165,7 @@ extern HWND gHandle;
 #include "Renders/Resources/ConstantBuffer.h"
 #include "Renders/Resources/GlobalBuffers.h"
 #include "Renders/Resources/VertexType.h"
+#include "Renders/Resources/Texture2D.h"
 
 #include "Renders/IA/IndexBuffer.h"
 #include "Renders/IA/InputLayout.h"
