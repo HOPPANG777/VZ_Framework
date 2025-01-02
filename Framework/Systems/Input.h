@@ -1,6 +1,9 @@
 #pragma once
+#include "Utilities/DirectHelper.h"
 
 #define MAX_INPUT_KEY 256
+
+#define MAX_INPUT_MOUSE 8
 
 class Input
 {
@@ -24,10 +27,10 @@ public:
 	bool Press(const DWORD key) const { return keyMap[key] == KEY_INPUT_STATUS_PRESS; }
 	bool DblClk(const DWORD key) const { return isDblClk; }
 
-	Vector2 GetMousePos() const { return mousePos; }
+	Vector3 GetMousePos() const { return mousePos; }
 
 private:
-	Vector2 mousePos;
+	Vector3 mousePos;
 
 	array<unsigned char, MAX_INPUT_KEY> keyState = { 0 };
 	array<unsigned char, MAX_INPUT_KEY> keyOldState = { 0 };

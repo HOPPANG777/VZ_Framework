@@ -124,6 +124,9 @@ extern HWND gHandle;
 #define SCENE SceneManager::Get()
 #define SOUNDS Sounds::Get()
 #define IMGUI Gui::Get()
+#define KEYBOARD Keyboard::Get()
+#define MOUSE Mouse::Get()
+
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
@@ -139,6 +142,8 @@ extern HWND gHandle;
 #include "Interfaces/IObject.h"
 
 //Systems
+#include "Systems/Keyboard.h"
+#include "Systems/Mouse.h"
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 #include "Systems/Graphics.h"
