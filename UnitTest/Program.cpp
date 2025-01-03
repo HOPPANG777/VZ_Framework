@@ -24,11 +24,11 @@ void Program::Start()
 
 	//Scene ¼¼ÆÃ
 	{
-		SCENE->AddScene(make_shared<Scene_00>());
-		SCENE->AddScene(make_shared<Scene_01>());
-		SCENE->AddScene(make_shared<Scene_02>());
+		SCENE->AddScene("TestScene", make_shared<Scene_00>());
+		SCENE->AddScene("MainMenuScene", make_shared<Scene_01>());
+		SCENE->AddScene("StageScene_01", make_shared<Scene_02>());
 
-		SCENE->LoadScene(1);
+		SCENE->LoadScene("MainMenuScene");
 	}
 }
 

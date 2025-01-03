@@ -24,7 +24,7 @@ void Scene_01::Update()
 {
 	auto rect = dynamic_pointer_cast<ColorRect>(objects.back());
 
-	if (INPUT->Down('Q'))
+	if (KEYBOARD->Down('Q'))
 	{
 		if (rect->GetColor() == BLUE) rect->SetColor(RED);
 		else if (rect->GetColor() == RED) rect->SetColor(BLUE);
