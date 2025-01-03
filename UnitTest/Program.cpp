@@ -28,7 +28,7 @@ void Program::Start()
 		SCENE->AddScene(make_shared<Scene_01>());
 		SCENE->AddScene(make_shared<Scene_02>());
 
-		SCENE->LoadScene(2);
+		SCENE->LoadScene(1);
 	}
 }
 

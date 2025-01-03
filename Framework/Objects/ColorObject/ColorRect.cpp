@@ -9,13 +9,13 @@ ColorRect::ColorRect(const Vector2& position, const Vector2& scale, const float 
 		vertices.assign(4, VertexColor());
 
 		// 좌 하단
-		vertices[0].position = { -0.5f, -0.5f };
+		vertices[0].position = { -0.5f, -0.5f, 0 };
 		// 좌 상단
-		vertices[1].position = { -0.5f, 0.5f };
+		vertices[1].position = { -0.5f, 0.5f, 0 };
 		// 우 하단
-		vertices[2].position = { 0.5f, -0.5f };
+		vertices[2].position = { 0.5f, -0.5f, 0 };
 		// 우 상단
-		vertices[3].position = { 0.5f, 0.5f };
+		vertices[3].position = { 0.5f, 0.5f, 0 };
 	
 		for (auto& vertex : vertices) vertex.color = color;
 	}
