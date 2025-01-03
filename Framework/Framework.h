@@ -178,10 +178,12 @@ extern HWND gHandle;
 
 //Components
 #include "Components/Component.h"
+#include "Components/GameComponent.h"
 #include "Components/MoveComponent.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 #include "Objects/BaseObject/Drawable.h"
 
 //Camera
