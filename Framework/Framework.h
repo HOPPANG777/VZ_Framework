@@ -28,6 +28,7 @@
 #include <functional>
 #include <fstream>
 #include <windowsx.h>
+#include <ctime>
 
 using namespace std;
 

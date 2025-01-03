@@ -17,6 +17,15 @@ public:
 			<< ", WorldTime : " << worldTime << '\n';
 	}
 
+	std::tm GetRealTime() const
+	{
+		auto now = chrono::system_clock::now();
+		time_t currentTime = chrono::system_clock::to_time_t(now);
+		std::tm localTime;
+		localtime_s(&localTime, &currentTime);
+		return localTime;
+	}
+
 private:
 	chrono::steady_clock::time_point currentTime;
 	chrono::steady_clock::time_point lastTime;
