@@ -257,7 +257,8 @@
     <ResourceCompile Include="Resources\Framework.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\icon1.ico" />
+    <Image Include="Resources\Ico\HOPPANG.ico" />
+    <Image Include="Resources\Ico\SMALLPPANG.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -253,10 +253,16 @@
     <Filter Include="Renders\RenderResources">
       <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Ico">
+      <UniqueIdentifier>{0fce0fed-39db-4a0a-9856-1fbfcf646086}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\icon1.ico">
-      <Filter>Resources</Filter>
+    <Image Include="Resources\Ico\HOPPANG.ico">
+      <Filter>Resources\Ico</Filter>
+    </Image>
+    <Image Include="Resources\Ico\SMALLPPANG.ico">
+      <Filter>Resources\Ico</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

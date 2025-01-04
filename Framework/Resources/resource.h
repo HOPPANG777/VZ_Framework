@@ -2,8 +2,9 @@
 // Microsoft Visual C++에서 생성한 포함 파일입니다.
 // Framework.rc에서 사용되고 있습니다.
 //
-#define IDI_ICON1                       103
-#define IDI_HOPPANG                     104
+
+#define IDI_HOPPANG                   245
+#define IDI_SMALLPPANG                246
 
 // Next default values for new objects
 // 

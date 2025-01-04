@@ -1,5 +1,6 @@
 #include "Framework.h"
 #include "Window.h"
+#include "Resources/resource.h"
 #include "../UnitTest/Program.h"
 
 unique_ptr<Program> Window::program = nullptr;
@@ -67,12 +68,12 @@ ATOM Window::MyRegisterClass(const WinDesc& desc)
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = desc.instance;
-	wcex.hIcon =  LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_HOPPANG));	//LoadMyIcon();	//LoadIcon(nullptr, IDI_WINLOGO);
+	wcex.hIcon = LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_HOPPANG));	//LoadMyIcon();	//LoadIcon(nullptr, IDI_WINLOGO);
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = HBRUSH(GetStockObject(GRAY_BRUSH));
 	wcex.lpszMenuName = nullptr;
 	wcex.lpszClassName = desc.appName.c_str();
-	wcex.hIconSm = wcex.hIcon;//LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
+	wcex.hIconSm =  LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_SMALLPPANG)); //wcex.hIcon;
 
 	return RegisterClassExW(&wcex);
 }
@@ -164,7 +165,7 @@ HICON Window::LoadMyIcon()
 	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
 
 	// 방법 2) 외부 ico 파일 로드
-	return static_cast<HICON>(LoadImage(NULL, L"../_Textures/Ico/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));			// HOPPANG 아이콘
+	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/Ico/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));			// HOPPANG 아이콘
 	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
 	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
 	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
