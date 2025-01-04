@@ -1,6 +1,5 @@
 #include "Framework.h"
 #include "Window.h"
-#include "Resources/resource.h"
 #include "../UnitTest/Program.h"
 
 unique_ptr<Program> Window::program = nullptr;
@@ -68,12 +67,12 @@ ATOM Window::MyRegisterClass(const WinDesc& desc)
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = desc.instance;
-	wcex.hIcon = LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_HOPPANG));	//LoadMyIcon();	//LoadIcon(nullptr, IDI_WINLOGO);
+	wcex.hIcon = desc.icon;	 //LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_HOPPANG));	//LoadMyIcon();	//LoadIcon(nullptr, IDI_WINLOGO);
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = HBRUSH(GetStockObject(GRAY_BRUSH));
 	wcex.lpszMenuName = nullptr;
 	wcex.lpszClassName = desc.appName.c_str();
-	wcex.hIconSm =  LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_SMALLPPANG)); //wcex.hIcon;
+	wcex.hIconSm = wcex.hIcon;//LoadIcon(desc.instance, MAKEINTRESOURCE(IDI_SMALLPPANG)); //
 
 	return RegisterClassExW(&wcex);
 }

@@ -21,6 +21,9 @@
     <ClInclude Include="Scenes\Scene_03.h">
       <Filter>Scenes\Scene_03_Texture</Filter>
     </ClInclude>
+    <ClInclude Include="Resources\resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
@@ -59,5 +62,24 @@
     <Filter Include="Scenes\Scene_03_Texture">
       <UniqueIdentifier>{2e685edb-7e19-4285-af26-0394697f50a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{c03ce4be-53d5-4426-983c-b739b38c93e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Ico">
+      <UniqueIdentifier>{af4daec0-f3f1-4b57-8ccc-759795ca603a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Ico\HOPPANG.ico">
+      <Filter>Resources\Ico</Filter>
+    </Image>
+    <Image Include="Resources\Ico\SMALLPPANG.ico">
+      <Filter>Resources\Ico</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\UnitTest.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -177,7 +177,7 @@
     <ClInclude Include="Components\GameComponent.h" />
     <ClInclude Include="Objects\BaseObject\GameObject.h" />
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
-    <ClInclude Include="Resources\resource.h" />
+    <ClInclude Include="Utilities\targetver.h" />
     <ClInclude Include="Utilities\Animator.h" />
     <ClInclude Include="Systems\Keyboard.h" />
     <ClInclude Include="Systems\Mouse.h" />
@@ -215,7 +215,6 @@
     <ClInclude Include="Systems\Input.h" />
     <ClInclude Include="Systems\Time.h" />
     <ClInclude Include="Systems\Window.h" />
-    <ClInclude Include="Resources\targetver.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
@@ -252,13 +251,6 @@
     <ClCompile Include="Systems\Input.cpp" />
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Resources\Framework.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\Ico\HOPPANG.ico" />
-    <Image Include="Resources\Ico\SMALLPPANG.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

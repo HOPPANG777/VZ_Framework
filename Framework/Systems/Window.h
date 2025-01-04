@@ -7,6 +7,7 @@ struct WinDesc
 	HWND handle = nullptr;
 	UINT width;
 	UINT height;
+	HICON icon = nullptr;
 };
 
 class Window

@@ -192,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="Manager\ObjectManager.h" />
     <ClInclude Include="Program.h" />
+    <ClInclude Include="Resources\resource.h" />
     <ClInclude Include="Scenes\SceneList.h" />
     <ClInclude Include="Scenes\Scene_00.h" />
     <ClInclude Include="Scenes\Scene_01.h" />
@@ -209,6 +210,13 @@
     <ClCompile Include="Scenes\Scene_01.cpp" />
     <ClCompile Include="Scenes\Scene_02.cpp" />
     <ClCompile Include="Scenes\Scene_03.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Ico\HOPPANG.ico" />
+    <Image Include="Resources\Ico\SMALLPPANG.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\UnitTest.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

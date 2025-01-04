@@ -70,6 +70,7 @@ int APIENTRY wWinMain
 	desc.handle = nullptr;
 	desc.width = gWinWidth;
 	desc.height = gWinHeight;
+	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
 
 	auto window = make_unique<Window>(desc);
 	WPARAM wParam = window->Run();
