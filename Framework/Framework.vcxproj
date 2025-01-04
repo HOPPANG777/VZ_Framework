@@ -176,7 +176,8 @@
   <ItemGroup>
     <ClInclude Include="Components\GameComponent.h" />
     <ClInclude Include="Objects\BaseObject\GameObject.h" />
-    <ClInclude Include="Renders\Resources\Texture2D.h" />
+    <ClInclude Include="Renders\RenderResources\Texture2D.h" />
+    <ClInclude Include="Resources\resource.h" />
     <ClInclude Include="Utilities\Animator.h" />
     <ClInclude Include="Systems\Keyboard.h" />
     <ClInclude Include="Systems\Mouse.h" />
@@ -198,8 +199,8 @@
     <ClInclude Include="Interfaces\IScene.h" />
     <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Objects\ColorObject\ColorRect.h" />
-    <ClInclude Include="Renders\Resources\GlobalBuffers.h" />
-    <ClInclude Include="Renders\Resources\ConstantBuffer.h" />
+    <ClInclude Include="Renders\RenderResources\GlobalBuffers.h" />
+    <ClInclude Include="Renders\RenderResources\ConstantBuffer.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Renders\Shaders\PixelShader.h" />
     <ClInclude Include="Renders\Shaders\IShader.h" />
@@ -209,17 +210,17 @@
     <ClInclude Include="Interfaces\IObject.h" />
     <ClInclude Include="Utilities\Random.h" />
     <ClInclude Include="Renders\IA\VertexBuffer.h" />
-    <ClInclude Include="Renders\Resources\VertexType.h" />
+    <ClInclude Include="Renders\RenderResources\VertexType.h" />
     <ClInclude Include="Systems\Graphics.h" />
     <ClInclude Include="Systems\Input.h" />
     <ClInclude Include="Systems\Time.h" />
     <ClInclude Include="Systems\Window.h" />
-    <ClInclude Include="Utilities\targetver.h" />
+    <ClInclude Include="Resources\targetver.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
-    <ClCompile Include="Renders\Resources\Texture2D.cpp" />
+    <ClCompile Include="Renders\RenderResources\Texture2D.cpp" />
     <ClCompile Include="Utilities\Animator.cpp" />
     <ClCompile Include="Systems\Keyboard.cpp" />
     <ClCompile Include="Systems\Mouse.cpp" />
@@ -237,7 +238,7 @@
     <ClCompile Include="Components\MoveComponent.cpp" />
     <ClCompile Include="Objects\BaseObject\Drawable.cpp" />
     <ClCompile Include="Objects\BaseObject\Object.cpp" />
-    <ClCompile Include="Renders\Resources\VertexType.cpp" />
+    <ClCompile Include="Renders\RenderResources\VertexType.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorRect.cpp" />
     <ClCompile Include="Framework.cpp">
@@ -251,6 +252,12 @@
     <ClCompile Include="Systems\Input.cpp" />
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\Framework.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

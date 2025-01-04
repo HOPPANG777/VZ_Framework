@@ -31,6 +31,11 @@ void Scene_01::Update()
 	}
 
 	for (const auto& obj : objects) obj->Update();
+
+	if (KEYBOARD->Down('E'))
+	{
+		SCENE->LoadScene("ClockScene");
+	}
 }
 
 void Scene_01::LateUpdate() {}

@@ -32,8 +32,8 @@
     <ClCompile Include="Components\MoveComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Renders\Resources\VertexType.cpp">
-      <Filter>Renders\Resources</Filter>
+    <ClCompile Include="Renders\RenderResources\VertexType.cpp">
+      <Filter>Renders\RenderResources</Filter>
     </ClCompile>
     <ClCompile Include="Renders\RenderStates.cpp">
       <Filter>Renders</Filter>
@@ -80,8 +80,8 @@
     <ClCompile Include="Utilities\Animator.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="Renders\Resources\Texture2D.cpp">
-      <Filter>Renders\Resources</Filter>
+    <ClCompile Include="Renders\RenderResources\Texture2D.cpp">
+      <Filter>Renders\RenderResources</Filter>
     </ClCompile>
     <ClCompile Include="Objects\BaseObject\GameObject.cpp">
       <Filter>Objects\BaseObject</Filter>
@@ -137,14 +137,14 @@
     <ClInclude Include="Renders\IA\VertexBuffer.h">
       <Filter>Renders\IA</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\Resources\GlobalBuffers.h">
-      <Filter>Renders\Resources</Filter>
+    <ClInclude Include="Renders\RenderResources\GlobalBuffers.h">
+      <Filter>Renders\RenderResources</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\Resources\ConstantBuffer.h">
-      <Filter>Renders\Resources</Filter>
+    <ClInclude Include="Renders\RenderResources\ConstantBuffer.h">
+      <Filter>Renders\RenderResources</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\Resources\VertexType.h">
-      <Filter>Renders\Resources</Filter>
+    <ClInclude Include="Renders\RenderResources\VertexType.h">
+      <Filter>Renders\RenderResources</Filter>
     </ClInclude>
     <ClInclude Include="Renders\Shaders\IShader.h">
       <Filter>Renders\Shaders</Filter>
@@ -160,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="Systems\Camera.h">
       <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\targetver.h">
-      <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Objects\ColorObject\ColorCircle.h">
       <Filter>Objects\ColorObject</Filter>
@@ -203,14 +200,20 @@
     <ClInclude Include="Utilities\Animator.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Renders\Resources\Texture2D.h">
-      <Filter>Renders\Resources</Filter>
+    <ClInclude Include="Renders\RenderResources\Texture2D.h">
+      <Filter>Renders\RenderResources</Filter>
     </ClInclude>
     <ClInclude Include="Objects\BaseObject\GameObject.h">
       <Filter>Objects\BaseObject</Filter>
     </ClInclude>
     <ClInclude Include="Components\GameComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\targetver.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\resource.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,9 +238,6 @@
     <Filter Include="Renders\IA">
       <UniqueIdentifier>{4c80fe29-4578-44c6-a710-a7b12d6e52db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renders\Resources">
-      <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renders\Shaders">
       <UniqueIdentifier>{41fa61ae-9ae0-46dd-b1c5-b3f14b916782}</UniqueIdentifier>
     </Filter>
@@ -247,5 +247,21 @@
     <Filter Include="Objects\BaseObject">
       <UniqueIdentifier>{e121b46d-0206-4c42-9432-6541d40372c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{2b6d849e-f678-4249-a8dd-707ade17d0bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\RenderResources">
+      <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\icon1.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\Framework.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

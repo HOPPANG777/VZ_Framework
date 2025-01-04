@@ -7,7 +7,8 @@
 //미리 컴파일된 헤더.
 //pch pre compiled header
 
-#include "Utilities/targetver.h"
+#include "Resources/resource.h"
+#include "Resources/targetver.h"
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용을 Windows 헤더에서 제외합니다.
 
 // C, C++ 헤더입니다.
@@ -162,10 +163,10 @@ extern HWND gHandle;
 #include "Utilities/FileStream.h"
 
 //Renders
-#include "Renders/Resources/ConstantBuffer.h"
-#include "Renders/Resources/GlobalBuffers.h"
-#include "Renders/Resources/VertexType.h"
-#include "Renders/Resources/Texture2D.h"
+#include "Renders/RenderResources/ConstantBuffer.h"
+#include "Renders/RenderResources/GlobalBuffers.h"
+#include "Renders/RenderResources/VertexType.h"
+#include "Renders/RenderResources/Texture2D.h"
 
 #include "Renders/IA/IndexBuffer.h"
 #include "Renders/IA/InputLayout.h"

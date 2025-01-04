@@ -21,6 +21,8 @@ public:
 
 	void MainRender();
 
+	HICON LoadMyIcon();
+
 private:
 	static LRESULT CALLBACK WndProc
 	(

@@ -25,10 +25,10 @@ void Program::Start()
 	//Scene ¼¼ÆÃ
 	{
 		SCENE->AddScene("TestScene", make_shared<Scene_00>());
-		SCENE->AddScene("MainMenuScene", make_shared<Scene_01>());
-		SCENE->AddScene("StageScene_01", make_shared<Scene_02>());
+		SCENE->AddScene("GeometryScene", make_shared<Scene_01>());
+		SCENE->AddScene("ClockScene", make_shared<Scene_02>());
 
-		SCENE->LoadScene("MainMenuScene");
+		SCENE->LoadScene("GeometryScene");
 	}
 }
 
