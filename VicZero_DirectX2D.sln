@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTe
 		{10003D09-6081-4E10-AA38-E5C41A7B4263} = {10003D09-6081-4E10-AA38-E5C41A7B4263}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CookieRun", "CookieRun\CookieRun.vcxproj", "{0280E596-9F35-4277-9AD7-299AB4210EF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -45,6 +47,14 @@ Global
 		{025BF21D-E3EC-4501-BB00-AB9A1CD0E550}.Release|x64.Build.0 = Release|x64
 		{025BF21D-E3EC-4501-BB00-AB9A1CD0E550}.Release|x86.ActiveCfg = Release|Win32
 		{025BF21D-E3EC-4501-BB00-AB9A1CD0E550}.Release|x86.Build.0 = Release|Win32
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Debug|x64.ActiveCfg = Debug|x64
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Debug|x64.Build.0 = Debug|x64
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Debug|x86.ActiveCfg = Debug|Win32
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Debug|x86.Build.0 = Debug|Win32
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Release|x64.ActiveCfg = Release|x64
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Release|x64.Build.0 = Release|x64
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Release|x86.ActiveCfg = Release|Win32
+		{0280E596-9F35-4277-9AD7-299AB4210EF3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
