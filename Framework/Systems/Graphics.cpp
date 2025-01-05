@@ -56,22 +56,26 @@ void Graphics::Init()
     UINT maxVRam = 0;
     for (UINT i = 0; i < adapterInfos.size(); i++)
     {
-        if (adapterInfos[i]->adapterDesc.DedicatedVideoMemory > maxVRam)
+        // adapterInfos[i]는 unique_ptr
+        auto& info = adapterInfos[i];
+        UINT64 dedicatedMem = info->adapterDesc.DedicatedVideoMemory;
+
+        if (dedicatedMem > maxVRam)
         {
             selectedAdapterIndex = i;
-            maxVRam = adapterInfos[i]->adapterDesc.DedicatedVideoMemory;
+            maxVRam = (UINT)dedicatedMem;
         }
     }
 
-    for (int i = 0; i < adapterInfos.size(); i++)
+    // 출력해보기
+    for (size_t i = 0; i < adapterInfos.size(); i++)
     {
-        gpuName = adapterInfos[i]->adapterDesc.Description;
-        wcout << "GPU Name : " << adapterInfos[i]->adapterDesc.Description << endl;
+        wcout << L"GPU Name : " << adapterInfos[i]->adapterDesc.Description << endl;
         cout << "VRAM : " << adapterInfos[i]->adapterDesc.DedicatedVideoMemory << endl;
         cout << endl;
     }
 
-    wcout << "Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << endl;
+    wcout << L"Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << endl;
 
     ComPtr<IDXGIAdapter1> chosenAdapter = adapterInfos[selectedAdapterIndex]->adapter;
 
