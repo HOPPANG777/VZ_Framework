@@ -120,11 +120,10 @@ if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" 
 
 )
 
-
 if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.cso" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
+    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 )</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -159,11 +158,10 @@ if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" 
 
 )
 
-
 if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.cso" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
+    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 )</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -194,11 +192,10 @@ if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" 
 
 )
 
-
 if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.cso" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
+    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 )</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -232,7 +229,6 @@ if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" 
     mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
 
 )
-
 
 if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
