@@ -15,9 +15,6 @@
     <ClInclude Include="Scenes\Scene_02.h">
       <Filter>Scenes\Scene_02_Clock</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\ObjectManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\Scene_03.h">
       <Filter>Scenes\Scene_03_Texture</Filter>
     </ClInclude>
@@ -36,17 +33,11 @@
     <ClCompile Include="Scenes\Scene_02.cpp">
       <Filter>Scenes\Scene_02_Clock</Filter>
     </ClCompile>
-    <ClCompile Include="Manager\ObjectManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Scenes\Scene_03.cpp">
       <Filter>Scenes\Scene_03_Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{6e840d11-01dd-463d-9a2e-80f40c05183e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{cb72a80c-538c-474e-8634-95e7782128ce}</UniqueIdentifier>
     </Filter>

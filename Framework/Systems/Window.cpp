@@ -156,18 +156,18 @@ LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 // 아이콘 리소스를 로드 (리소스(.rc) 파일 또는 ico 파일에서)
-HICON Window::LoadMyIcon()
-{
-	// 방법 1) 리소스 (.rc) 기반 아이콘
-	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
-	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
-	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
-
-	// 방법 2) 외부 ico 파일 로드
-	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/Ico/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));			// HOPPANG 아이콘
-	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
-	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
-	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
-	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
-	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
-}
+//HICON Window::LoadMyIcon()
+//{
+//	// 방법 1) 리소스 (.rc) 기반 아이콘
+//	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
+//	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
+//	// return static_cast<HICON>(LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_MY_ICON), IMAGE_ICON, 32, 32, 0));
+//
+//	// 방법 2) 외부 ico 파일 로드
+//	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/Ico/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));			// HOPPANG 아이콘
+//	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
+//	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
+//	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
+//	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
+//	//return static_cast<HICON>(LoadImage(NULL, L"../_Textures/ico_Image/HOPPANG.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE));
+//}

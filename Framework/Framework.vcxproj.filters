@@ -53,9 +53,6 @@
     <ClCompile Include="Objects\ColorObject\ColorRect.cpp">
       <Filter>Objects\ColorObject</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\SceneManager.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\Sounds.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -85,6 +82,12 @@
     </ClCompile>
     <ClCompile Include="Objects\BaseObject\GameObject.cpp">
       <Filter>Objects\BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\SceneManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\ResourcesManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +176,6 @@
     <ClInclude Include="Objects\ColorObject\ColorRect.h">
       <Filter>Objects\ColorObject</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\SceneManager.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\Sounds.h">
       <Filter>Systems</Filter>
     </ClInclude>
@@ -212,6 +212,12 @@
     <ClInclude Include="Utilities\targetver.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Managers\SceneManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\ResourcesManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -246,6 +252,9 @@
     </Filter>
     <Filter Include="Renders\RenderResources">
       <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{d93cd37b-b56b-4f58-89b0-69741b98752b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

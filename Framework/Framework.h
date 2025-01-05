@@ -156,7 +156,6 @@ extern HWND gHandle;
 #include "Utilities/DirectHelper.h"
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
-#include "Utilities/SceneManager.h"
 #include "Utilities/String.h"
 #include "Utilities/Path.h"
 #include "Utilities/FileStream.h"
@@ -192,7 +191,11 @@ extern HWND gHandle;
 //Sounds
 #include "Systems/Sounds.h"
 
+
 const wstring ShaderPath = L"../_Shaders/";
 const wstring TexturePath = L"../_Textures/";
 const wstring SoundPath = L"../_Sounds/";
 const string TilePath = "../_TileData/";
+
+//Managers
+#include "Managers/SceneManager.h"

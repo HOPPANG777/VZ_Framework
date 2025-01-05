@@ -22,7 +22,7 @@ public:
 
 	void MainRender();
 
-	HICON LoadMyIcon();
+	//HICON LoadMyIcon();
 
 private:
 	static LRESULT CALLBACK WndProc

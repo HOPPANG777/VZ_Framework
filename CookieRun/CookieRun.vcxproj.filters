@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{6e840d11-01dd-463d-9a2e-80f40c05183e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{cb72a80c-538c-474e-8634-95e7782128ce}</UniqueIdentifier>
     </Filter>
