@@ -13,21 +13,31 @@ void Scene_02::Start()
 
 void Scene_02::Destroy() 
 {
-	for (auto& obj : objects) obj.reset();
+	for (auto& obj : objects) if (obj != nullptr) obj.reset();
 }
 
 void Scene_02::FixedUpdate() {}
 
 void Scene_02::Update() 
 {
-	for (const auto& obj : objects) obj->Update();
+	if (KEYBOARD->Press('E'))
+	{
+		SCENE->LoadScene("TextureScene");
+	}
+
+	if (KEYBOARD->Press('Q'))
+	{
+		SCENE->LoadScene("GeometryScene");
+	}
+
+	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 }
 
 void Scene_02::LateUpdate() {}
 
 void Scene_02::Render()
 {
-	for (const auto& obj : objects) obj->Render();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 }
 
 void Scene_02::PostRender() {}

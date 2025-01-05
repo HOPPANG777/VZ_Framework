@@ -19,6 +19,10 @@ void Scene_03::FixedUpdate()
 
 void Scene_03::Update()
 {
+	if (KEYBOARD->Press('E'))
+	{
+		SCENE->LoadScene("ClockScene");
+	}
 }
 
 void Scene_03::LateUpdate()

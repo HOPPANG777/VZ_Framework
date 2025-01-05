@@ -47,7 +47,7 @@ void SceneManager::LoadScene(const string& sceneName)
 
 void SceneManager::Update()
 {
-	if (isLoading)
+	if (isLoading == true)
 	{
 		// 로딩 진행률 업데이트
 		loadingProgress += 0.1f; // 예제: 진행률 증가 (실제 작업에 맞게 수정)
@@ -70,7 +70,7 @@ void SceneManager::Update()
 
 void SceneManager::Render()
 {
-	if (isLoading)
+	if (isLoading == true)
 	{
 
 	}
@@ -83,7 +83,7 @@ void SceneManager::Render()
 
 void SceneManager::PostRender()
 {
-	if (isLoading)
+	if (isLoading == true)
 	{
 
 	}
@@ -95,7 +95,7 @@ void SceneManager::PostRender()
 
 void SceneManager::ImGUI()
 {
-	if (isLoading)
+	if (isLoading == true)
 	{
 
 	}
