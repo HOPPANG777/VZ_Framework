@@ -60,7 +60,7 @@ int APIENTRY wWinMain
 )
 {
 	WinDesc desc;
-	desc.appName = L"UnitTest";	// 창 이름
+	desc.appName = L"Client";	// 창 이름
 	desc.instance = hInstance;	
 	desc.handle = nullptr;
 	desc.width = gWinWidth;
