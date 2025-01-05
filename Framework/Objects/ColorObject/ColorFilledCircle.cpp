@@ -2,7 +2,7 @@
 #include "ColorFilledCircle.h"
 
 ColorFilledCircle::ColorFilledCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color)
-	: Drawable("ColorFilledCircle", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), segments(segments), color(color)
+	: Drawable("ColorFilledCircle", position, scale, rotation, ShaderPath + L"VertexColor.hlsl"), segments(segments), color(color)
 {
 	//vertices
 	{

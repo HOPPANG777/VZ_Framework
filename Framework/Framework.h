@@ -192,10 +192,12 @@ extern HWND gHandle;
 #include "Systems/Sounds.h"
 
 
-const wstring ShaderPath = L"../_Shaders/";
-const wstring TexturePath = L"../_Textures/";
-const wstring SoundPath = L"../_Sounds/";
-const string TilePath = "../_TileData/";
+const wstring ShaderPath = L"../_Data/_Shaders/";
+const wstring TexturePath = L"../_Data/_Textures/";
+const wstring SoundPath = L"../_Data/_Sounds/";
+const string TilePath = "../_Data/_TileData/";
+
+
 
 //Managers
 #include "Managers/SceneManager.h"

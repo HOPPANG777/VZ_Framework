@@ -2,7 +2,7 @@
 #include "ColorRect.h"
 
 ColorRect::ColorRect(const Vector2& position, const Vector2& scale, const float rotation, const Color& color)
-	: Drawable("ColorRect", position, scale, rotation, L"../_Shaders/VertexColor.hlsl"), color(color)
+	: Drawable("ColorRect", position, scale, rotation, ShaderPath + L"VertexColor.hlsl"), color(color)
 {
 	//vertices
 	{
