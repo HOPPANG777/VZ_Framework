@@ -1,5 +1,13 @@
 #pragma once
 
+/*
+DirectX 11
+DirectX June 2010 SDK
+software development kit
+*/
+class D3DEnumAdapterInfo;
+class D3DEnumOutputInfo;
+
 class Graphics
 {
 	DECLARE_SINGLETON(Graphics);
@@ -14,6 +22,12 @@ public:
 	void Begin();
 	void End();
 
+	void GUI();
+
+private:
+	void EnumerateAdapters();
+	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);
+
 private:
 	ComPtr<ID3D11Device> device = nullptr;
 	ComPtr<ID3D11DeviceContext> deviceContext = nullptr;
@@ -22,4 +36,39 @@ private:
 	ComPtr<ID3D11RenderTargetView> rtv = nullptr;
 	D3D11_VIEWPORT viewport = { 0 };
 	Color clearColor = { 0.4f, 0.4f, 0.4f, 1.0f };
+
+	UINT numerator = 0;
+	UINT denominator = 1;
+
+	UINT gpuMemorySize;
+	wstring gpuName;
+
+	vector<unique_ptr<D3DEnumAdapterInfo>> adapterInfos;
+	int selectedAdapterIndex = 0;
+
+	bool bVsync = true;
+};
+
+class D3DEnumAdapterInfo
+{
+public:
+	~D3DEnumAdapterInfo();
+
+	UINT adapterOrdinal = 0;
+	ComPtr<IDXGIAdapter1> adapter = nullptr;
+	DXGI_ADAPTER_DESC1 adapterDesc = { 0 };
+
+	shared_ptr<D3DEnumOutputInfo> outputInfo = nullptr;
+};
+
+class D3DEnumOutputInfo
+{
+public:
+	~D3DEnumOutputInfo();
+
+	ComPtr<IDXGIOutput> output = nullptr;
+	DXGI_OUTPUT_DESC outputDesc = { 0 };
+
+	UINT numerator = 0;
+	UINT denominator = 1;
 };

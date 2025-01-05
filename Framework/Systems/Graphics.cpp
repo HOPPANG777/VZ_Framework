@@ -3,6 +3,7 @@
 
 Graphics::Graphics()
 {
+    EnumerateAdapters();
 	Init();
 }
 
@@ -18,8 +19,18 @@ void Graphics::Init()
 
     desc.BufferDesc.Width = 0;
     desc.BufferDesc.Height = 0;
-    desc.BufferDesc.RefreshRate.Numerator = 60;
-    desc.BufferDesc.RefreshRate.Denominator = 1;
+
+    if (bVsync)
+    {
+        desc.BufferDesc.RefreshRate.Numerator = adapterInfos[0]->outputInfo->numerator;
+        desc.BufferDesc.RefreshRate.Denominator = adapterInfos[0]->outputInfo->denominator;
+    }
+    else
+    {
+        desc.BufferDesc.RefreshRate.Numerator = 60;
+        desc.BufferDesc.RefreshRate.Denominator = 1;
+    }
+
     desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     desc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
     desc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
@@ -42,10 +53,32 @@ void Graphics::Init()
         D3D_FEATURE_LEVEL_10_0
     };
 
+    UINT maxVRam = 0;
+    for (UINT i = 0; i < adapterInfos.size(); i++)
+    {
+        if (adapterInfos[i]->adapterDesc.DedicatedVideoMemory > maxVRam)
+        {
+            selectedAdapterIndex = i;
+            maxVRam = adapterInfos[i]->adapterDesc.DedicatedVideoMemory;
+        }
+    }
+
+    for (int i = 0; i < adapterInfos.size(); i++)
+    {
+        gpuName = adapterInfos[i]->adapterDesc.Description;
+        wcout << "GPU Name : " << adapterInfos[i]->adapterDesc.Description << endl;
+        cout << "VRAM : " << adapterInfos[i]->adapterDesc.DedicatedVideoMemory << endl;
+        cout << endl;
+    }
+
+    wcout << "Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << endl;
+
+    ComPtr<IDXGIAdapter1> chosenAdapter = adapterInfos[selectedAdapterIndex]->adapter;
+
     HRESULT hr = D3D11CreateDeviceAndSwapChain
     (
-        nullptr,
-        D3D_DRIVER_TYPE_HARDWARE,
+        chosenAdapter.Get(),
+        D3D_DRIVER_TYPE_UNKNOWN,
         nullptr,
         0,
         featureLevels.data(),
@@ -119,6 +152,103 @@ void Graphics::Begin()
 
 void Graphics::End()
 {
-    HRESULT hr = swapChain->Present(1, 0);
+    HRESULT hr = swapChain->Present(bVsync == true ? 1 : 0, 0);
     CHECK(hr);
 }
+
+void Graphics::GUI()
+{
+    static bool bOpen = true;
+    ImGui::SetNextWindowPos({ 0, 15 });
+    ImGui::SetNextWindowSize(ImVec2(200, 30)); // 위젯 창 크기 설정
+    ImGui::Begin
+    (
+        "Vstnc",
+        &bOpen,
+        ImGuiWindowFlags_NoBackground |
+        ImGuiWindowFlags_NoTitleBar |
+        ImGuiWindowFlags_NoResize |
+        ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_NoScrollbar
+    );
+    {
+        ImGui::Checkbox("##Vsync", &bVsync);
+    }
+    ImGui::End();
+}
+
+void Graphics::EnumerateAdapters()
+{
+    ComPtr<IDXGIFactory1> factory;
+    if (FAILED(CreateDXGIFactory1(__uuidof(IDXGIFactory1), (void**)&factory)))
+        return;
+
+    UINT index = 0;
+    while (true)
+    {
+        ComPtr<IDXGIAdapter1> adapter = nullptr;
+        HRESULT hr = factory->EnumAdapters1(index, &adapter);
+        if (hr == DXGI_ERROR_NOT_FOUND)
+            break;
+        assert(SUCCEEDED(hr));
+
+        auto adapterInfo = make_unique<D3DEnumAdapterInfo>();
+        adapterInfo->adapterOrdinal = index;
+
+        // 기수 / 서수
+        // 일이삼사 첫번째 두번째
+        adapter->GetDesc1(&adapterInfo->adapterDesc);
+        adapterInfo->adapter = adapter;
+
+        EnumerateAdapterOutput(adapterInfo.get());
+        adapterInfos.push_back(move(adapterInfo));
+
+        index++;
+    }
+}
+
+bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
+{
+    ComPtr<IDXGIOutput> output;
+    HRESULT hr = adapterInfo->adapter->EnumOutputs(0, &output);
+
+    if (DXGI_ERROR_NOT_FOUND == hr) return false;
+    assert(SUCCEEDED(hr));
+
+    auto outputInfo = make_shared<D3DEnumOutputInfo>();
+
+    output->GetDesc(&outputInfo->outputDesc);
+    outputInfo->output = output;
+
+    UINT numModes = 0;
+    DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+    hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &numModes, nullptr);
+    assert(SUCCEEDED(hr));
+
+    unique_ptr<DXGI_MODE_DESC[]> displayModes = make_unique<DXGI_MODE_DESC[]>(numModes);
+
+    hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModes.get());
+    assert(SUCCEEDED(hr));
+
+    for (UINT i = 0; i < numModes; i++)
+    {
+        bool bCheck = true;
+        bCheck &= displayModes[i].Width == WIN_DEFAULT_WIDTH;
+        bCheck &= displayModes[i].Height == WIN_DEFAULT_HEIGHT;
+
+        if (bCheck == true)
+        {
+            outputInfo->numerator = displayModes[i].RefreshRate.Numerator;
+            outputInfo->denominator = displayModes[i].RefreshRate.Denominator;
+        }
+    }
+
+    adapterInfo->outputInfo = outputInfo;
+    return true;
+}
+
+D3DEnumAdapterInfo::~D3DEnumAdapterInfo() {}
+
+D3DEnumOutputInfo::~D3DEnumOutputInfo() {}
+
