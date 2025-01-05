@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by UnitTest.rc
+// Used by Client.rc
 
 #define IDI_HOPPANG                         101
 #define IDI_SMALLPPANG                      102

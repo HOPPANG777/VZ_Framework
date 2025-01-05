@@ -243,12 +243,7 @@ if "$(Configuration)" == "Debug" (
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Program.h" />
-    <ClInclude Include="Resources\resource.h" />
-    <ClInclude Include="Scenes\SceneList.h" />
-    <ClInclude Include="Scenes\Scene_00.h" />
-    <ClInclude Include="Scenes\Scene_01.h" />
-    <ClInclude Include="Scenes\Scene_02.h" />
-    <ClInclude Include="Scenes\Scene_03.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -256,17 +251,16 @@ if "$(Configuration)" == "Debug" (
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_00.cpp" />
-    <ClCompile Include="Scenes\Scene_01.cpp" />
-    <ClCompile Include="Scenes\Scene_02.cpp" />
-    <ClCompile Include="Scenes\Scene_03.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\Ico\HOPPANG.ico" />
-    <Image Include="Resources\Ico\SMALLPPANG.ico" />
+    <Image Include="HOPPANG.ico" />
+    <Image Include="SMALLPPANG.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resources\Client.rc" />
+    <ResourceCompile Include="Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Client.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
