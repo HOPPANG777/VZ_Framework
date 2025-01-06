@@ -83,7 +83,7 @@ using namespace SimpleMath;
 
 #define CENTER_X (WIN_DEFAULT_WIDTH / 2)
 #define CENTER_Y (WIN_DEFAULT_HEIGHT / 2)
-#define CENTER (Vector2(CENTER_X, CENTER_Y))
+#define CENTER (Vector3(CENTER_X, CENTER_Y, 0))
 
 #define CHECK(hr) { assert(SUCCEEDED(hr)); }
 

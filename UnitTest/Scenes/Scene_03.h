@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Interfaces/IScene.h"
+#include "Objects/TextureObject/TextureRect.h"
+
 class Scene_03 : public Scene
 {
 public:
@@ -19,7 +22,7 @@ public:
 	void ImGUI() override;
 
 private:
-
+	vector<shared_ptr<Object>> objects;
 
 };
 

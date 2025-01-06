@@ -178,6 +178,7 @@
     <ClInclude Include="Objects\BaseObject\GameObject.h" />
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
     <ClInclude Include="Managers\ResourcesManager.h" />
+    <ClInclude Include="Objects\TextureObject\TextureRect.h" />
     <ClInclude Include="Utilities\targetver.h" />
     <ClInclude Include="Utilities\Animator.h" />
     <ClInclude Include="Systems\Keyboard.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
     <ClCompile Include="Renders\RenderResources\Texture2D.cpp" />
     <ClCompile Include="Managers\ResourcesManager.cpp" />
+    <ClCompile Include="Objects\TextureObject\TextureRect.cpp" />
     <ClCompile Include="Utilities\Animator.cpp" />
     <ClCompile Include="Systems\Keyboard.cpp" />
     <ClCompile Include="Systems\Mouse.cpp" />

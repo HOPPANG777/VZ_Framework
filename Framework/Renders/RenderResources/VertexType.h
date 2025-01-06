@@ -20,11 +20,11 @@ struct VertexColor
 
 struct VertexTexture
 {
-	Vector2 position;
+	Vector3 position;
 	Vector2 uv;
 
 	VertexTexture() = default;
-	VertexTexture(const Vector3& position, const Vector3& uv)
+	VertexTexture(const Vector3& position, const Vector2& uv)
 		: position(position), uv(uv)
 	{
 

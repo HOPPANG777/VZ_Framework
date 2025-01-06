@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "Drawable.h"
 
-Drawable::Drawable(const string& name, const Vector2& position, const Vector2& scale, const float rotation, const wstring& shaderPath)
+Drawable::Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, const wstring& shaderPath)
 	: Object(name, position, scale, rotation), shaderPath(shaderPath)
 {
 	//VertexBuffer

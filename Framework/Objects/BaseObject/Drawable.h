@@ -15,7 +15,7 @@ protected:
 	wstring shaderPath = L"";
 
 public:
-	Drawable(const string& name, const Vector2& position, const Vector2& scale, const float rotation, const wstring& shaderPath = L"");
+	Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, const wstring& shaderPath = L"");
 	
 	Drawable(const Drawable& other)
 		: Drawable(other.name, other.position, other.scale, other.rotation, other.shaderPath)

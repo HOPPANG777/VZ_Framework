@@ -13,7 +13,7 @@ private:
 	Color color;
 
 public:
-	ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color = RED);
+	ColorCircle(const Vector3& position, const Vector3& scale, const float rotation, const size_t& segments, const Color& color = RED);
 	~ColorCircle();
 
 public:

@@ -89,6 +89,9 @@
     <ClCompile Include="Managers\ResourcesManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\TextureObject\TextureRect.cpp">
+      <Filter>Objects\TextureObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -218,6 +221,9 @@
     <ClInclude Include="Managers\ResourcesManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\TextureObject\TextureRect.h">
+      <Filter>Objects\TextureObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -255,6 +261,9 @@
     </Filter>
     <Filter Include="Managers">
       <UniqueIdentifier>{d93cd37b-b56b-4f58-89b0-69741b98752b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\TextureObject">
+      <UniqueIdentifier>{c3308cb9-2245-415a-a93a-76bec85a871f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

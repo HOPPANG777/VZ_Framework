@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "ColorCircle.h"
 
-ColorCircle::ColorCircle(const Vector2& position, const Vector2& scale, const float rotation, const size_t& segments, const Color& color)
+ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const float rotation, const size_t& segments, const Color& color)
 	: Drawable("ColorCircle", position, scale, rotation, ShaderPath + L"VertexColor.hlsl"), segments(segments), color(color)
 {
 	//vertices

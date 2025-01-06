@@ -10,7 +10,7 @@ private:
 	Color color;
 
 public:
-	ColorRect(const Vector2& position, const Vector2& scale, const float rotation, const Color& color = RED);
+	ColorRect(const Vector3& position, const Vector3& scale, const float rotation, const Color& color = RED);
 	~ColorRect();
 
 public:

@@ -10,7 +10,7 @@ private:
 	Color color;
 
 public:
-	ColorLine(const Vector2& position, const float& length, const float rotation, const Color& color = RED);
+	ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color = RED);
 	~ColorLine();
 	
 public:

@@ -1,8 +1,8 @@
 #include "Framework.h"
 #include "ColorLine.h"
 
-ColorLine::ColorLine(const Vector2& position, const float& length, const float rotation, const Color& color)
-	: Drawable("ColorLine", position, Vector2(length, 0), rotation, ShaderPath + L"VertexColor.hlsl"), color(color)
+ColorLine::ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color)
+	: Drawable("ColorLine", position, Vector3(length, 0, 0), rotation, ShaderPath + L"VertexColor.hlsl"), color(color)
 {
 	//vertices
 	{

@@ -114,17 +114,9 @@
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,17 +144,9 @@ if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -186,17 +170,9 @@ if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -224,17 +200,9 @@ if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

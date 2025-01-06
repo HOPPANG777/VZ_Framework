@@ -11,6 +11,18 @@ Texture2D::Texture2D(const wstring& filePath)
 	// 텍스처가 이미 존재하는 경우 기존 데이터를 사용하고,
 	// 없을 경우 새로 생성합니다.
 	Textures::Load(make_shared<Texture2D>(*this));
+	
+	//std::wcout << L"Creating Texture2D for file: " << filePath << std::endl;
+	//try
+	//{
+	//	// 텍스처 로드
+	//	Textures::Load(make_shared<Texture2D>(*this));
+	//	std::wcout << L"Texture2D successfully created for file: " << filePath << std::endl;
+	//}
+	//catch (const std::exception& e)
+	//{
+	//	std::cerr << "Error during Texture2D creation: " << e.what() << std::endl;
+	//}
 }
 
 void Textures::Delete()
@@ -29,6 +41,8 @@ void Textures::Delete()
 // 이미 해당 그림의 데이터가 있는지 확인하고 없다면 만드는 함수
 void Textures::Load(shared_ptr<Texture2D> texture)
 {
+	//std::wcout << L"Textures::Load called for texture: " << texture->filePath << std::endl;
+
 	HRESULT hr;
 	TexMetadata metaData;
 
@@ -88,15 +102,71 @@ void Textures::Load(shared_ptr<Texture2D> texture)
 	}
 	CHECK(hr); // 로드 실패 시 프로그램을 종료합니다.
 
+	// SRV 생성 디버깅
+	//std::wcout << L"Attempting to create SRV for texture: " << texture->filePath << std::endl;
+
 	// Shader Resource View(SRV)를 생성합니다.
 	ComPtr<ID3D11ShaderResourceView> srv;
 	hr = CreateShaderResourceView(DEVICE, image.GetImages(), image.GetImageCount(), metaData, srv.ReleaseAndGetAddressOf());
 	CHECK(hr);  // SRV 생성 실패 시 프로그램을 종료합니다.
 
+	//if (FAILED(hr))
+	//{
+	//	std::wcerr << L"Failed to create SRV for texture: " << texture->filePath
+	//		<< L" (HRESULT: " << hr << L")" << std::endl;
+	//	return;
+	//}
+	//else
+	//{
+	//	std::wcout << L"SRV successfully created for texture: " << texture->filePath << std::endl;
+	//}
+
+	//if (FAILED(hr))
+	//{
+	//	std::wcerr << L"Failed to create SRV for texture: " << texture->filePath
+	//		<< L" (HRESULT: 0x" << std::hex << hr << L")" << std::endl;
+	//	return;
+	//}
+
+	//if (!srv)
+	//{
+	//	std::wcerr << L"Error: SRV is null after creation for texture: "
+	//		<< texture->filePath << std::endl;
+	//	return;
+	//}
+	//else
+	//{
+	//	std::wcout << L"SRV successfully created for texture: " << texture->filePath << std::endl;
+	//}
+
 	// 생성된 데이터를 TextureDesc와 Texture2D에 저장합니다.
 	desc.srv = srv;
 	texture->srv = srv;
 	texture->metaData = metaData;
+
+	// 디버깅 메시지 추가
+	//if (!texture->srv)
+	//{
+	//	std::wcerr << L"Error: texture->srv is still null after SRV assignment for texture: "
+	//		<< texture->filePath << std::endl;
+	//}
+	//else
+	//{
+	//	std::wcout << L"texture->srv successfully assigned for texture: "
+	//		<< texture->filePath << std::endl;
+	//}
+
+	// 디버깅 메시지 추가
+	//if (!texture->srv)
+	//{
+	//	std::wcerr << L"Error: texture->srv is null after SRV creation for texture: "
+	//		<< texture->filePath << std::endl;
+	//}
+	//else
+	//{
+	//	std::wcout << L"texture->srv successfully set for texture: "
+	//		<< texture->filePath << std::endl;
+	//}
 
 	// 텍스처를 목록에 추가합니다.
 	descs.push_back(desc);
