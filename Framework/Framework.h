@@ -81,11 +81,15 @@ using namespace SimpleMath;
 #endif
 //////////////////////////////////////////
 
-#define WIN_DEFAULT_WIDTH 1280
-#define WIN_DEFAULT_HEIGHT 720
+//#define WIN_DEFAULT_WIDTH 1280
+#define WIN_DEFAULT_WIDTH 1920
+//#define WIN_DEFAULT_HEIGHT 720
+#define WIN_DEFAULT_HEIGHT 1080
 
 #define CENTER_X (WIN_DEFAULT_WIDTH / 2)
+#define CENTER_X_1_5 (WIN_DEFAULT_WIDTH / 2.5f)
 #define CENTER_Y (WIN_DEFAULT_HEIGHT / 2)
+#define CENTER_Y_1_5 (WIN_DEFAULT_HEIGHT / 2.5f)
 #define CENTER (Vector3(CENTER_X, CENTER_Y, 0))
 
 #define CHECK(hr) { assert(SUCCEEDED(hr)); }

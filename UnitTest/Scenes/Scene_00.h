@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Interfaces/IScene.h"
+#include "Objects/TextureObject/TextureRect.h"
+#include "Objects/ColorObject/ColorRect.h"
 
 class Scene_00 : public Scene
 {
@@ -21,5 +23,6 @@ public:
 	void ImGUI() override;
 
 private:
+	vector<shared_ptr<Object>> objects;
 
 };
