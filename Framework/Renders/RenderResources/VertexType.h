@@ -7,7 +7,7 @@ struct VertexColor
 	Color color;
 
 	VertexColor() = default;
-	VertexColor(const Vector3& position, const Color& color)
+	VertexColor(const Vector2& position, const Color& color)
 		: position(position), color(color)
 	{
 		
