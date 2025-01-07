@@ -9,8 +9,6 @@ private:
 
 	Color color;
 
-	float length;
-
 public:
 	ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color = RED);
 	~ColorLine();

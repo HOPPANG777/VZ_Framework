@@ -29,7 +29,7 @@ void Program::Start()
 		SCENE->AddScene("ClockScene", make_shared<Scene_02>());
 		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
 
-		SCENE->LoadScene("LoadingScene");
+		SCENE->LoadScene("ClockScene");
 	}
 }
 

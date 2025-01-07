@@ -2,7 +2,7 @@
 #include "ColorLine.h"
 
 ColorLine::ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color)
-	: Drawable("ColorLine", position, Vector3(length, 0, 0), rotation, ShaderPath + L"VertexColor.hlsl"), color(color), length(length)
+	: Drawable("ColorLine", position, Vector3(length, 0, 0), rotation, ShaderPath + L"VertexColor.hlsl"), color(color)
 {
 	//vertices
 	{
