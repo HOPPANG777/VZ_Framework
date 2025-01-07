@@ -12,11 +12,11 @@ private:
 public:
 	ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color = RED);
 	~ColorLine();
-	
+
 public:
 	void Update() override;
 	void Render() override;
-	
+
 public:
 	Color GetColor() const { return color; }
 	void SetColor(const Color& color)
@@ -34,5 +34,6 @@ public:
 		}
 		DC->Unmap(vertexBuffer->GetResource(), 0);
 	}
+
 };
 

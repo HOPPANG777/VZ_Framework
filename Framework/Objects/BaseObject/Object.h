@@ -51,6 +51,12 @@ public:
 	void Scale(const Vector3& scale) { this->scale += scale * DELTA; }
 
 public:
+	// Getters
+	float GetRotation() const { return XMConvertToDegrees(rotation); } // 현재 회전값 반환
+	Vector3 GetPosition() const { return position; }
+	Vector3 GetScale() const { return scale; }
+
+public:
 	virtual void Update();
 	virtual void Render();
 };

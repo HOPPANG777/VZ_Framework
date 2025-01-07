@@ -5,9 +5,8 @@ void Scene_00::Awake() {}
 
 void Scene_00::Start()
 {
-	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Loading.png"));
-	objects.push_back(make_shared<TextureRect>(CENTER + Vector3(-400, -350, 0), Vector3(200, 100, 0), 0.0f, TexturePath + L"LoadingIcon.png"));
-	objects.push_back(make_shared<ColorRect>(CENTER - Vector3(0, CENTER_Y_1_5, 0), Vector3(CENTER_X, 40, 0), 0.0f, WHITE));
+	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Fallout76.jpg"));
+	objects.push_back(make_shared<TextureRect>(Vector3(WIN_DEFAULT_WIDTH * 0.9f, CENTER_Y / 5, 0), Vector3(200, 100, 0), 0.0f, TexturePath + L"SmolAmeLoading Icon.png"));
 }
 
 void Scene_00::Destroy()
