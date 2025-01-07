@@ -23,19 +23,13 @@ void Scene_02::Update()
 	SYSTEMTIME time;
 	GetLocalTime(&time);
 
-	const float hourAngle = (360.0f / 12) 
-		* (time.wHour) + (time.wMinute * 0.5f);
-
-	const float minutAngle = (360.0f / 60) 
-		* (time.wMinute);
-
-	const float secondAngle = (360.0f / 60) 
-		* (time.wSecond) + (360.0f / 60000) * (time.wMilliseconds);
+	const float hourAngle = (360.0f / 12) * (time.wHour) + (time.wMinute * 0.5f);
+	const float minuteAngle = (360.0f / 60) * (time.wMinute);
+	const float secondAngle = (360.0f / 60) * (time.wSecond) + (360.0f / 60000) * (time.wMilliseconds);
 
 	if (objects[1] != nullptr) objects[1]->Rotate(secondAngle);
-	if (objects[2] != nullptr) objects[1]->Rotate(minutAngle);
-	if (objects[3] != nullptr) objects[1]->Rotate(hourAngle);
-	
+	if (objects[2] != nullptr) objects[2]->Rotate(minuteAngle);
+	if (objects[3] != nullptr) objects[3]->Rotate(hourAngle);
 
 	if (KEYBOARD->Press('E'))
 	{

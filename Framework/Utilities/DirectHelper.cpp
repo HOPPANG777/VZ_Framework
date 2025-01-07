@@ -2,6 +2,7 @@
 #include "DirectHelper.h"
 
 const float Values::PI = 3.141592f;
+const float Values::Deg2Rad = PI / 180;
 
 const Vector3 Values::ZeroVec3 = Vector3(0, 0, 0);
 const Vector3 Values::OneVec3 = Vector3(1, 1, 1);

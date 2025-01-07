@@ -9,6 +9,8 @@ private:
 
 	Color color;
 
+	float length;
+
 public:
 	ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color = RED);
 	~ColorLine();
@@ -16,7 +18,7 @@ public:
 public:
 	void Update() override;
 	void Render() override;
-
+	
 public:
 	Color GetColor() const { return color; }
 	void SetColor(const Color& color)

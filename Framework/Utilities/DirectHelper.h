@@ -3,6 +3,7 @@ class Values
 {
 public:
 	const static float PI;
+	const static float Deg2Rad;
 
 	const static Vector3 ZeroVec3;
 	const static Vector3 OneVec3;

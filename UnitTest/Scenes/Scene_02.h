@@ -26,6 +26,5 @@ private:
 	vector<shared_ptr<Object>> objects;
 
 	bool isColor = false;
-
 };
 
