@@ -3,7 +3,7 @@
 
 	class TextureRect : public Drawable
 	{
-	private:
+	protected:
 		vector<VertexTexture> vertices;
 
 		vector<UINT> indices;
@@ -15,6 +15,8 @@
 		ComPtr<ID3D11SamplerState> sampler[2];
 
 		ComPtr<ID3D11ShaderResourceView> srv = nullptr;
+		
+		D3D11_MAPPED_SUBRESOURCE subRe;
 
 		//std::shared_ptr<Texture2D> texture;
 

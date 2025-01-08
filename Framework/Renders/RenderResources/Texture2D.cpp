@@ -102,71 +102,15 @@ void Textures::Load(shared_ptr<Texture2D> texture)
 	}
 	CHECK(hr); // 로드 실패 시 프로그램을 종료합니다.
 
-	// SRV 생성 디버깅
-	//std::wcout << L"Attempting to create SRV for texture: " << texture->filePath << std::endl;
-
 	// Shader Resource View(SRV)를 생성합니다.
 	ComPtr<ID3D11ShaderResourceView> srv;
 	hr = CreateShaderResourceView(DEVICE, image.GetImages(), image.GetImageCount(), metaData, srv.ReleaseAndGetAddressOf());
 	CHECK(hr);  // SRV 생성 실패 시 프로그램을 종료합니다.
 
-	//if (FAILED(hr))
-	//{
-	//	std::wcerr << L"Failed to create SRV for texture: " << texture->filePath
-	//		<< L" (HRESULT: " << hr << L")" << std::endl;
-	//	return;
-	//}
-	//else
-	//{
-	//	std::wcout << L"SRV successfully created for texture: " << texture->filePath << std::endl;
-	//}
-
-	//if (FAILED(hr))
-	//{
-	//	std::wcerr << L"Failed to create SRV for texture: " << texture->filePath
-	//		<< L" (HRESULT: 0x" << std::hex << hr << L")" << std::endl;
-	//	return;
-	//}
-
-	//if (!srv)
-	//{
-	//	std::wcerr << L"Error: SRV is null after creation for texture: "
-	//		<< texture->filePath << std::endl;
-	//	return;
-	//}
-	//else
-	//{
-	//	std::wcout << L"SRV successfully created for texture: " << texture->filePath << std::endl;
-	//}
-
 	// 생성된 데이터를 TextureDesc와 Texture2D에 저장합니다.
 	desc.srv = srv;
 	texture->srv = srv;
 	texture->metaData = metaData;
-
-	// 디버깅 메시지 추가
-	//if (!texture->srv)
-	//{
-	//	std::wcerr << L"Error: texture->srv is still null after SRV assignment for texture: "
-	//		<< texture->filePath << std::endl;
-	//}
-	//else
-	//{
-	//	std::wcout << L"texture->srv successfully assigned for texture: "
-	//		<< texture->filePath << std::endl;
-	//}
-
-	// 디버깅 메시지 추가
-	//if (!texture->srv)
-	//{
-	//	std::wcerr << L"Error: texture->srv is null after SRV creation for texture: "
-	//		<< texture->filePath << std::endl;
-	//}
-	//else
-	//{
-	//	std::wcout << L"texture->srv successfully set for texture: "
-	//		<< texture->filePath << std::endl;
-	//}
 
 	// 텍스처를 목록에 추가합니다.
 	descs.push_back(desc);
@@ -184,38 +128,69 @@ void Texture2D::ReadPixel(vector<Color>& pixels) const
 
 void Texture2D::ReadPixel(ID3D11Texture2D* texture, vector<Color>& pixels)
 {
-	// 원본 텍스처의 설명(D3D11_TEXTURE2D_DESC)을 가져옵니다.
+	// 원본 텍스쳐 정보
 	D3D11_TEXTURE2D_DESC srvDesc;
 	texture->GetDesc(&srvDesc);
 
-	// 읽기 전용 텍스처(복사본)의 설명을 설정합니다.
+	// 원본 텍스쳐 복사본
 	D3D11_TEXTURE2D_DESC destDesc = {};
-	destDesc.Usage = D3D11_USAGE_STAGING;  // CPU에서 읽을 수 있는 스테이징 텍스처로 설정
-	destDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;  // 읽기 전용
+	destDesc.Usage = D3D11_USAGE_STAGING;
+	destDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
 	destDesc.Width = srvDesc.Width;
 	destDesc.Height = srvDesc.Height;
-	destDesc.MipLevels = 1;  // MipMap 레벨 1로 설정
-	destDesc.ArraySize = 1;  // 배열 크기 1로 설정
-	destDesc.Format = srvDesc.Format;  // 포맷 동일
-	destDesc.SampleDesc = srvDesc.SampleDesc;  // 샘플링 설명 동일
+	destDesc.MipLevels = 1;
+	destDesc.ArraySize = 1;
+	destDesc.Format = srvDesc.Format;
+	destDesc.SampleDesc = srvDesc.SampleDesc;
 
-	// 읽기 전용 텍스처를 생성합니다.
 	ComPtr<ID3D11Texture2D> destTex;
 	HRESULT hr = DEVICE->CreateTexture2D(&destDesc, nullptr, destTex.GetAddressOf());
-	CHECK(hr);  // 생성 실패 시 프로그램 종료
+	if (FAILED(hr)) {
+		throw std::runtime_error("Failed to create texture.");
+	}
 
-	// 원본 텍스처 데이터를 읽기 전용 텍스처에 복사합니다.
-	DC->CopyResource(destTex.Get(), texture);
+	// 원본 texture를 복사본인 destTex에 집어 넣는다.
+	hr = D3DX11LoadTextureFromTexture(DC, texture, nullptr, destTex.Get());
+	if (FAILED(hr)) {
+		throw std::runtime_error("Failed to load texture.");
+	}
 
-	// 복사된 텍스처 데이터를 매핑하여 접근할 수 있도록 설정합니다.
-	D3D11_MAPPED_SUBRESOURCE subResource;
-	DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subResource);
+	auto colors = std::make_unique<UINT[]>(destDesc.Width * destDesc.Height);
 
-	// 픽셀 데이터를 저장할 벡터 크기를 설정하고 데이터를 복사합니다.
-	pixels.resize(destDesc.Width * destDesc.Height);
-	memcpy(pixels.data(), subResource.pData, sizeof(Color) * pixels.size());
-
-	// 매핑을 해제합니다.
+	D3D11_MAPPED_SUBRESOURCE subRe;
+	DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
+	{
+		// 그림의 픽셀 색상을 전부 추출
+		memcpy(colors.get(), subRe.pData, sizeof(UINT) * destDesc.Width * destDesc.Height);
+	}
 	DC->Unmap(destTex.Get(), 0);
+
+	// 이미지 가로 * 세로 즉, 픽셀 개수
+	int pixelNum = destDesc.Width * destDesc.Height;
+
+	// OpenGL과 호환되기 위해 색상 위치를 수정
+	{
+		auto alpha = std::make_unique<UINT[]>(pixelNum);
+		auto red = std::make_unique<UINT[]>(pixelNum);
+		auto green = std::make_unique<UINT[]>(pixelNum);
+		auto blue = std::make_unique<UINT[]>(pixelNum);
+
+		for (int i = 0; i < pixelNum; i++) {
+			alpha[i] = (colors[i] & 0xFF000000);
+			red[i] = (colors[i] & 0x00FF0000);
+			green[i] = (colors[i] & 0x0000FF00);
+			blue[i] = (colors[i] & 0x000000FF);
+
+			// OpenGL은 ARGB가 아닌 ABGR 순서이기 때문에
+			// R과 B의 위치를 바꾼다
+			red[i] = colors[i] >> 16;
+			blue[i] = colors[i] << 16;
+
+			colors[i] = alpha[i] | red[i] | green[i] | blue[i];
+		}
+
+		// 결과를 벡터로 저장
+		pixels.assign(&colors[0], &colors[pixelNum]);
+	}
 }
 

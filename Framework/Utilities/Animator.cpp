@@ -2,12 +2,12 @@
 #include "Animator.h"
 
 AnimationClip::AnimationClip(
-    const wstring& clipName,    // 애니메이션 클립의 이름
-    shared_ptr<Texture2D> srcTex,  // 애니메이션이 저장된 텍스처
-    UINT frameCount,           // 애니메이션의 프레임 개수
-    Vector2 startPos,          // 텍스처에서 애니메이션이 시작되는 좌표
-    Vector2 endPos,            // 텍스처에서 애니메이션이 끝나는 좌표
-    bool bReversed             // 애니메이션의 역재생 여부
+    const wstring& clipName,        // 애니메이션 클립의 이름
+    shared_ptr<Texture2D> srcTex,   // 애니메이션이 저장된 텍스처
+    UINT frameCount,                // 애니메이션의 프레임 개수
+    Vector2 startPos,               // 텍스처에서 애니메이션이 시작되는 좌표
+    Vector2 endPos,                 // 텍스처에서 애니메이션이 끝나는 좌표
+    bool bReversed                  // 애니메이션의 역재생 여부
 )
     : clipName(clipName), frameCount(frameCount), bReversed(bReversed)
 {

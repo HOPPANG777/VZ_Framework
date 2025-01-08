@@ -186,6 +186,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\TextureObject\AnimationRect.h" />
     <ClInclude Include="Components\GameComponent.h" />
     <ClInclude Include="Objects\BaseObject\GameObject.h" />
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
@@ -232,6 +233,7 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />
     <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
     <ClCompile Include="Renders\RenderResources\Texture2D.cpp" />
     <ClCompile Include="Managers\ResourcesManager.cpp" />
