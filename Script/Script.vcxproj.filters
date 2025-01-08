@@ -1,2 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Scenes\Scene_00.cpp">
+      <Filter>Scenes\Scene_00_Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_01.cpp">
+      <Filter>Scenes\Scene_01_Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_02.cpp">
+      <Filter>Scenes\Scene_02_Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_03.cpp">
+      <Filter>Scenes\Scene_03_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Scenes\Scene_00.h">
+      <Filter>Scenes\Scene_00_Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_01.h">
+      <Filter>Scenes\Scene_01_Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_02.h">
+      <Filter>Scenes\Scene_02_Clock</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_03.h">
+      <Filter>Scenes\Scene_03_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\SceneList.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{a9beda49-1ee7-4adb-a8f7-204a475f8913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_00_Test">
+      <UniqueIdentifier>{7e6ae146-8a72-4a13-87ad-25acf2116947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_01_Geometry">
+      <UniqueIdentifier>{261d174e-88a9-4219-9b4b-6ea9ab1cafdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_02_Clock">
+      <UniqueIdentifier>{aa469556-c664-415b-8f3e-c7977ab08e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_03_Texture">
+      <UniqueIdentifier>{27a644e9-b185-4627-982b-29b2d55411fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

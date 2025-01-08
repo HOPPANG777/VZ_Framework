@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Program.h"
+#include "Script/Scenes/SceneList.h"
 
 #include "Systems/Window.h"
 
@@ -23,7 +24,12 @@ void Program::Start()
 
 	//Scene ¼¼ÆÃ
 	{
-		
+		SCENE->AddScene("LoadingScene", make_shared<Scene_00>());
+		SCENE->AddScene("GeometryScene", make_shared<Scene_01>());
+		SCENE->AddScene("ClockScene", make_shared<Scene_02>());
+		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
+	
+		SCENE->LoadScene("ClockScene");
 	}
 }
 

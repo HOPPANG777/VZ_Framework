@@ -73,22 +73,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
@@ -100,7 +104,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,18 +118,9 @@
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.cso" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -137,7 +132,7 @@ if "$(Configuration)" == "Debug" (
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,18 +148,9 @@ if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.cso" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -174,7 +160,7 @@ if "$(Configuration)" == "Debug" (
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -188,18 +174,9 @@ if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.cso" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -211,7 +188,7 @@ if "$(Configuration)" == "Debug" (
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -227,18 +204,9 @@ if "$(Configuration)" == "Debug" (
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-if not exist "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders" (
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-    mkdir "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-
-)
-
-
-if "$(Configuration)" == "Debug" (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-) else (
-    xcopy /Y /D "$(SolutionDir)_Shaders\*.hlsl" "$(SolutionDir)_Build\$(Platform)\$(Configuration)\_Data\_Shaders"
-)</Command>
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
