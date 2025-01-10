@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\JumpHoppang.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
     <ClCompile Include="Scenes\Scene_01.cpp" />
     <ClCompile Include="Scenes\Scene_02.cpp" />
@@ -31,6 +32,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\JumpHoppang.h" />
     <ClInclude Include="Scenes\SceneList.h" />
     <ClInclude Include="Scenes\Scene_00.h" />
     <ClInclude Include="Scenes\Scene_01.h" />
