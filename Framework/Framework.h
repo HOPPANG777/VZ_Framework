@@ -35,7 +35,6 @@ using namespace std;
 //////////////////////////////////////////
 //DirectX D3D11
 #include <d3d11.h>
-#include <d2d1.h>
 #include <d3dcompiler.h>
 #include <D3DX11tex.h>
 #pragma comment(lib, "dxgi.lib")
@@ -172,6 +171,7 @@ extern HWND gHandle;
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 #include "Systems/Graphics.h"
+#include "Systems/Fonts.h"
 
 #include "Utilities/Gui.h"
 

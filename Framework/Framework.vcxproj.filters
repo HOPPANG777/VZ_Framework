@@ -92,8 +92,8 @@
     <ClCompile Include="Objects\TextureObject\TextureRect.cpp">
       <Filter>Objects\TextureObject</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\TextureObject\AnimationRect.cpp">
-      <Filter>Objects\TextureObject</Filter>
+    <ClCompile Include="Systems\Fonts.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,8 +227,8 @@
     <ClInclude Include="Objects\TextureObject\TextureRect.h">
       <Filter>Objects\TextureObject</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\TextureObject\AnimationRect.h">
-      <Filter>Objects\TextureObject</Filter>
+    <ClInclude Include="Systems\Fonts.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
