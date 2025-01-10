@@ -11,18 +11,6 @@ Texture2D::Texture2D(const wstring& filePath)
 	// 텍스처가 이미 존재하는 경우 기존 데이터를 사용하고,
 	// 없을 경우 새로 생성합니다.
 	Textures::Load(make_shared<Texture2D>(*this));
-	
-	//std::wcout << L"Creating Texture2D for file: " << filePath << std::endl;
-	//try
-	//{
-	//	// 텍스처 로드
-	//	Textures::Load(make_shared<Texture2D>(*this));
-	//	std::wcout << L"Texture2D successfully created for file: " << filePath << std::endl;
-	//}
-	//catch (const std::exception& e)
-	//{
-	//	std::cerr << "Error during Texture2D creation: " << e.what() << std::endl;
-	//}
 }
 
 void Textures::Delete()
@@ -41,8 +29,6 @@ void Textures::Delete()
 // 이미 해당 그림의 데이터가 있는지 확인하고 없다면 만드는 함수
 void Textures::Load(shared_ptr<Texture2D> texture)
 {
-	//std::wcout << L"Textures::Load called for texture: " << texture->filePath << std::endl;
-
 	HRESULT hr;
 	TexMetadata metaData;
 

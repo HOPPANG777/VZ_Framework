@@ -34,8 +34,8 @@ private:
 class Animator
 {
 public:
-    Animator() = default;
-    ~Animator() = default;
+    Animator();
+    ~Animator();
 
     void Update();
 
@@ -68,5 +68,6 @@ private:
     Vector2 currentFrame = Values::ZeroVec2;
 
     float deltaTime = 0.0f;
+
     float playRate = 1.0f / 15.0f;  // 이미지 전환 속도
 };

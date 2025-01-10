@@ -10,8 +10,8 @@ struct TextureDesc
     bool operator==(const TextureDesc& other) const
     {
         return filePath == other.filePath &&
-            width == other.width &&
-            height == other.height;
+               width == other.width &&
+               height == other.height;
     }
 };
 

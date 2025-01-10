@@ -30,7 +30,7 @@ void Program::Start()
 		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
 	
 		SCENE->SetLoadingScene("LoadingScene");
-		SCENE->LoadScene("GeometryScene");
+		SCENE->LoadScene("LoadingScene");
 	}
 }
 

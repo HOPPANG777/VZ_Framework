@@ -47,6 +47,18 @@ AnimationClip::AnimationClip(
     }
 }
 
+Animator::Animator()
+{
+}
+
+Animator::~Animator()
+{
+    for (auto& clip : animClips)
+    {
+        clip.second.reset();
+    }
+}
+
 void Animator::Update()
 {
     // 현재 실행 중인 애니메이션 클립이 없는 경우 업데이트를 종료합니다.
@@ -61,8 +73,7 @@ void Animator::Update()
             currentFrameIndex++;
 
             // 프레임 인덱스가 총 프레임 개수를 초과하면 처음으로 돌아갑니다.
-            if (currentFrameIndex >= currentClip->GetFrameCount())
-                currentFrameIndex = 0;
+            if (currentFrameIndex >= currentClip->GetFrameCount()) currentFrameIndex = 0;
 
             // 현재 프레임 좌표를 갱신합니다.
             currentFrame = currentClip->GetKeyFrames()[currentFrameIndex];
@@ -85,7 +96,7 @@ void Animator::Update()
     else
     {
         // 경과 시간을 증가시킵니다.
-        deltaTime += TIME->GetDeltaTime();
+        deltaTime += DELTA;
     }
 }
 
@@ -100,8 +111,7 @@ void Animator::AddAnimClip(shared_ptr<AnimationClip> animClip)
 void Animator::SetCurrentAnimClip(const wstring& clipName)
 {
     // 이미 현재 실행 중인 클립과 동일한 클립을 설정하려고 하면 무시합니다.
-    if (currentClip != nullptr && currentClip->GetClipName() == clipName)
-        return;
+    if (currentClip != nullptr && currentClip->GetClipName() == clipName) return;
 
     // 실행할 클립이 animClips에 존재하는지 확인합니다.
     if (CheckExist(clipName))
