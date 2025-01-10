@@ -48,5 +48,6 @@ xcopy "%SOURCE_DIR%_Textures" "%DEST_DIR%\_Textures" /E /I /Y
 xcopy "%SOURCE_DIR%_Sounds" "%DEST_DIR%\_Sounds" /E /I /Y
 xcopy "%SOURCE_DIR%_TileData" "%DEST_DIR%\_TileData" /E /I /Y
 xcopy "%SOURCE_DIR%_Shaders" "%DEST_DIR%\_Shaders" /E /I /Y
+xcopy "%SOURCE_DIR%_Fonts" "%DEST_DIR%\_Fonts" /E /I /Y
 
 echo 복사 완료.
