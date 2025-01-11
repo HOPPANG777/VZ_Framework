@@ -5,7 +5,9 @@
 
 # Ignore vcpkg_installed directories in specific projects
 Framework/vcpkg_installed/
-UnitTest/vcpkg_installed/
+Client/vcpkg_installed/
+Script/vcpkg_installed/
+Tool/vcpkg_installed/
 
 # Ignore _Build files and directories
 _Build/
