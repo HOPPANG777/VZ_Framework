@@ -14,7 +14,9 @@
       <Filter>Scenes\Scene_03_Texture</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Object\JumpHoppang.cpp" />
+    <ClCompile Include="Object\JumpHoppang.cpp">
+      <Filter>Object\LoadingObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -33,7 +35,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Object\JumpHoppang.h" />
+    <ClInclude Include="Object\JumpHoppang.h">
+      <Filter>Object\LoadingObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -53,6 +57,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{bd04c7ca-8433-4793-8a0a-f15af6d99777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\LoadingObject">
+      <UniqueIdentifier>{1071eefa-7738-4eed-8abb-e508e1b4db06}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
