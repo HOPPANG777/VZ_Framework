@@ -2,181 +2,206 @@
 #include "Texture2D.h"
 
 using namespace DirectX;
+
+// 정적 멤버 변수 초기화
 vector<TextureDesc> Textures::descs;
 
+// Texture2D 생성자
 Texture2D::Texture2D(const wstring& filePath)
-	: filePath(filePath)
+    : filePath(filePath)
 {
-	// 텍스처를 로드합니다.
-	// 텍스처가 이미 존재하는 경우 기존 데이터를 사용하고,
-	// 없을 경우 새로 생성합니다.
-	Textures::Load(make_shared<Texture2D>(*this));
+    Textures::Load(this);
 }
 
+// Textures::Delete()는 descs에 들어있는
+// 모든 srv를 명시적으로 해제한다.
 void Textures::Delete()
 {
-	// 저장된 모든 텍스처 데이터를 해제합니다.
-	for (auto& desc : descs)
-	{
-		// Shader Resource View(SRV)를 초기화하여 DirectX 리소스를 해제합니다.
-		desc.srv.Reset();
-	}
-	// 텍스처 목록을 비웁니다.
-	descs.clear();
+    for (auto& desc : descs)
+    {
+        // ComPtr은 스코프를 벗어나면 자동 해제되지만,
+        // 필요하다면 이렇게 Reset()으로 강제 해제 가능
+        desc.srv.Reset();
+    }
+    descs.clear();
 }
 
-// 텍스처2D를 생성하거나 따로 만들때 해당 texture2D의 데이터를 이용해서
-// 이미 해당 그림의 데이터가 있는지 확인하고 없다면 만드는 함수
-void Textures::Load(shared_ptr<Texture2D> texture)
+// 텍스처 로드 함수
+void Textures::Load(Texture2D* texture)
 {
-	HRESULT hr;
-	TexMetadata metaData;
+    HRESULT hr = S_OK;
+    TexMetadata metaData;
 
-	// 텍스처 파일 경로의 확장자를 가져옵니다.
-	// 확장자에 따라 적절한 로딩 함수를 호출합니다.
-	wstring ext = Path::GetExtension(texture->filePath);
-	if (ext == L"tga")
-	{
-		// TGA 파일에서 메타데이터를 가져옵니다.
-		hr = GetMetadataFromTGAFile(texture->filePath.c_str(), metaData);
-	}
-	else if (ext == L"dds")
-	{
-		// DDS 파일에서 메타데이터를 가져옵니다.
-		hr = GetMetadataFromDDSFile(texture->filePath.c_str(), DDS_FLAGS_NONE, metaData);
-	}
-	else
-	{
-		// 그 외 확장자는 WIC 파일에서 메타데이터를 가져옵니다.
-		hr = GetMetadataFromWICFile(texture->filePath.c_str(), WIC_FLAGS_NONE, metaData);
-	}
-	CHECK(hr); // HRESULT를 확인하고 실패 시 프로그램을 종료합니다.
+    // 확장자 추출
+    wstring ext = Path::GetExtension(texture->filePath);
 
-	// 텍스처의 너비와 높이를 메타데이터에서 가져옵니다.
-	UINT width = metaData.width;
-	UINT height = metaData.height;
+    // 확장자에 따라 메타데이터 얻기
+    if (ext == L"tga")
+    {
+        hr = GetMetadataFromTGAFile(texture->filePath.c_str(), metaData);
+        CHECK(hr);
+    }
+    else if (ext == L"dds")
+    {
+        hr = GetMetadataFromDDSFile(texture->filePath.c_str(),
+            DDS_FLAGS_NONE, metaData);
+        CHECK(hr);
+    }
+    else
+    {
+        hr = GetMetadataFromWICFile(texture->filePath.c_str(),
+            WIC_FLAGS_NONE, metaData);
+        CHECK(hr);
+    }
 
+    UINT width = metaData.width;
+    UINT height = metaData.height;
 
-	// 텍스처의 메타정보를 기반으로 TextureDesc 구조체를 생성합니다.
-	TextureDesc desc = { texture->filePath, width, height, nullptr };
+    // TextureDesc 생성
+    TextureDesc desc;
+    desc.filePath = texture->filePath;
+    desc.width = width;
+    desc.height = height;
 
-	// 텍스처가 이미 로드되었는지 확인합니다.
-	for (const auto& existingDesc : descs)
-	{
-		if (desc == existingDesc)
-		{
-			// 기존 텍스처가 존재하면 해당 Shader Resource View(SRV)와 메타데이터를 사용합니다.
-			texture->srv = existingDesc.srv;
-			texture->metaData = metaData;
-			return;
-		}
-	}
+    TextureDesc exist;
+    bool bExist = false;
 
-	// 텍스처 데이터를 로드합니다.
-	ScratchImage image;
-	if (ext == L"tga")
-	{
-		hr = LoadFromTGAFile(texture->filePath.c_str(), &metaData, image);
-	}
-	else if (ext == L"dds")
-	{
-		hr = LoadFromDDSFile(texture->filePath.c_str(), DDS_FLAGS_NONE, &metaData, image);
-	}
-	else
-	{
-		hr = LoadFromWICFile(texture->filePath.c_str(), WIC_FLAGS_NONE, &metaData, image);
-	}
-	CHECK(hr); // 로드 실패 시 프로그램을 종료합니다.
+    // 이미 같은 파일/크기의 TextureDesc가 있는지 확인
+    for (auto& temp : descs)
+    {
+        if (desc == temp)
+        {
+            bExist = true;
+            exist = temp;
+            break;
+        }
+    }
 
-	// Shader Resource View(SRV)를 생성합니다.
-	ComPtr<ID3D11ShaderResourceView> srv;
-	hr = CreateShaderResourceView(DEVICE, image.GetImages(), image.GetImageCount(), metaData, srv.ReleaseAndGetAddressOf());
-	CHECK(hr);  // SRV 생성 실패 시 프로그램을 종료합니다.
+    // 이미 존재한다면, 기존 SRV만 가져다가 사용
+    if (bExist)
+    {
+        texture->srv = exist.srv;
+        texture->metaData = metaData;
+    }
+    else
+    {
+        // 새로운 텍스처 로드
+        ScratchImage image;
+        if (ext == L"tga")
+        {
+            hr = LoadFromTGAFile(texture->filePath.c_str(), &metaData, image);
+            CHECK(hr);
+        }
+        else if (ext == L"dds")
+        {
+            hr = LoadFromDDSFile(texture->filePath.c_str(),
+                DDS_FLAGS_NONE, &metaData, image);
+            CHECK(hr);
+        }
+        else
+        {
+            hr = LoadFromWICFile(texture->filePath.c_str(),
+                WIC_FLAGS_NONE, &metaData, image);
+            CHECK(hr);
+        }
 
-	// 생성된 데이터를 TextureDesc와 Texture2D에 저장합니다.
-	desc.srv = srv;
-	texture->srv = srv;
-	texture->metaData = metaData;
+        ComPtr<ID3D11ShaderResourceView> shaderResourceView;
+        hr = CreateShaderResourceView(DEVICE,
+            image.GetImages(),
+            image.GetImageCount(),
+            metaData,
+            &shaderResourceView);
+        CHECK(hr);
 
-	// 텍스처를 목록에 추가합니다.
-	descs.push_back(desc);
+        desc.srv = shaderResourceView;
+        texture->srv = shaderResourceView;
+        texture->metaData = metaData;
+
+        descs.push_back(desc);
+    }
 }
 
-void Texture2D::ReadPixel(vector<Color>& pixels) const
+// ReadPixel 멤버 함수
+void Texture2D::ReadPixel(vector<Color>* pixels)
 {
-	// Shader Resource View에서 원본 텍스처를 가져옵니다.
-	ComPtr<ID3D11Texture2D> texture;
-	srv->GetResource(reinterpret_cast<ID3D11Resource**>(texture.GetAddressOf()));
+    // srv에서 실제 Texture2D COM 포인터 가져오기
+    ComPtr<ID3D11Resource> resource;
+    srv->GetResource(&resource);
 
-	// 가져온 텍스처 데이터를 기반으로 픽셀 데이터를 읽어옵니다.
-	ReadPixel(texture.Get(), pixels);
+    ComPtr<ID3D11Texture2D> texture2D;
+    resource.As(&texture2D);
+
+    ReadPixel(texture2D, pixels);
 }
 
-void Texture2D::ReadPixel(ID3D11Texture2D* texture, vector<Color>& pixels)
+// ReadPixel 정적 함수
+void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture,
+    vector<Color>* pixels)
 {
-	// 원본 텍스쳐 정보
-	D3D11_TEXTURE2D_DESC srvDesc;
-	texture->GetDesc(&srvDesc);
+    // 원본 텍스처 정보
+    D3D11_TEXTURE2D_DESC srvDesc;
+    texture->GetDesc(&srvDesc);
 
-	// 원본 텍스쳐 복사본
-	D3D11_TEXTURE2D_DESC destDesc = {};
-	destDesc.Usage = D3D11_USAGE_STAGING;
-	destDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-	destDesc.Width = srvDesc.Width;
-	destDesc.Height = srvDesc.Height;
-	destDesc.MipLevels = 1;
-	destDesc.ArraySize = 1;
-	destDesc.Format = srvDesc.Format;
-	destDesc.SampleDesc = srvDesc.SampleDesc;
+    // 복사본 desc 설정
+    D3D11_TEXTURE2D_DESC destDesc = {};
+    destDesc.Usage = D3D11_USAGE_STAGING;
+    destDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    destDesc.Width = srvDesc.Width;
+    destDesc.Height = srvDesc.Height;
+    destDesc.MipLevels = 1;
+    destDesc.ArraySize = 1;
+    destDesc.Format = srvDesc.Format;
+    destDesc.SampleDesc = srvDesc.SampleDesc;
 
-	ComPtr<ID3D11Texture2D> destTex;
-	HRESULT hr = DEVICE->CreateTexture2D(&destDesc, nullptr, destTex.GetAddressOf());
-	if (FAILED(hr)) {
-		throw std::runtime_error("Failed to create texture.");
-	}
+    // CreateTexture2D
+    ComPtr<ID3D11Texture2D> destTex;
+    HRESULT hr = DEVICE->CreateTexture2D(&destDesc, nullptr, &destTex);
+    CHECK(hr);
 
-	// 원본 texture를 복사본인 destTex에 집어 넣는다.
-	hr = D3DX11LoadTextureFromTexture(DC, texture, nullptr, destTex.Get());
-	if (FAILED(hr)) {
-		throw std::runtime_error("Failed to load texture.");
-	}
+    // 원본 texture를 복사본 destTex에 로드
+    hr = D3DX11LoadTextureFromTexture(DC, texture.Get(), nullptr, destTex.Get());
+    CHECK(hr);
 
-	auto colors = std::make_unique<UINT[]>(destDesc.Width * destDesc.Height);
+    // 픽셀 데이터 담을 메모리(Width * Height)
+    const size_t pixelCount = static_cast<size_t>(destDesc.Width)
+        * static_cast<size_t>(destDesc.Height);
 
-	D3D11_MAPPED_SUBRESOURCE subRe;
-	DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
-	{
-		// 그림의 픽셀 색상을 전부 추출
-		memcpy(colors.get(), subRe.pData, sizeof(UINT) * destDesc.Width * destDesc.Height);
-	}
-	DC->Unmap(destTex.Get(), 0);
+    // unique_ptr로 배열 관리
+    unique_ptr<UINT[]> colors = make_unique<UINT[]>(pixelCount);
 
-	// 이미지 가로 * 세로 즉, 픽셀 개수
-	int pixelNum = destDesc.Width * destDesc.Height;
+    // Map을 통해 CPU로 읽어온다
+    D3D11_MAPPED_SUBRESOURCE subRe;
+    DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
+    {
+        // 복사
+        memcpy(colors.get(), subRe.pData, sizeof(UINT) * pixelCount);
+    }
+    DC->Unmap(destTex.Get(), 0);
 
-	// OpenGL과 호환되기 위해 색상 위치를 수정
-	{
-		auto alpha = std::make_unique<UINT[]>(pixelNum);
-		auto red = std::make_unique<UINT[]>(pixelNum);
-		auto green = std::make_unique<UINT[]>(pixelNum);
-		auto blue = std::make_unique<UINT[]>(pixelNum);
+    // OpenGL 호환용(BGR → RGB 순서 교체)
+    {
+        // 임시 버퍼들
+        unique_ptr<UINT[]> alpha = make_unique<UINT[]>(pixelCount);
+        unique_ptr<UINT[]> red = make_unique<UINT[]>(pixelCount);
+        unique_ptr<UINT[]> green = make_unique<UINT[]>(pixelCount);
+        unique_ptr<UINT[]> blue = make_unique<UINT[]>(pixelCount);
 
-		for (int i = 0; i < pixelNum; i++) {
-			alpha[i] = (colors[i] & 0xFF000000);
-			red[i] = (colors[i] & 0x00FF0000);
-			green[i] = (colors[i] & 0x0000FF00);
-			blue[i] = (colors[i] & 0x000000FF);
+        for (size_t i = 0; i < pixelCount; i++)
+        {
+            alpha[i] = (colors[i] & 0xFF000000);
+            red[i] = (colors[i] & 0x00FF0000);
+            green[i] = (colors[i] & 0x0000FF00);
+            blue[i] = (colors[i] & 0x000000FF);
 
-			// OpenGL은 ARGB가 아닌 ABGR 순서이기 때문에
-			// R과 B의 위치를 바꾼다
-			red[i] = colors[i] >> 16;
-			blue[i] = colors[i] << 16;
+            // R과 B 위치 교체
+            red[i] = colors[i] >> 16;    // 16비트 쉬프트 → R 추출
+            blue[i] = colors[i] << 16;    // <<16 → B를 상위 비트로
 
-			colors[i] = alpha[i] | red[i] | green[i] | blue[i];
-		}
+            colors[i] = alpha[i] | red[i] | green[i] | blue[i];
+        }
 
-		// 결과를 벡터로 저장
-		pixels.assign(&colors[0], &colors[pixelNum]);
-	}
+        // 최종 픽셀을 결과 벡터에 저장
+        pixels->assign(colors.get(), colors.get() + pixelCount);
+    }
 }
 

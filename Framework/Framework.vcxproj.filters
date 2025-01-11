@@ -98,6 +98,9 @@
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp">
       <Filter>Objects\TextureObject</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\AnimationClip.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Objects\TextureObject\AnimationRect.h">
       <Filter>Objects\TextureObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\AnimationClip.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
