@@ -13,8 +13,8 @@ public:
 	~JumpHoppang();
 
 public:
-	//void Update();
-	//void Render();
+	void Update();
+	void Render();
 
 public:
 

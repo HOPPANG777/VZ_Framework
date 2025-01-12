@@ -35,3 +35,13 @@ JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const fl
 JumpHoppang::~JumpHoppang()
 {
 }
+
+void JumpHoppang::Update()
+{
+    BASE::Update();
+}
+
+void JumpHoppang::Render()
+{
+    BASE::Render();
+}

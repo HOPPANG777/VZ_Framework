@@ -95,37 +95,37 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
     // 여기서 Animator를 생성
     animator = std::make_shared<Animator>();
 
-    // AnimationClip 생성
-    {
-        // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
-        shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
+    //// AnimationClip 생성
+    //{
+    //    // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
+    //    shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
 
-        // 예: 아래 두 클립을 만든다고 가정
-        auto RunD = std::make_shared<AnimationClip>(
-            L"RunD",
-            srcTex.get(),
-            4,
-            1,
-            Values::ZeroVec2, // (0,0)에서 시작
-            Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
-        );
+    //    // 예: 아래 두 클립을 만든다고 가정
+    //    auto RunD = std::make_shared<AnimationClip>(
+    //        L"RunD",
+    //        srcTex.get(),
+    //        4,
+    //        1,
+    //        Values::ZeroVec2, // (0,0)에서 시작
+    //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
+    //    );
 
-        auto RunL = std::make_shared<AnimationClip>(
-            L"RunL",
-            srcTex.get(),
-            4,
-            1,
-            Vector2(0, srcTex->GetHeight() * 0.125f * 2),
-            Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
-        );
+    //    auto RunL = std::make_shared<AnimationClip>(
+    //        L"RunL",
+    //        srcTex.get(),
+    //        4,
+    //        1,
+    //        Vector2(0, srcTex->GetHeight() * 0.125f * 2),
+    //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
+    //    );
 
-        // Animator에 추가
-        animator->AddAnimClip(RunD);
-        animator->AddAnimClip(RunL);
+    //    // Animator에 추가
+    //    animator->AddAnimClip(RunD);
+    //    animator->AddAnimClip(RunL);
 
-        // 현재 재생할 기본 클립
-        animator->SetCurrentAnimClip(L"RunL");
-    }
+    //    // 현재 재생할 기본 클립
+    //    animator->SetCurrentAnimClip(L"RunL");
+    //}
 }
 
 AnimationRect::~AnimationRect()
@@ -134,15 +134,15 @@ AnimationRect::~AnimationRect()
 
 void AnimationRect::Update()
 {
-    // 키 입력에 따라 클립 교체
-    if (Keyboard::Get()->Press('A'))
-    {
-        animator->SetCurrentAnimClip(L"RunL");
-    }
-    else if (Keyboard::Get()->Press('S'))
-    {
-        animator->SetCurrentAnimClip(L"RunD");
-    }
+    //// 키 입력에 따라 클립 교체
+    //if (Keyboard::Get()->Press('A'))
+    //{
+    //    animator->SetCurrentAnimClip(L"RunL");
+    //}
+    //else if (Keyboard::Get()->Press('S'))
+    //{
+    //    animator->SetCurrentAnimClip(L"RunD");
+    //}
 
     // 애니메이션 진행
     animator->Update();
