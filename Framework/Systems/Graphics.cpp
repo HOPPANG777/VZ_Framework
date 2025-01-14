@@ -81,8 +81,8 @@ void Graphics::Init()
 
     HRESULT hr = D3D11CreateDeviceAndSwapChain
     (
-        chosenAdapter.Get(),
-        D3D_DRIVER_TYPE_UNKNOWN,
+        chosenAdapter.Get(),//nullptr,
+        D3D_DRIVER_TYPE_UNKNOWN,//D3D_DRIVER_TYPE_WARP,
         nullptr,
         0,
         featureLevels.data(),
@@ -98,6 +98,10 @@ void Graphics::Init()
     CHECK(hr);  // HRESULT가 성공했는지 확인.
 
     CreateBackBuffer();
+
+    CreateDirect2D();
+
+    CreateDirectWrite();
 }
 
 void Graphics::CreateBackBuffer()
@@ -152,10 +156,16 @@ void Graphics::Begin()
     deviceContext->RSSetViewports(1, &viewport);
     deviceContext->OMSetRenderTargets(1, rtv.GetAddressOf(), nullptr);
     deviceContext->ClearRenderTargetView(rtv.Get(), clearColor);
+
+    // Direct2D 그리기 시작
+    d2DeviceContext->BeginDraw();
 }
 
 void Graphics::End()
 {
+    HRESULT D2hr = d2DeviceContext->EndDraw();
+    CHECK(D2hr);
+
     HRESULT hr = swapChain->Present(bVsync == true ? 1 : 0, 0);
     CHECK(hr);
 }
@@ -250,6 +260,52 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
 
     adapterInfo->outputInfo = outputInfo;
     return true;
+}
+
+void Graphics::CreateDirect2D()
+{
+    // Direct2D Factory 생성 (버전 1 사용)
+    HRESULT hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, __uuidof(ID2D1Factory1), nullptr, &d2Factory);
+    CHECK(hr);
+
+    // DXGI Device 얻기: 기존 D3D11Device에서 IDXGIDevice 인터페이스 획득
+    ComPtr<IDXGIDevice> dxgiDevice = nullptr;
+    hr = device.As(&dxgiDevice);
+    CHECK(hr);
+
+    // Direct2D Device 생성
+    hr = d2Factory->CreateDevice(dxgiDevice.Get(), &d2Device);  // 시발 왜 안되는데 대체 뭐가 문제야!!!!!!!!!
+    CHECK(hr);
+
+    // Direct2D Device Context 생성
+    hr = d2Device->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE, &d2DeviceContext);
+    CHECK(hr);
+
+    // Swap Chain의 백버퍼를 Direct2D 비트맵으로 연결
+    ComPtr<IDXGISurface> dxgiSurface;
+    hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), (void**)&dxgiSurface);
+    CHECK(hr);
+
+    // Direct2D 비트맵 프로퍼티 정의 (픽셀 포맷, DPI 등)
+    D2D1_BITMAP_PROPERTIES1 bitmapProperties;
+    bitmapProperties.pixelFormat.format = DXGI_FORMAT_B8G8R8A8_UNORM;
+    bitmapProperties.pixelFormat.alphaMode = D2D1_ALPHA_MODE_PREMULTIPLIED;
+    bitmapProperties.dpiX = 96.0f;
+    bitmapProperties.dpiY = 96.0f;
+    bitmapProperties.bitmapOptions = D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW;
+
+    // Direct2D Bitmap 생성 후 Device Context의 타깃으로 설정
+    hr = d2DeviceContext->CreateBitmapFromDxgiSurface(dxgiSurface.Get(), &bitmapProperties, &d2Bitmap);
+    CHECK(hr);
+
+    d2DeviceContext->SetTarget(d2Bitmap.Get());
+}
+
+void Graphics::CreateDirectWrite()
+{
+    // IDWriteFactory 생성
+    HRESULT hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory), reinterpret_cast<IUnknown**>(writeFactory.GetAddressOf()));
+    CHECK(hr);
 }
 
 D3DEnumAdapterInfo::~D3DEnumAdapterInfo() {}

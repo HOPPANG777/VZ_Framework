@@ -18,6 +18,9 @@ public:
 
 	ID3D11Device* GetDevice() const { return device.Get(); }
 	ID3D11DeviceContext* GetDC() const { return deviceContext.Get(); }
+	IDXGISwapChain* GetSwapChain() const { return swapChain.Get(); }
+	ID2D1DeviceContext* GetD2DC() const { return d2DeviceContext.Get(); }
+	IDWriteFactory* GetWrite() const { return writeFactory.Get(); }
 
 	void Begin();
 	void End();
@@ -28,10 +31,21 @@ private:
 	void EnumerateAdapters();
 	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);
 
+	void CreateDirect2D();
+	void CreateDirectWrite();
+
 private:
 	ComPtr<ID3D11Device> device = nullptr;
 	ComPtr<ID3D11DeviceContext> deviceContext = nullptr;
 	ComPtr<IDXGISwapChain> swapChain = nullptr;
+
+	ComPtr<ID2D1Device>            d2Device = nullptr;
+	ComPtr<ID2D1DeviceContext>     d2DeviceContext = nullptr;
+
+	ComPtr<ID2D1Factory1>          d2Factory = nullptr;
+	ComPtr<IDWriteFactory>         writeFactory = nullptr;
+
+	ComPtr<ID2D1Bitmap1>           d2Bitmap = nullptr;
 
 	ComPtr<ID3D11RenderTargetView> rtv = nullptr;
 	D3D11_VIEWPORT viewport = { 0 };

@@ -46,7 +46,8 @@ using namespace std;
 
 //////////////////////////////////////////
 //Direct 2D, Direct Write
-#include <d2d1.h>
+#include <d2d1_3.h>
+#include <d2d1_3helper.h>
 #include <dwrite.h>
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
@@ -143,6 +144,10 @@ extern HWND gHandle;
 #define GRAPHICS Graphics::Get()
 #define DEVICE GRAPHICS->GetDevice()
 #define DC GRAPHICS->GetDC()
+#define SWAPCHAIN GRAPHICS->GetSwapChain()
+#define D2DC GRAPHICS->GetD2DC()
+#define WRITE GRAPHICS->GetWrite()	
+#define FONT Fonts::Get()
 #define DEBUG HelpMe::Get()
 #define CAMERA Camera::Get()
 #define SCENE SceneManager::Get()

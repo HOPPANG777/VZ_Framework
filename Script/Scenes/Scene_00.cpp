@@ -28,6 +28,15 @@ void Scene_00::Render()
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 }
 
-void Scene_00::PostRender() {}
+void Scene_00::PostRender() 
+{
+	RECT textRect;
+	textRect.left = 100;
+	textRect.top = 50;
+	textRect.right = 400;
+	textRect.bottom = 150;
+
+	FONT->RenderText(L"Hello, World!", textRect, 24.0f);
+}
 
 void Scene_00::ImGUI() {}
