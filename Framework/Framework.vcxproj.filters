@@ -290,4 +290,7 @@
       <UniqueIdentifier>{4c93c3de-2a01-45c7-ac1e-b831c0ec9a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Comment.txt" />
+  </ItemGroup>
 </Project>
