@@ -186,6 +186,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
     <ClInclude Include="Objects\TextureObject\AnimationRect.h" />
     <ClInclude Include="Systems\Fonts.h" />

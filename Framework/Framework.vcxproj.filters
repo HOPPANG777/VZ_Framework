@@ -242,6 +242,9 @@
     <ClInclude Include="Utilities\AnimationClip.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Struct\UIElement.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -282,6 +285,9 @@
     </Filter>
     <Filter Include="Objects\TextureObject">
       <UniqueIdentifier>{c3308cb9-2245-415a-a93a-76bec85a871f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Struct">
+      <UniqueIdentifier>{4c93c3de-2a01-45c7-ac1e-b831c0ec9a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

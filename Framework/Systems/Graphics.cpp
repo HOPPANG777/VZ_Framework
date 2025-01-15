@@ -14,88 +14,7 @@ Graphics::~Graphics()
 
 void Graphics::Init()
 {
-	DXGI_SWAP_CHAIN_DESC desc;
-	ZeroMemory(&desc, sizeof(desc));
-
-    desc.BufferDesc.Width = 0;
-    desc.BufferDesc.Height = 0;
-
-    if (bVsync)
-    {
-        desc.BufferDesc.RefreshRate.Numerator = adapterInfos[0]->outputInfo->numerator;
-        desc.BufferDesc.RefreshRate.Denominator = adapterInfos[0]->outputInfo->denominator;
-    }
-    else
-    {
-        desc.BufferDesc.RefreshRate.Numerator = 60;
-        desc.BufferDesc.RefreshRate.Denominator = 1;
-    }
-
-    desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    desc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-    desc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-
-    desc.SampleDesc.Count = 1;
-    desc.SampleDesc.Quality = 0;
-
-    desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-
-    desc.BufferCount = 1;
-    desc.OutputWindow = gHandle;
-    desc.Windowed = true;
-    desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-
-    vector<D3D_FEATURE_LEVEL> featureLevels
-    {
-        D3D_FEATURE_LEVEL_11_1,
-        D3D_FEATURE_LEVEL_11_0,
-        D3D_FEATURE_LEVEL_10_1,
-        D3D_FEATURE_LEVEL_10_0
-    };
-
-    UINT maxVRam = 0;
-    for (UINT i = 0; i < adapterInfos.size(); i++)
-    {
-        // adapterInfos[i]는 unique_ptr
-        auto& info = adapterInfos[i];
-        UINT64 dedicatedMem = info->adapterDesc.DedicatedVideoMemory;
-
-        if (dedicatedMem > maxVRam)
-        {
-            selectedAdapterIndex = i;
-            maxVRam = (UINT)dedicatedMem;
-        }
-    }
-
-    // 출력해보기
-    for (size_t i = 0; i < adapterInfos.size(); i++)
-    {
-        wcout << L"GPU Name : " << adapterInfos[i]->adapterDesc.Description << endl;
-        cout << "VRAM : " << adapterInfos[i]->adapterDesc.DedicatedVideoMemory << endl;
-        cout << endl;
-    }
-
-    wcout << L"Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << endl;
-
-    ComPtr<IDXGIAdapter1> chosenAdapter = adapterInfos[selectedAdapterIndex]->adapter;
-
-    HRESULT hr = D3D11CreateDeviceAndSwapChain
-    (
-        chosenAdapter.Get(),//nullptr,
-        D3D_DRIVER_TYPE_UNKNOWN,//D3D_DRIVER_TYPE_WARP,
-        nullptr,
-        0,
-        featureLevels.data(),
-        UINT(featureLevels.size()),
-        D3D11_SDK_VERSION,
-        &desc,
-        &swapChain,
-        &device,
-        nullptr,
-        &deviceContext
-    );
-
-    CHECK(hr);  // HRESULT가 성공했는지 확인.
+    CreateDirect3D();
 
     CreateBackBuffer();
 
@@ -112,7 +31,7 @@ void Graphics::CreateBackBuffer()
         0,
         UINT(gWinWidth),
         UINT(gWinHeight),
-        DXGI_FORMAT_UNKNOWN,
+        DXGI_FORMAT_B8G8R8A8_UNORM,
         0
     );
 
@@ -194,16 +113,14 @@ void Graphics::GUI()
 void Graphics::EnumerateAdapters()
 {
     ComPtr<IDXGIFactory1> factory;
-    if (FAILED(CreateDXGIFactory1(__uuidof(IDXGIFactory1), (void**)&factory)))
-        return;
+    if (FAILED(CreateDXGIFactory1(__uuidof(IDXGIFactory1), (void**)&factory))) return;
 
     UINT index = 0;
     while (true)
     {
         ComPtr<IDXGIAdapter1> adapter = nullptr;
         HRESULT hr = factory->EnumAdapters1(index, &adapter);
-        if (hr == DXGI_ERROR_NOT_FOUND)
-            break;
+        if (hr == DXGI_ERROR_NOT_FOUND) break;
         assert(SUCCEEDED(hr));
 
         auto adapterInfo = make_unique<D3DEnumAdapterInfo>();
@@ -262,15 +179,105 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
     return true;
 }
 
+void Graphics::CreateDirect3D()
+{
+    DXGI_SWAP_CHAIN_DESC desc;
+    ZeroMemory(&desc, sizeof(desc));
+
+    desc.BufferDesc.Width = 0;
+    desc.BufferDesc.Height = 0;
+
+    if (bVsync)
+    {
+        desc.BufferDesc.RefreshRate.Numerator = adapterInfos[0]->outputInfo->numerator;
+        desc.BufferDesc.RefreshRate.Denominator = adapterInfos[0]->outputInfo->denominator;
+    }
+    else
+    {
+        desc.BufferDesc.RefreshRate.Numerator = 60;
+        desc.BufferDesc.RefreshRate.Denominator = 1;
+    }
+
+    desc.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+    desc.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
+    desc.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
+
+    desc.SampleDesc.Count = 1;
+    desc.SampleDesc.Quality = 0;
+
+    desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+
+    desc.BufferCount = 1;
+    desc.OutputWindow = gHandle;
+    desc.Windowed = true;
+    desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+    desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+
+    vector<D3D_FEATURE_LEVEL> featureLevels
+    {
+        D3D_FEATURE_LEVEL_11_1,
+        D3D_FEATURE_LEVEL_11_0,
+        D3D_FEATURE_LEVEL_10_1,
+        D3D_FEATURE_LEVEL_10_0
+    };
+
+    UINT maxVRam = 0;
+    for (UINT i = 0; i < adapterInfos.size(); i++)
+    {
+        // adapterInfos[i]는 unique_ptr
+        auto& info = adapterInfos[i];
+        UINT64 dedicatedMem = info->adapterDesc.DedicatedVideoMemory;
+
+        if (dedicatedMem > maxVRam)
+        {
+            selectedAdapterIndex = i;
+            maxVRam = (UINT)dedicatedMem;
+        }
+    }
+
+    // 출력해보기
+    for (size_t i = 0; i < adapterInfos.size(); i++)
+    {
+        wcout << L"GPU Name : " << adapterInfos[i]->adapterDesc.Description << endl;
+        cout << "VRAM : " << adapterInfos[i]->adapterDesc.DedicatedVideoMemory << endl;
+        cout << endl;
+    }
+
+    wcout << L"Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << endl;
+
+    ComPtr<IDXGIAdapter1> chosenAdapter = adapterInfos[selectedAdapterIndex]->adapter;
+
+    UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT; // Direct2D와 호환
+#ifdef _DEBUG
+    createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG; // 디버그 레이어 활성화
+#endif
+    HRESULT hr = D3D11CreateDeviceAndSwapChain
+    (
+        chosenAdapter.Get(),//nullptr,
+        D3D_DRIVER_TYPE_UNKNOWN,//D3D_DRIVER_TYPE_HARDWARE,//D3D_DRIVER_TYPE_WARP,
+        nullptr,
+        createDeviceFlags, // <- 여기에 Direct2D를 위한 디바이스를 여러개 써야해
+        featureLevels.data(),
+        UINT(featureLevels.size()),
+        D3D11_SDK_VERSION,
+        &desc,
+        swapChain.GetAddressOf(),
+        device.GetAddressOf(),
+        nullptr,
+        deviceContext.GetAddressOf()
+    );
+
+    CHECK(hr);  // HRESULT가 성공했는지 확인.
+}
+
 void Graphics::CreateDirect2D()
 {
     // Direct2D Factory 생성 (버전 1 사용)
-    HRESULT hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, __uuidof(ID2D1Factory1), nullptr, &d2Factory);
+    HRESULT hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_MULTI_THREADED, __uuidof(ID2D1Factory1), nullptr, &d2Factory);
     CHECK(hr);
 
     // DXGI Device 얻기: 기존 D3D11Device에서 IDXGIDevice 인터페이스 획득
-    ComPtr<IDXGIDevice> dxgiDevice = nullptr;
-    hr = device.As(&dxgiDevice);
+    hr = device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(dxgiDevice.GetAddressOf()));
     CHECK(hr);
 
     // Direct2D Device 생성
@@ -278,12 +285,11 @@ void Graphics::CreateDirect2D()
     CHECK(hr);
 
     // Direct2D Device Context 생성
-    hr = d2Device->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE, &d2DeviceContext);
+    hr = d2Device->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS, &d2DeviceContext);
     CHECK(hr);
 
     // Swap Chain의 백버퍼를 Direct2D 비트맵으로 연결
-    ComPtr<IDXGISurface> dxgiSurface;
-    hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), (void**)&dxgiSurface);
+    hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), reinterpret_cast<void**>(dxgiSurface.GetAddressOf()));
     CHECK(hr);
 
     // Direct2D 비트맵 프로퍼티 정의 (픽셀 포맷, DPI 등)
@@ -293,6 +299,7 @@ void Graphics::CreateDirect2D()
     bitmapProperties.dpiX = 96.0f;
     bitmapProperties.dpiY = 96.0f;
     bitmapProperties.bitmapOptions = D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW;
+    bitmapProperties.colorContext = NULL;
 
     // Direct2D Bitmap 생성 후 Device Context의 타깃으로 설정
     hr = d2DeviceContext->CreateBitmapFromDxgiSurface(dxgiSurface.Get(), &bitmapProperties, &d2Bitmap);
@@ -306,6 +313,45 @@ void Graphics::CreateDirectWrite()
     // IDWriteFactory 생성
     HRESULT hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory), reinterpret_cast<IUnknown**>(writeFactory.GetAddressOf()));
     CHECK(hr);
+}
+
+void Graphics::SetFullScreen(bool fullscreen)
+{
+    HRESULT hr = swapChain->SetFullscreenState(fullscreen, nullptr);
+    CHECK(hr);
+}
+
+void Graphics::Resize(UINT width, UINT height)
+{
+    if (width == 0 || height == 0) return;
+
+    // 기존 백버퍼 해제
+    rtv.Reset();
+    d2Bitmap.Reset();
+
+    // 스왑 체인 크기 조정
+    HRESULT hr = swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
+    CHECK(hr);
+
+    // 새 백버퍼 설정
+    CreateBackBuffer();
+
+    // Direct2D 비트맵 갱신
+    ComPtr<IDXGISurface> dxgiSurface;
+    hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), reinterpret_cast<void**>(dxgiSurface.GetAddressOf()));
+    CHECK(hr);
+
+    D2D1_BITMAP_PROPERTIES1 bitmapProperties = {};
+    bitmapProperties.pixelFormat.format = DXGI_FORMAT_B8G8R8A8_UNORM;
+    bitmapProperties.pixelFormat.alphaMode = D2D1_ALPHA_MODE_PREMULTIPLIED;
+    bitmapProperties.dpiX = 96.0f;
+    bitmapProperties.dpiY = 96.0f;
+    bitmapProperties.bitmapOptions = D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW;
+
+    hr = d2DeviceContext->CreateBitmapFromDxgiSurface(dxgiSurface.Get(), &bitmapProperties, &d2Bitmap);
+    CHECK(hr);
+
+    d2DeviceContext->SetTarget(d2Bitmap.Get());
 }
 
 D3DEnumAdapterInfo::~D3DEnumAdapterInfo() {}

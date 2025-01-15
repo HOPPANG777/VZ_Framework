@@ -18,6 +18,9 @@ void Scene_00::FixedUpdate() {}
 
 void Scene_00::Update() 
 {
+	// 해상도에 따라 UI 업데이트 (예시)
+	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight); // rect를 사용하여 렌더링
+
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 }
 
@@ -25,6 +28,9 @@ void Scene_00::LateUpdate() {}
 
 void Scene_00::Render()
 {
+    // rect를 기반으로 Direct2D/Direct3D로 렌더링
+    for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
+
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 }
 

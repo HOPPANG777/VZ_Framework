@@ -27,10 +27,15 @@ public:
 
 	void GUI();
 
+	void SetFullScreen(bool fullscreen);
+
+	void Resize(UINT width, UINT height);
+
 private:
 	void EnumerateAdapters();
 	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);
 
+	void CreateDirect3D();
 	void CreateDirect2D();
 	void CreateDirectWrite();
 
@@ -46,6 +51,9 @@ private:
 	ComPtr<IDWriteFactory>         writeFactory = nullptr;
 
 	ComPtr<ID2D1Bitmap1>           d2Bitmap = nullptr;
+
+	ComPtr<IDXGIDevice> dxgiDevice = nullptr;
+	ComPtr<IDXGISurface> dxgiSurface = nullptr;
 
 	ComPtr<ID3D11RenderTargetView> rtv = nullptr;
 	D3D11_VIEWPORT viewport = { 0 };

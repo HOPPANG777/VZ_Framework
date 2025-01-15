@@ -35,6 +35,14 @@ void Scene_01::Update()
 		SCENE->LoadScene("ClockScene");
 	}
 
+	if (KEYBOARD->Down(VK_F4))
+	{
+		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
+		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
+	}
+
+	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
+
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 }
 
@@ -42,9 +50,20 @@ void Scene_01::LateUpdate() {}
 
 void Scene_01::Render()
 {
+	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
+
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 }
 
-void Scene_01::PostRender() {}
+void Scene_01::PostRender() 
+{
+	RECT textRect;
+	textRect.left = 100;
+	textRect.top = 50;
+	textRect.right = 400;
+	textRect.bottom = 150;
+
+	FONT->RenderText(L"GeometryScene", textRect, 35.0f);
+}
 
 void Scene_01::ImGUI() {}

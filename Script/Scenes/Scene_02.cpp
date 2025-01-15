@@ -31,7 +31,10 @@ void Scene_02::Update()
 		SCENE->LoadScene("TextureScene");
 	}
 
+    for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
+
     for (const auto& obj : objects) if (obj != nullptr) obj->Update();
+
     if (secondHand != nullptr) secondHand->Update();
     if (minuteHand != nullptr) minuteHand->Update();
     if (hourHand != nullptr) hourHand->Update();
@@ -41,7 +44,10 @@ void Scene_02::LateUpdate() {}
 
 void Scene_02::Render()
 {
+    for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
+
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
+    
     if (secondHand != nullptr) secondHand->Render();
     if (minuteHand != nullptr) minuteHand->Render();
     if (hourHand != nullptr) hourHand->Render();

@@ -170,6 +170,9 @@ extern HWND gHandle;
 //Interface
 #include "Interfaces/IObject.h"
 
+//Struct
+#include "Struct/UIElement.h"
+
 //Systems
 #include "Systems/Keyboard.h"
 #include "Systems/Mouse.h"

@@ -22,6 +22,11 @@ public:
 
 	void MainRender();
 
+	void SetBorderlessWindow();
+
+	void OnResize(UINT width, UINT height);
+
+
 	//HICON LoadMyIcon();
 
 private:
@@ -40,4 +45,6 @@ private:
 	WinDesc desc;
 
 	static unique_ptr<class Program> program;
+
+	vector<shared_ptr<UIElement>> uiElements;
 };
