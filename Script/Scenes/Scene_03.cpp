@@ -22,8 +22,6 @@ void Scene_03::Update()
 		SCENE->LoadScene("GeometryScene");
 	}
 
-	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
-
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 }
 
@@ -31,8 +29,6 @@ void Scene_03::LateUpdate() {}
 
 void Scene_03::Render()
 {
-	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
-	
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 }
 

@@ -158,14 +158,10 @@ void Window::OnResize(UINT width, UINT height)
 	// Window UI 업데이트
 	for (auto& uiElement : uiElements)
 	{
-		uiElement.GetRect(gWinWidth, gWinHeight);
+		uiElement->GetRect(gWinWidth, gWinHeight);
 	}
 
 	// Scene UI 업데이트
-	if (program)
-	{
-		program->UpdateUIElements(gWinWidth, gWinHeight);
-	}
 }
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)

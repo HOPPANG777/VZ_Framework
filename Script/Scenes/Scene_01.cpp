@@ -11,6 +11,8 @@ void Scene_01::Start()
 	objects.push_back(make_shared<ColorRect>(CENTER + Vector3(50, 0, 0), Vector3(100, 100, 0), 0.0f, RED));
 
 	objects.back()->AddComponent(make_shared<MoveComponent>());
+
+	UIs.push_back(make_shared<UIElement>(0.1f, 0.2f, 0.3f, 0.1f));
 }
 
 void Scene_01::Destroy()
@@ -41,8 +43,6 @@ void Scene_01::Update()
 		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
 	}
 
-	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
-
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 }
 
@@ -50,20 +50,12 @@ void Scene_01::LateUpdate() {}
 
 void Scene_01::Render()
 {
-	for (const auto& ui : sceneUIElements) RECT rect = ui.GetRect(gWinWidth, gWinHeight);
-
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 }
 
 void Scene_01::PostRender() 
 {
-	RECT textRect;
-	textRect.left = 100;
-	textRect.top = 50;
-	textRect.right = 400;
-	textRect.bottom = 150;
-
-	FONT->RenderText(L"GeometryScene", textRect, 35.0f);
+	FONT->RenderText(L"GeometryScene", UIs[0]->GetRect(gWinWidth, gWinHeight), 35.0f);
 }
 
 void Scene_01::ImGUI() {}

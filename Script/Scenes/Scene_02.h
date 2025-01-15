@@ -28,7 +28,7 @@ private:
 private:
 	vector<shared_ptr<Object>> objects;
 
-	vector<shared_ptr<UIElement>> sceneUIElements;
+	vector<shared_ptr<UIElement>> UIs;
 
 	shared_ptr<Object> hourHand;
 	shared_ptr<Object> minuteHand;
