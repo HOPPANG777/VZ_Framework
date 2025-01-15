@@ -8,6 +8,9 @@ struct UIElement
 	float widthRatio;  // 너비 비율
 	float heightRatio; // 높이 비율
 
+	// 생성자
+	UIElement(float x, float y, float width, float height) : xRatio(x), yRatio(y), widthRatio(width), heightRatio(height) {}
+
 	RECT GetRect(float screenWidth, float screenHeight)
 	{
 		RECT rect;

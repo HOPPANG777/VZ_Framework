@@ -104,7 +104,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,9 +118,9 @@
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-</Command>
+
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,7 +132,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,9 +148,9 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-</Command>
+
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,7 +160,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -174,9 +174,9 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-</Command>
+
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -188,7 +188,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -204,9 +204,9 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
     xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"
 
-</Command>
+
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
