@@ -26,7 +26,7 @@ void Scene_02::Update()
 {
     Clock();
 
-	if (KEYBOARD->Down('E'))
+	if (KEYBOARD->Down(VK_F2))
 	{
 		SCENE->LoadScene("TextureScene");
 	}

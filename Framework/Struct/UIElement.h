@@ -44,33 +44,59 @@
 
 struct UIElement
 {
-    // 화면의 너비와 높이를 기준으로 요소의 위치와 크기를 비율로 표현
-    float xRatio;       // 요소의 왼쪽 위치 비율 (0.0 ~ 1.0) → 화면 너비(screenWidth)의 비율
-    float yRatio;       // 요소의 위쪽 위치 비율 (0.0 ~ 1.0) → 화면 높이(screenHeight)의 비율
-    float widthRatio;   // 요소의 너비 비율 (0.0 ~ 1.0) → 화면 너비(screenWidth)의 비율
-    float heightRatio;  // 요소의 높이 비율 (0.0 ~ 1.0) → 화면 높이(screenHeight)의 비율
+    // 비율 기반 위치 및 크기
+    float xRatio;       // 요소의 왼쪽 위치 비율 (0.0 ~ 1.0)
+    float yRatio;       // 요소의 위쪽 위치 비율 (0.0 ~ 1.0)
+    float widthRatio;   // 요소의 너비 비율 (0.0 ~ 1.0)
+    float heightRatio;  // 요소의 높이 비율 (0.0 ~ 1.0)
 
-    // 생성자: 비율 값을 받아 초기화
-    UIElement(float x, float y, float width, float height) : xRatio(x), yRatio(y), widthRatio(width), heightRatio(height) {}
+    // 픽셀 단위 오프셋
+    int xOffset;        // 추가적으로 조정할 픽셀 단위 X 오프셋
+    int yOffset;        // 추가적으로 조정할 픽셀 단위 Y 오프셋
+    int widthOffset;    // 추가적으로 조정할 픽셀 단위 너비 오프셋
+    int heightOffset;   // 추가적으로 조정할 픽셀 단위 높이 오프셋
+
+    // 생성자
+    UIElement(float x, float y, float width, float height, int xOff = 0, int yOff = 0, int wOff = 0, int hOff = 0)
+        : xRatio(x), yRatio(y), widthRatio(width), heightRatio(height),
+        xOffset(xOff), yOffset(yOff), widthOffset(wOff), heightOffset(hOff) {
+    }
 
     // 현재 화면 크기(screenWidth, screenHeight)를 기준으로 UI 요소의 사각형 좌표(Rect)를 계산
     RECT GetRect(float screenWidth, float screenHeight)
     {
         RECT rect;
 
-        // 좌측(xRatio 비율에 따라 화면 너비를 곱하여 계산)
-        rect.left = LONG(xRatio * screenWidth);
+        // 좌측 (비율 기반 위치 + 픽셀 오프셋)
+        rect.left = LONG(xRatio * screenWidth) + xOffset;
 
-        // 상단(yRatio 비율에 따라 화면 높이를 곱하여 계산)
-        rect.top = LONG(yRatio * screenHeight);
+        // 상단 (비율 기반 위치 + 픽셀 오프셋)
+        rect.top = LONG(yRatio * screenHeight) + yOffset;
 
-        // 우측(좌측 좌표 + widthRatio 비율 * 화면 너비)
-        rect.right = LONG(rect.left + (widthRatio * screenWidth));
+        // 우측 (좌측 좌표 + 비율 기반 너비 + 픽셀 오프셋)
+        rect.right = LONG(rect.left + (widthRatio * screenWidth) + widthOffset);
 
-        // 하단(상단 좌표 + heightRatio 비율 * 화면 높이)
-        rect.bottom = LONG(rect.top + (heightRatio * screenHeight));
+        // 하단 (상단 좌표 + 비율 기반 높이 + 픽셀 오프셋)
+        rect.bottom = LONG(rect.top + (heightRatio * screenHeight) + heightOffset);
 
         return rect;
+    }
+
+    // 위치 및 크기 설정 함수
+    void SetPosition(float x, float y, int xOff = 0, int yOff = 0)
+    {
+        xRatio = x;
+        yRatio = y;
+        xOffset = xOff;
+        yOffset = yOff;
+    }
+
+    void SetSize(float width, float height, int wOff = 0, int hOff = 0)
+    {
+        widthRatio = width;
+        heightRatio = height;
+        widthOffset = wOff;
+        heightOffset = hOff;
     }
 };
 

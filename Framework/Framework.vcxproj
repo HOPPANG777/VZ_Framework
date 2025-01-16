@@ -186,6 +186,11 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\BoxCollider.h" />
+    <ClInclude Include="Components\CircleCollider.h" />
+    <ClInclude Include="Components\Collider.h" />
+    <ClInclude Include="Managers\CollisionManager.h" />
+    <ClInclude Include="Utilities\Gizmo.h" />
     <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
     <ClInclude Include="Objects\TextureObject\AnimationRect.h" />
@@ -236,6 +241,10 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\BoxCollider.cpp" />
+    <ClCompile Include="Components\CircleCollider.cpp" />
+    <ClCompile Include="Managers\CollisionManager.cpp" />
+    <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />
     <ClCompile Include="Systems\Fonts.cpp" />

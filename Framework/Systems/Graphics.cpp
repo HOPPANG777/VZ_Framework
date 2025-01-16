@@ -321,23 +321,29 @@ void Graphics::SetFullScreen(bool fullscreen)
     CHECK(hr);
 }
 
-void Graphics::Resize(UINT width, UINT height)
+void Graphics::SetResolution(UINT width, UINT height)
 {
     if (width == 0 || height == 0) return;
 
-    // 기존 백버퍼 해제
-    rtv.Reset();
-    d2Bitmap.Reset();
+    // 1. 기존 리소스 해제
+    rtv.Reset();               // Render Target View 해제
+    d2Bitmap.Reset();          // Direct2D 비트맵 해제
+    dxgiSurface.Reset();       // DXGI 서피스 해제
 
-    // 스왑 체인 크기 조정
-    HRESULT hr = swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
+    // 2. 스왑 체인 크기 조정
+    HRESULT hr = swapChain->ResizeBuffers(
+        0,                      // 버퍼 수 (0이면 변경 없음)
+        width,                  // 새로운 너비
+        height,                 // 새로운 높이
+        DXGI_FORMAT_B8G8R8A8_UNORM, // 픽셀 포맷
+        0                       // 추가 플래그 (보통 0)
+    );
     CHECK(hr);
 
-    // 새 백버퍼 설정
+    // 3. 렌더 타겟 뷰 재생성
     CreateBackBuffer();
 
-    // Direct2D 비트맵 갱신
-    ComPtr<IDXGISurface> dxgiSurface;
+    // 4. Direct2D 비트맵 재생성
     hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), reinterpret_cast<void**>(dxgiSurface.GetAddressOf()));
     CHECK(hr);
 
@@ -352,6 +358,16 @@ void Graphics::Resize(UINT width, UINT height)
     CHECK(hr);
 
     d2DeviceContext->SetTarget(d2Bitmap.Get());
+
+    // 5. 새로운 해상도 업데이트
+    gWinWidth = float(width);
+    gWinHeight = float(height);
+
+    // 씬과 UI에 알림
+    //if (SCENE)
+    //{
+    //    SCENE->OnResize(width, height);
+    //}
 }
 
 D3DEnumAdapterInfo::~D3DEnumAdapterInfo() {}

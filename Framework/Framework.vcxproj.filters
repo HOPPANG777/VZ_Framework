@@ -101,6 +101,18 @@
     <ClCompile Include="Utilities\AnimationClip.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities\Gizmo.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\CollisionManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BoxCollider.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CircleCollider.cpp">
+      <Filter>Components\Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -245,6 +257,21 @@
     <ClInclude Include="Struct\UIElement.h">
       <Filter>Struct</Filter>
     </ClInclude>
+    <ClInclude Include="Utilities\Gizmo.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\CollisionManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Collider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\BoxCollider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CircleCollider.h">
+      <Filter>Components\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -288,6 +315,9 @@
     </Filter>
     <Filter Include="Struct">
       <UniqueIdentifier>{4c93c3de-2a01-45c7-ac1e-b831c0ec9a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collider">
+      <UniqueIdentifier>{685ad174-edb2-4de8-af8d-de4676129f0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

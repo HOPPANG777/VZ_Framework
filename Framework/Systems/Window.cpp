@@ -120,6 +120,7 @@ void Window::MainRender()
 	TIME->Update();
 	SOUNDS->Update();
 	IMGUI->Update();
+	COLLISION->Update();
 
 	program->Update();
 
@@ -145,23 +146,6 @@ void Window::SetBorderlessWindow()
 		0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN),
 		SWP_FRAMECHANGED
 	);
-}
-
-void Window::OnResize(UINT width, UINT height)
-{
-	gWinWidth = float(width);
-	gWinHeight = float(height);
-
-	// Direct3D 스왑 체인 크기 조정
-	GRAPHICS->Resize(width, height);
-
-	// Window UI 업데이트
-	for (auto& uiElement : uiElements)
-	{
-		uiElement->GetRect(gWinWidth, gWinHeight);
-	}
-
-	// Scene UI 업데이트
 }
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)

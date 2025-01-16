@@ -8,7 +8,7 @@ void Scene_00::Start()
 	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"TowardsTheDemon.png"));
 	objects.push_back(make_shared<JumpHoppang>(Vector3(WIN_DEFAULT_WIDTH * 0.94f, CENTER_Y / 3.5f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"LoadingIcon.png"));
 
-	UIs.push_back(make_shared<UIElement>(0.1f, 0.2f, 0.3f, 0.1f));
+	UIs.push_back(make_shared<UIElement>(0.85f, 0.95f, 0.1f, 0.1f, -50, -50, 10, 20));
 }
 
 void Scene_00::Destroy()
@@ -32,7 +32,7 @@ void Scene_00::Render()
 
 void Scene_00::PostRender() 
 {
-	FONT->RenderText(L"Hello, World!", UIs[0]->GetRect(gWinWidth, gWinHeight), 24.0f);
+	FONT->RenderText(L"Loading...", UIs[0]->GetRect(gWinWidth, gWinHeight), 30.0f);
 }
 
 void Scene_00::ImGUI() {}

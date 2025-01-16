@@ -51,6 +51,7 @@ using namespace std;
 #include <dwrite.h>
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
+using namespace D2D1;
 //////////////////////////////////////////
 
 //////////////////////////////////////////
@@ -155,7 +156,8 @@ extern HWND gHandle;
 #define IMGUI Gui::Get()
 #define KEYBOARD Keyboard::Get()
 #define MOUSE Mouse::Get()
-
+#define COLLISION CollisionManager::Get()
+#define GIZMO Gizmo::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
@@ -191,6 +193,7 @@ extern HWND gHandle;
 #include "Utilities/String.h"
 #include "Utilities/Path.h"
 #include "Utilities/FileStream.h"
+#include "Utilities/Gizmo.h"
 
 //Renders
 #include "Renders/RenderResources/ConstantBuffer.h"
@@ -211,6 +214,10 @@ extern HWND gHandle;
 #include "Components/Component.h"
 #include "Components/GameComponent.h"
 #include "Components/MoveComponent.h"
+#include "Components/Collider.h"
+#include "Components/BoxCollider.h"
+#include "Components/CircleCollider.h"
+//#include "Components/Fonts.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"
@@ -233,3 +240,4 @@ const string TilePath = "../_Data/_TileData/";
 
 //Managers
 #include "Managers/SceneManager.h"
+#include "Managers/CollisionManager.h"

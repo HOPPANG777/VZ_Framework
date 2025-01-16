@@ -12,6 +12,12 @@ void Scene_01::Start()
 
 	objects.back()->AddComponent(make_shared<MoveComponent>());
 
+	//objects.back()->AddComponent(make_shared<BoxCollider>("Rect", Vector3(0, 0, 0), Vector3(150, 150, 0), RED));
+	//objects[1]->AddComponent(make_shared<BoxCollider>("Circle", Vector3(0, 0, 0), Vector3(100, 100, 0)));
+
+	//COLLISION->AddCollider(objects[3]->GetComponent<BoxCollider>("Rect"));
+	//COLLISION->AddCollider(objects[1]->GetComponent<BoxCollider>("Circle"));
+
 	UIs.push_back(make_shared<UIElement>(0.1f, 0.2f, 0.3f, 0.1f));
 }
 
@@ -32,7 +38,12 @@ void Scene_01::Update()
 		else if (rect->GetColor() == RED) rect->SetColor(BLUE);
 	}
 
-	if (KEYBOARD->Down('E'))
+	if (KEYBOARD->Down(VK_F1))
+	{
+		COLLISION->RenderDebug();
+	}
+
+	if (KEYBOARD->Down(VK_F2))
 	{
 		SCENE->LoadScene("ClockScene");
 	}

@@ -29,7 +29,7 @@ public:
 
 	void SetFullScreen(bool fullscreen);
 
-	void Resize(UINT width, UINT height);
+	void SetResolution(UINT width, UINT height);
 
 private:
 	void EnumerateAdapters();
