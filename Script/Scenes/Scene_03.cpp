@@ -17,7 +17,7 @@ void Scene_03::FixedUpdate() {}
 
 void Scene_03::Update()
 {
-	if (KEYBOARD->Down(VK_F2))
+	if (KEYBOARD->Down(VK_F1))
 	{
 		SCENE->LoadScene("GeometryScene");
 	}

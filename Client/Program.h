@@ -20,5 +20,6 @@ public:
 private:
 	//vector<shared_ptr<Scene>> sceneList;
 	//shared_ptr<Scene> currentScene;
-	
+
+	bool isFullScreen = false;
 };

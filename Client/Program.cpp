@@ -43,6 +43,17 @@ void Program::Update()
 	CAMERA->Update();
 
 	SCENE->Update();
+
+	if (KEYBOARD->Down(VK_F2))
+	{
+		COLLISION->RenderDebug();
+	}
+
+	if (KEYBOARD->Down(VK_F3))
+	{
+		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
+		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
+	}
 }
 
 void Program::Render()

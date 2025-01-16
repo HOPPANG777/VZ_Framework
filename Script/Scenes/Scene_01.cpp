@@ -40,18 +40,7 @@ void Scene_01::Update()
 
 	if (KEYBOARD->Down(VK_F1))
 	{
-		COLLISION->RenderDebug();
-	}
-
-	if (KEYBOARD->Down(VK_F2))
-	{
 		SCENE->LoadScene("ClockScene");
-	}
-
-	if (KEYBOARD->Down(VK_F4))
-	{
-		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
-		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
 	}
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();

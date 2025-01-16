@@ -30,6 +30,4 @@ private:
 	vector<shared_ptr<UIElement>> UIs;
 
 	bool isColor = false;
-
-	bool isFullScreen = false;
 };
