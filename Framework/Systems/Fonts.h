@@ -52,13 +52,13 @@ public:
 		  const wstring& text
 		, const RECT& rect
 		, const float size = 20.0f
-		, const wstring& font = L"Pretendard-Regular"//L"en-us",//L"ko-kr",
+		, const wstring& font = L"PretendardJP-Medium"//L"en-us",//L"ko-kr",
 		, const Color& color = WHITE
 		, const DWRITE_FONT_WEIGHT& weight = DWRITE_FONT_WEIGHT_NORMAL
 		, const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL
 		, const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL
 	);
-
+	
 
 private:
 	static vector<unique_ptr<FontBrushDesc>> fontBrush;
