@@ -30,6 +30,8 @@ private:
 
 	vector<shared_ptr<UIElement>> UIs;
 
+	shared_ptr<Texts> sceneName;
+
 	shared_ptr<Object> hourHand;
 	shared_ptr<Object> minuteHand;
 	shared_ptr<Object> secondHand;

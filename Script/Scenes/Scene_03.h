@@ -26,5 +26,7 @@ private:
 
 	vector<shared_ptr<UIElement>> UIs;
 
+	shared_ptr<Texts> sceneName;
+
 };
 

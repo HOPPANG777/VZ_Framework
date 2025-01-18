@@ -27,10 +27,13 @@ public:
 private:
 	vector<shared_ptr<Object>> objects;
 
+	shared_ptr<Object> red;
+
 	vector<shared_ptr<UIElement>> UIs;
 
-	shared_ptr<Texts> SceneName;
-	shared_ptr<TypingText> TestTyping;
+	shared_ptr<Texts> sceneName;
+	shared_ptr<TypingText> testTyping;
+	shared_ptr<ShakingText> testShake;
 
 	bool isColor = false;
 };
