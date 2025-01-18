@@ -16,12 +16,17 @@ public:
 	Vector3 GetPosition() const { return position; }
 	void SetPosition(const Vector3& position) { this->position = position; }
 
+	void SetTarget(Object* target) { this->target = target; }
+
+	Object* GetTarget() { return target; }
 
 private:
 	Matrix view, proj;
 	unique_ptr<ViewProjectionBuffer> VPBuffer;
 
 	Vector3 position = Values::ZeroVec3;
+
+	Object* target;
 
 	bool isMove = false;
 	float moveSpeed = 100.0f;

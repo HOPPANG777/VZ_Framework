@@ -12,6 +12,8 @@ void Scene_01::Start()
 
 	objects.back()->AddComponent(make_shared<MoveComponent>());
 
+	CAMERA->SetTarget(objects[3].get());
+
 	//objects.back()->AddComponent(make_shared<BoxCollider>("Rect", Vector3(0, 0, 0), Vector3(150, 150, 0), RED));
 	//objects[1]->AddComponent(make_shared<BoxCollider>("Circle", Vector3(0, 0, 0), Vector3(100, 100, 0)));
 

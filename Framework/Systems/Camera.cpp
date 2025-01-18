@@ -29,17 +29,53 @@ void Camera::Render()
 
 void Camera::UpdateView()
 {
+	// 카메라가 보는 방향을 position에서 (0,0,1) 방향으로 설정
+	view = XMMatrixLookAtLH(
+		position,                      // 카메라 위치
+		position + Vector3(0, 0, 1),   // 카메라가 보는 방향
+		Vector3(0, 1, 0)               // 카메라의 위쪽 방향
+	);
 
+	VPBuffer->SetView(view);
 }
 
 void Camera::Move()
 {
+	// 타겟이 있을 경우
+	if (target != nullptr)
+	{
+		position.x = target->GetPosition().x - WIN_DEFAULT_WIDTH * 0.5f;
+		position.y = target->GetPosition().y - WIN_DEFAULT_HEIGHT * 0.5f;
+	}
+	else // 타겟이 없을경우 // 개발자 모드
+	{
+		if (KEYBOARD->Down(VK_F4))
+		{
+			// 참은 거짓으로 거짓은 참으로
+			isMove = !isMove;
+		}
+		if (isMove)
+		{
+			if (Keyboard::Get()->Press('W'))
+				position.y += moveSpeed * DELTA;
+			else if (Keyboard::Get()->Press('S'))
+				position.y -= moveSpeed * DELTA;
 
+			if (Keyboard::Get()->Press('A'))
+				position.x -= moveSpeed * DELTA;
+			else if (Keyboard::Get()->Press('D'))
+				position.x += moveSpeed * DELTA;
+		}
+	}
 }
 
 const Vector3 Camera::Drag()
 {
-	return Vector3();
+	Vector3 mousePos = MOUSE->GetMousePos();
+
+	mousePos += position;
+
+	return mousePos;
 }
 
 
