@@ -33,6 +33,8 @@ void SceneManager::LoadScene(const string& sceneName)
 		if (currentScene != nullptr)
 		{
 			currentScene->Destroy(); // 기존 Scene 정리
+
+			CAMERA->Reset();
 		}
 
 		nextScene = it->second; // 로드할 Scene 저장

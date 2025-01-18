@@ -29,5 +29,8 @@ private:
 
 	vector<shared_ptr<UIElement>> UIs;
 
+	shared_ptr<Texts> SceneName;
+	shared_ptr<TypingText> TestTyping;
+
 	bool isColor = false;
 };

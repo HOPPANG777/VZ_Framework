@@ -148,7 +148,7 @@ extern HWND gHandle;
 #define SWAPCHAIN GRAPHICS->GetSwapChain()
 #define D2DC GRAPHICS->GetD2DC()
 #define WRITE GRAPHICS->GetWrite()	
-#define FONT Fonts::Get()
+#define FONT Texts::Get()
 #define DEBUG HelpMe::Get()
 #define CAMERA Camera::Get()
 #define SCENE SceneManager::Get()
@@ -168,12 +168,15 @@ extern HWND gHandle;
 #define CYAN Color(0, 1, 1, 1)
 #define WHITE Color(1, 1, 1, 1)
 #define BLACK Color(0, 0, 0, 1)
+#define CLEAR Color(1, 1, 1, 0)
 
 //Interface
 #include "Interfaces/IObject.h"
 
 //Struct
 #include "Struct/UIElement.h"
+#include "Struct/FontBrushDesc.h"
+#include "Struct/FontTextDesc.h"
 
 //Systems
 #include "Systems/Keyboard.h"
@@ -181,7 +184,6 @@ extern HWND gHandle;
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 #include "Systems/Graphics.h"
-#include "Systems/Fonts.h"
 
 #include "Utilities/Gui.h"
 
@@ -217,7 +219,9 @@ extern HWND gHandle;
 #include "Components/Collider.h"
 #include "Components/BoxCollider.h"
 #include "Components/CircleCollider.h"
-//#include "Components/Fonts.h"
+#include "Components/Texts.h"
+#include "Components/TypingText.h"
+#include "Components/ShakingText.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"

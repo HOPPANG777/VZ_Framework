@@ -92,9 +92,6 @@
     <ClCompile Include="Objects\TextureObject\TextureRect.cpp">
       <Filter>Objects\TextureObject</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\Fonts.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp">
       <Filter>Objects\TextureObject</Filter>
     </ClCompile>
@@ -112,6 +109,15 @@
     </ClCompile>
     <ClCompile Include="Components\CircleCollider.cpp">
       <Filter>Components\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Texts.cpp">
+      <Filter>Components\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ShakingText.cpp">
+      <Filter>Components\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TypingText.cpp">
+      <Filter>Components\Fonts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +251,6 @@
     <ClInclude Include="Objects\TextureObject\TextureRect.h">
       <Filter>Objects\TextureObject</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\Fonts.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\TextureObject\AnimationRect.h">
       <Filter>Objects\TextureObject</Filter>
     </ClInclude>
@@ -271,6 +274,21 @@
     </ClInclude>
     <ClInclude Include="Components\CircleCollider.h">
       <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\FontTextDesc.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct\FontBrushDesc.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Texts.h">
+      <Filter>Components\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ShakingText.h">
+      <Filter>Components\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TypingText.h">
+      <Filter>Components\Fonts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +336,9 @@
     </Filter>
     <Filter Include="Components\Collider">
       <UniqueIdentifier>{685ad174-edb2-4de8-af8d-de4676129f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Fonts">
+      <UniqueIdentifier>{a290791e-7d40-4314-8161-a4fd589da698}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

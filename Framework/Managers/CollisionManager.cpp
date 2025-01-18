@@ -36,11 +36,6 @@ void CollisionManager::Update()
 
 void CollisionManager::RenderDebug()
 {
-    //// 디버그 렌더링 (콜라이더를 시각적으로 표시)
-    //for (auto& collider : colliders)
-    //{
-    //    //collider->RenderDebug();
-    //}
     if (isColliderDebug == false)
     {
         isColliderDebug = true;
@@ -49,6 +44,10 @@ void CollisionManager::RenderDebug()
     {
         isColliderDebug = false;
     }
-
 }
 
+//// 디버그 렌더링 (콜라이더를 시각적으로 표시)
+//for (auto& collider : colliders)
+//{
+//    //collider->RenderDebug();
+//}

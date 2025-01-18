@@ -10,7 +10,7 @@ void Scene_01::Start()
 	objects.push_back(make_shared<ColorLine>(CENTER + Vector3(150, 0, 0), 300.0f, 0.0f, BLUE));
 	objects.push_back(make_shared<ColorRect>(CENTER + Vector3(50, 0, 0), Vector3(100, 100, 0), 0.0f, RED));
 
-	objects.back()->AddComponent(make_shared<MoveComponent>());
+	objects[3]->AddComponent(make_shared<MoveComponent>());
 
 	CAMERA->SetTarget(objects[3].get());
 
@@ -20,12 +20,19 @@ void Scene_01::Start()
 	//COLLISION->AddCollider(objects[3]->GetComponent<BoxCollider>("Rect"));
 	//COLLISION->AddCollider(objects[1]->GetComponent<BoxCollider>("Circle"));
 
-	UIs.push_back(make_shared<UIElement>(0.1f, 0.2f, 0.3f, 0.1f));
+	SceneName = make_shared<Texts>();
+	TestTyping = make_shared<TypingText>();
+	
+	UIs.push_back(make_shared<UIElement>(0.01f, 0.01f, 0.5f, 0.5f));
+	UIs.push_back(make_shared<UIElement>(0.31f, 0.7f, 0.5f, 0.5f));
 }
 
 void Scene_01::Destroy()
 {
 	for (auto& obj : objects) if (obj != nullptr) obj.reset();
+	for (auto& uis : UIs) if (uis != nullptr) uis.reset();
+	if (SceneName != nullptr) SceneName.reset();
+	if (TestTyping != nullptr) TestTyping.reset();
 }
 
 void Scene_01::FixedUpdate() {}
@@ -46,6 +53,8 @@ void Scene_01::Update()
 	}
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
+
+	TestTyping->Update();
 }
 
 void Scene_01::LateUpdate() {}
@@ -57,7 +66,8 @@ void Scene_01::Render()
 
 void Scene_01::PostRender() 
 {
-	FONT->RenderText(L"GeometryScene", UIs[0]->GetRect(gWinWidth, gWinHeight), 35.0f);
+	SceneName->RenderText(L"GeometryScene", UIs[0]->GetRect(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT), 25.0f);
+	TestTyping->RenderText(L"안녕하세요 조승영입니다 이건 테스트입니다.", UIs[1]->GetRect(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT), 25.0f);
 }
 
 void Scene_01::ImGUI() {}

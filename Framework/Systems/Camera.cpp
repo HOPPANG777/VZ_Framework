@@ -78,4 +78,11 @@ const Vector3 Camera::Drag()
 	return mousePos;
 }
 
+void Camera::Reset()
+{
+	position = { 0, 0, 0 };  // 월드 좌표 (0, 0, 0)으로 초기화
+	target = nullptr;        // 타겟 제거
+	UpdateView();            // 초기화 후 뷰 갱신
+}
+
 
