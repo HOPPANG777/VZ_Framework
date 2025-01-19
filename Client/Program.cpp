@@ -31,10 +31,15 @@ void Program::Start()
 		SCENE->AddScene("GeometryScene", make_shared<Scene_01>());
 		SCENE->AddScene("ClockScene", make_shared<Scene_02>());
 		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
+		SCENE->AddScene("TitleScene", make_shared<Scene_04>());
+		SCENE->AddScene("SplashScene", make_shared<Scene_05>());
 	
+		SCENE->SetSplashScene("SplashScene");
+
 		SCENE->SetLoadingScene("LoadingScene");
 
-		SCENE->LoadScene("GeometryScene");
+		//SCENE->StartGame("TitleScene");
+		SCENE->StartGame("GeometryScene");
 	}
 }
 

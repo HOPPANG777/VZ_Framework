@@ -17,7 +17,12 @@
     <ClCompile Include="Object\JumpHoppang.cpp">
       <Filter>Object\LoadingObject</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_04.cpp" />
+    <ClCompile Include="Scenes\Scene_04.cpp">
+      <Filter>Scenes\Scene_04_TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_05.cpp">
+      <Filter>Scenes\Scene_05_SplashScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -39,7 +44,12 @@
     <ClInclude Include="Object\JumpHoppang.h">
       <Filter>Object\LoadingObject</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_04.h" />
+    <ClInclude Include="Scenes\Scene_04.h">
+      <Filter>Scenes\Scene_04_TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_05.h">
+      <Filter>Scenes\Scene_05_SplashScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -62,6 +72,12 @@
     </Filter>
     <Filter Include="Object\LoadingObject">
       <UniqueIdentifier>{1071eefa-7738-4eed-8abb-e508e1b4db06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_04_TitleScene">
+      <UniqueIdentifier>{b50ca614-a326-415b-aeeb-549f82cc0861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_05_SplashScene">
+      <UniqueIdentifier>{fdd4b912-d43c-4c09-91bf-7c3cf9f0f000}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
