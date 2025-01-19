@@ -35,6 +35,8 @@ void Scene_01::Destroy()
 	if (sceneName != nullptr) sceneName.reset();
 	if (testTyping != nullptr) testTyping.reset();
 	if (testShake != nullptr) testShake.reset();
+	SOUNDS->RemoveSound("BGM");
+	
 }
 
 void Scene_01::FixedUpdate() {}

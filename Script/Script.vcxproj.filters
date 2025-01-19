@@ -17,6 +17,7 @@
     <ClCompile Include="Object\JumpHoppang.cpp">
       <Filter>Object\LoadingObject</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\Scene_04.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -38,6 +39,7 @@
     <ClInclude Include="Object\JumpHoppang.h">
       <Filter>Object\LoadingObject</Filter>
     </ClInclude>
+    <ClInclude Include="Scenes\Scene_04.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

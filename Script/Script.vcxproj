@@ -24,6 +24,7 @@
     <ClCompile Include="Scenes\Scene_01.cpp" />
     <ClCompile Include="Scenes\Scene_02.cpp" />
     <ClCompile Include="Scenes\Scene_03.cpp" />
+    <ClCompile Include="Scenes\Scene_04.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -38,6 +39,7 @@
     <ClInclude Include="Scenes\Scene_01.h" />
     <ClInclude Include="Scenes\Scene_02.h" />
     <ClInclude Include="Scenes\Scene_03.h" />
+    <ClInclude Include="Scenes\Scene_04.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
