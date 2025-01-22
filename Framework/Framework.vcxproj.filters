@@ -290,6 +290,9 @@
     <ClInclude Include="Components\TypingText.h">
       <Filter>Components\Fonts</Filter>
     </ClInclude>
+    <ClInclude Include="Struct\LoadingStatus.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

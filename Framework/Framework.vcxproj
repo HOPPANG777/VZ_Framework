@@ -192,6 +192,7 @@
     <ClInclude Include="Components\Texts.h" />
     <ClInclude Include="Components\ShakingText.h" />
     <ClInclude Include="Components\TypingText.h" />
+    <ClInclude Include="Struct\LoadingStatus.h" />
     <ClInclude Include="Struct\FontBrushDesc.h" />
     <ClInclude Include="Struct\FontTextDesc.h" />
     <ClInclude Include="Managers\CollisionManager.h" />
