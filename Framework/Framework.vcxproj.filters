@@ -340,6 +340,9 @@
     <Filter Include="Components\Fonts">
       <UniqueIdentifier>{a290791e-7d40-4314-8161-a4fd589da698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Animation">
+      <UniqueIdentifier>{2c62b0c8-a68f-48d6-9e66-66e18dfc4fff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Comment.txt" />

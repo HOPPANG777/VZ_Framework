@@ -1,9 +1,5 @@
 #pragma once
 
-#include "Interfaces/IScene.h"
-#include "Objects/ColorObject/ColorLine.h"
-#include "Objects/ColorObject/ColorCircle.h"
-
 class Scene_02 : public Scene
 {
 public:

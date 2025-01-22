@@ -1,10 +1,6 @@
 #pragma once
 
-#include "Interfaces/IScene.h"
-#include "Objects/TextureObject/TextureRect.h"
-#include "Objects/TextureObject/AnimationRect.h"
 #include "Object/JumpHoppang.h"
-#include "Objects/ColorObject/ColorRect.h"
 
 class Scene_00 : public Scene
 {

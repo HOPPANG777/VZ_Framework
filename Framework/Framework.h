@@ -172,6 +172,7 @@ extern HWND gHandle;
 
 //Interface
 #include "Interfaces/IObject.h"
+#include "Interfaces/IScene.h"
 
 //Struct
 #include "Struct/UIElement.h"
@@ -227,6 +228,12 @@ extern HWND gHandle;
 #include "Objects/BaseObject/Object.h"
 #include "Objects/BaseObject/GameObject.h"
 #include "Objects/BaseObject/Drawable.h"
+#include "Objects/ColorObject/ColorRect.h"
+#include "Objects/ColorObject/ColorCircle.h"
+#include "Objects/ColorObject/ColorFilledCircle.h"
+#include "Objects/ColorObject/ColorLine.h"
+#include "Objects/TextureObject/TextureRect.h"
+#include "Objects/TextureObject/AnimationRect.h"
 
 //Camera
 #include "Systems/Camera.h"
