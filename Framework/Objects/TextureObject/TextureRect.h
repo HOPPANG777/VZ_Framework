@@ -1,6 +1,5 @@
 	#pragma once
 
-
 	class TextureRect : public Drawable
 	{
 	private:

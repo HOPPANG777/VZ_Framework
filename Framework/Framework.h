@@ -170,6 +170,12 @@ extern HWND gHandle;
 #define BLACK Color(0, 0, 0, 1)
 #define CLEAR Color(1, 1, 1, 0)
 
+const wstring ShaderPath = L"../_Data/_Shaders/";
+const wstring TexturePath = L"../_Data/_Textures/";
+const wstring SoundPath = L"../_Data/_Sounds/";
+const wstring FontPath = L"../_Data/_Fonts/";
+const string TilePath = "../_Data/_TileData/";
+
 //Interface
 #include "Interfaces/IObject.h"
 #include "Interfaces/IScene.h"
@@ -240,14 +246,6 @@ extern HWND gHandle;
 
 //Sounds
 #include "Systems/Sounds.h"
-
-
-const wstring ShaderPath = L"../_Data/_Shaders/";
-const wstring TexturePath = L"../_Data/_Textures/";
-const wstring SoundPath = L"../_Data/_Sounds/";
-const wstring FontPath = L"../_Data/_Fonts/";
-const string TilePath = "../_Data/_TileData/";
-
 
 //Managers
 #include "Managers/SceneManager.h"
