@@ -19,7 +19,7 @@
 		//std::shared_ptr<Texture2D> texture;
 
 	public:
-		TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path = L"");
+		TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path = L"", const wstring shaderPath = ShaderPath + L"VertexTexture.hlsl");
 		~TextureRect();
 
 	public:

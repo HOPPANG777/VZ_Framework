@@ -1,5 +1,8 @@
 #pragma once
+
 #include "Interfaces/IScene.h"
+#include "Objects/TextureObject/TextureRect.h"
+#include "Objects/ColorObject/ColorRect.h"
 
 class Scene_05 : public Scene
 {
