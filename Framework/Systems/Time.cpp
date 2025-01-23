@@ -31,4 +31,6 @@ void Time::Update()
 
 		CheckTime();
 	}
+
+	scaledDeltaTime = float(deltaTime * timeScale);
 }

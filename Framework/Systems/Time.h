@@ -7,13 +7,17 @@ class Time
 public:
 	void Update();
 
-	float GetDeltaTime() const { return float(deltaTime); }
+	float GetRealDeltaTime() const { return float(deltaTime); }
+	float GetDeltaTime() const { return scaledDeltaTime; }
 	UINT GetFPS() const { return fps; }
 	double GetWorldTime() const { return worldTime; }
 	
+	void SetTimeScale(float scale) { timeScale = scale; }
+	float GetTimeScale() const { return timeScale; }
+
 	void CheckTime() const
 	{
-		cout << "FPS : " << fps << ", DeltaTime : " << deltaTime 
+		cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime
 			<< ", WorldTime : " << worldTime << '\n';
 	}
 
@@ -68,10 +72,14 @@ private:
 	chrono::steady_clock::time_point currentTime;
 	chrono::steady_clock::time_point lastTime;
 	double deltaTime = 0.0;
+	double scaledDeltaTime = 0.0;
 
 	UINT fps = 0;
 	double worldTime = 0.0;
 
 	UINT frameCount = 0;
 	double fpsTimeElapsed = 0.0;
+
+	float scaleDeltaTime = 0.0f;
+	float timeScale = 1.0f;		// 타임스케일
 };

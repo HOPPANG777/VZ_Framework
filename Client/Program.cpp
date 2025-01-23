@@ -59,6 +59,18 @@ void Program::Update()
 		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
 		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
 	}
+
+	if (KEYBOARD->Down(VK_F5))
+	{
+		if (TIME->GetTimeScale() != 0)
+		{
+			TIME->SetTimeScale(0);
+		}
+		else
+		{
+			TIME->SetTimeScale(1);
+		}
+	}
 }
 
 void Program::Render()

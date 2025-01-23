@@ -158,6 +158,7 @@ extern HWND gHandle;
 #define MOUSE Mouse::Get()
 #define COLLISION CollisionManager::Get()
 #define GIZMO Gizmo::Get()
+#define REALDELTA TIME->GetRealDeltaTime()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
