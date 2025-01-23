@@ -80,9 +80,6 @@
     <ClCompile Include="Renders\RenderResources\Texture2D.cpp">
       <Filter>Renders\RenderResources</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\BaseObject\GameObject.cpp">
-      <Filter>Objects\BaseObject</Filter>
-    </ClCompile>
     <ClCompile Include="Managers\SceneManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -118,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Components\TypingText.cpp">
       <Filter>Components\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Transform.cpp">
+      <Filter>Components\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,12 +233,6 @@
     <ClInclude Include="Renders\RenderResources\Texture2D.h">
       <Filter>Renders\RenderResources</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\BaseObject\GameObject.h">
-      <Filter>Objects\BaseObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\GameComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\targetver.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -293,6 +287,9 @@
     <ClInclude Include="Struct\LoadingStatus.h">
       <Filter>Struct</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Transform.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -345,6 +342,9 @@
     </Filter>
     <Filter Include="Components\Animation">
       <UniqueIdentifier>{2c62b0c8-a68f-48d6-9e66-66e18dfc4fff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{4a584632-058c-4569-b653-a71f4755202a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

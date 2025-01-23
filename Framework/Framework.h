@@ -222,7 +222,6 @@ const string TilePath = "_Data/_TileData/";
 
 //Components
 #include "Components/Component.h"
-#include "Components/GameComponent.h"
 #include "Components/MoveComponent.h"
 #include "Components/Collider.h"
 #include "Components/BoxCollider.h"
@@ -233,7 +232,6 @@ const string TilePath = "_Data/_TileData/";
 
 //Object
 #include "Objects/BaseObject/Object.h"
-#include "Objects/BaseObject/GameObject.h"
 #include "Objects/BaseObject/Drawable.h"
 #include "Objects/ColorObject/ColorRect.h"
 #include "Objects/ColorObject/ColorCircle.h"

@@ -191,6 +191,7 @@
     <ClInclude Include="Components\Collider.h" />
     <ClInclude Include="Components\Texts.h" />
     <ClInclude Include="Components\ShakingText.h" />
+    <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Components\TypingText.h" />
     <ClInclude Include="Struct\LoadingStatus.h" />
     <ClInclude Include="Struct\FontBrushDesc.h" />
@@ -200,8 +201,6 @@
     <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
     <ClInclude Include="Objects\TextureObject\AnimationRect.h" />
-    <ClInclude Include="Components\GameComponent.h" />
-    <ClInclude Include="Objects\BaseObject\GameObject.h" />
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
     <ClInclude Include="Managers\ResourcesManager.h" />
     <ClInclude Include="Objects\TextureObject\TextureRect.h" />
@@ -250,12 +249,12 @@
     <ClCompile Include="Components\CircleCollider.cpp" />
     <ClCompile Include="Components\ShakingText.cpp" />
     <ClCompile Include="Components\Texts.cpp" />
+    <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="Components\TypingText.cpp" />
     <ClCompile Include="Managers\CollisionManager.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />
-    <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
     <ClCompile Include="Renders\RenderResources\Texture2D.cpp" />
     <ClCompile Include="Managers\ResourcesManager.cpp" />
     <ClCompile Include="Objects\TextureObject\TextureRect.cpp" />
