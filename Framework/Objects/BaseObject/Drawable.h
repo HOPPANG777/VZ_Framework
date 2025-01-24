@@ -18,15 +18,20 @@ public:
 	Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, const wstring& shaderPath = L"");
 	
 	Drawable(const Drawable& other)
-		: Drawable(other.name, other.position, other.scale, other.rotation, other.shaderPath)
+		: Drawable(other.name, other.GetPosition(), other.GetScale(), other.GetRotation(), other.shaderPath)
 	{
 
 	}
 
 	Drawable operator=(const Drawable& other)
 	{
-		Drawable obj(other);
-		return obj;
+		if (this != &other)
+		{
+			Object::operator=(other); // 상위 객체 복사
+			shaderPath = other.shaderPath;
+			// 기타 리소스 복사
+		}
+		return *this;
 	}
 
 	virtual ~Drawable() override = default;

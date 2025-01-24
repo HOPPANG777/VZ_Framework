@@ -229,6 +229,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Components/Texts.h"
 #include "Components/TypingText.h"
 #include "Components/ShakingText.h"
+#include "Components/Transform.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"

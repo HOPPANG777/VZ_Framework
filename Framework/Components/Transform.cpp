@@ -1,12 +1,6 @@
 #include "Framework.h"
 #include "Transform.h"
 
-Transform::Transform(const std::string& compName)
-    : Component(compName)
-{
-
-}
-
 void Transform::Update()
 {
     // S, R, T 행렬 계산
