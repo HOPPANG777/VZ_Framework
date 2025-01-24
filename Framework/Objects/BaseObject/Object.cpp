@@ -1,17 +1,17 @@
 #include "Framework.h"
 #include "Object.h"
 
-Object::Object(const std::string& name)
+Object::Object(const string& name)
     : name(name)
 {
-    worldBuffer = std::make_unique<WorldBuffer>();
+    worldBuffer = make_unique<WorldBuffer>();
 
     // 모든 Object는 Transform을 무조건 포함
-    auto transform = std::make_shared<Transform>("Transform");
+    auto transform = make_shared<Transform>("Transform");
     AddComponent(transform);
 }
 
-Object::Object(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot)
+Object::Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot)
     : Object(name) // 위 기본 생성자 호출 후, Transform 초기값 세팅
 {
     auto transform = GetComponent<Transform>("Transform");
@@ -32,7 +32,7 @@ Object::Object(const Object& other)
     // (componets 맵을 돌며 clone 형태를 구현) 추가 작업이 필요
 }
 
-void Object::AddComponent(const std::shared_ptr<Component>& component)
+void Object::AddComponent(const shared_ptr<Component>& component)
 {
     if (components.count(component->GetName())) return;
 

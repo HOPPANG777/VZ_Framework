@@ -15,7 +15,9 @@ public:
         UINT rows,       // 세로 프레임 수
         Vector2 startPos,
         Vector2 endPos,
-        bool bReversed = false);
+        bool bReversed = false
+        //float playRate = 1.0f / 15.0f  // ★ 디폴트 1/15초로 설정
+    );
 
 private:
     wstring clipName = L"";
@@ -27,4 +29,7 @@ private:
 
     Vector2 texelFrameSize = Values::ZeroVec2;
     bool bReversed = false;
+
+    // ★ 추가: 이 애니메이션의 재생 속도
+    //float playRate = 0.0f;   // 기본 1/15초 (15FPS)
 };

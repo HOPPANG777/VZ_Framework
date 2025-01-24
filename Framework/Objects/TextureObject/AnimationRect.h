@@ -17,12 +17,10 @@ enum class AnimState
 class AnimationRect : public Drawable
 {
 private:
-    std::shared_ptr<Animator> animator = nullptr;
-
     AnimState animState = AnimState::ANIMATION_LEFT;
 
-    std::vector<VertexTexture> vertices;
-    std::vector<UINT> indices;
+    vector<VertexTexture> vertices;
+    vector<UINT> indices;
 
     // RS, Blend, Sampler 등 D3D 리소스
     ComPtr<ID3D11RasterizerState> rs = nullptr;
@@ -64,11 +62,7 @@ public:
     }
 
 public:
-    shared_ptr<Animator> GetAnimator() { return animator; }
-
-    void SetAnimator(shared_ptr<Animator> animator)
-    {
-        this->animator = animator;
-    }
+    // 필요 시 Animator를 직접 얻어올 수 있는 헬퍼함수
+    shared_ptr<Animator> GetAnimator() { return GetComponent<Animator>("Animator"); }
     
 };

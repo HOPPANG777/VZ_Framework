@@ -92,8 +92,17 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         RenderStates::CreateBlend(&desc, &blend[1]);
     }
 
-    // 여기서 Animator를 생성
-    animator = std::make_shared<Animator>();
+    // 4) Animator 컴포넌트를 등록
+    {
+        auto animatorComp = make_shared<Animator>("Animator");
+        AddComponent(animatorComp);
+
+        // ※ 여기서 애니메이션 클립들을 등록할 수도 있음
+        // 예: 
+        //   auto runClip = std::make_shared<AnimationClip>(L"Run", ... );
+        //   animatorComp->AddAnimClip(runClip);
+        //   animatorComp->SetCurrentAnimClip(L"Run");
+    }
 
     //// AnimationClip 생성
     //{
@@ -144,34 +153,41 @@ void AnimationRect::Update()
     //    animator->SetCurrentAnimClip(L"RunD");
     //}
 
-    // 애니메이션 진행
-    animator->Update();
-
-    // 버텍스 UV 갱신
-    DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRe);
+     // 1) Animator 가져오기 & 애니메이션 Update
+    auto animator = GetComponent<Animator>("Animator");
+    if (animator)
     {
-        Vector2 currentFrame = animator->GetCurrentFrame();
-        Vector2 frameSize = animator->GetTexelFrameSize();
+        animator->Update();
 
-        // 좌 하단
-        vertices[0].uv.x = currentFrame.x;
-        vertices[0].uv.y = currentFrame.y + frameSize.y;
+        // 2) 애니메이션에 따른 UV 갱신
+        DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRe);
+        {
+            Vector2 framePos = animator->GetCurrentFrame();
+            Vector2 frameSize = animator->GetTexelFrameSize();
 
-        // 좌 상단
-        vertices[1].uv.x = currentFrame.x;
-        vertices[1].uv.y = currentFrame.y;
+            // 좌 하단
+            vertices[0].uv.x = framePos.x;
+            vertices[0].uv.y = framePos.y + frameSize.y;
 
-        // 우 하단
-        vertices[2].uv.x = currentFrame.x + frameSize.x;
-        vertices[2].uv.y = currentFrame.y + frameSize.y;
+            // 좌 상단
+            vertices[1].uv.x = framePos.x;
+            vertices[1].uv.y = framePos.y;
 
-        // 우 상단
-        vertices[3].uv.x = currentFrame.x + frameSize.x;
-        vertices[3].uv.y = currentFrame.y;
+            // 우 하단
+            vertices[2].uv.x = framePos.x + frameSize.x;
+            vertices[2].uv.y = framePos.y + frameSize.y;
 
-        memcpy(subRe.pData, vertices.data(), sizeof(vertices[0]) * vertices.size());
+            // 우 상단
+            vertices[3].uv.x = framePos.x + frameSize.x;
+            vertices[3].uv.y = framePos.y;
+
+            memcpy(subRe.pData, vertices.data(), sizeof(VertexTexture) * vertices.size());
+        }
+        DC->Unmap(vertexBuffer->GetResource(), 0);
+
+        // SRV 갱신 (Animator가 현재 재생중인 클립의 SRV)
+        srv = animator->GetCurrentSRV();
     }
-    DC->Unmap(vertexBuffer->GetResource(), 0);
 
     // Drawable Update (행렬 계산 등)
     BASE::Update();
@@ -180,9 +196,6 @@ void AnimationRect::Update()
 void AnimationRect::Render()
 {
     BASE::Render();
-
-    // Animator가 가진 SRV로 교체해서 그림
-    srv = animator->GetCurrentSRV();
 
     // Sampler / RS / Blend State 세팅
     DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());

@@ -74,9 +74,6 @@
     <ClCompile Include="Systems\Mouse.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities\Animator.cpp">
-      <Filter>Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Renders\RenderResources\Texture2D.cpp">
       <Filter>Renders\RenderResources</Filter>
     </ClCompile>
@@ -118,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Components\Transform.cpp">
       <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Animator.cpp">
+      <Filter>Components\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +227,6 @@
     <ClInclude Include="Systems\Mouse.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\Animator.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Renders\RenderResources\Texture2D.h">
       <Filter>Renders\RenderResources</Filter>
     </ClInclude>
@@ -289,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="Components\Transform.h">
       <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Animator.h">
+      <Filter>Components\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

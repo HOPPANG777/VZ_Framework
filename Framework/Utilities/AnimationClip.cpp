@@ -7,11 +7,13 @@ AnimationClip::AnimationClip(const std::wstring& clipName,
     UINT rows,       // 세로 프레임 수
     Vector2 startPos,
     Vector2 endPos,
-    bool bReversed)
+    bool bReversed
+    //float playRate
+    )
     : clipName(clipName),
     // 전체 프레임 수 = columns * rows
     frameCount(columns * rows),
-    bReversed(bReversed)
+    bReversed(bReversed)//, playRate(playRate) // ★ 멤버에 저장
 {
     srv = srcTex->GetSRV();
 

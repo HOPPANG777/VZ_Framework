@@ -196,7 +196,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Utilities/Gui.h"
 
 //Utilities
-#include "Utilities/Animator.h"
+//#include "Utilities/Animator.h"
 #include "Utilities/DirectHelper.h"
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
@@ -204,6 +204,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Utilities/Path.h"
 #include "Utilities/FileStream.h"
 #include "Utilities/Gizmo.h"
+#include "Utilities/AnimationClip.h"
 
 //Renders
 #include "Renders/RenderResources/ConstantBuffer.h"
@@ -230,6 +231,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Components/TypingText.h"
 #include "Components/ShakingText.h"
 #include "Components/Transform.h"
+#include "Components/Animator.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"
