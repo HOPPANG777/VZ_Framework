@@ -31,6 +31,8 @@ public:
 
 	void SetResolution(UINT width, UINT height);
 
+	bool LoadCustomFont(const wstring& fontFilePath);
+
 private:
 	void EnumerateAdapters();
 	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);

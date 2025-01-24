@@ -94,7 +94,7 @@ FontTextDesc* Texts::GetOrCreateTextFormat(
         newTextDesc->style,
         newTextDesc->stretch,
         newTextDesc->fontSize,
-        L"ko",
+        L"ko-kr",
         &newTextDesc->format
     );
     CHECK(hr);

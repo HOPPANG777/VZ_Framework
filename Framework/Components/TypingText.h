@@ -12,7 +12,7 @@ public:
         const RECT& rect,
         const float size = 25.0f,
         const Color& color = WHITE,
-        const wstring& font = L"PretendardJP-Medium",
+        const wstring& font = L"Pretendard JP",
         const DWRITE_FONT_WEIGHT& weight = DWRITE_FONT_WEIGHT_NORMAL,
         const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL,
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL

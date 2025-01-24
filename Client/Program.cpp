@@ -109,7 +109,6 @@ int APIENTRY wWinMain
 	auto window = make_unique<Window>(desc);
 	WPARAM wParam = window->Run();
 
-
 	return int(wParam);
 }
 

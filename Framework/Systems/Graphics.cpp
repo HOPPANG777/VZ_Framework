@@ -14,6 +14,21 @@ Graphics::~Graphics()
 
 void Graphics::Init()
 {
+    LoadCustomFont(FontPath + L"Bazzi OTF.otf");
+    LoadCustomFont(FontPath + L"DNFBitBitv2.otf");
+    LoadCustomFont(FontPath + L"DNFForgedBlade-Bold.otf");
+    LoadCustomFont(FontPath + L"DNFForgedBlade-Light.otf");
+    LoadCustomFont(FontPath + L"DNFForgedBlade-Medium.otf");
+    LoadCustomFont(FontPath + L"Mabinogi_Classic_OTF.otf");
+    LoadCustomFont(FontPath + L"Maplestory OTF Bold.otf");
+    LoadCustomFont(FontPath + L"Maplestory OTF Light.otf");
+    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF Bold.otf");
+    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF ExtraBold.otf");
+    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF Medium.otf");
+    LoadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Bold.otf");
+    LoadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Regular.otf");
+    LoadCustomFont(FontPath + L"PretendardJP-Medium.otf");
+
     CreateDirect3D();
 
     CreateBackBuffer();
@@ -368,6 +383,23 @@ void Graphics::SetResolution(UINT width, UINT height)
     //{
     //    SCENE->OnResize(width, height);
     //}
+}
+
+bool Graphics::LoadCustomFont(const wstring& fontFilePath)
+{
+    // FR_PRIVATE: 현재 프로세스에서만 등록
+    int ret = AddFontResourceExW(fontFilePath.c_str(), FR_PRIVATE, 0);
+    if (ret == 0)
+    {
+        // 등록 실패
+        // 보통은 여기서 로그 출력, 에러 처리
+        return false;
+    }
+
+    // 필요하다면 전체 윈도우에 폰트가 변경되었음을 알림
+    // SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
+    return true;
 }
 
 D3DEnumAdapterInfo::~D3DEnumAdapterInfo() {}

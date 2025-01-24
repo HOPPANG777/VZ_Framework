@@ -6,11 +6,11 @@ void Scene_00::Awake() {}
 void Scene_00::Start()
 {
 	objects.push_back(make_shared<ColorRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, BLACK));
-	objects.push_back(make_shared<JumpHoppang>(Vector3(WIN_DEFAULT_WIDTH * 0.94f, CENTER_Y / 3.5f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"LoadingIcon.png"));
+	objects.push_back(make_shared<JumpHoppang>(Vector3(WIN_DEFAULT_WIDTH * 0.97f, WIN_DEFAULT_HEIGHT * 0.09f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"LoadingIcon.png"));
 
 	LoadingText = make_shared<Texts>();
 
-	UIs.push_back(make_shared<UIElement>(0.8f, 1.0f, 0.2f, 0.2f, -75, -75, 20, 20));
+	UIs.push_back(make_shared<UIElement>(0.9f, 1.0f, 0.2f, 0.2f, -75, -75, 20, 20));
 }
 
 void Scene_00::Destroy()

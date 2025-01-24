@@ -49,6 +49,7 @@ using namespace std;
 #include <d2d1_3.h>
 #include <d2d1_3helper.h>
 #include <dwrite.h>
+#pragma comment(lib, "gdi32.lib")
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 using namespace D2D1;
@@ -91,10 +92,12 @@ using namespace SimpleMath;
 #endif
 //////////////////////////////////////////
 
-#define WIN_DEFAULT_WIDTH 1280
-//#define WIN_DEFAULT_WIDTH 1920
-#define WIN_DEFAULT_HEIGHT 720
-//#define WIN_DEFAULT_HEIGHT 1080
+//#define WIN_DEFAULT_WIDTH 1280
+#define WIN_DEFAULT_WIDTH 1920
+//#define WIN_DEFAULT_WIDTH 2560
+//#define WIN_DEFAULT_HEIGHT 720
+#define WIN_DEFAULT_HEIGHT 1080
+//#define WIN_DEFAULT_HEIGHT 1440
 
 #define CENTER_X (WIN_DEFAULT_WIDTH / 2)
 #define CENTER_X_2_1 (WIN_DEFAULT_WIDTH / 2.1f)

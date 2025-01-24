@@ -19,8 +19,8 @@ void Scene_01::Start()
 	testShake = make_shared<ShakingText>();
 	
 	UIs.push_back(make_shared<UIElement>(0.01f, 0.01f, 0.5f, 0.5f));
-	UIs.push_back(make_shared<UIElement>(0.31f, 0.7f, 0.5f, 0.5f));
-	UIs.push_back(make_shared<UIElement>(0.41f, 0.2f, 0.5f, 0.5f));
+	UIs.push_back(make_shared<UIElement>(0.5f, 0.7f, 0.5f, 0.5f));
+	UIs.push_back(make_shared<UIElement>(0.5f, 0.2f, 0.5f, 0.5f));
 
 	SOUNDS->AddSound("BGM", SoundPath + L"bgm.wav", true);
 
