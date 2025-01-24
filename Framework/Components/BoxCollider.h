@@ -6,7 +6,7 @@ public:
     BoxCollider(const string& name, const Vector3& center, const Vector3& size, const Color& color = GREEN) : Collider(name, Type::Box), center(center), size(size), color(color) {}
     ~BoxCollider() override = default;
 
-    // ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Componentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Óµï¿½
     void Update() override;
     void Render() override;
 
@@ -37,4 +37,5 @@ private:
     Vector3 size;
     Color color;
 };
+
 
