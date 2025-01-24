@@ -7,6 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="HOPPANG.ico" />
