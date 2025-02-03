@@ -7,27 +7,25 @@ void Animator::Update()
     if (!currentClip) return;
 
     // 경과 시간이 playRate를 넘으면 다음 프레임
-    if (deltaTime >= playRate)
+    if (frameTime >= animationTime)
     {
         if (!currentClip->bReversed) // 정방향
         {
             ++currentFrameIndex;
-            if (currentFrameIndex == currentClip->frameCount)
-                currentFrameIndex = 0;
+            if (currentFrameIndex == currentClip->frameCount) currentFrameIndex = 0;
         }
         else // 역재생
         {
-            if (currentFrameIndex == 0)
-                currentFrameIndex = currentClip->frameCount;
+            if (currentFrameIndex == 0) currentFrameIndex = currentClip->frameCount;
             --currentFrameIndex;
         }
 
         currentFrame = currentClip->keyFrames[currentFrameIndex];
-        deltaTime = 0.0f;
+        frameTime = 0.0f;
     }
     else
     {
-        deltaTime += DELTA;
+        frameTime += DELTA;
     }
 }
 
@@ -56,13 +54,11 @@ void Animator::SetCurrentAnimClip(const wstring& clipName)
     if (CheckExist(clipName))
     {
         currentClip = animClips.at(clipName);
-        deltaTime = 0.0f;
+        frameTime = 0.0f;
 
         // 역재생이라면 마지막 프레임에서 시작
-        if (currentClip->bReversed)
-            currentFrameIndex = currentClip->frameCount - 1;
-        else
-            currentFrameIndex = 0;
+        if (currentClip->bReversed) currentFrameIndex = currentClip->frameCount - 1;
+        else currentFrameIndex = 0;
 
         currentFrame = currentClip->keyFrames[currentFrameIndex];
     }

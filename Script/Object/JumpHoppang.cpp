@@ -31,7 +31,7 @@ JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const fl
     // 기본 클립으로 "Loading" 재생
     GetAnimator()->SetCurrentAnimClip(L"Loading");
 
-    GetAnimator()->SetPlayRate(1.0f / 7.5f);
+    GetAnimator()->SetAnimationTime(1.0f / 7.5f);
 }
 
 JumpHoppang::~JumpHoppang()
