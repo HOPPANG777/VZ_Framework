@@ -4,7 +4,7 @@
 
 #include "Systems/Window.h"
 
-// $(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\ // 이걸 Client 프로젝트 설정 디버깅에 입력하시오
+// $(SolutionDir)_Build\$(Platform)\$(Configuration)\  //$(ProjectName)\ // 이걸 Client 프로젝트 설정 디버깅에 입력하시오
 // call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)" $(Platform) // 이걸 Client 프로젝트 설정 빌드 후 이벤트에 입력하시오
 
 float gWinWidth = WIN_DEFAULT_WIDTH;
