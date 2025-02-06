@@ -173,6 +173,8 @@ extern HWND gHandle;
 #define WHITE Color(1, 1, 1, 1)
 #define BLACK Color(0, 0, 0, 1)
 #define CLEAR Color(1, 1, 1, 0)
+#define GRAY Color(0.4f, 0.4f, 0.4f, 1.0f)
+#define CLEAR_COLOR Color(0xcff0cc);
 
 const wstring ShaderPath = L"_Data/_Shaders/";
 const wstring TexturePath = L"_Data/_Textures/";

@@ -59,7 +59,12 @@ struct UIElement
     // 생성자
     UIElement(float x, float y, float width, float height, int xOff = 0, int yOff = 0, int wOff = 0, int hOff = 0)
         : xRatio(x), yRatio(y), widthRatio(width), heightRatio(height),
-        xOffset(xOff), yOffset(yOff), widthOffset(wOff), heightOffset(hOff) {
+        xOffset(xOff), yOffset(yOff), widthOffset(wOff), heightOffset(hOff) 
+    {
+        //relativeX = x / float(baseScreenWidth);
+        //relativeY = y / float(baseScreenHeight);
+        //relativeWidth = width / float(baseScreenWidth);
+        //relativeHeight = height / float(baseScreenHeight);
     }
 
     // 현재 화면 크기(screenWidth, screenHeight)를 기준으로 UI 요소의 사각형 좌표(Rect)를 계산
