@@ -107,6 +107,11 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		RenderStates::CreateBlend(&desc, &blend[1]);
 	}
 
+	// ColorBuffer 생성
+	{
+		colorBuffer = make_unique<ColorBuffer>();
+	}
+
 }
 
 TextureRect::~TextureRect()
@@ -121,6 +126,9 @@ void TextureRect::Update()
 void TextureRect::Render()
 {
 	BASE::Render();
+
+	// 먼저, 픽셀 셰이더의 상수 버퍼 슬롯(예: b2)에 ColorBuffer를 업데이트 및 바인딩합니다.
+	colorBuffer->SetPSBuffer(2);  // b2 슬롯에 바인딩 (셰이더 코드와 일치해야 함)
 
 	DC->PSSetSamplers(0, 1, &sampler[1]);
 	

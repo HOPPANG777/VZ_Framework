@@ -23,8 +23,7 @@ public:
 
     virtual void OnCollision(Collider* other)
     {
-        if (collisionCallback)
-            collisionCallback(other);
+        if (collisionCallback) collisionCallback(other);
     }
 
 protected:

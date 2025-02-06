@@ -104,37 +104,44 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         //   animatorComp->SetCurrentAnimClip(L"Run");
     }
 
-    //// AnimationClip 생성
-    //{
-    //    // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
-    //    shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
+    // 5) ColorBuffer 생성
+    {
+        colorBuffer = make_unique<ColorBuffer>();
+    }
 
-    //    // 예: 아래 두 클립을 만든다고 가정
-    //    auto RunD = std::make_shared<AnimationClip>(
-    //        L"RunD",
-    //        srcTex.get(),
-    //        4,
-    //        1,
-    //        Values::ZeroVec2, // (0,0)에서 시작
-    //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
-    //    );
+    #pragma region OldTestClip
+//// AnimationClip 생성
+//{
+//    // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
+//    shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
 
-    //    auto RunL = std::make_shared<AnimationClip>(
-    //        L"RunL",
-    //        srcTex.get(),
-    //        4,
-    //        1,
-    //        Vector2(0, srcTex->GetHeight() * 0.125f * 2),
-    //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
-    //    );
+//    // 예: 아래 두 클립을 만든다고 가정
+//    auto RunD = std::make_shared<AnimationClip>(
+//        L"RunD",
+//        srcTex.get(),
+//        4,
+//        1,
+//        Values::ZeroVec2, // (0,0)에서 시작
+//        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
+//    );
 
-    //    // Animator에 추가
-    //    animator->AddAnimClip(RunD);
-    //    animator->AddAnimClip(RunL);
+//    auto RunL = std::make_shared<AnimationClip>(
+//        L"RunL",
+//        srcTex.get(),
+//        4,
+//        1,
+//        Vector2(0, srcTex->GetHeight() * 0.125f * 2),
+//        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
+//    );
 
-    //    // 현재 재생할 기본 클립
-    //    animator->SetCurrentAnimClip(L"RunL");
-    //}
+//    // Animator에 추가
+//    animator->AddAnimClip(RunD);
+//    animator->AddAnimClip(RunL);
+
+//    // 현재 재생할 기본 클립
+//    animator->SetCurrentAnimClip(L"RunL");
+//}
+#pragma endregion
 }
 
 AnimationRect::~AnimationRect()
@@ -143,15 +150,17 @@ AnimationRect::~AnimationRect()
 
 void AnimationRect::Update()
 {
-    //// 키 입력에 따라 클립 교체
-    //if (Keyboard::Get()->Press('A'))
-    //{
-    //    animator->SetCurrentAnimClip(L"RunL");
-    //}
-    //else if (Keyboard::Get()->Press('S'))
-    //{
-    //    animator->SetCurrentAnimClip(L"RunD");
-    //}
+    #pragma region OldTestClipControll
+//// 키 입력에 따라 클립 교체
+//if (Keyboard::Get()->Press('A'))
+//{
+//    animator->SetCurrentAnimClip(L"RunL");
+//}
+//else if (Keyboard::Get()->Press('S'))
+//{
+//    animator->SetCurrentAnimClip(L"RunD");
+//}
+#pragma endregion
 
      // 1) Animator 가져오기 & 애니메이션 Update
     auto animator = GetComponent<Animator>("Animator");
@@ -197,10 +206,16 @@ void AnimationRect::Render()
 {
     BASE::Render();
 
+    // 먼저, 픽셀 셰이더의 상수 버퍼 슬롯(예: b2)에 ColorBuffer를 업데이트 및 바인딩합니다.
+    colorBuffer->SetPSBuffer(2);  // b2 슬롯에 바인딩 (셰이더 코드와 일치해야 함)
+
     // Sampler / RS / Blend State 세팅
     DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
+
     DC->PSSetShaderResources(0, 1, srv.GetAddressOf());
+
     DC->RSSetState(rs.Get());
+
     DC->OMSetBlendState(blend[1].Get(), nullptr, 0xFFFFFFFF);
 
     // DrawCall
