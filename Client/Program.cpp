@@ -33,12 +33,11 @@ void Program::Start()
 		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
 		SCENE->AddScene("TitleScene", make_shared<Scene_04>());
 		SCENE->AddScene("SplashScene", make_shared<Scene_05>());
-	
+		
 		SCENE->SetSplashScene("SplashScene");
 
 		SCENE->SetLoadingScene("LoadingScene");
 
-		//SCENE->StartGame("TitleScene");
 		SCENE->StartGame("GeometryScene");
 	}
 }
@@ -99,7 +98,7 @@ int APIENTRY wWinMain
 )
 {
 	WinDesc desc;
-	desc.appName = L"Client";	// 창 이름
+	desc.appName = L"VZ_Framework";	// 창 이름
 	desc.instance = hInstance;	
 	desc.handle = nullptr;
 	desc.width = gWinWidth;
