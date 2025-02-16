@@ -41,6 +41,11 @@ public:
 	}
 	
 public:
+	// Helper 함수 추가: 각 Transform 컴포넌트를 반환
+	shared_ptr<Transform> GetTransformComponent() const;
+	shared_ptr<RectTransform> GetRectTransformComponent() const;
+
+public:
 	// 매 프레임 업데이트 & 렌더
 	virtual void Update();
 	virtual void Render();

@@ -45,6 +45,16 @@ void Object::RemoveComponent(const std::string& compName)
     components.erase(compName);
 }
 
+shared_ptr<Transform> Object::GetTransformComponent() const
+{
+    return GetComponent<Transform>("Transform");
+}
+
+shared_ptr<RectTransform> Object::GetRectTransformComponent() const
+{
+    return GetComponent<RectTransform>("RectTransform");
+}
+
 void Object::Update()
 {
     // 등록된 모든 컴포넌트 업데이트
@@ -57,11 +67,16 @@ void Object::Update()
         compPtr->Update();
     }
 
-    // Transform의 월드 행렬을 얻어와서 worldBuffer에 세팅
-    auto transform = GetComponent<Transform>("Transform");
-    if (transform)
+    // RectTransform이 있다면 우선적으로 사용합니다.
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans)
     {
-        worldBuffer->SetWorld(transform->GetWorld());
+        worldBuffer->SetWorld(rectTrans->GetWorld());
+    }
+    else
+    {
+        auto trans = GetComponent<Transform>("Transform");
+        if (trans) worldBuffer->SetWorld(trans->GetWorld());
     }
 }
 
@@ -86,36 +101,71 @@ void Object::Render()
 // ------------------------------------------------------
 Vector3 Object::GetPosition() const
 {
-    auto transform = GetComponent<Transform>("Transform");
-    return transform ? transform->GetPosition() : Vector3(0, 0, 0);
+    // RectTransform이 있으면 그것을 사용하고, 없으면 기본 Transform 사용
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans)return rectTrans->GetPosition();
+
+    auto trans = GetComponent<Transform>("Transform");
+    return trans ? trans->GetPosition() : Vector3(0, 0, 0);
 }
 
 Vector3 Object::GetScale() const
 {
-    auto transform = GetComponent<Transform>("Transform");
-    return transform ? transform->GetScale() : Vector3(1, 1, 1);
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->GetScale();
+
+    auto trans = GetComponent<Transform>("Transform");
+    return trans ? trans->GetScale() : Vector3(1, 1, 1);
 }
 
 float Object::GetRotation() const
 {
-    auto transform = GetComponent<Transform>("Transform");
-    return transform ? transform->GetRotation() : 0.0f;
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->GetRotation();
+
+    auto trans = GetComponent<Transform>("Transform");
+    return trans ? trans->GetRotation() : 0.0f;
 }
 
 void Object::Move(const Vector3& speed)
 {
-    auto transform = GetComponent<Transform>("Transform");
-    if (transform) transform->Move(speed);
+    // 상황에 따라 RectTransform이나 Transform을 선택적으로 업데이트할 수 있습니다.
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans)
+    {
+        rectTrans->Move(speed);
+    }
+    else
+    {
+        auto trans = GetComponent<Transform>("Transform");
+        if (trans) trans->Move(speed);
+    }
 }
 
 void Object::Rotate(float rot)
 {
-    auto transform = GetComponent<Transform>("Transform");
-    if (transform) transform->Rotate(rot);
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans)
+    {
+        rectTrans->Rotate(rot);
+    }
+    else
+    {
+        auto trans = GetComponent<Transform>("Transform");
+        if (trans) trans->Rotate(rot);
+    }
 }
 
-void Object::Scale(const Vector3& scale)
+void Object::Scale(const Vector3& scaleChange)
 {
-    auto transform = GetComponent<Transform>("Transform");
-    if (transform) transform->Scale(scale);
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans)
+    {
+        rectTrans->Scale(scaleChange);
+    }
+    else
+    {
+        auto trans = GetComponent<Transform>("Transform");
+        if (trans) trans->Scale(scaleChange);
+    }
 }
