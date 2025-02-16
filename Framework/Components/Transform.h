@@ -17,18 +17,21 @@ public:
     virtual void Update() override;  // 매 프레임 S*R*T 계산
     virtual void Render() override;  // 특별히 그릴 것은 없으므로 보통 빈 상태
 
+    const Matrix& GetWorld() const;
+
+public:
     // Getter
     Vector3 GetPosition() const;
     Vector3 GetScale() const;
-    float   GetRotation() const; // 반환 시에는 Degree(각도)
+    float GetRotation() const; // 반환 시에는 Degree(각도)
 
-    const Matrix& GetWorld() const;
-
+public:
     // Setter
     void SetPosition(const Vector3& pos);
     void SetScale(const Vector3& sca);
     void SetRotation(float degrees); // 외부 입력은 각도(°), 내부는 라디안
 
+public:
     // 이동/회전/스케일 변화를 DELTA 기반으로 적용할 수 있는 함수들
     void Move(const Vector3& speed);
     void Rotate(float degrees);

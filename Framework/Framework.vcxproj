@@ -194,6 +194,7 @@
     <ClInclude Include="Components\ShakingText.h" />
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Components\TypingText.h" />
+    <ClInclude Include="Components\RectTransform.h" />
     <ClInclude Include="Struct\LoadingStatus.h" />
     <ClInclude Include="Struct\FontBrushDesc.h" />
     <ClInclude Include="Struct\FontTextDesc.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="Components\Transform.cpp" />
     <ClCompile Include="Components\TypingText.cpp" />
     <ClCompile Include="Managers\CollisionManager.cpp" />
+    <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />

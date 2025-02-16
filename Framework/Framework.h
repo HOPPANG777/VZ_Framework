@@ -237,9 +237,11 @@ const string TilePath = "_Data/_TileData/";
 #include "Components/ShakingText.h"
 #include "Components/Transform.h"
 #include "Components/Animator.h"
+#include "Components/RectTransform.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"
+//#include "Objects/BaseObject/RectObject.h"
 #include "Objects/BaseObject/Drawable.h"
 #include "Objects/ColorObject/ColorRect.h"
 #include "Objects/ColorObject/ColorCircle.h"

@@ -119,6 +119,9 @@
     <ClCompile Include="Components\Animator.cpp">
       <Filter>Components\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Components\RectTransform.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -289,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="Components\Animator.h">
       <Filter>Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RectTransform.h">
+      <Filter>Components\Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
