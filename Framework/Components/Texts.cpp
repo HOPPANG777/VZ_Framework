@@ -106,8 +106,7 @@ FontTextDesc* Texts::GetOrCreateTextFormat(
 
 RECT Texts::CalculateRectFromObject(const RECT& rect)
 {
-    if (!attachedObject)
-        return rect;
+    if (!attachedObject) return rect;
 
     Vector3 objectPos = attachedObject->GetPosition(); // °´Ã¼ÀÇ ¿ùµå ÁÂÇ¥
     RECT adjustedRect = rect;

@@ -23,7 +23,9 @@ private:
 
 	shared_ptr<Object> red;
 
-	vector<shared_ptr<UIElement>> UIs;
+	shared_ptr<Object> sceneNameObject;
+	shared_ptr<Object> testTypingObject;
+	shared_ptr<Object> testShakeObject;
 
 	shared_ptr<Texts> sceneName;
 	shared_ptr<TypingText> testTyping;

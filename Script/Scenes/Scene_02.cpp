@@ -13,7 +13,7 @@ void Scene_02::Start()
 
     sceneName = make_shared<Texts>();
 
-    UIs.push_back(make_shared<UIElement>(0.01f, 0.01f, 0.5f, 0.5f));
+    sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
 }
 
 void Scene_02::Destroy() 
@@ -23,6 +23,7 @@ void Scene_02::Destroy()
     if (minuteHand != nullptr) minuteHand.reset();
     if (hourHand != nullptr) hourHand.reset();
     if (sceneName != nullptr) sceneName.reset();
+    if (sceneNameObject != nullptr) sceneNameObject.reset();
 }
 
 void Scene_02::FixedUpdate() {}
@@ -56,7 +57,7 @@ void Scene_02::Render()
 
 void Scene_02::PostRender() 
 {
-    sceneName->RenderText(L"ClockScene", UIs[0]->GetRect(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT), 25.0f);
+    sceneName->RenderText(L"ClockScene", sceneNameObject->GetRect(), 25.0f);
 }
 
 void Scene_02::ImGUI() {}

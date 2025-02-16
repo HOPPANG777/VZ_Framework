@@ -1,35 +1,54 @@
 #include "Framework.h"
 #include "Object.h"
 
-Object::Object(const string& name)
+Object::Object(const string& name, TransformType type)
     : name(name)
 {
     worldBuffer = make_unique<WorldBuffer>();
 
-    // 모든 Object는 Transform을 무조건 포함
-    auto transform = make_shared<Transform>("Transform");
-    AddComponent(transform);
+    // 선택에 따라 적절한 Transform 컴포넌트 추가
+    if (type == TransformType::Normal)
+    {
+        auto transform = make_shared<Transform>("Transform");
+        AddComponent(transform);
+    }
+    else if (type == TransformType::Rect)
+    {
+        auto rectTransform = make_shared<RectTransform>("RectTransform");
+        AddComponent(rectTransform);
+    }
 }
 
-Object::Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot)
-    : Object(name) // 위 기본 생성자 호출 후, Transform 초기값 세팅
+Object::Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
+    : Object(name, type)
 {
-    auto transform = GetComponent<Transform>("Transform");
-    if (transform)
+    // 타입에 따라 초기값 설정
+    if (type == TransformType::Normal)
     {
-        transform->SetPosition(initPos);
-        transform->SetScale(initScale);
-        transform->SetRotation(initRot);
+        auto transform = GetComponent<Transform>("Transform");
+        if (transform)
+        {
+            transform->SetPosition(initPos);
+            transform->SetScale(initScale);
+            transform->SetRotation(initRot);
+        }
+    }
+    else if (type == TransformType::Rect)
+    {
+        auto rectTransform = GetComponent<RectTransform>("RectTransform");
+        if (rectTransform)
+        {
+            rectTransform->SetPosition(initPos);
+            rectTransform->SetScale(initScale);
+            rectTransform->SetRotation(initRot);
+        }
     }
 }
 
 Object::Object(const Object& other)
-    : Object(other.name)
+    : Object(other.name, TransformType::Normal) // 복사 생성자 로직은 필요에 따라 수정
 {
-    // 복사 생성자 로직이 필요하면 작성
-    // 여기서는 간단히 name만 복사 예시
-    // 만약 컴포넌트를 복사해야 한다면
-    // (componets 맵을 돌며 clone 형태를 구현) 추가 작업이 필요
+    // 복사 생성자 구현 (필요 시 components 복사)
 }
 
 void Object::AddComponent(const shared_ptr<Component>& component)
@@ -45,12 +64,12 @@ void Object::RemoveComponent(const std::string& compName)
     components.erase(compName);
 }
 
-shared_ptr<Transform> Object::GetTransformComponent() const
+shared_ptr<Transform> Object::GetTransform() const
 {
     return GetComponent<Transform>("Transform");
 }
 
-shared_ptr<RectTransform> Object::GetRectTransformComponent() const
+shared_ptr<RectTransform> Object::GetRectTransform() const
 {
     return GetComponent<RectTransform>("RectTransform");
 }
@@ -125,6 +144,12 @@ float Object::GetRotation() const
 
     auto trans = GetComponent<Transform>("Transform");
     return trans ? trans->GetRotation() : 0.0f;
+}
+
+RECT Object::GetRect()
+{
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->GetRect();
 }
 
 void Object::Move(const Vector3& speed)

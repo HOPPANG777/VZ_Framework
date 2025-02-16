@@ -18,9 +18,9 @@ void Scene_01::Start()
 	testTyping = make_shared<TypingText>();
 	testShake = make_shared<ShakingText>();
 	
-	UIs.push_back(make_shared<UIElement>(0.01f, 0.01f, 0.5f, 0.5f));
-	UIs.push_back(make_shared<UIElement>(0.5f, 0.7f, 0.5f, 0.5f));
-	UIs.push_back(make_shared<UIElement>(0.5f, 0.2f, 0.5f, 0.5f));
+	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
+	testTypingObject = make_shared<Object>("TestTypingText", Vector3(0, -100, 0), Vector3(500, 100, 0), 0.0f, TransformType::Rect);
+	testShakeObject = make_shared<Object>("TestShakeText", Vector3(0, 200, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
 
 	SOUNDS->AddSound("BGM", SoundPath + L"bgm.wav", true);
 
@@ -35,6 +35,9 @@ void Scene_01::Destroy()
 	if (sceneName != nullptr) sceneName.reset();
 	if (testTyping != nullptr) testTyping.reset();
 	if (testShake != nullptr) testShake.reset();
+	if (sceneNameObject != nullptr) sceneNameObject.reset();
+	if (testTypingObject != nullptr) testTypingObject.reset();
+	if (testShakeObject != nullptr) testShakeObject.reset();
 	SOUNDS->RemoveSound("BGM");
 	
 }
@@ -72,9 +75,9 @@ void Scene_01::Render()
 
 void Scene_01::PostRender() 
 {
-	sceneName->RenderText(L"GeometryScene", UIs[0]->GetRect(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT), 25.0f);
-	testTyping->RenderText(L"안녕하세요 조승영입니다 이건 테스트입니다.", UIs[1]->GetRect(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT), 25.0f);
-	testShake->RenderText(L"그라라라라라라라라.", UIs[2]->GetRect(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT), 25.0f);
+	sceneName->RenderText(L"GeometryScene", sceneNameObject->GetRect(), 25.0f);
+	testTyping->RenderText(L"안녕하세요 조승영입니다 이건 테스트입니다.", testTypingObject->GetRect(), 25.0f);
+	testShake->RenderText(L"그라라라라라라라라.", testShakeObject->GetRect(), 25.0f);
 }
 
 void Scene_01::ImGUI() {}
