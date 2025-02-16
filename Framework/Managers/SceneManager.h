@@ -30,6 +30,7 @@ private:
     shared_ptr<Scene> currentScene;
     shared_ptr<Scene> nextScene;                         // 로드 중인 Scene
 
+
     shared_ptr<Scene> loadingScene;                      // 로딩 Scene
     bool isLoading = false;                              // 로딩 상태 플래그
     float loadingProgress = 0.0f;                        // 로딩 진행률
@@ -38,5 +39,6 @@ private:
     shared_ptr<Scene> splashScene;
     // “최초 실행인가?” 를 간단히 체크하기 위한 플래그
     bool isFirstLaunch = true;
+
 };
 
