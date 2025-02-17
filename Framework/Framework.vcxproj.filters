@@ -122,6 +122,9 @@
     <ClCompile Include="Components\RectTransform.cpp">
       <Filter>Components\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\TextureObject\Tile.cpp">
+      <Filter>Objects\TextureObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="Components\RectTransform.h">
       <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TextureObject\Tile.h">
+      <Filter>Objects\TextureObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

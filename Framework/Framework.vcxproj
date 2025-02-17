@@ -199,6 +199,7 @@
     <ClInclude Include="Struct\FontBrushDesc.h" />
     <ClInclude Include="Struct\FontTextDesc.h" />
     <ClInclude Include="Managers\CollisionManager.h" />
+    <ClInclude Include="Objects\TextureObject\Tile.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
     <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
@@ -255,6 +256,7 @@
     <ClCompile Include="Components\TypingText.cpp" />
     <ClCompile Include="Managers\CollisionManager.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
+    <ClCompile Include="Objects\TextureObject\Tile.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />
