@@ -5,11 +5,15 @@ void Scene_03::Awake() {}
 
 void Scene_03::Start()
 {
+	isLoaded = false;
+
 	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(352, 500, 0), 0.0f, TexturePath + L"Tree.png"));
 
 	sceneName = make_shared<Texts>();
 
 	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
+
+	isLoaded = true;
 }
 
 void Scene_03::Destroy()

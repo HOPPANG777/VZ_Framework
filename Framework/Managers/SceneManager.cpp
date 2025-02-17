@@ -74,8 +74,9 @@ void SceneManager::LoadScene(const string& sceneName)
 		}
 
 		// 로딩씬을 현재로 교체
-		currentScene = loadingScene;
+		currentScene = nextScene;
 		currentScene->Start();
+		loadingScene->Start();
 
 		// 로딩 플래그 켜고 진행률 초기화
 		isLoading = true;
@@ -163,15 +164,15 @@ void SceneManager::Update()
 
         // 로딩 진행률(예시)
         loadingProgress += 1.0f * DELTA;
-        if (loadingProgress >= 1.5f)
+        if (nextScene->IsLoaded())
         {
             // 로딩 끝났다고 가정
             // 로딩씬 -> nextScene 전환
             if (nextScene)
             {
-                currentScene->Destroy(); // 로딩씬 Destroy
-                currentScene = nextScene;
-                currentScene->Start();
+                loadingScene->Destroy(); // 로딩씬 Destroy
+                //currentScene = nextScene;
+                //currentScene->Start();
                 nextScene = nullptr;
             }
 

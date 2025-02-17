@@ -5,6 +5,8 @@ void Scene_01::Awake() {}
 
 void Scene_01::Start()
 {
+	isLoaded = false;
+
 	objects.push_back(make_shared<ColorFilledCircle>(CENTER + Vector3(-250, 0, 0), Vector3(100, 100, 0), 0.0f, 100, YELLOW));
 	objects.push_back(make_shared<ColorCircle>(CENTER + Vector3(-100, 0, 0), Vector3(100, 100, 0), 0.0f, 100, GREEN));
 	objects.push_back(make_shared<ColorLine>(CENTER + Vector3(150, 0, 0), 300.0f, 0.0f, BLUE));
@@ -25,6 +27,8 @@ void Scene_01::Start()
 	SOUNDS->AddSound("BGM", SoundPath + L"bgm.wav", true);
 
 	SOUNDS->Play("BGM", 0.2f);
+
+	isLoaded = true;
 }
 
 void Scene_01::Destroy()

@@ -7,7 +7,11 @@ void Scene_04::Awake()
 
 void Scene_04::Start()
 {
+	isLoaded = false;
+
 	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"TitleScreen.png"));
+
+	isLoaded = true;
 }
 
 void Scene_04::Destroy()

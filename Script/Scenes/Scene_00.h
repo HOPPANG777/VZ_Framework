@@ -20,6 +20,8 @@ public:
 
 	void ImGUI() override;
 
+	bool IsLoaded() const override { return true; }
+
 private:
 	vector<shared_ptr<Object>> objects;
 

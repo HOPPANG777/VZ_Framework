@@ -17,5 +17,7 @@ public:
 	virtual void PostRender() = 0;
 
 	virtual void ImGUI() = 0;
+
+	virtual bool IsLoaded() const = 0;
 };
 

@@ -11,6 +11,8 @@ void Scene_00::Start()
 	LoadingObject = make_shared<Object>("LoadingText", Vector3(510, 370, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
 
 	LoadingText = make_shared<Texts>();
+
+	CAMERA->Reset();
 }
 
 void Scene_00::Destroy()

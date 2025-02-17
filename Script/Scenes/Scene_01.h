@@ -18,6 +18,8 @@ public:
 
 	void ImGUI() override;
 
+	bool IsLoaded() const override { return isLoaded; }
+
 private:
 	vector<shared_ptr<Object>> objects;
 
@@ -32,4 +34,6 @@ private:
 	shared_ptr<ShakingText> testShake;
 
 	bool isColor = false;
+
+	bool isLoaded = false;
 };

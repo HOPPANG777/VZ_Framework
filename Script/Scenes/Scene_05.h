@@ -18,6 +18,8 @@ public:
 
     void ImGUI() override;
 
+    bool IsLoaded() const override { return isLoaded; }
+
 private:
     float timer = 0.0f;
     bool isDone = false;
@@ -27,6 +29,8 @@ private:
     //vector<shared_ptr<UIElement>> UIs;
 
     shared_ptr<Object> splash;
+
+    bool isLoaded = false;
 
 };
 

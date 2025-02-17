@@ -5,6 +5,8 @@ void Scene_02::Awake() {}
 
 void Scene_02::Start() 
 {
+    isLoaded = false;
+
     objects.push_back(make_shared<ColorCircle>(CENTER, Vector3(700, 700, 0), 0.0f, 100, BLUE));
 
     secondHand = make_shared<ColorLine>(CENTER, 345.0f, -90.0f, RED);
@@ -14,6 +16,8 @@ void Scene_02::Start()
     sceneName = make_shared<Texts>();
 
     sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
+
+    isLoaded = true;
 }
 
 void Scene_02::Destroy() 

@@ -18,9 +18,13 @@ public:
 	
 	void ImGUI() override;
 
+	bool IsLoaded() const override { return isLoaded; }
+
 private:
 	vector<shared_ptr<Object>> objects;
 
 	//vector<shared_ptr<UIElement>> UIs;
+
+	bool isLoaded = false;
 };
 

@@ -18,6 +18,8 @@ public:
 
 	void ImGUI() override;
 
+	bool IsLoaded() const override { return isLoaded; }
+
 private:
 	void Clock();
 
@@ -33,5 +35,7 @@ private:
 	shared_ptr<Object> secondHand;
 
 	bool isColor = false;
+
+	bool isLoaded = false;
 };
 
