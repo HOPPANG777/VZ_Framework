@@ -253,6 +253,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Objects/ColorObject/ColorLine.h"
 #include "Objects/TextureObject/TextureRect.h"
 #include "Objects/TextureObject/AnimationRect.h"
+#include "Objects/TextureObject/Tile.h"
 
 //Camera
 #include "Systems/Camera.h"
