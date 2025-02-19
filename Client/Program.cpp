@@ -15,9 +15,7 @@ Program::Program() {}
 
 Program::~Program() {}
 
-void Program::Awake() {}
-
-void Program::Start()
+void Program::Awake() 
 {
 	//´ÙÀÌ·ºÆ® ½Ì±ÛÅæ ¼¼ÆÃ
 	RenderStates::Init();
@@ -33,13 +31,18 @@ void Program::Start()
 		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
 		SCENE->AddScene("TitleScene", make_shared<Scene_04>());
 		SCENE->AddScene("SplashScene", make_shared<Scene_05>());
-		
+
 		SCENE->SetSplashScene("SplashScene");
 
 		SCENE->SetLoadingScene("LoadingScene");
 
 		SCENE->StartGame("GeometryScene");
 	}
+}
+
+void Program::Start()
+{
+	SCENE->Start();
 }
 
 void Program::Update()

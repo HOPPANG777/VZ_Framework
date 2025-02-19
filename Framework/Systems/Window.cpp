@@ -80,6 +80,7 @@ ATOM Window::MyRegisterClass(const WinDesc& desc)
 WPARAM Window::Run()
 {
 	program = make_unique<Program>();
+	program->Awake();
 	program->Start();
 
 	MSG msg = { 0 };

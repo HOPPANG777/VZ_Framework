@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "Scene_03.h"
 
-void Scene_03::Awake() {}
-
-void Scene_03::Start()
+void Scene_03::Awake() 
 {
 	isLoaded = false;
 
@@ -14,6 +12,11 @@ void Scene_03::Start()
 	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
 
 	isLoaded = true;
+}
+
+void Scene_03::Start()
+{
+
 }
 
 void Scene_03::Destroy()

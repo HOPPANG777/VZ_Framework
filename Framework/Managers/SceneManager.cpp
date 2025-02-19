@@ -58,7 +58,7 @@ void SceneManager::LoadScene(const string& sceneName)
 
 		// 바로 nextScene을 현재 씬으로
 		currentScene = nextScene;
-		currentScene->Start();
+		currentScene->Awake();
 		nextScene = nullptr;
 		return;
 	}
@@ -75,7 +75,7 @@ void SceneManager::LoadScene(const string& sceneName)
 
 		// 로딩씬을 현재로 교체
 		currentScene = nextScene;
-		currentScene->Start();
+		currentScene->Awake();
 		loadingScene->Start();
 
 		// 로딩 플래그 켜고 진행률 초기화
@@ -91,7 +91,7 @@ void SceneManager::LoadScene(const string& sceneName)
 			CAMERA->Reset();
 		}
 		currentScene = nextScene;
-		currentScene->Start();
+		currentScene->Awake();
 		nextScene = nullptr;
 	}
 }
@@ -149,10 +149,23 @@ void SceneManager::StartGame(const string& titleSceneName)
 
 	// 스플래시 씬을 현재 씬으로 교체
 	currentScene = splashScene;
-	currentScene->Start();
+	currentScene->Awake();
 
 	// “스플래시 -> 타이틀” 전환은 SplashScene 내부 로직(예: 일정 시간 후)에서
 	// SceneManager::LoadScene(titleSceneName)을 호출해 처리한다고 가정
+}
+
+void SceneManager::Start()
+{
+	if (isLoading == true)
+	{
+		if (loadingScene != nullptr) loadingScene->Start();
+		// 혹은 별도의 로딩 UI만 그릴 수도 있음
+	}
+	else
+	{
+		currentScene->Start();
+	}
 }
 
 void SceneManager::Update()
@@ -172,7 +185,7 @@ void SceneManager::Update()
             {
                 loadingScene->Destroy(); // 로딩씬 Destroy
                 //currentScene = nextScene;
-                //currentScene->Start();
+                currentScene->Start();
                 nextScene = nullptr;
             }
 

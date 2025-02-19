@@ -6,6 +6,8 @@ class SceneManager
 {
     DECLARE_SINGLETON(SceneManager);    
 public:
+    void Start();
+
     void Update();
 
     void Render();

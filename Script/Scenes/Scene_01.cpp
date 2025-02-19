@@ -1,9 +1,7 @@
 #include "stdafx.h"
 #include "Scene_01.h"
 
-void Scene_01::Awake() {}
-
-void Scene_01::Start()
+void Scene_01::Awake() 
 {
 	isLoaded = false;
 
@@ -14,21 +12,24 @@ void Scene_01::Start()
 
 	red->AddComponent(make_shared<MoveComponent>());
 
-	CAMERA->SetTarget(red.get());
-
 	sceneName = make_shared<Texts>();
 	testTyping = make_shared<TypingText>();
 	testShake = make_shared<ShakingText>();
-	
+
 	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
 	testTypingObject = make_shared<Object>("TestTypingText", Vector3(0, -100, 0), Vector3(500, 100, 0), 0.0f, TransformType::Rect);
 	testShakeObject = make_shared<Object>("TestShakeText", Vector3(0, 200, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
 
+	isLoaded = true;
+}
+
+void Scene_01::Start()
+{
 	SOUNDS->AddSound("BGM", SoundPath + L"bgm.wav", true);
 
 	SOUNDS->Play("BGM", 0.2f);
 
-	isLoaded = true;
+	CAMERA->SetTarget(red.get());
 }
 
 void Scene_01::Destroy()
