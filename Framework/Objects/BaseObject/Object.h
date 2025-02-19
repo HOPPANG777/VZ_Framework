@@ -60,7 +60,7 @@ public:
 	// Transform 컴포넌트에 대한 편의 함수들
 	Vector3 GetPosition() const;
 	Vector3 GetScale() const;
-	float   GetRotation() const;
+	float GetRotation() const;
 	RECT GetRect();
 
 public:

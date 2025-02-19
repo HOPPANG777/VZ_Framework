@@ -111,6 +111,7 @@ Button::Button(const Vector3& position, const Vector3& scale, const float rotati
 		colorBuffer = make_unique<ColorBuffer>();
 	}
 
+
 }
 
 Button::~Button()
@@ -120,6 +121,29 @@ Button::~Button()
 void Button::Update()
 {
     BASE::Update();
+
+	// 여기서 마우스 입력을 확인
+	if (IsMouseOver())
+	{
+		// 마우스가 버튼 영역 안에 있음
+		bool isPressed = MOUSE->Press(0); // 0: 왼쪽 버튼 (Press = 누르고 있는 중)
+		bool isDown = MOUSE->Down(0);  // Down = 이번 프레임에 새로 눌렸을 때
+
+		// 이전 프레임에는 눌린 적 없었는데 이번에 눌렸다면, 클릭 발생
+		if (!wasPressed && isDown)
+		{
+			// 콜백 등록되어 있으면 실행
+			if (onClick) onClick();
+		}
+
+		// 현재 상태를 갱신
+		wasPressed = isPressed;
+	}
+	else
+	{
+		// 버튼 영역 밖이면 누르는 상태 해제
+		wasPressed = false;
+	}
 }
 
 void Button::Render()
@@ -140,4 +164,23 @@ void Button::Render()
 
 	// 드로우 호출
 	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}
+
+bool Button::IsMouseOver()
+{
+	// Button이 속한 Object에 RectTransform이 있다고 가정
+	auto rectTrans = this->GetComponent<RectTransform>("RectTransform");
+	if (!rectTrans) return false;
+
+	// RectTransform에서 픽셀 좌표 RECT 가져오기
+	RECT rect = rectTrans->GetRect();
+
+	// 마우스 현재 위치
+	Vector3 mousePos = MOUSE->GetMousePos();
+	//  (오쏘그래픽 매트릭스나 기타 변환이 있다면 별도 보정 필요)
+
+	// RECT 내부 판정
+	bool inside = (mousePos.x >= rect.left && mousePos.x <= rect.right && mousePos.y >= rect.top && mousePos.y <= rect.bottom);
+
+	return inside;
 }

@@ -32,7 +32,7 @@ void Scene_03::Update()
 {
 	if (KEYBOARD->Down(VK_F1))
 	{
-		SCENE->LoadScene("GeometryScene");
+		SCENE->LoadScene("TitleScene");
 	}
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();

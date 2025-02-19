@@ -36,7 +36,7 @@ void Program::Awake()
 
 		SCENE->SetLoadingScene("LoadingScene");
 
-		SCENE->StartGame("GeometryScene");
+		SCENE->StartGame("TitleScene");
 	}
 }
 

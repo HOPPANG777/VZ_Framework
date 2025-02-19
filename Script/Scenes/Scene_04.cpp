@@ -9,14 +9,14 @@ void Scene_04::Awake()
 
 	startButtonText = make_shared<Texts>();
 
-	startButton = make_shared<Button>(Vector3(-50,-50,0), Vector3(200, 100, 0), 0.0f, TexturePath + L"WhiteImage.png");
+	startButton = make_shared<Button>(Vector3(10, 10, 0), Vector3(200, 100, 0), 0.0f, TexturePath + L"WhiteImage.png");
 
 	isLoaded = true;
 }
 
 void Scene_04::Start()
 {
-	
+	startButton->SetOnClick([this]() {SCENE->LoadScene("GeometryScene"); });
 }
 
 void Scene_04::Destroy()
@@ -55,7 +55,7 @@ void Scene_04::Render()
 
 void Scene_04::PostRender() 
 {
-	startButtonText->RenderText(L"StartButton", startButton->GetRect(), 25.0f, BLACK);
+	startButtonText->RenderText(L"StartButton", startButton->GetRect(), 50.0f, BLACK);
 }
 
 void Scene_04::ImGUI()

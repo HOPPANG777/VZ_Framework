@@ -59,6 +59,10 @@ void SceneManager::LoadScene(const string& sceneName)
 		// 바로 nextScene을 현재 씬으로
 		currentScene = nextScene;
 		currentScene->Awake();
+
+		// ★ 새 씬 바로 Start 해버린다!
+		currentScene->Start();
+
 		nextScene = nullptr;
 		return;
 	}
