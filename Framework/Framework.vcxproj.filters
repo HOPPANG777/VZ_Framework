@@ -29,9 +29,6 @@
     <ClCompile Include="Objects\BaseObject\Drawable.cpp">
       <Filter>Objects\BaseObject</Filter>
     </ClCompile>
-    <ClCompile Include="Components\MoveComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Renders\RenderResources\VertexType.cpp">
       <Filter>Renders\RenderResources</Filter>
     </ClCompile>
@@ -77,12 +74,6 @@
     <ClCompile Include="Renders\RenderResources\Texture2D.cpp">
       <Filter>Renders\RenderResources</Filter>
     </ClCompile>
-    <ClCompile Include="Managers\SceneManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Managers\ResourcesManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Objects\TextureObject\TextureRect.cpp">
       <Filter>Objects\TextureObject</Filter>
     </ClCompile>
@@ -94,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="Utilities\Gizmo.cpp">
       <Filter>Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Managers\CollisionManager.cpp">
-      <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Components\BoxCollider.cpp">
       <Filter>Components\Collider</Filter>
@@ -127,6 +115,18 @@
     </ClCompile>
     <ClCompile Include="Objects\TextureObject\Button.cpp">
       <Filter>Objects\TextureObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\MoveComponent.cpp">
+      <Filter>Components\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\CollisionManager.cpp">
+      <Filter>Managers\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\ResourcesManager.cpp">
+      <Filter>Managers\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\SceneManager.cpp">
+      <Filter>Managers\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,9 +160,6 @@
     </ClInclude>
     <ClInclude Include="Objects\BaseObject\Drawable.h">
       <Filter>Objects\BaseObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\MoveComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces\IObject.h">
       <Filter>Interfaces</Filter>
@@ -242,12 +239,6 @@
     <ClInclude Include="Utilities\targetver.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Managers\SceneManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Managers\ResourcesManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\TextureObject\TextureRect.h">
       <Filter>Objects\TextureObject</Filter>
     </ClInclude>
@@ -262,9 +253,6 @@
     </ClInclude>
     <ClInclude Include="Utilities\Gizmo.h">
       <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Managers\CollisionManager.h">
-      <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Components\Collider.h">
       <Filter>Components\Collider</Filter>
@@ -307,6 +295,18 @@
     </ClInclude>
     <ClInclude Include="Objects\TextureObject\Button.h">
       <Filter>Objects\TextureObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\MoveComponent.h">
+      <Filter>Components\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\CollisionManager.h">
+      <Filter>Managers\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\ResourcesManager.h">
+      <Filter>Managers\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\SceneManager.h">
+      <Filter>Managers\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -363,6 +363,21 @@
     </Filter>
     <Filter Include="Components\Transform">
       <UniqueIdentifier>{4a584632-058c-4569-b653-a71f4755202a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Move">
+      <UniqueIdentifier>{cd5809b4-9b4b-4bfa-9726-11085bd77a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Collision">
+      <UniqueIdentifier>{d9ab825b-4fb7-492f-897c-ddb83c11c0e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Resources">
+      <UniqueIdentifier>{316c953d-8650-4958-bbc8-e89bc006fbe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Scene">
+      <UniqueIdentifier>{dc0a6599-8872-4202-bf04-9949f9c81896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\SpriteObject">
+      <UniqueIdentifier>{011de93d-af6c-47a9-b54d-52ff4c6fe48c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
