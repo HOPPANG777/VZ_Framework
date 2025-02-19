@@ -14,11 +14,13 @@ protected:
 
 	wstring shaderPath = L"";
 
+	TransformType type;
+
 public:
-	Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, const wstring& shaderPath = L"");
+	Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const wstring& shaderPath = L"");
 	
 	Drawable(const Drawable& other)
-		: Drawable(other.name, other.GetPosition(), other.GetScale(), other.GetRotation(), other.shaderPath)
+		: Drawable(other.name, other.GetPosition(), other.GetScale(), other.GetRotation(), other.type, other.shaderPath)
 	{
 
 	}
@@ -28,6 +30,7 @@ public:
 		if (this != &other)
 		{
 			Object::operator=(other); // 상위 객체 복사
+			type = other.type;
 			shaderPath = other.shaderPath;
 			// 기타 리소스 복사
 		}

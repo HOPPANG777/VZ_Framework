@@ -3,7 +3,15 @@
 
 void Scene_05::Awake() 
 {
+
+}
+
+void Scene_05::Start()
+{
     isLoaded = false;
+
+    timer = 0.0f;
+    isDone = false;
 
     // 스플래시 씬 초기화
     objects.push_back(make_shared<ColorRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, BLACK));
@@ -12,13 +20,6 @@ void Scene_05::Awake()
     // 예) 로고 이미지 로드, 사운드 재생 등
 
     isLoaded = true;
-}
-
-void Scene_05::Start()
-{
-    timer = 0.0f;
-    isDone = false;
-
 }
 
 void Scene_05::Destroy()
@@ -41,7 +42,7 @@ void Scene_05::Update()
 
         rect->SetColor(Color(1.0f, 1.0f, 1.0f, timer));
 
-        if (timer >= 5.0f)
+        if (timer >= 2.0f)
         {
             isDone = true;
             // 스플래시 종료 후 타이틀 씬으로 이동

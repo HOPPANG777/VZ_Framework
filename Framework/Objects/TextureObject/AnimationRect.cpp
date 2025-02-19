@@ -2,7 +2,7 @@
 #include "AnimationRect.h"
 
 AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path)
-    : Drawable("AnimationRect", position, scale, rotation, ShaderPath + L"VertexTexture.hlsl")
+    : Drawable("AnimationRect", position, scale, rotation, TransformType::Normal, ShaderPath + L"VertexTexture.hlsl")
 {
     // Vertex ¼³Á¤
     {

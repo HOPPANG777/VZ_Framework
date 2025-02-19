@@ -3,7 +3,7 @@
 
 //, texture(std::make_shared<Texture2D>(path))
 TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path, const wstring shaderPath)
-	: Drawable("TextureRect", position, scale, rotation, shaderPath)
+	: Drawable("TextureRect", position, scale, rotation, TransformType::Normal, shaderPath)
 {
 	//vertices
 	{

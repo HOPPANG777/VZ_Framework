@@ -30,6 +30,10 @@ void Texts::RenderText(
         rectF,
         brush->brush.Get()
     );
+
+    // 텍스트 정렬 설정
+    textDesc->format->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+    textDesc->format->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 }
 
 void Texts::AttachToObject(Object* object, const Vector3& offset)

@@ -20,11 +20,13 @@ public:
 
 	void ImGUI() override;
 
-	bool IsLoaded() const override { return true; }
+	bool IsLoaded() const override { return isLoaded; }
 
 private:
 	vector<shared_ptr<Object>> objects;
 
 	shared_ptr<Object> LoadingObject;
 	shared_ptr<Texts> LoadingText;
+
+	bool isLoaded = false;
 };

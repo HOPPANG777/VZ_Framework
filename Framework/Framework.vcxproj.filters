@@ -125,6 +125,9 @@
     <ClCompile Include="Objects\TextureObject\Tile.cpp">
       <Filter>Objects\TextureObject</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\TextureObject\Button.cpp">
+      <Filter>Objects\TextureObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -300,6 +303,9 @@
       <Filter>Components\Transform</Filter>
     </ClInclude>
     <ClInclude Include="Objects\TextureObject\Tile.h">
+      <Filter>Objects\TextureObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TextureObject\Button.h">
       <Filter>Objects\TextureObject</Filter>
     </ClInclude>
   </ItemGroup>

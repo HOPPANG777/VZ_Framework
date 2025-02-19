@@ -186,6 +186,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Objects\TextureObject\Button.h" />
     <ClInclude Include="Components\Animator.h" />
     <ClInclude Include="Components\BoxCollider.h" />
     <ClInclude Include="Components\CircleCollider.h" />
@@ -247,6 +248,7 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Objects\TextureObject\Button.cpp" />
     <ClCompile Include="Components\Animator.cpp" />
     <ClCompile Include="Components\BoxCollider.cpp" />
     <ClCompile Include="Components\CircleCollider.cpp" />

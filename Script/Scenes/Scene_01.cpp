@@ -43,6 +43,7 @@ void Scene_01::Destroy()
 	if (sceneNameObject != nullptr) sceneNameObject.reset();
 	if (testTypingObject != nullptr) testTypingObject.reset();
 	if (testShakeObject != nullptr) testShakeObject.reset();
+	
 	SOUNDS->RemoveSound("BGM");
 	
 }
