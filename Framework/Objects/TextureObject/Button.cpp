@@ -110,8 +110,6 @@ Button::Button(const Vector3& position, const Vector3& scale, const float rotati
 	{
 		colorBuffer = make_unique<ColorBuffer>();
 	}
-
-
 }
 
 Button::~Button()
@@ -120,31 +118,53 @@ Button::~Button()
 
 void Button::Update()
 {
-    BASE::Update();
+	BASE::Update();
 
-	// 여기서 마우스 입력을 확인
-	if (IsMouseOver())
+	bool over = IsMouseOver();         // 버튼 영역 내에 마우스 존재 여부
+	bool pressedNow = MOUSE->Press(0);   // 현재 프레임에 버튼이 눌린 상태
+	bool downNow = MOUSE->Down(0);    // 이번 프레임에 새롭게 눌림
+	bool upNow = MOUSE->Up(0);        // 이번 프레임에 버튼을 뗀 상태
+
+	if (over)
 	{
-		// 마우스가 버튼 영역 안에 있음
-		bool isPressed = MOUSE->Press(0); // 0: 왼쪽 버튼 (Press = 누르고 있는 중)
-		bool isDown = MOUSE->Down(0);  // Down = 이번 프레임에 새로 눌렸을 때
-
-		// 이전 프레임에는 눌린 적 없었는데 이번에 눌렸다면, 클릭 발생
-		if (!wasPressed && isDown)
+		// 색상 효과: 버튼이 눌려있거나 단일 클릭 효과 시간이 남아 있다면 어둡게 표시
+		if (pressedNow || clickEffectTime > 0.0f)
 		{
-			// 콜백 등록되어 있으면 실행
-			if (onClick) onClick();
+			SetColor(Color(0.7f, 0.7f, 0.7f, 1.0f));
+		}
+		else
+		{
+			SetColor(Color(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
-		// 현재 상태를 갱신
-		wasPressed = isPressed;
+		// 마우스를 누르고 있는 동안
+		if (downNow)
+		{
+			clickEffectTime = 0.1f; // 단일 클릭 시 효과 (예: 0.1초)
+			wasPressed = true; // 눌렸다는 상태 저장
+		}
+
+		// 마우스를 눌렀다가 뗄 때 onClick 실행
+		if (upNow && wasPressed)
+		{
+			if (onClick) onClick();
+			wasPressed = false; // 눌림 상태 초기화
+		}
+
+		// onPress: 누르고 있는 동안 매 프레임 호출 (등록된 경우)
+		if (onPress && pressedNow) onPress();
 	}
 	else
 	{
-		// 버튼 영역 밖이면 누르는 상태 해제
-		wasPressed = false;
+		SetColor(Color(1.0f, 1.0f, 1.0f, 1.0f));
+		clickEffectTime = 0.0f;
+		wasPressed = false; // 영역을 벗어나면 초기화
 	}
+
+	// 타이머 업데이트: 만약 효과 시간이 남아 있다면 감소
+	if (clickEffectTime > 0.0f) clickEffectTime -= DELTA;
 }
+
 
 void Button::Render()
 {

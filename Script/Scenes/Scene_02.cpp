@@ -13,7 +13,7 @@ void Scene_02::Awake()
 
     sceneName = make_shared<Texts>();
 
-    sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
+    sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
 
     isLoaded = true;
 }

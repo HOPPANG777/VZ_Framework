@@ -62,6 +62,7 @@ public:
 	Vector3 GetScale() const;
 	float GetRotation() const;
 	RECT GetRect();
+	RECT GetCorrectedRect();
 
 public:
 	void Move(const Vector3& speed);

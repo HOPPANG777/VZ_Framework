@@ -152,6 +152,12 @@ RECT Object::GetRect()
     if (rectTrans) return rectTrans->GetRect();
 }
 
+RECT Object::GetCorrectedRect()
+{
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->GetCorrectedRect();
+}
+
 void Object::Move(const Vector3& speed)
 {
     // 상황에 따라 RectTransform이나 Transform을 선택적으로 업데이트할 수 있습니다.

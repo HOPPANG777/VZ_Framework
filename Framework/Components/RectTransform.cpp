@@ -37,39 +37,49 @@ float RectTransform::GetRotation() const
 RECT RectTransform::GetRect()
 {
     // 부모 사각형 (여기서는 전체 창 크기를 사용)
-    RECT parentRect = { 0, 0, gWinWidth, gWinHeight };
-    float parentWidth = (parentRect.right - parentRect.left);
+    RECT parentRect = { -(LONG)(gWinWidth * 0.5f), -(LONG)(gWinHeight * 0.5f), (LONG)(gWinWidth * 0.5f), (LONG)(gWinHeight * 0.5f) };
+    float parentWidth  = (parentRect.right  - parentRect.left);
     float parentHeight = (parentRect.bottom - parentRect.top);
 
+
     // 앵커와 오프셋을 이용하여 기본 사각형 계산
-    float anchorPosMinX = parentRect.left + anchorMin.x * parentWidth + offsetMin.x;
-    float anchorPosMinY = parentRect.top + anchorMin.y * parentHeight + offsetMin.y;
-    float anchorPosMaxX = parentRect.left + anchorMax.x * parentWidth + offsetMax.x;
-    float anchorPosMaxY = parentRect.top + anchorMax.y * parentHeight + offsetMax.y;
+    float anchorPosMinX = parentRect.left + anchorMin.x * parentWidth  + offsetMin.x;
+    float anchorPosMinY = parentRect.top  + anchorMin.y * parentHeight + offsetMin.y;
+    float anchorPosMaxX = parentRect.left + anchorMax.x * parentWidth  + offsetMax.x;
+    float anchorPosMaxY = parentRect.top  + anchorMax.y * parentHeight + offsetMax.y;
 
     // 기본 사각형의 중심 및 크기
     float anchoredCenterX = (anchorPosMinX + anchorPosMaxX) * 0.5f;
     float anchoredCenterY = (anchorPosMinY + anchorPosMaxY) * 0.5f;
-    float anchoredWidth = anchorPosMaxX - anchorPosMinX;
-    float anchoredHeight = anchorPosMaxY - anchorPosMinY;
+    float anchoredWidth   = anchorPosMaxX - anchorPosMinX;
+    float anchoredHeight  = anchorPosMaxY - anchorPosMinY;
 
     // 추가로 position 값을 더해 최종 중심 계산 (앵커 기준 오프셋)
     float finalCenterX = anchoredCenterX + position.x;
     float finalCenterY = anchoredCenterY + position.y;
 
     // 추가 scale을 기본 크기에 반영 (너비, 높이 변화량)
-    float finalWidth = anchoredWidth + scale.x;
+    float finalWidth  = anchoredWidth + scale.x;
     float finalHeight = anchoredHeight + scale.y;
 
     // 최종 중심과 크기를 이용해 RECT 계산 (중심 기준 좌표)
-    UINT left = (finalCenterX - finalWidth * 0.5f);
-    UINT top = (finalCenterY - finalHeight * 0.5f);
-    UINT right = (finalCenterX + finalWidth * 0.5f);
-    UINT bottom = (finalCenterY + finalHeight * 0.5f);
+    UINT left   = (UINT)(finalCenterX - finalWidth * 0.5f);
+    UINT right  = (UINT)(finalCenterX + finalWidth * 0.5f);
+    UINT top    = (UINT)(finalCenterY - finalHeight * 0.5f);
+    UINT bottom = (UINT)(finalCenterY + finalHeight * 0.5f);
 
     RECT rect = { left, top, right, bottom };
     return rect;
 }
+
+RECT RectTransform::GetCorrectedRect()
+{
+    // 1) (0,0)이 좌측 상단, Y 아래로 증가하는 GetRect()
+    RECT rect = GetRect();
+
+    return rect;
+}
+
 
 const Matrix& RectTransform::GetWorld() const
 {

@@ -33,6 +33,7 @@ public:
 
     // 화면 크기를 기준으로 UI 요소의 RECT 반환
     RECT GetRect();
+    RECT GetCorrectedRect();
 
 public:
     // Setter

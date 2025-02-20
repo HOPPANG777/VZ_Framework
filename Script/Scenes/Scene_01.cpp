@@ -16,9 +16,9 @@ void Scene_01::Awake()
 	testTyping = make_shared<TypingText>();
 	testShake = make_shared<ShakingText>();
 
-	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(-430, -255, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
-	testTypingObject = make_shared<Object>("TestTypingText", Vector3(0, -100, 0), Vector3(500, 100, 0), 0.0f, TransformType::Rect);
-	testShakeObject = make_shared<Object>("TestShakeText", Vector3(0, 200, 0), Vector3(300, 100, 0), 0.0f, TransformType::Rect);
+	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+	testTypingObject = make_shared<Object>("TestTypingText", Vector3(640, 200, 0), Vector3(500, 25, 0), 0.0f, TransformType::Rect);
+	testShakeObject = make_shared<Object>("TestShakeText", Vector3(640, 520, 0), Vector3(200, 25, 0), 0.0f, TransformType::Rect);
 
 	isLoaded = true;
 }

@@ -6,7 +6,8 @@ public:
     Texts(const string& name = "Texts") : Component(name) {}
     virtual ~Texts() = default;
 
-    virtual void RenderText(
+    virtual void RenderText
+    (
         const wstring& text,
         const RECT& rect,
         const float size = 25.0f,
@@ -21,7 +22,7 @@ public:
     virtual void Render() override {}
 
 public:
-    void AttachToObject(Object* object, const Vector3& offset = Values::ZeroVec3);
+    void AttachToObject(Object* object);
     void Detach();
 
 protected:
@@ -29,7 +30,8 @@ protected:
     vector<unique_ptr<FontTextDesc>> fontText;
 
     FontBrushDesc* GetOrCreateBrush(const Color& color);
-    FontTextDesc* GetOrCreateTextFormat(
+    FontTextDesc* GetOrCreateTextFormat
+    (
         const wstring& font,
         float size,
         const DWRITE_FONT_WEIGHT& weight,
@@ -42,4 +44,5 @@ protected:
 
 private:
     RECT CalculateRectFromObject(const RECT& rect);
+    RECT ConvertToWindowCoordinates(const RECT& rect, float screenHeight);
 };
