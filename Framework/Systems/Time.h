@@ -17,8 +17,7 @@ public:
 
 	void CheckTime() const
 	{
-		cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime
-			<< ", WorldTime : " << worldTime << '\n';
+		cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime << ", WorldTime : " << worldTime << '\n';
 	}
 
 	// UTC 시간 반환
