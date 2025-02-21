@@ -5,7 +5,7 @@ void Scene_03::Awake()
 {
 	isLoaded = false;
 
-	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(352, 500, 0), 0.0f, TexturePath + L"Tree.png"));
+	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(158, 416, 0), 0.0f, TexturePath + L"Mirko1.png"));
 
 	sceneName = make_shared<Texts>();
 
@@ -32,7 +32,7 @@ void Scene_03::Update()
 {
 	if (KEYBOARD->Down(VK_F1))
 	{
-		SCENE->LoadScene("TitleScene");
+		SCENE->LoadScene("GeometryScene");
 	}
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
