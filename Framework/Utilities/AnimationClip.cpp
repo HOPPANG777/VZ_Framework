@@ -1,7 +1,9 @@
 #include "Framework.h"
 #include "AnimationClip.h"
 
-AnimationClip::AnimationClip(const std::wstring& clipName,
+AnimationClip::AnimationClip
+    (
+    const std::wstring& clipName,
     Texture2D* srcTex,
     UINT columns,    // 가로 프레임 수
     UINT rows,       // 세로 프레임 수
@@ -10,10 +12,9 @@ AnimationClip::AnimationClip(const std::wstring& clipName,
     bool bReversed
     //float playRate
     )
-    : clipName(clipName),
-    // 전체 프레임 수 = columns * rows
-    frameCount(columns * rows),
-    bReversed(bReversed)//, playRate(playRate) // ★ 멤버에 저장
+    :   clipName(clipName),
+        frameCount(columns * rows),     // 전체 프레임 수 = columns * rows
+        bReversed(bReversed)            //, playRate(playRate) // ★ 멤버에 저장
 {
     srv = srcTex->GetSRV();
 

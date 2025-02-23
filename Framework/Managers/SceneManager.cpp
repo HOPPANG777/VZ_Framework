@@ -33,70 +33,27 @@ void SceneManager::LoadScene(const string& sceneName)
 		printf("Scene '%s' not found.\n", sceneName.c_str());
 		return;
 	}
-
-	// 이미 다른 로딩이 진행 중이면 무시할 수도 있고,
-	// 혹은 강제로 교체할 수도 있음(필요 로직에 맞게)
+	// 이미 로딩 중이면 무시
 	if (isLoading)
 		return;
 
-	// 먼저 “다음에 로드될 씬”을 설정
 	nextScene = it->second;
+	sceneChangeRequested = true;
 
-	// 만약 아직 ‘최초 실행 중’이라면, 로딩씬 없이 바로 씬 교체
-	// (즉, 스플래시 → 타이틀 전환 시점에는 로딩씬을 거치지 않게 하려고)
+	// 만약 최초 실행이면 바로 전환 (deferred 처리 없이)
 	if (isFirstLaunch)
 	{
-		// 첫 전환만 로딩씬 없이 전환하고,
-		// 그 다음부터는 로딩씬을 사용하도록 플래그를 꺼준다.
 		isFirstLaunch = false;
-
-		if (currentScene != nullptr)
+		if (currentScene)
 		{
 			currentScene->Destroy();
 			CAMERA->Reset();
 		}
-
-		// 바로 nextScene을 현재 씬으로
 		currentScene = nextScene;
 		currentScene->Awake();
-
-		// ★ 새 씬 바로 Start 해버린다!
 		currentScene->Start();
-
 		nextScene = nullptr;
-		return;
-	}
-
-	// 그 외(최초가 아닐 때)에는 로딩씬을 거치는 로직
-	if (loadingScene != nullptr)
-	{
-		// 현재 씬 정리
-		if (currentScene != nullptr)
-		{
-			currentScene->Destroy();
-			CAMERA->Reset();
-		}
-
-		// 로딩씬을 현재로 교체
-		currentScene = nextScene;
-		currentScene->Awake();
-		loadingScene->Start();
-
-		// 로딩 플래그 켜고 진행률 초기화
-		isLoading = true;
-		loadingProgress = 0.0f;
-	}
-	else
-	{
-		// 로딩씬이 없는 경우엔 그냥 즉시 전환
-		if (currentScene != nullptr)
-		{
-			currentScene->Destroy();
-			CAMERA->Reset();
-		}
-		currentScene = nextScene;
-		currentScene->Awake();
-		nextScene = nullptr;
+		sceneChangeRequested = false;
 	}
 }
 
@@ -159,6 +116,45 @@ void SceneManager::StartGame(const string& titleSceneName)
 	// SceneManager::LoadScene(titleSceneName)을 호출해 처리한다고 가정
 }
 
+void SceneManager::ProcessSceneChange()
+{
+	if (sceneChangeRequested && nextScene)
+	{
+		// 로딩씬이 존재하면 로딩씬을 거치는 로직
+		if (loadingScene != nullptr)
+		{
+			// 현재 씬 정리
+			if (currentScene != nullptr)
+			{
+				currentScene->Destroy();
+				CAMERA->Reset();
+			}
+
+			// nextScene을 현재 씬으로 설정하고, 로딩씬을 시작합니다.
+			currentScene = nextScene;
+			currentScene->Awake();
+			loadingScene->Start();
+
+			// 로딩 플래그를 활성화하고 진행률 초기화
+			isLoading = true;
+			loadingProgress = 0.0f;
+		}
+		else
+		{
+			// 로딩씬이 없는 경우엔 즉시 전환
+			if (currentScene != nullptr)
+			{
+				currentScene->Destroy();
+				CAMERA->Reset();
+			}
+			currentScene = nextScene;
+			currentScene->Awake();
+			nextScene = nullptr;
+		}
+		sceneChangeRequested = false;
+	}
+}
+
 void SceneManager::Start()
 {
 	if (isLoading == true)
@@ -180,7 +176,6 @@ void SceneManager::Update()
         if (loadingScene) loadingScene->Update();
 
         // 로딩 진행률(예시)
-        loadingProgress += 1.0f * DELTA;
         if (nextScene->IsLoaded())
         {
             // 로딩 끝났다고 가정
@@ -206,6 +201,9 @@ void SceneManager::Update()
             currentScene->LateUpdate();
         }
     }
+
+	// deferred 씬 전환 처리
+	ProcessSceneChange();
 }
 
 void SceneManager::Render()

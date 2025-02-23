@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Editor\MapTools.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
     <ClCompile Include="Scenes\Scene_01.cpp" />
@@ -34,6 +35,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Editor\EditorList.h" />
+    <ClInclude Include="Editor\MapTools.h" />
     <ClInclude Include="Object\JumpHoppang.h" />
     <ClInclude Include="Scenes\SceneList.h" />
     <ClInclude Include="Scenes\Scene_00.h" />

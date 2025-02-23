@@ -60,7 +60,8 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
 
     // SRV 로드 (애니메이션 아틀라스를 통째로)
     {
-        HRESULT hr = D3DX11CreateShaderResourceViewFromFile(
+        HRESULT hr = D3DX11CreateShaderResourceViewFromFile
+        (
             DEVICE,
             path.c_str(),
             nullptr,
@@ -110,38 +111,38 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
     }
 
     #pragma region OldTestClip
-//// AnimationClip 생성
-//{
-//    // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
-//    shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
-
-//    // 예: 아래 두 클립을 만든다고 가정
-//    auto RunD = std::make_shared<AnimationClip>(
-//        L"RunD",
-//        srcTex.get(),
-//        4,
-//        1,
-//        Values::ZeroVec2, // (0,0)에서 시작
-//        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
-//    );
-
-//    auto RunL = std::make_shared<AnimationClip>(
-//        L"RunL",
-//        srcTex.get(),
-//        4,
-//        1,
-//        Vector2(0, srcTex->GetHeight() * 0.125f * 2),
-//        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
-//    );
-
-//    // Animator에 추가
-//    animator->AddAnimClip(RunD);
-//    animator->AddAnimClip(RunL);
-
-//    // 현재 재생할 기본 클립
-//    animator->SetCurrentAnimClip(L"RunL");
-//}
-#pragma endregion
+    //// AnimationClip 생성
+    //{
+    //    // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
+    //    shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
+    
+    //    // 예: 아래 두 클립을 만든다고 가정
+    //    auto RunD = std::make_shared<AnimationClip>(
+    //        L"RunD",
+    //        srcTex.get(),
+    //        4,
+    //        1,
+    //        Values::ZeroVec2, // (0,0)에서 시작
+    //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
+    //    );
+    
+    //    auto RunL = std::make_shared<AnimationClip>(
+    //        L"RunL",
+    //        srcTex.get(),
+    //        4,
+    //        1,
+    //        Vector2(0, srcTex->GetHeight() * 0.125f * 2),
+    //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
+    //    );
+    
+    //    // Animator에 추가
+    //    animator->AddAnimClip(RunD);
+    //    animator->AddAnimClip(RunL);
+    
+    //    // 현재 재생할 기본 클립
+    //    animator->SetCurrentAnimClip(L"RunL");
+    //}
+    #pragma endregion
 }
 
 AnimationRect::~AnimationRect()
@@ -151,16 +152,16 @@ AnimationRect::~AnimationRect()
 void AnimationRect::Update()
 {
     #pragma region OldTestClipControll
-//// 키 입력에 따라 클립 교체
-//if (Keyboard::Get()->Press('A'))
-//{
-//    animator->SetCurrentAnimClip(L"RunL");
-//}
-//else if (Keyboard::Get()->Press('S'))
-//{
-//    animator->SetCurrentAnimClip(L"RunD");
-//}
-#pragma endregion
+    //// 키 입력에 따라 클립 교체
+    //if (Keyboard::Get()->Press('A'))
+    //{
+    //    animator->SetCurrentAnimClip(L"RunL");
+    //}
+    //else if (Keyboard::Get()->Press('S'))
+    //{
+    //    animator->SetCurrentAnimClip(L"RunD");
+    //}
+    #pragma endregion
 
      // 1) Animator 가져오기 & 애니메이션 Update
     auto animator = GetComponent<Animator>("Animator");

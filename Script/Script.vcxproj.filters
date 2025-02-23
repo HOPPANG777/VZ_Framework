@@ -23,6 +23,9 @@
     <ClCompile Include="Scenes\Scene_05.cpp">
       <Filter>Scenes\Scene_05_SplashScene</Filter>
     </ClCompile>
+    <ClCompile Include="Editor\MapTools.cpp">
+      <Filter>Editor\MapTools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -49,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="Scenes\Scene_05.h">
       <Filter>Scenes\Scene_05_SplashScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\MapTools.h">
+      <Filter>Editor\MapTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\EditorList.h">
+      <Filter>Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +87,12 @@
     </Filter>
     <Filter Include="Scenes\Scene_05_SplashScene">
       <UniqueIdentifier>{fdd4b912-d43c-4c09-91bf-7c3cf9f0f000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{2b37ce3c-753d-4db3-88c9-f6e93fb22489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\MapTools">
+      <UniqueIdentifier>{68539ec6-144b-4742-ab0e-91dc3f19d26c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

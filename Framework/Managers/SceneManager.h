@@ -28,6 +28,10 @@ public:
     void StartGame(const string& titleSceneName);
 
 private:
+    // 안전한 씬 전환을 처리하는 내부 함수
+    void ProcessSceneChange();
+
+private:
     unordered_map<string, shared_ptr<Scene>> sceneList;
     shared_ptr<Scene> currentScene;
     shared_ptr<Scene> nextScene;                         // 로드 중인 Scene
@@ -41,6 +45,8 @@ private:
     shared_ptr<Scene> splashScene;
     // “최초 실행인가?” 를 간단히 체크하기 위한 플래그
     bool isFirstLaunch = true;
+
+    bool sceneChangeRequested = false;
 
 };
 

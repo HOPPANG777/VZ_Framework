@@ -186,21 +186,23 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Objects\TextureObject\Button.h" />
+    <ClInclude Include="Components\Button.h" />
     <ClInclude Include="Components\Animator.h" />
     <ClInclude Include="Components\BoxCollider.h" />
     <ClInclude Include="Components\CircleCollider.h" />
     <ClInclude Include="Components\Collider.h" />
+    <ClInclude Include="Interfaces\IColorable.h" />
     <ClInclude Include="Components\Texts.h" />
     <ClInclude Include="Components\ShakingText.h" />
     <ClInclude Include="Components\Transform.h" />
     <ClInclude Include="Components\TypingText.h" />
     <ClInclude Include="Components\RectTransform.h" />
+    <ClInclude Include="Objects\SpriteObject\Sprite.h" />
     <ClInclude Include="Struct\LoadingStatus.h" />
     <ClInclude Include="Struct\FontBrushDesc.h" />
     <ClInclude Include="Struct\FontTextDesc.h" />
     <ClInclude Include="Managers\CollisionManager.h" />
-    <ClInclude Include="Objects\TextureObject\Tile.h" />
+    <ClInclude Include="Objects\TileObject\Tile.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
     <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
@@ -248,7 +250,7 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Objects\TextureObject\Button.cpp" />
+    <ClCompile Include="Components\Button.cpp" />
     <ClCompile Include="Components\Animator.cpp" />
     <ClCompile Include="Components\BoxCollider.cpp" />
     <ClCompile Include="Components\CircleCollider.cpp" />
@@ -258,7 +260,8 @@
     <ClCompile Include="Components\TypingText.cpp" />
     <ClCompile Include="Managers\CollisionManager.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
-    <ClCompile Include="Objects\TextureObject\Tile.cpp" />
+    <ClCompile Include="Objects\TileObject\Tile.cpp" />
+    <ClCompile Include="Objects\SpriteObject\Sprite.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />

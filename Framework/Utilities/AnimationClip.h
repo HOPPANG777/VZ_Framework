@@ -9,7 +9,9 @@ public:
 
     // AnimationClip 생성자
     // SRV는 Texture2D로부터 얻어오고, 계산된 UV 프레임들을 저장
-    AnimationClip(const wstring& clipName,
+    AnimationClip
+    (
+        const wstring& clipName,
         Texture2D* srcTex,
         UINT columns,    // 가로 프레임 수
         UINT rows,       // 세로 프레임 수

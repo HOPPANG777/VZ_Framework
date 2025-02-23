@@ -9,16 +9,16 @@ void Scene_04::Awake()
 
 	startButtonText = make_shared<Texts>();
 
-	startButton = make_shared<Button>(Vector3(1135, 300, 0), Vector3(150, 50, 0), 0.0f, TexturePath + L"WhiteImage.png");
-
-	//startButtonText->AttachToObject(startButton.get());
+	startButton = make_shared<TextureRect>(Vector3(1135, 300, 0), Vector3(150, 50, 0), 0.0f, TexturePath + L"WhiteImage.png", TransformType::Rect);
 
 	isLoaded = true;
 }
 
 void Scene_04::Start()
 {
-	startButton->SetOnClick([this]() { SCENE->LoadScene("GeometryScene"); });
+	auto startButtonComp = make_shared<Button>();
+	startButtonComp->SetOnClick([this]() { SCENE->LoadScene("GeometryScene"); });
+	startButton->AddComponent(startButtonComp);
 }
 
 void Scene_04::Destroy()

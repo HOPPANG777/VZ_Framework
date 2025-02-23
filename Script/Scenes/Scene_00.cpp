@@ -10,7 +10,7 @@ void Scene_00::Start()
 	objects.push_back(make_shared<ColorRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, BLACK));
 	objects.push_back(make_shared<JumpHoppang>(Vector3(WIN_DEFAULT_WIDTH * 0.93f, WIN_DEFAULT_HEIGHT * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"LoadingIcon.png"));
 
-	LoadingObject = make_shared<Object>("LoadingText", Vector3(1050, 670, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+	LoadingObject = make_shared<Object>("LoadingText", Vector3(1020, 70, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
 
 	LoadingText = make_shared<Texts>();
 

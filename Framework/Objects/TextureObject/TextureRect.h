@@ -1,6 +1,6 @@
 	#pragma once
 
-	class TextureRect : public Drawable
+	class TextureRect : public Drawable, public IColorable
 	{
 	private:
 		vector<VertexTexture> vertices;
@@ -17,11 +17,9 @@
 
 		// 컬러 변환을 위한 상수 버퍼 (ColorBuffer)
 		unique_ptr<ColorBuffer> colorBuffer;
-			
-		//std::shared_ptr<Texture2D> texture;
 
 	public:
-		TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path = L"", const wstring shaderPath = ShaderPath + L"VertexTexture.hlsl");
+		TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path = L"", const TransformType type = TransformType::Normal, const wstring shaderPath = ShaderPath + L"VertexTexture.hlsl");
 		~TextureRect();
 
 	public:
@@ -47,9 +45,9 @@
 		}
 
 	public:
-		Color GetColor() const { return colorBuffer->GetColor();; }
+		virtual Color GetColor() const override { return colorBuffer->GetColor();; }
 
-		void SetColor(const Color& color)
+		virtual void SetColor(const Color& color) override
 		{
 			colorBuffer->SetColor(color);
 			// 별도로 정점 버퍼의 데이터를 변경할 필요는 없습니다.

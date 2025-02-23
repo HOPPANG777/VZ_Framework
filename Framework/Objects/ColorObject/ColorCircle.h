@@ -1,7 +1,7 @@
 #pragma once
 
 
-class ColorCircle : public Drawable
+class ColorCircle : public Drawable, public IColorable
 {
 private:
 	vector<VertexColor> vertices;
@@ -17,12 +17,12 @@ public:
 	~ColorCircle();
 
 public:
-	void Update()override;
-	void Render()override;
+	void Update() override;
+	void Render() override;
 
 public:
-	Color GetColor() const { return color; }
-	void SetColor(const Color& color)
+	virtual Color GetColor() const override { return color; }
+	virtual void SetColor(const Color& color) override
 	{
 		this->color = color;
 		D3D11_MAPPED_SUBRESOURCE mappedSubResource;

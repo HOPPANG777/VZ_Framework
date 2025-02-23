@@ -110,12 +110,6 @@
     <ClCompile Include="Components\RectTransform.cpp">
       <Filter>Components\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\TextureObject\Tile.cpp">
-      <Filter>Objects\TextureObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\TextureObject\Button.cpp">
-      <Filter>Objects\TextureObject</Filter>
-    </ClCompile>
     <ClCompile Include="Components\MoveComponent.cpp">
       <Filter>Components\Move</Filter>
     </ClCompile>
@@ -127,6 +121,15 @@
     </ClCompile>
     <ClCompile Include="Managers\SceneManager.cpp">
       <Filter>Managers\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Button.cpp">
+      <Filter>Components\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\TileObject\Tile.cpp">
+      <Filter>Objects\TileObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\SpriteObject\Sprite.cpp">
+      <Filter>Objects\SpriteObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,12 +293,6 @@
     <ClInclude Include="Components\RectTransform.h">
       <Filter>Components\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\TextureObject\Tile.h">
-      <Filter>Objects\TextureObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\TextureObject\Button.h">
-      <Filter>Objects\TextureObject</Filter>
-    </ClInclude>
     <ClInclude Include="Components\MoveComponent.h">
       <Filter>Components\Move</Filter>
     </ClInclude>
@@ -307,6 +304,18 @@
     </ClInclude>
     <ClInclude Include="Managers\SceneManager.h">
       <Filter>Managers\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Button.h">
+      <Filter>Components\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IColorable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TileObject\Tile.h">
+      <Filter>Objects\TileObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\SpriteObject\Sprite.h">
+      <Filter>Objects\SpriteObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -378,6 +387,12 @@
     </Filter>
     <Filter Include="Objects\SpriteObject">
       <UniqueIdentifier>{011de93d-af6c-47a9-b54d-52ff4c6fe48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Button">
+      <UniqueIdentifier>{b93bb33f-4111-4931-ab11-f54fdfca6667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\TileObject">
+      <UniqueIdentifier>{e156996b-d8e5-49fd-9604-85e162072cb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

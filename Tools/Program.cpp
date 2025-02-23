@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Program.h"
-#include "Script/Scenes/SceneList.h"
+#include "Script/Editor/EditorList.h"
 
 #include "Systems/Window.h"
 
@@ -25,18 +25,9 @@ void Program::Awake()
 
 	//Scene 세팅
 	{
-		SCENE->AddScene("LoadingScene", make_shared<Scene_00>());
-		SCENE->AddScene("GeometryScene", make_shared<Scene_01>());
-		SCENE->AddScene("ClockScene", make_shared<Scene_02>());
-		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
-		SCENE->AddScene("TitleScene", make_shared<Scene_04>());
-		SCENE->AddScene("SplashScene", make_shared<Scene_05>());
+		SCENE->AddScene("MapTools", make_shared<MapTools>());
 
-		SCENE->SetSplashScene("SplashScene");
-
-		SCENE->SetLoadingScene("LoadingScene");
-
-		SCENE->StartGame("TitleScene");
+		SCENE->LoadScene("MapTools");
 	}
 }
 
@@ -50,29 +41,6 @@ void Program::Update()
 	CAMERA->Update();
 
 	SCENE->Update();
-
-	if (KEYBOARD->Down(VK_F2))
-	{
-		COLLISION->RenderDebug();
-	}
-
-	if (KEYBOARD->Down(VK_F3))
-	{
-		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
-		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
-	}
-
-	if (KEYBOARD->Down(VK_F5))
-	{
-		if (TIME->GetTimeScale() != 0)
-		{
-			TIME->SetTimeScale(0);
-		}
-		else
-		{
-			TIME->SetTimeScale(1);
-		}
-	}
 }
 
 void Program::Render()
@@ -101,12 +69,12 @@ int APIENTRY wWinMain
 )
 {
 	WinDesc desc;
-	desc.appName = L"VZ_Framework";	// 창 이름
+	desc.appName = L"Tools";	// 창 이름
 	desc.instance = hInstance;	
 	desc.handle = nullptr;
 	desc.width = gWinWidth;
 	desc.height = gWinHeight;
-	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
+	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_Tools));
 
 	auto window = make_unique<Window>(desc);
 	WPARAM wParam = window->Run();

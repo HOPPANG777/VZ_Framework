@@ -14,7 +14,7 @@ enum class AnimState
 };
 
 // Drawable을 상속해 실제 그리는 Rect
-class AnimationRect : public Drawable
+class AnimationRect : public Drawable, public IColorable
 {
 private:
     AnimState animState = AnimState::ANIMATION_LEFT;
@@ -36,10 +36,7 @@ private:
     unique_ptr<ColorBuffer> colorBuffer;
 
 public:
-    AnimationRect(const Vector3& position,
-        const Vector3& scale,
-        float rotation,
-        const std::wstring path = L"");
+    AnimationRect(const Vector3& position, const Vector3& scale, float rotation, const std::wstring path = L"");
     virtual ~AnimationRect();
 
 public:
@@ -53,7 +50,8 @@ public:
     // 외부에서 이미지 교체
     void SetImage(const std::wstring& imagePath)
     {
-        HRESULT hr = D3DX11CreateShaderResourceViewFromFile(
+        HRESULT hr = D3DX11CreateShaderResourceViewFromFile
+        (
             DEVICE,
             imagePath.c_str(),
             nullptr,
@@ -65,9 +63,9 @@ public:
     }
 
 public:
-    Color GetColor() const { return colorBuffer->GetColor();; }
+    virtual Color GetColor() const override { return colorBuffer->GetColor();; }
 
-    void SetColor(const Color& color)
+    virtual void SetColor(const Color& color) override
     {
         colorBuffer->SetColor(color);
         // 별도로 정점 버퍼의 데이터를 변경할 필요는 없습니다.

@@ -25,7 +25,7 @@ private:
 
 	//vector<shared_ptr<UIElement>> UIs;
 
-	shared_ptr<Button> startButton;
+	shared_ptr<Object> startButton;
 
 	shared_ptr<Texts> startButtonText;
 

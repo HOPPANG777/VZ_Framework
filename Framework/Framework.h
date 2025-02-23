@@ -189,6 +189,7 @@ const string TilePath = "_Data/_TileData/";
 //Interface
 #include "Interfaces/IObject.h"
 #include "Interfaces/IScene.h"
+#include "Interfaces/IColorable.h"
 
 //Struct
 #include "Struct/UIElement.h"
@@ -205,7 +206,6 @@ const string TilePath = "_Data/_TileData/";
 #include "Utilities/Gui.h"
 
 //Utilities
-//#include "Utilities/Animator.h"
 #include "Utilities/DirectHelper.h"
 #include "Utilities/HelpMe.h"
 #include "Utilities/Random.h"
@@ -242,10 +242,10 @@ const string TilePath = "_Data/_TileData/";
 #include "Components/Transform.h"
 #include "Components/Animator.h"
 #include "Components/RectTransform.h"
+#include "Components/Button.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"
-//#include "Objects/BaseObject/RectObject.h"
 #include "Objects/BaseObject/Drawable.h"
 #include "Objects/ColorObject/ColorRect.h"
 #include "Objects/ColorObject/ColorCircle.h"
@@ -253,8 +253,8 @@ const string TilePath = "_Data/_TileData/";
 #include "Objects/ColorObject/ColorLine.h"
 #include "Objects/TextureObject/TextureRect.h"
 #include "Objects/TextureObject/AnimationRect.h"
-#include "Objects/TextureObject/Tile.h"
-#include "Objects/TextureObject/Button.h"
+#include "Objects/TileObject/Tile.h"
+#include "Objects/SpriteObject/Sprite.h"
 
 //Camera
 #include "Systems/Camera.h"
