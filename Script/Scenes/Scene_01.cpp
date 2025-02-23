@@ -20,6 +20,10 @@ void Scene_01::Awake()
 	testTypingObject = make_shared<Object>("TestTypingText", Vector3(640, 200, 0), Vector3(500, 25, 0), 0.0f, TransformType::Rect);
 	testShakeObject = make_shared<Object>("TestShakeText", Vector3(640, 520, 0), Vector3(200, 25, 0), 0.0f, TransformType::Rect);
 
+	sceneNameObject->AddComponent(sceneName);
+	testTypingObject->AddComponent(testTyping);
+	testShakeObject->AddComponent(testShake);
+
 	isLoaded = true;
 }
 
@@ -35,7 +39,7 @@ void Scene_01::Start()
 void Scene_01::Destroy()
 {
 	for (auto& obj : objects) if (obj != nullptr) obj.reset();
-	//for (auto& uis : UIs) if (uis != nullptr) uis.reset();
+
 	if (red != nullptr) red.reset();
 	if (sceneName != nullptr) sceneName.reset();
 	if (testTyping != nullptr) testTyping.reset();
@@ -45,7 +49,6 @@ void Scene_01::Destroy()
 	if (testShakeObject != nullptr) testShakeObject.reset();
 	
 	SOUNDS->RemoveSound("BGM");
-	
 }
 
 void Scene_01::FixedUpdate() {}

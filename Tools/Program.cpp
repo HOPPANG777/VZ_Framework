@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Program.h"
-#include "Script/Editor/EditorList.h"
+#include "Editor/EditorList.h"
 
 #include "Systems/Window.h"
 

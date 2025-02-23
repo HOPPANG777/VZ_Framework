@@ -25,6 +25,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcx
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tools", "Tools\Tools.vcxproj", "{8C80B893-3C8C-4BCD-B762-8F210141FAB2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10003D09-6081-4E10-AA38-E5C41A7B4263} = {10003D09-6081-4E10-AA38-E5C41A7B4263}
+		{3C26F10E-6EF1-4A45-A635-4D82FFA32B18} = {3C26F10E-6EF1-4A45-A635-4D82FFA32B18}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

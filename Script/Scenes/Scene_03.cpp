@@ -5,11 +5,12 @@ void Scene_03::Awake()
 {
 	isLoaded = false;
 
-	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(158, 416, 0), 0.0f, TexturePath + L"Mirko1.png"));
-
-	sceneName = make_shared<Texts>();
+	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(237, 624, 0), 0.0f, TexturePath + L"Mirko1.png"));
 
 	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+	
+	sceneName = make_shared<Texts>();
+	sceneNameObject->AddComponent(sceneName);
 
 	isLoaded = true;
 }
@@ -36,6 +37,7 @@ void Scene_03::Update()
 	}
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
+	if (sceneNameObject != nullptr) sceneNameObject->Update();
 }
 
 void Scene_03::LateUpdate() {}
@@ -43,6 +45,7 @@ void Scene_03::LateUpdate() {}
 void Scene_03::Render()
 {
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
+	if (sceneNameObject != nullptr) sceneNameObject->Render();
 }
 
 void Scene_03::PostRender() 

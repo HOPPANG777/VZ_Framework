@@ -3,6 +3,9 @@
 
 void MapTools::Awake()
 {
+	isLoaded = false;
+
+	isLoaded = true;
 }
 
 void MapTools::Start()
@@ -34,18 +37,5 @@ void MapTools::PostRender()
 }
 
 void MapTools::ImGUI()
-{
-}
-
-bool MapTools::IsLoaded() const
-{
-	return false;
-}
-
-void MapTools::SaveMap()
-{
-}
-
-void MapTools::LoadMap()
 {
 }

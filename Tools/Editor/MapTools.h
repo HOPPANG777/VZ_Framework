@@ -18,14 +18,15 @@ public:
 
 	void ImGUI() override;
 
-	bool IsLoaded() const override;
+	bool IsLoaded() const override { return isLoaded; }
+
+public:
+
+
+private:
+	bool isLoaded = false;
 
 private:
 
-
-private:
-	// Helper ÇÔ¼ö
-	void SaveMap();
-	void LoadMap();
 
 };
