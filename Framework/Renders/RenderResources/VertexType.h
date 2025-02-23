@@ -33,5 +33,23 @@ struct VertexTexture
 	static vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
 };
 
+struct VertexTile
+{
+	Vector3 position;
+	Vector2 uv;
+	Vector2 uv2;
+	Color color;
+	UINT index;
+	
+	VertexTile() = default;
+	VertexTile(Vector3 position, Vector2 uv, Vector2 uv2, Color color, UINT index)
+		: position(position), uv(uv), uv2(uv2), color(color), index(index)
+	{
+
+	}
+
+	static vector<D3D11_INPUT_ELEMENT_DESC> isDescs;
+};
+
 
 
