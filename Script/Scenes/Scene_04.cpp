@@ -7,9 +7,8 @@ void Scene_04::Awake()
 
 	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"TitleScreen.png"));
 
-	startButtonText = make_shared<Texts>();
-
 	startButton = make_shared<TextureRect>(Vector3(1135, 300, 0), Vector3(150, 50, 0), 0.0f, TexturePath + L"WhiteImage.png", TransformType::Rect);
+	startButton->AddComponent(make_shared<Texts>());
 
 	isLoaded = true;
 }
@@ -24,7 +23,6 @@ void Scene_04::Start()
 void Scene_04::Destroy()
 {
 	for (auto& obj : objects) if (obj != nullptr) obj.reset();
-	if (startButtonText != nullptr) startButtonText.reset();
 	if (startButton != nullptr) startButton.reset();
 }
 
@@ -57,7 +55,7 @@ void Scene_04::Render()
 
 void Scene_04::PostRender() 
 {
-	startButtonText->RenderText(L"Start", startButton->GetRect(), 37.0f, BLACK);
+	startButton->GetComponent<Texts>("Texts")->RenderText(L"Start", startButton->GetRect(), 37.0f, BLACK);
 }
 
 void Scene_04::ImGUI()

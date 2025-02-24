@@ -3,7 +3,7 @@
 class ShakingText : public Texts
 {
 public:
-    ShakingText(const string& name = "ShakingEffect", float intensity = 2.0f)
+    ShakingText(const string& name = "ShakingText", float intensity = 2.0f)
         : Texts(name), intensity(intensity) {
     }
 

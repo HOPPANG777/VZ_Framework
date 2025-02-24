@@ -226,10 +226,6 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="HOPPANG.ico" />
-    <Image Include="SMALLPPANG.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Tools.rc" />
   </ItemGroup>
   <ItemGroup>

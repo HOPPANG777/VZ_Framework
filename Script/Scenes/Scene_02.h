@@ -28,8 +28,6 @@ private:
 
 	shared_ptr<Object> sceneNameObject;
 
-	shared_ptr<Texts> sceneName;
-
 	shared_ptr<Object> hourHand;
 	shared_ptr<Object> minuteHand;
 	shared_ptr<Object> secondHand;

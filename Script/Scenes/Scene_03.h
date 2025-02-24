@@ -25,8 +25,6 @@ private:
 
 	shared_ptr<Object> sceneNameObject;
 
-	shared_ptr<Texts> sceneName;
-
 	bool isLoaded = false;
 };
 

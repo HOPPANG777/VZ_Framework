@@ -29,10 +29,6 @@ private:
 	shared_ptr<Object> testTypingObject;
 	shared_ptr<Object> testShakeObject;
 
-	shared_ptr<Texts> sceneName;
-	shared_ptr<TypingText> testTyping;
-	shared_ptr<ShakingText> testShake;
-
 	bool isColor = false;
 
 	bool isLoaded = false;

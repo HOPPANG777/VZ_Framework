@@ -25,8 +25,7 @@ public:
 private:
 	vector<shared_ptr<Object>> objects;
 
-	shared_ptr<Object> LoadingObject;
-	shared_ptr<Texts> LoadingText;
+	shared_ptr<Object> LoadingTextObject;
 
 	bool isLoaded = false;
 };

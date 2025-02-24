@@ -23,11 +23,7 @@ public:
 private:
 	vector<shared_ptr<Object>> objects;
 
-	//vector<shared_ptr<UIElement>> UIs;
-
 	shared_ptr<Object> startButton;
-
-	shared_ptr<Texts> startButtonText;
 
 	bool isLoaded = false;
 };

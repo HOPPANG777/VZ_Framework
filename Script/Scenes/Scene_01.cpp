@@ -12,17 +12,13 @@ void Scene_01::Awake()
 
 	red->AddComponent(make_shared<MoveComponent>());
 
-	sceneName = make_shared<Texts>();
-	testTyping = make_shared<TypingText>();
-	testShake = make_shared<ShakingText>();
-
 	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
 	testTypingObject = make_shared<Object>("TestTypingText", Vector3(640, 200, 0), Vector3(500, 25, 0), 0.0f, TransformType::Rect);
 	testShakeObject = make_shared<Object>("TestShakeText", Vector3(640, 520, 0), Vector3(200, 25, 0), 0.0f, TransformType::Rect);
 
-	sceneNameObject->AddComponent(sceneName);
-	testTypingObject->AddComponent(testTyping);
-	testShakeObject->AddComponent(testShake);
+	sceneNameObject->AddComponent(make_shared<Texts>());
+	testTypingObject->AddComponent(make_shared<TypingText>());
+	testShakeObject->AddComponent(make_shared<ShakingText>());
 
 	isLoaded = true;
 }
@@ -41,9 +37,7 @@ void Scene_01::Destroy()
 	for (auto& obj : objects) if (obj != nullptr) obj.reset();
 
 	if (red != nullptr) red.reset();
-	if (sceneName != nullptr) sceneName.reset();
-	if (testTyping != nullptr) testTyping.reset();
-	if (testShake != nullptr) testShake.reset();
+
 	if (sceneNameObject != nullptr) sceneNameObject.reset();
 	if (testTypingObject != nullptr) testTypingObject.reset();
 	if (testShakeObject != nullptr) testShakeObject.reset();
@@ -68,7 +62,7 @@ void Scene_01::Update()
 		SCENE->LoadScene("ClockScene");
 	}
 
-	if (testTyping != nullptr) testTyping->Update();
+	if (testTypingObject != nullptr) testTypingObject->Update();
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 	if (red != nullptr) red->Update();
@@ -84,9 +78,9 @@ void Scene_01::Render()
 
 void Scene_01::PostRender() 
 {
-	sceneName->RenderText(L"GeometryScene", sceneNameObject->GetRect(), 25.0f);
-	testTyping->RenderText(L"안녕하세요 조승영입니다 이건 테스트입니다.", testTypingObject->GetRect(), 25.0f);
-	testShake->RenderText(L"그라라라라라라라라.", testShakeObject->GetRect(), 25.0f);
+	sceneNameObject->GetComponent<Texts>("Texts")->RenderText(L"GeometryScene", sceneNameObject->GetRect(), 25.0f);
+	testTypingObject->GetComponent<TypingText>("TypingText")->RenderText(L"안녕하세요 조승영입니다 이건 테스트입니다.", testTypingObject->GetRect(), 25.0f);
+	testShakeObject->GetComponent<ShakingText>("ShakingText")->RenderText(L"그라라라라라라라라.", testShakeObject->GetRect(), 25.0f);
 }
 
 void Scene_01::ImGUI() {}

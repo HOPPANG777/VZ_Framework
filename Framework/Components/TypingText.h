@@ -3,7 +3,7 @@
 class TypingText : public Texts
 {
 public:
-    TypingText(const string& name = "TypingEffect", float typingSpeed = 0.1f)
+    TypingText(const string& name = "TypingText", float typingSpeed = 0.1f)
         : Texts(name), typingSpeed(typingSpeed), elapsedTime(0.0f), visibleCharacters(0) {
     }
 

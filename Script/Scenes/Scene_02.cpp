@@ -12,8 +12,7 @@ void Scene_02::Awake()
     hourHand = make_shared<ColorLine>(CENTER, 245.0f, -90.0f, YELLOW);
 
     sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
-    sceneName = make_shared<Texts>();
-    sceneNameObject->AddComponent(sceneName);
+    sceneNameObject->AddComponent(make_shared<Texts>());
 
     isLoaded = true;
 }
@@ -29,7 +28,6 @@ void Scene_02::Destroy()
     if (secondHand != nullptr) secondHand.reset();
     if (minuteHand != nullptr) minuteHand.reset();
     if (hourHand != nullptr) hourHand.reset();
-    if (sceneName != nullptr) sceneName.reset();
     if (sceneNameObject != nullptr) sceneNameObject.reset();
 }
 
@@ -64,7 +62,7 @@ void Scene_02::Render()
 
 void Scene_02::PostRender() 
 {
-    sceneName->RenderText(L"ClockScene", sceneNameObject->GetRect(), 25.0f);
+    sceneNameObject->GetComponent<Texts>("Texts")->RenderText(L"ClockScene", sceneNameObject->GetRect(), 25.0f);
 }
 
 void Scene_02::ImGUI() {}
