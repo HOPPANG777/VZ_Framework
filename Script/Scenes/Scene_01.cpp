@@ -9,6 +9,7 @@ void Scene_01::Awake()
 	objects.push_back(make_shared<ColorCircle>(CENTER + Vector3(-100, 0, 0), Vector3(100, 100, 0), 0.0f, 100, GREEN));
 	objects.push_back(make_shared<ColorLine>(CENTER + Vector3(150, 0, 0), 300.0f, 0.0f, BLUE));
 	red = make_shared<ColorRect>(CENTER + Vector3(50, 0, 0), Vector3(100, 100, 0), 0.0f, RED);
+	Axe = make_shared<BezierCurveAxe>(CENTER, Vector3(50, 50, 0), 0.0f);
 
 	red->AddComponent(make_shared<MoveComponent>());
 
@@ -37,6 +38,7 @@ void Scene_01::Destroy()
 	for (auto& obj : objects) if (obj != nullptr) obj.reset();
 
 	if (red != nullptr) red.reset();
+	if (Axe != nullptr) Axe.reset();
 
 	if (sceneNameObject != nullptr) sceneNameObject.reset();
 	if (testTypingObject != nullptr) testTypingObject.reset();
@@ -66,6 +68,7 @@ void Scene_01::Update()
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 	if (red != nullptr) red->Update();
+	if (Axe != nullptr) Axe->Update();
 }
 
 void Scene_01::LateUpdate() {}
@@ -74,6 +77,7 @@ void Scene_01::Render()
 {
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 	if (red != nullptr) red->Render();
+	if (Axe != nullptr) Axe->Render();
 }
 
 void Scene_01::PostRender() 

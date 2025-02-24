@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Object/BezierCurveAxe.h"
+
 class Scene_01 : public Scene
 {
 public:
@@ -24,6 +26,8 @@ private:
 	vector<shared_ptr<Object>> objects;
 
 	shared_ptr<Object> red;
+
+	shared_ptr<Object> Axe;
 
 	shared_ptr<Object> sceneNameObject;
 	shared_ptr<Object> testTypingObject;
