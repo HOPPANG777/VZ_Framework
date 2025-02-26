@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "BezierCurve.h"
+#include "BezierCurveAxe.h"
 
 BezierCurveAxe::BezierCurveAxe(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
 	: TextureRect(position, scale, rotation, path)
