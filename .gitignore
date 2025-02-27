@@ -7,7 +7,7 @@
 Framework/vcpkg_installed/
 Client/vcpkg_installed/
 Script/vcpkg_installed/
-Tool/vcpkg_installed/
+Tools/vcpkg_installed/
 
 # Ignore _Build files and directories
 _Build/

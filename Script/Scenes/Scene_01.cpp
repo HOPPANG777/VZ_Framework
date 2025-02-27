@@ -76,8 +76,8 @@ void Scene_01::LateUpdate() {}
 void Scene_01::Render()
 {
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
-	if (red != nullptr) red->Render();
 	if (Axe != nullptr) Axe->Render();
+	if (red != nullptr) red->Render();
 }
 
 void Scene_01::PostRender() 
