@@ -26,7 +26,4 @@ public:
 private:
 	bool isLoaded = false;
 
-private:
-
-
 };

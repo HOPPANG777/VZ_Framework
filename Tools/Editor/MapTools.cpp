@@ -1,11 +1,7 @@
-#include "stdafx.h"
 #include "MapTools.h"
 
 void MapTools::Awake()
 {
-	isLoaded = false;
-
-	isLoaded = true;
 }
 
 void MapTools::Start()
