@@ -21,7 +21,7 @@ private:
     // 추가 렌더 상태들
     ComPtr<ID3D11SamplerState> sampler[2];
     ComPtr<ID3D11BlendState> blend[2];
-    ComPtr<ID3D11RasterizerState> rs;
+    ComPtr<ID3D11RasterizerState> rs = nullptr;
     unique_ptr<ColorBuffer> colorBuffer;
 
     // 정점 및 인덱스 데이터
@@ -29,7 +29,7 @@ private:
     vector<UINT> indices;
 
     // 텍스처 SRV (픽셀 셰이더에서 사용)
-    ComPtr<ID3D11ShaderResourceView> srv;
+    ComPtr<ID3D11ShaderResourceView> srv = nullptr;
 
     // 내부: 추가 렌더 상태 설정 (Sampler, Blend, Rasterizer 등)
     void SetupRenderStates();
