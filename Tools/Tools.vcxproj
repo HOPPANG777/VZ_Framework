@@ -231,6 +231,10 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
   <ItemGroup>
     <None Include="Tools.aps" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="SMALLTools.ico" />
+    <Image Include="Tools.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

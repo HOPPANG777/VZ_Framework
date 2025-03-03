@@ -32,4 +32,8 @@
       <UniqueIdentifier>{abb5ca08-d21a-4ecb-aba9-4e250d42f7fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Tools.ico" />
+    <Image Include="SMALLTools.ico" />
+  </ItemGroup>
 </Project>
