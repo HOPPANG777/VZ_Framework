@@ -102,11 +102,11 @@ void MapTools::ImGUI()
 
     if (ImGui::Button("Save Map"))
     {
-        TileMapManager::Get()->SaveMap(tileMap, rows, cols, currentMapFile);
+        TILE->SaveMap(tileMap, rows, cols, currentMapFile);
     }
     if (ImGui::Button("Load Map"))
     {
-        tileMap = TileMapManager::Get()->LoadMap(currentMapFile, rows, cols, tileSize, tileSetPath, tileSetColumns, tileSetRows);
+        tileMap = TILE->LoadMap(currentMapFile, rows, cols, tileSize, tileSetPath, tileSetColumns, tileSetRows);
     }
 
     ImGui::End();
