@@ -5,20 +5,14 @@ void MapTools::Awake()
 {
     isLoaded = false;
 
-    // 타일셋 텍스처 로드
-    HRESULT hr = D3DX11CreateShaderResourceViewFromFile
-    (
-        DEVICE,
-        tileSetPath.c_str(),
-        nullptr,
-        nullptr,
-        tileSetSRV.GetAddressOf(),
-        nullptr
-    );
-    CHECK(hr);
-
+    // 초기 맵 생성
     CreateDefaultMap();
-    
+
+    // TileSet 싱글톤에서 필요한 정보를 바꿀 수도 있음
+    // 예: TileSet::Get()->ChangeTileMap(tileSetPath, tileSetColumns, tileSetRows);
+
+    TILESET->ChangeTileMap(TexturePath + L"Tilesets/Grass.png", 11, 7);
+
     isLoaded = true;
 }
 
@@ -39,19 +33,27 @@ void MapTools::FixedUpdate()
 
 void MapTools::Update()
 {
-    for (const auto& tile : tileMap) if (tile) tile->Update();
-    
-    // 맵 배치 로직: 마우스 클릭을 통해 타일을 교체
+    // 마우스 클릭으로 맵에 타일 배치
     if (ImGui::IsMouseClicked(0) && !ImGui::GetIO().WantCaptureMouse)
     {
         ImVec2 mousePos = ImGui::GetMousePos();
-        int gridX = static_cast<int>((mousePos.x - mapOrigin.x) / tileSize.x);
-        int gridY = static_cast<int>((mousePos.y - mapOrigin.y) / tileSize.y);
+        float offsetX = mousePos.x - mapOrigin.x;
+        float offsetY = mousePos.y - mapOrigin.y;
+        int gridX = (int)(offsetX / tileSize.x);
+        int gridY = (int)(offsetY / tileSize.y);
         int index = gridY * cols + gridX;
-        if (index >= 0 && index < tileMap.size())
+
+        if (index >= 0 && index < (int)tileMap.size())
         {
+            // 선택된 인덱스로 타일 교체
             tileMap[index]->SetTileIndex(selectedTileIndex);
         }
+    }
+
+    // 각 타일 업데이트
+    for (auto& tile : tileMap)
+    {
+        if (tile) tile->Update();
     }
 }
 
@@ -62,7 +64,15 @@ void MapTools::LateUpdate()
 
 void MapTools::Render()
 {
-    for (const auto& tile : tileMap) if (tile) tile->Render();
+    // 1) 배경(맵) 그리기
+    // Begin() ~ End() 사이에서 각 Tile의 Render() 호출
+    for (auto& tile : tileMap)
+    {
+        if (!tile) continue;
+        tile->Render();
+    }
+
+    // 2) IMGUI를 통한 UI는 ImGUI()에서 처리
     
 }
 
@@ -73,64 +83,68 @@ void MapTools::PostRender()
 
 void MapTools::ImGUI()
 {
-    ImGui::Begin("Map Editor");
-
-    ImGui::InputInt("Rows", &rows);
-    ImGui::InputInt("Columns", &cols);
-    if (ImGui::Button("Create New Map"))
+    // 타일셋 팔레트 창 (왼쪽 or 상단에 배치)
     {
-        CreateDefaultMap();
+        // 원하는 위치/크기 설정
+        ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Once);
+        ImGui::SetNextWindowSize(ImVec2(400, 600), ImGuiCond_Once);
+
+        ImGui::Begin("TileSet");
+        // TileSet 싱글톤 GUI (타일셋 이미지 표시)
+        TILESET->ImGUI();
+
+        // 현재 선택된 타일 인덱스 표시
+        ImGui::Text("Selected Tile Index: %d", selectedTileIndex);
+
+        // 맵 사이즈, 새 맵 생성
+        ImGui::InputInt("Rows", &rows);
+        ImGui::InputInt("Cols", &cols);
+        if (ImGui::Button("Create New Map"))
+        {
+            CreateDefaultMap();
+        }
+
+        // 저장 / 불러오기
+        if (ImGui::Button("Save Map"))
+        {
+            TILEMAP->SaveMap(tileMap, rows, cols, currentMapFile);
+        }
+        ImGui::SameLine();
+        if (ImGui::Button("Load Map"))
+        {
+            tileMap = TILEMAP->LoadMap(currentMapFile, rows, cols, tileSize, tileSetPath, tileSetColumns, tileSetRows);
+        }
+
+        ImGui::End();
     }
 
-    // 타일셋 선택 UI
-    ImGui::Text("Tile Palette");
-    // 타일셋 이미지를 표시 (tileSetSRV는 미리 로드된 타일셋 SRV)
-    ImGui::Image((ImTextureID)tileSetSRV.Get(), ImVec2(256, 256));
-    if (ImGui::IsItemClicked())
-    {
-        ImVec2 imagePos = ImGui::GetItemRectMin();
-        ImVec2 mousePos = ImGui::GetMousePos();
-        float relX = mousePos.x - imagePos.x;
-        float relY = mousePos.y - imagePos.y;
-        float tileWidth = 256.0f / tileSetColumns;
-        float tileHeight = 256.0f / tileSetRows;
-        int col = static_cast<int>(relX / tileWidth);
-        int row = static_cast<int>(relY / tileHeight);
-        selectedTileIndex = row * tileSetColumns + col;
-    }
-    ImGui::Text("Selected Tile Index: %d", selectedTileIndex);
-
-    if (ImGui::Button("Save Map"))
-    {
-        TILE->SaveMap(tileMap, rows, cols, currentMapFile);
-    }
-    if (ImGui::Button("Load Map"))
-    {
-        tileMap = TILE->LoadMap(currentMapFile, rows, cols, tileSize, tileSetPath, tileSetColumns, tileSetRows);
-    }
-
-    ImGui::End();
+    // 필요하다면, 타일맵 미리보기를 IMGUI 위젯으로도 표시 가능
+    // 하지만 보통은 DirectX Render()에서 배경으로 그립니다.
 }
 
 void MapTools::CreateDefaultMap()
 {
     tileMap.clear();
-    for (int i = 0; i < rows; ++i)
+    tileMap.reserve(rows * cols);
+
+    for (int y = 0; y < rows; ++y)
     {
-        for (int j = 0; j < cols; ++j)
+        for (int x = 0; x < cols; ++x)
         {
-            // 각 타일의 중심 좌표 계산 (예: 좌측 상단 기준)
-            Vector3 pos(j * tileSize.x + tileSize.x * 0.5f, i * tileSize.y + tileSize.y * 0.5f, 0);
-            // 기본 타일 인덱스는 0으로 설정
-            auto tile = make_shared<Tile>(
-                "Tile_" + to_string(i) + "_" + to_string(j),
+            // 타일의 중심 좌표 계산 (mapOrigin 기준)
+            Vector3 pos(mapOrigin.x + x * tileSize.x + tileSize.x * 0.5f, mapOrigin.y + y * tileSize.y + tileSize.y * 0.5f, 0.0f);
+
+            // 타일셋 모드 사용 (TileSetPath, columns, rows, 인덱스=0)
+            auto tile = make_shared<Tile>
+            (
+                "Tile_" + to_string(y) + "_" + to_string(x),
                 pos,
                 tileSize,
                 0.0f,
                 tileSetPath,
                 tileSetColumns,
                 tileSetRows,
-                0 // 초기 타일 인덱스
+                0 // 초기 인덱스
             );
             tileMap.push_back(tile);
         }

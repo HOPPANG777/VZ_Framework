@@ -31,9 +31,6 @@ private:
     // 텍스처 SRV (픽셀 셰이더에서 사용)
     ComPtr<ID3D11ShaderResourceView> srv = nullptr;
 
-    // 내부: 추가 렌더 상태 설정 (Sampler, Blend, Rasterizer 등)
-    void SetupRenderStates();
-
 public:
     // 생성자: 일반 타일 모드
     Tile(const string& name, const Vector3& position, const Vector3& scale, float rotation, const wstring& texturePath);
@@ -41,21 +38,28 @@ public:
     Tile(const string& name, const Vector3& position, const Vector3& scale, float rotation, const wstring& tileSetPath, UINT columns, UINT rows, UINT tileIndex);
     virtual ~Tile();
 
+public:
     virtual void Update() override;
     virtual void Render() override;
 
+public:
     // 텍스처 로드 및 UV 갱신
     void LoadTexture();
     void UpdateUV();
+    void SetupRenderStates();
 
+public:
     // 타일셋 모드에서 타일 인덱스 변경
     void SetTileIndex(UINT index);
 
+public:
     // Getter
     wstring GetTexturePath() const { return texturePath; }
     UINT GetTileIndex() const { return tileIndex; }
 
+public:
     // IColorable 구현 (만약 IColorable을 상속받도록 확장한다면)
     virtual void SetColor(const Color& col) override { color = col; UpdateUV(); }
     virtual Color GetColor() const override { return color; }
+
 };

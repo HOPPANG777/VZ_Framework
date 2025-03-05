@@ -134,6 +134,9 @@
     <ClCompile Include="Managers\TileMapManager.cpp">
       <Filter>Managers\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="Managers\TileSetManager.cpp">
+      <Filter>Managers\TileSet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -323,6 +326,9 @@
     <ClInclude Include="Managers\TileMapManager.h">
       <Filter>Managers\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="Managers\TileSetManager.h">
+      <Filter>Managers\TileSet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -402,6 +408,9 @@
     </Filter>
     <Filter Include="Managers\Tile">
       <UniqueIdentifier>{9009ba62-6111-44b3-acc4-8f7215d2abab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\TileSet">
+      <UniqueIdentifier>{1bd25161-5930-47c5-932c-ba7fc03ba138}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
