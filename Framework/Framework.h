@@ -166,6 +166,7 @@ extern HWND gHandle;
 #define COLLISION CollisionManager::Get()
 #define GIZMO Gizmo::Get()
 #define REALDELTA TIME->GetRealDeltaTime()
+#define TILE TileMapManager::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
@@ -265,3 +266,4 @@ const string TilePath = "_Data/_TileData/";
 //Managers
 #include "Managers/SceneManager.h"
 #include "Managers/CollisionManager.h"
+#include "Managers/TileMapManager.h"

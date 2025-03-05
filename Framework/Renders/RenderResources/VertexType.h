@@ -42,7 +42,7 @@ struct VertexTile
 	UINT index;
 	
 	VertexTile() = default;
-	VertexTile(Vector3 position, Vector2 uv, Vector2 uv2, Color color, UINT index)
+	VertexTile(const Vector3& position, const Vector2& uv, const Vector2& uv2, const Color& color, const UINT& index)
 		: position(position), uv(uv), uv2(uv2), color(color), index(index)
 	{
 
