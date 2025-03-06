@@ -5,14 +5,10 @@ class TileSetManager
     DECLARE_SINGLETON(TileSetManager);
 
 public:
+    void Init();
     void ImGUI();
 
-    ComPtr<ID3D11ShaderResourceView> GetSRV() const { return tileSRV; }
-
-public:
     void ChangeTileMap(const wstring& imagePath, const UINT& xCount, const UINT& yCount);
-
-    void Init();
 
 public:
     wstring GetTilePath() const { return tilePath; }
@@ -20,6 +16,9 @@ public:
     UINT GetXCount() const { return tileXCount; }
     UINT GetYCount() const { return tileYCount; }
 
+    ComPtr<ID3D11ShaderResourceView> GetSRV() const { return tileSRV; }
+
+public:
     // 선택된 타일의 시작 UV와 타일 크기
     Vector2 selectedStartUV = Values::ZeroVec2;
     Vector2 texelTileSize = Values::ZeroVec2;

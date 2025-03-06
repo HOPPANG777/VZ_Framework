@@ -21,13 +21,15 @@ public:
 	bool IsLoaded() const override { return isLoaded; }
 
 private:
-    // 맵 편집용
+    // 타일셋 텍스처는 TileSetManager를 사용하고,
+    // 타일맵은 TileMap 클래스를 unique_ptr으로 관리
+    unique_ptr<TileMap> tmap;
+
+private:
+    // 맵 편집용 설정
     int rows = 10;
     int cols = 10;
     Vector3 tileSize = Vector3(64, 64, 0);
-
-    // 타일맵(1차원 벡터, row-major)
-    vector<shared_ptr<Tile>> tileMap;
 
     // 타일셋 정보
     wstring tileSetPath = TexturePath + L"tile.png";
@@ -35,10 +37,10 @@ private:
     UINT tileSetRows = 8;
     int selectedTileIndex = 0;
 
-    // 파일명
+    // 파일명 (저장/불러오기)
     string currentMapFile = "map01.dat";
 
-    // IMGUI에서 맵을 배치할 기준 위치
+    // IMGUI에서 맵 배치 기준 위치
     ImVec2 mapOrigin = ImVec2(400, 50);
 
     bool isLoaded = false;

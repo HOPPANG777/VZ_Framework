@@ -10,12 +10,18 @@
     <ClInclude Include="Editor\MapTools.h">
       <Filter>Editor\MapTools</Filter>
     </ClInclude>
+    <ClInclude Include="Editor\TileMap.h">
+      <Filter>Editor\MapTools\TileMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Editor\MapTools.cpp">
       <Filter>Editor\MapTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\TileMap.cpp">
+      <Filter>Editor\MapTools\TileMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +36,9 @@
     </Filter>
     <Filter Include="Editor\MapTools">
       <UniqueIdentifier>{abb5ca08-d21a-4ecb-aba9-4e250d42f7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\MapTools\TileMap">
+      <UniqueIdentifier>{13798a01-67e9-49a4-b022-7154eb78922d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

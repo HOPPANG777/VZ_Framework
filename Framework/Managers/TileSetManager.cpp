@@ -34,19 +34,25 @@ void TileSetManager::ImGUI()
 void TileSetManager::ChangeTileMap(const wstring& imagePath, const UINT& xCount, const UINT& yCount)
 {
     tilePath = imagePath;
+
     auto tex = make_unique<Texture2D>(tilePath);
     tileSRV = tex->GetSRV();
+
     tileXCount = xCount;
     tileYCount = yCount;
+
     texelTileSize = Vector2(1.0f / tileXCount, 1.0f / tileYCount);
 }
 
 void TileSetManager::Init()
 {
     tilePath = TexturePath + L"tile.png";
+
     auto tex = make_unique<Texture2D>(tilePath);
     tileSRV = tex->GetSRV();
+
     tileXCount = 11;
     tileYCount = 7;
+
     texelTileSize = Vector2(1.0f / tileXCount, 1.0f / tileYCount);
 }

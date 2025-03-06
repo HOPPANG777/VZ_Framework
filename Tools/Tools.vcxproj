@@ -212,12 +212,14 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
   <ItemGroup>
     <ClInclude Include="Editor\EditorList.h" />
     <ClInclude Include="Editor\MapTools.h" />
+    <ClInclude Include="Editor\TileMap.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\MapTools.cpp" />
+    <ClCompile Include="Editor\TileMap.cpp" />
     <ClCompile Include="Program.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

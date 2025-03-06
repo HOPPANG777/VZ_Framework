@@ -72,63 +72,28 @@ public:
 	}
 };
 
-//class AlphaBuffer : public ConstantBuffer
-//{
-//	struct AlphaStruct
-//	{
-//		Color alphaColor;
-//		float alpha;
-//		Vector3 dummy;
-//	};
-//
-//	AlphaStruct data;
-//
-//public:
-//	AlphaBuffer() : ConstantBuffer(&data, sizeof(data))
-//	{
-//		// 기본값 설정
-//		data.alphaColor = CLEAR;
-//		data.alpha = 0.0f;
-//		data.dummy = Vector3(0, 0, 0);
-//	}
-//
-//	// 알파값 및 알파 색상을 수정하거나 얻을 수 있는 함수들
-//	float GetAlpha() const { return data.alpha; }
-//	Color GetAlphaColor() const { return data.alphaColor; }
-//
-//	void SetAlpha(const float alpha) { data.alpha = alpha; }
-//	void SetAlphaColor(const Color color) { data.alphaColor = color; }
-//
-//	float* GetAlphaPtr() { return &data.alpha; }
-//	const AlphaStruct& GetAlphaStruct() const { return data; }
-//};
-//
-//class ShaderBuffer : public ConstantBuffer
-//{
-//	struct ShaderStruct
-//	{
-//		int     selection;       // 효과 선택 번호 (예: 0: 없음, 1: 색반전, 2: 흑백, 3: 블러 등)
-//		int     blurCount;       // 블러 강도 (샘플링 횟수 등)
-//		Vector2 textureSize;     // 텍스처 사이즈 (블러 효과 계산 등에서 사용)
-//	};
-//
-//	ShaderStruct data;
-//
-//public:
-//	ShaderBuffer() : ConstantBuffer(&data, sizeof(data))
-//	{
-//		// 기본값 설정
-//		data.selection = 1;
-//		data.blurCount = 1;
-//		data.textureSize = Vector2(0, 0);
-//	}
-//
-//	// CPU에서 데이터를 수정할 수 있는 함수들
-//	int* GetSelectionPtr() { return &data.selection; }
-//	int* GetBlurCountPtr() { return &data.blurCount; }
-//	void SetTextureSize(const Vector2 size) { data.textureSize = size; }
-//
-//	// 객체 내부 데이터를 읽기 전용으로 얻고 싶을 때
-//	const ShaderStruct& GetShaderStruct() const { return data; }
-//};
+class IndexNumBuffer : public ConstantBuffer
+{
+	struct IndexStruct
+	{
+		UINT index;
+		Vector3 dummy;
+	};
+
+	IndexStruct data;
+
+public:
+	IndexNumBuffer() : ConstantBuffer(&data, sizeof(data))
+	{
+		data.index = 0;
+	}
+
+	void SetIndex(UINT index) 
+	{
+		data.index = index; 
+	}
+
+};
+
+
 

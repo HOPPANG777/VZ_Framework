@@ -203,7 +203,6 @@
     <ClInclude Include="Struct\FontTextDesc.h" />
     <ClInclude Include="Managers\CollisionManager.h" />
     <ClInclude Include="Objects\TileObject\Tile.h" />
-    <ClInclude Include="Managers\TileMapManager.h" />
     <ClInclude Include="Managers\TileSetManager.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
     <ClInclude Include="Struct\UIElement.h" />
@@ -264,7 +263,6 @@
     <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="Objects\TileObject\Tile.cpp" />
     <ClCompile Include="Objects\SpriteObject\Sprite.cpp" />
-    <ClCompile Include="Managers\TileMapManager.cpp" />
     <ClCompile Include="Managers\TileSetManager.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
@@ -306,6 +304,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Comment.txt" />
+    <Text Include="BackupCode.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,6 +33,7 @@
 #include <thread>
 #include <unordered_set>
 #include <future>
+#include <sstream>
 
 using namespace std;
 
@@ -166,7 +167,6 @@ extern HWND gHandle;
 #define COLLISION CollisionManager::Get()
 #define GIZMO Gizmo::Get()
 #define REALDELTA TIME->GetRealDeltaTime()
-#define TILEMAP TileMapManager::Get()
 #define TILESET TileSetManager::Get()
 
 //ColorMacros
@@ -267,5 +267,7 @@ const string TilePath = "_Data/_TileData/";
 //Managers
 #include "Managers/SceneManager.h"
 #include "Managers/CollisionManager.h"
-#include "Managers/TileMapManager.h"
 #include "Managers/TileSetManager.h"
+
+// Editor
+#include "Tools/Editor/TileMap.h"

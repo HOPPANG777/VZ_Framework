@@ -1,0 +1,320 @@
+#include "stdafx.h"
+#include "TileMap.h"
+
+TileMap::TileMap(UINT width, UINT height, UINT spacing)
+    : width(width), height(height), spacing(spacing)
+{
+    // 타일셋(이미지) 관련 설정은 TileSetManager 싱글톤을 사용
+    // 타일셋 매니저는 내부에서 텍스처(SRV)와 타일 분할 정보를 관리합니다.
+    TILESET->Init();
+
+    // 타일맵 생성 (2차원 vector 형태)
+    GenerateTileMap();
+
+    //vertices
+    {
+        // 타일 하나를 그리기 위한 기본 버텍스 데이터 (사각형)
+        vertices.resize(4);
+        vertices[0].position = Values::ZeroVec3;
+        vertices[1].position = Vector3(0.0f, (float)spacing, 0.0f);
+        vertices[2].position = Vector3((float)spacing, 0.0f, 0.0f);
+        vertices[3].position = Vector3((float)spacing, (float)spacing, 0.0f);
+    }
+
+    //indices
+    {
+        // 인덱스 데이터 (사각형 2개의 삼각형)
+        indices = { 0, 1, 2, 2, 1, 3 };
+    }
+
+    //vertexBuffer
+    {
+        // D3D 리소스 생성 (Framework의 매크로나 unique_ptr 활용)
+        vertexBuffer = make_unique<VertexBuffer>();
+        vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
+    }
+    
+    //indexBuffer
+    {
+        indexBuffer = make_unique<IndexBuffer>();
+        indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
+    }
+    
+    //vertexBuffer
+    {
+        vertexShader = make_unique<VertexShader>();
+        vertexShader->Create(ShaderPath + L"VertexTile.hlsl", "VS");
+    }
+
+    //pixelShader
+    {
+        pixelShader = make_unique<PixelShader>();
+        pixelShader->Create(ShaderPath + L"VertexTile.hlsl", "PS");
+    }
+
+    //inputLayout
+    {
+        inputLayout = make_unique<InputLayout>();
+        // VertexTile::descs와 VertexTile::count는 해당 구조체의 입력 레이아웃 정보
+        inputLayout->Create(VertexTile::isDescs.data(), VertexTile::isDescs.size(), vertexShader->GetBlob());
+    }
+
+    //worldBuffer
+    {
+        worldBuffer = make_unique<WorldBuffer>();
+        worldBuffer->SetWorld(world);
+    }
+
+    //indexNumBuffer
+    {
+        indexNumBuffer = make_unique<IndexNumBuffer>();
+        indexNumBuffer->SetIndex(0);
+    }
+
+}
+
+void TileMap::GenerateTileMap()
+{
+    // 타일맵 생성: 2차원 vector로 각 행을 생성
+    tiles.clear();
+    tiles.resize(height);
+    for (UINT y = 0; y < height; y++)
+    {
+        tiles[y].resize(width);
+        for (UINT x = 0; x < width; x++)
+        {
+            // 타일의 중심 좌표 계산 (mapOrigin은 외부에서 조정)
+            Vector3 position((float)(x * spacing) + spacing * 0.5f, (float)(y * spacing) + spacing * 0.5f, 0.0f);
+            // 타일 생성: 타일셋 모드로 생성 (타일셋 정보는 TileSetManager에서 제공)
+            auto tile = make_shared<Tile>
+            (
+                "Tile_" + to_string(y) + "_" + to_string(x),
+                position,
+                Vector3((float)spacing, (float)spacing, 0),
+                0.0f,
+                TileSetManager::Get()->GetTilePath(),       // 타일셋 이미지 경로
+                TileSetManager::Get()->GetXCount(),         // 타일셋 가로 타일 수
+                TileSetManager::Get()->GetYCount(),         // 타일셋 세로 타일 수
+                0                                           // 초기 타일 인덱스
+            );
+            tiles[y][x] = tile;
+        }
+    }
+}
+
+void TileMap::MapVertexBuffer()
+{
+    HRESULT hr = DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
+    CHECK(hr);
+}
+
+void TileMap::UnmapVertexBuffer()
+{
+    memcpy(subResource.pData, vertices.data(), sizeof(vertices[0]) * vertices.size());
+    DC->Unmap(vertexBuffer->GetResource(), 0);
+}
+
+void TileMap::Update()
+{
+    // 예시: Ctrl+S 또는 Ctrl+L 키로 저장/불러오기 처리 (FileStream, Path 사용)
+    if (KEYBOARD->Press(VK_CONTROL))
+    {
+        if (KEYBOARD->Down('S'))
+        {
+            HelpMe::Get()->Log("타일맵 저장할 파일 이름을 입력해주세요!");
+            string tileName;
+            cin >> tileName;
+            getchar();
+            Path::CreateFolders(TilePath);
+            Save(TilePath + tileName + ".data");
+            Save(TilePath + tileName + ".txt");
+            HelpMe::Get()->Log("타일맵 파일 저장 완료");
+        }
+        if (KEYBOARD->Down('L'))
+        {
+            HelpMe::Get()->Log("타일맵 불러올 파일 이름을 입력해주세요!");
+            string tileName;
+            cin >> tileName;
+            getchar();
+            Load(TilePath + tileName + ".data");
+        }
+    }
+
+    // 마우스 위치에 해당하는 타일 선택
+    Vector3 mPos = MOUSE->GetMousePos();
+    Tile* tile = GetTile(mPos);
+    if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
+
+    // 좌클릭 시 타일 색상 및 UV 변경 (TileSetManager에서 선택한 타일 정보 사용)
+    if (MOUSE->Press(0x0000))
+    {
+        if (tile)
+        {
+            tile->SetColor(Values::Red);
+            Vector2 startUV = TileSetManager::Get()->selectedStartUV;
+            Vector2 endUV = startUV + TileSetManager::Get()->texelTileSize;
+            tile->SetStartUV(startUV);
+            tile->SetEndUV(endUV);
+        }
+    }
+}
+
+void TileMap::Render()
+{
+    vertexBuffer->SetIA();
+    indexBuffer->SetIA();
+    inputLayout->SetIA();
+    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    vertexShader->SetShader();
+    pixelShader->SetShader();
+
+    // 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
+    DC->PSSetShaderResources(0, 1, TileSetManager::Get()->GetSRV().GetAddressOf());
+
+    // 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
+    for (UINT y = 0; y < height; y++)
+    {
+        for (UINT x = 0; x < width; x++)
+        {
+            auto tile = tiles[y][x];
+            if (!tile) continue;
+
+            MapVertexBuffer();
+
+            // 각 타일에 맞게 버텍스 데이터 업데이트
+            for (auto& v : vertices)
+            {
+                v.color = tile->GetColor();
+                v.index = tile->GetIndex();
+            }
+            vertices[0].uv = Vector2(tile->GetStartUV().x, tile->GetEndUV().y);
+            vertices[1].uv = tile->GetStartUV();
+            vertices[2].uv = tile->GetEndUV();
+            vertices[3].uv = Vector2(tile->GetEndUV().x, tile->GetStartUV().y);
+
+            // uv2 (추가 텍스처 좌표, 기본값)
+            vertices[0].uv2 = Vector2(0, 1);
+            vertices[1].uv2 = Vector2(0, 0);
+            vertices[2].uv2 = Vector2(1, 1);
+            vertices[3].uv2 = Vector2(1, 0);
+
+            UnmapVertexBuffer();
+
+            world = Matrix::CreateTranslation(tile->GetPosition());
+            worldBuffer->SetWorld(world);
+            worldBuffer->SetVSBuffer(0);
+            indexNumBuffer->SetPSBuffer(0);
+            DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
+        }
+    }
+}
+
+void TileMap::ImGUI()
+{
+    // 타일셋 매니저의 GUI (타일 팔레트)
+    TileSetManager::Get()->ImGUI();
+}
+
+void TileMap::Save(const string& path)
+{
+    ofstream fout(path);
+    fout << to_string(width) << ' ' << to_string(height) << ' ' << to_string(spacing) << endl;
+
+    // 타일셋 정보
+    string imagePath = "";
+    wstring tsPath = TileSetManager::Get()->GetTilePath();
+    imagePath.assign(tsPath.begin(), tsPath.end());
+    string xCount = to_string(TileSetManager::Get()->GetXCount());
+    string yCount = to_string(TileSetManager::Get()->GetYCount());
+    fout << imagePath << ' ' << xCount << ' ' << yCount << endl;
+
+    // 각 타일의 UV 정보를 row-major 순서로 저장
+    for (UINT y = 0; y < height; y++)
+    {
+        for (UINT x = 0; x < width; x++)
+        {
+            auto tile = tiles[y][x];
+            fout    << to_string(tile->GetStartUV().x)  << ' '
+                    << to_string(tile->GetStartUV().y)  << ' '
+                    << to_string(tile->GetEndUV().x)    << ' '
+                    << to_string(tile->GetEndUV().y)    << endl;
+        }
+    }
+}
+
+void TileMap::Load(const string& path)
+{
+    ifstream fin(path);
+    if (fin.fail())
+    {
+        HelpMe::Get()->Log("파일이 존재하지 않습니다. 이름을 정확히 적어주세요.");
+        return;
+    }
+
+    // 기존 타일맵 초기화
+    tiles.clear();
+
+    char temp[256];
+
+    // 읽기: width, height, spacing
+    {
+        fin.getline(temp, 256);
+        istringstream iss(temp);
+        iss >> width >> height >> spacing;
+        if (width == 0 || height == 0 || spacing == 0) assert(false);
+    }
+
+    // 읽기: 타일셋 정보
+    {
+        fin.getline(temp, 256);
+        istringstream iss(temp);
+        string imagePath;
+        UINT xCount = 0, yCount = 0;
+        iss >> imagePath >> xCount >> yCount;
+        wstring tsPath(imagePath.begin(), imagePath.end());
+        TileSetManager::Get()->ChangeTileMap(tsPath, xCount, yCount);
+    }
+
+    // 재생성: 2차원 벡터로 타일맵 생성
+    tiles.resize(height);
+    for (UINT y = 0; y < height; y++)
+    {
+        tiles[y].resize(width);
+        for (UINT x = 0; x < width; x++)
+        {
+            Vector3 position((float)(x * spacing), (float)(y * spacing), 0.0f);
+            auto tile = make_shared<Tile>
+            (
+                "Tile_" + to_string(y) + "_" + to_string(x),
+                position,
+                Vector3((float)spacing, (float)spacing, 0),
+                0.0f,
+                TileSetManager::Get()->GetTilePath(),
+                TileSetManager::Get()->GetXCount(),
+                TileSetManager::Get()->GetYCount(),
+                0  // 기본 인덱스 (추후 파일에서 읽은 값으로 설정)
+            );
+            // 읽은 UV 정보
+            fin.getline(temp, 256);
+            istringstream uvStream(temp);
+            float sx, sy, ex, ey;
+            uvStream >> sx >> sy >> ex >> ey;
+            tile->SetStartUV(Vector2(sx, sy));
+            tile->SetEndUV(Vector2(ex, ey));
+            tiles[y][x] = tile;
+        }
+    }
+
+    // 백업본 생성 (디버그용)
+    Save(TilePath + "After.txt");
+    HelpMe::Get()->Log("타일맵 불러오기 완료!");
+}
+
+Tile* TileMap::GetTile(Vector3 mPos)
+{
+    UINT x = (UINT)(mPos.x) / spacing;
+    UINT y = (UINT)(mPos.y) / spacing;
+    if (x >= width || y >= height) return nullptr;
+    return tiles[y][x].get();
+}
