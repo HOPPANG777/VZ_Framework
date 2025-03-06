@@ -75,29 +75,23 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing)
 
 void TileMap::GenerateTileMap()
 {
-    // 타일맵 생성: 2차원 vector로 각 행을 생성
-    tiles.clear();
+    if (width == 0 || height == 0 || spacing == 0) assert(false);
+
+    // 2차원 벡터를 사용하여 각 행에 대해 vector<shared_ptr<Tile>>를 생성합니다.
+    vector<vector<shared_ptr<Tile>>> tiles;
     tiles.resize(height);
+
+    int index = 0;
     for (UINT y = 0; y < height; y++)
     {
+        // 각 행의 열 크기를 미리 할당합니다.
         tiles[y].resize(width);
         for (UINT x = 0; x < width; x++)
         {
-            // 타일의 중심 좌표 계산 (mapOrigin은 외부에서 조정)
-            Vector3 position((float)(x * spacing) + spacing * 0.5f, (float)(y * spacing) + spacing * 0.5f, 0.0f);
-            // 타일 생성: 타일셋 모드로 생성 (타일셋 정보는 TileSetManager에서 제공)
-            auto tile = make_shared<Tile>
-            (
-                "Tile_" + to_string(y) + "_" + to_string(x),
-                position,
-                Vector3((float)spacing, (float)spacing, 0),
-                0.0f,
-                TileSetManager::Get()->GetTilePath(),       // 타일셋 이미지 경로
-                TileSetManager::Get()->GetXCount(),         // 타일셋 가로 타일 수
-                TileSetManager::Get()->GetYCount(),         // 타일셋 세로 타일 수
-                0                                           // 초기 타일 인덱스
-            );
-            tiles[y][x] = tile;
+            // 각 타일을 make_shared로 생성합니다.
+            tiles[y][x] = make_shared<Tile>();
+            tiles[y][x]->SetPosition(Vector3(static_cast<float>(x * spacing), static_cast<float>(y * spacing), 0.0f));
+            tiles[y][x]->SetIndex(index++);
         }
     }
 }
@@ -151,8 +145,8 @@ void TileMap::Update()
         if (tile)
         {
             tile->SetColor(Values::Red);
-            Vector2 startUV = TileSetManager::Get()->selectedStartUV;
-            Vector2 endUV = startUV + TileSetManager::Get()->texelTileSize;
+            Vector2 startUV = TILESET->selectedStartUV;
+            Vector2 endUV = startUV + TILESET->texelTileSize;
             tile->SetStartUV(startUV);
             tile->SetEndUV(endUV);
         }
@@ -170,7 +164,7 @@ void TileMap::Render()
     pixelShader->SetShader();
 
     // 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
-    DC->PSSetShaderResources(0, 1, TileSetManager::Get()->GetSRV().GetAddressOf());
+    DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
 
     // 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
     for (UINT y = 0; y < height; y++)
@@ -188,6 +182,7 @@ void TileMap::Render()
                 v.color = tile->GetColor();
                 v.index = tile->GetIndex();
             }
+
             vertices[0].uv = Vector2(tile->GetStartUV().x, tile->GetEndUV().y);
             vertices[1].uv = tile->GetStartUV();
             vertices[2].uv = tile->GetEndUV();
@@ -213,7 +208,7 @@ void TileMap::Render()
 void TileMap::ImGUI()
 {
     // 타일셋 매니저의 GUI (타일 팔레트)
-    TileSetManager::Get()->ImGUI();
+    TILESET->ImGUI();
 }
 
 void TileMap::Save(const string& path)
@@ -223,10 +218,10 @@ void TileMap::Save(const string& path)
 
     // 타일셋 정보
     string imagePath = "";
-    wstring tsPath = TileSetManager::Get()->GetTilePath();
+    wstring tsPath = TILESET->GetTilePath();
     imagePath.assign(tsPath.begin(), tsPath.end());
-    string xCount = to_string(TileSetManager::Get()->GetXCount());
-    string yCount = to_string(TileSetManager::Get()->GetYCount());
+    string xCount = to_string(TILESET->GetXCount());
+    string yCount = to_string(TILESET->GetYCount());
     fout << imagePath << ' ' << xCount << ' ' << yCount << endl;
 
     // 각 타일의 UV 정보를 row-major 순서로 저장
@@ -273,7 +268,7 @@ void TileMap::Load(const string& path)
         UINT xCount = 0, yCount = 0;
         iss >> imagePath >> xCount >> yCount;
         wstring tsPath(imagePath.begin(), imagePath.end());
-        TileSetManager::Get()->ChangeTileMap(tsPath, xCount, yCount);
+        TILESET->ChangeTileMap(tsPath, xCount, yCount);
     }
 
     // 재생성: 2차원 벡터로 타일맵 생성
@@ -284,17 +279,7 @@ void TileMap::Load(const string& path)
         for (UINT x = 0; x < width; x++)
         {
             Vector3 position((float)(x * spacing), (float)(y * spacing), 0.0f);
-            auto tile = make_shared<Tile>
-            (
-                "Tile_" + to_string(y) + "_" + to_string(x),
-                position,
-                Vector3((float)spacing, (float)spacing, 0),
-                0.0f,
-                TileSetManager::Get()->GetTilePath(),
-                TileSetManager::Get()->GetXCount(),
-                TileSetManager::Get()->GetYCount(),
-                0  // 기본 인덱스 (추후 파일에서 읽은 값으로 설정)
-            );
+            auto tile = make_shared<Tile>();
             // 읽은 UV 정보
             fin.getline(temp, 256);
             istringstream uvStream(temp);

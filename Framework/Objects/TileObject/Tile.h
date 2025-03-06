@@ -1,6 +1,6 @@
 #pragma once
 
-class Tile : public IColorable 
+class Tile
 {
 private:
     Vector3 position = Values::ZeroVec3;
@@ -24,8 +24,8 @@ public:
     Vector2 GetEndUV() const { return endUV; }
     void SetEndUV(const Vector2& uv) { this->endUV = uv; }
 
-    virtual Color GetColor() const override { return color; }
-    virtual void SetColor(const Color& color) override { this->color = color; }
+    Color GetColor() const { return color; }
+    void SetColor(const Color& color) { this->color = color; }
 
     UINT GetIndex() const { return index; }
     void SetIndex(UINT index) { this->index = index; }

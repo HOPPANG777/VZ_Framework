@@ -27,8 +27,9 @@ private:
 
 private:
     // 맵 편집용 설정
-    int rows = 10;
-    int cols = 10;
+    UINT spacing = 10;
+    UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
+    UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
     Vector3 tileSize = Vector3(64, 64, 0);
 
     // 타일셋 정보

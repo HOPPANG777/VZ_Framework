@@ -31,28 +31,6 @@ void MapTools::FixedUpdate()
 
 void MapTools::Update()
 {
-    //// 마우스 클릭으로 타일 배치 처리 (IMGUI가 마우스 입력을 캡쳐하지 않을 때)
-    //if (ImGui::IsMouseClicked(0) && !ImGui::GetIO().WantCaptureMouse)
-    //{
-    //    ImVec2 mousePos = ImGui::GetMousePos();
-    //    float offsetX = mousePos.x - mapOrigin.x;
-    //    float offsetY = mousePos.y - mapOrigin.y;
-    //    // 그리드 좌표 계산 (타일 크기를 기준으로)
-    //    int gridX = static_cast<int>(offsetX / tileSize.x);
-    //    int gridY = static_cast<int>(offsetY / tileSize.y);
-
-    //    // 타일맵 내에서 해당 좌표의 타일 가져오기
-    //    if (tmap)
-    //    {
-    //        // 타일의 좌표는 mapOrigin 기준 오프셋을 사용하여 계산
-    //        Tile* tile = tmap->GetTile(Vector3(offsetX, offsetY, 0));
-    //        if (tile)
-    //        {
-    //            tile->SetTileIndex(selectedTileIndex);
-    //        }
-    //    }
-    //}
-
     if (tmap) tmap->Update();
 }
 
@@ -73,29 +51,55 @@ void MapTools::PostRender()
 
 void MapTools::ImGUI()
 {
-    ImGui::Begin("Map Editor");
+    if (ImGui::BeginTabBar("MapTabs"))
+    {
+        // 첫번째 탭: Map Editor
+        if (ImGui::BeginTabItem("Map Editor"))
+        {
+            // spacing만 입력받고, width와 height는 계산
+            ImGui::InputInt("Spacing", reinterpret_cast<int*>(&spacing));
+            // spacing이 0이 아닌지 체크
+            if (spacing <= 0)
+                spacing = 1;
 
-    ImGui::InputInt("Rows", &rows);
-    ImGui::InputInt("Cols", &cols);
-    if (ImGui::Button("Create New Map"))
-    {
-        CreateDefaultMap();
+            // WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT는 전역 상수로 정의되어 있음
+            width = (WIN_DEFAULT_WIDTH * 2) / spacing;
+            height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+
+            ImGui::Text("Calculated Map Width: %d", width);
+            ImGui::Text("Calculated Map Height: %d", height);
+
+            if (ImGui::Button("Create New Map"))
+            {
+                CreateDefaultMap();
+            }
+            if (ImGui::Button("Save Map"))
+            {
+                if (tmap) tmap->Save(currentMapFile);
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Load Map"))
+            {
+                // 새 타일맵 생성 후 파일로부터 로드
+                tmap = make_unique<TileMap>(width, height, spacing);
+                tmap->Load(currentMapFile);
+            }
+            ImGui::EndTabItem();
+        }
+
+        // 두번째 탭: TileMap ImGui (타일맵 자체의 UI)
+        if (ImGui::BeginTabItem("TileMap ImGui"))
+        {
+            if (tmap) tmap->ImGUI();
+            ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
     }
-    if (ImGui::Button("Save Map"))
-    {
-        tmap->Save(currentMapFile);
-    }
-    ImGui::SameLine();
-    if (ImGui::Button("Load Map"))
-    {
-        // 기존 tmap를 재생성하고 파일로부터 로드
-        tmap = make_unique<TileMap>(cols, rows, (UINT)tileSize.x);
-        tmap->Load(currentMapFile);
-    }
-    ImGui::End();
 }
 
 void MapTools::CreateDefaultMap()
 {
-    tmap = make_unique<TileMap>(cols, rows, (UINT)tileSize.x);
+    // 새로운 타일맵 생성 (mapWidth x mapHeight, spacing 사용)
+    tmap = make_unique<TileMap>(width, height, spacing);
 }
