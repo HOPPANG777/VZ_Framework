@@ -1,17 +1,17 @@
 #include "Framework.h"
-#include "TileSet.h"
+#include "TileSetManager.h"
 
-TileSet::TileSet()
+TileSetManager::TileSetManager()
 {
     Init();
 }
 
-TileSet::~TileSet()
+TileSetManager::~TileSetManager()
 {
     // ComPtr은 자동으로 Release()를 호출하므로 별도 처리 불필요
 }
 
-void TileSet::Init()
+void TileSetManager::Init()
 {
     // 기본 타일셋 경로 설정
     tilePath = TexturePath + L"tile.png";
@@ -29,9 +29,9 @@ void TileSet::Init()
     texelTileSize = Vector2(1.0f / static_cast<float>(tileXCount), 1.0f / static_cast<float>(tileYCount));
 }
 
-void TileSet::ImGUI()
+void TileSetManager::ImGUI()
 {
-    ImGui::Begin("TileSet");
+    ImGui::Begin("TileSetManager");
     {
         int count = 0;
         for (UINT y = 0; y < tileYCount; y++)
@@ -57,7 +57,7 @@ void TileSet::ImGUI()
     ImGui::End();
 }
 
-void TileSet::ChangeTileMap(const std::wstring& imagePath, UINT xCount, UINT yCount)
+void TileSetManager::ChangeTileMap(const std::wstring& imagePath, UINT xCount, UINT yCount)
 {
     tilePath = imagePath;
 

@@ -131,7 +131,7 @@
     <ClCompile Include="Objects\SpriteObject\Sprite.cpp">
       <Filter>Objects\SpriteObject</Filter>
     </ClCompile>
-    <ClCompile Include="Managers\TileSet.cpp">
+    <ClCompile Include="Managers\TileSetManager.cpp">
       <Filter>Managers\TileSet</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,7 +320,7 @@
     <ClInclude Include="Objects\SpriteObject\Sprite.h">
       <Filter>Objects\SpriteObject</Filter>
     </ClInclude>
-    <ClInclude Include="Managers\TileSet.h">
+    <ClInclude Include="Managers\TileSetManager.h">
       <Filter>Managers\TileSet</Filter>
     </ClInclude>
   </ItemGroup>

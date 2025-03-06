@@ -1,8 +1,8 @@
 #pragma once
 
-class TileSet
+class TileSetManager
 {
-    DECLARE_SINGLETON(TileSet);
+    DECLARE_SINGLETON(TileSetManager);
     friend class TileMap;
 
 public:
