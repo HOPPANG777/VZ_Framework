@@ -5,18 +5,16 @@ void MapTools::Awake()
 {
     isLoaded = false;
 
-    // 초기 맵 생성
-    CreateDefaultMap();
-
     // 예시: 타일셋 매니저를 통해 타일셋을 변경 (Tilesets/Grass.png)
-    TILESET->ChangeTileMap(TexturePath + L"Tilesets/Grass.png", 11, 7);
+    TILESET->ChangeTileMap(TexturePath + L"Tilesets/tile.png", 11, 7);
 
     isLoaded = true;
 }
 
 void MapTools::Start()
 {
-    // 추가 시작 로직이 필요하면 여기에 작성
+    // 초기 맵 생성
+    CreateDefaultMap();
 }
 
 void MapTools::Destroy()
@@ -59,8 +57,7 @@ void MapTools::ImGUI()
             // spacing만 입력받고, width와 height는 계산
             ImGui::InputInt("Spacing", reinterpret_cast<int*>(&spacing));
             // spacing이 0이 아닌지 체크
-            if (spacing <= 0)
-                spacing = 1;
+            if (spacing <= 0) spacing = 10;
 
             // WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT는 전역 상수로 정의되어 있음
             width = (WIN_DEFAULT_WIDTH * 2) / spacing;

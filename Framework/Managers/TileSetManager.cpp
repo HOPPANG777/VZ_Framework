@@ -3,7 +3,7 @@
 
 TileSetManager::TileSetManager()
 {
-    Init();
+    //Init();
 }
 
 TileSetManager::~TileSetManager()
