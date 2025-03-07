@@ -16,6 +16,8 @@ void Texture2DManager::Delete()
     descs.clear();
 }
 
+// 텍스처2D를 생성하거나 따로 만들때 해당 texture2D의 데이터를 이용해서
+// 이미 해당 그림의 데이터가 있는지 확인하고 없다면 만드는 함수
 void Texture2DManager::Load(Texture2D* texture)
 {
     HRESULT hr;
@@ -40,36 +42,45 @@ void Texture2DManager::Load(Texture2D* texture)
         hr = GetMetadataFromWICFile(texture->filePath.c_str(), WIC_FLAGS_NONE, metaData);
         CHECK(hr);
     }
-
+    
+    // 해당 그림의 너비와 높이를 변수화
     UINT width = metaData.width;
     UINT height = metaData.height;
 
+    // Texture2D가 가지고있던 파일 경로 이미지의
+    // 주소, 너비, 높이를 desc에 담음
     TextureDesc desc;
     desc.filePath = texture->filePath;
     desc.width = width;
     desc.height = height;
 
+    // 만약 이미 가지고있는 descs에 이번에 만들려 하는 Texture2D의
+    // 주소, 너비, 높이가 같은 이미지 데이터가 이미 있는지 검사
     bool bExist = false;
     TextureDesc existDesc;
     for (auto& temp : descs)
     {
         if (desc == temp)
         {
+            // 주소, 너비, 높이가 같은 이미지가 있을경우
             bExist = true;
-            existDesc = temp;
+            existDesc = temp;   // 이미 있는 데이터를 exist에 넣기
             break;
         }
     }
 
+    // 텍스처 데이터가 이미 있다면
     if (bExist)
     {
         // 기존에 로드된 텍스처가 있으면 캐싱된 SRV 사용
         texture->srv = existDesc.srv;
         texture->metaData = metaData;
     }
-    else
+    else // 이전에 만든 텍스쳐 데이터가 없다면
     {
+        // 이미지 파일로 부터 텍스처 데이터를 추출하는데 사용
         ScratchImage image;
+
         if (ext == L"tga")
         {
             hr = LoadFromTGAFile(texture->filePath.c_str(), &metaData, image);
