@@ -204,6 +204,8 @@
     <ClInclude Include="Managers\CollisionManager.h" />
     <ClInclude Include="Objects\TileObject\Tile.h" />
     <ClInclude Include="Managers\TileSetManager.h" />
+    <ClInclude Include="Struct\TextureDesc.h" />
+    <ClInclude Include="Managers\Texture2DManager.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
     <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
@@ -264,6 +266,7 @@
     <ClCompile Include="Objects\TileObject\Tile.cpp" />
     <ClCompile Include="Objects\SpriteObject\Sprite.cpp" />
     <ClCompile Include="Managers\TileSetManager.cpp" />
+    <ClCompile Include="Managers\Texture2DManager.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />

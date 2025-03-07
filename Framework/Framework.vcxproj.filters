@@ -134,6 +134,9 @@
     <ClCompile Include="Managers\TileSetManager.cpp">
       <Filter>Managers\TileSet</Filter>
     </ClCompile>
+    <ClCompile Include="Managers\Texture2DManager.cpp">
+      <Filter>Managers\Texture2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -323,6 +326,12 @@
     <ClInclude Include="Managers\TileSetManager.h">
       <Filter>Managers\TileSet</Filter>
     </ClInclude>
+    <ClInclude Include="Struct\TextureDesc.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\Texture2DManager.h">
+      <Filter>Managers\Texture2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -402,6 +411,9 @@
     </Filter>
     <Filter Include="Managers\TileSet">
       <UniqueIdentifier>{1bd25161-5930-47c5-932c-ba7fc03ba138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Texture2D">
+      <UniqueIdentifier>{903804ac-7f86-4d0f-a253-90a0f3cdeb28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

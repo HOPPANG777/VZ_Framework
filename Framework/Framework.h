@@ -168,6 +168,7 @@ extern HWND gHandle;
 #define GIZMO Gizmo::Get()
 #define REALDELTA TIME->GetRealDeltaTime()
 #define TILESET TileSetManager::Get()
+#define TEXTURE2D Texture2DManager::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
@@ -197,6 +198,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Struct/UIElement.h"
 #include "Struct/FontBrushDesc.h"
 #include "Struct/FontTextDesc.h"
+#include "Struct/TextureDesc.h"
 
 //Systems
 #include "Systems/Keyboard.h"
@@ -268,6 +270,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Managers/SceneManager.h"
 #include "Managers/CollisionManager.h"
 #include "Managers/TileSetManager.h"
+#include "Managers/Texture2DManager.h"
 
 // Editor
 #include "Tools/Editor/TileMap.h"

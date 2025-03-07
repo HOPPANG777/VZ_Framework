@@ -3,7 +3,6 @@
 class TileSetManager
 {
     DECLARE_SINGLETON(TileSetManager);
-    friend class TileMap;
 
 public:
     void Init();
