@@ -14,7 +14,7 @@ TileSetManager::~TileSetManager()
 void TileSetManager::Init()
 {
     // 기본 타일셋 경로 설정
-    tilePath = TexturePath + L"tile.png";
+    tilePath = TexturePath + L"Tilesets/tile.png";
 
     // Texture2D 객체를 unique_ptr로 생성
     auto tex = make_unique<Texture2D>(tilePath);

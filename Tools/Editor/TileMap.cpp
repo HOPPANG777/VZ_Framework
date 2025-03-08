@@ -78,7 +78,7 @@ void TileMap::GenerateTileMap()
     if (width == 0 || height == 0 || spacing == 0) assert(false);
 
     // 2차원 벡터를 사용하여 각 행에 대해 vector<shared_ptr<Tile>>를 생성합니다.
-    vector<vector<shared_ptr<Tile>>> tiles;
+    //vector<vector<shared_ptr<Tile>>> tiles;
     tiles.resize(height);
 
     int index = 0;
@@ -298,8 +298,8 @@ void TileMap::Load(const string& path)
 
 Tile* TileMap::GetTile(Vector3 mPos)
 {
-    UINT x = (UINT)(mPos.x) / spacing;
-    UINT y = (UINT)(mPos.y) / spacing;
-    if (x >= width || y >= height) return nullptr;
+    UINT x = (int)(mPos.x) / spacing;
+    UINT y = (int)(mPos.y) / spacing;
+    if (x < 0 || x >= width || y < 0 || y >= height) return nullptr;
     return tiles[y][x].get();
 }
