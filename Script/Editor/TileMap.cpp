@@ -232,20 +232,20 @@ void TileMap::Load(const string& path)
         return;
     }
 
-    // 기존 타일맵 초기화
     tiles.clear();
 
     char temp[256];
 
-    // 읽기: width, height, spacing
+    // (1) width, height, spacing 읽기
     {
         fin.getline(temp, 256);
         istringstream iss(temp);
         iss >> width >> height >> spacing;
-        if (width == 0 || height == 0 || spacing == 0) assert(false);
+        if (width == 0 || height == 0 || spacing == 0)
+            assert(false);
     }
 
-    // 읽기: 타일셋 정보
+    // (2) 타일셋 정보 읽기
     {
         fin.getline(temp, 256);
         istringstream iss(temp);
@@ -256,27 +256,34 @@ void TileMap::Load(const string& path)
         TILESET->ChangeTileMap(tsPath, xCount, yCount);
     }
 
-    // 재생성: 2차원 벡터로 타일맵 생성
+    // (3) 2차원 벡터 재생성
     tiles.resize(height);
     for (UINT y = 0; y < height; y++)
     {
         tiles[y].resize(width);
         for (UINT x = 0; x < width; x++)
         {
-            Vector3 position((float)(x * spacing), (float)(y * spacing), 0.0f);
+            // 타일 생성
             auto tile = make_shared<Tile>();
-            // 읽은 UV 정보
+
+            // 위치 설정 (중요!)
+            Vector3 position((float)(x * spacing), (float)(y * spacing), 0.0f);
+            tile->SetPosition(position);
+
+            // UV 정보 읽기
             fin.getline(temp, 256);
             istringstream uvStream(temp);
             float sx, sy, ex, ey;
             uvStream >> sx >> sy >> ex >> ey;
             tile->SetStartUV(Vector2(sx, sy));
             tile->SetEndUV(Vector2(ex, ey));
+
+            // 타일을 tiles에 저장
             tiles[y][x] = tile;
         }
     }
 
-    // 백업본 생성 (디버그용)
+    // 디버그용 백업
     Save(TilePath + "After.txt");
     HelpMe::Get()->Log("타일맵 불러오기 완료!");
 }

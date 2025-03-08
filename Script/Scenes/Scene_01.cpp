@@ -21,7 +21,7 @@ void Scene_01::Awake()
 	testTypingObject->AddComponent(make_shared<TypingText>());
 	testShakeObject->AddComponent(make_shared<ShakingText>());
 
-	UINT spacing = 75;
+	UINT spacing = 25;
 	UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
 	UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
 
@@ -87,8 +87,8 @@ void Scene_01::LateUpdate() {}
 
 void Scene_01::Render()
 {
-	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 	if (tmap != nullptr) tmap->Render();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 	if (Axe != nullptr) Axe->Render();
 	if (red != nullptr) red->Render();
 }

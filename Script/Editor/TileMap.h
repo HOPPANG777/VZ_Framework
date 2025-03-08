@@ -27,6 +27,14 @@ private:
 
     // 2차원 타일 배열: rows x cols, row-major 순서
     vector<vector<shared_ptr<Tile>>> tiles;
+    
+    // 전체 버텍스 및 인덱스 수
+    UINT totalVertexCount = 0;
+    UINT totalIndexCount = 0;
+
+    // Dirty 플래그: 타일 정보가 변경되었을 때만 버텍스 버퍼 업데이트
+    bool needUpdateVB = true;
+
 
 public:
     TileMap(UINT width, UINT height, UINT spacing);
