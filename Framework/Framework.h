@@ -141,6 +141,34 @@ static CLASS_NAME* Get()									\
 	return &instance;										\
 }
 
+#define DECLARE_SINGLETON_DYNAMIC(CLASS_NAME)                   \
+private:                                                        \
+    static CLASS_NAME* instance;                                \
+    CLASS_NAME();                                               \
+    ~CLASS_NAME();                                              \
+public:                                                         \
+    CLASS_NAME(const CLASS_NAME& other) = delete;               \
+    CLASS_NAME& operator=(const CLASS_NAME& other) = delete;    \
+    CLASS_NAME(const CLASS_NAME&& other) = delete;              \
+    CLASS_NAME& operator=(const CLASS_NAME&& other) = delete;   \
+public:                                                         \
+    static CLASS_NAME* Create()                                 \
+    {                                                           \
+        if (!instance) instance = new CLASS_NAME();             \
+        return instance;                                        \
+    }                                                           \
+    static CLASS_NAME* Get()                                    \
+    {                                                           \
+        if (!instance)                                          \
+            instance = new CLASS_NAME();                        \
+        return instance;                                        \
+    }                                                           \
+    static void Delete()                                        \
+    {                                                           \
+        delete instance;                                        \
+        instance = nullptr;                                     \
+    }
+
 //ExternGlobals
 extern float gWinWidth;
 extern float gWinHeight;

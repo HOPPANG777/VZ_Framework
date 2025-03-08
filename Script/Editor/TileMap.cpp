@@ -73,6 +73,11 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing)
 
 }
 
+TileMap::~TileMap()
+{
+    tiles.clear();
+}
+
 void TileMap::GenerateTileMap()
 {
     if (width == 0 || height == 0 || spacing == 0) assert(false);
@@ -98,8 +103,7 @@ void TileMap::GenerateTileMap()
 
 void TileMap::MapVertexBuffer()
 {
-    HRESULT hr = DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
-    CHECK(hr);
+    DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
 }
 
 void TileMap::UnmapVertexBuffer()
@@ -115,29 +119,29 @@ void TileMap::UpdateVertexBuffer()
     {
         for (UINT x = 0; x < width; x++)
         {
-            auto tile = tiles[y][x];
-            if (!tile) continue;
+            shared_ptr<Tile> tile = tiles[y][x];
+            //if (!tile) continue;
 
             MapVertexBuffer();
-
-            // 각 타일에 맞게 버텍스 데이터 업데이트
-            for (auto& v : vertices)
             {
-                v.color = tile->GetColor();
-                v.index = tile->GetIndex();
+                // 각 타일에 맞게 버텍스 데이터 업데이트
+                for (VertexTile& v : vertices)
+                {
+                    v.color = tile->GetColor();
+                    v.index = tile->GetIndex();
+                }
+
+                vertices[0].uv = Vector2(tile->GetStartUV().x, tile->GetEndUV().y);
+                vertices[1].uv = tile->GetStartUV();
+                vertices[2].uv = tile->GetEndUV();
+                vertices[3].uv = Vector2(tile->GetEndUV().x, tile->GetStartUV().y);
+
+                // uv2 (추가 텍스처 좌표, 기본값)
+                vertices[0].uv2 = Vector2(0, 1);
+                vertices[1].uv2 = Vector2(0, 0);
+                vertices[2].uv2 = Vector2(1, 1);
+                vertices[3].uv2 = Vector2(1, 0);
             }
-
-            vertices[0].uv = Vector2(tile->GetStartUV().x, tile->GetEndUV().y);
-            vertices[1].uv = tile->GetStartUV();
-            vertices[2].uv = tile->GetEndUV();
-            vertices[3].uv = Vector2(tile->GetEndUV().x, tile->GetStartUV().y);
-
-            // uv2 (추가 텍스처 좌표, 기본값)
-            vertices[0].uv2 = Vector2(0, 1);
-            vertices[1].uv2 = Vector2(0, 0);
-            vertices[2].uv2 = Vector2(1, 1);
-            vertices[3].uv2 = Vector2(1, 0);
-
             UnmapVertexBuffer();
 
             world = Matrix::CreateTranslation(tile->GetPosition());

@@ -30,7 +30,7 @@ private:
 
 public:
     TileMap(UINT width, UINT height, UINT spacing);
-    ~TileMap() = default;
+    ~TileMap();
 
 public:
     void Update();
