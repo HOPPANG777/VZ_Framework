@@ -55,7 +55,6 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing)
     //inputLayout
     {
         inputLayout = make_unique<InputLayout>();
-        // VertexTile::descs와 VertexTile::count는 해당 구조체의 입력 레이아웃 정보
         inputLayout->Create(VertexTile::isDescs.data(), VertexTile::isDescs.size(), vertexShader->GetBlob());
     }
 

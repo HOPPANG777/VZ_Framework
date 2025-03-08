@@ -62,7 +62,7 @@ void MapTools::ImGUI()
             {
                 // spacing 입력 및 계산
                 ImGui::InputInt("Spacing", reinterpret_cast<int*>(&spacing));
-                if (spacing <= 0) spacing = 50;
+                //if (spacing <= 0) spacing = 50;
 
                 width = (WIN_DEFAULT_WIDTH * 2) / spacing;
                 height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
