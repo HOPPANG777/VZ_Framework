@@ -154,12 +154,15 @@ void TileMap::UpdateVertexBuffer()
 
 void TileMap::Update()
 {
-    // 마우스 위치에 해당하는 타일 선택
+    // 예시: 카메라 위치를 고려하여 마우스 좌표를 월드 좌표로 변환
     Vector3 mPos = MOUSE->GetMousePos();
+
+    // 카메라가 직교 카메라이고, GetPosition()이 카메라의 월드 위치를 반환한다고 가정하면:
+    mPos += CAMERA->GetPosition();
+
     Tile* tile = GetTile(mPos);
     if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
 
-    // 좌클릭 시 타일 색상 및 UV 변경 (TileSetManager에서 선택한 타일 정보 사용)
     if (MOUSE->Press(0x0000))
     {
         if (tile)

@@ -33,6 +33,9 @@ private:
 	Object* target = nullptr;
 
 	bool isMove = false;
-	float moveSpeed = 100.0f;
+	float moveSpeed = 150.0f;
+
+	float accelerationTime = 0.0f;
+	float currentSpeed = 0.0f; 
 };
 
