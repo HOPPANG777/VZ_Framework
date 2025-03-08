@@ -4,42 +4,16 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Editor\EditorList.h">
-      <Filter>Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\MapTools.h">
-      <Filter>Editor\MapTools</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\TileMap.h">
-      <Filter>Editor\MapTools\TileMap</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Editor\MapTools.cpp">
-      <Filter>Editor\MapTools</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\TileMap.cpp">
-      <Filter>Editor\MapTools\TileMap</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tools.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Tools.aps" />
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Editor">
-      <UniqueIdentifier>{0a626f09-3415-46dd-8982-d92e59a5aa74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\MapTools">
-      <UniqueIdentifier>{abb5ca08-d21a-4ecb-aba9-4e250d42f7fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\MapTools\TileMap">
-      <UniqueIdentifier>{13798a01-67e9-49a4-b022-7154eb78922d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Tools.ico" />

@@ -33,6 +33,8 @@ private:
 	shared_ptr<Object> testTypingObject;
 	shared_ptr<Object> testShakeObject;
 
+	unique_ptr<TileMap> tmap;
+
 	bool isColor = false;
 
 	bool isLoaded = false;

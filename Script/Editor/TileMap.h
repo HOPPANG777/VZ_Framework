@@ -44,6 +44,8 @@ public:
     void MapVertexBuffer();
     void UnmapVertexBuffer();
 
+    void UpdateVertexBuffer();
+
 public:
     void Save(const string& path);
     void Load(const string& path);

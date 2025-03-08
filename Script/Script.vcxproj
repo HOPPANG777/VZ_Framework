@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Editor\MapTools.cpp" />
+    <ClCompile Include="Editor\TileMap.cpp" />
     <ClCompile Include="Object\BezierCurveAxe.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
@@ -35,6 +37,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Editor\EditorList.h" />
+    <ClInclude Include="Editor\MapTools.h" />
+    <ClInclude Include="Editor\TileMap.h" />
     <ClInclude Include="Object\BezierCurveAxe.h" />
     <ClInclude Include="Object\JumpHoppang.h" />
     <ClInclude Include="Scenes\SceneList.h" />

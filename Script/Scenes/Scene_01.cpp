@@ -21,6 +21,16 @@ void Scene_01::Awake()
 	testTypingObject->AddComponent(make_shared<TypingText>());
 	testShakeObject->AddComponent(make_shared<ShakingText>());
 
+	UINT spacing = 75;
+	UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
+	UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+
+	tmap = make_unique<TileMap>(spacing, width, height);
+
+	string mapFilePath = "_Data/_TileData/TEST75MAP.data";
+
+	tmap->Load(mapFilePath);
+
 	isLoaded = true;
 }
 
@@ -44,6 +54,8 @@ void Scene_01::Destroy()
 	if (testTypingObject != nullptr) testTypingObject.reset();
 	if (testShakeObject != nullptr) testShakeObject.reset();
 	
+	if (tmap != nullptr) tmap.reset();
+
 	SOUNDS->RemoveSound("BGM");
 }
 
@@ -76,6 +88,7 @@ void Scene_01::LateUpdate() {}
 void Scene_01::Render()
 {
 	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
+	if (tmap != nullptr) tmap->Render();
 	if (Axe != nullptr) Axe->Render();
 	if (red != nullptr) red->Render();
 }

@@ -108,64 +108,8 @@ void TileMap::UnmapVertexBuffer()
     DC->Unmap(vertexBuffer->GetResource(), 0);
 }
 
-void TileMap::Update()
+void TileMap::UpdateVertexBuffer()
 {
-    // 예시: Ctrl+S 또는 Ctrl+L 키로 저장/불러오기 처리 (FileStream, Path 사용)
-    if (KEYBOARD->Press(VK_CONTROL))
-    {
-        if (KEYBOARD->Down('S'))
-        {
-            HelpMe::Get()->Log("타일맵 저장할 파일 이름을 입력해주세요!");
-            string tileName;
-            cin >> tileName;
-            getchar();
-            Path::CreateFolders(TilePath);
-            Save(TilePath + tileName + ".data");
-            Save(TilePath + tileName + ".txt");
-            HelpMe::Get()->Log("타일맵 파일 저장 완료");
-        }
-        if (KEYBOARD->Down('L'))
-        {
-            HelpMe::Get()->Log("타일맵 불러올 파일 이름을 입력해주세요!");
-            string tileName;
-            cin >> tileName;
-            getchar();
-            Load(TilePath + tileName + ".data");
-        }
-    }
-
-    // 마우스 위치에 해당하는 타일 선택
-    Vector3 mPos = MOUSE->GetMousePos();
-    Tile* tile = GetTile(mPos);
-    if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
-
-    // 좌클릭 시 타일 색상 및 UV 변경 (TileSetManager에서 선택한 타일 정보 사용)
-    if (MOUSE->Press(0x0000))
-    {
-        if (tile)
-        {
-            tile->SetColor(Values::Red);
-            Vector2 startUV = TILESET->selectedStartUV;
-            Vector2 endUV = startUV + TILESET->texelTileSize;
-            tile->SetStartUV(startUV);
-            tile->SetEndUV(endUV);
-        }
-    }
-}
-
-void TileMap::Render()
-{
-    vertexBuffer->SetIA();
-    indexBuffer->SetIA();
-    inputLayout->SetIA();
-    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-    vertexShader->SetShader();
-    pixelShader->SetShader();
-
-    // 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
-    DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
-
     // 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
     for (UINT y = 0; y < height; y++)
     {
@@ -203,6 +147,43 @@ void TileMap::Render()
             DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
         }
     }
+}
+
+void TileMap::Update()
+{
+    // 마우스 위치에 해당하는 타일 선택
+    Vector3 mPos = MOUSE->GetMousePos();
+    Tile* tile = GetTile(mPos);
+    if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
+
+    // 좌클릭 시 타일 색상 및 UV 변경 (TileSetManager에서 선택한 타일 정보 사용)
+    if (MOUSE->Press(0x0000))
+    {
+        if (tile)
+        {
+            tile->SetColor(Values::Red);
+            Vector2 startUV = TILESET->selectedStartUV;
+            Vector2 endUV = startUV + TILESET->texelTileSize;
+            tile->SetStartUV(startUV);
+            tile->SetEndUV(endUV);
+        }
+    }
+}
+
+void TileMap::Render()
+{
+    vertexBuffer->SetIA();
+    indexBuffer->SetIA();
+    inputLayout->SetIA();
+    DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    vertexShader->SetShader();
+    pixelShader->SetShader();
+
+    // 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
+    DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
+
+    UpdateVertexBuffer();
 }
 
 void TileMap::ImGUI()
@@ -303,3 +284,4 @@ Tile* TileMap::GetTile(Vector3 mPos)
     if (x < 0 || x >= width || y < 0 || y >= height) return nullptr;
     return tiles[y][x].get();
 }
+
