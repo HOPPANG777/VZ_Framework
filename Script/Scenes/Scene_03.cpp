@@ -7,7 +7,7 @@ void Scene_03::Awake()
 
 	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(237, 624, 0), 0.0f, TexturePath + L"Mirko1.png"));
 
-	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+	sceneNameObject = make_shared<Object>("SceneNameText", CENTER + Vector3(-540, 335, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
 	sceneNameObject->AddComponent(make_shared<Texts>());
 
 	isLoaded = true;

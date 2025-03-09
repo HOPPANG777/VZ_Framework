@@ -7,7 +7,7 @@ void Scene_04::Awake()
 
 	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"TitleScreen.png"));
 
-	startButton = make_shared<TextureRect>(Vector3(1135, 300, 0), Vector3(150, 50, 0), 0.0f, TexturePath + L"WhiteImage.png", TransformType::Rect);
+	startButton = make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 50, 0), 0.0f, TexturePath + L"WhiteImage.png", TransformType::Rect);
 	startButton->AddComponent(make_shared<Texts>());
 
 	isLoaded = true;

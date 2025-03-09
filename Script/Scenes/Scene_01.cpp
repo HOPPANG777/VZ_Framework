@@ -13,9 +13,9 @@ void Scene_01::Awake()
 
 	red->AddComponent(make_shared<MoveComponent>());
 
-	sceneNameObject = make_shared<Object>("SceneNameText", Vector3(100, 695, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
-	testTypingObject = make_shared<Object>("TestTypingText", Vector3(640, 200, 0), Vector3(500, 25, 0), 0.0f, TransformType::Rect);
-	testShakeObject = make_shared<Object>("TestShakeText", Vector3(640, 520, 0), Vector3(200, 25, 0), 0.0f, TransformType::Rect);
+	sceneNameObject = make_shared<Object>("SceneNameText", CENTER + Vector3(-540, 335, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+	testTypingObject = make_shared<Object>("TestTypingText", CENTER + Vector3(0, -200, 0), Vector3(500, 25, 0), 0.0f, TransformType::Rect);
+	testShakeObject = make_shared<Object>("TestShakeText", CENTER + Vector3(0, 200, 0), Vector3(200, 25, 0), 0.0f, TransformType::Rect);
 
 	sceneNameObject->AddComponent(make_shared<Texts>());
 	testTypingObject->AddComponent(make_shared<TypingText>());
