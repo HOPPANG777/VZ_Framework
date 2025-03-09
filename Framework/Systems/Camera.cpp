@@ -50,7 +50,7 @@ void Camera::Move()
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
-        if (KEYBOARD->Down(VK_F4))
+        if (INPUT->KeyDown(VK_F4))
         {
             // 토글: 이동 모드 On/Off
             isMove = !isMove;
@@ -103,7 +103,7 @@ void Camera::Move()
 
 const Vector3 Camera::Drag()
 {
-	Vector3 mousePos = MOUSE->GetMousePos();
+	Vector3 mousePos = INPUT->GetMousePos();
 
 	mousePos += position;
 

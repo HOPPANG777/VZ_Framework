@@ -155,7 +155,7 @@ void TileMap::UpdateVertexBuffer()
 void TileMap::Update()
 {
     // 예시: 카메라 위치를 고려하여 마우스 좌표를 월드 좌표로 변환
-    Vector3 mPos = MOUSE->GetMousePos();
+    Vector3 mPos = INPUT->GetMousePos();
 
     // 카메라가 직교 카메라이고, GetPosition()이 카메라의 월드 위치를 반환한다고 가정하면:
     mPos += CAMERA->GetPosition();
@@ -164,7 +164,7 @@ void TileMap::Update()
 
     if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
 
-    if (MOUSE->Press(0x0000))
+    if (INPUT->MousePressed(0x0000))
     {
         if (tile)
         {

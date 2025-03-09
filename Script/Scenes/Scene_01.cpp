@@ -65,13 +65,13 @@ void Scene_01::Update()
 {
 	auto rect = dynamic_pointer_cast<ColorRect>(red);
 
-	if (KEYBOARD->Down('Q'))
+	if (INPUT->KeyDown('Q'))
 	{
 		if (rect->GetColor() == BLUE) rect->SetColor(RED);
 		else if (rect->GetColor() == RED) rect->SetColor(BLUE);
 	}
 
-	if (KEYBOARD->Down(VK_F1))
+	if (INPUT->KeyDown(VK_F1))
 	{
 		SCENE->LoadScene("ClockScene");
 	}

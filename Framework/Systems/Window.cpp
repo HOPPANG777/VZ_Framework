@@ -97,7 +97,7 @@ WPARAM Window::Run()
 			TranslateMessage(&msg);
 
 			//INPUT->InputProc(msg.message, msg.lParam);
-			MOUSE->MouseProc(msg.message, msg.wParam, msg.lParam);
+			INPUT->MouseProc(msg.message, msg.wParam, msg.lParam);
 			if (IMGUI->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
 
 			// 메시지 처리함수로 전달
@@ -115,9 +115,7 @@ WPARAM Window::Run()
 
 void Window::MainRender()
 {
-	//INPUT->Update();
-	KEYBOARD->Update();
-	MOUSE->Update();
+	INPUT->Update();
 	TIME->Update();
 	SOUNDS->Update();
 	IMGUI->Update();

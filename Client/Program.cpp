@@ -51,18 +51,18 @@ void Program::Update()
 
 	SCENE->Update();
 
-	if (KEYBOARD->Down(VK_F2))
+	if (INPUT->KeyDown(VK_F2))
 	{
 		COLLISION->RenderDebug();
 	}
 
-	if (KEYBOARD->Down(VK_F3))
+	if (INPUT->KeyDown(VK_F3))
 	{
 		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
 		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
 	}
 
-	if (KEYBOARD->Down(VK_F5))
+	if (INPUT->KeyDown(VK_F5))
 	{
 		if (TIME->GetTimeScale() != 0)
 		{

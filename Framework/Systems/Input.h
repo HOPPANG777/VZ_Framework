@@ -7,34 +7,27 @@
 
 class Input
 {
-	DECLARE_SINGLETON(Input);
-
-	enum
-	{
-		KEY_INPUT_STATUS_NONE = 0,
-		KEY_INPUT_STATUS_DOWN,
-		KEY_INPUT_STATUS_UP,
-		KEY_INPUT_STATUS_PRESS
-	};
+    DECLARE_SINGLETON(Input);
 
 public:
-	void Update();
+    // 매 프레임마다 키보드와 마우스 업데이트 호출
+    void Update()
+    {
+        KEYBOARD->Update();
+        MOUSE->Update();
+    }
 
-	void InputProc(UINT message, LPARAM lParam);
+    // Keyboard 관련 래퍼 함수들
+    bool KeyDown(DWORD key) const { return KEYBOARD->Down(key); }
+    bool KeyUp(DWORD key) const { return KEYBOARD->Up(key); }
+    bool KeyPressed(DWORD key) const { return KEYBOARD->Press(key); }
 
-	bool Down(const DWORD key) const { return keyMap[key] == KEY_INPUT_STATUS_DOWN; }
-	bool Up(const DWORD key) const { return keyMap[key] == KEY_INPUT_STATUS_UP; }
-	bool Press(const DWORD key) const { return keyMap[key] == KEY_INPUT_STATUS_PRESS; }
-	bool DblClk(const DWORD key) const { return isDblClk; }
+    // Mouse 관련 래퍼 함수들
+    DirectX::SimpleMath::Vector3 GetMousePos() const { return MOUSE->GetMousePos(); }
+    bool MouseDown(DWORD button) const { return MOUSE->Down(button); }
+    bool MouseUp(DWORD button) const { return MOUSE->Up(button); }
+    bool MousePressed(DWORD button) const { return MOUSE->Press(button); }
+    LRESULT MouseProc(UINT message, WPARAM wParam, LPARAM lParam) const { return MOUSE->MouseProc(message, wParam, lParam); }
+    DirectX::SimpleMath::Vector3 GetMouseMove() const { return MOUSE->GetMoveValue(); }
 
-	Vector3 GetMousePos() const { return mousePos; }
-
-private:
-	Vector3 mousePos;
-
-	array<unsigned char, MAX_INPUT_KEY> keyState = { 0 };
-	array<unsigned char, MAX_INPUT_KEY> keyOldState = { 0 };
-	array<unsigned char, MAX_INPUT_KEY> keyMap = { 0 };
-
-	bool isDblClk = false;
 };

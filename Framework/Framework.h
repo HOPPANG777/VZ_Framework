@@ -197,6 +197,7 @@ extern HWND gHandle;
 #define REALDELTA TIME->GetRealDeltaTime()
 #define TILESET TileSetManager::Get()
 #define TEXTURE2D Texture2DManager::Get()
+#define INPUT Input::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
