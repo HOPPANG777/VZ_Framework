@@ -40,7 +40,7 @@ void Scene_01::Start()
 
 	SOUNDS->Play("BGM", 0.2f);
 
-	//CAMERA->SetTarget(red.get());
+	CAMERA->SetTarget(red.get());
 }
 
 void Scene_01::Destroy()

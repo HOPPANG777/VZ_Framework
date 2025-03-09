@@ -70,20 +70,19 @@ float4 PS(PixelInput input) : SV_Target
 	{
 		color = color; // 그림을 그리겠다.
 		
-		if (color.r <= 0.01f && color.g <= 0.01f && color.b <= 0.01f)
-			discard;
+		if (color.r <= 0.01f && color.g <= 0.01f && color.b <= 0.01f) discard;
 
 	}
 	else
+    {
 		color = input.color; // 단색으로 칠하겠다.
+    }
 	
 	// 마우스가 올라가있는 타일은
 		if (input.index == _index)
 		{
-		// 외각선을 빨갛게 칠하겠다.
-			if (input.uv2.x < 0.05f || input.uv2.x > 0.95f
-			|| input.uv2.y < 0.05f || input.uv2.y > 0.95f)
-				color = float4(1, 0, 0, 1);
+			// 외각선을 빨갛게 칠하겠다.
+			if (input.uv2.x < 0.05f || input.uv2.x > 0.95f || input.uv2.y < 0.05f || input.uv2.y > 0.95f) color = float4(1, 0, 0, 1);
 		}
 	
 		return color;

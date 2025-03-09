@@ -119,7 +119,7 @@ void TileMap::UpdateVertexBuffer()
         for (UINT x = 0; x < width; x++)
         {
             shared_ptr<Tile> tile = tiles[y][x];
-            //if (!tile) continue;
+            if (!tile) continue;
 
             MapVertexBuffer();
             {
@@ -161,6 +161,7 @@ void TileMap::Update()
     mPos += CAMERA->GetPosition();
 
     Tile* tile = GetTile(mPos);
+
     if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
 
     if (MOUSE->Press(0x0000))
