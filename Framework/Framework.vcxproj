@@ -198,6 +198,7 @@
     <ClInclude Include="Components\TypingText.h" />
     <ClInclude Include="Components\RectTransform.h" />
     <ClInclude Include="Objects\SpriteObject\Sprite.h" />
+    <ClInclude Include="Objects\TileObject\TileMap.h" />
     <ClInclude Include="Struct\LoadingStatus.h" />
     <ClInclude Include="Struct\FontBrushDesc.h" />
     <ClInclude Include="Struct\FontTextDesc.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="Objects\SpriteObject\Sprite.cpp" />
     <ClCompile Include="Managers\TileSetManager.cpp" />
     <ClCompile Include="Managers\Texture2DManager.cpp" />
+    <ClCompile Include="Objects\TileObject\TileMap.cpp" />
     <ClCompile Include="Utilities\Gizmo.cpp" />
     <ClCompile Include="Utilities\AnimationClip.cpp" />
     <ClCompile Include="Objects\TextureObject\AnimationRect.cpp" />

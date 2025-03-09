@@ -21,7 +21,7 @@ void Scene_01::Awake()
 	testTypingObject->AddComponent(make_shared<TypingText>());
 	testShakeObject->AddComponent(make_shared<ShakingText>());
 
-	UINT spacing = 25;
+	UINT spacing = 19;
 	UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
 	UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
 
@@ -40,7 +40,7 @@ void Scene_01::Start()
 
 	SOUNDS->Play("BGM", 0.2f);
 
-	CAMERA->SetTarget(red.get());
+	//CAMERA->SetTarget(red.get());
 }
 
 void Scene_01::Destroy()

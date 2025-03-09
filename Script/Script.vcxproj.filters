@@ -26,12 +26,6 @@
     <ClCompile Include="Object\BezierCurveAxe.cpp">
       <Filter>Object\BezierCurveAxe</Filter>
     </ClCompile>
-    <ClCompile Include="Editor\MapTools.cpp">
-      <Filter>Editor\MapTools</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\TileMap.cpp">
-      <Filter>Editor\MapTools\TilleMap</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -61,15 +55,6 @@
     </ClInclude>
     <ClInclude Include="Object\BezierCurveAxe.h">
       <Filter>Object\BezierCurveAxe</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\EditorList.h">
-      <Filter>Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\MapTools.h">
-      <Filter>Editor\MapTools</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\TileMap.h">
-      <Filter>Editor\MapTools\TilleMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,15 +87,6 @@
     </Filter>
     <Filter Include="Scenes\Scene_00_Loading">
       <UniqueIdentifier>{7e6ae146-8a72-4a13-87ad-25acf2116947}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor">
-      <UniqueIdentifier>{2f5fca9e-8e6e-4a76-885d-58305c492ef9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\MapTools">
-      <UniqueIdentifier>{514d547a-9abc-4397-921b-4a191e0e8cc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\MapTools\TilleMap">
-      <UniqueIdentifier>{7fb213a6-9520-4b61-b698-9671dbdab54a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

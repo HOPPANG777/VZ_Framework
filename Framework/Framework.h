@@ -97,11 +97,11 @@ using namespace SimpleMath;
 #endif
 //////////////////////////////////////////
 
-//#define WIN_DEFAULT_WIDTH 1280
-#define WIN_DEFAULT_WIDTH 1920
+#define WIN_DEFAULT_WIDTH 1280
+//#define WIN_DEFAULT_WIDTH 1920
 //#define WIN_DEFAULT_WIDTH 2560
-//#define WIN_DEFAULT_HEIGHT 720
-#define WIN_DEFAULT_HEIGHT 1080
+#define WIN_DEFAULT_HEIGHT 720
+//#define WIN_DEFAULT_HEIGHT 1080
 //#define WIN_DEFAULT_HEIGHT 1440
 
 #define CENTER_X (WIN_DEFAULT_WIDTH / 2)
@@ -287,6 +287,7 @@ const string TilePath = "_Data/_TileData/";
 #include "Objects/TextureObject/AnimationRect.h"
 #include "Objects/TileObject/Tile.h"
 #include "Objects/SpriteObject/Sprite.h"
+#include "Objects/TileObject/TileMap.h"
 
 //Camera
 #include "Systems/Camera.h"
@@ -301,4 +302,3 @@ const string TilePath = "_Data/_TileData/";
 #include "Managers/Texture2DManager.h"
 
 // Editor
-#include "Script/Editor/TileMap.h"

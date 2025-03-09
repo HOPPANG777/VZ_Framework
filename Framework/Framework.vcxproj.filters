@@ -137,6 +137,9 @@
     <ClCompile Include="Managers\Texture2DManager.cpp">
       <Filter>Managers\Texture2D</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\TileObject\TileMap.cpp">
+      <Filter>Objects\TileObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -331,6 +334,9 @@
     </ClInclude>
     <ClInclude Include="Managers\Texture2DManager.h">
       <Filter>Managers\Texture2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\TileObject\TileMap.h">
+      <Filter>Objects\TileObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
