@@ -31,6 +31,10 @@ void Program::Awake()
 		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
 		SCENE->AddScene("TitleScene", make_shared<Scene_04>());
 		SCENE->AddScene("SplashScene", make_shared<Scene_05>());
+		SCENE->AddScene("StartStage", make_shared<Scene_06>());
+		SCENE->AddScene("CombatStage", make_shared<Scene_07>());
+		SCENE->AddScene("PuzzleStage", make_shared<Scene_08>());
+		SCENE->AddScene("BossStage", make_shared<Scene_09>());
 
 		SCENE->SetSplashScene("SplashScene");
 
