@@ -23,5 +23,16 @@ public:
 private:
 	bool isLoaded = false;
 
+	vector<shared_ptr<Object>> objects;
+
+	shared_ptr<Object> player;
+	shared_ptr<Object> lumberAxe;
+
+	shared_ptr<Object> background01;
+	shared_ptr<Object> background02;
+	shared_ptr<Object> background03;
+
+	unique_ptr<TileMap> tmap;
+
 };
 

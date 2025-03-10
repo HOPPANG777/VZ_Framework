@@ -16,7 +16,7 @@ void Scene_04::Awake()
 void Scene_04::Start()
 {
 	auto startButtonComp = make_shared<Button>();
-	startButtonComp->SetOnClick([this]() { SCENE->LoadScene("GeometryScene"); });
+	startButtonComp->SetOnClick([this]() { SCENE->LoadScene("StartStage"); });
 	startButton->AddComponent(startButtonComp);
 }
 
