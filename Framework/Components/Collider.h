@@ -14,7 +14,7 @@ public:
 
     Type GetType() const { return type; }
 
-    void SetCollisionCallback(function<void(Collider*)> callback)
+    void SetCollision(function<void(Collider*)> callback)
     {
         collisionCallback = callback;
     }
