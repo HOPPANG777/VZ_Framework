@@ -14,9 +14,9 @@ public:
 
     Type GetType() const { return type; }
 
-    void SetCollision(function<void(Collider*)> callback)
+    void SetCollision(function<void(Collider*)> setCollision)
     {
-        collisionCallback = callback;
+        collisionCallback = setCollision;
     }
 
     virtual bool IsColliding(const Collider* other) const = 0;
