@@ -34,5 +34,9 @@ private:
 
 	unique_ptr<TileMap> tmap;
 
+	shared_ptr<Object> testPlayer;
+
+	Vector3 testPlayerVelocity = Vector3::Zero; // testPlayer의 수직(및 필요시 전체) 속도
+
 };
 
