@@ -28,6 +28,7 @@ const Color Values::Magenta = Color(1, 0, 1, 1);
 const Color Values::Cyan = Color(0, 1, 1, 1);
 const Color Values::Black = Color(0, 0, 0, 1);
 const Color Values::White = Color(1, 1, 1, 1);
+const Color Values::Transparent = Color(0, 0, 0, 0);
 //const Color Values::ClearColor = 0xFF555566;
 
 const Matrix Values::Identity = { 1, 0, 0, 0,

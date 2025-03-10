@@ -1,6 +1,6 @@
 #pragma once
 
-class Tile
+class Tile  
 {
 private:
     Vector3 position = Values::ZeroVec3;

@@ -30,6 +30,7 @@ public:
 	const static Color Black;
 	const static Color White;
 	const static Color ClearColor;
+	const static Color Transparent;
 
 	const static Matrix Identity;
 };

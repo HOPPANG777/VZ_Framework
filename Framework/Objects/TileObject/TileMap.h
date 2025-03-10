@@ -19,6 +19,8 @@ private:
 
     unique_ptr<IndexNumBuffer> indexNumBuffer;
     
+    unique_ptr<ColorBuffer> colorBuffer;
+
     Matrix world = Values::Identity;
 
     UINT width = 0, height = 0, spacing = 0;
@@ -35,9 +37,10 @@ private:
     // Dirty 플래그: 타일 정보가 변경되었을 때만 버텍스 버퍼 업데이트
     bool needUpdateVB = true;
 
+    bool editNow = false;
 
 public:
-    TileMap(UINT width, UINT height, UINT spacing);
+    TileMap(UINT width, UINT height, UINT spacing, bool editNow = false);
     ~TileMap();
 
 public:

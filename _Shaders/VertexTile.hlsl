@@ -34,6 +34,12 @@ cbuffer VPBuffer : register(b1)
 	matrix _projection;
 };
 
+// 색상 변환 상수 버퍼 (슬롯 b2)
+cbuffer ColorBuffer : register(b2)
+{
+    float4 Color; // 예를 들어, (1.0, 0.5, 0.5, 1.0) 등으로 지정
+};
+
 cbuffer IndexNumBuffer : register(b0)
 {
 	uint _index;
@@ -64,29 +70,31 @@ SamplerState _samp : register(s0);
 
 float4 PS(PixelInput input) : SV_Target
 {
-	float4 color = _sourceTex.Sample(_samp, (float2) input.uv);
-	
-	if (input.uv.x > 0.0f || input.uv.y > 0.0f)
-	{
-		color = color; // 그림을 그리겠다.
-		
-		if (color.r <= 0.01f && color.g <= 0.01f && color.b <= 0.01f) discard;
+    float4 color = _sourceTex.Sample(_samp, input.uv);
 
-	}
-	else
+    if (input.uv.x > 0.0f || input.uv.y > 0.0f)
     {
-		color = input.color; // 단색으로 칠하겠다.
+        if (color.r <= 0.01f && color.g <= 0.01f && color.b <= 0.01f) discard;
     }
-	
-	// 마우스가 올라가있는 타일은
-		if (input.index == _index)
-		{
-			// 외각선을 빨갛게 칠하겠다.
-			if (input.uv2.x < 0.05f || input.uv2.x > 0.95f || input.uv2.y < 0.05f || input.uv2.y > 0.95f) color = float4(1, 0, 0, 1);
-		}
-	
-		return color;
-	}
+    else
+    {
+        color = input.color;
+    }
+
+    // 마우스가 올라있는 타일(_index가 유효하고 input.index와 일치하는 경우)에 한해서 테두리 효과 적용
+    if (_index != 0xFFFFFFFF && input.index == _index)
+    {
+        // 테두리 영역: uv2 값이 0.05 이하 또는 0.95 이상인 경우
+        float borderThickness = 0.05f;
+        if (input.uv2.x < borderThickness || input.uv2.x > (1.0f - borderThickness) || input.uv2.y < borderThickness || input.uv2.y > (1.0f - borderThickness))
+        {
+            // 테두리 효과: 빨간색으로 출력
+            color = float4(1, 0, 0, 1);
+        }
+    }
+    
+    return color;
+}
 
 /*
 Semantic : 세멘틱

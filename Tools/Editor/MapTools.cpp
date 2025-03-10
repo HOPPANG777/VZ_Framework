@@ -114,5 +114,5 @@ void MapTools::ImGUI()
 void MapTools::CreateDefaultMap()
 {
     // 货肺款 鸥老甘 积己 (mapWidth x mapHeight, spacing 荤侩)
-    tmap = make_unique<TileMap>(width, height, spacing);
+    tmap = make_unique<TileMap>(width, height, spacing, true);
 }

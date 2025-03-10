@@ -21,13 +21,13 @@ void Scene_01::Awake()
 	testTypingObject->AddComponent(make_shared<TypingText>());
 	testShakeObject->AddComponent(make_shared<ShakingText>());
 
-	UINT spacing = 19;
+	UINT spacing = 28;
 	UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
 	UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
 
 	tmap = make_unique<TileMap>(spacing, width, height);
 
-	string mapFilePath = "_Data/_TileData/TEST75MAP.data";
+	string mapFilePath = "_Data/_TileData/TestMap.data";
 
 	tmap->Load(mapFilePath);
 
@@ -75,6 +75,8 @@ void Scene_01::Update()
 	{
 		SCENE->LoadScene("ClockScene");
 	}
+
+	if (tmap != nullptr) tmap->Update();
 
 	if (testTypingObject != nullptr) testTypingObject->Update();
 

@@ -1,8 +1,8 @@
 #include "Framework.h"
 #include "TileMap.h"
 
-TileMap::TileMap(UINT width, UINT height, UINT spacing)
-    : width(width), height(height), spacing(spacing)
+TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
+    : width(width), height(height), spacing(spacing), editNow(editNow)
 {
     // 타일셋(이미지) 관련 설정은 TileSetManager 싱글톤을 사용
     // 타일셋 매니저는 내부에서 텍스처(SRV)와 타일 분할 정보를 관리합니다.
@@ -70,6 +70,10 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing)
         indexNumBuffer->SetIndex(0);
     }
 
+    // ColorBuffer 생성
+    {
+        colorBuffer = make_unique<ColorBuffer>();
+    }
 }
 
 TileMap::~TileMap()
@@ -154,27 +158,38 @@ void TileMap::UpdateVertexBuffer()
 
 void TileMap::Update()
 {
-    // 예시: 카메라 위치를 고려하여 마우스 좌표를 월드 좌표로 변환
-    Vector3 mPos = INPUT->GetMousePos();
-
-    // 카메라가 직교 카메라이고, GetPosition()이 카메라의 월드 위치를 반환한다고 가정하면:
-    mPos += CAMERA->GetPosition();
-
-    Tile* tile = GetTile(mPos);
-
-    if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
-
-    if (INPUT->MousePressed(0x0000))
+    if (editNow == true)
     {
-        if (tile)
+        // 예시: 카메라 위치를 고려하여 마우스 좌표를 월드 좌표로 변환
+        Vector3 mPos = INPUT->GetMousePos();
+
+        // 카메라가 직교 카메라이고, GetPosition()이 카메라의 월드 위치를 반환한다고 가정하면:
+        mPos += CAMERA->GetPosition();
+
+        Tile* tile = GetTile(mPos);
+
+        if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
+
+        // 클릭 이벤트 처리 등 다른 입력 로직은 필요에 따라 여기에 추가
+        // 예: 좌클릭 시 타일의 UV를 변경하는 등의 편집 작업
+        if (INPUT->MousePressed(0x0000))
         {
-            tile->SetColor(Values::Red);
-            Vector2 startUV = TILESET->selectedStartUV;
-            Vector2 endUV = startUV + TILESET->texelTileSize;
-            tile->SetStartUV(startUV);
-            tile->SetEndUV(endUV);
+            if (tile)
+            {
+                // 편집 작업은 별도로 처리(예: UV 변경 등)
+                Vector2 startUV = TILESET->selectedStartUV;
+                Vector2 endUV = startUV + TILESET->texelTileSize;
+                tile->SetStartUV(startUV);
+                tile->SetEndUV(endUV);
+            }
         }
     }
+    else
+    {
+        // 타일 위에 없으면 무효값(예: UINT_MAX)으로 설정
+        indexNumBuffer->SetIndex(0xFFFFFFFF);
+    }
+
 }
 
 void TileMap::Render()
@@ -212,16 +227,20 @@ void TileMap::Save(const string& path)
     string yCount = to_string(TILESET->GetYCount());
     fout << imagePath << ' ' << xCount << ' ' << yCount << endl;
 
-    // 각 타일의 UV 정보를 row-major 순서로 저장
+    // 각 타일의 UV 정보를 row-major 순서로 저장하면서,
+    // 타일이 "빈 타일"이면 플래그 0, 아니면 1과 함께 UV정보 저장
     for (UINT y = 0; y < height; y++)
     {
         for (UINT x = 0; x < width; x++)
         {
             auto tile = tiles[y][x];
-            fout    << to_string(tile->GetStartUV().x)  << ' '
-                    << to_string(tile->GetStartUV().y)  << ' '
-                    << to_string(tile->GetEndUV().x)    << ' '
-                    << to_string(tile->GetEndUV().y)    << endl;
+            // 예를 들어, 빈 타일은 색상이 기본 검은색(혹은 UV가 모두 0)으로 설정되어 있다고 가정
+            bool isEmpty = (tile->GetStartUV() == Vector2(0, 0) && tile->GetEndUV() == Vector2(0, 0));
+                fout    << (isEmpty ? "0 " : "1 ");
+                fout    << to_string(tile->GetStartUV().x)  << ' '
+                        << to_string(tile->GetStartUV().y)  << ' '
+                        << to_string(tile->GetEndUV().x)    << ' '
+                        << to_string(tile->GetEndUV().y)    << endl;
         }
     }
 }
@@ -236,7 +255,6 @@ void TileMap::Load(const string& path)
     }
 
     tiles.clear();
-
     char temp[256];
 
     // (1) width, height, spacing 읽기
@@ -244,8 +262,7 @@ void TileMap::Load(const string& path)
         fin.getline(temp, 256);
         istringstream iss(temp);
         iss >> width >> height >> spacing;
-        if (width == 0 || height == 0 || spacing == 0)
-            assert(false);
+        if (width == 0 || height == 0 || spacing == 0) assert(false);
     }
 
     // (2) 타일셋 정보 읽기
@@ -259,34 +276,44 @@ void TileMap::Load(const string& path)
         TILESET->ChangeTileMap(tsPath, xCount, yCount);
     }
 
-    // (3) 2차원 벡터 재생성
+    // (3) 2차원 벡터 재생성 및 타일 생성
     tiles.resize(height);
+    int index = 0;
     for (UINT y = 0; y < height; y++)
     {
         tiles[y].resize(width);
         for (UINT x = 0; x < width; x++)
         {
-            // 타일 생성
             auto tile = make_shared<Tile>();
-
-            // 위치 설정 (중요!)
-            Vector3 position((float)(x * spacing), (float)(y * spacing), 0.0f);
+            // 위치 설정
+            Vector3 position(static_cast<float>(x * spacing), static_cast<float>(y * spacing), 0.0f);
             tile->SetPosition(position);
+            tile->SetIndex(index++);
 
-            // UV 정보 읽기
+            // UV 정보와 활성 플래그 읽기
             fin.getline(temp, 256);
             istringstream uvStream(temp);
+            int activeFlag;
             float sx, sy, ex, ey;
-            uvStream >> sx >> sy >> ex >> ey;
-            tile->SetStartUV(Vector2(sx, sy));
-            tile->SetEndUV(Vector2(ex, ey));
+            uvStream >> activeFlag >> sx >> sy >> ex >> ey;
 
-            // 타일을 tiles에 저장
+            if (activeFlag == 1)
+            {
+                tile->SetStartUV(Vector2(sx, sy));
+                tile->SetEndUV(Vector2(ex, ey));
+                // 저장 시 빨간색이 임시로 설정되었더라도, 불러올 때는 기본 색상(예: 흰색)으로 덮어씁니다.
+                tile->SetColor(Values::White);
+            }
+            else
+            {
+                // 빈 타일은 투명하게 처리
+                tile->SetColor(Values::Transparent);
+            }
             tiles[y][x] = tile;
         }
     }
 
-    // 디버그용 백업
+    // 디버그용 백업 (원하는 경우)
     Save(TilePath + "After.txt");
     HelpMe::Get()->Log("타일맵 불러오기 완료!");
 }
