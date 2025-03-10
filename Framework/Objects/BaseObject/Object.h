@@ -61,6 +61,13 @@ public:
 	Vector3 GetPosition() const;
 	Vector3 GetScale() const;
 	float GetRotation() const;
+
+public:
+	void SetPosition(const Vector3& position);
+	void SetScale(const Vector3& scale);
+	void SetRotation(const float& rotation);
+
+public:
 	RECT GetRect();
 	RECT GetCorrectedRect();
 

@@ -146,6 +146,33 @@ float Object::GetRotation() const
     return trans ? trans->GetRotation() : 0.0f;
 }
 
+void Object::SetPosition(const Vector3& position)
+{
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->SetPosition(position);
+
+    auto trans = GetComponent<Transform>("Transform");
+    return trans->SetPosition(position);
+}
+
+void Object::SetScale(const Vector3& scale)
+{
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->SetScale(scale);
+
+    auto trans = GetComponent<Transform>("Transform");
+    return trans->SetScale(scale);
+}
+
+void Object::SetRotation(const float& rotation)
+{
+    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    if (rectTrans) return rectTrans->SetRotation(rotation);
+
+    auto trans = GetComponent<Transform>("Transform");
+    return trans->SetRotation(rotation);
+}
+
 RECT Object::GetRect()
 {
     auto rectTrans = GetComponent<RectTransform>("RectTransform");
