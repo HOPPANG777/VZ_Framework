@@ -186,11 +186,13 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\AnimationMove.h" />
     <ClInclude Include="Components\Button.h" />
     <ClInclude Include="Components\Animator.h" />
     <ClInclude Include="Components\BoxCollider.h" />
     <ClInclude Include="Components\CircleCollider.h" />
     <ClInclude Include="Components\Collider.h" />
+    <ClInclude Include="Enum\UnitAnimationType.h" />
     <ClInclude Include="Interfaces\IColorable.h" />
     <ClInclude Include="Components\Texts.h" />
     <ClInclude Include="Components\ShakingText.h" />
@@ -254,6 +256,7 @@
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\AnimationMove.cpp" />
     <ClCompile Include="Components\Button.cpp" />
     <ClCompile Include="Components\Animator.cpp" />
     <ClCompile Include="Components\BoxCollider.cpp" />

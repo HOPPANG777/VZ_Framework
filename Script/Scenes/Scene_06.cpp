@@ -21,7 +21,7 @@ void Scene_06::Awake()
 
 	objects[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(5000, 1, 0), GREEN));
 	testPlayer->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(118.5, 312, 0), BLUE));
-	testPlayer->AddComponent(make_shared<MoveComponent>(true));
+	testPlayer->AddComponent(make_shared<MoveComponent>());
 
 	//TileMap
 	{

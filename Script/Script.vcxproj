@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Object\LumberjackPlayer.cpp" />
+    <ClCompile Include="Object\UnitBase.cpp" />
     <ClCompile Include="Object\BezierCurveAxe.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
@@ -40,7 +40,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Object\LumberjackPlayer.h" />
+    <ClInclude Include="Object\UnitBase.h" />
     <ClInclude Include="Object\BezierCurveAxe.h" />
     <ClInclude Include="Object\JumpHoppang.h" />
     <ClInclude Include="Scenes\SceneList.h" />

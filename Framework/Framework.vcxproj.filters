@@ -140,6 +140,9 @@
     <ClCompile Include="Objects\TileObject\TileMap.cpp">
       <Filter>Objects\TileObject</Filter>
     </ClCompile>
+    <ClCompile Include="Components\AnimationMove.cpp">
+      <Filter>Components\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -338,6 +341,12 @@
     <ClInclude Include="Objects\TileObject\TileMap.h">
       <Filter>Objects\TileObject</Filter>
     </ClInclude>
+    <ClInclude Include="Components\AnimationMove.h">
+      <Filter>Components\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum\UnitAnimationType.h">
+      <Filter>Enum</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -420,6 +429,9 @@
     </Filter>
     <Filter Include="Managers\Texture2D">
       <UniqueIdentifier>{903804ac-7f86-4d0f-a253-90a0f3cdeb28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enum">
+      <UniqueIdentifier>{8823b7f9-477d-4b4d-831f-f730a602e7df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
