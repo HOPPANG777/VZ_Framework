@@ -3,7 +3,7 @@
 class BoxCollider : public Collider
 {
 public:
-    BoxCollider(const string& name, const Vector3& center, const Vector3& size, const Color& color = GREEN) : Collider(name, Type::Box), center(center), size(size), color(color) {}
+    BoxCollider(const Vector3& center, const Vector3& size, const Color& color = GREEN) : Collider("BoxCollider", Type::Box), center(center), size(size), color(color) {}
     ~BoxCollider() override = default;
 
     // Component 상속

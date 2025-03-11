@@ -38,6 +38,9 @@
     <ClCompile Include="Scenes\Scene_09.cpp">
       <Filter>Scenes\Scene_09_BossStage</Filter>
     </ClCompile>
+    <ClCompile Include="Object\LumberjackPlayer.cpp">
+      <Filter>Object\LumberjackPlayer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Scenes\Scene_09.h">
       <Filter>Scenes\Scene_09_BossStage</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\LumberjackPlayer.h">
+      <Filter>Object\LumberjackPlayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +129,9 @@
     </Filter>
     <Filter Include="Scenes\Scene_09_BossStage">
       <UniqueIdentifier>{9842f30f-39ed-4496-83f1-0d39299931c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\LumberjackPlayer">
+      <UniqueIdentifier>{d169aade-f96e-449a-8c24-32491c5d6a6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

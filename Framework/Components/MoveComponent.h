@@ -3,7 +3,7 @@
 class MoveComponent : public Component
 {
 public:
-	MoveComponent(const float maxSpeed = 300.0f, const string& name = "Move") : Component(name), maxSpeed(maxSpeed) {}
+	MoveComponent(const bool sideView = false, const float maxSpeed = 300.0f, const string& name = "Move") : Component(name), sideView(sideView), maxSpeed(maxSpeed) {}
 	~MoveComponent() override = default;
 
 public:
@@ -17,6 +17,7 @@ public:
 private:
 	float maxSpeed = 300.0f;
 	float speed = maxSpeed;
+	bool sideView = false;
 	UINT keyCount = 0;
 
 };

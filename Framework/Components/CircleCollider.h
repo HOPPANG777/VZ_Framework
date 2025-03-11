@@ -3,7 +3,7 @@
 class CircleCollider : public Collider
 {
 public:
-    CircleCollider(const string& name, const Vector3& center, float radius, const Color& color = GREEN) : Collider(name, Type::Circle), center(center), radius(radius), color(color) {}
+    CircleCollider(const Vector3& center, float radius, const Color& color = GREEN) : Collider("CircleCollider", Type::Circle), center(center), radius(radius), color(color) {}
     ~CircleCollider() override = default;
 
     // Component을(를) 통해 상속됨
