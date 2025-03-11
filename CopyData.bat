@@ -44,10 +44,10 @@ REM xcopy 옵션 설명:
 REM /E - 모든 하위 디렉토리 및 빈 디렉토리 포함
 REM /I - 대상이 디렉토리일 경우 묻지 않음
 REM /Y - 기존 파일 덮어쓰기 확인하지 않음
-xcopy "%SOURCE_DIR%_Textures" "%DEST_DIR%\_Textures" /E /I /Y
-xcopy "%SOURCE_DIR%_Sounds" "%DEST_DIR%\_Sounds" /E /I /Y
-xcopy "%SOURCE_DIR%_TileData" "%DEST_DIR%\_TileData" /E /I /Y
-xcopy "%SOURCE_DIR%_Shaders" "%DEST_DIR%\_Shaders" /E /I /Y
-xcopy "%SOURCE_DIR%_Fonts" "%DEST_DIR%\_Fonts" /E /I /Y
+xcopy "%SOURCE_DIR%_Data\_Textures" "%DEST_DIR%\_Textures" /E /I /Y
+xcopy "%SOURCE_DIR%_Data\_Sounds" "%DEST_DIR%\_Sounds" /E /I /Y
+xcopy "%SOURCE_DIR%_Data\_TileData" "%DEST_DIR%\_TileData" /E /I /Y
+xcopy "%SOURCE_DIR%_Data\_Shaders" "%DEST_DIR%\_Shaders" /E /I /Y
+xcopy "%SOURCE_DIR%_Data\_Fonts" "%DEST_DIR%\_Fonts" /E /I /Y
 
 echo 복사 완료.
