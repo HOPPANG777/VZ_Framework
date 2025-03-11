@@ -73,25 +73,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\</LibraryPath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\</LibraryPath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\</LibraryPath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\</LibraryPath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
@@ -165,13 +165,13 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../_Libraries/;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../_Data/_Libraries/;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>if "$(Platform)" == "x64" (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
 
