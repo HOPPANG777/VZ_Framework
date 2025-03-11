@@ -7,6 +7,7 @@ void MapTools::Awake()
 
     // 예시: 타일셋 매니저를 통해 타일셋을 변경 (Tilesets/Grass.png)
     TILESET->ChangeTileMap(TexturePath + L"Tilesets/tile.png", 11, 7);
+    //TILESET->ChangeTileMap(TexturePath + L"Tilesets/tile1.png", 21, 15);
 
     isLoaded = true;
 }

@@ -6,10 +6,10 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 {
     // 타일셋(이미지) 관련 설정은 TileSetManager 싱글톤을 사용
     // 타일셋 매니저는 내부에서 텍스처(SRV)와 타일 분할 정보를 관리합니다.
-    TILESET->Init();
+    //TILESET->Init();
 
     // 타일맵 생성 (2차원 vector 형태)
-    GenerateTileMap();
+    GenerateTileMap(); 
 
     //vertices
     {

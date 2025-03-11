@@ -28,9 +28,10 @@ private:
 	shared_ptr<Object> player;
 	shared_ptr<Object> lumberAxe;
 
-	shared_ptr<Object> background01;
-	shared_ptr<Object> background02;
-	shared_ptr<Object> background03;
+	shared_ptr<Object> bgLayer[5];
+	shared_ptr<Object> bgLayerDup[5];
+	Vector3 bgOrigin[5];
+	Vector3 bgOriginDup[5];
 
 	unique_ptr<TileMap> tmap;
 
