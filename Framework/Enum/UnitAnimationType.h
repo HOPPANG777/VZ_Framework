@@ -30,5 +30,8 @@ enum class UnitAnimationType
 	HIT_R,
 	HIT_L,
 	COLLECT_R,
-	COLLECT_L
+	COLLECT_L,
+	AXE_THROW_PREPARE,
+	AXE_RETURN,
+	AXE_THROW
 };

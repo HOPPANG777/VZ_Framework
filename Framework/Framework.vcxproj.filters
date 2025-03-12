@@ -143,6 +143,9 @@
     <ClCompile Include="Components\AnimationMove.cpp">
       <Filter>Components\Move</Filter>
     </ClCompile>
+    <ClCompile Include="Components\PlayerMove.cpp">
+      <Filter>Components\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="Enum\UnitAnimationType.h">
       <Filter>Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PlayerMove.h">
+      <Filter>Components\Move</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

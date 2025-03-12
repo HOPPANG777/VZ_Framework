@@ -229,6 +229,9 @@ const string TilePath = "../../../_Data/_TileData/";
 #include "Struct/FontTextDesc.h"
 #include "Struct/TextureDesc.h"
 
+//Enum
+#include "Enum/UnitAnimationType.h"
+
 //Systems
 #include "Systems/Keyboard.h"
 #include "Systems/Mouse.h"
@@ -276,6 +279,8 @@ const string TilePath = "../../../_Data/_TileData/";
 #include "Components/Animator.h"
 #include "Components/RectTransform.h"
 #include "Components/Button.h"
+#include "Components/AnimationMove.h"
+#include "Components/PlayerMove.h"
 
 //Object
 #include "Objects/BaseObject/Object.h"

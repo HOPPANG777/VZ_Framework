@@ -23,7 +23,7 @@ public:
 private:
 	bool isLoaded = false;
 
-	vector<shared_ptr<Object>> objects;
+	vector<shared_ptr<Object>> floor;
 
 	shared_ptr<Object> player;
 	shared_ptr<Object> lumberAxe;
