@@ -7,7 +7,7 @@ void Scene_06::Awake()
 
 	floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-640, -330, 0), 5000, 0.0f, CLEAR));
 
-	testPlayer = make_shared<TextureRect>(CENTER + Vector3(-540, -150, 0), Vector3(118.5, 312, 0), 0.0f, TexturePath + L"Mirko1.png");
+	testPlayer = make_shared<TextureRect>(CENTER + Vector3(-540, -342, 0), Vector3(118.5, 312, 0), 0.0f, TexturePath + L"Mirko1.png");
 
 	// 배경 레이어 2개씩 생성
 	for (int i = 0; i < 5; i++)
