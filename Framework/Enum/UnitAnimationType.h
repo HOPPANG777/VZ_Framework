@@ -29,6 +29,8 @@ enum class UnitAnimationType
 	CROUCH_ATTACK_L,
 	HIT_R,
 	HIT_L,
+	DYING,
+	DIE,
 	COLLECT_R,
 	COLLECT_L,
 	AXE_THROW_PREPARE,

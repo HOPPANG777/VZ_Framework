@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component\EnemyAI.cpp" />
     <ClCompile Include="Object\UnitBase.cpp" />
     <ClCompile Include="Object\BezierCurveAxe.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp" />
+    <ClCompile Include="Object\PlayerUnit.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
     <ClCompile Include="Scenes\Scene_01.cpp" />
     <ClCompile Include="Scenes\Scene_02.cpp" />
@@ -40,9 +42,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Object\UnitBase.h" />
     <ClInclude Include="Object\BezierCurveAxe.h" />
     <ClInclude Include="Object\JumpHoppang.h" />
+    <ClInclude Include="Object\PlayerUnit.h" />
     <ClInclude Include="Scenes\SceneList.h" />
     <ClInclude Include="Scenes\Scene_00.h" />
     <ClInclude Include="Scenes\Scene_01.h" />

@@ -41,6 +41,12 @@
     <ClCompile Include="Object\UnitBase.cpp">
       <Filter>Object\Unit</Filter>
     </ClCompile>
+    <ClCompile Include="Object\PlayerUnit.cpp">
+      <Filter>Object\Unit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\EnemyAI.cpp">
+      <Filter>Component\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -85,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="Object\UnitBase.h">
       <Filter>Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\PlayerUnit.h">
+      <Filter>Object\Unit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\EnemyAI.h">
+      <Filter>Component\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +144,15 @@
     </Filter>
     <Filter Include="Object\Unit">
       <UniqueIdentifier>{d169aade-f96e-449a-8c24-32491c5d6a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Player">
+      <UniqueIdentifier>{4dbf3130-4dc2-4f40-8f29-44ea7d060ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{5c487cbd-1aed-4970-8988-a2153c0d9a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Enemy">
+      <UniqueIdentifier>{4d125b92-cb12-4fc6-8bcf-6babfc05614b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
