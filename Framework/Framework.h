@@ -228,6 +228,7 @@ const string TilePath = "../../../_Data/_TileData/";
 #include "Struct/FontBrushDesc.h"
 #include "Struct/FontTextDesc.h"
 #include "Struct/TextureDesc.h"
+#include "Struct/WinDesc.h"
 
 //Enum
 #include "Enum/UnitAnimationType.h"

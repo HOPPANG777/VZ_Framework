@@ -353,6 +353,9 @@
     <ClInclude Include="Components\PlayerMove.h">
       <Filter>Components\Move</Filter>
     </ClInclude>
+    <ClInclude Include="Struct\WinDesc.h">
+      <Filter>Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

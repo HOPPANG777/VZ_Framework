@@ -210,6 +210,7 @@
     <ClInclude Include="Managers\TileSetManager.h" />
     <ClInclude Include="Struct\TextureDesc.h" />
     <ClInclude Include="Managers\Texture2DManager.h" />
+    <ClInclude Include="Struct\WinDesc.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
     <ClInclude Include="Struct\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
