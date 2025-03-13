@@ -5,17 +5,6 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{10003D09-6081-4E10-AA38-E5C41A7B4263}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{590625FE-F9EC-419E-80D1-D7876094078F}"
-	ProjectSection(SolutionItems) = preProject
-		_Shaders\Color.hlsl = _Shaders\Color.hlsl
-		_Shaders\Texture.hlsl = _Shaders\Texture.hlsl
-		_Shaders\TextureAlpha.hlsl = _Shaders\TextureAlpha.hlsl
-		_Shaders\TextureShader.hlsl = _Shaders\TextureShader.hlsl
-		_Shaders\VertexColor.hlsl = _Shaders\VertexColor.hlsl
-		_Shaders\VertexTexture.hlsl = _Shaders\VertexTexture.hlsl
-		_Shaders\VertexTile.hlsl = _Shaders\VertexTile.hlsl
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Script", "Script\Script.vcxproj", "{3C26F10E-6EF1-4A45-A635-4D82FFA32B18}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxproj", "{001D3150-49BC-4804-BA4D-6565D20E54EB}"
@@ -28,6 +17,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tools", "Tools\Tools.vcxpro
 	ProjectSection(ProjectDependencies) = postProject
 		{10003D09-6081-4E10-AA38-E5C41A7B4263} = {10003D09-6081-4E10-AA38-E5C41A7B4263}
 		{3C26F10E-6EF1-4A45-A635-4D82FFA32B18} = {3C26F10E-6EF1-4A45-A635-4D82FFA32B18}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{2A3A057F-5D22-31FD-628C-DF5EF75AEF1E}"
+	ProjectSection(SolutionItems) = preProject
+		_Data\_Shaders\Color.hlsl = _Data\_Shaders\Color.hlsl
+		_Data\_Shaders\Texture.hlsl = _Data\_Shaders\Texture.hlsl
+		_Data\_Shaders\TextureAlpha.hlsl = _Data\_Shaders\TextureAlpha.hlsl
+		_Data\_Shaders\TextureShader.hlsl = _Data\_Shaders\TextureShader.hlsl
+		_Data\_Shaders\VertexColor.hlsl = _Data\_Shaders\VertexColor.hlsl
+		_Data\_Shaders\VertexTexture.hlsl = _Data\_Shaders\VertexTexture.hlsl
+		_Data\_Shaders\VertexTile.hlsl = _Data\_Shaders\VertexTile.hlsl
 	EndProjectSection
 EndProject
 Global

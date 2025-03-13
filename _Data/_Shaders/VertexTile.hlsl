@@ -40,7 +40,7 @@ cbuffer ColorBuffer : register(b2)
     float4 Color; // 예를 들어, (1.0, 0.5, 0.5, 1.0) 등으로 지정
 };
 
-cbuffer IndexNumBuffer : register(b0)
+cbuffer IndexNumBuffer : register(b3)
 {
 	uint _index;
 }

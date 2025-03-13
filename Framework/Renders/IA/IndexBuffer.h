@@ -17,6 +17,7 @@ public:
 		D3D11_BUFFER_DESC desc = { 0 };
 
 		desc.Usage = usage;
+		//desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		desc.ByteWidth = stride * count;
 
