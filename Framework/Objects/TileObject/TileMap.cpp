@@ -14,7 +14,8 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
     //vertices
     {
         // 타일 하나를 그리기 위한 기본 버텍스 데이터 (사각형)
-        vertices.resize(4);
+        //vertices.resize(4);
+        vertices.assign(4, VertexTile());
 
         vertices[0].position = Values::ZeroVec3;
         vertices[1].position = Vector3(0.0f, (float)spacing, 0.0f);
@@ -38,7 +39,7 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
     //indexBuffer
     {
         indexBuffer = make_unique<IndexBuffer>();
-        indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
+        indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE, true);
     }
     
     //vertexBuffer
@@ -69,53 +70,6 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
     {
         indexNumBuffer = make_unique<IndexNumBuffer>();
         indexNumBuffer->SetIndex(0);
-    }
-
-    //RenderState
-    {
-        D3D11_RASTERIZER_DESC desc;
-        ZeroMemory(&desc, sizeof(D3D11_RASTERIZER_DESC));
-
-        // CullMode : 그리지 않을 부분 설정
-        // d3d11_cull_back == 뒷면 지우겠다. (반시계 방향 안그림)
-        desc.CullMode = D3D11_CULL_BACK;
-        //desc.CullMode = D3D11_CULL_NONE;
-
-        // FillMode : 체우는 방식 설정
-        // d3d11_fill_solid == 전부 체우겠다. (빈공간 안만든다)
-        desc.FillMode = D3D11_FILL_SOLID;
-
-        // 시계방향 설정 (false == 시계 방향 // true == 반 시계 방향)
-        desc.FrontCounterClockwise = false;
-
-        HRESULT hr = DEVICE->CreateRasterizerState(&desc, &rs);
-        CHECK(hr);
-    }
-
-    // Sampler
-    {
-        D3D11_SAMPLER_DESC desc;
-        RenderStates::GetSamplerDesc(&desc);
-        RenderStates::CreateSampler(&desc, &sampler[0]);
-
-        // 선형보간
-        desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-        RenderStates::CreateSampler(&desc, &sampler[1]);
-    }
-
-    // Blend
-    {
-        D3D11_BLEND_DESC desc;
-        RenderStates::GetBlendDesc(&desc);
-        RenderStates::CreateBlend(&desc, &blend[0]);
-
-        desc.RenderTarget[0].BlendEnable = true;
-        RenderStates::CreateBlend(&desc, &blend[1]);
-    }
-
-    // ColorBuffer 생성
-    {
-        colorBuffer = make_unique<ColorBuffer>();
     }
 }
 
@@ -156,48 +110,6 @@ void TileMap::UnmapVertexBuffer()
 {
     memcpy(subResource.pData, vertices.data(), sizeof(vertices[0]) * vertices.size());
     DC->Unmap(vertexBuffer->GetResource(), 0);
-}
-
-void TileMap::UpdateVertexBuffer()
-{
-    // 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
-    for (UINT y = 0; y < height; y++)
-    {
-        for (UINT x = 0; x < width; x++)
-        {
-            shared_ptr<Tile> tile = tiles[y][x];
-            if (!tile) continue;
-
-            MapVertexBuffer();
-            {
-                // 각 타일에 맞게 버텍스 데이터 업데이트
-                for (VertexTile& v : vertices)
-                {
-                    v.color = tile->GetColor();
-                    v.index = tile->GetIndex();
-                }
-
-                vertices[0].uv = Vector2(tile->GetStartUV().x, tile->GetEndUV().y);
-                vertices[1].uv = tile->GetStartUV();
-                vertices[2].uv = tile->GetEndUV();
-                vertices[3].uv = Vector2(tile->GetEndUV().x, tile->GetStartUV().y);
-
-                // uv2 (추가 텍스처 좌표, 기본값)
-                vertices[0].uv2 = Vector2(0, 1);
-                vertices[1].uv2 = Vector2(0, 0);
-                vertices[2].uv2 = Vector2(1, 1);
-                vertices[3].uv2 = Vector2(1, 0);
-            }
-            UnmapVertexBuffer();
-
-            world = Matrix::CreateTranslation(tile->GetPosition());
-            worldBuffer->SetWorld(world);
-            worldBuffer->SetVSBuffer(0);
-            colorBuffer->SetPSBuffer(2);
-            indexNumBuffer->SetPSBuffer(3);
-            DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
-        }
-    }
 }
 
 void TileMap::Update()
@@ -246,17 +158,46 @@ void TileMap::Render()
     vertexShader->SetShader();
     pixelShader->SetShader();
 
-    DC->PSSetSamplers(0, 1, &sampler[1]);
-
     // 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
     DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
 
-    // 레스터라이저 및 블렌드 상태 설정
-    DC->RSSetState(rs.Get());
+    // 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
+    for (UINT y = 0; y < height; y++)
+    {
+        for (UINT x = 0; x < width; x++)
+        {
+            shared_ptr<Tile> tile = tiles[y][x];
+            if (!tile) continue;
 
-    DC->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
+            MapVertexBuffer();
+            {
+                // 각 타일에 맞게 버텍스 데이터 업데이트
+                for (VertexTile& v : vertices)
+                {
+                    v.color = tile->GetColor();
+                    v.index = tile->GetIndex();
+                }
 
-    UpdateVertexBuffer();
+                vertices[0].uv = Vector2(tile->GetStartUV().x, tile->GetEndUV().y);
+                vertices[1].uv = tile->GetStartUV();
+                vertices[2].uv = tile->GetEndUV();
+                vertices[3].uv = Vector2(tile->GetEndUV().x, tile->GetStartUV().y);
+
+                // uv2 (추가 텍스처 좌표, 기본값)
+                vertices[0].uv2 = Vector2(0, 1);
+                vertices[1].uv2 = Vector2(0, 0);
+                vertices[2].uv2 = Vector2(1, 1);
+                vertices[3].uv2 = Vector2(1, 0);
+            }
+            UnmapVertexBuffer();
+
+            world = Matrix::CreateTranslation(tile->GetPosition());
+            worldBuffer->SetWorld(world);
+            worldBuffer->SetVSBuffer(0);
+            indexNumBuffer->SetPSBuffer(2);
+            DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
+        }
+    }
 }
 
 void TileMap::ImGUI()

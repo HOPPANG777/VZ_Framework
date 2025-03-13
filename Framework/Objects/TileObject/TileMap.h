@@ -18,14 +18,6 @@ private:
     unique_ptr<WorldBuffer> worldBuffer;
 
     unique_ptr<IndexNumBuffer> indexNumBuffer;
-    
-    unique_ptr<ColorBuffer> colorBuffer;
-
-    ComPtr<ID3D11RasterizerState> rs = nullptr;
-
-    ComPtr<ID3D11BlendState> blend[2];
-
-    ComPtr<ID3D11SamplerState> sampler[2];
 
     Matrix world = Values::Identity;
 
@@ -60,8 +52,6 @@ public:
 
     void MapVertexBuffer();
     void UnmapVertexBuffer();
-
-    void UpdateVertexBuffer();
 
 public:
     void Save(const string& path);

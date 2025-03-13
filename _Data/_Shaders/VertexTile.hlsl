@@ -34,13 +34,7 @@ cbuffer VPBuffer : register(b1)
 	matrix _projection;
 };
 
-// 색상 변환 상수 버퍼 (슬롯 b2)
-cbuffer ColorBuffer : register(b2)
-{
-    float4 Color; // 예를 들어, (1.0, 0.5, 0.5, 1.0) 등으로 지정
-};
-
-cbuffer IndexNumBuffer : register(b3)
+cbuffer IndexNumBuffer : register(b2)
 {
 	uint _index;
 }

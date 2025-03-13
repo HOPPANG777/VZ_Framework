@@ -9,7 +9,7 @@ private:
 	UINT count = 0;
 
 public:
-	void Create(const vector<UINT>& indices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT)
+	void Create(const vector<UINT>& indices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT, const bool index = false)
 	{
 		stride = sizeof(UINT);
 		count = UINT(indices.size());
@@ -17,8 +17,16 @@ public:
 		D3D11_BUFFER_DESC desc = { 0 };
 
 		desc.Usage = usage;
-		//desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+
+		if (index == false)
+		{
+			desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		}
+		else
+		{
+			desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		}
+
 		desc.ByteWidth = stride * count;
 
 		switch (usage)

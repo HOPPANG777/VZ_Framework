@@ -23,6 +23,7 @@ void Scene_06::Awake()
 	testPlayer->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(118.5, 312, 0), BLUE));
 	testPlayer->AddComponent(make_shared<PlayerMove>());
 
+	//*
 	//TileMap
 	{
 		UINT spacing = 28;
@@ -32,6 +33,7 @@ void Scene_06::Awake()
 		tmap = make_unique<TileMap>(spacing, width, height);
 		tmap->Load("_Data/_TileData/map04.data");
 	}
+	//*/
 
 	auto object01Collider = floor[0]->GetComponent<BoxCollider>("BoxCollider");
 	auto testPlayerCollider = testPlayer->GetComponent<BoxCollider>("BoxCollider");
