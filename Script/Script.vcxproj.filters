@@ -47,6 +47,9 @@
     <ClCompile Include="Component\EnemyAI.cpp">
       <Filter>Component\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Object\EnemyUnit.cpp">
+      <Filter>Object\Unit\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Component\EnemyAI.h">
       <Filter>Component\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\EnemyUnit.h">
+      <Filter>Object\Unit\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +159,9 @@
     </Filter>
     <Filter Include="Component\Enemy">
       <UniqueIdentifier>{4d125b92-cb12-4fc6-8bcf-6babfc05614b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Unit\Enemy">
+      <UniqueIdentifier>{b780b800-c62c-451b-b33c-e27c1ce7772d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

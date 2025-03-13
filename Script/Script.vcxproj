@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component\EnemyAI.cpp" />
+    <ClCompile Include="Object\EnemyUnit.cpp" />
     <ClCompile Include="Object\UnitBase.cpp" />
     <ClCompile Include="Object\BezierCurveAxe.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component\EnemyAI.h" />
+    <ClInclude Include="Object\EnemyUnit.h" />
     <ClInclude Include="Object\UnitBase.h" />
     <ClInclude Include="Object\BezierCurveAxe.h" />
     <ClInclude Include="Object\JumpHoppang.h" />
