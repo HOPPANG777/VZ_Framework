@@ -71,15 +71,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\</LibraryPath>
+    <OutDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(PlatformTarget)\;$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Script\</LibraryPath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\;$(SolutionDir)_Build\$(Platform)\$(Configuration)\Script\</LibraryPath>
+    <OutDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(PlatformTarget)\;$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Script\</LibraryPath>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,6 +105,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,7 +121,7 @@
 
 
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -133,6 +134,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +152,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
 
 
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -222,6 +224,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

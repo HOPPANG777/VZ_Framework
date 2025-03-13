@@ -115,19 +115,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(PlatformTarget)\</LibraryPath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)_Build\$(Platform)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Obj\$(ProjectName)\</IntDir>
     <PublicIncludeDirectories>
     </PublicIncludeDirectories>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(Platform)\$(Configuration)\Framework\;;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(Platform)\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\Framework\;$(SolutionDir)_Data\_Libraries\DirectX\Lib\$(PlatformTarget)\</LibraryPath>
     <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)_Data\_Libraries\DirectX\Include</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
