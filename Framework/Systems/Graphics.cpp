@@ -281,8 +281,29 @@ void Graphics::CreateDirect3D()
         nullptr,
         deviceContext.GetAddressOf()
     );
-
     CHECK(hr);  // HRESULT가 성공했는지 확인.
+
+    // 여기서 device가 생성되었으므로 InfoQueue를 설정할 수 있음
+    ID3D11InfoQueue* pInfoQueue = nullptr;
+    if (SUCCEEDED(device->QueryInterface(__uuidof(ID3D11InfoQueue), (void**)&pInfoQueue)))
+    {
+        // 숨기고 싶은 메시지 ID 목록
+        D3D11_MESSAGE_ID hideMessages[] = 
+        {
+            D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_NOT_SET,
+            D3D11_MESSAGE_ID_IASETINDEXBUFFER_INVALIDBUFFER
+        };
+
+        D3D11_INFO_QUEUE_FILTER filter = {};
+        filter.DenyList.NumIDs = _countof(hideMessages);
+        filter.DenyList.pIDList = hideMessages;
+
+        // 메시지 필터 적용
+        pInfoQueue->AddStorageFilterEntries(&filter);
+
+        pInfoQueue->Release();
+    }
+
 }
 
 void Graphics::CreateDirect2D()

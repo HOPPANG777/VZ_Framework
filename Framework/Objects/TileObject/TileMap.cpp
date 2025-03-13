@@ -71,6 +71,51 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
         indexNumBuffer = make_unique<IndexNumBuffer>();
         indexNumBuffer->SetIndex(0);
     }
+
+    // Rasterizer State
+    // 레스터라이저는 버텍스 쉐이더로 찍은 정점들의 사이와 내부를
+    // 채워주는 역할이다.
+    // 이거 안만들면 기본값으로 넣어주고 만들면 만든거 넣어줌
+    {
+        D3D11_RASTERIZER_DESC desc;
+        ZeroMemory(&desc, sizeof(D3D11_RASTERIZER_DESC));
+
+        // CullMode : 그리지 않을 부분 설정
+        // d3d11_cull_back == 뒷면 지우겠다. (반시계 방향 안그림)
+        desc.CullMode = D3D11_CULL_BACK;
+        //desc.CullMode = D3D11_CULL_NONE;
+
+        // FillMode : 체우는 방식 설정
+        // d3d11_fill_solid == 전부 체우겠다. (빈공간 안만든다)
+        desc.FillMode = D3D11_FILL_SOLID;
+
+        // 시계방향 설정 (false == 시계 방향 // true == 반 시계 방향)
+        desc.FrontCounterClockwise = false;
+
+        HRESULT hr = DEVICE->CreateRasterizerState(&desc, &rs);
+        CHECK(hr);
+    }
+
+    // Sampler
+    {
+        D3D11_SAMPLER_DESC desc;
+        RenderStates::GetSamplerDesc(&desc);
+        RenderStates::CreateSampler(&desc, &sampler[0]);
+
+        // 선형보간
+        desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+        RenderStates::CreateSampler(&desc, &sampler[1]);
+    }
+
+    // Blend
+    {
+        D3D11_BLEND_DESC desc;
+        RenderStates::GetBlendDesc(&desc);
+        RenderStates::CreateBlend(&desc, &blend[0]);
+
+        desc.RenderTarget[0].BlendEnable = true;
+        RenderStates::CreateBlend(&desc, &blend[1]);
+    }
 }
 
 TileMap::~TileMap()
@@ -158,8 +203,15 @@ void TileMap::Render()
     vertexShader->SetShader();
     pixelShader->SetShader();
 
+    DC->PSSetSamplers(0, 1, &sampler[1]);
+
     // 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
     DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
+
+    // 레스터라이저 및 블렌드 상태 설정
+    DC->RSSetState(rs.Get());
+
+    DC->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
 
     // 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
     for (UINT y = 0; y < height; y++)

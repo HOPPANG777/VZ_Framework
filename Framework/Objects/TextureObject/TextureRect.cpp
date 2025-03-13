@@ -71,21 +71,6 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		CHECK(hr);
 	}
 
-	// SRV 추출 // 그림 데이터 추출
-	{
-		HRESULT hr = D3DX11CreateShaderResourceViewFromFile
-		(
-			DEVICE,
-			path.c_str(),
-			nullptr,
-			nullptr,
-			srv.GetAddressOf(),
-			nullptr
-		);
-		CHECK(hr);
-	}
-
-
 	// Sampler
 	{
 		D3D11_SAMPLER_DESC desc;
@@ -105,6 +90,20 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 
 		desc.RenderTarget[0].BlendEnable = true;
 		RenderStates::CreateBlend(&desc, &blend[1]);
+	}
+
+	// SRV 추출 // 그림 데이터 추출
+	{
+		HRESULT hr = D3DX11CreateShaderResourceViewFromFile
+		(
+			DEVICE,
+			path.c_str(),
+			nullptr,
+			nullptr,
+			srv.GetAddressOf(),
+			nullptr
+		);
+		CHECK(hr);
 	}
 
 	// ColorBuffer 생성

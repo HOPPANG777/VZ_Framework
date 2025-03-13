@@ -19,6 +19,12 @@ private:
 
     unique_ptr<IndexNumBuffer> indexNumBuffer;
 
+    ComPtr<ID3D11RasterizerState> rs = nullptr;
+
+    ComPtr<ID3D11BlendState> blend[2];
+
+    ComPtr<ID3D11SamplerState> sampler[2];
+
     Matrix world = Values::Identity;
 
     UINT width = 0, height = 0, spacing = 0;
