@@ -4,10 +4,6 @@
 
 class JumpHoppang : public AnimationRect
 {
-private:
-
-
-
 public:
 	JumpHoppang(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path);
 	~JumpHoppang();
@@ -15,9 +11,6 @@ public:
 public:
 	void Update();
 	void Render();
-
-public:
-
 
 };
 

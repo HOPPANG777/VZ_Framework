@@ -16,7 +16,8 @@ JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const fl
     // - frameCount : 7
     // - startPos   : (0, 0)
     // - endPos     : (350, 50)  (tex->GetWidth(), tex->GetHeight() 라고 가정)
-    auto loadingClip = make_shared<AnimationClip>(
+    auto loadingClip = make_shared<AnimationClip>
+    (
         L"Loading",      // clipName
         tex.get(),             // Texture2D (shared_ptr)
         7,               // frameCount
