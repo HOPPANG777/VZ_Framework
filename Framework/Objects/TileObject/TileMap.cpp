@@ -358,7 +358,7 @@ void TileMap::Load(const string& path)
     }
 
     // 디버그용 백업 (원하는 경우)
-    Save(TilePath + "After.txt");
+    Save(BuildTilePath + "After.txt");
     HelpMe::Get()->Log("타일맵 불러오기 완료!");
 }
 
