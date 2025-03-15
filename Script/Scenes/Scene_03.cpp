@@ -53,7 +53,7 @@ void Scene_03::Destroy()
 {
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
 	for (auto& bg : bgLayer) if (bg != nullptr) bg.reset();
-	for (int i = 0; i < 5; i++) { if (bgLayer[i]) bgLayer[i].reset(); if (bgLayerDup[i]) bgLayerDup[i].reset(); }
+	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
 }
 
@@ -63,8 +63,9 @@ void Scene_03::Update()
 {
 	if (tmap != nullptr) tmap->Update();
 
-	for (int i = 0; i < 5; i++) { if (bgLayer[i]) bgLayer[i]->Update(); if (bgLayerDup[i]) bgLayerDup[i]->Update(); }
-
+	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
+	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
+	
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
 
 	if (testPlayer)

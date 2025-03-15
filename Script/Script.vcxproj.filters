@@ -26,7 +26,7 @@
     <ClCompile Include="Scenes\Scene_05.cpp">
       <Filter>Scenes\Scene_05_PuzzleStage</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_09.cpp">
+    <ClCompile Include="Scenes\Scene_06.cpp">
       <Filter>Scenes\Scene_06_BossStage</Filter>
     </ClCompile>
     <ClCompile Include="Object\UnitBase.cpp">
@@ -71,7 +71,7 @@
     <ClInclude Include="Scenes\Scene_05.h">
       <Filter>Scenes\Scene_05_PuzzleStage</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_09.h">
+    <ClInclude Include="Scenes\Scene_06.h">
       <Filter>Scenes\Scene_06_BossStage</Filter>
     </ClInclude>
     <ClInclude Include="Object\UnitBase.h">
