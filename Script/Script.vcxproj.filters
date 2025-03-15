@@ -4,65 +4,41 @@
     <ClCompile Include="Scenes\Scene_00.cpp">
       <Filter>Scenes\Scene_00_Loading</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_01.cpp">
-      <Filter>Scenes\Scene_01_Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\Scene_02.cpp">
-      <Filter>Scenes\Scene_02_Clock</Filter>
-    </ClCompile>
     <ClCompile Include="Scenes\Scene_03.cpp">
-      <Filter>Scenes\Scene_03_Texture</Filter>
+      <Filter>Scenes\Scene_03_Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_04.cpp">
+      <Filter>Scenes\Scene_04_Clock</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Scene_05.cpp">
+      <Filter>Scenes\Scene_05_Texture</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp">
       <Filter>Object\LoadingObject</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_04.cpp">
-      <Filter>Scenes\Scene_04_TitleScene</Filter>
+    <ClCompile Include="Scenes\Scene_01.cpp">
+      <Filter>Scenes\Scene_01_TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\Scene_05.cpp">
-      <Filter>Scenes\Scene_05_SplashScene</Filter>
+    <ClCompile Include="Scenes\Scene_02.cpp">
+      <Filter>Scenes\Scene_02_SplashScene</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BezierCurveAxe.cpp">
-      <Filter>Object\BezierCurveAxe</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\Scene_06.cpp">
-      <Filter>Scenes\Scene_06_StartStage</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\Scene_07.cpp">
-      <Filter>Scenes\Scene_07_CombatStage</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\Scene_08.cpp">
-      <Filter>Scenes\Scene_08_PuzzleStage</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenes\Scene_09.cpp">
-      <Filter>Scenes\Scene_09_BossStage</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\UnitBase.cpp">
-      <Filter>Object\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\PlayerUnit.cpp">
-      <Filter>Object\Unit\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Component\EnemyAI.cpp">
-      <Filter>Component\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\EnemyUnit.cpp">
-      <Filter>Object\Unit\Enemy</Filter>
+    <ClCompile Include="Component\TestComponent.cpp">
+      <Filter>Component\TestComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
       <Filter>Scenes\Scene_00_Loading</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_01.h">
-      <Filter>Scenes\Scene_01_Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\Scene_02.h">
-      <Filter>Scenes\Scene_02_Clock</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\Scene_03.h">
-      <Filter>Scenes\Scene_03_Texture</Filter>
+      <Filter>Scenes\Scene_03_Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_04.h">
+      <Filter>Scenes\Scene_04_Clock</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_05.h">
+      <Filter>Scenes\Scene_05_Texture</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\SceneList.h">
       <Filter>Scenes</Filter>
@@ -71,52 +47,19 @@
     <ClInclude Include="Object\JumpHoppang.h">
       <Filter>Object\LoadingObject</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_04.h">
-      <Filter>Scenes\Scene_04_TitleScene</Filter>
+    <ClInclude Include="Scenes\Scene_01.h">
+      <Filter>Scenes\Scene_01_TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\Scene_05.h">
-      <Filter>Scenes\Scene_05_SplashScene</Filter>
+    <ClInclude Include="Scenes\Scene_02.h">
+      <Filter>Scenes\Scene_02_SplashScene</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BezierCurveAxe.h">
-      <Filter>Object\BezierCurveAxe</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\Scene_06.h">
-      <Filter>Scenes\Scene_06_StartStage</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\Scene_07.h">
-      <Filter>Scenes\Scene_07_CombatStage</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\Scene_08.h">
-      <Filter>Scenes\Scene_08_PuzzleStage</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenes\Scene_09.h">
-      <Filter>Scenes\Scene_09_BossStage</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\UnitBase.h">
-      <Filter>Object\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\PlayerUnit.h">
-      <Filter>Object\Unit\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\EnemyAI.h">
-      <Filter>Component\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\EnemyUnit.h">
-      <Filter>Object\Unit\Enemy</Filter>
+    <ClInclude Include="Component\TestComponent.h">
+      <Filter>Component\TestComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
       <UniqueIdentifier>{a9beda49-1ee7-4adb-a8f7-204a475f8913}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_01_Geometry">
-      <UniqueIdentifier>{261d174e-88a9-4219-9b4b-6ea9ab1cafdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_02_Clock">
-      <UniqueIdentifier>{aa469556-c664-415b-8f3e-c7977ab08e7b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_03_Texture">
-      <UniqueIdentifier>{27a644e9-b185-4627-982b-29b2d55411fa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{bd04c7ca-8433-4793-8a0a-f15af6d99777}</UniqueIdentifier>
@@ -124,44 +67,29 @@
     <Filter Include="Object\LoadingObject">
       <UniqueIdentifier>{1071eefa-7738-4eed-8abb-e508e1b4db06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Scene_04_TitleScene">
-      <UniqueIdentifier>{b50ca614-a326-415b-aeeb-549f82cc0861}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_05_SplashScene">
-      <UniqueIdentifier>{fdd4b912-d43c-4c09-91bf-7c3cf9f0f000}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\BezierCurveAxe">
-      <UniqueIdentifier>{107db589-0137-4d62-9a65-25386dc18bb5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\Scene_00_Loading">
       <UniqueIdentifier>{7e6ae146-8a72-4a13-87ad-25acf2116947}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_06_StartStage">
-      <UniqueIdentifier>{07f6fda2-5901-41cc-9b3e-f3433584dc38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_07_CombatStage">
-      <UniqueIdentifier>{2d10c630-e89d-48e6-9c17-855b094c5dd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_08_PuzzleStage">
-      <UniqueIdentifier>{877d9aaf-8574-47d1-b916-dc0ba44fa05f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\Scene_09_BossStage">
-      <UniqueIdentifier>{9842f30f-39ed-4496-83f1-0d39299931c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Unit">
-      <UniqueIdentifier>{d169aade-f96e-449a-8c24-32491c5d6a6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Unit\Player">
-      <UniqueIdentifier>{4dbf3130-4dc2-4f40-8f29-44ea7d060ab9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Component">
       <UniqueIdentifier>{5c487cbd-1aed-4970-8988-a2153c0d9a99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\Enemy">
-      <UniqueIdentifier>{4d125b92-cb12-4fc6-8bcf-6babfc05614b}</UniqueIdentifier>
+    <Filter Include="Scenes\Scene_01_TitleScene">
+      <UniqueIdentifier>{b50ca614-a326-415b-aeeb-549f82cc0861}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Unit\Enemy">
-      <UniqueIdentifier>{b780b800-c62c-451b-b33c-e27c1ce7772d}</UniqueIdentifier>
+    <Filter Include="Scenes\Scene_02_SplashScene">
+      <UniqueIdentifier>{fdd4b912-d43c-4c09-91bf-7c3cf9f0f000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_03_Geometry">
+      <UniqueIdentifier>{261d174e-88a9-4219-9b4b-6ea9ab1cafdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_04_Clock">
+      <UniqueIdentifier>{aa469556-c664-415b-8f3e-c7977ab08e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_05_Texture">
+      <UniqueIdentifier>{27a644e9-b185-4627-982b-29b2d55411fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\TestComponent">
+      <UniqueIdentifier>{8aa3c2c7-a542-492b-b118-6e2f3e4a5d4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

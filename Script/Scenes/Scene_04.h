@@ -8,22 +8,31 @@ public:
 	void Start() override;
 
 	void Destroy() override;
-	
+
 	void FixedUpdate() override;
 	void Update() override;
 	void LateUpdate() override;
-	
+
 	void Render() override;
 	void PostRender() override;
-	
+
 	void ImGUI() override;
 
 	bool IsLoaded() const override { return isLoaded; }
 
 private:
+	void Clock();
+
+private:
 	vector<shared_ptr<Object>> objects;
 
-	shared_ptr<Object> startButton;
+	shared_ptr<Object> sceneNameObject;
+
+	shared_ptr<Object> hourHand;
+	shared_ptr<Object> minuteHand;
+	shared_ptr<Object> secondHand;
+
+	bool isColor = false;
 
 	bool isLoaded = false;
 };

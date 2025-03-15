@@ -3,37 +3,34 @@
 class Scene_02 : public Scene
 {
 public:
-	// Scene을(를) 통해 상속됨
-	void Awake() override;
-	void Start() override;
+    // Scene을(를) 통해 상속됨
+    void Awake() override;
+    void Start() override;
 
-	void Destroy() override;
+    void Destroy() override;
 
-	void FixedUpdate() override;
-	void Update() override;
-	void LateUpdate() override;
+    void FixedUpdate() override;
+    void Update() override;
+    void LateUpdate() override;
 
-	void Render() override;
-	void PostRender() override;
+    void Render() override;
+    void PostRender() override;
 
-	void ImGUI() override;
+    void ImGUI() override;
 
-	bool IsLoaded() const override { return isLoaded; }
-
-private:
-	void Clock();
+    bool IsLoaded() const override { return isLoaded; }
 
 private:
-	vector<shared_ptr<Object>> objects;
+    float timer = 0.0f;
+    bool isDone = false;
 
-	shared_ptr<Object> sceneNameObject;
+    vector<shared_ptr<Object>> objects;
 
-	shared_ptr<Object> hourHand;
-	shared_ptr<Object> minuteHand;
-	shared_ptr<Object> secondHand;
+    //vector<shared_ptr<UIElement>> UIs;
 
-	bool isColor = false;
+    shared_ptr<Object> splash;
 
-	bool isLoaded = false;
+    bool isLoaded = false;
+
 };
 
