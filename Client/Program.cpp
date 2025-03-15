@@ -26,15 +26,12 @@ void Program::Awake()
 	//Scene 세팅
 	{
 		SCENE->AddScene("LoadingScene", make_shared<Scene_00>());
-		SCENE->AddScene("GeometryScene", make_shared<Scene_01>());
-		SCENE->AddScene("ClockScene", make_shared<Scene_02>());
-		SCENE->AddScene("TextureScene", make_shared<Scene_03>());
-		SCENE->AddScene("TitleScene", make_shared<Scene_04>());
-		SCENE->AddScene("SplashScene", make_shared<Scene_05>());
-		SCENE->AddScene("StartStage", make_shared<Scene_06>());
-		SCENE->AddScene("CombatStage", make_shared<Scene_07>());
-		SCENE->AddScene("PuzzleStage", make_shared<Scene_08>());
-		SCENE->AddScene("BossStage", make_shared<Scene_09>());
+		SCENE->AddScene("TitleScene", make_shared<Scene_01>());
+		SCENE->AddScene("SplashScene", make_shared<Scene_02>());
+		SCENE->AddScene("StartStage", make_shared<Scene_03>());
+		SCENE->AddScene("CombatStage", make_shared<Scene_04>());
+		SCENE->AddScene("PuzzleStage", make_shared<Scene_05>());
+		SCENE->AddScene("BossStage", make_shared<Scene_06>());
 
 		SCENE->SetSplashScene("SplashScene");
 
@@ -105,7 +102,7 @@ int APIENTRY wWinMain
 )
 {
 	WinDesc desc;
-	desc.appName = L"VZ_Framework";	// 창 이름
+	desc.appName = L"NordicLumberjack";	// 창 이름
 	desc.instance = hInstance;	
 	desc.handle = nullptr;
 	desc.width = gWinWidth;

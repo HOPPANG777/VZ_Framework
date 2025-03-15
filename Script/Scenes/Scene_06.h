@@ -23,21 +23,5 @@ public:
 private:
 	bool isLoaded = false;
 
-	vector<shared_ptr<Object>> floor;
-
-	shared_ptr<Object> player;
-	shared_ptr<Object> lumberAxe;
-
-	shared_ptr<Object> bgLayer[5];
-	shared_ptr<Object> bgLayerDup[5];
-	Vector3 bgOrigin[5];
-	Vector3 bgOriginDup[5];
-
-	unique_ptr<TileMap> tmap;
-
-	shared_ptr<Object> testPlayer;
-
-	Vector3 testPlayerVelocity = Vector3::Zero; // testPlayer의 수직(및 필요시 전체) 속도
-
 };
 
