@@ -5,9 +5,9 @@ void Scene_01::Awake()
 {
 	isLoaded = false;
 
-	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"TitleScreen.png"));
+	objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Client/TitleScreen.png"));
 
-	startButton = make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"NordicLumberjack/UI/Button01.png", TransformType::Rect);
+	startButton = make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button01.png", TransformType::Rect);
 	startButton->AddComponent(make_shared<Texts>());
 
 	isLoaded = true;

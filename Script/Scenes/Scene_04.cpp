@@ -31,7 +31,7 @@ void Scene_04::Destroy()
 	if (sceneNameObject != nullptr) sceneNameObject.reset();
 }
 
-void Scene_03::FixedUpdate() {}
+void Scene_04::FixedUpdate() {}
 
 void Scene_04::Update()
 {
