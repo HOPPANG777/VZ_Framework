@@ -31,7 +31,7 @@ void Scene_03::Awake()
 		UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
 
 		tmap = make_unique<TileMap>(spacing, width, height);
-		tmap->Load("_Data/_TileData/map04.data");
+		tmap->Load("_Data/_TileData/map01.data");
 	}
 	//*/
 

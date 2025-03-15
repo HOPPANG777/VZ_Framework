@@ -114,9 +114,9 @@
     </Link>
     <PostBuildEvent>
       <Command>if "$(Platform)" == "x64" (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
 
@@ -137,7 +137,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -145,9 +145,9 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
     </Link>
     <PostBuildEvent>
       <Command>if "$(Platform)" == "x64" (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
 
@@ -178,7 +178,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
 
 
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -201,14 +201,14 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
     </Link>
     <PostBuildEvent>
       <Command>if "$(Platform)" == "x64" (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x64\fmod.dll" "$(OutDir)"
 ) else (
-    xcopy /Y /D "$(SolutionDir)_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
+    xcopy /Y /D "$(SolutionDir)_Data\_Libraries\FMOD\lib\x86\fmod.dll" "$(OutDir)"
 )
 
 
 
-call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)"</Command>
+call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
