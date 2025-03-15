@@ -19,6 +19,8 @@ void Camera::Init()
 void Camera::Update()
 {
 	Move();
+    //UpdateFollow();
+    //UpdateFollow2();
 	UpdateView();
 }
 
@@ -45,8 +47,8 @@ void Camera::Move()
     // 타겟이 있을 경우
     if (target != nullptr)
     {
-        position.x = target->GetPosition().x - WIN_DEFAULT_WIDTH * 0.5f;
-        position.y = target->GetPosition().y - WIN_DEFAULT_HEIGHT * 0.5f;
+        //position.x = target->GetPosition().x - WIN_DEFAULT_WIDTH * 0.5f;
+        //position.y = target->GetPosition().y - WIN_DEFAULT_HEIGHT * 0.5f;
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
@@ -116,5 +118,70 @@ void Camera::Reset()
 	target = nullptr;        // 타겟 제거
 	UpdateView();            // 초기화 후 뷰 갱신
 }
+
+void Camera::UpdateFollow()
+{
+    if (target == nullptr) return;
+
+    // 플레이어(타겟)의 월드 좌표
+    Vector3 targetPos = target->GetPosition();
+
+    // 현재 카메라의 위치 (좌상단 기준)
+    Vector3 camPos = position;
+
+    // 데드 존 여백 설정 (원하는 값으로 조정 가능)
+    float marginX = 600.0f;
+    float marginY = 200.0f;
+
+    // 현재 카메라 뷰포트 경계 계산
+    float viewLeft = camPos.x;
+    float viewRight = camPos.x + WIN_DEFAULT_WIDTH;
+    float viewTop = camPos.y;
+    float viewBottom = camPos.y + WIN_DEFAULT_HEIGHT;
+
+    // 데드 존 내부 경계 (화면의 가장자리에서 margin 만큼 안쪽)
+    float deadLeft = viewLeft + marginX;
+    float deadRight = viewRight - marginX;
+    float deadTop = viewTop + marginY;
+    float deadBottom = viewBottom - marginY;
+
+    // x축: 타겟이 데드 존 밖으로 벗어나면 카메라 x 위치 조정
+    if (targetPos.x < deadLeft)
+    {
+        camPos.x = targetPos.x - marginX;
+    }
+    else if (targetPos.x > deadRight)
+    {
+        camPos.x = targetPos.x + marginX - WIN_DEFAULT_WIDTH;
+    }
+
+    // y축: 타겟이 데드 존 밖으로 벗어나면 카메라 y 위치 조정
+    if (targetPos.y < deadTop)
+    {
+        camPos.y = targetPos.y - marginY;
+    }
+    else if (targetPos.y > deadBottom)
+    {
+        camPos.y = targetPos.y + marginY - WIN_DEFAULT_HEIGHT;
+    }
+
+    // 부드러운 이동을 원하면 보간(interpolation) 기법을 사용할 수 있음
+    position = camPos;
+
+    UpdateView();
+}
+
+void Camera::UpdateFollow2()
+{
+    if (target == nullptr) return;
+
+    if (target->GetPosition().x > WIN_DEFAULT_WIDTH * 0.5 && target->GetPosition().x < WIN_DEFAULT_WIDTH * 1.5)
+    {
+        Vector3 newCamPos = Vector3(target->GetPosition().x - WIN_DEFAULT_WIDTH / 2, 0, 0);
+        position = newCamPos;
+        UpdateView();
+    }
+}
+
 
 

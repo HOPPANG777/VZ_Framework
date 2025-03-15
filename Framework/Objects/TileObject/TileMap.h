@@ -58,6 +58,8 @@ public:
 
     void MapVertexBuffer();
     void UnmapVertexBuffer();
+    
+    void ResizeMap(UINT newWidth, UINT newHeight);
 
 public:
     void Save(const string& path);

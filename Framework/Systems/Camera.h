@@ -24,6 +24,10 @@ public:
 
 	Object* GetTarget() { return target; }
 
+public:
+	void UpdateFollow();
+	void UpdateFollow2();
+
 private:
 	Matrix view, proj;
 	unique_ptr<ViewProjectionBuffer> VPBuffer;

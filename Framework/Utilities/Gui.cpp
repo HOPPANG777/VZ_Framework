@@ -29,13 +29,13 @@ void Gui::Init()
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	ImGui_ImplWin32_Init(gHandle);
 	ImGui_ImplDX11_Init(DEVICE, DC);
 
-	ApplyStyle();
+	ImGui::StyleColorsDark();
+	//ApplyStyle();
 }
 
 void Gui::Resize()

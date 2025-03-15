@@ -26,11 +26,11 @@ void Scene_03::Awake()
 	//*
 	//TileMap
 	{
-		UINT spacing = 28;
+		UINT spacing = 50;
 		UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
 		UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
 
-		tmap = make_unique<TileMap>(spacing, width, height);
+		tmap = make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map01.data");
 	}
 	//*/
@@ -46,7 +46,7 @@ void Scene_03::Awake()
 
 void Scene_03::Start()
 {
-
+	CAMERA->SetTarget(testPlayer.get());
 }
 
 void Scene_03::Destroy()
@@ -65,29 +65,32 @@ void Scene_03::Update()
 
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
-	
+
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
+
+	if (testPlayer != nullptr) testPlayer->Update();
 
 	if (testPlayer)
 	{
 		// 플레이어와 각 floor의 충돌 검사
 		// 플레이어와 floor에 부착된 BoxCollider는 "BoxCollider"라는 이름으로 등록되었다고 가정합니다.
 		auto playerCollider = testPlayer->GetComponent<BoxCollider>("BoxCollider");
-		if (playerCollider) {
-			for (const auto& f : floor) 
+		if (playerCollider) 
+		{
+			for (const auto& f : floor)
 			{
 				auto floorCollider = f->GetComponent<BoxCollider>("BoxCollider");
 				if (!floorCollider) continue;
 
 				// 충돌이 발생하면 (floorCollider의 IsColliding() 사용)
-				if (floorCollider->IsColliding(playerCollider.get())) 
+				if (floorCollider->IsColliding(playerCollider.get()))
 				{
 					// 발판의 상단 = floor의 center.y + (floor의 size.y * 0.5)
 					float floorTop = floorCollider->GetCenter().y + (floorCollider->GetSize().y * 0.5f);
 					// 플레이어의 하단 = player의 center.y - (player의 size.y * 0.5)
 					float playerBottom = playerCollider->GetCenter().y - (playerCollider->GetSize().y * 0.5f);
 					// 만약 플레이어가 발판에 침투했다면 보정
-					if (playerBottom < floorTop) 
+					if (playerBottom < floorTop)
 					{
 						testPlayer->GetComponent<PlayerMove>("PlayerMove")->Land();
 						float correction = floorTop - playerBottom;
@@ -102,39 +105,47 @@ void Scene_03::Update()
 			}
 		}
 
-		if (testPlayer->GetPosition().x > WIN_DEFAULT_WIDTH * 0.5 && testPlayer->GetPosition().x < WIN_DEFAULT_WIDTH * 1.5)
+		CAMERA->UpdateFollow2();
+
+		// 카메라의 현재 위치(월드 좌표)를 가져옵니다.
+		Vector3 camPos = CAMERA->GetPosition();
+
+		// 패럴럭스 계수 배열: 각 배경 레이어가 카메라 이동에 따라 얼마나 이동할지 결정합니다.
+		float parallaxFactors[5] = { 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
+
+		// 각 배경 레이어 업데이트
+		for (int i = 0; i < 5; i++)
 		{
-			Vector3 newCamPos = Vector3(testPlayer->GetPosition().x - WIN_DEFAULT_WIDTH / 2, 0, 0);
-			CAMERA->SetPosition(newCamPos);
-
-			float parallaxFactors[5] = { 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
-
-			for (int i = 0; i < 5; i++)
+			if (bgLayer[i] && bgLayerDup[i])
 			{
-				if (bgLayer[i] && bgLayerDup[i])
+				// 카메라 이동에 따른 오프셋 계산 (패럴럭스 효과)
+				float offsetX = camPos.x * parallaxFactors[i];
+
+				// 원본 배경과 복제 배경의 새로운 위치 계산
+				Vector3 newBgPos = bgOrigin[i] + Vector3(offsetX, 0, 0);
+				Vector3 newBgDupPos = bgOriginDup[i] + Vector3(offsetX, 0, 0);
+
+				bgLayer[i]->SetPosition(newBgPos);
+				bgLayerDup[i]->SetPosition(newBgDupPos);
+
+				// 무한 스크롤 처리: 배경 너비 (여기서는 WIN_DEFAULT_WIDTH를 사용)
+				float bgWidth = WIN_DEFAULT_WIDTH;
+
+				// 만약 원본 배경이 완전히 왼쪽으로 벗어났다면, 복제 배경의 오른쪽에 배치
+				if (newBgPos.x + bgWidth < camPos.x)
 				{
-					float offsetX = newCamPos.x * parallaxFactors[i];
-
-					// 원본 배경 위치 업데이트
-					Vector3 newBgPos = bgOrigin[i] + Vector3(offsetX, 0, 0);
-					bgLayer[i]->SetPosition(newBgPos);
-
-					// 복제 배경 위치 업데이트
-					Vector3 newBgDupPos = bgOriginDup[i] + Vector3(offsetX, 0, 0);
-					bgLayerDup[i]->SetPosition(newBgDupPos);
-
-					// 배경이 화면을 벗어나면 재조정하여 무한 스크롤 효과 적용
-					float bgWidth = WIN_DEFAULT_WIDTH;
-					if (newBgPos.x + bgWidth < newCamPos.x)
-					{
-						bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
-						std::swap(bgLayer[i], bgLayerDup[i]);
-					}
+					bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
+					std::swap(bgLayer[i], bgLayerDup[i]); // 역할 교환
+				}
+				// 반대로 원본 배경이 완전히 오른쪽으로 벗어났다면, 복제 배경의 왼쪽에 배치
+				else if (newBgPos.x > camPos.x + WIN_DEFAULT_WIDTH)
+				{
+					bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() - Vector3(bgWidth, 0, 0));
+					std::swap(bgLayer[i], bgLayerDup[i]);
 				}
 			}
 		}
-
-		if (testPlayer != nullptr) testPlayer->Update();
+		
 	}
 }
 

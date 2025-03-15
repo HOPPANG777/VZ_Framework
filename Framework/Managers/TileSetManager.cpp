@@ -31,30 +31,6 @@ void TileSetManager::Init()
 
 void TileSetManager::ImGUI()
 {
-    //ImGui::Begin("TileSetManager");
-    //{
-    //    int count = 0;
-    //    for (UINT y = 0; y < tileYCount; y++)
-    //    {
-    //        for (UINT x = 0; x < tileXCount; x++)
-    //        {
-    //            float startX = texelTileSize.x * x;
-    //            float startY = texelTileSize.y * y;
-
-    //            ImGui::PushID(count);
-    //            // ImGui::ImageButton은 ImTextureID를 받으므로, tileSRV.Get()를 캐스팅
-    //            if (ImGui::ImageButton("##TileButton",(ImTextureID)tileSRV.Get(), ImVec2(40, 40), ImVec2(startX, startY), ImVec2(startX + texelTileSize.x, startY + texelTileSize.y)))
-    //            {
-    //                selectedStartUV = Vector2(startX, startY);
-    //            }
-    //            count++;
-    //            ImGui::PopID();
-
-    //            if (count % tileXCount != 0) ImGui::SameLine();
-    //        }
-    //    }
-    //}
-    //ImGui::End();
     ImGui::Begin("TileSetManager");
     {
         // 스크롤 가능한 영역 (가로 + 세로 스크롤 적용)
