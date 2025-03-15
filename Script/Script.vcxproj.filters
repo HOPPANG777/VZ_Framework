@@ -21,13 +21,13 @@
       <Filter>Scenes\Scene_03_StartStage</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_04.cpp">
-      <Filter>Scenes\Scene_04_CombatStage</Filter>
+      <Filter>Scenes\Scene_04_Stage01</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_05.cpp">
-      <Filter>Scenes\Scene_05_PuzzleStage</Filter>
+      <Filter>Scenes\Scene_05_Stage02</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_06.cpp">
-      <Filter>Scenes\Scene_06_BossStage</Filter>
+      <Filter>Scenes\Scene_06_Stage03</Filter>
     </ClCompile>
     <ClCompile Include="Object\UnitBase.cpp">
       <Filter>Object\Unit</Filter>
@@ -66,13 +66,13 @@
       <Filter>Scenes\Scene_03_StartStage</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_04.h">
-      <Filter>Scenes\Scene_04_CombatStage</Filter>
+      <Filter>Scenes\Scene_04_Stage01</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_05.h">
-      <Filter>Scenes\Scene_05_PuzzleStage</Filter>
+      <Filter>Scenes\Scene_05_Stage02</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_06.h">
-      <Filter>Scenes\Scene_06_BossStage</Filter>
+      <Filter>Scenes\Scene_06_Stage03</Filter>
     </ClInclude>
     <ClInclude Include="Object\UnitBase.h">
       <Filter>Object\Unit</Filter>
@@ -127,13 +127,13 @@
     <Filter Include="Scenes\Scene_03_StartStage">
       <UniqueIdentifier>{07f6fda2-5901-41cc-9b3e-f3433584dc38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Scene_04_CombatStage">
+    <Filter Include="Scenes\Scene_04_Stage01">
       <UniqueIdentifier>{2d10c630-e89d-48e6-9c17-855b094c5dd6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Scene_05_PuzzleStage">
+    <Filter Include="Scenes\Scene_05_Stage02">
       <UniqueIdentifier>{877d9aaf-8574-47d1-b916-dc0ba44fa05f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes\Scene_06_BossStage">
+    <Filter Include="Scenes\Scene_06_Stage03">
       <UniqueIdentifier>{9842f30f-39ed-4496-83f1-0d39299931c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

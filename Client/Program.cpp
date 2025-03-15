@@ -29,9 +29,9 @@ void Program::Awake()
 		SCENE->AddScene("TitleScene", make_shared<Scene_01>());
 		SCENE->AddScene("SplashScene", make_shared<Scene_02>());
 		SCENE->AddScene("StartStage", make_shared<Scene_03>());
-		SCENE->AddScene("CombatStage", make_shared<Scene_04>());
-		SCENE->AddScene("PuzzleStage", make_shared<Scene_05>());
-		SCENE->AddScene("BossStage", make_shared<Scene_06>());
+		SCENE->AddScene("Stage01", make_shared<Scene_04>());
+		SCENE->AddScene("Stage02", make_shared<Scene_05>());
+		SCENE->AddScene("Stage03", make_shared<Scene_06>());
 
 		SCENE->SetSplashScene("SplashScene");
 

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Camera.h"
 
 Camera::Camera() {}
@@ -19,8 +19,6 @@ void Camera::Init()
 void Camera::Update()
 {
 	Move();
-    //UpdateFollow();
-    //UpdateFollow2();
 	UpdateView();
 }
 
@@ -31,12 +29,12 @@ void Camera::Render()
 
 void Camera::UpdateView()
 {
-	// Ä«¸Ş¶ó°¡ º¸´Â ¹æÇâÀ» position¿¡¼­ (0,0,1) ¹æÇâÀ¸·Î ¼³Á¤
+	// ì¹´ë©”ë¼ê°€ ë³´ëŠ” ë°©í–¥ì„ positionì—ì„œ (0,0,1) ë°©í–¥ìœ¼ë¡œ ì„¤ì •
 	view = XMMatrixLookAtLH
 	(
-		position,                      // Ä«¸Ş¶ó À§Ä¡
-		position + Vector3(0, 0, 1),   // Ä«¸Ş¶ó°¡ º¸´Â ¹æÇâ
-		Vector3(0, 1, 0)               // Ä«¸Ş¶óÀÇ À§ÂÊ ¹æÇâ
+		position,                      // ì¹´ë©”ë¼ ìœ„ì¹˜
+		position + Vector3(0, 0, 1),   // ì¹´ë©”ë¼ê°€ ë³´ëŠ” ë°©í–¥
+		Vector3(0, 1, 0)               // ì¹´ë©”ë¼ì˜ ìœ„ìª½ ë°©í–¥
 	);
 
 	VPBuffer->SetView(view);
@@ -44,26 +42,26 @@ void Camera::UpdateView()
 
 void Camera::Move()
 {
-    // Å¸°ÙÀÌ ÀÖÀ» °æ¿ì
+    // íƒ€ê²Ÿì´ ìˆì„ ê²½ìš°
     if (target != nullptr)
     {
         //position.x = target->GetPosition().x - WIN_DEFAULT_WIDTH * 0.5f;
         //position.y = target->GetPosition().y - WIN_DEFAULT_HEIGHT * 0.5f;
     }
-    else // Å¸°ÙÀÌ ¾øÀ» °æ¿ì (°³¹ßÀÚ ¸ğµå)
+    else // íƒ€ê²Ÿì´ ì—†ì„ ê²½ìš° (ê°œë°œì ëª¨ë“œ)
     {
         if (INPUT->KeyDown(VK_F4))
         {
-            // Åä±Û: ÀÌµ¿ ¸ğµå On/Off
+            // í† ê¸€: ì´ë™ ëª¨ë“œ On/Off
             isMove = !isMove;
-            // ÀÌµ¿ ¸ğµå ÀüÈ¯ ½Ã °¡¼Ó ½Ã°£ ÃÊ±âÈ­
+            // ì´ë™ ëª¨ë“œ ì „í™˜ ì‹œ ê°€ì† ì‹œê°„ ì´ˆê¸°í™”
             accelerationTime = 0.0f;
             currentSpeed = moveSpeed;
         }
         if (isMove)
         {
             bool moving = false;
-            // ±âº»ÀûÀ¸·Î ÇöÀç ¼Óµµ(currentSpeed)¸¦ »ç¿ëÇÏ¿© ÀÌµ¿
+            // ê¸°ë³¸ì ìœ¼ë¡œ í˜„ì¬ ì†ë„(currentSpeed)ë¥¼ ì‚¬ìš©í•˜ì—¬ ì´ë™
             if (Keyboard::Get()->Press('W'))
             {
                 position.y += currentSpeed * DELTA;
@@ -86,18 +84,18 @@ void Camera::Move()
                 moving = true;
             }
 
-            // ¸¸¾à ÇÑ °³ ÀÌ»óÀÇ ÀÌµ¿ Å°°¡ ´­·ÁÀÖÀ¸¸é °¡¼Ó ´©Àû, ¾Æ´Ï¸é °¡¼Ó ½Ã°£ ÃÊ±âÈ­
+            // ë§Œì•½ í•œ ê°œ ì´ìƒì˜ ì´ë™ í‚¤ê°€ ëˆŒë ¤ìˆìœ¼ë©´ ê°€ì† ëˆ„ì , ì•„ë‹ˆë©´ ê°€ì† ì‹œê°„ ì´ˆê¸°í™”
             if (moving)
             {
                 accelerationTime += DELTA;
-                // ÃÖ¼Ò 5ÃÊ µ¿¾È ´©¸£°í ÀÖ¾î¾ß ÃÖ´ë °¡¼Ó¿¡ µµ´Ş (ÃÖ´ë °¡¼ÓÀº 5ÃÊ¿¡ ÇØ´ç)
+                // ìµœì†Œ 5ì´ˆ ë™ì•ˆ ëˆ„ë¥´ê³  ìˆì–´ì•¼ ìµœëŒ€ ê°€ì†ì— ë„ë‹¬ (ìµœëŒ€ ê°€ì†ì€ 5ì´ˆì— í•´ë‹¹)
                 if (accelerationTime > 3.0f) accelerationTime = 3.0f;
             }
             else
             {
                 accelerationTime = 0.0f;
             }
-            // °¡¼Ó ½Ã°£¿¡ µû¶ó ¼Óµµ¸¦ ¼±ÇüÀûÀ¸·Î Áõ°¡ (¿¹: 5ÃÊ ÈÄ 2¹è ¼Óµµ)
+            // ê°€ì† ì‹œê°„ì— ë”°ë¼ ì†ë„ë¥¼ ì„ í˜•ì ìœ¼ë¡œ ì¦ê°€ (ì˜ˆ: 5ì´ˆ í›„ 2ë°° ì†ë„)
             currentSpeed = moveSpeed * (1.0f + accelerationTime / 5.0f);
         }
     }
@@ -114,73 +112,46 @@ const Vector3 Camera::Drag()
 
 void Camera::Reset()
 {
-	position = { 0, 0, 0 };  // ¿ùµå ÁÂÇ¥ (0, 0, 0)À¸·Î ÃÊ±âÈ­
-	target = nullptr;        // Å¸°Ù Á¦°Å
-	UpdateView();            // ÃÊ±âÈ­ ÈÄ ºä °»½Å
+	position = { 0, 0, 0 };  // ì›”ë“œ ì¢Œí‘œ (0, 0, 0)ìœ¼ë¡œ ì´ˆê¸°í™”
+	target = nullptr;        // íƒ€ê²Ÿ ì œê±°
+	UpdateView();            // ì´ˆê¸°í™” í›„ ë·° ê°±ì‹ 
 }
 
 void Camera::UpdateFollow()
 {
     if (target == nullptr) return;
 
-    // ÇÃ·¹ÀÌ¾î(Å¸°Ù)ÀÇ ¿ùµå ÁÂÇ¥
+    // (1) í˜„ì¬ ì¹´ë©”ë¼ì˜ ì¢Œì¸¡ ìƒë‹¨ì„ camPosë¡œ ê°€ì •
+    Vector3 camPos = position;
     Vector3 targetPos = target->GetPosition();
 
-    // ÇöÀç Ä«¸Ş¶óÀÇ À§Ä¡ (ÁÂ»ó´Ü ±âÁØ)
-    Vector3 camPos = position;
-
-    // µ¥µå Á¸ ¿©¹é ¼³Á¤ (¿øÇÏ´Â °ªÀ¸·Î Á¶Á¤ °¡´É)
+    // (2) ë°ë“œì¡´(marginX, marginY) ë°–ì´ë©´ ì¹´ë©”ë¼ë¥¼ ì´ë™
     float marginX = 600.0f;
     float marginY = 200.0f;
 
-    // ÇöÀç Ä«¸Ş¶ó ºäÆ÷Æ® °æ°è °è»ê
     float viewLeft = camPos.x;
     float viewRight = camPos.x + WIN_DEFAULT_WIDTH;
     float viewTop = camPos.y;
     float viewBottom = camPos.y + WIN_DEFAULT_HEIGHT;
 
-    // µ¥µå Á¸ ³»ºÎ °æ°è (È­¸éÀÇ °¡ÀåÀÚ¸®¿¡¼­ margin ¸¸Å­ ¾ÈÂÊ)
     float deadLeft = viewLeft + marginX;
     float deadRight = viewRight - marginX;
     float deadTop = viewTop + marginY;
     float deadBottom = viewBottom - marginY;
 
-    // xÃà: Å¸°ÙÀÌ µ¥µå Á¸ ¹ÛÀ¸·Î ¹ş¾î³ª¸é Ä«¸Ş¶ó x À§Ä¡ Á¶Á¤
-    if (targetPos.x < deadLeft)
-    {
-        camPos.x = targetPos.x - marginX;
-    }
-    else if (targetPos.x > deadRight)
-    {
-        camPos.x = targetPos.x + marginX - WIN_DEFAULT_WIDTH;
-    }
+    // xì¶•
+    if (targetPos.x < deadLeft) camPos.x = targetPos.x - marginX;
+    else if (targetPos.x > deadRight) camPos.x = targetPos.x + marginX - WIN_DEFAULT_WIDTH;
 
-    // yÃà: Å¸°ÙÀÌ µ¥µå Á¸ ¹ÛÀ¸·Î ¹ş¾î³ª¸é Ä«¸Ş¶ó y À§Ä¡ Á¶Á¤
-    if (targetPos.y < deadTop)
-    {
-        camPos.y = targetPos.y - marginY;
-    }
-    else if (targetPos.y > deadBottom)
-    {
-        camPos.y = targetPos.y + marginY - WIN_DEFAULT_HEIGHT;
-    }
+    // yì¶•
+    if (targetPos.y < deadTop) camPos.y = targetPos.y - marginY;
+    else if (targetPos.y > deadBottom) camPos.y = targetPos.y + marginY - WIN_DEFAULT_HEIGHT;
 
-    // ºÎµå·¯¿î ÀÌµ¿À» ¿øÇÏ¸é º¸°£(interpolation) ±â¹ıÀ» »ç¿ëÇÒ ¼ö ÀÖÀ½
+    // ìµœì¢… ì¹´ë©”ë¼ ìœ„ì¹˜ ê°±ì‹ 
     position = camPos;
 
+    // ë·° í–‰ë ¬ ì—…ë°ì´íŠ¸
     UpdateView();
-}
-
-void Camera::UpdateFollow2()
-{
-    if (target == nullptr) return;
-
-    if (target->GetPosition().x > WIN_DEFAULT_WIDTH * 0.5 && target->GetPosition().x < WIN_DEFAULT_WIDTH * 1.5)
-    {
-        Vector3 newCamPos = Vector3(target->GetPosition().x - WIN_DEFAULT_WIDTH / 2, 0, 0);
-        position = newCamPos;
-        UpdateView();
-    }
 }
 
 

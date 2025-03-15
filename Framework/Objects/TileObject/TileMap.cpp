@@ -159,44 +159,43 @@ void TileMap::UnmapVertexBuffer()
 
 void TileMap::ResizeMap(UINT newWidth, UINT newHeight)
 {
-	// 새로운 2차원 벡터 준비
-	vector<vector<shared_ptr<Tile>>> newTiles;
-	newTiles.resize(newHeight);
+    // 새로운 2차원 벡터 준비
+    vector<vector<shared_ptr<Tile>>> newTiles;
+    newTiles.resize(newHeight);
 
-	// 인덱스를 새로 부여할 때 사용할 변수
-	int index = 0;
+    // 인덱스를 새로 부여할 때 사용할 변수
+    int index = 0;
 
-	for (UINT y = 0; y < newHeight; y++)
-	{
-		newTiles[y].resize(newWidth);
+    for (UINT y = 0; y < newHeight; y++)
+    {
+        newTiles[y].resize(newWidth);
 
-		for (UINT x = 0; x < newWidth; x++)
-		{
-			if (x < width && y < height)
-			{
-				// 기존 맵 범위 안에 있으면, 기존 타일을 그대로 가져옴
-				newTiles[y][x] = tiles[y][x];
-			}
-			else
-			{
-				// 새로 확장된 영역이면, 새로운 타일을 생성
-				auto tile = make_shared<Tile>();
-				tile->SetPosition(Vector3((float)x * spacing, (float)y * spacing, 0.0f));
-				tile->SetIndex(index);
-				// 필요하다면 기본 색상/UV 설정
-				tile->SetColor(Values::Transparent);
-				newTiles[y][x] = tile;
-			}
-			index++;
-		}
-	}
+        for (UINT x = 0; x < newWidth; x++)
+        {
+            if (x < width && y < height)
+            {
+                // 기존 맵 범위 안에 있으면, 기존 타일을 그대로 가져옴
+                newTiles[y][x] = tiles[y][x];
+            }
+            else
+            {
+                // 새로 확장된 영역이면, 새로운 타일을 생성
+                auto tile = make_shared<Tile>();
+                tile->SetPosition(Vector3((float)x * spacing, (float)y * spacing, 0.0f));
+                tile->SetIndex(index);
+                // 새로 생성되는 타일은 검은색으로 설정
+                tile->SetColor(Values::Black);
+                newTiles[y][x] = tile;
+            }
+            index++;
+        }
+    }
 
-	// 기존 tiles를 새 tiles로 교체
-	tiles = move(newTiles);
-	// width/height를 갱신
-	width = newWidth;
-	height = newHeight;
-
+    // 기존 tiles를 새 tiles로 교체
+    tiles = move(newTiles);
+    // width/height를 갱신
+    width = newWidth;
+    height = newHeight;
 }
 
 void TileMap::Update()

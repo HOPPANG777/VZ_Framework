@@ -21,12 +21,12 @@ public:
 	void SetPosition(const Vector3& position) { this->position = position; }
 
 	void SetTarget(Object* target) { this->target = target; }
+	void RemoveTarget() { this->target = nullptr; }
 
 	Object* GetTarget() { return target; }
 
 public:
 	void UpdateFollow();
-	void UpdateFollow2();
 
 private:
 	Matrix view, proj;
