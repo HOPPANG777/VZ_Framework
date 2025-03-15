@@ -26,6 +26,9 @@
     <ClCompile Include="Component\TestComponent.cpp">
       <Filter>Component\TestComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\Scene_06.cpp">
+      <Filter>Scenes\Scene_06_TestMove</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="Component\TestComponent.h">
       <Filter>Component\TestComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_06.h">
+      <Filter>Scenes\Scene_06_TestMove</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +96,9 @@
     </Filter>
     <Filter Include="Component\TestComponent">
       <UniqueIdentifier>{8aa3c2c7-a542-492b-b118-6e2f3e4a5d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_06_TestMove">
+      <UniqueIdentifier>{617c3d6b-26e4-4278-9c05-bc549dbb0be4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

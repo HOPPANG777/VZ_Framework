@@ -31,6 +31,7 @@ void Program::Awake()
 		SCENE->AddScene("GeometryScene", make_shared<Scene_03>());
 		SCENE->AddScene("ClockScene", make_shared<Scene_04>());
 		SCENE->AddScene("TextureScene", make_shared<Scene_05>());
+		SCENE->AddScene("TestMoveScene", make_shared<Scene_06>());
 
 		SCENE->SetSplashScene("SplashScene");
 
