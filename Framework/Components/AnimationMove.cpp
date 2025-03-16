@@ -1,6 +1,8 @@
 #include "Framework.h"
 #include "AnimationMove.h"
 
+
+
 void AnimationMove::Update()
 {
     auto animator = owner->GetComponent<Animator>("Animator");
@@ -11,7 +13,6 @@ void AnimationMove::Update()
     {
         bool facingLeft = IsFacingLeft(currentAnimation);
         UnitAnimationType newState = facingLeft ? UnitAnimationType::DIE_L : UnitAnimationType::DIE_R;
-
         if (newState != currentAnimation)
         {
             currentAnimation = newState;
@@ -35,13 +36,13 @@ void AnimationMove::Update()
     UnitAnimationType newState = currentAnimation;
 
     // 숙이기: 컨트롤 키 입력
-    if (INPUT->KeyPressed(VK_CONTROL))
+    if (INPUT->KeyDown(VK_CONTROL))
     {
-        if (INPUT->KeyPressed('A'))
+        if (INPUT->KeyDown('A'))
         {
             newState = UnitAnimationType::CROUCH_WALK_L;
         }
-        else if (INPUT->KeyPressed('D'))
+        else if (INPUT->KeyDown('D'))
         {
             newState = UnitAnimationType::CROUCH_WALK_R;
         }
@@ -51,16 +52,28 @@ void AnimationMove::Update()
         }
     }
     // 점프: 스페이스바 입력
-    else if (INPUT->KeyPressed(VK_SPACE))
+    else if (INPUT->KeyDown(VK_SPACE))
     {
+        // 만약 스페이스바가 눌린 순간이라면 점프 상태로 시작
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::JUMP_L : UnitAnimationType::JUMP_R;
     }
+    // 점프 상태에서 스페이스바를 떼면 BETWEEN 상태로 전환 (정점)
+    else if (!INPUT->KeyDown(VK_SPACE) && (currentAnimation == UnitAnimationType::JUMP_L || currentAnimation == UnitAnimationType::JUMP_R))
+    {
+        newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::JUMP_BETWEEN_L : UnitAnimationType::JUMP_BETWEEN_R;
+    }
+    // BETWEEN 상태에서 추가로 하강하면 FALL 상태로 전환
+    else if ((currentAnimation == UnitAnimationType::JUMP_BETWEEN_L || currentAnimation == UnitAnimationType::JUMP_BETWEEN_R) &&
+        /* 여기에 실제 낙하 조건 (예: 수직 속도 < 0) 등을 체크 */ false)
+    {
+        newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::JUMP_FALL_L : UnitAnimationType::JUMP_FALL_R;
+    }
     // 좌우 이동
-    else if (INPUT->KeyPressed('A'))
+    else if (INPUT->KeyDown('A'))
     {
         newState = UnitAnimationType::RUN_L;
     }
-    else if (INPUT->KeyPressed('D'))
+    else if (INPUT->KeyDown('D'))
     {
         newState = UnitAnimationType::RUN_R;
     }
@@ -69,8 +82,7 @@ void AnimationMove::Update()
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::IDLE_L : UnitAnimationType::IDLE_R;
     }
 
-    // 도끼 관련 입력 처리:
-    // 여기서는 현재 바라보는 방향을 기준으로 좌우 버전으로 설정합니다.
+    // 도끼 관련 입력 처리 (좌우 분기)
     if (INPUT->MouseDown(2))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::AXE_THROW_PREPARE_L : UnitAnimationType::AXE_THROW_PREPARE_R;
@@ -96,12 +108,16 @@ void AnimationMove::Update()
         case UnitAnimationType::RUN_L:            animator->SetCurrentAnimClip(L"RunL");            break;
         case UnitAnimationType::JUMP_R:           animator->SetCurrentAnimClip(L"JumpR");           break;
         case UnitAnimationType::JUMP_L:           animator->SetCurrentAnimClip(L"JumpL");           break;
+        case UnitAnimationType::JUMP_BETWEEN_R:     animator->SetCurrentAnimClip(L"JumpBetweenR");    break;
+        case UnitAnimationType::JUMP_BETWEEN_L:     animator->SetCurrentAnimClip(L"JumpBetweenL");    break;
+        case UnitAnimationType::JUMP_FALL_R:        animator->SetCurrentAnimClip(L"JumpFallR");       break;
+        case UnitAnimationType::JUMP_FALL_L:        animator->SetCurrentAnimClip(L"JumpFallL");       break;
         case UnitAnimationType::AXE_THROW_PREPARE_R:animator->SetCurrentAnimClip(L"AxeThrowPrepareR"); break;
         case UnitAnimationType::AXE_THROW_PREPARE_L:animator->SetCurrentAnimClip(L"AxeThrowPrepareL"); break;
-        case UnitAnimationType::AXE_THROW_R:        animator->SetCurrentAnimClip(L"AxeThrowR");          break;
-        case UnitAnimationType::AXE_THROW_L:        animator->SetCurrentAnimClip(L"AxeThrowL");          break;
-        case UnitAnimationType::AXE_RETURN_R:       animator->SetCurrentAnimClip(L"AxeReturnR");         break;
-        case UnitAnimationType::AXE_RETURN_L:       animator->SetCurrentAnimClip(L"AxeReturnL");         break;
+        case UnitAnimationType::AXE_THROW_R:         animator->SetCurrentAnimClip(L"AxeThrowR");          break;
+        case UnitAnimationType::AXE_THROW_L:         animator->SetCurrentAnimClip(L"AxeThrowL");          break;
+        case UnitAnimationType::AXE_RETURN_R:        animator->SetCurrentAnimClip(L"AxeReturnR");         break;
+        case UnitAnimationType::AXE_RETURN_L:        animator->SetCurrentAnimClip(L"AxeReturnL");         break;
         case UnitAnimationType::CROUCH_R:           animator->SetCurrentAnimClip(L"CrouchR");           break;
         case UnitAnimationType::CROUCH_L:           animator->SetCurrentAnimClip(L"CrouchL");           break;
         case UnitAnimationType::CROUCH_WALK_R:      animator->SetCurrentAnimClip(L"CrouchWalkR");       break;
@@ -113,6 +129,7 @@ void AnimationMove::Update()
 
     animator->Update();
 }
+
 
 void AnimationMove::Render()
 {

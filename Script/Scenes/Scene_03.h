@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Object/PlayerUnit.h"
+
 class Scene_03 : public Scene
 {
 public:

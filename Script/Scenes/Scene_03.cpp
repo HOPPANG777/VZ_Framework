@@ -7,7 +7,7 @@ void Scene_03::Awake()
 
 	floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-640, -330, 0), 10000, 0.0f, CLEAR));
 
-	testPlayer = make_shared<TextureRect>(CENTER + Vector3(-580, -280, 0), Vector3(118.5, 312, 0), 0.0f, TexturePath + L"Client/Mirko1.png");
+	testPlayer = make_shared <PlayerUnit> (CENTER + Vector3(-550, -300, 0));
 
 	// 배경 레이어 2개씩 생성
 	for (int i = 0; i < 5; i++)
@@ -20,8 +20,6 @@ void Scene_03::Awake()
 	}
 
 	floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
-	testPlayer->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(118.5, 312, 0), BLUE));
-	testPlayer->AddComponent(make_shared<PlayerMove>());
 
 	//*
 	//TileMap
@@ -36,10 +34,8 @@ void Scene_03::Awake()
 	//*/
 
 	auto object01Collider = floor[0]->GetComponent<BoxCollider>("BoxCollider");
-	auto testPlayerCollider = testPlayer->GetComponent<BoxCollider>("BoxCollider");
 
 	if (object01Collider) COLLISION->AddCollider(object01Collider);
-	if (testPlayerCollider) COLLISION->AddCollider(testPlayerCollider);
 
 	isLoaded = true;
 }

@@ -19,6 +19,7 @@ private:
 
     bool isDead = false;
 
+    // 현재 상태가 왼쪽을 향하고 있는지 판단하는 함수
     bool IsFacingLeft(UnitAnimationType anim) const
     {
         switch (anim)
@@ -26,12 +27,15 @@ private:
         case UnitAnimationType::RUN_L:
         case UnitAnimationType::IDLE_L:
         case UnitAnimationType::JUMP_L:
+        case UnitAnimationType::JUMP_BETWEEN_L:
+        case UnitAnimationType::JUMP_FALL_L:
         case UnitAnimationType::CROUCH_L:
         case UnitAnimationType::CROUCH_WALK_L:
         case UnitAnimationType::DIE_L:
             return true;
+        default:
+            return false;
         }
-        return false;
     }
 };
 

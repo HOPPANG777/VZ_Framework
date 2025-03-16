@@ -8,7 +8,7 @@ private:
 
 
 public:
-	PlayerUnit(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path);
+	PlayerUnit(const Vector3& position, const Vector3& scale = Vector3(150, 150, 0), const float rotation = 0.0f, const wstring& path = L"");
 	~PlayerUnit();
 
 public:
