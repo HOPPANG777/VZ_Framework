@@ -11,8 +11,27 @@ public:
 
     UnitAnimationType GetCurrentAnimation() const { return currentAnimation; }
 
+    void SetPlayerDead(const bool isDead) { this->isDead = isDead; }
+
 private:
     // 현재 애니메이션 상태를 저장합니다.
     UnitAnimationType currentAnimation = UnitAnimationType::IDLE;
+
+    bool isDead = false;
+
+    bool IsFacingLeft(UnitAnimationType anim) const
+    {
+        switch (anim)
+        {
+        case UnitAnimationType::RUN_L:
+        case UnitAnimationType::IDLE_L:
+        case UnitAnimationType::JUMP_L:
+        case UnitAnimationType::CROUCH_L:
+        case UnitAnimationType::CROUCH_WALK_L:
+        case UnitAnimationType::DIE_L:
+            return true;
+        }
+        return false;
+    }
 };
 
