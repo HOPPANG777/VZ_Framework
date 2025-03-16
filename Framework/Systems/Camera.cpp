@@ -45,8 +45,8 @@ void Camera::Move()
     // 타겟이 있을 경우
     if (target != nullptr)
     {
-        //position.x = target->GetPosition().x - WIN_DEFAULT_WIDTH * 0.5f;
-        //position.y = target->GetPosition().y - WIN_DEFAULT_HEIGHT * 0.5f;
+        position.x = target->GetPosition().x - WIN_DEFAULT_WIDTH * 0.5f;
+        position.y = target->GetPosition().y - WIN_DEFAULT_HEIGHT * 0.5f;
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
