@@ -68,7 +68,7 @@ float4 PS(PixelInput input) : SV_Target
 
     if (input.uv.x > 0.0f || input.uv.y > 0.0f)
     {
-        //if (color.r <= 0.01f && color.g <= 0.01f && color.b <= 0.01f) discard;
+        if (color.r <= 0.01f && color.g <= 0.01f && color.b <= 0.01f) discard;
     }
     else
     {

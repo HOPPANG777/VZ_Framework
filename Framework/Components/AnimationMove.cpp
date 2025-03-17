@@ -69,11 +69,11 @@ void AnimationMove::Update()
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::JUMP_FALL_L : UnitAnimationType::JUMP_FALL_R;
     }
     // ÁÂ¿ì ÀÌµ¿
-    else if (INPUT->KeyDown('A'))
+    else if (INPUT->KeyPressed('A'))
     {
         newState = UnitAnimationType::RUN_L;
     }
-    else if (INPUT->KeyDown('D'))
+    else if (INPUT->KeyPressed('D'))
     {
         newState = UnitAnimationType::RUN_R;
     }
