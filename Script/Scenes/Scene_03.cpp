@@ -9,6 +9,8 @@ void Scene_03::Awake()
 
 	testPlayer = make_shared <PlayerUnit> (CENTER + Vector3(-550, -300, 0));
 
+
+
 	// 배경 레이어 2개씩 생성
 	for (int i = 0; i < 5; i++)
 	{

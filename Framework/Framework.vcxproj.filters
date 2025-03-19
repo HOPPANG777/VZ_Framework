@@ -356,6 +356,9 @@
     <ClInclude Include="Struct\WinDesc.h">
       <Filter>Struct</Filter>
     </ClInclude>
+    <ClInclude Include="Enum\AxeState.h">
+      <Filter>Enum</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

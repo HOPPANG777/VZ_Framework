@@ -14,8 +14,8 @@
     <ClCompile Include="Scenes\Scene_02.cpp">
       <Filter>Scenes\Scene_02_SplashScene</Filter>
     </ClCompile>
-    <ClCompile Include="Object\BezierCurveAxe.cpp">
-      <Filter>Object\BezierCurveAxe</Filter>
+    <ClCompile Include="Object\LumberAxe.cpp">
+      <Filter>Object\LumberAxe</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_03.cpp">
       <Filter>Scenes\Scene_03_StartStage</Filter>
@@ -41,6 +41,9 @@
     <ClCompile Include="Object\EnemyUnit.cpp">
       <Filter>Object\Unit\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Component\BezierCurveAxe.cpp">
+      <Filter>Component\BezierCurveAxe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -59,8 +62,8 @@
     <ClInclude Include="Scenes\Scene_02.h">
       <Filter>Scenes\Scene_02_SplashScene</Filter>
     </ClInclude>
-    <ClInclude Include="Object\BezierCurveAxe.h">
-      <Filter>Object\BezierCurveAxe</Filter>
+    <ClInclude Include="Object\LumberAxe.h">
+      <Filter>Object\LumberAxe</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_03.h">
       <Filter>Scenes\Scene_03_StartStage</Filter>
@@ -86,6 +89,9 @@
     <ClInclude Include="Object\EnemyUnit.h">
       <Filter>Object\Unit\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Component\BezierCurveAxe.h">
+      <Filter>Component\BezierCurveAxe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -96,9 +102,6 @@
     </Filter>
     <Filter Include="Object\LoadingObject">
       <UniqueIdentifier>{1071eefa-7738-4eed-8abb-e508e1b4db06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\BezierCurveAxe">
-      <UniqueIdentifier>{107db589-0137-4d62-9a65-25386dc18bb5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes\Scene_00_Loading">
       <UniqueIdentifier>{7e6ae146-8a72-4a13-87ad-25acf2116947}</UniqueIdentifier>
@@ -135,6 +138,12 @@
     </Filter>
     <Filter Include="Scenes\Scene_06_Stage03">
       <UniqueIdentifier>{9842f30f-39ed-4496-83f1-0d39299931c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\BezierCurveAxe">
+      <UniqueIdentifier>{3cc3a854-3941-4c40-adfa-d7699010b7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\LumberAxe">
+      <UniqueIdentifier>{107db589-0137-4d62-9a65-25386dc18bb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

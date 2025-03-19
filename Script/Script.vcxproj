@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component\BezierCurveAxe.cpp" />
     <ClCompile Include="Component\EnemyAI.cpp" />
     <ClCompile Include="Object\EnemyUnit.cpp" />
     <ClCompile Include="Object\UnitBase.cpp" />
-    <ClCompile Include="Object\BezierCurveAxe.cpp" />
+    <ClCompile Include="Object\LumberAxe.cpp" />
     <ClCompile Include="Object\JumpHoppang.cpp" />
     <ClCompile Include="Object\PlayerUnit.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
@@ -40,10 +41,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\BezierCurveAxe.h" />
     <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Object\EnemyUnit.h" />
     <ClInclude Include="Object\UnitBase.h" />
-    <ClInclude Include="Object\BezierCurveAxe.h" />
+    <ClInclude Include="Object\LumberAxe.h" />
     <ClInclude Include="Object\JumpHoppang.h" />
     <ClInclude Include="Object\PlayerUnit.h" />
     <ClInclude Include="Scenes\SceneList.h" />

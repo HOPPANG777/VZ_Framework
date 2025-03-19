@@ -186,6 +186,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Enum\AxeState.h" />
     <ClInclude Include="Components\AnimationMove.h" />
     <ClInclude Include="Components\Button.h" />
     <ClInclude Include="Components\Animator.h" />
