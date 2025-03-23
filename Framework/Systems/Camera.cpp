@@ -154,5 +154,21 @@ void Camera::UpdateFollow()
     UpdateView();
 }
 
+void Camera::UpdateHorizontalScroll(Object* target, float minRatio, float maxRatio)
+{
+    if (target == nullptr) return;
+
+    // 타겟의 월드 좌표
+    Vector3 targetPos = target->GetPosition();
+
+    // 조건: 타겟의 x좌표가 윈도우의 중앙보다 오른쪽이면서 2.5배 너비보다 작을 경우
+    if (targetPos.x > WIN_DEFAULT_WIDTH * minRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxRatio)
+    {
+        // 타겟의 x 좌표가 화면 중앙에 오도록 카메라 x 위치를 조정
+        Vector3 newCamPos = Vector3(targetPos.x - WIN_DEFAULT_WIDTH / 2.0f, position.y, position.z);
+        SetPosition(newCamPos);
+    }
+}
+
 
 

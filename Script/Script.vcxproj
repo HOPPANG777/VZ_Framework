@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Component\EnemyAI.cpp" />
     <ClCompile Include="Component\LumberAxeComponent.cpp" />
+    <ClCompile Include="Component\FloorCollision.cpp" />
     <ClCompile Include="Object\EnemyUnit.cpp" />
     <ClCompile Include="Object\UnitBase.cpp" />
     <ClCompile Include="Object\LumberAxe.cpp" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Component\LumberAxeComponent.h" />
+    <ClInclude Include="Component\FloorCollision.h" />
     <ClInclude Include="Object\EnemyUnit.h" />
     <ClInclude Include="Object\UnitBase.h" />
     <ClInclude Include="Object\LumberAxe.h" />

@@ -47,6 +47,9 @@
     <ClCompile Include="Component\ParallaxBackground.cpp">
       <Filter>Component\ParallaxBackground</Filter>
     </ClCompile>
+    <ClCompile Include="Component\FloorCollision.cpp">
+      <Filter>Component\FloorCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Component\ParallaxBackground.h">
       <Filter>Component\ParallaxBackground</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\FloorCollision.h">
+      <Filter>Component\FloorCollision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +159,9 @@
     </Filter>
     <Filter Include="Component\ParallaxBackground">
       <UniqueIdentifier>{0bdff270-ed7a-4830-b661-ed964886db01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\FloorCollision">
+      <UniqueIdentifier>{534cb469-44af-4d52-aeb9-5f5c2039f6a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

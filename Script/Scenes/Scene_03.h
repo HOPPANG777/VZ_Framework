@@ -3,6 +3,7 @@
 #include "Object/PlayerUnit.h"
 #include "Object/LumberAxe.h"
 #include "Component/ParallaxBackground.h"
+#include "Component/FloorCollision.h"
 
 class Scene_03 : public Scene
 {
