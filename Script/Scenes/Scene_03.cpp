@@ -8,8 +8,10 @@ void Scene_03::Awake()
 	floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-640, -330, 0), 10000, 0.0f, CLEAR));
 
 	testPlayer = make_shared <PlayerUnit> (CENTER + Vector3(-550, -300, 0));
+	
+	lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -305, 0));
 
-
+	auto parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
 	// 배경 레이어 2개씩 생성
 	for (int i = 0; i < 5; i++)
@@ -19,6 +21,8 @@ void Scene_03::Awake()
 
 		bgOrigin[i] = bgLayer[i]->GetPosition();
 		bgOriginDup[i] = bgLayerDup[i]->GetPosition();
+
+		parallax->SetLayer(i, bgLayer[i], bgLayerDup[i]);
 	}
 
 	floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
@@ -39,6 +43,9 @@ void Scene_03::Awake()
 
 	if (object01Collider) COLLISION->AddCollider(object01Collider);
 
+	backgroundObject = make_shared<Object>("Background");
+	backgroundObject->AddComponent(parallax);
+
 	isLoaded = true;
 }
 
@@ -53,6 +60,8 @@ void Scene_03::Destroy()
 	for (auto& bg : bgLayer) if (bg != nullptr) bg.reset();
 	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
+	if (lumberAxe != nullptr) lumberAxe.reset();
+	if (backgroundObject != nullptr) backgroundObject.reset();
 }
 
 void Scene_03::FixedUpdate() {}
@@ -62,42 +71,47 @@ void Scene_03::Update()
 	if (tmap != nullptr) tmap->Update();
 
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
+
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
 
 	if (testPlayer != nullptr) testPlayer->Update();
 
-	if (testPlayer->GetPosition().x > WIN_DEFAULT_WIDTH * 0.5 && testPlayer->GetPosition().x < WIN_DEFAULT_WIDTH * 1.5)
+	if (lumberAxe != nullptr) lumberAxe->Update();
+
+	if (backgroundObject != nullptr) backgroundObject->Update();
+
+	if (testPlayer->GetPosition().x > WIN_DEFAULT_WIDTH * 0.5 && testPlayer->GetPosition().x < WIN_DEFAULT_WIDTH * 2.5)
 	{
 		Vector3 newCamPos = Vector3(testPlayer->GetPosition().x - WIN_DEFAULT_WIDTH / 2, 0, 0);
 		CAMERA->SetPosition(newCamPos);
 
-		float parallaxFactors[5] = { 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
+		//float parallaxFactors[5] = { 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
 
-		for (int i = 0; i < 5; i++)
-		{
-			if (bgLayer[i] && bgLayerDup[i])
-			{
-				float offsetX = newCamPos.x * parallaxFactors[i];
+		//for (int i = 0; i < 5; i++)
+		//{
+		//	if (bgLayer[i] && bgLayerDup[i])
+		//	{
+		//		float offsetX = newCamPos.x * parallaxFactors[i];
 
-				// 원본 배경 위치 업데이트
-				Vector3 newBgPos = bgOrigin[i] + Vector3(offsetX, 0, 0);
-				bgLayer[i]->SetPosition(newBgPos);
+		//		// 원본 배경 위치 업데이트
+		//		Vector3 newBgPos = bgOrigin[i] + Vector3(offsetX, 0, 0);
+		//		bgLayer[i]->SetPosition(newBgPos);
 
-				// 복제 배경 위치 업데이트
-				Vector3 newBgDupPos = bgOriginDup[i] + Vector3(offsetX, 0, 0);
-				bgLayerDup[i]->SetPosition(newBgDupPos);
+		//		// 복제 배경 위치 업데이트
+		//		Vector3 newBgDupPos = bgOriginDup[i] + Vector3(offsetX, 0, 0);
+		//		bgLayerDup[i]->SetPosition(newBgDupPos);
 
-				// 배경이 화면을 벗어나면 재조정하여 무한 스크롤 효과 적용
-				float bgWidth = WIN_DEFAULT_WIDTH;
-				if (newBgPos.x + bgWidth < newCamPos.x)
-				{
-					bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
-					std::swap(bgLayer[i], bgLayerDup[i]);
-				}
-			}
-		}
+		//		// 배경이 화면을 벗어나면 재조정하여 무한 스크롤 효과 적용
+		//		float bgWidth = WIN_DEFAULT_WIDTH;
+		//		if (newBgPos.x + bgWidth < newCamPos.x)
+		//		{
+		//			bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
+		//			std::swap(bgLayer[i], bgLayerDup[i]);
+		//		}
+		//	}
+		//}
 	}
 
 	// 플레이어와 각 floor의 충돌 검사
@@ -139,17 +153,21 @@ void Scene_03::LateUpdate() {}
 
 void Scene_03::Render()
 {
-	for (int i = 4; i >= 0; i--) // 배경을 뒤에서부터 순서대로 그림
-	{
-		if (bgLayer[i]) bgLayer[i]->Render();
-		if (bgLayerDup[i]) bgLayerDup[i]->Render();
-	}
+	//for (int i = 4; i >= 0; i--) // 배경을 뒤에서부터 순서대로 그림
+	//{
+	//	if (bgLayer[i]) bgLayer[i]->Render();
+	//	if (bgLayerDup[i]) bgLayerDup[i]->Render();
+	//}
+
+	if (backgroundObject != nullptr) backgroundObject->Render();
 
 	if (tmap != nullptr) tmap->Render();
 
 	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
 
 	if (testPlayer != nullptr) testPlayer->Render();
+
+	if (lumberAxe != nullptr) lumberAxe->Render();
 }
 
 void Scene_03::PostRender()

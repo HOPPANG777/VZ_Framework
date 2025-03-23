@@ -41,8 +41,11 @@
     <ClCompile Include="Object\EnemyUnit.cpp">
       <Filter>Object\Unit\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Component\BezierCurveAxe.cpp">
-      <Filter>Component\BezierCurveAxe</Filter>
+    <ClCompile Include="Component\LumberAxeComponent.cpp">
+      <Filter>Component\LumberAxeComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\ParallaxBackground.cpp">
+      <Filter>Component\ParallaxBackground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +92,11 @@
     <ClInclude Include="Object\EnemyUnit.h">
       <Filter>Object\Unit\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Component\BezierCurveAxe.h">
-      <Filter>Component\BezierCurveAxe</Filter>
+    <ClInclude Include="Component\LumberAxeComponent.h">
+      <Filter>Component\LumberAxeComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\ParallaxBackground.h">
+      <Filter>Component\ParallaxBackground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,11 +145,14 @@
     <Filter Include="Scenes\Scene_06_Stage03">
       <UniqueIdentifier>{9842f30f-39ed-4496-83f1-0d39299931c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\BezierCurveAxe">
-      <UniqueIdentifier>{3cc3a854-3941-4c40-adfa-d7699010b7a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\LumberAxe">
       <UniqueIdentifier>{107db589-0137-4d62-9a65-25386dc18bb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\LumberAxeComponent">
+      <UniqueIdentifier>{3cc3a854-3941-4c40-adfa-d7699010b7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\ParallaxBackground">
+      <UniqueIdentifier>{0bdff270-ed7a-4830-b661-ed964886db01}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

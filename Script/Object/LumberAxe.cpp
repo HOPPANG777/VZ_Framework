@@ -4,9 +4,8 @@
 LumberAxe::LumberAxe(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
 	: TextureRect(position, scale, rotation, path)
 {
-
-	AddComponent(make_shared<BezierCurveAxe>());
-
+	lumberAxeComponent = make_shared<LumberAxeComponent>();
+	AddComponent(lumberAxeComponent);
 }
 
 LumberAxe::~LumberAxe()

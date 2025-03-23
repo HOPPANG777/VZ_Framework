@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Object/PlayerUnit.h"
+#include "Object/LumberAxe.h"
+#include "Component/ParallaxBackground.h"
 
 class Scene_03 : public Scene
 {
@@ -29,6 +31,8 @@ private:
 
 	shared_ptr<Object> player;
 	shared_ptr<Object> lumberAxe;
+
+	shared_ptr<Object> backgroundObject;
 
 	shared_ptr<Object> bgLayer[5];
 	shared_ptr<Object> bgLayerDup[5];
