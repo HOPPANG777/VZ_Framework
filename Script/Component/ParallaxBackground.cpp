@@ -47,17 +47,37 @@ void ParallaxBackground::Update()
             // 무한 스크롤 처리: 배경 너비 (여기서는 WIN_DEFAULT_WIDTH로 가정)
             float bgWidth = WIN_DEFAULT_WIDTH;
 
-            // 만약 원본 배경이 완전히 왼쪽으로 벗어났다면, 복제 배경의 오른쪽에 재배치
-            if (newBgPos.x + bgWidth * 0.5f < camPos.x)
+            //// 만약 원본 배경이 완전히 왼쪽으로 벗어났다면, 복제 배경의 오른쪽에 재배치
+            //if (newBgPos.x + bgWidth * 0.5f < camPos.x)
+            //{
+            //    bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
+            //    std::swap(bgLayer[i], bgLayerDup[i]);
+            //}
+            //// 반대로 원본 배경이 완전히 오른쪽으로 벗어났다면, 복제 배경의 왼쪽에 재배치
+            //else if (newBgPos.x > camPos.x + WIN_DEFAULT_WIDTH - bgWidth * 0.5f)
+            //{
+            //    bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() - Vector3(bgWidth, 0, 0));
+            //    std::swap(bgLayer[i], bgLayerDup[i]);
+            //}
+
+            while (newBgPos.x + bgWidth * 0.5f < camPos.x)
             {
+                // 배경이 화면 왼쪽 밖으로 벗어났다면, 오른쪽으로 bgWidth만큼 이동
                 bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
                 std::swap(bgLayer[i], bgLayerDup[i]);
+
+                // 다시 newBgPos를 갱신해서 다음 루프에서 또 검사
+                newBgPos = bgLayer[i]->GetPosition();
             }
-            // 반대로 원본 배경이 완전히 오른쪽으로 벗어났다면, 복제 배경의 왼쪽에 재배치
-            else if (newBgPos.x > camPos.x + WIN_DEFAULT_WIDTH - bgWidth * 0.5f)
+
+            // 반대쪽도 while 루프로
+            while (newBgPos.x > camPos.x + WIN_DEFAULT_WIDTH - bgWidth * 0.5f)
             {
+                // 배경이 화면 오른쪽 밖으로 벗어났다면, 왼쪽으로 bgWidth만큼 이동
                 bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() - Vector3(bgWidth, 0, 0));
                 std::swap(bgLayer[i], bgLayerDup[i]);
+
+                newBgPos = bgLayer[i]->GetPosition();
             }
         }
     }
