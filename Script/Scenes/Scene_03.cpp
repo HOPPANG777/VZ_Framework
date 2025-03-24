@@ -51,7 +51,7 @@ void Scene_03::Awake()
 
 void Scene_03::Start()
 {
-	
+	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 }
 
 void Scene_03::Destroy()
