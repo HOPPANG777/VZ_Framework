@@ -1,109 +1,66 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "LumberAxeComponent.h"
 
 LumberAxeComponent::LumberAxeComponent(const string& name)
-    : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero)
+    : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.5f) // ì˜ˆ: 0.3ì´ˆ ë™ì•ˆì€ ì¤‘ë ¥ ë¬´ì‹œ(ì§ì„  ì´ë™)
 {
 
 }
 
 void LumberAxeComponent::Update()
 {
-    float dt = DELTA; // ÇÁ·¹ÀÓ µ¨Å¸Å¸ÀÓ
-
-    // (A) Idle »óÅÂ: µµ³¢¸¦ µé°í ÀÖ´Ù.
-    if (state == AxeState::AXE_IDLE)
+    float dt = DELTA;
+    if (isDead)
     {
-        // ¿¹¸¦ µé¾î, ¸¶¿ì½º ¿À¸¥ÂÊ ¹öÆ°ÀÌ ´­¸®¸é µµ³¢¸¦ ´øÁø´Ù.
-        if (INPUT->MousePressed(1))  // ¿À¸¥ÂÊ ¹öÆ° (È¤Àº ¿øÇÏ´Â ÀÔ·Â)
-        {
-            // ´øÁú ¹æÇâ°ú ÃÊ±â ¼Óµµ´Â ¿©±â¼­ Á¤ÇÕ´Ï´Ù.
-            // ¿¹: ÇÃ·¹ÀÌ¾î°¡ ¹Ù¶óº¸´Â ¹æÇâ¿¡ µû¶ó (°£´ÜÇÏ°Ô ¿À¸¥ÂÊÀ¸·Î ´øÁø´Ù°í °¡Á¤)
-            velocity = Vector3(500, -300, 0); // x: 500, y: -300 (À§·Î ´øÁö±â), z: 0
-            state = AxeState::AXE_THROWN;
-        }
+        return;
     }
-    // (B) Thrown »óÅÂ: µµ³¢°¡ ´øÁ®Á® ³¯¾Æ°¡´Â Áß
-    else if (state == AxeState::AXE_THROWN)
+
+    switch (state)
     {
-        // Áß·Â Àû¿ë: yÃà ¼Óµµ¸¦ Áõ°¡½ÃÅ´ (¾Æ·¡·Î ²ø¾î´ç±è)
-        velocity.y += gravity * dt;
-
-        // ÇöÀç µµ³¢ À§Ä¡ ¾÷µ¥ÀÌÆ® (owner´Â µµ³¢ ¿ÀºêÁ§Æ®)
-        Vector3 pos = owner->GetPosition();
-        pos += velocity * dt;
-        owner->SetPosition(pos);
-
-        // ¸®Äİ Å° ÀÔ·ÂÀÌ³ª ÀÏÁ¤ °Å¸® µµ´Ş ½Ã Returning »óÅÂ·Î ÀüÈ¯
-        // ¿¹: EÅ°¸¦ ´­·¶´Ù¸é ¸®Äİ
-        if (INPUT->KeyPressed('E') && target)
-        {
-            state = AxeState::AXE_RETURNING;
-            returnTimer = 0.0f;
-            returnStart = pos;
-            // º£Áö¾î °î¼±ÀÇ Á¦¾îÁ¡: ÇöÀç À§Ä¡¿Í Å¸°ÙÀÇ Áß°£¿¡¼­ ¾à°£ À§ÂÊ
-            Vector3 targetPos = target->GetPosition();
-            returnControl = (pos + targetPos) * 0.5f + Vector3(0, -100, 0); // Á¶Á¤ °¡´É
-        }
-        // ¶Ç´Â µµ³¢°¡ ³Ê¹« ¸Ö¸® ³ª°¬À» °æ¿ì
-        if (pos.x > 1000 || pos.x < -1000)  // ÀÓÀÇÀÇ ¹üÀ§, ÇÊ¿ä¿¡ µû¶ó Á¶Á¤
-        {
-            if (target)
-            {
-                state = AxeState::AXE_RETURNING;
-                returnTimer = 0.0f;
-                returnStart = pos;
-                Vector3 targetPos = target->GetPosition();
-                returnControl = (pos + targetPos) * 0.5f + Vector3(0, -100, 0);
-            }
-        }
-    }
-    // (C) Returning »óÅÂ: µµ³¢°¡ ÇÃ·¹ÀÌ¾î¿¡°Ô µ¹¾Æ¿À´Â Áß
-    else if (state == AxeState::AXE_RETURNING)
-    {
-        returnTimer += dt;
-        float t = returnTimer / returnDuration;
-        if (t > 1.0f) t = 1.0f;
-
-        Vector3 targetPos = target ? target->GetPosition() : Vector3::Zero;
-        Vector3 newPos = QuadraticBezier(returnStart, returnControl, targetPos, t);
-        owner->SetPosition(newPos);
-
-        if (t >= 1.0f)
-        {
-            // µµ³¢°¡ ÇÃ·¹ÀÌ¾î¿¡°Ô ¿ÏÀüÈ÷ µ¹¾Æ¿ÔÀ¸¹Ç·Î »óÅÂ¸¦ Idle·Î ÀüÈ¯
-            state = AxeState::AXE_IDLE;
-            velocity = Vector3::Zero;
-            // µµ³¢¸¦ ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ °íÁ¤
-            owner->SetPosition(targetPos);
-        }
+    case AxeState::AXE_IDLE:
+        UpdateIdleState(dt);
+        break;
+    case AxeState::AXE_PREPARE:
+        UpdatePrepareState(dt);
+        break;
+    case AxeState::AXE_THROWN:
+        UpdateThrownState(dt);
+        break;
+    case AxeState::AXE_RETURNING:
+        UpdateReturningState(dt);
+        break;
     }
 }
 
 void LumberAxeComponent::Render()
 {
-    // µµ³¢ÀÇ ÄÄÆ÷³ÍÆ®ÀÌ¹Ç·Î º°µµÀÇ ·»´õ¸µ ·ÎÁ÷Àº ÇÊ¿ä¾øÁö¸¸,
-    // µğ¹ö±×¿ëÀ¸·Î °æ·Î¸¦ ±×¸°´Ù°Å³ª ÇÒ ¼ö ÀÖÀ½.
-}
-
-void LumberAxeComponent::Throw(const Vector3& initialVelocity)
-{
-    if (state == AxeState::AXE_IDLE)
+    // ì¤€ë¹„ ìƒíƒœì¼ ë•Œ ê¶¤ì  ë¯¸ë¦¬ë³´ê¸°
+    if (state == AxeState::AXE_PREPARE)
     {
-        velocity = initialVelocity;
-        state = AxeState::AXE_THROWN;
-    }
-}
+        // 1) ë§ˆìš°ìŠ¤ë¡œë¶€í„° ë˜ì§ˆ ë°©í–¥ì„ êµ¬í•œë‹¤
+        Vector3 throwDir = ComputeThrowDirection();
 
-void LumberAxeComponent::Recall()
-{
-    if (state == AxeState::AXE_THROWN && target)
-    {
-        state = AxeState::AXE_RETURNING;
-        returnTimer = 0.0f;
-        returnStart = owner->GetPosition();
-        Vector3 targetPos = target->GetPosition();
-        returnControl = (returnStart + targetPos) * 0.5f + Vector3(0, -100, 0);
+        // 2) ì´ˆê¸° ì†ë„ ì„¤ì •
+        float throwSpeed = 800.0f;
+        Vector3 initialVel = throwDir * throwSpeed;
+
+        //// 3) ê¶¤ì  ì ë“¤ì„ ì‹œë®¬ë ˆì´ì…˜
+        //vector<Vector3> trajPoints = SimulateTrajectory
+        //(
+        //    owner->GetPosition(), // ì‹œì‘ì 
+        //    initialVel,           // ì´ˆê¸° ì†ë„
+        //    gravity,              // ì¤‘ë ¥ ê°’
+        //    straightFlightTime,   // ì§ì„  ë¹„í–‰ ì‹œê°„
+        //    DELTA,                 // ì‹œë®¬ë ˆì´ì…˜ ë‹¨ìœ„ ì‹œê°„(dtSim)
+        //    25                    // ì‹œë®¬ë ˆì´ì…˜ ì  ê°œìˆ˜
+        //);
+
+        // 3) ì‹¤ì œ UpdateThrownStateì™€ ë™ì¼í•œ dt ì‚¬ìš© (ì˜ˆ: DELTA)
+        // ê·¸ë¦¬ê³  ì¶©ë¶„í•œ ì  ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ê¶¤ì ì„ ë¯¸ë¦¬ ê³„ì‚°
+        vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.05f, 30);
+
+        // 4) ì ë“¤ì„ ì ì„ ìœ¼ë¡œ ê·¸ë¦¬ê¸°
+        DrawTrajectory(trajPoints, 5.0f, BLACK);
     }
 }
 
@@ -113,10 +70,8 @@ Vector3 LumberAxeComponent::QuadraticBezier(const Vector3& p0, const Vector3& p1
     return p0 * (oneMinusT * oneMinusT) + p1 * (2 * oneMinusT * t) + p2 * (t * t);
 }
 
-// °£´ÜÇÏ°Ô ÇöÀç ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ³ª µµ³¢ »óÅÂ¸¦ º¸°í ¹Ù¶óº¸´Â ¹æÇâ ÆÇ´Ü (¿¹Á¦ÀÌ¹Ç·Î ´Ü¼øÈ­)
 bool LumberAxeComponent::IsFacingLeft(UnitAnimationType currentAnim) const
 {
-    // ¿¹¸¦ µé¾î, RUN_L, JUMP_L, AXE_THROW_PREPARE_L, etc. ÀÌ¸é ¿ŞÂÊÀ¸·Î ÆÇ´Ü
     switch (currentAnim)
     {
     case UnitAnimationType::RUN_L:
@@ -130,5 +85,171 @@ bool LumberAxeComponent::IsFacingLeft(UnitAnimationType currentAnim) const
         return true;
     default:
         return false;
+    }
+}
+
+void LumberAxeComponent::Throw(const Vector3& initialVelocity)
+{
+    // Idle ìƒíƒœì—ì„œë§Œ ë˜ì§ˆ ìˆ˜ ìˆë„ë¡ ì˜ˆì‹œ
+    if (state == AxeState::AXE_IDLE)
+    {
+        velocity = initialVelocity;  // ì¸ìë¡œ ë°›ì€ ì´ˆê¸° ì†ë„ ì„¤ì •
+        state = AxeState::AXE_THROWN;
+        // ì—¬ê¸°ì„œ ë„ë¼ê°€ ë‚ ì•„ê°€ëŠ” ì• ë‹ˆë©”ì´ì…˜ì´ë‚˜
+        // ì‚¬ìš´ë“œ ì¬ìƒ, ê¸°íƒ€ ë¡œì§ì„ ë„£ì„ ìˆ˜ ìˆìŒ
+    }
+}
+
+void LumberAxeComponent::Recall()
+{
+    // ë„ë¼ê°€ ë‚ ì•„ê°€ê³  ìˆì„ ë•Œë§Œ(THROWN) íšŒìˆ˜ ê°€ëŠ¥í•˜ë‹¤ê³  ì˜ˆì‹œ
+    if (state == AxeState::AXE_THROWN && target)
+    {
+        state = AxeState::AXE_RETURNING;
+        returnTimer = 0.0f;
+        returnStart = owner->GetPosition();
+
+        // ë² ì§€ì–´ ê³¡ì„  ì œì–´ì ì„ ê³„ì‚°
+        Vector3 tPos = target->GetPosition();
+        returnControl = (returnStart + tPos) * 0.5f + Vector3(0, -100, 0);
+
+        // íšŒìˆ˜ ì‹œì‘ ë¡œì§ (ì‚¬ìš´ë“œ ì¬ìƒ ë“±)ì„ ë„£ì„ ìˆ˜ë„ ìˆìŒ
+    }
+}
+
+void LumberAxeComponent::UpdateIdleState(float dt)
+{
+    // targetì´ ì„¤ì •ë˜ì–´ ìˆìœ¼ë©´ targetì˜ ìœ„ì¹˜ë¥¼ ë”°ë¼ê°.
+    if (target)
+    {
+        // ì˜ˆì‹œ: targetì˜ ìœ„ì¹˜ì— ì•½ê°„ì˜ ì˜¤í”„ì…‹(ì˜ˆ: ì˜¤ë¥¸ìª½ 10í”½ì…€)ì„ ë”í•´ ë„ë¼ ìœ„ì¹˜ë¥¼ ì„¤ì •
+        Vector3 targetPos = target->GetPosition();
+        Vector3 offset(10.0f, 0.0f, 0.0f); // í•„ìš”ì— ë”°ë¼ ì¡°ì ˆ
+        owner->SetPosition(targetPos + offset);
+    }
+
+    // Idle ìƒíƒœ ì²˜ë¦¬: ì˜¤ë¥¸ìª½ í´ë¦­ â†’ ì¤€ë¹„ ìƒíƒœë¡œ ì „í™˜
+    if (INPUT->MousePressed(1))
+    {
+        state = AxeState::AXE_PREPARE;
+    }
+}
+
+void LumberAxeComponent::UpdatePrepareState(float dt)
+{
+    // Prepare ìƒíƒœ: ì™¼ìª½ í´ë¦­ ì‹œ ë˜ì§€ê¸°, ì˜¤ë¥¸ìª½ ë²„íŠ¼ ë†“ìœ¼ë©´ ì·¨ì†Œ
+    if (INPUT->MousePressed(0))
+    {
+        Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
+        Vector3 throwDir = mousePos - owner->GetPosition();
+        if (throwDir.Length() > 0.001f) throwDir.Normalize();
+        else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0);
+        float throwSpeed = 800.0f;
+        velocity = throwDir * throwSpeed;
+        straightFlightTime = 0.3f; // ì§ì„  ë¹„í–‰ ì‹œê°„ ì„¤ì •
+        state = AxeState::AXE_THROWN;
+    }
+    else if (!INPUT->MouseDown(1))
+    {
+        state = AxeState::AXE_IDLE;
+    }
+}
+
+void LumberAxeComponent::UpdateThrownState(float dt)
+{
+    Vector3 pos = owner->GetPosition();
+    if (straightFlightTime > 0.0f)
+    {
+        pos += velocity * dt;
+        straightFlightTime -= dt;
+        if (straightFlightTime < 0.0f) straightFlightTime = 0.0f;
+    }
+    else
+    {
+        velocity.y += -gravity * dt;
+        pos += velocity * dt;
+    }
+    owner->SetPosition(pos);
+    if (INPUT->KeyPressed('E') && target)
+    {
+        state = AxeState::AXE_RETURNING;
+        returnTimer = 0.0f;
+        returnStart = pos;
+        Vector3 tPos = target->GetPosition();
+        returnControl = (pos + tPos) * 0.5f + Vector3(0, -100, 0);
+    }
+}
+
+void LumberAxeComponent::UpdateReturningState(float dt)
+{
+    returnTimer += dt;
+    float t = returnTimer / returnDuration;
+    if (t > 1.0f) t = 1.0f;
+    Vector3 tPos = target ? target->GetPosition() : Vector3::Zero;
+    Vector3 newPos = QuadraticBezier(returnStart, returnControl, tPos, t);
+    owner->SetPosition(newPos);
+    if (t >= 1.0f)
+    {
+        state = AxeState::AXE_IDLE;
+        velocity = Vector3::Zero;
+        owner->SetPosition(tPos);
+    }
+}
+
+Vector3 LumberAxeComponent::ComputeThrowDirection()
+{
+    // ì˜¤ë¸Œì íŠ¸(ë„ë¼) ìœ„ì¹˜
+    Vector3 startPos = owner->GetPosition();
+
+    // ë§ˆìš°ìŠ¤ ì›”ë“œ ìœ„ì¹˜ (ì¹´ë©”ë¼ ì˜¤í”„ì…‹ ë”í•¨)
+    Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
+
+    // ë°©í–¥ ë²¡í„°
+    Vector3 throwDir = mousePos - startPos;
+
+    if (throwDir.Length() > 0.001f) throwDir.Normalize();
+    else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0); // ê±°ë¦¬ê°€ ë„ˆë¬´ ì§§ìœ¼ë©´, ë°”ë¼ë³´ëŠ” ë°©í–¥ìœ¼ë¡œ ëŒ€ì²´
+
+    return throwDir;
+}
+
+vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps)
+{
+    vector<Vector3> points;
+    points.reserve(numSteps);
+
+    // ì‹œì‘ ìœ„ì¹˜ì™€ ì†ë„ ì„¤ì •
+    Vector3 simPos = startPos;
+    Vector3 simVel = initialVel;
+    float remainingStraightTime = straightFlightTime; // ì§ì„  ë¹„í–‰ ì‹œê°„ (ì¤‘ë ¥ ë¬´ì‹œ êµ¬ê°„)
+
+    for (int i = 0; i < numSteps; i++)
+    {
+        if (remainingStraightTime > 0.0f)
+        {
+            // ì§ì„  ë¹„í–‰ êµ¬ê°„: ì¤‘ë ¥ íš¨ê³¼ ì—†ìŒ
+            float t = min(dt, remainingStraightTime);
+            simPos += simVel * t;
+            remainingStraightTime -= t;
+        }
+        else
+        {
+            // ì¤‘ë ¥ ì ìš©: yì¶•ì— -gravity ê°€ì†ë„ ì ìš©
+            simVel.y += -gravity * dt;
+            simPos += simVel * dt;
+        }
+        points.push_back(simPos);
+    }
+
+    return points;
+}
+
+void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color)
+{
+    // ë‘ ì ì”© ëŠì–´ì„œ ê·¸ë¦¬ë©´ ì ì„ (dotted line) íš¨ê³¼
+    // (i += 2) ë©´ ì§ìˆ˜ë²ˆì§¸-í™€ìˆ˜ë²ˆì§¸ë§Œ ì„ 
+    for (int i = 0; i < (int)points.size() - 1; i += 2)
+    {
+        GIZMO->DrawLine(points[i], points[i + 1], color, thickness);
     }
 }

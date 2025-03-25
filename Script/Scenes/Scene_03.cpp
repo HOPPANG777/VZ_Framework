@@ -83,6 +83,8 @@ void Scene_03::Update()
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 5.5f);
+
+	
 }
 
 void Scene_03::LateUpdate() {}
