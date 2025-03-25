@@ -2,7 +2,7 @@
 #include "LumberAxeComponent.h"
 
 LumberAxeComponent::LumberAxeComponent(const string& name)
-    : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.5f) // 예: 0.3초 동안은 중력 무시(직선 이동)
+    : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.3f) // 예: 0.3초 동안은 중력 무시(직선 이동)
 {
 
 }
@@ -41,23 +41,12 @@ void LumberAxeComponent::Render()
         Vector3 throwDir = ComputeThrowDirection();
 
         // 2) 초기 속도 설정
-        float throwSpeed = 800.0f;
+        float throwSpeed = 1000.0f;
         Vector3 initialVel = throwDir * throwSpeed;
-
-        //// 3) 궤적 점들을 시뮬레이션
-        //vector<Vector3> trajPoints = SimulateTrajectory
-        //(
-        //    owner->GetPosition(), // 시작점
-        //    initialVel,           // 초기 속도
-        //    gravity,              // 중력 값
-        //    straightFlightTime,   // 직선 비행 시간
-        //    DELTA,                 // 시뮬레이션 단위 시간(dtSim)
-        //    25                    // 시뮬레이션 점 개수
-        //);
 
         // 3) 실제 UpdateThrownState와 동일한 dt 사용 (예: DELTA)
         // 그리고 충분한 점 수를 사용하여 궤적을 미리 계산
-        vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.05f, 30);
+        vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
 
         // 4) 점들을 점선으로 그리기
         DrawTrajectory(trajPoints, 5.0f, BLACK);
@@ -131,6 +120,7 @@ void LumberAxeComponent::UpdateIdleState(float dt)
     // Idle 상태 처리: 오른쪽 클릭 → 준비 상태로 전환
     if (INPUT->MousePressed(1))
     {
+        straightFlightTime = 0.3f; // 직선 비행 시간 설정
         state = AxeState::AXE_PREPARE;
     }
 }
@@ -144,9 +134,8 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
         Vector3 throwDir = mousePos - owner->GetPosition();
         if (throwDir.Length() > 0.001f) throwDir.Normalize();
         else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0);
-        float throwSpeed = 800.0f;
+        float throwSpeed = 1000.0f;
         velocity = throwDir * throwSpeed;
-        straightFlightTime = 0.3f; // 직선 비행 시간 설정
         state = AxeState::AXE_THROWN;
     }
     else if (!INPUT->MouseDown(1))
@@ -250,6 +239,6 @@ void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thi
     // (i += 2) 면 짝수번째-홀수번째만 선
     for (int i = 0; i < (int)points.size() - 1; i += 2)
     {
-        GIZMO->DrawLine(points[i], points[i + 1], color, thickness);
+        GIZMO->DrawLine(points[i] - CAMERA->GetPosition(), points[i + 1] - CAMERA->GetPosition(), color, thickness);
     }
 }
