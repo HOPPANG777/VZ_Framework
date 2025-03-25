@@ -2,7 +2,7 @@
 #include "LumberAxeComponent.h"
 
 // 생성자: 초기 상태, 속도, 중력, 직선 이동 시간 설정
-LumberAxeComponent::LumberAxeComponent(const std::string& name)
+LumberAxeComponent::LumberAxeComponent(const string& name)
     : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.3f)
 {
 
@@ -97,7 +97,7 @@ void LumberAxeComponent::Throw(const Vector3& initialVelocity)
 // - 도끼가 던져진 상태에서 타겟이 설정되어 있을 때 회수 상태로 전환
 void LumberAxeComponent::Recall()
 {
-    if (state == AxeState::AXE_THROWN && target)
+    if (state == AxeState::AXE_THROWN && target || state == AxeState::AXE_IDLE && target && isLand == true)
     {
         state = AxeState::AXE_RETURNING;
         returnTimer = 0.0f;
@@ -110,10 +110,24 @@ void LumberAxeComponent::Recall()
     }
 }
 
+void LumberAxeComponent::Land()
+{
+    // 도끼가 충돌해서 착지할 때 호출됨.
+    // 상태를 Idle로 전환하고, 속도를 초기화합니다.
+    state = AxeState::AXE_IDLE;
+    velocity = Vector3::Zero;
+    isLand = true;
+    // 필요하다면 도끼의 위치를 충돌한 floor 위로 보정할 수도 있음.
+    // 예시: 충돌 위치의 y 좌표를 기준으로 도끼의 y를 조정
+    // Vector3 currentPos = owner->GetPosition();
+    // float floorY = ...; // 충돌 floor의 y 위치 계산
+    // owner->SetPosition({ currentPos.x, floorY, currentPos.z });
+}
+
 // Idle 상태 업데이트: 타겟 위치로 도끼를 따라가게 하고, 마우스 입력에 따라 준비 상태로 전환
 void LumberAxeComponent::UpdateIdleState(float dt)
 {
-    if (target)
+    if (target && isLand == false)
     {
         // 타겟 위치에 오프셋을 더하여 도끼 위치 설정
         Vector3 targetPos = target->GetPosition();
@@ -122,7 +136,7 @@ void LumberAxeComponent::UpdateIdleState(float dt)
     }
 
     // 오른쪽 클릭 시 던지기 준비 상태로 전환
-    if (INPUT->MousePressed(1))
+    if (INPUT->MousePressed(1) && isLand == false)
     {
         straightFlightTime = 0.3f; // 직선 이동 시간 재설정
         state = AxeState::AXE_PREPARE;
@@ -132,6 +146,11 @@ void LumberAxeComponent::UpdateIdleState(float dt)
 // 준비 상태 업데이트: 왼쪽 클릭 시 도끼 던지기, 오른쪽 버튼 해제 시 Idle 상태 복귀
 void LumberAxeComponent::UpdatePrepareState(float dt)
 {
+    // 타겟 위치에 오프셋을 더하여 도끼 위치 설정
+    Vector3 targetPos = target->GetPosition();
+    Vector3 offset(10.0f, 0.0f, 0.0f);
+    owner->SetPosition(targetPos + offset);
+
     if (INPUT->MousePressed(0))
     {
         // 마우스 위치 기반 던질 방향 계산
@@ -145,7 +164,7 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
         velocity = throwDir * throwSpeed;
         state = AxeState::AXE_THROWN;
     }
-    else if (!INPUT->MouseDown(1))
+    else if (INPUT->MouseUp(1))
     {
         // 오른쪽 버튼이 해제되면 준비 취소하고 Idle 상태로 복귀
         state = AxeState::AXE_IDLE;
@@ -169,16 +188,6 @@ void LumberAxeComponent::UpdateThrownState(float dt)
         pos += velocity * dt;
     }
     owner->SetPosition(pos);
-
-    // 'E' 키 입력과 타겟이 설정되어 있을 경우 회수 시작
-    if (INPUT->KeyPressed('E') && target)
-    {
-        state = AxeState::AXE_RETURNING;
-        returnTimer = 0.0f;
-        returnStart = pos;
-        Vector3 tPos = target->GetPosition();
-        returnControl = (pos + tPos) * 0.5f + Vector3(0, -100, 0);
-    }
 }
 
 // 회수 상태 업데이트: 베지어 곡선을 따라 도끼를 타겟으로 회수
@@ -195,6 +204,7 @@ void LumberAxeComponent::UpdateReturningState(float dt)
     // 회수가 완료되면 상태를 Idle로 전환하고 위치를 타겟에 맞춤
     if (t >= 1.0f)
     {
+        isLand = false;
         state = AxeState::AXE_IDLE;
         velocity = Vector3::Zero;
         owner->SetPosition(tPos);
@@ -251,7 +261,7 @@ vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, 
 
 // 궤적 그리기 함수
 // - 인자로 받은 점들을 2개씩 연결하여 점선 형태로 렌더링
-void LumberAxeComponent::DrawTrajectory(const std::vector<Vector3>& points, float thickness, const Color& color)
+void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color)
 {
     for (size_t i = 0; i < points.size() - 1; i += 2)
     {

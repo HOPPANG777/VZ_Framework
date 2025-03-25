@@ -5,12 +5,12 @@ void Scene_03::Awake()
 {
 	isLoaded = false;
 
-	testPlayer = make_shared <PlayerUnit> (CENTER + Vector3(-550, -300, 0));
+	testPlayer = make_shared <PlayerUnit> (CENTER + Vector3(-550, -330, 0));
 	
-	lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -305, 0));
+	lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -330, 0));
 
 	floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-640, -330, 0), 10000, 0.0f, CLEAR));
-	floor.back()->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer));
+	floor.back()->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
 	floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 
 	auto parallax = make_shared<ParallaxBackground>("Parallax", 5);
@@ -52,6 +52,7 @@ void Scene_03::Awake()
 void Scene_03::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
+	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
 }
 
 void Scene_03::Destroy()
