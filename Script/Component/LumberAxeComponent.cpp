@@ -1,19 +1,20 @@
 ﻿#include "stdafx.h"
 #include "LumberAxeComponent.h"
 
-LumberAxeComponent::LumberAxeComponent(const string& name)
-    : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.3f) // 예: 0.3초 동안은 중력 무시(직선 이동)
+// 생성자: 초기 상태, 속도, 중력, 직선 이동 시간 설정
+LumberAxeComponent::LumberAxeComponent(const std::string& name)
+    : Component(name), state(AxeState::AXE_IDLE), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.3f)
 {
 
 }
 
+// 매 프레임 호출되는 업데이트 함수
+// - isDead 플래그가 설정되면 업데이트 중단
+// - 현재 상태에 따라 각각의 업데이트 함수를 호출함
 void LumberAxeComponent::Update()
 {
     float dt = DELTA;
-    if (isDead)
-    {
-        return;
-    }
+    if (isDead) return;
 
     switch (state)
     {
@@ -32,33 +33,36 @@ void LumberAxeComponent::Update()
     }
 }
 
+// 렌더링 함수: 준비 상태에서 마우스 방향에 따른 도끼 궤적 미리보기 그리기
 void LumberAxeComponent::Render()
 {
-    // 준비 상태일 때 궤적 미리보기
     if (state == AxeState::AXE_PREPARE)
     {
-        // 1) 마우스로부터 던질 방향을 구한다
+        // 1. 던질 방향 계산 (마우스 위치 기반)
         Vector3 throwDir = ComputeThrowDirection();
 
-        // 2) 초기 속도 설정
+        // 2. 초기 속도 계산 (고정 속도 값 사용)
         float throwSpeed = 1000.0f;
         Vector3 initialVel = throwDir * throwSpeed;
 
-        // 3) 실제 UpdateThrownState와 동일한 dt 사용 (예: DELTA)
-        // 그리고 충분한 점 수를 사용하여 궤적을 미리 계산
+        // 3. 궤적 시뮬레이션: 충분한 점을 계산하여 궤적 생성 (dt=0.02, 64단계)
         vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
 
-        // 4) 점들을 점선으로 그리기
+        // 4. 궤적 점들을 점선으로 그리기
         DrawTrajectory(trajPoints, 5.0f, BLACK);
     }
 }
 
+// 2차 베지어 곡선 계산 함수
+// - p0, p1, p2: 곡선의 시작, 제어, 종료 점
+// - t: [0,1] 구간의 파라미터
 Vector3 LumberAxeComponent::QuadraticBezier(const Vector3& p0, const Vector3& p1, const Vector3& p2, float t)
 {
     float oneMinusT = 1.0f - t;
     return p0 * (oneMinusT * oneMinusT) + p1 * (2 * oneMinusT * t) + p2 * (t * t);
 }
 
+// 현재 애니메이션 상태를 통해 플레이어가 왼쪽을 바라보는지 판단
 bool LumberAxeComponent::IsFacingLeft(UnitAnimationType currentAnim) const
 {
     switch (currentAnim)
@@ -77,73 +81,78 @@ bool LumberAxeComponent::IsFacingLeft(UnitAnimationType currentAnim) const
     }
 }
 
+// 도끼 던지기 함수
+// - Idle 상태에서만 동작하며, 초기 속도를 설정 후 상태를 Thrown으로 변경
 void LumberAxeComponent::Throw(const Vector3& initialVelocity)
 {
-    // Idle 상태에서만 던질 수 있도록 예시
     if (state == AxeState::AXE_IDLE)
     {
-        velocity = initialVelocity;  // 인자로 받은 초기 속도 설정
+        velocity = initialVelocity;
         state = AxeState::AXE_THROWN;
-        // 여기서 도끼가 날아가는 애니메이션이나
-        // 사운드 재생, 기타 로직을 넣을 수 있음
+        // 추가: 애니메이션, 사운드 등 처리 가능
     }
 }
 
+// 도끼 회수 함수
+// - 도끼가 던져진 상태에서 타겟이 설정되어 있을 때 회수 상태로 전환
 void LumberAxeComponent::Recall()
 {
-    // 도끼가 날아가고 있을 때만(THROWN) 회수 가능하다고 예시
     if (state == AxeState::AXE_THROWN && target)
     {
         state = AxeState::AXE_RETURNING;
         returnTimer = 0.0f;
         returnStart = owner->GetPosition();
 
-        // 베지어 곡선 제어점을 계산
+        // 베지어 곡선을 위한 제어점 계산: 시작과 타겟의 중간에 오프셋 추가
         Vector3 tPos = target->GetPosition();
         returnControl = (returnStart + tPos) * 0.5f + Vector3(0, -100, 0);
-
-        // 회수 시작 로직 (사운드 재생 등)을 넣을 수도 있음
+        // 추가: 회수 시작 시 사운드 등 처리 가능
     }
 }
 
+// Idle 상태 업데이트: 타겟 위치로 도끼를 따라가게 하고, 마우스 입력에 따라 준비 상태로 전환
 void LumberAxeComponent::UpdateIdleState(float dt)
 {
-    // target이 설정되어 있으면 target의 위치를 따라감.
     if (target)
     {
-        // 예시: target의 위치에 약간의 오프셋(예: 오른쪽 10픽셀)을 더해 도끼 위치를 설정
+        // 타겟 위치에 오프셋을 더하여 도끼 위치 설정
         Vector3 targetPos = target->GetPosition();
-        Vector3 offset(10.0f, 0.0f, 0.0f); // 필요에 따라 조절
+        Vector3 offset(10.0f, 0.0f, 0.0f);
         owner->SetPosition(targetPos + offset);
     }
 
-    // Idle 상태 처리: 오른쪽 클릭 → 준비 상태로 전환
+    // 오른쪽 클릭 시 던지기 준비 상태로 전환
     if (INPUT->MousePressed(1))
     {
-        straightFlightTime = 0.3f; // 직선 비행 시간 설정
+        straightFlightTime = 0.3f; // 직선 이동 시간 재설정
         state = AxeState::AXE_PREPARE;
     }
 }
 
+// 준비 상태 업데이트: 왼쪽 클릭 시 도끼 던지기, 오른쪽 버튼 해제 시 Idle 상태 복귀
 void LumberAxeComponent::UpdatePrepareState(float dt)
 {
-    // Prepare 상태: 왼쪽 클릭 시 던지기, 오른쪽 버튼 놓으면 취소
     if (INPUT->MousePressed(0))
     {
+        // 마우스 위치 기반 던질 방향 계산
         Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
         Vector3 throwDir = mousePos - owner->GetPosition();
+
         if (throwDir.Length() > 0.001f) throwDir.Normalize();
         else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0);
+
         float throwSpeed = 1000.0f;
         velocity = throwDir * throwSpeed;
         state = AxeState::AXE_THROWN;
     }
     else if (!INPUT->MouseDown(1))
     {
+        // 오른쪽 버튼이 해제되면 준비 취소하고 Idle 상태로 복귀
         state = AxeState::AXE_IDLE;
     }
 }
 
+// 던진 상태 업데이트: 초기 직선 비행 후 중력 효과 적용하여 이동, 'E' 키 입력 시 회수 상태로 전환
 void LumberAxeComponent::UpdateThrownState(float dt)
 {
     Vector3 pos = owner->GetPosition();
@@ -155,10 +164,13 @@ void LumberAxeComponent::UpdateThrownState(float dt)
     }
     else
     {
+        // 중력 효과 적용 (y축에 가속도)
         velocity.y += -gravity * dt;
         pos += velocity * dt;
     }
     owner->SetPosition(pos);
+
+    // 'E' 키 입력과 타겟이 설정되어 있을 경우 회수 시작
     if (INPUT->KeyPressed('E') && target)
     {
         state = AxeState::AXE_RETURNING;
@@ -169,14 +181,18 @@ void LumberAxeComponent::UpdateThrownState(float dt)
     }
 }
 
+// 회수 상태 업데이트: 베지어 곡선을 따라 도끼를 타겟으로 회수
 void LumberAxeComponent::UpdateReturningState(float dt)
 {
     returnTimer += dt;
     float t = returnTimer / returnDuration;
     if (t > 1.0f) t = 1.0f;
+
     Vector3 tPos = target ? target->GetPosition() : Vector3::Zero;
     Vector3 newPos = QuadraticBezier(returnStart, returnControl, tPos, t);
     owner->SetPosition(newPos);
+
+    // 회수가 완료되면 상태를 Idle로 전환하고 위치를 타겟에 맞춤
     if (t >= 1.0f)
     {
         state = AxeState::AXE_IDLE;
@@ -185,45 +201,45 @@ void LumberAxeComponent::UpdateReturningState(float dt)
     }
 }
 
+// 던질 방향 계산 함수
+// - 마우스 위치와 도끼(오너)의 위치 차이를 기반으로 방향 계산
+// - 마우스 위치와 도끼 위치가 가까운 경우 현재 바라보는 방향으로 설정
 Vector3 LumberAxeComponent::ComputeThrowDirection()
 {
-    // 오브젝트(도끼) 위치
     Vector3 startPos = owner->GetPosition();
-
-    // 마우스 월드 위치 (카메라 오프셋 더함)
     Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
-
-    // 방향 벡터
     Vector3 throwDir = mousePos - startPos;
 
     if (throwDir.Length() > 0.001f) throwDir.Normalize();
-    else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0); // 거리가 너무 짧으면, 바라보는 방향으로 대체
+    else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0);
 
     return throwDir;
 }
 
+// 궤적 시뮬레이션 함수
+// - 초기 위치, 속도, 시간 간격, 시뮬레이션 단계 수를 인자로 받아 도끼의 이동 경로를 점들로 반환
+// - straightFlightTime 동안은 중력 효과를 무시하고 직선 이동, 이후 중력 적용
 vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps)
 {
     vector<Vector3> points;
     points.reserve(numSteps);
 
-    // 시작 위치와 속도 설정
     Vector3 simPos = startPos;
     Vector3 simVel = initialVel;
-    float remainingStraightTime = straightFlightTime; // 직선 비행 시간 (중력 무시 구간)
+    float remainingStraightTime = straightFlightTime;
 
     for (int i = 0; i < numSteps; i++)
     {
         if (remainingStraightTime > 0.0f)
         {
-            // 직선 비행 구간: 중력 효과 없음
+            // 직선 비행: 남은 시간과 dt 중 작은 값을 사용
             float t = min(dt, remainingStraightTime);
             simPos += simVel * t;
             remainingStraightTime -= t;
         }
         else
         {
-            // 중력 적용: y축에 -gravity 가속도 적용
+            // 중력 적용: 속도에 중력 가속도 반영 후 이동
             simVel.y += -gravity * dt;
             simPos += simVel * dt;
         }
@@ -233,12 +249,13 @@ vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, 
     return points;
 }
 
-void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color)
+// 궤적 그리기 함수
+// - 인자로 받은 점들을 2개씩 연결하여 점선 형태로 렌더링
+void LumberAxeComponent::DrawTrajectory(const std::vector<Vector3>& points, float thickness, const Color& color)
 {
-    // 두 점씩 끊어서 그리면 점선(dotted line) 효과
-    // (i += 2) 면 짝수번째-홀수번째만 선
-    for (int i = 0; i < (int)points.size() - 1; i += 2)
+    for (size_t i = 0; i < points.size() - 1; i += 2)
     {
+        // 카메라 위치를 빼서 화면 좌표로 변환 후 선 그리기
         GIZMO->DrawLine(points[i] - CAMERA->GetPosition(), points[i + 1] - CAMERA->GetPosition(), color, thickness);
     }
 }
