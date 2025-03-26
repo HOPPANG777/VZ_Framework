@@ -27,6 +27,7 @@ public:
 
 private:
 	bool isLoaded = false;
+	bool isNextStage = false;
 
 	vector<shared_ptr<Object>> floor;
 
@@ -43,6 +44,9 @@ private:
 	unique_ptr<TileMap> tmap;
 
 	shared_ptr<Object> testPlayer;
+
+	shared_ptr<Object> nextStagePoint;
+	shared_ptr<Object> nextStageText;
 
 	Vector3 testPlayerVelocity = Vector3::Zero; // testPlayer의 수직(및 필요시 전체) 속도
 

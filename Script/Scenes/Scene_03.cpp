@@ -5,13 +5,20 @@ void Scene_03::Awake()
 {
 	isLoaded = false;
 
-	testPlayer = make_shared <PlayerUnit> (CENTER + Vector3(-550, -330, 0));
+	isNextStage = false;
+
+	testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -330, 0));
 	
 	lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -330, 0));
 
 	floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-640, -330, 0), 10000, 0.0f, CLEAR));
 	floor.back()->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
 	floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
+
+	nextStagePoint = make_shared<Object>("NextStagePoint", CENTER + Vector3(3100, -330, 0), Vector3(Values::ZeroVec3), 0.0f);
+
+	nextStageText = make_shared<Object>("NextStageText", CENTER, Vector3(1000, 100, 0), 0.0f, TransformType::Rect);
+	nextStageText->AddComponent(make_shared<TypingText>());
 
 	auto parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
@@ -46,6 +53,9 @@ void Scene_03::Awake()
 	backgroundObject = make_shared<Object>("Background");
 	backgroundObject->AddComponent(parallax);
 
+	nextStagePoint->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
+	COLLISION->AddCollider(nextStagePoint->GetComponent<BoxCollider>("BoxCollider"));
+
 	isLoaded = true;
 }
 
@@ -63,6 +73,8 @@ void Scene_03::Destroy()
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
+	if (nextStagePoint != nullptr) nextStagePoint.reset();
+	if (nextStageText != nullptr) nextStageText.reset();
 }
 
 void Scene_03::FixedUpdate() {}
@@ -83,9 +95,20 @@ void Scene_03::Update()
 
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
+	if (nextStagePoint != nullptr) nextStagePoint->Update();
+
+	if (nextStageText != nullptr) nextStageText->Update();
+
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.5f);
 
-	
+	if (nextStagePoint->GetComponent<BoxCollider>("BoxCollider") ->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
+	{
+		isNextStage = true;
+		if (INPUT->KeyDown(VK_RETURN))
+		{
+			SCENE->LoadScene("Stage01");
+		}
+	}
 }
 
 void Scene_03::LateUpdate() {}
@@ -100,12 +123,17 @@ void Scene_03::Render()
 
 	if (testPlayer != nullptr) testPlayer->Render();
 
+	if (nextStagePoint != nullptr) nextStagePoint->Render();
+
 	if (lumberAxe != nullptr) lumberAxe->Render();
 }
 
 void Scene_03::PostRender()
 {
-
+	if (isNextStage == true)
+	{
+		nextStageText->GetComponent<TypingText>("TypingText")->RenderText(L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", nextStageText->GetRect(), 25.0f, BLACK);
+	}
 }
 
 void Scene_03::ImGUI()
