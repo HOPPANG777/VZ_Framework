@@ -97,13 +97,12 @@ void Scene_03::Update()
 
 	if (nextStagePoint != nullptr) nextStagePoint->Update();
 
-	if (nextStageText != nullptr) nextStageText->Update();
-
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.5f);
 
 	if (nextStagePoint->GetComponent<BoxCollider>("BoxCollider") ->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
 		isNextStage = true;
+		if (nextStageText != nullptr) nextStageText->Update();
 		if (INPUT->KeyDown(VK_RETURN))
 		{
 			SCENE->LoadScene("Stage01");
@@ -130,10 +129,7 @@ void Scene_03::Render()
 
 void Scene_03::PostRender()
 {
-	if (isNextStage == true)
-	{
-		nextStageText->GetComponent<TypingText>("TypingText")->RenderText(L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", nextStageText->GetRect(), 25.0f, BLACK);
-	}
+	nextStageText->GetComponent<TypingText>("TypingText")->RenderText(L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", nextStageText->GetRect(), 25.0f, BLACK);
 }
 
 void Scene_03::ImGUI()
