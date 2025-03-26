@@ -49,7 +49,7 @@ void LumberAxeComponent::Render()
         vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
 
         // 4. 궤적 점들을 점선으로 그리기
-        DrawTrajectory(trajPoints, 5.0f, BLACK);
+        DrawTrajectory(trajPoints, 3.0f, WHITE);
     }
 }
 
@@ -112,16 +112,9 @@ void LumberAxeComponent::Recall()
 
 void LumberAxeComponent::Land()
 {
-    // 도끼가 충돌해서 착지할 때 호출됨.
-    // 상태를 Idle로 전환하고, 속도를 초기화합니다.
     state = AxeState::AXE_IDLE;
     velocity = Vector3::Zero;
     isLand = true;
-    // 필요하다면 도끼의 위치를 충돌한 floor 위로 보정할 수도 있음.
-    // 예시: 충돌 위치의 y 좌표를 기준으로 도끼의 y를 조정
-    // Vector3 currentPos = owner->GetPosition();
-    // float floorY = ...; // 충돌 floor의 y 위치 계산
-    // owner->SetPosition({ currentPos.x, floorY, currentPos.z });
 }
 
 // Idle 상태 업데이트: 타겟 위치로 도끼를 따라가게 하고, 마우스 입력에 따라 준비 상태로 전환

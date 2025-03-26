@@ -23,7 +23,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
 
     this->AddComponent(make_shared<PlayerMove>());
     this->AddComponent(make_shared<AnimationMove>());
-    this->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(150, 160, 0), RED));
+    this->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), scale, RED));
     if (this->GetComponent<BoxCollider>("BoxCollider")) COLLISION->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
 }
 

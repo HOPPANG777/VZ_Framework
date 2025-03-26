@@ -161,12 +161,36 @@ void Camera::UpdateHorizontalScroll(Object* target, float minRatio, float maxRat
     // 타겟의 월드 좌표
     Vector3 targetPos = target->GetPosition();
 
-    // 조건: 타겟의 x좌표가 윈도우의 중앙보다 오른쪽이면서 2.5배 너비보다 작을 경우
-    if (targetPos.x > WIN_DEFAULT_WIDTH * minRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxRatio)
+    //// 조건: 타겟의 x좌표가 윈도우의 중앙보다 오른쪽이면서 2.5배 너비보다 작을 경우
+    //if (targetPos.x > WIN_DEFAULT_WIDTH * minRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxRatio)
+    //{
+    //    // 타겟의 x 좌표가 화면 중앙에 오도록 카메라 x 위치를 조정
+    //    Vector3 newCamPos = Vector3(targetPos.x - WIN_DEFAULT_WIDTH / 2.0f, position.y, position.z);
+    //    SetPosition(newCamPos);
+    //}
+
+        // x와 y 모두 각각의 조건 범위 내에 있을 경우에만 업데이트
+    //if (targetPos.x > WIN_DEFAULT_WIDTH * minXRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxXRatio &&
+    //    targetPos.y > WIN_DEFAULT_HEIGHT * minYRatio && targetPos.y < WIN_DEFAULT_HEIGHT * maxYRatio)
+    //{
+    //    // target의 중앙이 화면 중앙에 오도록 카메라 위치 설정
+    //    float newX = targetPos.x - WIN_DEFAULT_WIDTH / 2.0f;
+    //    float newY = targetPos.y - WIN_DEFAULT_HEIGHT / 2.0f;
+    //    SetPosition(Vector3(newX, newY, position.z));
+    //}
+
+    // x와 y 모두 각각의 조건 범위 내에 있을 경우에만 업데이트
+    if (targetPos.x > WIN_DEFAULT_WIDTH * minRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxRatio )
     {
-        // 타겟의 x 좌표가 화면 중앙에 오도록 카메라 x 위치를 조정
-        Vector3 newCamPos = Vector3(targetPos.x - WIN_DEFAULT_WIDTH / 2.0f, position.y, position.z);
-        SetPosition(newCamPos);
+        // target의 중앙이 화면 중앙에 오도록 카메라 위치 설정
+        float newX = targetPos.x - WIN_DEFAULT_WIDTH / 2.0f;
+
+        SetPosition(Vector3(newX, 0, position.z));
+    }
+    if (targetPos.y > WIN_DEFAULT_HEIGHT * minRatio && targetPos.y < WIN_DEFAULT_HEIGHT * maxRatio)
+    {
+        float newY = targetPos.y - WIN_DEFAULT_HEIGHT / 2.0f;
+        SetPosition(Vector3(0, newY, position.z));
     }
 }
 
