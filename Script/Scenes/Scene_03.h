@@ -47,6 +47,8 @@ private:
 
 	shared_ptr<Object> nextStagePoint;
 	shared_ptr<Object> nextStageText;
+	shared_ptr<Object> nextStageTextBG;
+	shared_ptr<Object> uiPlayerTexture;
 
 	Vector3 testPlayerVelocity = Vector3::Zero; // testPlayer의 수직(및 필요시 전체) 속도
 

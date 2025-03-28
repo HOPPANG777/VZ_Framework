@@ -6,7 +6,7 @@ void Button::Update()
 	bool over = IsMouseOver();         // 버튼 영역 내에 마우스 존재 여부
 	bool pressedNow = INPUT->MousePressed(0);   // 현재 프레임에 버튼이 눌린 상태
 	bool downNow = INPUT->MouseDown(0);    // 이번 프레임에 새롭게 눌림
-	bool upNow = INPUT->MouseDown(0);        // 이번 프레임에 버튼을 뗀 상태
+	bool upNow = INPUT->MouseUp(0);        // 이번 프레임에 버튼을 뗀 상태
 
 	IColorable* colorableOwner = dynamic_cast<IColorable*>(GetOwner());
 

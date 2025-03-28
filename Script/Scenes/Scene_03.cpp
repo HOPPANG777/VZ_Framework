@@ -7,7 +7,7 @@ void Scene_03::Awake()
 
 	isNextStage = false;
 
-	testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -330, 0));
+	testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -350, 0));
 	
 	lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -330, 0));
 
@@ -17,7 +17,9 @@ void Scene_03::Awake()
 
 	nextStagePoint = make_shared<Object>("NextStagePoint", CENTER + Vector3(3100, -330, 0), Vector3(Values::ZeroVec3), 0.0f);
 
-	nextStageText = make_shared<Object>("NextStageText", CENTER, Vector3(1000, 100, 0), 0.0f, TransformType::Rect);
+	nextStageText = make_shared<Object>("NextStageText", CENTER + Vector3(0, -300, 0), Vector3(1000, 200, 0), 0.0f, TransformType::Rect);
+	nextStageTextBG = make_shared<TextureRect>(CENTER + Vector3(2560, -300, 0), Vector3(1000, 250, 0), 0.0f, TexturePath + L"UI/Panel1.png");
+	uiPlayerTexture = make_shared<TextureRect>(CENTER + Vector3(2100, -200, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/Player_.png");
 	nextStageText->AddComponent(make_shared<TypingText>());
 
 	auto parallax = make_shared<ParallaxBackground>("Parallax", 5);
@@ -75,6 +77,8 @@ void Scene_03::Destroy()
 	if (backgroundObject != nullptr) backgroundObject.reset();
 	if (nextStagePoint != nullptr) nextStagePoint.reset();
 	if (nextStageText != nullptr) nextStageText.reset();
+	if (nextStageTextBG != nullptr) nextStageTextBG.reset();
+	if (uiPlayerTexture != nullptr) uiPlayerTexture.reset();
 }
 
 void Scene_03::FixedUpdate() {}
@@ -96,6 +100,10 @@ void Scene_03::Update()
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
 	if (nextStagePoint != nullptr) nextStagePoint->Update();
+
+	if (nextStageTextBG != nullptr) nextStageTextBG->Update();
+
+	if (uiPlayerTexture != nullptr) uiPlayerTexture->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.5f);
 
@@ -120,11 +128,17 @@ void Scene_03::Render()
 
 	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
 
+	if (lumberAxe != nullptr) lumberAxe->Render();
+
 	if (testPlayer != nullptr) testPlayer->Render();
 
 	if (nextStagePoint != nullptr) nextStagePoint->Render();
 
-	if (lumberAxe != nullptr) lumberAxe->Render();
+	if (isNextStage == true)
+	{
+		if (uiPlayerTexture != nullptr) uiPlayerTexture->Render();
+		if (nextStageTextBG != nullptr) nextStageTextBG->Render();
+	}
 }
 
 void Scene_03::PostRender()

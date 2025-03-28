@@ -124,7 +124,7 @@ void LumberAxeComponent::UpdateIdleState(float dt)
     {
         // 타겟 위치에 오프셋을 더하여 도끼 위치 설정
         Vector3 targetPos = target->GetPosition();
-        Vector3 offset(10.0f, 0.0f, 0.0f);
+        Vector3 offset(3.0f, -3.5f, 0.0f);
         owner->SetPosition(targetPos + offset);
     }
 
