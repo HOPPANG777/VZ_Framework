@@ -2,11 +2,24 @@
 #include "LumberAxe.h"
 
 LumberAxe::LumberAxe(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
-	: TextureRect(position, scale, rotation, path)
+	: AnimationRect(position, scale, rotation, path)
 {
+    auto srcAxeIdleR = make_shared<Texture2D>(TexturePath + L"Weapon/Axe_R.png");
+    auto srcAxeIdleL = make_shared<Texture2D>(TexturePath + L"Weapon/Axe_L.png");
+
+    auto axeIdleR = make_shared<AnimationClip>(L"AxeIdle_R", srcAxeIdleR.get(), 1, 1, Values::ZeroVec2, Vector2((float)srcAxeIdleR->GetWidth(), (float)srcAxeIdleR->GetHeight()), false);
+    auto axeIdleL = make_shared<AnimationClip>(L"AxeIdle_L", srcAxeIdleL.get(), 1, 1, Values::ZeroVec2, Vector2((float)srcAxeIdleL->GetWidth(), (float)srcAxeIdleL->GetHeight()), true);
+
+    GetAnimator()->AddAnimClip(axeIdleR);
+    GetAnimator()->AddAnimClip(axeIdleL);
+
+    GetAnimator()->SetAnimationTime(1.0f / 2.8f);
+
 	lumberAxeComponent = make_shared<LumberAxeComponent>();
 	AddComponent(lumberAxeComponent);
+	AddComponent(make_shared<LumberAxeAnimation>());
 	AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), scale));
+    if (this->GetComponent<BoxCollider>("BoxCollider")) COLLISION->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
 }
 
 LumberAxe::~LumberAxe()

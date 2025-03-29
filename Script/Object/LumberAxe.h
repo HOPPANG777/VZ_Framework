@@ -2,8 +2,9 @@
 
 //#include "Objects/TextureObject/TextureRect.h"
 #include "Component/LumberAxeComponent.h"
+#include "Component/LumberAxeAnimation.h"
 
-class LumberAxe : public TextureRect
+class LumberAxe : public AnimationRect
 {
 public:
 	LumberAxe(const Vector3& position, const Vector3& scale = Vector3(50, 50, 0), const float rotation = 0.0f, const wstring& path = TexturePath + L"Weapon/Axe.png");

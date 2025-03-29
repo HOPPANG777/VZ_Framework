@@ -88,7 +88,7 @@ void LumberAxeComponent::Throw(const Vector3& initialVelocity)
     if (state == AxeState::AXE_IDLE)
     {
         velocity = initialVelocity;
-        state = AxeState::AXE_THROWN;
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_THROWN_L : AxeState::AXE_THROWN_R;
         // 추가: 애니메이션, 사운드 등 처리 가능
     }
 }
@@ -99,7 +99,7 @@ void LumberAxeComponent::Recall()
 {
     if (state == AxeState::AXE_THROWN && target || state == AxeState::AXE_IDLE && target && isLand == true)
     {
-        state = AxeState::AXE_RETURNING;
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_RETURNING_L : AxeState::AXE_RETURNING_R;
         returnTimer = 0.0f;
         returnStart = owner->GetPosition();
 
@@ -112,7 +112,7 @@ void LumberAxeComponent::Recall()
 
 void LumberAxeComponent::Land()
 {
-    state = AxeState::AXE_IDLE;
+    state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     velocity = Vector3::Zero;
     isLand = true;
 }
@@ -126,13 +126,15 @@ void LumberAxeComponent::UpdateIdleState(float dt)
         Vector3 targetPos = target->GetPosition();
         Vector3 offset(3.0f, -3.5f, 0.0f);
         owner->SetPosition(targetPos + offset);
+        // 애니메이션 상태도 갱신
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     }
 
     // 오른쪽 클릭 시 던지기 준비 상태로 전환
     if (INPUT->MousePressed(1) && isLand == false)
     {
         straightFlightTime = 0.3f; // 직선 이동 시간 재설정
-        state = AxeState::AXE_PREPARE;
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_PREPARE_L : AxeState::AXE_PREPARE_R;
     }
 }
 
@@ -155,12 +157,12 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
 
         float throwSpeed = 1000.0f;
         velocity = throwDir * throwSpeed;
-        state = AxeState::AXE_THROWN;
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_THROWN_L : AxeState::AXE_THROWN_R;
     }
     else if (INPUT->MouseUp(1))
     {
         // 오른쪽 버튼이 해제되면 준비 취소하고 Idle 상태로 복귀
-        state = AxeState::AXE_IDLE;
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     }
 }
 
@@ -198,7 +200,7 @@ void LumberAxeComponent::UpdateReturningState(float dt)
     if (t >= 1.0f)
     {
         isLand = false;
-        state = AxeState::AXE_IDLE;
+        state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
         velocity = Vector3::Zero;
         owner->SetPosition(tPos);
     }

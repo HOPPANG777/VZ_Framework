@@ -58,6 +58,7 @@ private:
     // 던진 상태 관련 물리 변수
     Vector3 velocity;                                               // 도끼의 현재 속도
     float gravity = 980.0f;                                         // 중력 가속도
+    float straightFlightTime = 0.3f;                                // 던진 후 일정 시간 동안 직선 이동 시간 (중력 무시)
 
     // 회수 상태 관련 베지어 곡선 변수
     float returnTimer = 0.0f;                                       // 회수 진행 시간 누적
@@ -70,6 +71,5 @@ private:
 
     bool isDead = false;                                            // 플레이어가 사망한 상태인지 여부
     bool isLand = false;
-    float straightFlightTime = 0.3f;                                // 던진 후 일정 시간 동안 직선 이동 시간 (중력 무시)
 
 };
