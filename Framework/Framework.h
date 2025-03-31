@@ -173,6 +173,7 @@ public:                                                         \
 extern float gWinWidth;
 extern float gWinHeight;
 extern HWND gHandle;
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 //SingletonMacros
 #define INPUT Input::Get()

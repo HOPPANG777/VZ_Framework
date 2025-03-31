@@ -1,8 +1,6 @@
 #include "Framework.h"
 #include "Gui.h"
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// ImGui가 메시지를 처리한 경우

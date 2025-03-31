@@ -15,6 +15,10 @@ void Scene_03::Awake()
 	floor.back()->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
 	floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 
+	house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
+	house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
+	house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
+
 	nextStagePoint = make_shared<Object>("NextStagePoint", CENTER + Vector3(3100, -330, 0), Vector3(Values::ZeroVec3), 0.0f);
 
 	nextStageText = make_shared<Object>("NextStageText", CENTER + Vector3(0, -300, 0), Vector3(1000, 200, 0), 0.0f, TransformType::Rect);
@@ -72,6 +76,7 @@ void Scene_03::Destroy()
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
 	for (auto& bg : bgLayer) if (bg != nullptr) bg.reset();
 	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
+	for (auto& house : house) if (house != nullptr) house.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
@@ -92,6 +97,8 @@ void Scene_03::Update()
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
+
+	for (const auto& house : house) if (house != nullptr) house->Update();
 
 	if (testPlayer != nullptr) testPlayer->Update();
 
@@ -130,7 +137,12 @@ void Scene_03::Render()
 
 	if (lumberAxe != nullptr) lumberAxe->Render();
 
+	if (house[1] != nullptr) house[1]->Render();
+	if (house[2] != nullptr) house[2]->Render();
+
 	if (testPlayer != nullptr) testPlayer->Render();
+
+	if (house[0] != nullptr) house[0]->Render();
 
 	if (nextStagePoint != nullptr) nextStagePoint->Render();
 

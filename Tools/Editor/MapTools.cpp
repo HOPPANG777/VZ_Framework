@@ -129,7 +129,7 @@ void MapTools::ImGUI()
                 // 입력받은 타일셋 이름을 wstring으로 변환
                 wstring tileSetName = String::ToWstring(string(tileSetNameBuffer));
                 // 기본 경로 + "Tilesets/" + 사용자 입력 타일셋 이름
-                wstring newTilePath = TexturePath + L"Tilesets/" + tileSetName;
+                wstring newTilePath = TexturePath + L"Tilesets/" + tileSetName + L".png";
                 TILESET->ChangeTileMap(newTilePath, tileSetColumns, tileSetRows);
             }
         }

@@ -149,6 +149,9 @@ void Window::SetBorderlessWindow()
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	// ImGui가 메시지를 처리했다면 바로 반환
+	//if (ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam)) return 1;
+
 	switch (message)
 	{
 	case WM_CREATE:

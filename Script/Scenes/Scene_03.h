@@ -31,6 +31,8 @@ private:
 
 	vector<shared_ptr<Object>> floor;
 
+	vector<shared_ptr<Object>> house;
+
 	shared_ptr<Object> player;
 	shared_ptr<Object> lumberAxe;
 
