@@ -409,7 +409,7 @@ void Graphics::SetResolution(UINT width, UINT height)
 bool Graphics::LoadCustomFont(const wstring& fontFilePath)
 {
     // FR_PRIVATE: 현재 프로세스에서만 등록
-    int ret = AddFontResourceExW(fontFilePath.c_str(), FR_PRIVATE, 0);
+    int ret = AddFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);
     if (ret == 0)
     {
         // 등록 실패

@@ -30,8 +30,10 @@ private:
 	bool isNextStage = false;
 
 	vector<shared_ptr<Object>> floor;
-
 	vector<shared_ptr<Object>> house;
+	vector<shared_ptr<Object>> text;
+	vector<shared_ptr<Object>> textBG;
+	vector<shared_ptr<Object>> textPoint;
 
 	shared_ptr<Object> player;
 	shared_ptr<Object> lumberAxe;
