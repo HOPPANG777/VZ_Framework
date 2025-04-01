@@ -22,16 +22,15 @@ public:
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL
     ) override;
 
-
+public:
     virtual void Update() override;
     virtual void Render() override;
 
 public:
-    // 새 텍스트 설정: 타이핑 효과를 초기화합니다.
-    void SetText(const wstring& newText);
-
     // 텍스트 출력이 모두 완료되었는지 여부 반환
     bool IsComplete() const { return complete; }
+    // 텍스트 출력 스킵
+	void SkipToEnd() { visibleCharacters = fullText.size(); complete = true; }
 
 private:
     float typingSpeed;        // 한 글자 출력에 걸리는 시간 (초)

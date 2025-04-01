@@ -40,11 +40,3 @@ void TypingText::Render()
 {
 
 }
-
-void TypingText::SetText(const wstring& newText)
-{
-	fullText = newText;
-	visibleCharacters = 0;
-	elapsedTime = 0.0f;
-	complete = false;
-}

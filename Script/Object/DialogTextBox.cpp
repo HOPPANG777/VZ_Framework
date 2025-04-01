@@ -1,84 +1,55 @@
 #include "stdafx.h"
 #include "DialogTextBox.h"
 
-DialogTextBox::DialogTextBox(const string& name, const Vector3& position, const Vector3& size, const wstring& backgroundTexturePath, const wstring& arrowTexturePath)
-    : Object(name, position, size, 0.0f, TransformType::Rect)
+DialogTextBox::DialogTextBox(const string& name, const Vector3& position, const Vector3& scale, const float& rotation, const wstring& backgroundTexturePath, const wstring& arrowTexturePath, const wstring& text, const float& fontSize, const wstring& font, const Color& fontColor)
+	: Object(name, position, scale, rotation), dialogText(text), fontSize(fontSize), fontName(font), fontColor(fontColor)
 {
-    // 대화창 배경 생성 (배경 텍스처 사용)
-    background = make_shared<TextureRect>(position, size, 0.0f, backgroundTexturePath);
+    // 배경 생성
+    background = make_shared<TextureRect>(position, scale, rotation, backgroundTexturePath, TransformType::Rect);
 
-    // 텍스트 객체 생성: 대화창 내 텍스트 영역 (예: 전체 크기의 일부 영역)
-    // 여기서는 배경 위에 겹쳐서 표시합니다.
-    Vector3 textPos = position; // 필요에 따라 오프셋 적용
-    Vector3 textSize = size;
-    textObject = make_shared<Object>("DialogText", textPos, textSize, 0.0f, TransformType::Rect);
+    // TypingText 컴포넌트 추가 (타이핑 효과)
+    auto typing = make_shared<TypingText>("TypingText", 0.075f);
+    this->AddComponent(typing);
 
-    // TypingText 컴포넌트를 추가 (타이핑 효과 속도는 0.05초 정도)
-    auto typing = make_shared<TypingText>("TypingText", 0.05f);
-    textObject->AddComponent(typing);
-
-    // 초기 텍스트는 빈 문자열로 설정
-    typing->SetText(L"");
-    textComplete = false;
-
-    // 화살표 아이콘 생성: 대화창의 오른쪽 아래 모서리에 위치, 기본적으로 숨김 처리(렌더링 시 조건 처리)
-    Vector3 arrowPos = { position.x + size.x - 30, position.y + 5, position.z };
-    Vector3 arrowSize = { 20, 20, 1 };
-    arrowIndicator = make_shared<TextureRect>(arrowPos, arrowSize, 0.0f, arrowTexturePath);
-}
-
-void DialogTextBox::SetDialogText(const wstring& text)
-{
-    dialogText = text;
-    // 텍스트 객체의 TypingText 컴포넌트에 새 텍스트 설정 및 타이핑 효과 재시작
-    auto typing = textObject->GetComponent<TypingText>("TypingText");
-
-    if (typing)
-    {
-        typing->SetText(dialogText);
-        textComplete = false;
-    }
+    // 화살표 인디케이터 생성 (배경 오른쪽 아래 위치에)
+    Vector3 arrowPos = position + Vector3(scale.x * 0.4f, -scale.y * 0.4f, 0.0f);
+    arrowIndicator = make_shared<TextureRect>(arrowPos, Vector3(30, 30, 0), TexturePath + L"UI/Arrow.png");
+    arrowIndicator->SetColor(WHITE);
 }
 
 void DialogTextBox::Update()
 {
-    if (!active) return;
+	if (!active) return;
 
-    // 텍스트 객체 업데이트 (타이핑 효과 진행)
-    if (textObject)
+    auto typing = GetComponent<TypingText>("TypingText");
+    if (!typing) return;
+
+    // 사용자가 클릭하면...
+    if (INPUT->MousePressed(0))
     {
-        textObject->Update();
-        auto typing = textObject->GetComponent<TypingText>("TypingText");
-        if (typing && typing->IsComplete())
-        {
-            textComplete = true;
-        }
+        // 만약 아직 텍스트가 모두 출력되지 않았다면 타이핑 효과 건너뛰기
+        if (!typing->IsComplete()) typing->SkipToEnd();
+        else active = false; // 이미 텍스트가 모두 출력되었으면 창 닫힘
     }
 
-    // 텍스트 출력이 완료되면 화살표 아이콘 업데이트 및 클릭 입력 처리
-    if (textComplete && arrowIndicator)
-    {
-        arrowIndicator->Update();
+    // TypingText 업데이트
+    typing->Update();
 
-        // 마우스 입력 검사: 왼쪽 클릭 시, 마우스 포인터가 화살표 영역에 있으면 대화창 종료
-        if (INPUT->MousePressed(0))
-        {
-            Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
-            RECT arrowRect = arrowIndicator->GetRect();
-            if (PointInRect(mousePos, arrowRect))
-            {
-                Deactivate();
-            }
-        }
-    }
+    // 텍스트 출력이 완료되면 화살표 표시
+    if (typing->IsComplete()) arrowVisible = true;
 }
 
 void DialogTextBox::Render()
 {
-    if (!active) return;
+	if (!active) return;
 
-    // Render 순서: 배경 → 텍스트 → (텍스트 출력 완료시) 화살표
-    if (background) background->Render();
-    if (textObject) textObject->Render();
-    if (textComplete && arrowIndicator) arrowIndicator->Render();
+    // 배경 렌더링
+    background->Render();
+
+    // TypingText의 RenderText를 통해 텍스트 출력 (항상 RenderText를 사용)
+    auto typing = GetComponent<TypingText>("TypingText");
+    if (typing) typing->RenderText(dialogText, this->GetRect(), fontSize, fontColor, fontName);
+
+    // 텍스트 출력 완료 시 화살표 렌더링
+    if (arrowVisible && arrowIndicator) arrowIndicator->Render();
 }

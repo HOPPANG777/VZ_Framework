@@ -4,10 +4,13 @@ class ShakingText : public Texts
 {
 public:
     ShakingText(const string& name = "ShakingText", float intensity = 2.0f)
-        : Texts(name), intensity(intensity) {
+        : Texts(name), intensity(intensity) 
+    {
+
     }
 
-    void RenderText(
+    void RenderText
+    (
         const wstring& text,
         const RECT& rect,
         const float size = 25.0f,
