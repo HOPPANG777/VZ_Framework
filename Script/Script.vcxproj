@@ -23,6 +23,7 @@
     <ClCompile Include="Component\LumberAxeComponent.cpp" />
     <ClCompile Include="Component\FloorCollision.cpp" />
     <ClCompile Include="Component\LumberAxeAnimation.cpp" />
+    <ClCompile Include="Object\DialogTextBox.cpp" />
     <ClCompile Include="Object\EnemyUnit.cpp" />
     <ClCompile Include="Object\UnitBase.cpp" />
     <ClCompile Include="Object\LumberAxe.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Component\LumberAxeComponent.h" />
     <ClInclude Include="Component\FloorCollision.h" />
     <ClInclude Include="Component\LumberAxeAnimation.h" />
+    <ClInclude Include="Object\DialogTextBox.h" />
     <ClInclude Include="Object\EnemyUnit.h" />
     <ClInclude Include="Object\UnitBase.h" />
     <ClInclude Include="Object\LumberAxe.h" />

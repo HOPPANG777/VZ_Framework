@@ -4,6 +4,7 @@
 #include "Object/LumberAxe.h"
 #include "Component/ParallaxBackground.h"
 #include "Component/FloorCollision.h"
+#include "Object/DialogTextBox.h"
 
 class Scene_03 : public Scene
 {

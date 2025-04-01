@@ -53,6 +53,9 @@
     <ClCompile Include="Component\LumberAxeAnimation.cpp">
       <Filter>Component\LumberAxeAnimation</Filter>
     </ClCompile>
+    <ClCompile Include="Object\DialogTextBox.cpp">
+      <Filter>Object\DialogTextBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Component\LumberAxeAnimation.h">
       <Filter>Component\LumberAxeAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\DialogTextBox.h">
+      <Filter>Object\DialogTextBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +177,9 @@
     </Filter>
     <Filter Include="Component\LumberAxeAnimation">
       <UniqueIdentifier>{281092b1-65ff-4cf2-832a-85e73e1c9127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\DialogTextBox">
+      <UniqueIdentifier>{afe1d7ca-35bd-4f5d-bfae-284ce9618d7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
