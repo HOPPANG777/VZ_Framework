@@ -19,20 +19,13 @@ void Scene_03::Awake()
 	house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
 	house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
 
-	text.push_back(make_shared<Object>("Text_01", CENTER + Vector3(0, -300, 0), Vector3(630, 200, 0), 0.0f, TransformType::Rect));
-	textBG.push_back(make_shared<TextureRect>(CENTER + Vector3(0, -300, 0), Vector3(1000, 250, 0), 0.0f, TexturePath + L"UI/Panel1.png", TransformType::Rect));
-	dynamic_pointer_cast<TextureRect>(textBG[0])->SetColor(Color(0, 0, 0, 0));
+	text.push_back(make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"제100회팔씨름챔피언선발토너먼트 선수 등록 마감 까지 일주일... 선수 등록을 진행하는 도시까지 전속력으로 달린다!", 25.0f, L"마비옛체_OTF", BLACK));
 	textPoint.push_back(make_shared<Object>("TextPoint_01", CENTER + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-	text[0]->AddComponent(make_shared<TypingText>());
+	text.push_back(make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(2560, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", 25.0f, L"마비옛체_OTF", BLACK));
+	textPoint.push_back(make_shared<Object>("TextPoint_02", CENTER + Vector3(3100, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
 
-	for (auto text : textPoint) text->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-
-	nextStagePoint = make_shared<Object>("NextStagePoint", CENTER + Vector3(3100, -330, 0), Vector3(Values::ZeroVec3), 0.0f);
-
-	nextStageText = make_shared<Object>("NextStageText", CENTER + Vector3(0, -300, 0), Vector3(1000, 200, 0), 0.0f, TransformType::Rect);
-	nextStageTextBG = make_shared<TextureRect>(CENTER + Vector3(2560, -300, 0), Vector3(1000, 250, 0), 0.0f, TexturePath + L"UI/Panel1.png");
-	uiPlayerTexture = make_shared<TextureRect>(CENTER + Vector3(2100, -200, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/Player_.png");
-	nextStageText->AddComponent(make_shared<TypingText>());
+	for (auto textPoint : textPoint) textPoint->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
+	for (auto textPoint : textPoint) COLLISION->AddCollider(textPoint->GetComponent<BoxCollider>("BoxCollider"));
 
 	auto parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
@@ -67,9 +60,6 @@ void Scene_03::Awake()
 	backgroundObject = make_shared<Object>("Background");
 	backgroundObject->AddComponent(parallax);
 
-	nextStagePoint->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-	COLLISION->AddCollider(nextStagePoint->GetComponent<BoxCollider>("BoxCollider"));
-
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 
 	isLoaded = true;
@@ -78,6 +68,8 @@ void Scene_03::Awake()
 void Scene_03::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
+	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
+	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
 }
 
 void Scene_03::Destroy()
@@ -87,15 +79,10 @@ void Scene_03::Destroy()
 	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
 	for (auto& house : house) if (house != nullptr) house.reset();
 	for (auto& text : text) if (text != nullptr) text.reset();
-	for (auto& text : textBG) if (text != nullptr) text.reset();
 	for (auto& text : textPoint) if (text != nullptr) text.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
-	if (nextStagePoint != nullptr) nextStagePoint.reset();
-	if (nextStageText != nullptr) nextStageText.reset();
-	if (nextStageTextBG != nullptr) nextStageTextBG.reset();
-	if (uiPlayerTexture != nullptr) uiPlayerTexture.reset();
 }
 
 void Scene_03::FixedUpdate() {}
@@ -111,10 +98,10 @@ void Scene_03::Update()
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
 
 	for (const auto& house : house) if (house != nullptr) house->Update();
-	
-	for (const auto& text : textBG) if (text != nullptr) text->Update();
 
-	for (const auto& text : textPoint) if (text != nullptr) text->Update();
+	for (const auto& text : text) if (text != nullptr) text->Update();
+
+	for (const auto& textPoint : textPoint) if (textPoint != nullptr) textPoint->Update();
 
 	if (testPlayer != nullptr) testPlayer->Update();
 
@@ -122,29 +109,16 @@ void Scene_03::Update()
 
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
-	if (nextStagePoint != nullptr) nextStagePoint->Update();
-
-	if (nextStageTextBG != nullptr) nextStageTextBG->Update();
-
-	if (uiPlayerTexture != nullptr) uiPlayerTexture->Update();
-
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.5f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		if (text[0] != nullptr) text[0]->Update();
-		dynamic_pointer_cast<TextureRect>(textBG[0])->SetColor(WHITE);
-		if (INPUT->KeyDown(VK_RETURN))
-		{
-			text[0]->GetComponent<TypingText>("TypingText")->SetTextOut(true);
-			dynamic_pointer_cast<TextureRect>(textBG[0])->SetColor(Color(0, 0, 0, 0));
-		}
+		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
-	if (nextStagePoint->GetComponent<BoxCollider>("BoxCollider") ->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
+	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider") ->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[1]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		isNextStage = true;
-		if (nextStageText != nullptr) nextStageText->Update();
+		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (INPUT->KeyDown(VK_RETURN))
 		{
 			SCENE->LoadScene("Stage01");
@@ -171,26 +145,16 @@ void Scene_03::Render()
 
 	if (house[0] != nullptr) house[0]->Render();
 
-	if (nextStagePoint != nullptr) nextStagePoint->Render();
+	for (const auto& textPoint : textPoint) if (textPoint != nullptr) textPoint->Update();
 
-	for (const auto& text : textPoint) if (text != nullptr) text->Update();
-
-	if (textBG[0] != nullptr) textBG[0]->Render();
-	
-	if (isNextStage == true)
-	{
-		if (uiPlayerTexture != nullptr) uiPlayerTexture->Render();
-		if (nextStageTextBG != nullptr) nextStageTextBG->Render();
-	}
+	for (const auto& text : text) if (text != nullptr) text->Render();
 }
 
 void Scene_03::PostRender()
 {
-	nextStageText->GetComponent<TypingText>("TypingText")->RenderText(L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", nextStageText->GetRect(), 25.0f, BLACK, L"마비옛체_OTF");
-	if (text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
-	{
-		text[0]->GetComponent<TypingText>("TypingText")->RenderText(L"제100회팔씨름챔피언선발토너먼트 선수 등록 마감 까지 일주일... 선수 등록을 진행하는 도시까지 전속력으로 달린다!", text[0]->GetRect(), 25.0f, BLACK, L"마비옛체_OTF");
-	}
+	if (text[0] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
+	if (text[1] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
+
 }
 
 void Scene_03::ImGUI()
