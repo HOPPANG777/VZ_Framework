@@ -159,7 +159,7 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
     HRESULT hr = adapterInfo->adapter->EnumOutputs(0, &output);
 
     if (DXGI_ERROR_NOT_FOUND == hr) return false;
-    assert(SUCCEEDED(hr));
+    CHECK(hr);
 
     auto outputInfo = make_shared<D3DEnumOutputInfo>();
 
@@ -170,12 +170,12 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
     DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
     hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &numModes, nullptr);
-    assert(SUCCEEDED(hr));
+    CHECK(hr);
 
     unique_ptr<DXGI_MODE_DESC[]> displayModes = make_unique<DXGI_MODE_DESC[]>(numModes);
 
     hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModes.get());
-    assert(SUCCEEDED(hr));
+    CHECK(hr);
 
     for (UINT i = 0; i < numModes; i++)
     {

@@ -33,7 +33,6 @@ private:
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> house;
 	vector<shared_ptr<Object>> text;
-	vector<shared_ptr<Object>> textBG;
 	vector<shared_ptr<Object>> textPoint;
 
 	shared_ptr<Object> player;
@@ -49,11 +48,6 @@ private:
 	unique_ptr<TileMap> tmap;
 
 	shared_ptr<Object> testPlayer;
-
-	shared_ptr<Object> nextStagePoint;
-	shared_ptr<Object> nextStageText;
-	shared_ptr<Object> nextStageTextBG;
-	shared_ptr<Object> uiPlayerTexture;
 
 	Vector3 testPlayerVelocity = Vector3::Zero; // testPlayer의 수직(및 필요시 전체) 속도
 
