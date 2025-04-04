@@ -38,8 +38,8 @@ void Scene_03::Awake()
 	{
 		text.push_back(make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"제100회팔씨름챔피언선발토너먼트 선수 등록 마감 까지 일주일... 선수 등록을 진행하는 도시까지 전속력으로 달린다!", 25.0f, L"마비옛체_OTF", BLACK));
 		textPoint.push_back(make_shared<Object>("TextPoint_01", CENTER + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(2560, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", 25.0f, L"마비옛체_OTF", BLACK));
-		textPoint.push_back(make_shared<Object>("TextPoint_02", CENTER + Vector3(3100, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(1920, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", 25.0f, L"마비옛체_OTF", BLACK));
+		textPoint.push_back(make_shared<Object>("TextPoint_02", CENTER + Vector3(2400, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider
@@ -146,7 +146,7 @@ void Scene_03::Update()
 
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
-	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.5f);
+	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
