@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component\LogPathCreator.cpp" />
+    <ClCompile Include="Component\HitComponent.cpp" />
     <ClCompile Include="Manager\BattleManager.cpp" />
     <ClCompile Include="Component\EnemyAI.cpp" />
     <ClCompile Include="Component\LumberAxeComponent.cpp" />
@@ -50,6 +51,7 @@
   <ItemGroup>
     <ClInclude Include="Enum\BattleState.h" />
     <ClInclude Include="Component\LogPathCreator.h" />
+    <ClInclude Include="Component\HitComponent.h" />
     <ClInclude Include="Manager\BattleManager.h" />
     <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Component\LumberAxeComponent.h" />

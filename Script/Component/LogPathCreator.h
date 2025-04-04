@@ -1,5 +1,7 @@
 #pragma once
 
+#include "HitComponent.h"
+
 class LogPathCreator : public Component
 {
 public:

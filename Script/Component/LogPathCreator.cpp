@@ -25,21 +25,26 @@ void LogPathCreator::OnAxeCollision()
     // 충돌 횟수를 증가
     collisionCount++;
 
+	auto owner = GetOwner();
+
+    // 피격 효과 활성화: HitComponent가 있다면 Activate() 호출
+    owner->GetComponent<HitComponent>("HitComponent")->Activate();
+
     // 3회 이상 충돌하면 변환 처리
     if (collisionCount >= 3)
     {
         // log 오브젝트(Owner)의 회전을 오른쪽으로 90도 변경
         // (예: 90도)
-        GetOwner()->SetRotation(-90);
+        owner->SetRotation(-90);
 
-		GetOwner()->SetPosition(GetOwner()->GetPosition() + Vector3(300, -300, 0));
+        owner->SetPosition(owner->GetPosition() + Vector3(300, -300, 0));
 
         // 기존 BoxCollider 제거
-        GetOwner()->RemoveComponent("BoxCollider");
+        owner->RemoveComponent("BoxCollider");
 
         // 새로운 BoxCollider 생성 (크기: 500,300,0)
         auto newCollider = make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
-        GetOwner()->AddComponent(newCollider);
+        owner->AddComponent(newCollider);
 
         // CollisionManager에 새 콜라이더 등록
         COLLISION->AddCollider(newCollider);

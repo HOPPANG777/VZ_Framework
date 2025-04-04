@@ -65,6 +65,9 @@
     <ClCompile Include="Component\SolidCollider.cpp">
       <Filter>Component\SolidCollider</Filter>
     </ClCompile>
+    <ClCompile Include="Component\HitComponent.cpp">
+      <Filter>Component\HitComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="Component\SolidCollider.h">
       <Filter>Component\SolidCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\HitComponent.h">
+      <Filter>Component\HitComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +222,9 @@
     </Filter>
     <Filter Include="Component\SolidCollider">
       <UniqueIdentifier>{772d1520-1d6f-4a61-b9a4-207e8241efd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\HitComponent">
+      <UniqueIdentifier>{913956e3-a403-49e2-baab-7d4d129fd333}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

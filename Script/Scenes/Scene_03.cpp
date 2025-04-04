@@ -14,9 +14,9 @@ void Scene_03::Awake()
 
 	// Floor
 	{
-		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(5800, -330, 0), 0, 0.0f, CLEAR));
+		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(5800, -320, 0), 0, 0.0f, CLEAR));
 		floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
-		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-170, -330, 0), 0, 0.0f, CLEAR));
+		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-170, -320, 0), 0, 0.0f, CLEAR));
 		floor[1]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(950, 1, 0), GREEN));
 	}
 
@@ -81,6 +81,7 @@ void Scene_03::Awake()
 	// Log
 	{
 		log.push_back(make_shared<TextureRect>(CENTER + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png"));
+		log[0]->AddComponent(make_shared<HitComponent>("HitComponent"));
 		log[0]->AddComponent(make_shared<LogPathCreator>());
 		log[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 500, 0), BLACK));
 		COLLISION->AddCollider(log[0]->GetComponent<BoxCollider>("BoxCollider"));
