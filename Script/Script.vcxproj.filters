@@ -56,6 +56,9 @@
     <ClCompile Include="Object\DialogTextBox.cpp">
       <Filter>Object\DialogTextBox</Filter>
     </ClCompile>
+    <ClCompile Include="Manager\BattleManager.cpp">
+      <Filter>Manager\BattleManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -115,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="Object\DialogTextBox.h">
       <Filter>Object\DialogTextBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\BattleManager.h">
+      <Filter>Manager\BattleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum\BattleState.h">
+      <Filter>Enum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +189,15 @@
     </Filter>
     <Filter Include="Object\DialogTextBox">
       <UniqueIdentifier>{afe1d7ca-35bd-4f5d-bfae-284ce9618d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{c1961aaf-4cc4-4250-a75f-32ef06ab80cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\BattleManager">
+      <UniqueIdentifier>{2fc8e772-92e6-45f9-973f-68c6652a863d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enum">
+      <UniqueIdentifier>{4c5c7358-d263-4cdc-a54a-c1fa8ecedb8d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

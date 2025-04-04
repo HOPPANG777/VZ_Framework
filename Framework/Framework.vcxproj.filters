@@ -266,8 +266,8 @@
     <ClInclude Include="Utilities\AnimationClip.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\UIElement.h">
-      <Filter>Struct</Filter>
+    <ClInclude Include="Structs\UIElement.h">
+      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\Gizmo.h">
       <Filter>Utilities</Filter>
@@ -281,11 +281,11 @@
     <ClInclude Include="Components\CircleCollider.h">
       <Filter>Components\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\FontTextDesc.h">
-      <Filter>Struct</Filter>
+    <ClInclude Include="Structs\FontTextDesc.h">
+      <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\FontBrushDesc.h">
-      <Filter>Struct</Filter>
+    <ClInclude Include="Structs\FontBrushDesc.h">
+      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="Components\Texts.h">
       <Filter>Components\Fonts</Filter>
@@ -296,8 +296,8 @@
     <ClInclude Include="Components\TypingText.h">
       <Filter>Components\Fonts</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\LoadingStatus.h">
-      <Filter>Struct</Filter>
+    <ClInclude Include="Structs\LoadingStatus.h">
+      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="Components\Transform.h">
       <Filter>Components\Transform</Filter>
@@ -335,8 +335,8 @@
     <ClInclude Include="Managers\TileSetManager.h">
       <Filter>Managers\TileSet</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\TextureDesc.h">
-      <Filter>Struct</Filter>
+    <ClInclude Include="Structs\TextureDesc.h">
+      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="Managers\Texture2DManager.h">
       <Filter>Managers\Texture2D</Filter>
@@ -347,17 +347,17 @@
     <ClInclude Include="Components\AnimationMove.h">
       <Filter>Components\Move</Filter>
     </ClInclude>
-    <ClInclude Include="Enum\UnitAnimationType.h">
-      <Filter>Enum</Filter>
+    <ClInclude Include="Enums\UnitAnimationType.h">
+      <Filter>Enums</Filter>
     </ClInclude>
     <ClInclude Include="Components\PlayerMove.h">
       <Filter>Components\Move</Filter>
     </ClInclude>
-    <ClInclude Include="Struct\WinDesc.h">
-      <Filter>Struct</Filter>
+    <ClInclude Include="Structs\WinDesc.h">
+      <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="Enum\AxeState.h">
-      <Filter>Enum</Filter>
+    <ClInclude Include="Enums\AxeState.h">
+      <Filter>Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -400,9 +400,6 @@
     <Filter Include="Objects\TextureObject">
       <UniqueIdentifier>{c3308cb9-2245-415a-a93a-76bec85a871f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Struct">
-      <UniqueIdentifier>{4c93c3de-2a01-45c7-ac1e-b831c0ec9a32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\Collider">
       <UniqueIdentifier>{685ad174-edb2-4de8-af8d-de4676129f0a}</UniqueIdentifier>
     </Filter>
@@ -442,7 +439,10 @@
     <Filter Include="Managers\Texture2D">
       <UniqueIdentifier>{903804ac-7f86-4d0f-a253-90a0f3cdeb28}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enum">
+    <Filter Include="Structs">
+      <UniqueIdentifier>{4c93c3de-2a01-45c7-ac1e-b831c0ec9a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enums">
       <UniqueIdentifier>{8823b7f9-477d-4b4d-831f-f730a602e7df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

@@ -226,14 +226,14 @@ const string BuildTilePath = "_Data/_Fonts/";
 #include "Interfaces/IColorable.h"
 
 //Struct
-#include "Struct/UIElement.h"
-#include "Struct/FontBrushDesc.h"
-#include "Struct/FontTextDesc.h"
-#include "Struct/TextureDesc.h"
-#include "Struct/WinDesc.h"
+#include "Structs/UIElement.h"
+#include "Structs/FontBrushDesc.h"
+#include "Structs/FontTextDesc.h"
+#include "Structs/TextureDesc.h"
+#include "Structs/WinDesc.h"
 
 //Enum
-#include "Enum/UnitAnimationType.h"
+#include "Enums/UnitAnimationType.h"
 
 //Systems
 #include "Systems/Keyboard.h"

@@ -186,14 +186,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Enum\AxeState.h" />
+    <ClInclude Include="Enums\AxeState.h" />
     <ClInclude Include="Components\AnimationMove.h" />
     <ClInclude Include="Components\Button.h" />
     <ClInclude Include="Components\Animator.h" />
     <ClInclude Include="Components\BoxCollider.h" />
     <ClInclude Include="Components\CircleCollider.h" />
     <ClInclude Include="Components\Collider.h" />
-    <ClInclude Include="Enum\UnitAnimationType.h" />
+    <ClInclude Include="Enums\UnitAnimationType.h" />
     <ClInclude Include="Interfaces\IColorable.h" />
     <ClInclude Include="Components\Texts.h" />
     <ClInclude Include="Components\ShakingText.h" />
@@ -203,17 +203,17 @@
     <ClInclude Include="Objects\SpriteObject\Sprite.h" />
     <ClInclude Include="Objects\TileObject\TileMap.h" />
     <ClInclude Include="Components\PlayerMove.h" />
-    <ClInclude Include="Struct\LoadingStatus.h" />
-    <ClInclude Include="Struct\FontBrushDesc.h" />
-    <ClInclude Include="Struct\FontTextDesc.h" />
+    <ClInclude Include="Structs\LoadingStatus.h" />
+    <ClInclude Include="Structs\FontBrushDesc.h" />
+    <ClInclude Include="Structs\FontTextDesc.h" />
     <ClInclude Include="Managers\CollisionManager.h" />
     <ClInclude Include="Objects\TileObject\Tile.h" />
     <ClInclude Include="Managers\TileSetManager.h" />
-    <ClInclude Include="Struct\TextureDesc.h" />
+    <ClInclude Include="Structs\TextureDesc.h" />
     <ClInclude Include="Managers\Texture2DManager.h" />
-    <ClInclude Include="Struct\WinDesc.h" />
+    <ClInclude Include="Structs\WinDesc.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
-    <ClInclude Include="Struct\UIElement.h" />
+    <ClInclude Include="Structs\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
     <ClInclude Include="Objects\TextureObject\AnimationRect.h" />
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />

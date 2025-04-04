@@ -23,6 +23,7 @@ void Scene_03::Awake()
 		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
 		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
 		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
+		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-300, -280, 0), Vector3(70, 70, 0), 0.0f, TexturePath + L"Object/Wood.png"));
 	}
 	
 	// Text
@@ -163,6 +164,8 @@ void Scene_03::Render()
 
 	if (house[2] != nullptr) house[2]->Render();
 
+	if (house[3] != nullptr) house[3]->Render();
+	
 	if (testPlayer != nullptr) testPlayer->Render();
 
 	if (house[0] != nullptr) house[0]->Render();

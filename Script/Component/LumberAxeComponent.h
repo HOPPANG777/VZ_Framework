@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Enum/AxeState.h"
+#include "Enums/AxeState.h"
 
 // 도끼(axe) 컴포넌트 클래스
 // - 플레이어(또는 타겟)와 상호작용하며 도끼를 던지고 회수하는 기능 제공
