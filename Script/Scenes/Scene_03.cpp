@@ -4,14 +4,14 @@
 void Scene_03::Awake()
 {
 	isLoaded = false;
-
+	
 	// Player
 	{
 		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -450, 0));
 		lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -330, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 	}
-	
+
 	// Floor
 	{
 		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(5800, -330, 0), 0, 0.0f, CLEAR));
@@ -81,9 +81,11 @@ void Scene_03::Awake()
 	// Log
 	{
 		log.push_back(make_shared<TextureRect>(CENTER + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png"));
-		log[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(300, 500, 0), BLACK));
+		log[0]->AddComponent(make_shared<LogPathCreator>());
+		log[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 500, 0), BLACK));
+		COLLISION->AddCollider(log[0]->GetComponent<BoxCollider>("BoxCollider"));
 	}
-	
+
 	isLoaded = true;
 }
 
@@ -150,13 +152,33 @@ void Scene_03::Update()
 		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
-	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider") ->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
+	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
 		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (INPUT->KeyDown(VK_RETURN))
 		{
 			SCENE->LoadScene("Stage01");
 		}
+	}
+
+	if (log[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(lumberAxe->GetComponent<BoxCollider>("BoxCollider").get()) && isTest == false)
+	{
+		isTest = true;
+		if (isTest == true)
+		{
+			log[0]->GetComponent<LogPathCreator>("LogPathCreator")->OnLogCollision(lumberAxe->GetComponent<BoxCollider>("BoxCollider").get());
+		}
+	}
+
+	if (lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_IDLE_L || lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_IDLE_R)
+	{
+		isTest = false;
+	}
+
+	if (log[0]->GetComponent<LogPathCreator>("LogPathCreator")->GetTransformed() == true && isTest2 == false)
+	{
+		log[0]->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
+		isTest2 = true;
 	}
 }
 

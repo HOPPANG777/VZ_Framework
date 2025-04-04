@@ -59,6 +59,12 @@
     <ClCompile Include="Manager\BattleManager.cpp">
       <Filter>Manager\BattleManager</Filter>
     </ClCompile>
+    <ClCompile Include="Component\LogPathCreator.cpp">
+      <Filter>Component\LogPathCreator</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\SolidCollider.cpp">
+      <Filter>Component\SolidCollider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -124,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="Enum\BattleState.h">
       <Filter>Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\LogPathCreator.h">
+      <Filter>Component\LogPathCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SolidCollider.h">
+      <Filter>Component\SolidCollider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +210,12 @@
     </Filter>
     <Filter Include="Enum">
       <UniqueIdentifier>{4c5c7358-d263-4cdc-a54a-c1fa8ecedb8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\LogPathCreator">
+      <UniqueIdentifier>{94c9cd4c-ea2a-435c-9a0e-e9d1e684cefc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\SolidCollider">
+      <UniqueIdentifier>{772d1520-1d6f-4a61-b9a4-207e8241efd3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

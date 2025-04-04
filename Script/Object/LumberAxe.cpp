@@ -4,6 +4,8 @@
 LumberAxe::LumberAxe(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
 	: AnimationRect(position, scale, rotation, path)
 {
+	SetName("LumberAxe");
+
     auto srcAxeIdleR = make_shared<Texture2D>(TexturePath + L"Weapon/Axe_R.png");
     auto srcAxeIdleL = make_shared<Texture2D>(TexturePath + L"Weapon/Axe_L.png");
 

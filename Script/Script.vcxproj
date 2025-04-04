@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component\LogPathCreator.cpp" />
     <ClCompile Include="Manager\BattleManager.cpp" />
     <ClCompile Include="Component\EnemyAI.cpp" />
     <ClCompile Include="Component\LumberAxeComponent.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="Scenes\Scene_04.cpp" />
     <ClCompile Include="Scenes\Scene_05.cpp" />
     <ClCompile Include="Scenes\Scene_06.cpp" />
+    <ClCompile Include="Component\SolidCollider.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -47,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enum\BattleState.h" />
+    <ClInclude Include="Component\LogPathCreator.h" />
     <ClInclude Include="Manager\BattleManager.h" />
     <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Component\LumberAxeComponent.h" />
@@ -67,6 +70,7 @@
     <ClInclude Include="Scenes\Scene_04.h" />
     <ClInclude Include="Scenes\Scene_05.h" />
     <ClInclude Include="Scenes\Scene_06.h" />
+    <ClInclude Include="Component\SolidCollider.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

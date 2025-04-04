@@ -5,6 +5,8 @@
 #include "Component/ParallaxBackground.h"
 #include "Component/FloorCollision.h"
 #include "Object/DialogTextBox.h"
+#include "Component/LogPathCreator.h"
+#include "Component/SolidCollider.h"
 
 class Scene_03 : public Scene
 {
@@ -29,6 +31,8 @@ public:
 private:
 	bool isLoaded = false;
 	bool isNextStage = false;
+	bool isTest = false;
+	bool isTest2 = false;
 
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> house;

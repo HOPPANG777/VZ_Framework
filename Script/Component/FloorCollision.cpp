@@ -5,15 +5,15 @@ void FloorCollision::Update()
 {
     if (!player) return;
 
-    // 플레이어의 BoxCollider 가져오기 ("BoxCollider"라는 이름으로 등록되어 있다고 가정)
+    // 플레이어의 BoxCollider ("BoxCollider"라는 이름으로 등록되어 있다고 가정)
     auto playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
     if (!playerCollider) return;
 
-    // owner(해당 floor 오브젝트)의 BoxCollider 가져오기
+    // Floor(해당 floor 오브젝트)의 BoxCollider
     auto floorCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     if (!floorCollider) return;
 
-    // 두 Collider 간의 충돌 검사
+    // 플레이어와 floor 간의 충돌 검사
     if (floorCollider->IsColliding(playerCollider.get()))
     {
         // floor의 상단 위치 계산
@@ -24,11 +24,11 @@ void FloorCollision::Update()
         // 플레이어가 floor에 침투했으면
         if (playerBottom < floorTop)
         {
-            // 플레이어의 PlayerMove 컴포넌트의 Land() 호출 (플레이어가 floor에 닿았음을 알림)
+            // 플레이어의 PlayerMove 컴포넌트에 충돌 상태를 설정
             auto pm = player->GetComponent<PlayerMove>("PlayerMove");
-            if (pm) pm->Land();
+            if (pm) pm->SetCollision(true);
 
-            // 침투 정도만큼 y 보정
+            // 침투 정도만큼 y 보정 (이 보정은 플레이어가 Update()에서 Land() 호출 후에도 적용될 수 있음)
             float correction = floorTop - playerBottom;
             Vector3 curPos = player->GetPosition();
             player->SetPosition({ curPos.x, curPos.y + correction, curPos.z });
@@ -38,7 +38,9 @@ void FloorCollision::Update()
     // 이제 도끼(LumberAxe) 충돌 검사 (플레이어와의 충돌은 무시)
     if (lumberAxe)  // 'lumberAxe'는 미리 설정된 도끼 Object
     {
-        if (lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_RETURNING_R || lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_RETURNING_L) return;
+        auto la = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
+        if (la && (la->GetState() == AxeState::AXE_RETURNING_R || la->GetState() == AxeState::AXE_RETURNING_L)) return;
+
         auto axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
         if (axeCollider && floorCollider->IsColliding(axeCollider.get()))
         {
@@ -48,8 +50,6 @@ void FloorCollision::Update()
             float axeBottom = axeCollider->GetCenter().y - (axeCollider->GetSize().y * 0.5f);
             if (axeBottom < floorTop)
             {
-                // 도끼의 LumberAxeComponent에서 Land() 호출 (Land() 함수를 추가해야 함)
-                auto la = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
                 if (la) la->Land();
 
                 // 도끼 위치 보정

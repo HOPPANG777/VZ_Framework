@@ -47,6 +47,11 @@ public:
 	}
 	
 public:
+	// GetName 함수 추가
+	string GetName() const { return name; }
+	void SetName(const string& newName) { name = newName; }
+
+public:
 	// Helper 함수 추가: 각 Transform 컴포넌트를 반환
 	shared_ptr<Transform> GetTransform() const;
 	shared_ptr<RectTransform> GetRectTransform() const;
