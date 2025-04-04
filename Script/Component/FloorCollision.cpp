@@ -38,7 +38,7 @@ void FloorCollision::Update()
     // 이제 도끼(LumberAxe) 충돌 검사 (플레이어와의 충돌은 무시)
     if (lumberAxe)  // 'lumberAxe'는 미리 설정된 도끼 Object
     {
-        if (lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_RETURNING) return;
+        if (lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_RETURNING_R || lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_RETURNING_L) return;
         auto axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
         if (axeCollider && floorCollider->IsColliding(axeCollider.get()))
         {

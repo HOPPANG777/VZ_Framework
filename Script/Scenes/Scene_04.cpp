@@ -5,16 +5,49 @@ void Scene_04::Awake()
 {
 	isLoaded = false;
 
-	// 배경 레이어 2개씩 생성
-	for (int i = 0; i < 5; i++)
+	/*
+	// Floor
 	{
-		bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 50, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/CombatScene/" + to_wstring(i + 1) + L".png");
-		bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 50, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/CombatScene/" + to_wstring(i + 1) + L".png");
-
-		bgOrigin[i] = bgLayer[i]->GetPosition();
-		bgOriginDup[i] = bgLayerDup[i]->GetPosition();
+		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-640, -330, 0), 10000, 0.0f, CLEAR));
+		floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 	}
 
+	// Floor Collider
+	{
+		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
+		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+	}
+
+	// Background
+	{
+		auto parallax = make_shared<ParallaxBackground>("Parallax", 5);
+
+		// 배경 레이어 2개씩 생성
+		for (int i = 0; i < 4; i++)
+		{
+			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+
+			bgOrigin[i] = bgLayer[i]->GetPosition();
+			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
+
+			parallax->SetLayer(i, bgLayer[i], bgLayerDup[i]);
+		}
+
+		backgroundObject = make_shared<Object>("Background");
+		backgroundObject->AddComponent(parallax);
+	}
+
+	//TileMap
+	{
+		UINT spacing = 50;
+		UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
+		UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+
+		tmap = make_unique<TileMap>(width, height, spacing);
+		tmap->Load("_Data/_TileData/map02.data");
+	}
+	*/
 
 	isLoaded = true;
 }
@@ -25,8 +58,17 @@ void Scene_04::Start()
 
 void Scene_04::Destroy()
 {
+	/*
+	for (auto& floors : floor) if (floors != nullptr) floors.reset();
+
+	//for (auto& house : house) if (house != nullptr) house.reset();
+
 	for (auto& bg : bgLayer) if (bg != nullptr) bg.reset();
+
 	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
+
+	if (backgroundObject != nullptr) backgroundObject.reset();
+	*/
 }
 
 void Scene_04::FixedUpdate()
@@ -35,43 +77,19 @@ void Scene_04::FixedUpdate()
 
 void Scene_04::Update()
 {
+	/*
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
+
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 
-	/*
-	if (player->GetPosition().x > WIN_DEFAULT_WIDTH * 0.5 && player->GetPosition().x < WIN_DEFAULT_WIDTH * 1.5)
-	{
-		Vector3 newCamPos = Vector3(player->GetPosition().x - WIN_DEFAULT_WIDTH / 2, 0, 0);
-		CAMERA->SetPosition(newCamPos);
+	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
 
-		float parallaxFactors[5] = { 0.2f, 0.4f, 0.6f, 0.8f, 1.0f };
+	//for (const auto& house : house) if (house != nullptr) house->Update();
 
-		for (int i = 0; i < 5; i++)
-		{
-			if (bgLayer[i] && bgLayerDup[i])
-			{
-				float offsetX = newCamPos.x * parallaxFactors[i];
-
-				// 원본 배경 위치 업데이트
-				Vector3 newBgPos = bgOrigin[i] + Vector3(offsetX, 0, 0);
-				bgLayer[i]->SetPosition(newBgPos);
-
-				// 복제 배경 위치 업데이트
-				Vector3 newBgDupPos = bgOriginDup[i] + Vector3(offsetX, 0, 0);
-				bgLayerDup[i]->SetPosition(newBgDupPos);
-
-				// 배경이 화면을 벗어나면 재조정하여 무한 스크롤 효과 적용
-				float bgWidth = WIN_DEFAULT_WIDTH;
-				if (newBgPos.x + bgWidth < newCamPos.x)
-				{
-					bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
-					std::swap(bgLayer[i], bgLayerDup[i]);
-				}
-			}
-		}
-	}
+	if (backgroundObject != nullptr) backgroundObject->Update();
+	
+	if (tmap != nullptr) tmap->Update();
 	*/
-
 }
 
 void Scene_04::LateUpdate()
@@ -80,13 +98,23 @@ void Scene_04::LateUpdate()
 
 void Scene_04::Render()
 {
-	for (int i = 4; i >= 0; i--) // 배경을 뒤에서부터 순서대로 그림
-	{
-		if (bgLayer[i]) bgLayer[i]->Render();
-		if (bgLayerDup[i]) bgLayerDup[i]->Render();
-	}
+	/*
+	if (backgroundObject != nullptr) backgroundObject->Render();
 
+	if (tmap != nullptr) tmap->Render();
 
+	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
+
+	//if (house[1] != nullptr) house[1]->Render();
+
+	//if (house[2] != nullptr) house[2]->Render();
+
+	//if (house[3] != nullptr) house[3]->Render();
+
+	//if (testPlayer != nullptr) testPlayer->Render();
+
+	//if (house[0] != nullptr) house[0]->Render();
+	*/
 }
 
 void Scene_04::PostRender()

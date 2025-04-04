@@ -53,7 +53,7 @@ private:
     
 
 private:
-    AxeState state = AxeState::AXE_IDLE;                            // 현재 도끼 상태 (초기값: Idle)
+    AxeState state;                            // 현재 도끼 상태 (초기값: Idle)
 
     // 던진 상태 관련 물리 변수
     Vector3 velocity;                                               // 도끼의 현재 속도
