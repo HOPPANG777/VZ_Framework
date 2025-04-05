@@ -48,7 +48,7 @@
       <Filter>Component\ParallaxBackground</Filter>
     </ClCompile>
     <ClCompile Include="Component\FloorCollision.cpp">
-      <Filter>Component\FloorCollision</Filter>
+      <Filter>Component\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Component\LumberAxeAnimation.cpp">
       <Filter>Component\LumberAxeAnimation</Filter>
@@ -67,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="Component\HitComponent.cpp">
       <Filter>Component\HitComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\WallCollision.cpp">
+      <Filter>Component\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +123,7 @@
       <Filter>Component\ParallaxBackground</Filter>
     </ClInclude>
     <ClInclude Include="Component\FloorCollision.h">
-      <Filter>Component\FloorCollision</Filter>
+      <Filter>Component\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Component\LumberAxeAnimation.h">
       <Filter>Component\LumberAxeAnimation</Filter>
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Component\HitComponent.h">
       <Filter>Component\HitComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\WallCollision.h">
+      <Filter>Component\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +205,6 @@
     <Filter Include="Component\ParallaxBackground">
       <UniqueIdentifier>{0bdff270-ed7a-4830-b661-ed964886db01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\FloorCollision">
-      <UniqueIdentifier>{534cb469-44af-4d52-aeb9-5f5c2039f6a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\LumberAxeAnimation">
       <UniqueIdentifier>{281092b1-65ff-4cf2-832a-85e73e1c9127}</UniqueIdentifier>
     </Filter>
@@ -225,6 +228,9 @@
     </Filter>
     <Filter Include="Component\HitComponent">
       <UniqueIdentifier>{913956e3-a403-49e2-baab-7d4d129fd333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collision">
+      <UniqueIdentifier>{534cb469-44af-4d52-aeb9-5f5c2039f6a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

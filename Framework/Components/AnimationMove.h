@@ -6,11 +6,12 @@ public:
     AnimationMove(const string& name = "AnimationMove") : Component(name), currentAnimation(UnitAnimationType::IDLE) {} 
     virtual ~AnimationMove() override = default;
 
+public:
     virtual void Update() override;
     virtual void Render() override;
 
-    UnitAnimationType GetCurrentAnimation() const { return currentAnimation; }
-
+public:
+    UnitAnimationType GetState() const { return currentAnimation; }
     void SetPlayerDead(const bool isDead) { this->isDead = isDead; }
 
 private:

@@ -31,6 +31,11 @@ public:
 public:
     // 내부 상태 반환
     AxeState GetState() const { return state; }
+    float GetSpeed() const 
+    { 
+        float currentSpeed = velocity.Length();
+        return (currentSpeed > 0.001f) ? currentSpeed : 1000.0f;
+    }
 
 private:
     // 상태별 업데이트 함수

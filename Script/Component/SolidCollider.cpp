@@ -16,7 +16,7 @@ void SolidCollider::Render()
     Vector3 center = GetCenter();
     Vector3 half = GetHalfSize();
     Vector3 topLeft = center - half;
-    Vector3 bottomRight = center + half;
+    Vector3 bottoisRight = center + half;
     // 예: Gizmo에서 DrawBox()를 호출해 사각형 경계선 표시
     GIZMO->DrawBox(center, size, color, 1.0f);
 }
