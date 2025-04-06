@@ -23,7 +23,7 @@ void WallCollision::Update()
         if (player->GetPosition().y < wallTop)
         {
             // 플레이어의 상태는 PlayerMove 컴포넌트를 통해 조회
-            auto pm = player->GetComponent<PlayerMove>("PlayerMove");
+            auto pm = player->GetComponent<PlayerController>("PlayerController");
             if (!pm) return;
             // GetRight()로 플레이어가 오른쪽을 향하는지 확인 (true면 오른쪽)
             bool playerFacingRight = pm->GetRight();

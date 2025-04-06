@@ -2,6 +2,7 @@
 
 #include "UnitBase.h"
 #include "LumberAxe.h"
+#include "Component/PlayerController.h"
 
 class PlayerUnit : public UnitBase
 {

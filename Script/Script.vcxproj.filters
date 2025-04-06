@@ -71,6 +71,9 @@
     <ClCompile Include="Component\WallCollision.cpp">
       <Filter>Component\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Component\PlayerController.cpp">
+      <Filter>Component\PlayerController</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="Component\WallCollision.h">
       <Filter>Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\PlayerController.h">
+      <Filter>Component\PlayerController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +237,9 @@
     </Filter>
     <Filter Include="Component\Collision">
       <UniqueIdentifier>{534cb469-44af-4d52-aeb9-5f5c2039f6a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\PlayerController">
+      <UniqueIdentifier>{637dfd82-5a12-4ae5-ab7d-d5cbd4303f8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -8,17 +8,17 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
     auto srcPlayerIdleR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
     auto srcPlayerIdleL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
     
-    auto srcPlayerRunR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
-    auto srcPlayerRunL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
+    auto srcPlayerRunR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Run_R.png");
+    auto srcPlayerRunL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Run_L.png");
     
-    auto srcPlayerJumpR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
-    auto srcPlayerJumpL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
+    auto srcPlayerJumpR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Jump_R.png");
+    auto srcPlayerJumpL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Jump_L.png");
 
-    auto srcPlayerJumpBetweenR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
-    auto srcPlayerJumpBetweenL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
+    auto srcPlayerJumpBetweenR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Between_R.png");
+    auto srcPlayerJumpBetweenL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Between_L.png");
 
-    auto srcPlayerJumpFallR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
-    auto srcPlayerJumpFallL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
+    auto srcPlayerJumpFallR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Fall_R.png");
+    auto srcPlayerJumpFallL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Fall_L.png");
 
     auto srcPlayerAxeThrowPrepareR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
     auto srcPlayerAxeThrowPrepareL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
@@ -45,14 +45,14 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
     auto playerIdleR = make_shared<AnimationClip>(L"IdleR", srcPlayerIdleR.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerIdleR->GetWidth(), (float)srcPlayerIdleR->GetHeight()), false);
     auto playerIdleL = make_shared<AnimationClip>(L"IdleL", srcPlayerIdleL.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerIdleL->GetWidth(), (float)srcPlayerIdleL->GetHeight()), true);
 
-    auto playerRunR = make_shared<AnimationClip>(L"RunR", srcPlayerRunR.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerRunR->GetWidth(), (float)srcPlayerRunR->GetHeight()), false);
-    auto playerRunL = make_shared<AnimationClip>(L"RunL", srcPlayerRunL.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerRunL->GetWidth(), (float)srcPlayerRunL->GetHeight()), true);
+    auto playerRunR = make_shared<AnimationClip>(L"RunR", srcPlayerRunR.get(), 8, 1, Values::ZeroVec2, Vector2((float)srcPlayerRunR->GetWidth(), (float)srcPlayerRunR->GetHeight()), false);
+    auto playerRunL = make_shared<AnimationClip>(L"RunL", srcPlayerRunL.get(), 8, 1, Values::ZeroVec2, Vector2((float)srcPlayerRunL->GetWidth(), (float)srcPlayerRunL->GetHeight()), true);
 
-    auto playerJumpR = make_shared<AnimationClip>(L"JumpR", srcPlayerJumpR.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpR->GetWidth(), (float)srcPlayerJumpR->GetHeight()), false);
-    auto playerJumpL = make_shared<AnimationClip>(L"JumpL", srcPlayerJumpL.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpL->GetWidth(), (float)srcPlayerJumpL->GetHeight()), true);
+    auto playerJumpR = make_shared<AnimationClip>(L"JumpR", srcPlayerJumpR.get(), 5, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpR->GetWidth(), (float)srcPlayerJumpR->GetHeight()), false);
+    auto playerJumpL = make_shared<AnimationClip>(L"JumpL", srcPlayerJumpL.get(), 5, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpL->GetWidth(), (float)srcPlayerJumpL->GetHeight()), true);
 
-    auto playerJumpBetweenR = make_shared<AnimationClip>(L"JumpBetweenR", srcPlayerJumpBetweenR.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpBetweenR->GetWidth(), (float)srcPlayerJumpBetweenR->GetHeight()), false);
-    auto playerJumpBetweenL = make_shared<AnimationClip>(L"JumpBetweenL", srcPlayerJumpBetweenL.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpBetweenL->GetWidth(), (float)srcPlayerJumpBetweenL->GetHeight()), true);
+    auto playerJumpBetweenR = make_shared<AnimationClip>(L"JumpBetweenR", srcPlayerJumpBetweenR.get(), 3, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpBetweenR->GetWidth(), (float)srcPlayerJumpBetweenR->GetHeight()), false);
+    auto playerJumpBetweenL = make_shared<AnimationClip>(L"JumpBetweenL", srcPlayerJumpBetweenL.get(), 3, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpBetweenL->GetWidth(), (float)srcPlayerJumpBetweenL->GetHeight()), true);
 
     auto playerJumpFallR = make_shared<AnimationClip>(L"JumpFallR", srcPlayerJumpFallR.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpFallR->GetWidth(), (float)srcPlayerJumpFallR->GetHeight()), false);
     auto playerJumpFallL = make_shared<AnimationClip>(L"JumpFallL", srcPlayerJumpFallL.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerJumpFallL->GetWidth(), (float)srcPlayerJumpFallL->GetHeight()), true);
@@ -90,25 +90,24 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
     GetAnimator()->AddAnimClip(playerJumpBetweenL);
     GetAnimator()->AddAnimClip(playerJumpFallR);
     GetAnimator()->AddAnimClip(playerJumpFallL);
-    GetAnimator()->AddAnimClip(playerAxeThrowPrepareR);
-    GetAnimator()->AddAnimClip(playerAxeThrowPrepareL);
-    GetAnimator()->AddAnimClip(playerAxeThrowR);
-    GetAnimator()->AddAnimClip(playerAxeThrowL);
-    GetAnimator()->AddAnimClip(playerAxeReturnR);
-    GetAnimator()->AddAnimClip(playerAxeReturnL);
-    GetAnimator()->AddAnimClip(playerCrouchR);
-    GetAnimator()->AddAnimClip(playerCrouchL);
-    GetAnimator()->AddAnimClip(playerCrouchWalkR);
-    GetAnimator()->AddAnimClip(playerCrouchWalkL);
-    GetAnimator()->AddAnimClip(playerHitR);
-    GetAnimator()->AddAnimClip(playerHitL);
-    GetAnimator()->AddAnimClip(playerDieR);
-    GetAnimator()->AddAnimClip(playerDieL);
+    //GetAnimator()->AddAnimClip(playerAxeThrowPrepareR);
+    //GetAnimator()->AddAnimClip(playerAxeThrowPrepareL);
+    //GetAnimator()->AddAnimClip(playerAxeThrowR);
+    //GetAnimator()->AddAnimClip(playerAxeThrowL);
+    //GetAnimator()->AddAnimClip(playerAxeReturnR);
+    //GetAnimator()->AddAnimClip(playerAxeReturnL);
+    //GetAnimator()->AddAnimClip(playerCrouchR);
+    //GetAnimator()->AddAnimClip(playerCrouchL);
+    //GetAnimator()->AddAnimClip(playerCrouchWalkR);
+    //GetAnimator()->AddAnimClip(playerCrouchWalkL);
+    //GetAnimator()->AddAnimClip(playerHitR);
+    //GetAnimator()->AddAnimClip(playerHitL);
+    //GetAnimator()->AddAnimClip(playerDieR);
+    //GetAnimator()->AddAnimClip(playerDieL);
 
     GetAnimator()->SetAnimationTime(1.0f / 2.8f);
 
-    this->AddComponent(make_shared<PlayerMove>());
-    this->AddComponent(make_shared<AnimationMove>());
+    this->AddComponent(make_shared<PlayerController>());
     this->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), scale, RED));
     if (this->GetComponent<BoxCollider>("BoxCollider")) COLLISION->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
 }

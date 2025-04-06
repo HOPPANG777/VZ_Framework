@@ -33,6 +33,7 @@
     <ClCompile Include="Object\JumpHoppang.cpp" />
     <ClCompile Include="Object\PlayerUnit.cpp" />
     <ClCompile Include="Component\ParallaxBackground.cpp" />
+    <ClCompile Include="Component\PlayerController.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
     <ClCompile Include="Scenes\Scene_01.cpp" />
     <ClCompile Include="Scenes\Scene_02.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="Object\JumpHoppang.h" />
     <ClInclude Include="Object\PlayerUnit.h" />
     <ClInclude Include="Component\ParallaxBackground.h" />
+    <ClInclude Include="Component\PlayerController.h" />
     <ClInclude Include="Scenes\SceneList.h" />
     <ClInclude Include="Scenes\Scene_00.h" />
     <ClInclude Include="Scenes\Scene_01.h" />

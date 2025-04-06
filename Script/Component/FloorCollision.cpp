@@ -25,7 +25,7 @@ void FloorCollision::Update()
         if (playerBottom < floorTop)
         {
             // 플레이어의 PlayerMove 컴포넌트에 충돌 상태를 설정
-            auto pm = player->GetComponent<PlayerMove>("PlayerMove");
+            auto pm = player->GetComponent<PlayerController>("PlayerController");
             if (pm) pm->SetCollision(true);
 
             // 침투 정도만큼 y 보정 (이 보정은 플레이어가 Update()에서 Land() 호출 후에도 적용될 수 있음)

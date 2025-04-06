@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LumberAxeComponent.h"
+#include "PlayerController.h"
 
 class FloorCollision : public Component
 {

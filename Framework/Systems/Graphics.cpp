@@ -9,7 +9,20 @@ Graphics::Graphics()
 
 Graphics::~Graphics() 
 {
-	
+    UnloadCustomFont(FontPath + L"Bazzi OTF.otf");
+    UnloadCustomFont(FontPath + L"DNFBitBitv2.otf");
+    UnloadCustomFont(FontPath + L"DNFForgedBlade-Bold.otf");
+    UnloadCustomFont(FontPath + L"DNFForgedBlade-Light.otf");
+    UnloadCustomFont(FontPath + L"DNFForgedBlade-Medium.otf");
+    UnloadCustomFont(FontPath + L"Mabinogi_Classic_OTF.otf");
+    UnloadCustomFont(FontPath + L"Maplestory OTF Bold.otf");
+    UnloadCustomFont(FontPath + L"Maplestory OTF Light.otf");
+    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF Bold.otf");
+    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF ExtraBold.otf");
+    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF Medium.otf");
+    UnloadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Bold.otf");
+    UnloadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Regular.otf");
+    UnloadCustomFont(FontPath + L"PretendardJP-Medium.otf");
 }
 
 void Graphics::Init()
@@ -420,6 +433,16 @@ bool Graphics::LoadCustomFont(const wstring& fontFilePath)
     // 필요하다면 전체 윈도우에 폰트가 변경되었음을 알림
     // SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
 
+    return true;
+}
+
+bool Graphics::UnloadCustomFont(const wstring& fontFilePath)
+{
+    if (!RemoveFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0))
+    {
+        // 해제 실패 시 처리
+        return false;
+    }
     return true;
 }
 

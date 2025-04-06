@@ -33,6 +33,8 @@ public:
 
 	bool LoadCustomFont(const wstring& fontFilePath);
 
+	bool UnloadCustomFont(const wstring& fontFilePath);
+
 private:
 	void EnumerateAdapters();
 	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);
