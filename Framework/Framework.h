@@ -218,7 +218,7 @@ const wstring TexturePath = L"_Data/_Textures/";
 const wstring SoundPath = L"_Data/_Sounds/";
 const wstring FontPath = L"_Data/_Fonts/";
 const string TilePath = "../../../_Data/_TileData/";
-const string BuildTilePath = "_Data/_Fonts/";
+const string BuildTilePath = "_Data/_TileData/";
 
 //Interface
 #include "Interfaces/IObject.h"
