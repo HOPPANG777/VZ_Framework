@@ -5,6 +5,25 @@ void Scene_04::Awake()
 {
 	isLoaded = false;
 
+	// Player
+	{
+		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -40, 0));
+		lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
+		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
+	}
+
+	// Floor
+	{
+		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-550, -55, 0), 0, 0.0f, CLEAR));
+		floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
+	}
+
+	// Floor Collider
+	{
+		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
+		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+	}
+
 	// Background
 	{
 		auto parallax = make_shared<ParallaxBackground>("Parallax", 6);
@@ -55,11 +74,17 @@ void Scene_04::Destroy()
 
 	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
 
+	for (auto& floors : floor) if (floors != nullptr) floors.reset();
+	
 	if (backgroundObject != nullptr) backgroundObject.reset();
 
 	if (tmap != nullptr) tmap.reset();
 
 	if (puzzleRock != nullptr) puzzleRock.reset();
+
+	if (testPlayer != nullptr) testPlayer.reset();
+
+	if (lumberAxe != nullptr) lumberAxe.reset();
 }
 
 void Scene_04::FixedUpdate()
@@ -72,11 +97,20 @@ void Scene_04::Update()
 
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 
+	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
+
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
 	if (tmap != nullptr) tmap->Update();
 	
 	if (puzzleRock != nullptr) puzzleRock->Update();
+
+	if (testPlayer != nullptr) testPlayer->Update();
+
+	if (lumberAxe != nullptr) lumberAxe->Update();
+
+	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
+
 }
 
 void Scene_04::LateUpdate()
@@ -89,11 +123,18 @@ void Scene_04::Render()
 
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Render();
 
+	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
+
 	if (backgroundObject != nullptr) backgroundObject->Render();
 
 	if (tmap != nullptr) tmap->Render();
 
 	if (puzzleRock != nullptr) puzzleRock->Render();
+	
+	if (lumberAxe != nullptr) lumberAxe->Render();
+
+	if (testPlayer != nullptr) testPlayer->Render();
+
 }
 
 void Scene_04::PostRender()
