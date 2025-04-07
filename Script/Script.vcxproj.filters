@@ -74,6 +74,7 @@
     <ClCompile Include="Component\PlayerController.cpp">
       <Filter>Component\PlayerController</Filter>
     </ClCompile>
+    <ClCompile Include="Component\PushableComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -155,6 +156,8 @@
     <ClInclude Include="Component\PlayerController.h">
       <Filter>Component\PlayerController</Filter>
     </ClInclude>
+    <ClInclude Include="Component\PushableComponent.h" />
+    <ClInclude Include="Interface\IInteractable.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

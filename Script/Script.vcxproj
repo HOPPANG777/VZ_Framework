@@ -34,6 +34,7 @@
     <ClCompile Include="Object\PlayerUnit.cpp" />
     <ClCompile Include="Component\ParallaxBackground.cpp" />
     <ClCompile Include="Component\PlayerController.cpp" />
+    <ClCompile Include="Component\PushableComponent.cpp" />
     <ClCompile Include="Scenes\Scene_00.cpp" />
     <ClCompile Include="Scenes\Scene_01.cpp" />
     <ClCompile Include="Scenes\Scene_02.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="Enum\BattleState.h" />
     <ClInclude Include="Component\LogPathCreator.h" />
     <ClInclude Include="Component\HitComponent.h" />
+    <ClInclude Include="Interface\IInteractable.h" />
     <ClInclude Include="Manager\BattleManager.h" />
     <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Component\LumberAxeComponent.h" />
@@ -67,6 +69,7 @@
     <ClInclude Include="Object\PlayerUnit.h" />
     <ClInclude Include="Component\ParallaxBackground.h" />
     <ClInclude Include="Component\PlayerController.h" />
+    <ClInclude Include="Component\PushableComponent.h" />
     <ClInclude Include="Scenes\SceneList.h" />
     <ClInclude Include="Scenes\Scene_00.h" />
     <ClInclude Include="Scenes\Scene_01.h" />
