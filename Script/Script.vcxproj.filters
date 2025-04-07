@@ -74,7 +74,9 @@
     <ClCompile Include="Component\PlayerController.cpp">
       <Filter>Component\PlayerController</Filter>
     </ClCompile>
-    <ClCompile Include="Component\PushableComponent.cpp" />
+    <ClCompile Include="Component\PushableComponent.cpp">
+      <Filter>Component\PushableComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -156,8 +158,12 @@
     <ClInclude Include="Component\PlayerController.h">
       <Filter>Component\PlayerController</Filter>
     </ClInclude>
-    <ClInclude Include="Component\PushableComponent.h" />
-    <ClInclude Include="Interface\IInteractable.h" />
+    <ClInclude Include="Interface\IInteractable.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\PushableComponent.h">
+      <Filter>Component\PushableComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -243,6 +249,12 @@
     </Filter>
     <Filter Include="Component\PlayerController">
       <UniqueIdentifier>{637dfd82-5a12-4ae5-ab7d-d5cbd4303f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{641158ec-e0ce-45af-aaaa-5b9ebedb19af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\PushableComponent">
+      <UniqueIdentifier>{f4f042ce-e236-4058-acb3-0b6cf38a94fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
