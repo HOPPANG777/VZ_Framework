@@ -77,6 +77,9 @@
     <ClCompile Include="Component\PushableComponent.cpp">
       <Filter>Component\PushableComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Component\InteractionComponent.cpp">
+      <Filter>Component\InteractionComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="Component\PushableComponent.h">
       <Filter>Component\PushableComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InteractionComponent.h">
+      <Filter>Component\InteractionComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +261,9 @@
     </Filter>
     <Filter Include="Component\PushableComponent">
       <UniqueIdentifier>{f4f042ce-e236-4058-acb3-0b6cf38a94fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\InteractionComponent">
+      <UniqueIdentifier>{9e3f7b5e-a932-4f53-a3c5-60dcfbe3b9df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

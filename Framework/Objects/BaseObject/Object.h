@@ -81,5 +81,34 @@ public:
 	void Rotate(float rot);
 	void Scale(const Vector3& scale);
 
+public:
+	// 새롭게 추가하는 템플릿 기반 함수:
+	template<typename T>
+	T* FindComponentByInterface() const
+	{
+		for (const auto& pair : components)
+		{
+			if (T* comp = dynamic_cast<T*>(pair.second.get()))
+			{
+				return comp;
+			}
+		}
+		return nullptr;
+	}
+
+	// 또는, 모든 해당 타입의 컴포넌트를 찾고 싶다면:
+	template<typename T>
+	std::vector<T*> GetAllComponentsByInterface() const
+	{
+		std::vector<T*> result;
+		for (const auto& pair : components)
+		{
+			if (T* comp = dynamic_cast<T*>(pair.second.get()))
+			{
+				result.push_back(comp);
+			}
+		}
+		return result;
+	}
 };
 
