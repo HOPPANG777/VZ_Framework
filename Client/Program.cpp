@@ -33,11 +33,11 @@ void Program::Awake()
 		SCENE->AddScene("Stage02", make_shared<Scene_05>());
 		SCENE->AddScene("Stage03", make_shared<Scene_06>());
 
-		SCENE->SetSplashScene("SplashScene");
+		//SCENE->SetSplashScene("SplashScene");
 
 		SCENE->SetLoadingScene("LoadingScene");
 
-		SCENE->StartGame("TitleScene");
+		SCENE->StartGame("Stage01");
 	}
 }
 

@@ -30,9 +30,10 @@ private:
 	shared_ptr<Object> lumberAxe;
 
 	vector<shared_ptr<Object>> floor;
-	vector<shared_ptr<Object>> house;
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
+
+	shared_ptr<Object> puzzleRock;
 
 	shared_ptr<Object> backgroundObject;
 
