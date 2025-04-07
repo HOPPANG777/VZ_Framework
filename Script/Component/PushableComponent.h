@@ -5,7 +5,7 @@
 class PushableComponent : public Component, public IInteractable
 {
 public:
-    PushableComponent(const string& name = "PushableComponent", float pushSpeed = 100.0f) : Component(name), pushSpeed(pushSpeed), isBeingPushed(false) {}
+    PushableComponent(const string& name = "PushableComponent", float pushSpeed = 250.0f) : Component(name), pushSpeed(pushSpeed), isBeingPushed(false) {}
     virtual ~PushableComponent() override = default;
 
 public:
@@ -15,6 +15,7 @@ public:
 public:
     // IInteractable 인터페이스 구현
     virtual void Interact() override;
+	virtual void StopInteract() override;
 
 public:
     // 내부 밀기 동작 시작/종료

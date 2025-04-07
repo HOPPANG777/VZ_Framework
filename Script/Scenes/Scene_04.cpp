@@ -14,7 +14,7 @@ void Scene_04::Awake()
 
 	// Floor
 	{
-		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-550, -55, 0), 0, 0.0f, CLEAR));
+		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
 		floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 	}
 
@@ -31,8 +31,8 @@ void Scene_04::Awake()
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 200, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 200, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 50, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 50, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -109,7 +109,7 @@ void Scene_04::Update()
 
 	if (lumberAxe != nullptr) lumberAxe->Update();
 
-	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
+	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
 }
 

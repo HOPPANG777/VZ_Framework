@@ -3,6 +3,7 @@
 class Camera
 {
 	DECLARE_SINGLETON(Camera);
+
 public:
 	void Init();
 
