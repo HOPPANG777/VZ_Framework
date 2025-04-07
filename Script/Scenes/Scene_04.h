@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Component/ParallaxBackground.h"
-#include "Component/FloorCollision.h"`
+#include "Component/FloorCollision.h"
+#include "Component/PushableComponent.h"
 
 class Scene_04 : public Scene
 {
