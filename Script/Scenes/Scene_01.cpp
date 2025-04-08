@@ -6,7 +6,8 @@ void Scene_01::Awake()
 	isLoaded = false;
 
 	{
-		objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/TitleScreen.png"));
+		objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/TitleScreen2.png"));
+		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(-260, 210, 0), Vector3(700, 700, 0), 0.0f, TexturePath + L"UI/NordicLumberJackTitle.png"));
 	}
 
 	{
