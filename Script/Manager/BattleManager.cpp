@@ -10,8 +10,15 @@ BattleManager::BattleManager()
 BattleManager::~BattleManager() 
 {
     // 자원 정리
-    playerUnits.clear();
-    enemyUnits.clear();
+    for (std::shared_ptr<UnitBase>& p : playerUnits)
+    {
+        p.reset();
+    }
+
+    for (std::shared_ptr<UnitBase>& e : enemyUnits)
+    {
+        e.reset();
+    }
 }
 
 void BattleManager::Initialize() 
@@ -27,8 +34,16 @@ void BattleManager::Initialize()
 void BattleManager::Reset() 
 {
     // 전투가 새로 시작되거나 재시작될 때 호출
-    playerUnits.clear();
-    enemyUnits.clear();
+    for (std::shared_ptr<UnitBase>& p : playerUnits)
+    {
+        p.reset();
+    }
+    
+	for (std::shared_ptr<UnitBase>& e : enemyUnits)
+	{
+		e.reset();
+	}
+
     currentState = BattleState::PLAYER_COMMAND;
 }
 

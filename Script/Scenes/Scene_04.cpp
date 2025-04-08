@@ -10,6 +10,7 @@ void Scene_04::Awake()
 		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -40, 0));
 		lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
+		SCENE->SetPlayer(testPlayer);
 	}
 
 	// Floor
@@ -67,6 +68,20 @@ void Scene_04::Awake()
 		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png"));
 	}
 
+	// Wind
+	{
+		// 예시: 플레이어를 뒤로 밀어내는 바람 영역 생성 
+	// 예를 들어, x축 기준으로 300~500 사이, y축은 전체, z는 0 (2D 게임이라 가정)
+		Vector3 windRegionMin = { 300, -1000, 0 };
+		Vector3 windRegionMax = { 700, 1000, 0 };
+		// 바람 방향: 플레이어를 왼쪽으로 밀어낸다고 하면, (-1, 0, 0)
+		Vector3 windDirection = { -1, 0, 0 };
+		float windIntensity = 400.0f; // 적절한 값 조절
+		
+		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
+		windObject->AddComponent(make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));
+	}
+
 	isLoaded = true;
 }
 
@@ -86,6 +101,8 @@ void Scene_04::Destroy()
 
 	if (testPlayer != nullptr) testPlayer.reset();
 
+	if (windObject != nullptr) windObject.reset();
+
 	for (std::shared_ptr<Object>& bg : bgLayer) if (bg != nullptr) bg.reset();
 
 	for (std::shared_ptr<Object>& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
@@ -93,7 +110,8 @@ void Scene_04::Destroy()
 	for (std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors.reset();
 
 	for (std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj.reset();
-	
+
+	SCENE->ResetPlayer();
 }
 
 void Scene_04::FixedUpdate()
@@ -122,6 +140,8 @@ void Scene_04::Update()
 	
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
+	if (windObject != nullptr) windObject->Update();
+
 }
 
 void Scene_04::LateUpdate()
@@ -144,6 +164,7 @@ void Scene_04::Render()
 
 	if (testPlayer != nullptr) testPlayer->Render();
 
+	if (windObject != nullptr) windObject->Render();
 }
 
 void Scene_04::PostRender()

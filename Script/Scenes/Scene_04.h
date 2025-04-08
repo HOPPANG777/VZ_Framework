@@ -5,6 +5,8 @@
 #include "Component/PushableComponent.h"
 #include "Object/PlayerUnit.h"
 #include "Object/LumberAxe.h"
+#include "Object/Wind.h"
+#include "Component/WindZone.h"
 
 class Scene_04 : public Scene
 {
@@ -38,6 +40,8 @@ private:
 	vector<shared_ptr<Object>> objects;
 
 	shared_ptr<Object> puzzleRock;
+
+	shared_ptr<Object> windObject;
 
 	shared_ptr<Object> backgroundObject;
 

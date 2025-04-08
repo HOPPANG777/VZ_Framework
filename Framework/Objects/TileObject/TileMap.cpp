@@ -120,7 +120,13 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 
 TileMap::~TileMap()
 {
-	tiles.clear();
+	for (auto& tile : tiles)
+	{
+		for (auto& t : tile)
+		{
+			t.reset();
+		}
+	}
 }
 
 void TileMap::GenerateTileMap()

@@ -51,7 +51,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Component\WallCollision.cpp" />
-    <ClCompile Include="WindZone.cpp" />
+    <ClCompile Include="Component\WindZone.cpp" />
+    <ClCompile Include="Object\Wind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enum\BattleState.h" />
@@ -84,7 +85,8 @@
     <ClInclude Include="Component\SolidCollider.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Component\WallCollision.h" />
-    <ClInclude Include="WindZone.h" />
+    <ClInclude Include="Component\WindZone.h" />
+    <ClInclude Include="Object\Wind.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

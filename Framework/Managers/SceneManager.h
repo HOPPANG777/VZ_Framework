@@ -30,6 +30,7 @@ public:
 public:
 	void SetPlayer(shared_ptr<Object> player) { this->player = player; }
 	shared_ptr<Object> GetPlayer() { return player; }
+	void ResetPlayer() { this->player = nullptr; }
 
 private:
     // 안전한 씬 전환을 처리하는 내부 함수

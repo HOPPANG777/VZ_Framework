@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "WindZone.h"
 
+// 헬퍼 함수: 플레이어 위치가 영역 내에 있는지 확인
+bool IsInsideRegion(const Vector3& pos, const Vector3& min, const Vector3& max)
+{
+    return pos.x >= min.x && pos.x <= max.x &&
+        pos.y >= min.y && pos.y <= max.y &&
+     pos.z >= min.z && pos.z <= max.z;
+}
+
 void WindZone::Update()
 {
     // 예시로, 특정 씬의 플레이어를 전역에서 접근하는 방식 (예: SCENE->GetPlayer())
@@ -23,10 +31,3 @@ void WindZone::Update()
     }
 }
 
-// 헬퍼 함수: 플레이어 위치가 영역 내에 있는지 확인
-bool IsInsideRegion(const Vector3& pos, const Vector3& min, const Vector3& max)
-{
-    return pos.x >= min.x && pos.x <= max.x &&
-        pos.y >= min.y && pos.y <= max.y &&
-        pos.z >= min.z && pos.z <= max.z;
-}
