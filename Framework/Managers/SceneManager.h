@@ -27,6 +27,10 @@ public:
     // ★ 게임 스타트 시, 로딩씬을 거치지 않고 바로 스플래시 → 타이틀로 가도록 처리
     void StartGame(const string& titleSceneName);
 
+public:
+	void SetPlayer(shared_ptr<Object> player) { this->player = player; }
+	shared_ptr<Object> GetPlayer() { return player; }
+
 private:
     // 안전한 씬 전환을 처리하는 내부 함수
     void ProcessSceneChange();
@@ -47,6 +51,8 @@ private:
     bool isFirstLaunch = true;
 
     bool sceneChangeRequested = false;
+
+    shared_ptr<Object> player;
 
 };
 
