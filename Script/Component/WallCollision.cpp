@@ -8,11 +8,11 @@ void WallCollision::Update()
     if (!player) return;
 
     // 플레이어의 BoxCollider ("BoxCollider"라는 이름으로 등록)
-    auto playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
+    const std::shared_ptr<BoxCollider>& playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
     if (!playerCollider) return;
 
     // wall(소유자)의 BoxCollider
-    auto wallCollider = owner->GetComponent<BoxCollider>("BoxCollider");
+    const std::shared_ptr<BoxCollider>& wallCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     if (!wallCollider) return;
 
     // 플레이어와 wall 간의 충돌 검사
@@ -23,7 +23,7 @@ void WallCollision::Update()
         if (player->GetPosition().y < wallTop)
         {
             // 플레이어의 상태는 PlayerMove 컴포넌트를 통해 조회
-            auto pm = player->GetComponent<PlayerController>("PlayerController");
+            const std::shared_ptr<PlayerController>& pm = player->GetComponent<PlayerController>("PlayerController");
             if (!pm) return;
             // GetRight()로 플레이어가 오른쪽을 향하는지 확인 (true면 오른쪽)
             bool playerFacingRight = pm->GetRight();
@@ -51,7 +51,7 @@ void WallCollision::Update()
     // 도끼(LumberAxe) 충돌 검사 (플레이어와의 충돌은 무시)
     if (lumberAxe)
     {
-        auto la = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
+        const std::shared_ptr<LumberAxeComponent>& la = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
         if (la)
         {
             AxeState axeState = la->GetState();
@@ -63,7 +63,7 @@ void WallCollision::Update()
             }
             else
             {
-                auto axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
+                const std::shared_ptr<BoxCollider>& axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
                 if (axeCollider && wallCollider->IsColliding(axeCollider.get()))
                 {
                     // 도끼의 방향은 GetState()를 통해 판단

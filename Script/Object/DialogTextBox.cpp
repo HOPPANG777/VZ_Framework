@@ -10,11 +10,11 @@ DialogTextBox::DialogTextBox(const string& name, const Vector3& position, const 
 	playerTexture = make_shared<TextureRect>(texturePosition + Vector3(-400, 100, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/Player.png");
 
     // TypingText 컴포넌트 추가 (타이핑 효과)
-    auto typing = make_shared<TypingText>();
+    std::shared_ptr<TypingText> typing = make_shared<TypingText>();
     this->AddComponent(typing);
 
     // 화살표 인디케이터 생성 (배경 오른쪽 아래 위치에)
-    Vector3 arrowPos = position + Vector3((scale.x + 200) * 0.45f, -scale.y * 0.18f, 0.0f);
+    Vector3 arrowPos = texturePosition + Vector3((scale.x + 200) * 0.45f, -scale.y * 0.18f, 0.0f);
     arrowIndicator = make_shared<TextureRect>(arrowPos, Vector3(25, 25, 0), 0.0f, TexturePath + L"UI/Arrow.png");
 }
 
@@ -37,7 +37,7 @@ void DialogTextBox::Update()
 
 	playerTexture->Update();
 
-    auto typing = this->GetComponent<TypingText>("TypingText");
+    std::shared_ptr<TypingText> typing = this->GetComponent<TypingText>("TypingText");
 
     // 사용자가 클릭하면...
     if (INPUT->MouseDown(0))
@@ -78,6 +78,6 @@ void DialogTextBox::PostRender()
 	if (!active) return;
 
     // TypingText의 RenderText를 통해 텍스트 출력 (항상 RenderText를 사용)
-    auto typing = this->GetComponent<TypingText>("TypingText");
+    std::shared_ptr<TypingText> typing = this->GetComponent<TypingText>("TypingText");
     typing->RenderText(dialogText, this->GetRect(), fontSize, fontColor, fontName);
 }

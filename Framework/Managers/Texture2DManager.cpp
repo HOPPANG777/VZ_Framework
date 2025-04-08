@@ -58,7 +58,7 @@ void Texture2DManager::Load(Texture2D* texture)
     // 주소, 너비, 높이가 같은 이미지 데이터가 이미 있는지 검사
     bool bExist = false;
     TextureDesc existDesc;
-    for (auto& temp : descs)
+    for (const auto& temp : descs)
     {
         if (desc == temp)
         {

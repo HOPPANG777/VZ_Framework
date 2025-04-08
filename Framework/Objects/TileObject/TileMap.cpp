@@ -180,7 +180,7 @@ void TileMap::ResizeMap(UINT newWidth, UINT newHeight)
             else
             {
                 // 새로 확장된 영역이면, 새로운 타일을 생성
-                auto tile = make_shared<Tile>();
+				const std::shared_ptr<Tile>& tile = make_shared<Tile>();
                 tile->SetPosition(Vector3((float)x * spacing, (float)y * spacing, 0.0f));
                 tile->SetIndex(index);
                 // 새로 생성되는 타일은 검은색으로 설정
@@ -318,7 +318,7 @@ void TileMap::Save(const string& path)
 	{
 		for (UINT x = 0; x < width; x++)
 		{
-			auto tile = tiles[y][x];
+			std::shared_ptr<Tile>& tile = tiles[y][x];
 			// 예를 들어, 빈 타일은 색상이 기본 검은색(혹은 UV가 모두 0)으로 설정되어 있다고 가정
 			bool isEmpty = (tile->GetStartUV() == Vector2(0, 0) && tile->GetEndUV() == Vector2(0, 0));
 			fout << (isEmpty ? "0 " : "1 ");
@@ -369,7 +369,7 @@ void TileMap::Load(const string& path)
 		tiles[y].resize(width);
 		for (UINT x = 0; x < width; x++)
 		{
-			auto tile = make_shared<Tile>();
+			const std::shared_ptr<Tile>& tile = make_shared<Tile>();
 			// 위치 설정
 			Vector3 position(static_cast<float>(x * spacing), static_cast<float>(y * spacing), 0.0f);
 			tile->SetPosition(position);

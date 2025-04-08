@@ -60,8 +60,8 @@ void BattleManager::Update()
     }
 
     // 전투 중 유닛 업데이트 (필요시)
-    for (auto& unit : playerUnits) unit->Update();
-    for (auto& unit : enemyUnits) unit->Update();
+    for (std::shared_ptr<UnitBase>& unit : playerUnits) unit->Update();
+    for (std::shared_ptr<UnitBase>& unit : enemyUnits) unit->Update();
 }
 
 void BattleManager::ProcessPlayerCommand() 
@@ -108,13 +108,13 @@ void BattleManager::CheckBattleOutcome()
 {
     // 플레이어와 적 유닛의 체력을 확인하여 승리 또는 패배 조건을 검사.
     bool allEnemiesDefeated = true;
-    for (auto& enemy : enemyUnits) 
+    for (std::shared_ptr<UnitBase>& enemy : enemyUnits)
     {
         // 예시: if (enemy->GetHP() > 0) { allEnemiesDefeated = false; break; }
     }
     
     bool allPlayersDefeated = true;
-    for (auto& player : playerUnits) 
+    for (std::shared_ptr<UnitBase>& player : playerUnits)
     {
         // 예시: if (player->GetHP() > 0) { allPlayersDefeated = false; break; }
     }

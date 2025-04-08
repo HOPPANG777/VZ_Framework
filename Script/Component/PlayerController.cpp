@@ -31,7 +31,7 @@ void PlayerController::Update()
 
 void PlayerController::UpdateMovement(float dt)
 {
-    auto transform = owner->GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& transform = owner->GetComponent<Transform>("Transform");
     if (!transform) return;
     Vector3 pos = transform->GetPosition();
 
@@ -98,7 +98,7 @@ void PlayerController::UpdateMovement(float dt)
 
 void PlayerController::UpdateAnimation()
 {
-    auto animator = owner->GetComponent<Animator>("Animator");
+    const std::shared_ptr<Animator>& animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
     UnitAnimationType newState = currentAnimation;

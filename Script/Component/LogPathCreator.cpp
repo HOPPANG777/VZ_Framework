@@ -2,7 +2,7 @@
 #include "LogPathCreator.h"
 
 LogPathCreator::LogPathCreator(const string& name)
-    : Component(name), collisionCount(0), transformed(false), newColliderSize(500, 100, 0)
+    : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0)
 {
 
 }
@@ -25,7 +25,7 @@ void LogPathCreator::OnAxeCollision()
     // 충돌 횟수를 증가
     collisionCount++;
 
-	auto owner = GetOwner();
+    Object* owner = GetOwner();
 
     // 피격 효과 활성화: HitComponent가 있다면 Activate() 호출
     owner->GetComponent<HitComponent>("HitComponent")->Activate();
@@ -43,7 +43,7 @@ void LogPathCreator::OnAxeCollision()
         owner->RemoveComponent("BoxCollider");
 
         // 새로운 BoxCollider 생성 (크기: 500,300,0)
-        auto newCollider = make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
+        const std::shared_ptr<BoxCollider>& newCollider = make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
         owner->AddComponent(newCollider);
 
         // CollisionManager에 새 콜라이더 등록
@@ -60,7 +60,7 @@ void LogPathCreator::OnLogCollision(Collider* other)
     if (other->GetOwner()->GetName().find("LumberAxe") != string::npos)
     {
         // log[0]의 LogPathCreator 컴포넌트를 찾아 OnAxeCollision() 호출
-        auto logPathComp = GetOwner()->GetComponent<LogPathCreator>("LogPathCreator");
+        const std::shared_ptr<LogPathCreator>& logPathComp = GetOwner()->GetComponent<LogPathCreator>("LogPathCreator");
         if (logPathComp) logPathComp->OnAxeCollision();
     }
 }

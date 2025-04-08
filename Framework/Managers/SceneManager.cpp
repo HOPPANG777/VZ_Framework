@@ -3,31 +3,36 @@
 
 SceneManager::SceneManager() {}
 
+// SceneManager 소멸자: 모든 씬을 Destroy() 호출 후 sceneList를 clear합니다.
 SceneManager::~SceneManager()
 {
-	// 모든 씬 정리
-	for (auto& scene : sceneList)
+	// std::unordered_map<std::string, std::shared_ptr<Scene>>::iterator 사용
+	std::unordered_map<std::string, std::shared_ptr<Scene>>::iterator it;
+	for (it = sceneList.begin(); it != sceneList.end(); ++it)
 	{
-		scene.second->Destroy();
+		it->second->Destroy();
 	}
-
 	sceneList.clear();
 }
 
-void SceneManager::AddScene(const string& sceneName, shared_ptr<Scene> newScene)
+// 씬을 추가합니다.
+void SceneManager::AddScene(const std::string& sceneName, std::shared_ptr<Scene> newScene)
 {
-    // 같은 이름의 Scene이 이미 있는지 확인
-    if (sceneList.find(sceneName) != sceneList.end())
-    {
-        printf("Scene '%s' already exists.\n", sceneName.c_str());
-        return;
-    }
-    sceneList[sceneName] = newScene;
+	// 같은 이름의 씬이 이미 존재하는지 확인
+	if (sceneList.find(sceneName) != sceneList.end())
+	{
+		printf("Scene '%s' already exists.\n", sceneName.c_str());
+		return;
+	}
+	// 씬 추가
+	sceneList[sceneName] = newScene;
 }
 
-void SceneManager::LoadScene(const string& sceneName)
+// 씬을 로드하는 함수: sceneName에 해당하는 씬을 nextScene으로 지정하고, 첫 실행인 경우 바로 전환합니다.
+void SceneManager::LoadScene(const std::string& sceneName)
 {
-	auto it = sceneList.find(sceneName);
+	// 명시적 iterator 타입 사용
+	std::unordered_map<std::string, std::shared_ptr<Scene>>::const_iterator it = sceneList.find(sceneName);
 	if (it == sceneList.end())
 	{
 		printf("Scene '%s' not found.\n", sceneName.c_str());
@@ -35,7 +40,9 @@ void SceneManager::LoadScene(const string& sceneName)
 	}
 	// 이미 로딩 중이면 무시
 	if (isLoading)
+	{
 		return;
+	}
 
 	nextScene = it->second;
 	sceneChangeRequested = true;
@@ -57,9 +64,10 @@ void SceneManager::LoadScene(const string& sceneName)
 	}
 }
 
-void SceneManager::SetLoadingScene(const string& sceneName)
+// Loading Scene을 설정하는 함수
+void SceneManager::SetLoadingScene(const std::string& sceneName)
 {
-	auto it = sceneList.find(sceneName);
+	std::unordered_map<std::string, std::shared_ptr<Scene>>::const_iterator it = sceneList.find(sceneName);
 	if (it != sceneList.end())
 	{
 		loadingScene = it->second;
@@ -70,9 +78,10 @@ void SceneManager::SetLoadingScene(const string& sceneName)
 	}
 }
 
-void SceneManager::SetSplashScene(const string& sceneName)
+// Splash Scene을 설정하는 함수
+void SceneManager::SetSplashScene(const std::string& sceneName)
 {
-	auto it = sceneList.find(sceneName);
+	std::unordered_map<std::string, std::shared_ptr<Scene>>::const_iterator it = sceneList.find(sceneName);
 	if (it != sceneList.end())
 	{
 		splashScene = it->second;

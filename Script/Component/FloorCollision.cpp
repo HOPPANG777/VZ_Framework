@@ -5,13 +5,13 @@ void FloorCollision::Update()
 {
     if (!player) return;
 
-    auto playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
+    std::shared_ptr<BoxCollider> playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
     if (!playerCollider) return;
 
-    auto floorCollider = owner->GetComponent<BoxCollider>("BoxCollider");
+    std::shared_ptr<BoxCollider> floorCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     if (!floorCollider) return;
 
-    auto playerController = player->GetComponent<PlayerController>("PlayerController");
+    std::shared_ptr<PlayerController> playerController = player->GetComponent<PlayerController>("PlayerController");
     if (!playerController) return;
 
     if (floorCollider->IsColliding(playerCollider.get()))
@@ -36,7 +36,7 @@ void FloorCollision::Update()
 
     if (!lumberAxe) return;
 
-    auto axeComponent = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
+    std::shared_ptr<LumberAxeComponent> axeComponent = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
     if (!axeComponent) return;
 
     AxeState state = axeComponent->GetState();
@@ -44,7 +44,7 @@ void FloorCollision::Update()
     bool isIdle = (state == AxeState::AXE_IDLE_R || state == AxeState::AXE_IDLE_L);
     if (isReturning || isIdle) return;
 
-    auto axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
+    std::shared_ptr<BoxCollider> axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
     if (!axeCollider) return;
 
     if (floorCollider->IsColliding(axeCollider.get()))

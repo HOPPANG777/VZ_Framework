@@ -95,7 +95,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
 
     // 4) Animator 컴포넌트를 등록
     {
-        auto animatorComp = make_shared<Animator>("Animator");
+        const std::shared_ptr<Animator>& animatorComp = make_shared<Animator>("Animator");
         AddComponent(animatorComp);
 
         // ※ 여기서 애니메이션 클립들을 등록할 수도 있음
@@ -164,7 +164,7 @@ void AnimationRect::Update()
     #pragma endregion
 
      // 1) Animator 가져오기 & 애니메이션 Update
-    auto animator = GetComponent<Animator>("Animator");
+    const std::shared_ptr<Animator>& animator = GetComponent<Animator>("Animator");
     if (animator)
     {
         animator->Update();

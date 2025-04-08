@@ -24,7 +24,7 @@ void Scene_00::Start()
 
 void Scene_00::Destroy()
 {
-	for (auto& obj : objects) if (obj != nullptr) obj.reset();
+	for (std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj.reset();
 	if (LoadingTextObject != nullptr) LoadingTextObject.reset();
 }
 
@@ -32,7 +32,7 @@ void Scene_00::FixedUpdate() {}
 
 void Scene_00::Update() 
 {
-	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
+	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Update();
 	if (LoadingTextObject != nullptr) LoadingTextObject->Update();
 }
 
@@ -40,7 +40,7 @@ void Scene_00::LateUpdate() {}
 
 void Scene_00::Render()
 {
-	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
+	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Render();
 	if (LoadingTextObject != nullptr) LoadingTextObject->Render();
 }
 

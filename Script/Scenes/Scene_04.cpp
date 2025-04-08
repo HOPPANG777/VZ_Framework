@@ -20,19 +20,19 @@ void Scene_04::Awake()
 
 	// Floor Collider
 	{
-		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
-		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+		for (const std::shared_ptr<Object>& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
+		for (const std::shared_ptr<Object>& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Background
 	{
-		auto parallax = make_shared<ParallaxBackground>("Parallax", 6);
+		std::shared_ptr<ParallaxBackground> parallax = make_shared<ParallaxBackground>("Parallax", 6);
 
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -76,23 +76,24 @@ void Scene_04::Start()
 
 void Scene_04::Destroy()
 {
-	for (auto& bg : bgLayer) if (bg != nullptr) bg.reset();
-
-	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
-
-	for (auto& floors : floor) if (floors != nullptr) floors.reset();
-
-	for (auto& obj : objects) if (obj != nullptr) obj.reset();
-	
-	if (backgroundObject != nullptr) backgroundObject.reset();
-
 	if (tmap != nullptr) tmap.reset();
+
+	if (backgroundObject != nullptr) backgroundObject.reset();
 
 	if (puzzleRock != nullptr) puzzleRock.reset();
 
+	if (lumberAxe != nullptr) lumberAxe.reset();
+
 	if (testPlayer != nullptr) testPlayer.reset();
 
-	if (lumberAxe != nullptr) lumberAxe.reset();
+	for (std::shared_ptr<Object>& bg : bgLayer) if (bg != nullptr) bg.reset();
+
+	for (std::shared_ptr<Object>& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
+
+	for (std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors.reset();
+
+	for (std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj.reset();
+	
 }
 
 void Scene_04::FixedUpdate()
@@ -101,24 +102,24 @@ void Scene_04::FixedUpdate()
 
 void Scene_04::Update()
 {
+	if (tmap != nullptr) tmap->Update();
+
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
-	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
-
-	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
-
-	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
-
-	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
-
-	if (tmap != nullptr) tmap->Update();
-	
 	if (puzzleRock != nullptr) puzzleRock->Update();
-
-	if (testPlayer != nullptr) testPlayer->Update();
 
 	if (lumberAxe != nullptr) lumberAxe->Update();
 
+	if (testPlayer != nullptr) testPlayer->Update();
+
+	for (const std::shared_ptr<Object>& bg : bgLayer) if (bg != nullptr) bg->Update();
+
+	for (const std::shared_ptr<Object>& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
+
+	for (const std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors->Update();
+
+	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Update();
+	
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
 }
@@ -129,24 +130,20 @@ void Scene_04::LateUpdate()
 
 void Scene_04::Render()
 {
-
-	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Render();
-
-	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Render();
-
-	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
-
 	if (backgroundObject != nullptr) backgroundObject->Render();
 
-	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
-
 	if (tmap != nullptr) tmap->Render();
+
+	for (const std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors->Render();
+
+	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Render();
 
 	if (puzzleRock != nullptr) puzzleRock->Render();
 
 	if (lumberAxe != nullptr) lumberAxe->Render();
-	
+
 	if (testPlayer != nullptr) testPlayer->Render();
+
 }
 
 void Scene_04::PostRender()

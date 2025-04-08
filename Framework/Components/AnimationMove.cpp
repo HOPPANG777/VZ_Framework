@@ -29,7 +29,7 @@ bool AnimationMove::IsFacingLeft(UnitAnimationType anim) const
 
 void AnimationMove::Update()
 {
-    auto animator = owner->GetComponent<Animator>("Animator");
+    std::shared_ptr<Animator> animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
     // (A) 사망 상태 체크: 사망이면 바로 죽음 애니메이션을 재생

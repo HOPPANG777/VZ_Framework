@@ -52,14 +52,15 @@ void Texts::Detach()
 
 FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 {
-	auto newBrushDesc = make_unique<FontBrushDesc>();
+	std::unique_ptr<FontBrushDesc> newBrushDesc = make_unique<FontBrushDesc>();
 	newBrushDesc->color = color;
 
-	auto brushIt = find_if(fontBrush.begin(), fontBrush.end(),
-		[&newBrushDesc](const unique_ptr<FontBrushDesc>& ptr)
-		{
-			return *ptr == *newBrushDesc;
-		});
+	const std::vector<std::unique_ptr<FontBrushDesc>>::const_iterator brushIt =
+		std::find_if(fontBrush.begin(), fontBrush.end(),
+			[&](const std::unique_ptr<FontBrushDesc>& ptr) -> bool
+			{
+				return *ptr == *newBrushDesc;
+			});
 
 	if (brushIt != fontBrush.end()) return brushIt->get();
 
@@ -81,18 +82,19 @@ FontTextDesc* Texts::GetOrCreateTextFormat
 	const DWRITE_FONT_STRETCH& stretch
 )
 {
-	auto newTextDesc = make_unique<FontTextDesc>();
+	std::unique_ptr<FontTextDesc> newTextDesc = make_unique<FontTextDesc>();
 	newTextDesc->font = font;
 	newTextDesc->fontSize = size;
 	newTextDesc->weight = weight;
 	newTextDesc->style = style;
 	newTextDesc->stretch = stretch;
 
-	auto textIt = find_if(fontText.begin(), fontText.end(),
-		[&newTextDesc](const unique_ptr<FontTextDesc>& ptr)
-		{
-			return *ptr == *newTextDesc;
-		});
+	const std::vector<std::unique_ptr<FontTextDesc>>::const_iterator textIt =
+		std::find_if(fontText.begin(), fontText.end(),
+			[&](const std::unique_ptr<FontTextDesc>& ptr) -> bool
+			{
+				return *ptr == *newTextDesc;
+			});
 
 	if (textIt != fontText.end()) return textIt->get();
 
@@ -120,7 +122,7 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 	if (attachedObject)
 	{
 		// RectTransform이 있다면 그 값을 사용
-		auto rectTrans = attachedObject->GetComponent<RectTransform>("RectTransform");
+		const std::shared_ptr<RectTransform>& rectTrans = attachedObject->GetComponent<RectTransform>("RectTransform");
 		if (rectTrans)
 		{
 			adjustedRect = rectTrans->GetRect();

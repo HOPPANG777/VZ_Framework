@@ -9,12 +9,12 @@ Object::Object(const string& name, TransformType type)
     // 선택에 따라 적절한 Transform 컴포넌트 추가
     if (type == TransformType::Normal)
     {
-        auto transform = make_shared<Transform>("Transform");
+        const std::shared_ptr<Transform>& transform = make_shared<Transform>("Transform");
         AddComponent(transform);
     }
     else if (type == TransformType::Rect)
     {
-        auto rectTransform = make_shared<RectTransform>("RectTransform");
+        const std::shared_ptr<RectTransform>& rectTransform = make_shared<RectTransform>("RectTransform");
         AddComponent(rectTransform);
     }
 }
@@ -25,7 +25,7 @@ Object::Object(const string& name, const Vector3& initPos, const Vector3& initSc
     // 타입에 따라 초기값 설정
     if (type == TransformType::Normal)
     {
-        auto transform = GetComponent<Transform>("Transform");
+        const std::shared_ptr<Transform>& transform = GetComponent<Transform>("Transform");
         if (transform)
         {
             transform->SetPosition(initPos);
@@ -35,7 +35,7 @@ Object::Object(const string& name, const Vector3& initPos, const Vector3& initSc
     }
     else if (type == TransformType::Rect)
     {
-        auto rectTransform = GetComponent<RectTransform>("RectTransform");
+        const std::shared_ptr<RectTransform>& rectTransform = GetComponent<RectTransform>("RectTransform");
         if (rectTransform)
         {
             rectTransform->SetPosition(initPos);
@@ -77,36 +77,38 @@ shared_ptr<RectTransform> Object::GetRectTransform() const
 void Object::Update()
 {
     // 등록된 모든 컴포넌트 업데이트
-    for (auto& it : components)
+    // 여기서 each element의 타입은 std::pair<const std::string, std::shared_ptr<Component>>
+    for (std::pair<const std::string, std::shared_ptr<Component>>& element : components)
     {
-        // it은 map< string, shared_ptr<Component> >::value_type &
-        auto& compName = it.first;
-        auto& compPtr = it.second;
+        const std::string& compName = element.first;    // 컴포넌트 이름
+        std::shared_ptr<Component>& compPtr = element.second; // 컴포넌트 포인터
 
         compPtr->Update();
     }
 
     // RectTransform이 있다면 우선적으로 사용합니다.
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
     {
         worldBuffer->SetWorld(rectTrans->GetWorld());
     }
     else
     {
-        auto trans = GetComponent<Transform>("Transform");
-        if (trans) worldBuffer->SetWorld(trans->GetWorld());
+        const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
+        if (trans) 
+        {
+            worldBuffer->SetWorld(trans->GetWorld());
+        }
     }
 }
 
 void Object::Render()
 {
     // 등록된 모든 컴포넌트 Render
-    for (auto& it : components)
+    for (std::pair<const std::string, std::shared_ptr<Component>>& element : components)
     {
-        // it은 map< string, shared_ptr<Component> >::value_type &
-        auto& compName = it.first;
-        auto& compPtr = it.second;
+        const std::string& compName = element.first;
+        std::shared_ptr<Component>& compPtr = element.second;
 
         compPtr->Render();
     }
@@ -121,109 +123,109 @@ void Object::Render()
 Vector3 Object::GetPosition() const
 {
     // RectTransform이 있으면 그것을 사용하고, 없으면 기본 Transform 사용
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)return rectTrans->GetPosition();
 
-    auto trans = GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
     return trans ? trans->GetPosition() : Vector3(0, 0, 0);
 }
 
 Vector3 Object::GetScale() const
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetScale();
 
-    auto trans = GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
     return trans ? trans->GetScale() : Vector3(1, 1, 1);
 }
 
 float Object::GetRotation() const
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetRotation();
 
-    auto trans = GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
     return trans ? trans->GetRotation() : 0.0f;
 }
 
 void Object::SetPosition(const Vector3& position)
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetPosition(position);
 
-    auto trans = GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
     return trans->SetPosition(position);
 }
 
 void Object::SetScale(const Vector3& scale)
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetScale(scale);
 
-    auto trans = GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
     return trans->SetScale(scale);
 }
 
 void Object::SetRotation(const float& rotation)
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetRotation(rotation);
 
-    auto trans = GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
     return trans->SetRotation(rotation);
 }
 
 RECT Object::GetRect()
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetRect();
 }
 
 RECT Object::GetCorrectedRect()
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetCorrectedRect();
 }
 
 void Object::Move(const Vector3& speed)
 {
     // 상황에 따라 RectTransform이나 Transform을 선택적으로 업데이트할 수 있습니다.
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
     {
         rectTrans->Move(speed);
     }
     else
     {
-        auto trans = GetComponent<Transform>("Transform");
+        const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
         if (trans) trans->Move(speed);
     }
 }
 
 void Object::Rotate(float rot)
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
     {
         rectTrans->Rotate(rot);
     }
     else
     {
-        auto trans = GetComponent<Transform>("Transform");
+        const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
         if (trans) trans->Rotate(rot);
     }
 }
 
 void Object::Scale(const Vector3& scaleChange)
 {
-    auto rectTrans = GetComponent<RectTransform>("RectTransform");
+    const std::shared_ptr<RectTransform>& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
     {
         rectTrans->Scale(scaleChange);
     }
     else
     {
-        auto trans = GetComponent<Transform>("Transform");
+        const std::shared_ptr<Transform>& trans = GetComponent<Transform>("Transform");
         if (trans) trans->Scale(scaleChange);
     }
 }

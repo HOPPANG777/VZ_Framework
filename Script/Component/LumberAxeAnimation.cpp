@@ -4,14 +4,14 @@
 void LumberAxeAnimation::Update()
 {
     // owner에서 LumberAxeComponent를 가져옵니다.
-    auto axeComp = owner->GetComponent<LumberAxeComponent>("LumberAxeComponent");
+    const std::shared_ptr<LumberAxeComponent>& axeComp = owner->GetComponent<LumberAxeComponent>("LumberAxeComponent");
     if (!axeComp) return;
 
     // 현재 도끼 상태 (예: AXE_IDLE_R, AXE_THROWN_L 등)
     AxeState state = axeComp->GetState();
 
     // owner에서 Animator 컴포넌트를 가져옵니다.
-    auto animator = owner->GetComponent<Animator>("Animator");
+    const std::shared_ptr<Animator>& animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
     // 상태에 따라 애니메이션 클립 이름을 설정합니다.

@@ -22,8 +22,8 @@ void CollisionManager::Update()
     {
         for (size_t j = i + 1; j < colliders.size(); ++j)
         {
-            auto colliderA = colliders[i];
-            auto colliderB = colliders[j];
+            shared_ptr<Collider> colliderA = colliders[i];
+            shared_ptr<Collider> colliderB = colliders[j];
 
             if (colliderA->IsColliding(colliderB.get()))
             {
@@ -56,7 +56,7 @@ vector<Object*> CollisionManager::GetCollidingObjects(Object* obj) const
     if (myColliders.empty()) return result;
 
     // CollisionManager에 등록된 모든 Collider와 비교합니다.
-    for (const auto& otherCollider : colliders)
+    for (const std::shared_ptr<Collider>& otherCollider : colliders)
     {
         // 자기 자신은 제외
         if (otherCollider->GetOwner() == obj) continue;

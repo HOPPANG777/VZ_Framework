@@ -12,7 +12,7 @@ PlayerMove::PlayerMove(const string& name, float spd)
 
 void PlayerMove::Update()
 {
-    auto transform = owner->GetComponent<Transform>("Transform");
+    const std::shared_ptr<Transform>& transform = owner->GetComponent<Transform>("Transform");
     if (!transform) return;
 
     Vector3 pos = transform->GetPosition();

@@ -15,7 +15,7 @@ ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const fl
 			vertices[i].position = Vector2(sinf(theta), cosf(theta)) * 0.5f;
 		}
 
-		for (auto& vertex : vertices) vertex.color = color;
+		for (VertexColor& vertex : vertices) vertex.color = color;
 	}
 
 	//vertexBuffer

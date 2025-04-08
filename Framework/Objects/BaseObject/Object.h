@@ -93,10 +93,11 @@ public:
 				return nullptr;
 			}
 
+			// components의 타입: std::unordered_map<std::string, std::unique_ptr<Component>>
 			for (const auto& pair : components)
 			{
-				// pair.second는 std::unique_ptr<Component> 등이라고 가정
-				if (T* comp = dynamic_cast<T*>(pair.second.get()))
+				T* comp = dynamic_cast<T*>(pair.second.get());
+				if (comp != nullptr)
 				{
 					return comp;
 				}
@@ -121,9 +122,11 @@ public:
 				return result;
 			}
 
+			// components의 타입: std::unordered_map<std::string, std::unique_ptr<Component>>
 			for (const auto& pair : components)
 			{
-				if (T* comp = dynamic_cast<T*>(pair.second.get()))
+				T* comp = dynamic_cast<T*>(pair.second.get());
+				if (comp != nullptr)
 				{
 					result.push_back(comp);
 				}

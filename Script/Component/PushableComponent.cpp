@@ -12,7 +12,7 @@ void PushableComponent::Update()
         if (pushDir.x != 0)
         {
             pushDir.Normalize();
-            auto transform = owner->GetComponent<Transform>("Transform");
+            const std::shared_ptr<Transform>& transform = owner->GetComponent<Transform>("Transform");
             if (transform)
             {
                 Vector3 pos = transform->GetPosition();

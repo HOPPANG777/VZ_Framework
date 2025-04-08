@@ -80,7 +80,7 @@
 //        tiles[y].resize(width);
 //        for (UINT x = 0; x < width; x++)
 //        {
-//            auto tile = make_shared<Tile>();
+//             tile = make_shared<Tile>();
 //            // 각 타일의 원래 위치 계산: (x * spacing, y * spacing)
 //            // 그 후, 전체 맵의 중심을 빼고 CENTER를 더합니다.
 //            Vector3 position(static_cast<float>(x * spacing) - offsetX + CENTER.x, static_cast<float>(y * spacing) - offsetY + CENTER.y, 0.0f);

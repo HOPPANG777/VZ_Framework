@@ -10,13 +10,13 @@ JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const fl
     // 이제 로딩 아이콘에 맞는 애니메이션 클립을 등록
     // 예: 가로 7프레임
     //    한 프레임 크기는 50x50, 총 이미지(350×50)라 가정
-    auto tex = make_shared<Texture2D>(path);
+    const std::shared_ptr<Texture2D>& tex = make_shared<Texture2D>(path);
 
     // AnimationClip 생성 (이름: "Loading")
     // - frameCount : 7
     // - startPos   : (0, 0)
     // - endPos     : (350, 50)  (tex->GetWidth(), tex->GetHeight() 라고 가정)
-    auto loadingClip = make_shared<AnimationClip>
+    const std::shared_ptr<AnimationClip>& loadingClip = make_shared<AnimationClip>
     (
         L"Loading",      // clipName
         tex.get(),             // Texture2D (shared_ptr)

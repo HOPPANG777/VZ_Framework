@@ -13,7 +13,7 @@ ColorLine::ColorLine(const Vector3& position, const float& length, const float r
 		// аб ╩С╢э
 		vertices[1].position = Vector2(1, 0);
 
-		for (auto& vertex : vertices) vertex.color = color;
+		for (VertexColor& vertex : vertices) vertex.color = color;
 	}
 
 	//vertexBuffer

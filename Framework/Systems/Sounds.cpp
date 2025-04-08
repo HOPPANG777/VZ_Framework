@@ -65,7 +65,7 @@ void Sounds::AddSound(const  string& name, const  wstring& file, bool loop)
 
 void Sounds::RemoveSound(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end())
 		return;
 
@@ -82,7 +82,7 @@ void Sounds::Play(const  string& name, float volume)
 	if (!system) return;
 
 	// name에 해당하는 사운드 찾기
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
 
 	// 이미 사운드가 존재
@@ -109,7 +109,7 @@ void Sounds::Play(const  string& name, float volume)
 
 void Sounds::Stop(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
 
 	if (iter->second.second)
@@ -118,7 +118,7 @@ void Sounds::Stop(const  string& name)
 
 void Sounds::Pause(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
 
 	if (iter->second.second)
@@ -127,7 +127,7 @@ void Sounds::Pause(const  string& name)
 
 void Sounds::Resum(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
 
 	if (iter->second.second)
@@ -136,7 +136,7 @@ void Sounds::Resum(const  string& name)
 
 bool Sounds::IsPlaying(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return false;
 
 	if (!iter->second.second)
@@ -149,7 +149,7 @@ bool Sounds::IsPlaying(const  string& name)
 
 bool Sounds::IsPause(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return false;
 
 	if (!iter->second.second)
@@ -162,7 +162,7 @@ bool Sounds::IsPause(const  string& name)
 
 void Sounds::SetVolume(const  string& name, float volume)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
 
 	if (iter->second.second)
@@ -171,7 +171,7 @@ void Sounds::SetVolume(const  string& name, float volume)
 
 float Sounds::GetVolume(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return 0.0f;
 
 	if (!iter->second.second)
@@ -184,7 +184,7 @@ float Sounds::GetVolume(const  string& name)
 
 float Sounds::GetSoundLength(const  string& name)
 {
-	auto iter = sounds.find(name);
+	const auto& iter = sounds.find(name);
 	if (iter == sounds.end())
 		return 0.0f;
 
