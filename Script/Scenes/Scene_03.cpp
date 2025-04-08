@@ -104,6 +104,8 @@ void Scene_03::Start()
 
 void Scene_03::Destroy()
 {
+	if (tmap != nullptr) tmap.reset();
+
 	for (std::shared_ptr<Object>& floors : floor)if (floors != nullptr)floors.reset();
 
 	for (std::shared_ptr<Object>& houseElem : house)if (houseElem != nullptr)houseElem.reset();

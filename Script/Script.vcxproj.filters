@@ -80,6 +80,9 @@
     <ClCompile Include="Component\InteractionComponent.cpp">
       <Filter>Component\InteractionComponent</Filter>
     </ClCompile>
+    <ClCompile Include="WindZone.cpp">
+      <Filter>Component\WindZone</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Component\InteractionComponent.h">
       <Filter>Component\InteractionComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="WindZone.h">
+      <Filter>Component\WindZone</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +270,9 @@
     </Filter>
     <Filter Include="Component\InteractionComponent">
       <UniqueIdentifier>{9e3f7b5e-a932-4f53-a3c5-60dcfbe3b9df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\WindZone">
+      <UniqueIdentifier>{1006334e-557c-4b89-9734-d785d68ccd1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -7,7 +7,6 @@ void Scene_01::Awake()
 
 	{
 		objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/TitleScreen.png"));
-		
 	}
 
 	{
