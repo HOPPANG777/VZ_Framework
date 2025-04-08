@@ -35,6 +35,7 @@ private:
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
+	vector<shared_ptr<Object>> objects;
 
 	shared_ptr<Object> puzzleRock;
 

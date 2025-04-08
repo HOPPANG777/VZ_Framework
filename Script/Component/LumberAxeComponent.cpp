@@ -3,7 +3,7 @@
 
 // 생성자: 초기 상태, 속도, 중력, 직선 이동 시간 설정
 LumberAxeComponent::LumberAxeComponent(const string& name)
-    : Component(name), state(AxeState::AXE_IDLE_R), velocity(Vector3::Zero), gravity(980.0f), returnDuration(1.0f), straightFlightTime(0.3f)
+    : Component(name), state(AxeState::AXE_IDLE_R), velocity(Vector3::Zero), gravity(980.0f), returnDuration(0.5f), straightFlightTime(0.3f)
 {
 
 }

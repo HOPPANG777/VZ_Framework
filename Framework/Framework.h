@@ -34,6 +34,7 @@
 #include <unordered_set>
 #include <future>
 #include <sstream>
+#include <exception>
 
 using namespace std;
 

@@ -82,31 +82,56 @@ public:
 	void Scale(const Vector3& scale);
 
 public:
-	// 새롭게 추가하는 템플릿 기반 함수:
 	template<typename T>
 	T* FindComponentByInterface() const
 	{
-		for (const auto& pair : components)
+		try
 		{
-			if (T* comp = dynamic_cast<T*>(pair.second.get()))
+			// 컨테이너가 비어있는지 먼저 확인
+			if (components.empty())
 			{
-				return comp;
+				return nullptr;
 			}
+
+			for (const auto& pair : components)
+			{
+				// pair.second는 std::unique_ptr<Component> 등이라고 가정
+				if (T* comp = dynamic_cast<T*>(pair.second.get()))
+				{
+					return comp;
+				}
+			}
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << "[FindComponentByInterface] 예외 발생: " << e.what() << std::endl;
+			// 필요한 경우 추가적인 복구 또는 로그 처리
 		}
 		return nullptr;
 	}
 
-	// 또는, 모든 해당 타입의 컴포넌트를 찾고 싶다면:
 	template<typename T>
 	std::vector<T*> GetAllComponentsByInterface() const
 	{
 		std::vector<T*> result;
-		for (const auto& pair : components)
+		try
 		{
-			if (T* comp = dynamic_cast<T*>(pair.second.get()))
+			if (components.empty())
 			{
-				result.push_back(comp);
+				return result;
 			}
+
+			for (const auto& pair : components)
+			{
+				if (T* comp = dynamic_cast<T*>(pair.second.get()))
+				{
+					result.push_back(comp);
+				}
+			}
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << "[GetAllComponentsByInterface] 예외 발생: " << e.what() << std::endl;
 		}
 		return result;
 	}

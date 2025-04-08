@@ -37,7 +37,7 @@ void LogPathCreator::OnAxeCollision()
         // (예: 90도)
         owner->SetRotation(-90);
 
-        owner->SetPosition(owner->GetPosition() + Vector3(300, -300, 0));
+        owner->SetPosition(owner->GetPosition() + Vector3(300, -280, 0));
 
         // 기존 BoxCollider 제거
         owner->RemoveComponent("BoxCollider");

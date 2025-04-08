@@ -32,6 +32,8 @@ void Scene_03::Awake()
 		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
 		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
 		house.push_back(make_shared<TextureRect>(CENTER + Vector3(-300, -280, 0), Vector3(70, 70, 0), 0.0f, TexturePath + L"Object/Wood.png"));
+		house.push_back(make_shared<TextureRect>(CENTER + Vector3(1300, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse01.png"));
+		house.push_back(make_shared<TextureRect>(CENTER + Vector3(2100, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse02.png"));
 	}
 	
 	// Text
@@ -44,8 +46,8 @@ void Scene_03::Awake()
 
 	// TextPoint Collider
 	{
-		for (auto textPoint : textPoint) textPoint->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-		for (auto textPoint : textPoint) COLLISION->AddCollider(textPoint->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& textPoint : textPoint) textPoint->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
+		for (const auto& textPoint : textPoint) COLLISION->AddCollider(textPoint->GetComponent<BoxCollider>("BoxCollider"));
 	}
 	
 	// Background
@@ -199,6 +201,10 @@ void Scene_03::Render()
 
 	if (house[3] != nullptr) house[3]->Render();
 	
+	if (house[4] != nullptr) house[4]->Render();
+
+	if (house[5] != nullptr) house[5]->Render();
+
 	for (const auto& logs : log) if (logs != nullptr) logs->Render();
 
 	if (lumberAxe != nullptr) lumberAxe->Render();

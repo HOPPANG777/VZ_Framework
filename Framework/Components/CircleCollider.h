@@ -6,16 +6,20 @@ public:
     CircleCollider(const Vector3& center, float radius, const Color& color = GREEN) : Collider("CircleCollider", Type::Circle), center(center), radius(radius), color(color) {}
     ~CircleCollider() override = default;
 
+public:
     // Component을(를) 통해 상속됨
     void Update() override;
     void Render() override;
 
+public:
     void SetCenter(const Vector3& newCenter) { center = newCenter; }
     void SetRadius(float newRadius) { radius = newRadius; }
 
+public:
     Vector3 GetCenter() const { return center; }
     float GetRadius() const { return radius; }
 
+public:
     bool IsColliding(const Collider* other) const override
     {
         if (other->GetType() == Type::Circle)
@@ -39,4 +43,5 @@ private:
     Vector3 center;
     float radius;
     Color color;
+
 };

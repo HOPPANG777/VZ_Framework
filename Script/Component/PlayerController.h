@@ -15,14 +15,16 @@ public:
 public:
     // 외부 충돌(플랫폼과의 접촉) 여부를 설정하는 함수.
     void SetCollision(bool col) { isCollision = col; }
-    bool IsCollision() const { return isCollision; }
+	void SetFall(bool fall) { isFall = fall; } // 낙하 상태 설정
+	void SetGravity(float g) { gravity = g; } // 중력 설정
 
+public:
     // 상태 접근자
-    bool IsJumping() const { return isJump; }
-    bool IsFalling() const { return isFall; }
-    bool IsBetween() const { return isBetween; }
+    bool GetCollision() const { return isCollision; }
+    bool GetJumping() const { return isJump; }
+    bool GetFalling() const { return isFall; }
+    bool GetBetween() const { return isBetween; }
     bool GetRight() const { return isRight; }
-
     bool GetSpeed() const { return currentSpeed; }
 
 public:

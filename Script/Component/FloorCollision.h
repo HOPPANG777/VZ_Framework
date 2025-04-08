@@ -16,6 +16,7 @@ public:
 private:
     shared_ptr<Object> player;
     shared_ptr<Object> lumberAxe;
+    shared_ptr<Object> floorEnd;
 
 };
 

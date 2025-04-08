@@ -31,8 +31,8 @@ void Scene_04::Awake()
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 50, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 50, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -54,11 +54,17 @@ void Scene_04::Awake()
 		tmap->Load("_Data/_TileData/map02.data");
 	}
 
+	// Puzzle Rock
 	{
 		puzzleRock = make_shared<TextureRect>(CENTER + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
 		puzzleRock->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
 		COLLISION->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
 		puzzleRock->AddComponent(make_shared<PushableComponent>());
+	}
+
+	// Objects
+	{
+		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png"));
 	}
 
 	isLoaded = true;
@@ -75,6 +81,8 @@ void Scene_04::Destroy()
 	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
 
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
+
+	for (auto& obj : objects) if (obj != nullptr) obj.reset();
 	
 	if (backgroundObject != nullptr) backgroundObject.reset();
 
@@ -93,13 +101,15 @@ void Scene_04::FixedUpdate()
 
 void Scene_04::Update()
 {
+	if (backgroundObject != nullptr) backgroundObject->Update();
+
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
 
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
 
-	if (backgroundObject != nullptr) backgroundObject->Update();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 
 	if (tmap != nullptr) tmap->Update();
 	
@@ -119,6 +129,7 @@ void Scene_04::LateUpdate()
 
 void Scene_04::Render()
 {
+
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Render();
 
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Render();
@@ -127,14 +138,15 @@ void Scene_04::Render()
 
 	if (backgroundObject != nullptr) backgroundObject->Render();
 
+	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
+
 	if (tmap != nullptr) tmap->Render();
 
 	if (puzzleRock != nullptr) puzzleRock->Render();
-	
+
 	if (lumberAxe != nullptr) lumberAxe->Render();
-
+	
 	if (testPlayer != nullptr) testPlayer->Render();
-
 }
 
 void Scene_04::PostRender()

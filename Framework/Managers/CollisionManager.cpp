@@ -46,12 +46,6 @@ void CollisionManager::RenderDebug()
     }
 }
 
-//// 디버그 렌더링 (콜라이더를 시각적으로 표시)
-//for (auto& collider : colliders)
-//{
-//    //collider->RenderDebug();
-//}
-
 vector<Object*> CollisionManager::GetCollidingObjects(Object* obj) const
 {
     vector<Object*> result;

@@ -27,7 +27,6 @@ void PushableComponent::Interact()
 {
     // 상호작용 요청이 오면 밀기를 시작합니다.
     StartPushing();
-    // 예를 들어, 일정 시간 후 밀기를 멈추도록 타이머를 추가할 수 있습니다.
 }
 
 void PushableComponent::StopInteract()

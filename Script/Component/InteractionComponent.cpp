@@ -1,38 +1,55 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "InteractionComponent.h"
 
 void InteractionComponent::Update()
 {
-    // EÅ°°¡ ´­·ÈÀ» ¶§ ±ÙÃ³ »óÈ£ÀÛ¿ë ´ë»óÀÇ Interact() È£Ãâ
-    if (INPUT->KeyPressed('E'))
+    // E í‚¤ê°€ ëˆŒë¦° ìˆœê°„(KeyDown) â€“ ìƒí˜¸ì‘ìš© ì‹œì‘ ì²˜ë¦¬
+    if (INPUT->KeyDown('E'))
     {
-        // ¿¹½Ã: CollisionManager¿¡¼­ ÇöÀç ¿À³Ê(ÇÃ·¹ÀÌ¾î)°¡ Ãæµ¹ ÁßÀÎ ¿ÀºêÁ§Æ®µéÀ» ¹İÈ¯ÇÑ´Ù°í °¡Á¤
-        vector<Object*> collidingObjects = COLLISION->GetCollidingObjects(owner);
-        for (Object* obj : collidingObjects)
+        // ë§Œì•½ í˜„ì¬ ìƒí˜¸ì‘ìš©ì´ ì§„í–‰ ì¤‘ì´ ì•„ë‹ˆë¼ë©´ ì‹œì‘
+        if (!isInteracting)
         {
-            // Ä¸½¶È­¸¦ À§ÇØ Object ³»ºÎÀÇ components¿¡ Á÷Á¢ Á¢±ÙÇÏÁö ¾Ê°í ÅÛÇÃ¸´ ÇÔ¼ö¸¦ »ç¿ë
-            IInteractable* interactable = obj->FindComponentByInterface<IInteractable>();
-            if (interactable)
+            try
             {
-                interactable->Interact();
-                break; // ÇÑ ¿ÀºêÁ§Æ®¿Í »óÈ£ÀÛ¿ë ÈÄ Á¾·á (ÇÊ¿ä¿¡ µû¶ó ¿©·¯ ¿ÀºêÁ§Æ®¿¡ ´ëÇØ È£Ãâ °¡´É)
+                // ì˜ˆì‹œë¡œ, CollisionManagerì—ì„œ í˜„ì¬ ì˜¤ë„ˆ(í”Œë ˆì´ì–´)ì™€ ì¶©ëŒ ì¤‘ì¸ ì˜¤ë¸Œì íŠ¸ ëª©ë¡ì„ ê°€ì ¸ì˜´
+                vector<Object*> collidingObjects = COLLISION->GetCollidingObjects(owner);
+                for (Object* obj : collidingObjects)
+                {
+                    // ìº¡ìŠí™”ë¥¼ ìœ„í•´ Object ë‚´ë¶€ì˜ ì»´í¬ë„ŒíŠ¸ ì ‘ê·¼ì€ í…œí”Œë¦¿ í•¨ìˆ˜ë¥¼ ì‚¬ìš©
+                    IInteractable* interactable = obj->FindComponentByInterface<IInteractable>();
+                    if (interactable)
+                    {
+                        activeInteractable = interactable; // í˜„ì¬ ìƒí˜¸ì‘ìš© ëŒ€ìƒ ì €ì¥
+                        activeInteractable->Interact();      // ìƒí˜¸ì‘ìš© ì‹œì‘
+                        isInteracting = true;  // ìƒí˜¸ì‘ìš© ìƒíƒœ í™œì„±í™”
+                        break;  // í•˜ë‚˜ì˜ ì˜¤ë¸Œì íŠ¸ì™€ ìƒí˜¸ì‘ìš© í›„ ì¢…ë£Œ (ì—¬ëŸ¬ ì˜¤ë¸Œì íŠ¸ì™€ ìƒí˜¸ì‘ìš©í•˜ê³  ì‹¶ë‹¤ë©´ breakë¥¼ ì œê±°)
+                    }
+                }
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "[PlayerInteraction] Interact() í˜¸ì¶œ ì¤‘ ì˜ˆì™¸ ë°œìƒ: " << e.what() << std::endl;
             }
         }
     }
-    else
+
+    // E í‚¤ê°€ ë–¼ì§„ ìˆœê°„(KeyUp) â€“ ìƒí˜¸ì‘ìš© ì·¨ì†Œ ì²˜ë¦¬, ìƒí˜¸ì‘ìš©ì´ ì‹¤ì œ ì§„í–‰ ì¤‘ì¼ ë•Œë§Œ ì²˜ë¦¬
+    if (INPUT->KeyUp('E'))
     {
-		// EÅ°°¡ ´­¸®Áö ¾Ê¾ÒÀ» ¶§ »óÈ£ÀÛ¿ë ÁßÁö
-		// ¿¹¸¦ µé¾î, »óÈ£ÀÛ¿ë UI¸¦ ¼û±â°Å³ª »óÅÂ¸¦ ÃÊ±âÈ­ÇÏ´Â ·ÎÁ÷À» Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-        // ¿¹½Ã: CollisionManager¿¡¼­ ÇöÀç ¿À³Ê(ÇÃ·¹ÀÌ¾î)°¡ Ãæµ¹ ÁßÀÎ ¿ÀºêÁ§Æ®µéÀ» ¹İÈ¯ÇÑ´Ù°í °¡Á¤
-        vector<Object*> collidingObjects = COLLISION->GetCollidingObjects(owner);
-        for (Object* obj : collidingObjects)
+        if (isInteracting)  // ìƒí˜¸ì‘ìš© ì¤‘ì¼ ë•Œë§Œ ì²˜ë¦¬
         {
-            // Ä¸½¶È­¸¦ À§ÇØ Object ³»ºÎÀÇ components¿¡ Á÷Á¢ Á¢±ÙÇÏÁö ¾Ê°í ÅÛÇÃ¸´ ÇÔ¼ö¸¦ »ç¿ë
-            IInteractable* interactable = obj->FindComponentByInterface<IInteractable>();
-            if (interactable)
+            try
             {
-                interactable->StopInteract();
-                break; // ÇÑ ¿ÀºêÁ§Æ®¿Í »óÈ£ÀÛ¿ë ÈÄ Á¾·á (ÇÊ¿ä¿¡ µû¶ó ¿©·¯ ¿ÀºêÁ§Æ®¿¡ ´ëÇØ È£Ãâ °¡´É)
+                if (activeInteractable)
+                {
+                    activeInteractable->StopInteract();  // ìƒí˜¸ì‘ìš© ì¤‘ì§€ í˜¸ì¶œ
+                    activeInteractable = nullptr;          // ëŒ€ìƒ ì´ˆê¸°í™”
+                }
+                isInteracting = false;  // ìƒí˜¸ì‘ìš© ìƒíƒœ í•´ì œ
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "[PlayerInteraction] StopInteract() í˜¸ì¶œ ì¤‘ ì˜ˆì™¸ ë°œìƒ: " << e.what() << std::endl;
             }
         }
     }
