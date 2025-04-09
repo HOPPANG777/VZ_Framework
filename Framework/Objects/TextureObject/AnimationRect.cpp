@@ -54,7 +54,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         desc.FillMode = D3D11_FILL_SOLID;
         desc.FrontCounterClockwise = false;
 
-        HRESULT hr = DEVICE->CreateRasterizerState(&desc, &rs);
+        HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
         CHECK(hr);
     }
 
@@ -76,21 +76,21 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
     {
         D3D11_SAMPLER_DESC desc;
         RenderStates::GetSamplerDesc(&desc);
-        RenderStates::CreateSampler(&desc, &sampler[0]);
+        RenderStates::CreateSampler(&desc, sampler[0].GetAddressOf());
 
         // 예: POINT 필터
         desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-        RenderStates::CreateSampler(&desc, &sampler[1]);
+        RenderStates::CreateSampler(&desc, sampler[1].GetAddressOf());
     }
 
     // Blend
     {
         D3D11_BLEND_DESC desc;
         RenderStates::GetBlendDesc(&desc);
-        RenderStates::CreateBlend(&desc, &blend[0]);
+        RenderStates::CreateBlend(&desc, blend[0].GetAddressOf());
 
         desc.RenderTarget[0].BlendEnable = true;
-        RenderStates::CreateBlend(&desc, &blend[1]);
+        RenderStates::CreateBlend(&desc, blend[1].GetAddressOf());
     }
 
     // 4) Animator 컴포넌트를 등록

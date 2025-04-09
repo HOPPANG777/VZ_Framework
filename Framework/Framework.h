@@ -227,7 +227,6 @@ const string BuildTilePath = "_Data/_TileData/";
 #include "Interfaces/IColorable.h"
 
 //Struct
-#include "Structs/UIElement.h"
 #include "Structs/FontBrushDesc.h"
 #include "Structs/FontTextDesc.h"
 #include "Structs/TextureDesc.h"

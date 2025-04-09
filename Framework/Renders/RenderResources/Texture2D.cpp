@@ -52,7 +52,7 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
     const size_t pixelCount = static_cast<size_t>(destDesc.Width) * static_cast<size_t>(destDesc.Height);
 
     // unique_ptr로 배열 관리
-    unique_ptr<UINT[]> colors = make_unique<UINT[]>(pixelCount);
+    const unique_ptr<UINT[]>& colors = make_unique<UINT[]>(pixelCount);
 
     // Map을 통해 CPU로 읽어온다
     D3D11_MAPPED_SUBRESOURCE subRe;
@@ -66,10 +66,10 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
     // OpenGL 호환용(BGR → RGB 순서 교체)
     {
         // 임시 버퍼들
-        unique_ptr<UINT[]> alpha = make_unique<UINT[]>(pixelCount);
-        unique_ptr<UINT[]> red = make_unique<UINT[]>(pixelCount);
-        unique_ptr<UINT[]> green = make_unique<UINT[]>(pixelCount);
-        unique_ptr<UINT[]> blue = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& alpha = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& red = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& green = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& blue = make_unique<UINT[]>(pixelCount);
 
         for (size_t i = 0; i < pixelCount; i++)
         {

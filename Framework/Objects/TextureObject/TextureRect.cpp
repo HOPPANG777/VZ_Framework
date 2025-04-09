@@ -67,7 +67,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		// 시계방향 설정 (false == 시계 방향 // true == 반 시계 방향)
 		desc.FrontCounterClockwise = false;
 
-		HRESULT hr = DEVICE->CreateRasterizerState(&desc, &rs);
+		HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
 		CHECK(hr);
 	}
 
@@ -75,21 +75,21 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 	{
 		D3D11_SAMPLER_DESC desc;
 		RenderStates::GetSamplerDesc(&desc);
-		RenderStates::CreateSampler(&desc, &sampler[0]);
+		RenderStates::CreateSampler(&desc, sampler[0].GetAddressOf());
 
 		// 선형보간
 		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-		RenderStates::CreateSampler(&desc, &sampler[1]);
+		RenderStates::CreateSampler(&desc, sampler[1].GetAddressOf());
 	}
 
 	// Blend
 	{
 		D3D11_BLEND_DESC desc;
 		RenderStates::GetBlendDesc(&desc);
-		RenderStates::CreateBlend(&desc, &blend[0]);
+		RenderStates::CreateBlend(&desc, blend[0].GetAddressOf());
 
 		desc.RenderTarget[0].BlendEnable = true;
-		RenderStates::CreateBlend(&desc, &blend[1]);
+		RenderStates::CreateBlend(&desc, blend[1].GetAddressOf());
 	}
 
 	// SRV 추출 // 그림 데이터 추출
@@ -129,7 +129,7 @@ void TextureRect::Render()
 	// 먼저, 픽셀 셰이더의 상수 버퍼 슬롯(예: b2)에 ColorBuffer를 업데이트 및 바인딩합니다.
 	colorBuffer->SetPSBuffer(2);  // b2 슬롯에 바인딩 (셰이더 코드와 일치해야 함)
 
-	DC->PSSetSamplers(0, 1, &sampler[1]);
+	DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 	
 	//// SRV를 픽셀 셰이더에 바인딩
 	DC->PSSetShaderResources(0, 1, srv.GetAddressOf());

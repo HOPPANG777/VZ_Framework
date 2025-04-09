@@ -101,6 +101,7 @@ void RenderStates::CreateSamplerDesc()
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;		// U 좌표에 대해 텍스처 좌표를 래핑
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;		// V 좌표에 대해 텍스처 좌표를 래핑
 	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;		// W 좌표에 대해 텍스처 좌표를 래핑
+	samplerDesc.MipLODBias = 0.0f;
 	samplerDesc.MaxAnisotropy = 1;							// 아니소트로피 필터링에서 사용 (여기서는 사용안함)
 	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;	// 비교 샘플링에서 사용 (여기서는 사용안함)
 	samplerDesc.MinLOD = FLT_MIN;							// 텍스처의 최소 LOD 레벨 설정

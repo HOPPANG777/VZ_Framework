@@ -297,6 +297,7 @@ void Graphics::CreateDirect3D()
     CHECK(hr);  // HRESULT가 성공했는지 확인.
 
     // 여기서 device가 생성되었으므로 InfoQueue를 설정할 수 있음
+    /*
     ID3D11InfoQueue* pInfoQueue = nullptr;
     if (SUCCEEDED(device->QueryInterface(__uuidof(ID3D11InfoQueue), (void**)&pInfoQueue)))
     {
@@ -316,7 +317,7 @@ void Graphics::CreateDirect3D()
 
         pInfoQueue->Release();
     }
-
+    */
 }
 
 void Graphics::CreateDirect2D()

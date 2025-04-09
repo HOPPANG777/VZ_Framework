@@ -266,9 +266,6 @@
     <ClInclude Include="Utilities\AnimationClip.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Structs\UIElement.h">
-      <Filter>Structs</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\Gizmo.h">
       <Filter>Utilities</Filter>
     </ClInclude>
@@ -295,9 +292,6 @@
     </ClInclude>
     <ClInclude Include="Components\TypingText.h">
       <Filter>Components\Fonts</Filter>
-    </ClInclude>
-    <ClInclude Include="Structs\LoadingStatus.h">
-      <Filter>Structs</Filter>
     </ClInclude>
     <ClInclude Include="Components\Transform.h">
       <Filter>Components\Transform</Filter>

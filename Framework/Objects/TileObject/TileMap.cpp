@@ -39,7 +39,7 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 	//indexBuffer
 	{
 		indexBuffer = make_unique<IndexBuffer>();
-		indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE, true);
+		indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
 	}
 
 	//vertexBuffer
@@ -92,7 +92,7 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 		// 시계방향 설정 (false == 시계 방향 // true == 반 시계 방향)
 		desc.FrontCounterClockwise = false;
 
-		HRESULT hr = DEVICE->CreateRasterizerState(&desc, &rs);
+		HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
 		CHECK(hr);
 	}
 
@@ -100,21 +100,21 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 	{
 		D3D11_SAMPLER_DESC desc;
 		RenderStates::GetSamplerDesc(&desc);
-		RenderStates::CreateSampler(&desc, &sampler[0]);
+		RenderStates::CreateSampler(&desc, sampler[0].GetAddressOf());
 
 		// 선형보간
 		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
-		RenderStates::CreateSampler(&desc, &sampler[1]);
+		RenderStates::CreateSampler(&desc, sampler[1].GetAddressOf());
 	}
 
 	// Blend
 	{
 		D3D11_BLEND_DESC desc;
 		RenderStates::GetBlendDesc(&desc);
-		RenderStates::CreateBlend(&desc, &blend[0]);
+		RenderStates::CreateBlend(&desc, blend[0].GetAddressOf());
 
 		desc.RenderTarget[0].BlendEnable = true;
-		RenderStates::CreateBlend(&desc, &blend[1]);
+		RenderStates::CreateBlend(&desc, blend[1].GetAddressOf());
 	}
 }
 
@@ -250,7 +250,7 @@ void TileMap::Render()
 	vertexShader->SetShader();
 	pixelShader->SetShader();
 
-	DC->PSSetSamplers(0, 1, &sampler[1]);
+	DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 
 	// 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
 	DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
@@ -259,6 +259,7 @@ void TileMap::Render()
 	DC->RSSetState(rs.Get());
 
 	DC->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
+
 
 	// 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
 	for (UINT y = 0; y < height; y++)

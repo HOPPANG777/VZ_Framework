@@ -203,7 +203,6 @@
     <ClInclude Include="Objects\SpriteObject\Sprite.h" />
     <ClInclude Include="Objects\TileObject\TileMap.h" />
     <ClInclude Include="Components\PlayerMove.h" />
-    <ClInclude Include="Structs\LoadingStatus.h" />
     <ClInclude Include="Structs\FontBrushDesc.h" />
     <ClInclude Include="Structs\FontTextDesc.h" />
     <ClInclude Include="Managers\CollisionManager.h" />
@@ -213,7 +212,6 @@
     <ClInclude Include="Managers\Texture2DManager.h" />
     <ClInclude Include="Structs\WinDesc.h" />
     <ClInclude Include="Utilities\Gizmo.h" />
-    <ClInclude Include="Structs\UIElement.h" />
     <ClInclude Include="Utilities\AnimationClip.h" />
     <ClInclude Include="Objects\TextureObject\AnimationRect.h" />
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
