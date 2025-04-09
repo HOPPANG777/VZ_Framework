@@ -71,12 +71,12 @@ void Scene_04::Awake()
 	// Wind
 	{
 		// 예시: 플레이어를 뒤로 밀어내는 바람 영역 생성 
-	// 예를 들어, x축 기준으로 300~500 사이, y축은 전체, z는 0 (2D 게임이라 가정)
-		Vector3 windRegionMin = { 300, -1000, 0 };
-		Vector3 windRegionMax = { 700, 1000, 0 };
+		// 예를 들어, x축 기준으로 300~500 사이, y축은 전체, z는 0 (2D 게임이라 가정)
+		Vector3 windRegionMin = { 45, -1000, 0 };
+		Vector3 windRegionMax = { 600, 1000, 0 };
 		// 바람 방향: 플레이어를 왼쪽으로 밀어낸다고 하면, (-1, 0, 0)
 		Vector3 windDirection = { -1, 0, 0 };
-		float windIntensity = 400.0f; // 적절한 값 조절
+		float windIntensity = 220.0f; // 적절한 값 조절
 		
 		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
 		windObject->AddComponent(make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));

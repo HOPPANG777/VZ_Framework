@@ -39,6 +39,7 @@ private:
 	void EnumerateAdapters();
 	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);
 
+private:
 	void CreateDirect3D();
 	void CreateDirect2D();
 	void CreateDirectWrite();
