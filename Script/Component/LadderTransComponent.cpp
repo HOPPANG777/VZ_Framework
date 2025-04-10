@@ -39,7 +39,7 @@ void LadderTransComponent::OnLadderCollision(Collider* other)
     // 상대 오브젝트가 LumberAxe인지 체크 (예: 이름에 "LumberAxe" 포함)
     if (other->GetOwner()->GetName().find("LumberAxe") != string::npos)
     {
-        const std::shared_ptr<LadderComponent>& logPathComp = GetOwner()->GetComponent<LadderComponent>("LadderComponent");
+        const std::shared_ptr<LadderTransComponent>& logPathComp = GetOwner()->GetComponent<LadderTransComponent>("LadderComponent");
         if (logPathComp) logPathComp->OnAxeCollision();
     }
 }
