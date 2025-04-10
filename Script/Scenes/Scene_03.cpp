@@ -5,13 +5,14 @@ void Scene_03::Awake()
 {
 	isLoaded = false;
 
+	
 	// Player
 	{
 		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -300, 0));
 		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 	}
-
+	
 	// Floor
 	{
 		std::shared_ptr<ColorLine> floorLine1 = std::make_shared<ColorLine>(CENTER + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
@@ -28,7 +29,7 @@ void Scene_03::Awake()
 		for (std::shared_ptr<Object> flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
 		for (std::shared_ptr<Object> flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
-
+	
 	// House
 	{
 		house.push_back(std::make_shared<TextureRect>(CENTER + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
@@ -81,7 +82,7 @@ void Scene_03::Awake()
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map01.data");
 	}
-
+	
 	// Log
 	{
 		std::shared_ptr<TextureRect> logRect = std::make_shared<TextureRect>(CENTER + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
@@ -91,6 +92,7 @@ void Scene_03::Awake()
 		COLLISION->AddCollider(logRect->GetComponent<BoxCollider>("BoxCollider"));
 		log.push_back(logRect);
 	}
+	
 
 	isLoaded = true;
 }

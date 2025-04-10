@@ -342,7 +342,7 @@ void TileMap::Load(const string& path)
 	ifstream fin(path);
 	if (fin.fail())
 	{
-		HelpMe::Get()->Log("파일이 존재하지 않습니다. 이름을 정확히 적어주세요.");
+		cout << "파일이 존재하지 않습니다. 이름을 정확히 적어주세요." << endl;
 		return;
 	}
 
@@ -407,7 +407,7 @@ void TileMap::Load(const string& path)
 
 	// 디버그용 백업 (원하는 경우)
 	Save(BuildTilePath + "After.txt");
-	HelpMe::Get()->Log("타일맵 불러오기 완료!");
+	cout << "타일맵 불러오기 완료!" << endl;
 }
 
 Tile* TileMap::GetTile(Vector3 mPos)

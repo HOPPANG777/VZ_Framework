@@ -35,6 +35,7 @@
 #include <future>
 #include <sstream>
 #include <exception>
+#include <crtdbg.h>
 
 using namespace std;
 
