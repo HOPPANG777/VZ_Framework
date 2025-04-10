@@ -22,6 +22,7 @@
     <ClCompile Include="Component\LogPathCreator.cpp" />
     <ClCompile Include="Component\HitComponent.cpp" />
     <ClCompile Include="Component\InteractionComponent.cpp" />
+    <ClCompile Include="Component\LadderTransComponent.cpp" />
     <ClCompile Include="Manager\BattleManager.cpp" />
     <ClCompile Include="Component\EnemyAI.cpp" />
     <ClCompile Include="Component\LumberAxeComponent.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="Component\HitComponent.h" />
     <ClInclude Include="Component\InteractionComponent.h" />
     <ClInclude Include="Interface\IInteractable.h" />
+    <ClInclude Include="Component\LadderTransComponent.h" />
     <ClInclude Include="Manager\BattleManager.h" />
     <ClInclude Include="Component\EnemyAI.h" />
     <ClInclude Include="Component\LumberAxeComponent.h" />

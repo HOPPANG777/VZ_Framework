@@ -1,22 +1,6 @@
 #include "stdafx.h"
 #include "LogPathCreator.h"
 
-LogPathCreator::LogPathCreator(const string& name)
-    : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0)
-{
-
-}
-
-void LogPathCreator::Update()
-{
-
-}
-
-void LogPathCreator::Render()
-{
-
-}
-
 void LogPathCreator::OnAxeCollision()
 {
     // 이미 변환된 경우에는 더 이상 처리하지 않음

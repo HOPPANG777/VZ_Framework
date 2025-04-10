@@ -5,12 +5,12 @@
 class LogPathCreator : public Component
 {
 public:
-    LogPathCreator(const string& name = "LogPathCreator");
+    LogPathCreator(const string& name = "LogPathCreator") : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0) {}
     virtual ~LogPathCreator() override = default;
 
 public:
-    virtual void Update() override;
-    virtual void Render() override;
+    virtual void Update() override {}
+    virtual void Render() override {}
 
 public:
     // 도끼와 충돌 시 호출될 함수
