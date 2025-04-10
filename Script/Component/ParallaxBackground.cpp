@@ -45,7 +45,7 @@ void ParallaxBackground::Update()
             bgLayerDup[i]->SetPosition(newBgDupPos);
 
             // 무한 스크롤 처리: 배경 너비 (여기서는 WIN_DEFAULT_WIDTH로 가정)
-            float bgWidth = WIN_DEFAULT_WIDTH;
+            float bgWidth = WIN_DEFAULT_WIDTH * 1.2f;
 
             //// 만약 원본 배경이 완전히 왼쪽으로 벗어났다면, 복제 배경의 오른쪽에 재배치
             //if (newBgPos.x + bgWidth * 0.5f < camPos.x)
@@ -71,7 +71,7 @@ void ParallaxBackground::Update()
             }
 
             // 반대쪽도 while 루프로
-            while (newBgPos.x > camPos.x + WIN_DEFAULT_WIDTH - bgWidth * 0.5f)
+            while (newBgPos.x > camPos.x + (WIN_DEFAULT_WIDTH * 1.2f) - bgWidth * 0.5f)
             {
                 // 배경이 화면 오른쪽 밖으로 벗어났다면, 왼쪽으로 bgWidth만큼 이동
                 bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() - Vector3(bgWidth, 0, 0));

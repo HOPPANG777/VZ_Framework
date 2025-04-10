@@ -246,7 +246,6 @@
     <ClInclude Include="Renders\IA\InputLayout.h" />
     <ClInclude Include="Renders\IA\IndexBuffer.h" />
     <ClInclude Include="Utilities\HelpMe.h" />
-    <ClInclude Include="Interfaces\IObject.h" />
     <ClInclude Include="Utilities\Random.h" />
     <ClInclude Include="Renders\IA\VertexBuffer.h" />
     <ClInclude Include="Renders\RenderResources\VertexType.h" />

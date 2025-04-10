@@ -63,6 +63,7 @@ private:
 	ComPtr<ID3D11RenderTargetView> rtv = nullptr;
 	D3D11_VIEWPORT viewport = { 0 };
 	Color clearColor = { 0.4f, 0.4f, 0.4f, 1.0f };
+	//Color clearColor = Color(0xcff0cc);
 
 	UINT numerator = 0;
 	UINT denominator = 1;

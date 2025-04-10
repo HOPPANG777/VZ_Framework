@@ -7,10 +7,9 @@ SceneManager::SceneManager() {}
 SceneManager::~SceneManager()
 {
 	// std::unordered_map<std::string, std::shared_ptr<Scene>>::iterator 사용
-	std::unordered_map<std::string, std::shared_ptr<Scene>>::iterator it;
-	for (it = sceneList.begin(); it != sceneList.end(); ++it)
+	for (auto& scene : sceneList)
 	{
-		it->second->Destroy();
+		scene.second->Destroy();
 	}
 	sceneList.clear();
 }
@@ -32,7 +31,7 @@ void SceneManager::AddScene(const std::string& sceneName, std::shared_ptr<Scene>
 void SceneManager::LoadScene(const std::string& sceneName)
 {
 	// 명시적 iterator 타입 사용
-	std::unordered_map<std::string, std::shared_ptr<Scene>>::const_iterator it = sceneList.find(sceneName);
+	const auto& it = sceneList.find(sceneName);
 	if (it == sceneList.end())
 	{
 		printf("Scene '%s' not found.\n", sceneName.c_str());
@@ -67,7 +66,7 @@ void SceneManager::LoadScene(const std::string& sceneName)
 // Loading Scene을 설정하는 함수
 void SceneManager::SetLoadingScene(const std::string& sceneName)
 {
-	std::unordered_map<std::string, std::shared_ptr<Scene>>::const_iterator it = sceneList.find(sceneName);
+	const auto& it = sceneList.find(sceneName);
 	if (it != sceneList.end())
 	{
 		loadingScene = it->second;
@@ -81,7 +80,7 @@ void SceneManager::SetLoadingScene(const std::string& sceneName)
 // Splash Scene을 설정하는 함수
 void SceneManager::SetSplashScene(const std::string& sceneName)
 {
-	std::unordered_map<std::string, std::shared_ptr<Scene>>::const_iterator it = sceneList.find(sceneName);
+	const auto& it = sceneList.find(sceneName);
 	if (it != sceneList.end())
 	{
 		splashScene = it->second;

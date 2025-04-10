@@ -151,7 +151,7 @@ void Graphics::EnumerateAdapters()
         if (hr == DXGI_ERROR_NOT_FOUND) break;
         assert(SUCCEEDED(hr));
 
-        std::unique_ptr<D3DEnumAdapterInfo> adapterInfo = make_unique<D3DEnumAdapterInfo>();
+        const auto& adapterInfo = make_unique<D3DEnumAdapterInfo>();
         adapterInfo->adapterOrdinal = index;
 
         // 기수 / 서수
@@ -174,7 +174,7 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
     if (DXGI_ERROR_NOT_FOUND == hr) return false;
     CHECK(hr);
 
-    std::shared_ptr<D3DEnumOutputInfo> outputInfo = make_shared<D3DEnumOutputInfo>();
+    const auto& outputInfo = make_shared<D3DEnumOutputInfo>();
 
     output->GetDesc(&outputInfo->outputDesc);
     outputInfo->output = output;
@@ -253,7 +253,7 @@ void Graphics::CreateDirect3D()
     for (UINT i = 0; i < adapterInfos.size(); i++)
     {
         // adapterInfos[i]는 unique_ptr
-        std::unique_ptr<D3DEnumAdapterInfo>& info = adapterInfos[i];
+        const auto& info = adapterInfos[i];
         UINT64 dedicatedMem = info->adapterDesc.DedicatedVideoMemory;
 
         if (dedicatedMem > maxVRam)

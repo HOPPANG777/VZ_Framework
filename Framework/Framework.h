@@ -125,6 +125,7 @@ using namespace SimpleMath;
 
 #define SAFE_DELETE(p) { if (p) {delete p ; p = nullptr;} }
 #define SAFE_DELETE_ARRAY(p) { if (p) { delete[] p ; p = nullptr;} }
+#define SAFE_RELEASE(p)		 { if(p) { (p)->Release(); (p) = nullptr; } }   
 
 #define DECLARE_SINGLETON(CLASS_NAME)						\
 private:													\
@@ -222,7 +223,6 @@ const string TilePath = "../../../_Data/_TileData/";
 const string BuildTilePath = "_Data/_TileData/";
 
 //Interface
-#include "Interfaces/IObject.h"
 #include "Interfaces/IScene.h"
 #include "Interfaces/IColorable.h"
 

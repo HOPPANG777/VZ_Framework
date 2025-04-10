@@ -24,7 +24,7 @@ void Scene_02::Start()
 
 void Scene_02::Destroy()
 {
-    for (std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj.reset();
+    for (auto& obj : objects) if (obj != nullptr) obj.reset();
 
     if (splash != nullptr) splash.reset();
 }
@@ -33,7 +33,7 @@ void Scene_02::FixedUpdate() {}
 
 void Scene_02::Update()
 {
-    std::shared_ptr<TextureRect> rect = dynamic_pointer_cast<TextureRect>(splash);
+    const auto& rect = dynamic_pointer_cast<TextureRect>(splash);
     
     if (!isDone)
     {
@@ -52,7 +52,7 @@ void Scene_02::Update()
     }
     // 그 외 스플래시 애니메이션 업데이트
 
-    for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Update();
+    for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 
     if (splash != nullptr) splash->Update();
 }
@@ -61,7 +61,7 @@ void Scene_02::LateUpdate() {}
 
 void Scene_02::Render()
 {
-    for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Render();
+    for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 
     if (splash != nullptr) splash->Render();
 }

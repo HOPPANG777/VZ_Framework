@@ -7,8 +7,8 @@ void Scene_03::Awake()
 
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -400, 0));
-		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -330, 0));
+		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -300, 0));
+		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 	}
 
@@ -59,8 +59,8 @@ void Scene_03::Awake()
 
 		for (int i = 0; i < 4; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/StartScene/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/StartScene/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -106,19 +106,19 @@ void Scene_03::Destroy()
 {
 	if (tmap != nullptr) tmap.reset();
 
-	for (std::shared_ptr<Object>& floors : floor)if (floors != nullptr)floors.reset();
+	for (auto& floors : floor)if (floors != nullptr)floors.reset();
 
-	for (std::shared_ptr<Object>& houseElem : house)if (houseElem != nullptr)houseElem.reset();
+	for (auto& houseElem : house)if (houseElem != nullptr)houseElem.reset();
 
-	for (std::shared_ptr<Object>& bg : bgLayer)if (bg != nullptr)bg.reset();
+	for (auto& bg : bgLayer)if (bg != nullptr)bg.reset();
 
-	for (std::shared_ptr<Object>& bgdup : bgLayerDup)if (bgdup != nullptr)bgdup.reset();
+	for (auto& bgdup : bgLayerDup)if (bgdup != nullptr)bgdup.reset();
 
-	for (std::shared_ptr<Object>& t : text)if (t != nullptr)t.reset();
+	for (auto& t : text)if (t != nullptr)t.reset();
 
-	for (std::shared_ptr<Object>& tp : textPoint)if (tp != nullptr)tp.reset();
+	for (auto& tp : textPoint)if (tp != nullptr)tp.reset();
 
-	for (std::shared_ptr<Object>& l : log) if (l != nullptr) l.reset();
+	for (auto& l : log) if (l != nullptr) l.reset();
 
 	if (testPlayer != nullptr)testPlayer.reset();
 
@@ -139,19 +139,19 @@ void Scene_03::Update()
 
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
-	for (const std::shared_ptr<Object>& bg : bgLayer) if (bg != nullptr) bg->Update();
+	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
 
-	for (const std::shared_ptr<Object>& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
+	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 
-	for (const std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors->Update();
+	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
 
-	for (const std::shared_ptr<Object>& houseElem : house) if (houseElem != nullptr) houseElem->Update();
+	for (const auto& houseElem : house) if (houseElem != nullptr) houseElem->Update();
 
-	for (const std::shared_ptr<Object>& t : text) if (t != nullptr) t->Update();
+	for (const auto& t : text) if (t != nullptr) t->Update();
 
-	for (const std::shared_ptr<Object>& tp : textPoint) if (tp != nullptr) tp->Update();
+	for (const auto& tp : textPoint) if (tp != nullptr) tp->Update();
 
-	for (const std::shared_ptr<Object>& l : log) if (l != nullptr) l->Update();
+	for (const auto& l : log) if (l != nullptr) l->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
 
@@ -198,9 +198,9 @@ void Scene_03::Render()
 
 	if (tmap != nullptr) tmap->Render();
 
-	for (const std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors->Render();
+	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
 
-	for (const std::shared_ptr<Object>& l : log) if (l != nullptr) l->Render();
+	for (const auto& l : log) if (l != nullptr) l->Render();
 
 	if (house[1] != nullptr) house[1]->Render();
 
@@ -218,9 +218,9 @@ void Scene_03::Render()
 
 	if (house[0] != nullptr) house[0]->Render();
 
-	for (const std::shared_ptr<Object>& tp : textPoint) if (tp != nullptr) tp->Render();
+	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
 
-	for (const std::shared_ptr<Object>& t : text) if (t != nullptr) t->Render();
+	for (const auto& t : text) if (t != nullptr) t->Render();
 }
 
 void Scene_03::PostRender()

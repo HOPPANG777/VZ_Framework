@@ -116,7 +116,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
 
 PlayerUnit::~PlayerUnit()
 {
- 
+
 }
 
 void PlayerUnit::Update()

@@ -12,16 +12,14 @@ PlayerMove::PlayerMove(const string& name, float spd)
 
 void PlayerMove::Update()
 {
-    const std::shared_ptr<Transform>& transform = owner->GetComponent<Transform>("Transform");
+    const auto& transform = owner->GetComponent<Transform>("Transform");
     if (!transform) return;
 
     Vector3 pos = transform->GetPosition();
 
     // 숙이기 상태 업데이트
-    if (INPUT->KeyPressed(VK_CONTROL))
-        isCrouch = true;
-    else if (INPUT->KeyUp(VK_CONTROL))
-        isCrouch = false;
+    if (INPUT->KeyPressed(VK_CONTROL)) isCrouch = true;
+    else if (INPUT->KeyUp(VK_CONTROL)) isCrouch = false;
 
     // 좌우 이동 처리
     currentSpeed = isCrouch ? speed * 0.25f : speed;

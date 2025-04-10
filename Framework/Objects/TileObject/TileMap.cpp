@@ -186,7 +186,7 @@ void TileMap::ResizeMap(UINT newWidth, UINT newHeight)
             else
             {
                 // 새로 확장된 영역이면, 새로운 타일을 생성
-				const std::shared_ptr<Tile>& tile = make_shared<Tile>();
+				const auto& tile = make_shared<Tile>();
                 tile->SetPosition(Vector3((float)x * spacing, (float)y * spacing, 0.0f));
                 tile->SetIndex(index);
                 // 새로 생성되는 타일은 검은색으로 설정

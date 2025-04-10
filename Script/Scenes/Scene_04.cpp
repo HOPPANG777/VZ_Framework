@@ -32,8 +32,8 @@ void Scene_04::Awake()
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH, 0, 0), Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
+			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -78,7 +78,7 @@ void Scene_04::Awake()
 		Vector3 windDirection = { -1, 0, 0 };
 		float windIntensity = 220.0f; // 적절한 값 조절
 		
-		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
+		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f);
 		windObject->AddComponent(make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));
 	}
 
@@ -103,13 +103,13 @@ void Scene_04::Destroy()
 
 	if (windObject != nullptr) windObject.reset();
 
-	for (std::shared_ptr<Object>& bg : bgLayer) if (bg != nullptr) bg.reset();
-
-	for (std::shared_ptr<Object>& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
-
-	for (std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors.reset();
-
-	for (std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj.reset();
+	for (auto& bg : bgLayer) if (bg != nullptr) bg.reset();
+		 
+	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup.reset();
+		 
+	for (auto& floors : floor) if (floors != nullptr) floors.reset();
+		 
+	for (auto& obj : objects) if (obj != nullptr) obj.reset();
 
 	SCENE->ResetPlayer();
 }
@@ -121,27 +121,16 @@ void Scene_04::FixedUpdate()
 void Scene_04::Update()
 {
 	if (tmap != nullptr) tmap->Update();
-
 	if (backgroundObject != nullptr) backgroundObject->Update();
-
 	if (puzzleRock != nullptr) puzzleRock->Update();
-
 	if (lumberAxe != nullptr) lumberAxe->Update();
-
 	if (testPlayer != nullptr) testPlayer->Update();
-
-	for (const std::shared_ptr<Object>& bg : bgLayer) if (bg != nullptr) bg->Update();
-
-	for (const std::shared_ptr<Object>& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
-
-	for (const std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors->Update();
-
-	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Update();
-	
-	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
-
 	if (windObject != nullptr) windObject->Update();
-
+	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
+	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
+	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
+	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 }
 
 void Scene_04::LateUpdate()
@@ -151,19 +140,12 @@ void Scene_04::LateUpdate()
 void Scene_04::Render()
 {
 	if (backgroundObject != nullptr) backgroundObject->Render();
-
 	if (tmap != nullptr) tmap->Render();
-
-	for (const std::shared_ptr<Object>& floors : floor) if (floors != nullptr) floors->Render();
-
-	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Render();
-
+	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 	if (puzzleRock != nullptr) puzzleRock->Render();
-
 	if (lumberAxe != nullptr) lumberAxe->Render();
-
 	if (testPlayer != nullptr) testPlayer->Render();
-
 	if (windObject != nullptr) windObject->Render();
 }
 

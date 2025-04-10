@@ -179,9 +179,6 @@
     <ClInclude Include="Objects\BaseObject\Drawable.h">
       <Filter>Objects\BaseObject</Filter>
     </ClInclude>
-    <ClInclude Include="Interfaces\IObject.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="Interfaces\IScene.h">
       <Filter>Interfaces</Filter>
     </ClInclude>

@@ -20,14 +20,14 @@ void Scene_01::Awake()
 
 void Scene_01::Start()
 {
-	std::shared_ptr<Button> startButtonComp = make_shared<Button>();
+	const auto& startButtonComp = make_shared<Button>();
 	startButtonComp->SetOnClick([this]() { SCENE->LoadScene("StartStage"); });
 	startButton->AddComponent(startButtonComp);
 }
 
 void Scene_01::Destroy()
 {
-	for (std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj.reset();
+	for (auto& obj : objects) if (obj != nullptr) obj.reset();
 	if (startButton != nullptr) startButton.reset();
 }
 
@@ -43,7 +43,7 @@ void Scene_01::Update()
 		SCENE->LoadScene("GeometryScene");
 	}
 
-	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Update();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 	if (startButton != nullptr) startButton->Update();
 }
 
@@ -54,7 +54,7 @@ void Scene_01::LateUpdate()
 
 void Scene_01::Render()
 {
-	for (const std::shared_ptr<Object>& obj : objects) if (obj != nullptr) obj->Render();
+	for (const auto& obj : objects) if (obj != nullptr) obj->Render();
 	if (startButton != nullptr) startButton->Render();
 }
 

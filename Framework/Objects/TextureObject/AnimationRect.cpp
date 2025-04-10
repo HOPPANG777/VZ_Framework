@@ -164,7 +164,7 @@ void AnimationRect::Update()
     #pragma endregion
 
      // 1) Animator 가져오기 & 애니메이션 Update
-    const std::shared_ptr<Animator>& animator = GetComponent<Animator>("Animator");
+    const auto& animator = GetComponent<Animator>("Animator");
     if (animator)
     {
         animator->Update();
