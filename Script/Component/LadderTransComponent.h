@@ -13,7 +13,7 @@ public:
 	void Render() override {}
 
 public:
-	void OnAxeCollision(Collider* other);
+	void OnAxeCollision();
 	void OnLadderCollision(Collider* other);
 
 private:

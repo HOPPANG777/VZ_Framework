@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "LadderTransComponent.h"
 
-void LadderTransComponent::OnAxeCollision(Collider* other)
+void LadderTransComponent::OnAxeCollision()
 {
     // 이미 변환된 경우에는 더 이상 처리하지 않음
     if (transformed) return;
