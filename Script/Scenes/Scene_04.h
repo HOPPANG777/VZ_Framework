@@ -7,6 +7,7 @@
 #include "Object/LumberAxe.h"
 #include "Object/Wind.h"
 #include "Component/WindZone.h"
+#include "Object/DialogTextBox.h"
 
 class Scene_04 : public Scene
 {
@@ -30,6 +31,8 @@ public:
 
 private:
 	bool isLoaded = false;
+	bool isTest = false;
+	bool isTest1 = false;
 
 	shared_ptr<Object> testPlayer;
 	shared_ptr<Object> lumberAxe;
@@ -37,9 +40,9 @@ private:
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
-	vector<shared_ptr<Object>> objects;
 
 	shared_ptr<Object> puzzleRock;
+	shared_ptr<Object> bridge;
 
 	shared_ptr<Object> windObject;
 

@@ -5,7 +5,6 @@ void Scene_03::Awake()
 {
 	isLoaded = false;
 
-	
 	// Player
 	{
 		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -300, 0));
@@ -107,25 +106,15 @@ void Scene_03::Start()
 void Scene_03::Destroy()
 {
 	if (tmap != nullptr) tmap.reset();
-
-	for (auto& floors : floor)if (floors != nullptr)floors.reset();
-
-	for (auto& houseElem : house)if (houseElem != nullptr)houseElem.reset();
-
-	for (auto& bg : bgLayer)if (bg != nullptr)bg.reset();
-
-	for (auto& bgdup : bgLayerDup)if (bgdup != nullptr)bgdup.reset();
-
-	for (auto& t : text)if (t != nullptr)t.reset();
-
-	for (auto& tp : textPoint)if (tp != nullptr)tp.reset();
-
+	for (auto& floors : floor)if (floors != nullptr) floors.reset();
+	for (auto& houseElem : house)if (houseElem != nullptr) houseElem.reset();
+	for (auto& bg : bgLayer)if (bg != nullptr) bg.reset();
+	for (auto& bgdup : bgLayerDup)if (bgdup != nullptr) bgdup.reset();
+	for (auto& t : text)if (t != nullptr) t.reset();
+	for (auto& tp : textPoint)if (tp != nullptr) tp.reset();
 	for (auto& l : log) if (l != nullptr) l.reset();
-
 	if (testPlayer != nullptr)testPlayer.reset();
-
 	if (lumberAxe != nullptr)lumberAxe.reset();
-
 	if (backgroundObject != nullptr)backgroundObject.reset();
 }
 
@@ -134,25 +123,15 @@ void Scene_03::FixedUpdate() {}
 void Scene_03::Update()
 {
 	if (tmap != nullptr) tmap->Update();
-
 	if (testPlayer != nullptr) testPlayer->Update();
-
 	if (lumberAxe != nullptr) lumberAxe->Update();
-
 	if (backgroundObject != nullptr) backgroundObject->Update();
-
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
-
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
-
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
-
 	for (const auto& houseElem : house) if (houseElem != nullptr) houseElem->Update();
-
 	for (const auto& t : text) if (t != nullptr) t->Update();
-
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Update();
-
 	for (const auto& l : log) if (l != nullptr) l->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
@@ -197,31 +176,18 @@ void Scene_03::LateUpdate() {}
 void Scene_03::Render()
 {
 	if (backgroundObject != nullptr) backgroundObject->Render();
-
 	if (tmap != nullptr) tmap->Render();
-
 	for (const auto& floors : floor) if (floors != nullptr) floors->Render();
-
 	for (const auto& l : log) if (l != nullptr) l->Render();
-
 	if (house[1] != nullptr) house[1]->Render();
-
 	if (house[2] != nullptr) house[2]->Render();
-
 	if (house[3] != nullptr) house[3]->Render();
-
 	if (house[4] != nullptr) house[4]->Render();
-
 	if (house[5] != nullptr) house[5]->Render();
-
 	if (lumberAxe != nullptr) lumberAxe->Render();
-
 	if (testPlayer != nullptr) testPlayer->Render();
-
 	if (house[0] != nullptr) house[0]->Render();
-
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
-
 	for (const auto& t : text) if (t != nullptr) t->Render();
 }
 

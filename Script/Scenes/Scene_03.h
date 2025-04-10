@@ -41,6 +41,7 @@ private:
 	vector<shared_ptr<Object>> log;
 
 	shared_ptr<Object> lumberAxe;
+	shared_ptr<Object> testPlayer;
 
 	shared_ptr<Object> backgroundObject;
 
@@ -51,6 +52,5 @@ private:
 
 	unique_ptr<TileMap> tmap;
 
-	shared_ptr<Object> testPlayer;
 };
 

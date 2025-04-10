@@ -18,13 +18,6 @@ DialogTextBox::DialogTextBox(const string& name, const Vector3& position, const 
     arrowIndicator = make_shared<TextureRect>(arrowPos, Vector3(25, 25, 0), 0.0f, TexturePath + L"UI/Arrow.png");
 }
 
-DialogTextBox::~DialogTextBox()
-{
-	background.reset();
-	arrowIndicator.reset();
-	playerTexture.reset();
-}
-
 void DialogTextBox::Update()
 {
 	if (!active) return;

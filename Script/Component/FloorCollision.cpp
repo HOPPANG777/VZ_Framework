@@ -16,20 +16,22 @@ void FloorCollision::Update()
 
     if (floorCollider->IsColliding(playerCollider.get()))
     {
+        // 바닥의 상단 위치 계산 (플랫폼 위쪽)
         float floorTop = floorCollider->GetCenter().y + floorCollider->GetSize().y * 0.5f;
+        // 플레이어의 바닥 위치 계산
         float playerBottom = playerCollider->GetCenter().y - playerCollider->GetSize().y * 0.5f;
 
-        // 침투 여부 확인
+        // 단순 비교: 플레이어의 하단이 바닥 위로 침투했으면 보정
         if (playerBottom < floorTop)
         {
-            // 위치 보정
+            // 플레이어 상태 업데이트 (낙하 중 해제 등)
+            playerController->SetFall(false);
+            playerController->SetCollision(true);
+
+            // 위치 보정: 플레이어의 바닥이 딱 플랫폼 위에 위치하도록
             Vector3 curPos = player->GetPosition();
             float desiredY = floorTop + playerCollider->GetSize().y * 0.5f;
-            player->SetPosition({ curPos.x, desiredY, curPos.z });
-
-            // 충돌 상태 설정
-            playerController->SetCollision(true);
-            playerController->SetFall(false); 
+            player->SetPosition({ curPos.x, desiredY, 0 });
         }
     }
 
