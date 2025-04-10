@@ -52,11 +52,11 @@ void Texts::Detach()
 
 FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 {
-	const auto& newBrushDesc = make_unique<FontBrushDesc>();
+	auto newBrushDesc = make_unique<FontBrushDesc>();
 	newBrushDesc->color = color;
 
-	const auto& brushIt = std::find_if(fontBrush.begin(), fontBrush.end(), 
-		[&](const auto& ptr) -> bool
+	const auto& brushIt = find_if(fontBrush.begin(), fontBrush.end(),
+		[&newBrushDesc](const unique_ptr<FontBrushDesc>& ptr)
 		{
 			return *ptr == *newBrushDesc;
 		});
@@ -81,18 +81,18 @@ FontTextDesc* Texts::GetOrCreateTextFormat
 	const DWRITE_FONT_STRETCH& stretch
 )
 {
-	const auto& newTextDesc = make_unique<FontTextDesc>();
+	auto newTextDesc = make_unique<FontTextDesc>();
 	newTextDesc->font = font;
 	newTextDesc->fontSize = size;
 	newTextDesc->weight = weight;
 	newTextDesc->style = style;
 	newTextDesc->stretch = stretch;
 
-	const auto& textIt = std::find_if(fontText.begin(), fontText.end(),
-			[&](const auto& ptr) -> bool
-			{
-				return *ptr == *newTextDesc;
-			});
+	const auto& textIt = find_if(fontText.begin(), fontText.end(),
+		[&newTextDesc](const unique_ptr<FontTextDesc>& ptr)
+		{
+			return *ptr == *newTextDesc;
+		});
 
 	if (textIt != fontText.end()) return textIt->get();
 
