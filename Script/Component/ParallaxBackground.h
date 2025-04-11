@@ -16,15 +16,15 @@ public:
 
 public:
     // 배경 오브젝트와 복제 오브젝트를 세팅하는 함수 (외부에서 호출)
-    void SetLayer(int index, shared_ptr<Object> layer, shared_ptr<Object> layerDup);
+    void SetLayer(int index, Object* layer, Object* layerDup);
 
 private:
     // 실제 사용하는 레이어 수
     int layerCount = 5;
 
     // 각 레이어의 배경 오브젝트와 복제본 (배경 오브젝트는 TextureRect 등의 객체라고 가정)
-    shared_ptr<Object> bgLayer[MAX_LAYERS];
-    shared_ptr<Object> bgLayerDup[MAX_LAYERS];
+    Object* bgLayer[MAX_LAYERS];
+    Object* bgLayerDup[MAX_LAYERS];
 
     // 각 배경의 초기(원본) 위치 (월드 좌표)
     Vector3 bgOrigin[MAX_LAYERS];

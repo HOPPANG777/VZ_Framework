@@ -21,13 +21,13 @@ void Scene_04::Awake()
 
 	// Floor Collider
 	{
-		for (const std::shared_ptr<Object>& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
-		for (const std::shared_ptr<Object>& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer.get(), lumberAxe.get()));
+		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Background
 	{
-		std::shared_ptr<ParallaxBackground> parallax = make_shared<ParallaxBackground>("Parallax", 6);
+		const auto& parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
@@ -38,7 +38,7 @@ void Scene_04::Awake()
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
 
-			parallax->SetLayer(i, bgLayer[i], bgLayerDup[i]);
+			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
 		backgroundObject = make_shared<Object>("Background");
@@ -79,7 +79,7 @@ void Scene_04::Awake()
 		Vector3 windDirection = { -1, 0, 0 };
 		float windIntensity = 220.0f; // 적절한 값 조절
 		
-		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f);
+		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
 		windObject->AddComponent(make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));
 	}
 
@@ -93,8 +93,8 @@ void Scene_04::Awake()
 
 	// TextPoint Collider
 	{
-		for (std::shared_ptr<Object> textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-		for (std::shared_ptr<Object> textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
+		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 

@@ -8,9 +8,7 @@ public:
 
 public:
 	virtual void Update() override;
-	virtual void Render() override;
-
-private:
+	virtual void Render() override {}
 
 };
 

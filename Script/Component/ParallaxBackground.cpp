@@ -14,7 +14,7 @@ ParallaxBackground::ParallaxBackground(const string& compName, int layerCount)
     }
 }
 
-void ParallaxBackground::SetLayer(int index, shared_ptr<Object> layer, shared_ptr<Object> layerDup)
+void ParallaxBackground::SetLayer(int index, Object* layer, Object* layerDup)
 {
     if (index < 0 || index >= layerCount) return;
     bgLayer[index] = layer;

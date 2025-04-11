@@ -14,19 +14,19 @@ void Scene_03::Awake()
 	
 	// Floor
 	{
-		std::shared_ptr<ColorLine> floorLine1 = std::make_shared<ColorLine>(CENTER + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
+		const auto& floorLine1 = std::make_shared<ColorLine>(CENTER + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
 		floorLine1->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 		floor.push_back(floorLine1);
 
-		std::shared_ptr<ColorLine> floorLine2 = std::make_shared<ColorLine>(CENTER + Vector3(-170, -320, 0), 0, 0.0f, CLEAR);
+		const auto& floorLine2 = std::make_shared<ColorLine>(CENTER + Vector3(-170, -320, 0), 0, 0.0f, CLEAR);
 		floorLine2->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(950, 1, 0), GREEN));
 		floor.push_back(floorLine2);
 	}
 
 	// Floor Collider
 	{
-		for (std::shared_ptr<Object> flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
-		for (std::shared_ptr<Object> flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision", testPlayer.get(), lumberAxe.get()));
+		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 	
 	// House
@@ -49,13 +49,13 @@ void Scene_03::Awake()
 
 	// TextPoint Collider
 	{
-		for (std::shared_ptr<Object> textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-		for (std::shared_ptr<Object> textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
+		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Background
 	{
-		std::shared_ptr<ParallaxBackground> parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
+		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -65,7 +65,7 @@ void Scene_03::Awake()
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
 
-			parallax->SetLayer(i, bgLayer[i], bgLayerDup[i]);
+			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
 		backgroundObject = std::make_shared<Object>("Background");
@@ -84,7 +84,7 @@ void Scene_03::Awake()
 	
 	// Log
 	{
-		std::shared_ptr<TextureRect> logRect = std::make_shared<TextureRect>(CENTER + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
+		const auto& logRect = std::make_shared<TextureRect>(CENTER + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
 		logRect->AddComponent(std::make_shared<HitComponent>("HitComponent"));
 		logRect->AddComponent(std::make_shared<LogPathCreator>());
 		logRect->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 500, 0), BLACK));
@@ -113,9 +113,10 @@ void Scene_03::Destroy()
 	for (auto& t : text)if (t != nullptr) t.reset();
 	for (auto& tp : textPoint)if (tp != nullptr) tp.reset();
 	for (auto& l : log) if (l != nullptr) l.reset();
-	if (testPlayer != nullptr)testPlayer.reset();
-	if (lumberAxe != nullptr)lumberAxe.reset();
-	if (backgroundObject != nullptr)backgroundObject.reset();
+	if (testPlayer != nullptr) testPlayer.reset();
+	if (lumberAxe != nullptr) lumberAxe.reset();
+	if (backgroundObject != nullptr) backgroundObject.reset();
+	
 }
 
 void Scene_03::FixedUpdate() {}

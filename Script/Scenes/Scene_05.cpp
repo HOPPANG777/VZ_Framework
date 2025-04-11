@@ -18,7 +18,7 @@ void Scene_05::Awake()
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
 
-			parallax->SetLayer(i, bgLayer[i], bgLayerDup[i]);
+			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
 		backgroundObject = make_shared<Object>("Background");
@@ -46,8 +46,8 @@ void Scene_05::FixedUpdate()
 
 void Scene_05::Update()
 {
-	for (auto& bg : bgLayer) if (bg != nullptr) bg->Update();
-	for (auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
+	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
+	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 	if (backgroundObject != nullptr) backgroundObject->Update();
 }
 
