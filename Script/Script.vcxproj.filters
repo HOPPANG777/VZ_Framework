@@ -87,7 +87,10 @@
       <Filter>Object\Wind</Filter>
     </ClCompile>
     <ClCompile Include="Component\LadderTransComponent.cpp">
-      <Filter>Component\LadderTransComponent</Filter>
+      <Filter>Component\LadderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\LadderComponent.cpp">
+      <Filter>Component\LadderComponent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +189,10 @@
       <Filter>Object\Wind</Filter>
     </ClInclude>
     <ClInclude Include="Component\LadderTransComponent.h">
-      <Filter>Component\LadderTransComponent</Filter>
+      <Filter>Component\LadderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\LadderComponent.h">
+      <Filter>Component\LadderComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,7 +295,7 @@
     <Filter Include="Object\Wind">
       <UniqueIdentifier>{099ae48f-8c71-4e40-b549-96998d097031}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\LadderTransComponent">
+    <Filter Include="Component\LadderComponent">
       <UniqueIdentifier>{c36902e1-9522-4734-8b43-9581f2f7d881}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
