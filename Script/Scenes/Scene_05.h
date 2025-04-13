@@ -7,6 +7,7 @@
 #include "Component/LadderComponent.h"
 #include "Component/LadderTransComponent.h"
 #include "Object/DialogTextBox.h"
+#include "Component/WallCollision.h"
 
 class Scene_05 : public Scene
 {
@@ -37,6 +38,7 @@ private:
 	shared_ptr<Object> lumberAxe;
 
 	vector<shared_ptr<Object>> floor;
+	vector<shared_ptr<Object>> wall;
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
 

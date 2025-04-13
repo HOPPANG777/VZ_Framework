@@ -29,6 +29,20 @@ void Scene_05::Awake()
 		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
+	// Wall
+	{
+		wall.push_back(std::make_shared<ColorLine>(CENTER + Vector3(0, -330, 0), 0, 0.0f, CLEAR));
+		wall[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(1, 750, 0), GREEN));
+	}
+
+	// Wall Collider
+	{
+		for (const auto& wal : wall) if (wal != nullptr) wal->AddComponent(std::make_shared<WallCollision>("WallCollision", true));
+		for (const auto& wal : wall) if (wal != nullptr) wal->GetComponent<WallCollision>("WallCollision")->SetPlayer(testPlayer.get());
+		for (const auto& wal : wall) if (wal != nullptr) wal->GetComponent<WallCollision>("WallCollision")->SetLumberAxe(lumberAxe.get());
+		for (const auto& wal : wall) if (wal != nullptr) COLLISION->AddCollider(wal->GetComponent<BoxCollider>("BoxCollider"));
+	}
+
 	// Background
 	{
 		std::shared_ptr<ParallaxBackground> parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
@@ -101,6 +115,7 @@ void Scene_05::Destroy()
 	for (auto& flr : floor) if (flr != nullptr) flr.reset();
 	for (auto& t : text) if (t != nullptr) t.reset();
 	for (auto& tp : textPoint) if (tp != nullptr) tp.reset();
+	for (auto& wal : wall) if (wal != nullptr) wal.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
@@ -118,6 +133,7 @@ void Scene_05::Update()
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 	for (const auto& flr : floor) if (flr != nullptr) flr->Update();
+	for (const auto& wal : wall) if (wal != nullptr) wal->Update();
 	for (const auto& t : text) if (t != nullptr) t->Update();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Update();
 	if (backgroundObject != nullptr) backgroundObject->Update();
@@ -175,6 +191,7 @@ void Scene_05::Render()
 	if (backgroundObject != nullptr) backgroundObject->Render();
 	if (tmap != nullptr) tmap->Render();
 	for (const auto& flr : floor) if (flr != nullptr) flr->Render();
+	for (const auto& wal : wall) if (wal != nullptr) wal->Render();
 	if (ladder != nullptr) ladder->Render();
 	if (ladder2 != nullptr) ladder2->Render();
 	if (lumberAxe != nullptr) lumberAxe->Render();

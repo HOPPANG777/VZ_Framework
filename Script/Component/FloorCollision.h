@@ -22,8 +22,8 @@ public:
     Object* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
-    Object* player;
-    Object* lumberAxe;
+    Object* player = nullptr;
+    Object* lumberAxe = nullptr;
 
 };
 
