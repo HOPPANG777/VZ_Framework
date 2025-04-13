@@ -25,7 +25,9 @@ void Scene_03::Awake()
 
 	// Floor Collider
 	{
-		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision", testPlayer.get(), lumberAxe.get()));
+		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision"));
+		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetPlayer(testPlayer.get());
+		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
 		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 	
@@ -153,6 +155,7 @@ void Scene_03::Update()
 
 	if (log[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(lumberAxe->GetComponent<BoxCollider>("BoxCollider").get()) && isTest == false)
 	{
+		if (lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_IDLE_L || lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->GetState() == AxeState::AXE_IDLE_R) return;
 		isTest = true;
 		if (isTest == true)
 		{
@@ -167,7 +170,9 @@ void Scene_03::Update()
 
 	if (log[0]->GetComponent<LogPathCreator>("LogPathCreator")->GetTransformed() == true && isTest2 == false)
 	{
-		log[0]->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer, lumberAxe));
+		log[0]->AddComponent(make_shared<FloorCollision>("FloorCollision"));
+		log[0]->GetComponent<FloorCollision>("FloorCollision")->SetPlayer(testPlayer.get());
+		log[0]->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
 		isTest2 = true;
 	}
 }

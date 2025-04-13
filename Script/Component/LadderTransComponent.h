@@ -16,6 +16,9 @@ public:
 	void OnAxeCollision();
 	void OnLadderCollision(Collider* other);
 
+public:
+	bool GetTransformed() const { return transformed; }
+
 private:
 	bool transformed = false;
 	int collisionCount = 0;

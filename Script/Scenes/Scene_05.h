@@ -1,6 +1,12 @@
 #pragma once
 
 #include "Component/ParallaxBackground.h"
+#include "Component/FloorCollision.h"
+#include "Object/PlayerUnit.h"
+#include "Object/LumberAxe.h"
+#include "Component/LadderComponent.h"
+#include "Component/LadderTransComponent.h"
+#include "Object/DialogTextBox.h"
 
 class Scene_05 : public Scene
 {
@@ -24,6 +30,8 @@ public:
 
 private:
 	bool isLoaded = false;
+	bool isTest = false;
+	bool isTest2 = false;
 
 	shared_ptr<Object> testPlayer;
 	shared_ptr<Object> lumberAxe;
@@ -33,6 +41,7 @@ private:
 	vector<shared_ptr<Object>> textPoint;
 
 	shared_ptr<Object> ladder;
+	shared_ptr<Object> ladder2;
 
 	shared_ptr<Object> backgroundObject;
 

@@ -21,7 +21,9 @@ void Scene_04::Awake()
 
 	// Floor Collider
 	{
-		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(make_shared<FloorCollision>("FloorCollision", testPlayer.get(), lumberAxe.get()));
+		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision"));
+		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetPlayer(testPlayer.get());
+		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
 		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
@@ -30,7 +32,7 @@ void Scene_04::Awake()
 		const auto& parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
 		// 배경 레이어 2개씩 생성
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
 			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + to_wstring(i + 1) + L".png");
@@ -106,6 +108,7 @@ void Scene_04::Start()
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
 	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
 	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
+
 }
 
 void Scene_04::Destroy()
