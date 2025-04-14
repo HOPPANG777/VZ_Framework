@@ -77,7 +77,6 @@ void Scene_05::Awake()
 	{
 		ladder = std::make_shared<TextureRect>(CENTER + Vector3(0, 320, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Object/Ladder1.png");
 		ladder->AddComponent(std::make_shared<LadderTransComponent>());
-		ladder->AddComponent(std::make_shared<LadderComponent>());
 		ladder2 = std::make_shared<TextureRect>(CENTER + Vector3(0, 320, 0), Vector3(100, 360, 0), 0.0f, TexturePath + L"Object/Ladder2.png");
 		
 	}
@@ -122,6 +121,7 @@ void Scene_05::Destroy()
 	if (ladder != nullptr) ladder.reset();
 	if (ladder2 != nullptr) ladder2.reset();
 	if (tmap != nullptr) tmap.reset();
+	SCENE->ResetPlayer();
 }
 
 void Scene_05::FixedUpdate()
@@ -177,6 +177,7 @@ void Scene_05::Update()
 	{
 		dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
 		dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(WHITE);
+		ladder->AddComponent(std::make_shared<LadderComponent>());
 		isTest2 = true;
 	}
 
