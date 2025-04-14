@@ -57,12 +57,12 @@ void Scene_03::Awake()
 
 	// Background
 	{
-		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
+		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 6);
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/StartScene/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();

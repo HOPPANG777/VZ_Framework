@@ -439,7 +439,8 @@ bool Graphics::LoadCustomFont(const wstring& fontFilePath)
 
 bool Graphics::UnloadCustomFont(const wstring& fontFilePath)
 {
-    if (!RemoveFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0))
+    int ret = RemoveFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);
+    if (ret == 0)
     {
         // 해제 실패 시 처리
         return false;
