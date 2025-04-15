@@ -81,7 +81,7 @@ void PlayerController::UpdateMovement(float dt)
             isFall = true;
         }
     }
-    else if (isFall)
+    else if (isFall == true && isCollision == false)
     {
         pos.y -= gravity * TIME->GetDeltaTime();
         gravity += (gravity * 2.0f) * TIME->GetDeltaTime();

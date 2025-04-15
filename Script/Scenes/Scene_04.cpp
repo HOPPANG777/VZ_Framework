@@ -7,7 +7,7 @@ void Scene_04::Awake()
 
 	// Player
 	{
-		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -40, 0));
+		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -45, 0));
 		lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SCENE->SetPlayer(testPlayer);
@@ -32,7 +32,7 @@ void Scene_04::Awake()
 		const auto& parallax = make_shared<ParallaxBackground>("Parallax", 6);
 
 		// 배경 레이어 2개씩 생성
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
 			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");

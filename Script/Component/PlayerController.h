@@ -25,7 +25,7 @@ public:
     bool GetFalling() const { return isFall; }
     bool GetBetween() const { return isBetween; }
     bool GetRight() const { return isRight; }
-    bool GetSpeed() const { return currentSpeed; }
+    float GetSpeed() const { return currentSpeed; }
 
 public:
     // 추가: 플레이어가 사망했을 때 호출

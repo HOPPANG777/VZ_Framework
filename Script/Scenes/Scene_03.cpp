@@ -7,7 +7,7 @@ void Scene_03::Awake()
 
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -300, 0));
+		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -310, 0));
 		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 	}
@@ -15,11 +15,11 @@ void Scene_03::Awake()
 	// Floor
 	{
 		const auto& floorLine1 = std::make_shared<ColorLine>(CENTER + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
-		floorLine1->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
+		floorLine1->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 10, 0), GREEN));
 		floor.push_back(floorLine1);
 
 		const auto& floorLine2 = std::make_shared<ColorLine>(CENTER + Vector3(-170, -320, 0), 0, 0.0f, CLEAR);
-		floorLine2->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(950, 1, 0), GREEN));
+		floorLine2->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(950, 10, 0), GREEN));
 		floor.push_back(floorLine2);
 	}
 
@@ -59,7 +59,7 @@ void Scene_03::Awake()
 	{
 		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 6);
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");

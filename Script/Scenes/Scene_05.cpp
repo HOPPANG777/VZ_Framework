@@ -7,18 +7,18 @@ void Scene_05::Awake()
 	
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -330, 0));
-		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -330, 0));
+		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -320, 0));
+		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -320, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SCENE->SetPlayer(testPlayer);
 	}
 
 	// Floor
 	{
-		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(-550, -330, 0), 0, 0.0f, CLEAR));
+		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(-250, -320, 0), 0, 0.0f, CLEAR));
 		floor[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(750, 1, 0), GREEN));
-		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(250, 330, 0), 0, 0.0f, CLEAR));
-		floor[1]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(750, 1, 0), GREEN));
+		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(1100, 230, 0), 0, 0.0f, CLEAR));
+		floor[1]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(2000, 1, 0), GREEN));
 	}
 
 	// Floor Collider
@@ -31,13 +31,14 @@ void Scene_05::Awake()
 
 	// Wall
 	{
-		wall.push_back(std::make_shared<ColorLine>(CENTER + Vector3(0, -330, 0), 0, 0.0f, CLEAR));
-		wall[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(1, 750, 0), GREEN));
+		wall.push_back(std::make_shared<ColorLine>(CENTER + Vector3(120, -120, 0), 0, 0.0f, CLEAR));
+		wall[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10, 750, 0), GREEN));
 	}
 
 	// Wall Collider
 	{
-		for (const auto& wal : wall) if (wal != nullptr) wal->AddComponent(std::make_shared<WallCollision>("WallCollision", true));
+		//for (const auto& wal : wall) if (wal != nullptr) wal->AddComponent(std::make_shared<WallCollision>("WallCollision", false));
+		wall[0]->AddComponent(std::make_shared<WallCollision>("WallCollision", false));
 		for (const auto& wal : wall) if (wal != nullptr) wal->GetComponent<WallCollision>("WallCollision")->SetPlayer(testPlayer.get());
 		for (const auto& wal : wall) if (wal != nullptr) wal->GetComponent<WallCollision>("WallCollision")->SetLumberAxe(lumberAxe.get());
 		for (const auto& wal : wall) if (wal != nullptr) COLLISION->AddCollider(wal->GetComponent<BoxCollider>("BoxCollider"));
@@ -48,7 +49,7 @@ void Scene_05::Awake()
 		std::shared_ptr<ParallaxBackground> parallax = std::make_shared<ParallaxBackground>("Parallax", 6);
 
 		// 배경 레이어 2개씩 생성
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
 			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
@@ -75,10 +76,13 @@ void Scene_05::Awake()
 
 	// Ladder
 	{
-		ladder = std::make_shared<TextureRect>(CENTER + Vector3(0, 320, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Object/Ladder1.png");
+		ladder = std::make_shared<TextureRect>(CENTER + Vector3(100, 230, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Object/Ladder1.png");
 		ladder->AddComponent(std::make_shared<LadderTransComponent>());
-		ladder2 = std::make_shared<TextureRect>(CENTER + Vector3(0, 320, 0), Vector3(100, 360, 0), 0.0f, TexturePath + L"Object/Ladder2.png");
-		
+		ladder2 = std::make_shared<TextureRect>(CENTER + Vector3(100, 0, 0), Vector3(100, 520, 0), 0.0f, TexturePath + L"Object/Ladder2.png");
+		ladder->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), GREEN));
+		COLLISION->AddCollider(ladder->GetComponent<BoxCollider>("BoxCollider"));
+		//ladder2->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 520, 0), GREEN));
+		//COLLISION->AddCollider(ladder2->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Text
