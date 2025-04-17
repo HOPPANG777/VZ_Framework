@@ -22,6 +22,8 @@ void LadderTransComponent::OnAxeCollision()
         // 기존 BoxCollider 제거
         owner->RemoveComponent("BoxCollider");
 
+        owner->SetPosition(owner->GetPosition() + Vector3(0, -300, 0));
+
         // 새로운 BoxCollider 생성 (크기: 500,300,0)
         const std::shared_ptr<BoxCollider>& newCollider = make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
         owner->AddComponent(newCollider);
@@ -39,7 +41,7 @@ void LadderTransComponent::OnLadderCollision(Collider* other)
     // 상대 오브젝트가 LumberAxe인지 체크 (예: 이름에 "LumberAxe" 포함)
     if (other->GetOwner()->GetName().find("LumberAxe") != string::npos)
     {
-        const std::shared_ptr<LadderTransComponent>& logPathComp = GetOwner()->GetComponent<LadderTransComponent>("LadderComponent");
+        const std::shared_ptr<LadderTransComponent>& logPathComp = GetOwner()->GetComponent<LadderTransComponent>("LadderTransComponent");
         if (logPathComp) logPathComp->OnAxeCollision();
     }
 }

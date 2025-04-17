@@ -29,6 +29,7 @@ public:
 public:
 	void UpdateFollow();
 	void UpdateHorizontalScroll(Object* target, float minRatio = 0.5f, float maxRatio = 2.5f);
+	void UpdateVerticalScroll(Object* target, float minRatio = 0.5f, float maxRatio = 2.5f);
 
 private:
 	Matrix view, proj;

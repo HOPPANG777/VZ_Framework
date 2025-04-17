@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PlayerController.h"
+
 class LadderComponent : public Component
 {
 public:

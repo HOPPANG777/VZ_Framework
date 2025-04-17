@@ -13,6 +13,9 @@ void FloorCollision::Update()
     bool was = wasColliding;
     bool now = floorCollider->IsColliding(playerCollider.get());
 
+    // 오르기 시작
+    if (playerController && playerController->GetClimbing()) return;
+
     // (1) 착지 순간에만 Land()
     if (now && !was)
     {
@@ -29,7 +32,8 @@ void FloorCollision::Update()
         float playerBottom = playerCollider->GetCenter().y - playerCollider->GetSize().y * 0.5f;
         float pen = floorTop - playerBottom;
 
-        if (pen > EPSILON)
+        //if (pen > EPSILON)
+        if (playerBottom < floorTop)
         {
             Vector3 pos = player->GetPosition();
             pos.y = floorTop + playerCollider->GetSize().y * 0.5f;

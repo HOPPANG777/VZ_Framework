@@ -106,9 +106,9 @@ void PlayerController::UpdateMovement(float dt)
     //if (!isCollision) newPos.y = pos.y;   // 땅에 닿아 있을 때는 Y 덮어쓰지 않음 → 충돌 보정 유지 
     //transform->SetPosition(newPos);
 
-    //transform->SetPosition(pos);
+    transform->SetPosition(pos);
 
-    transform->SetPosition({ pos.x,(isCollision ? cur.y : pos.y),0 });
+    //transform->SetPosition({ pos.x,(isCollision ? cur.y : pos.y),0 });
 }
 
 void PlayerController::UpdateAnimation()

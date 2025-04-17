@@ -135,6 +135,11 @@ void Scene_04::FixedUpdate()
 
 void Scene_04::Update()
 {
+	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
+	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
+	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
+	for (const auto& t : text) if (t != nullptr) t->Update();
+	for (const auto& tp : textPoint) if (tp != nullptr) tp->Update();
 	if (tmap != nullptr) tmap->Update();
 	if (backgroundObject != nullptr) backgroundObject->Update();
 	if (puzzleRock != nullptr) puzzleRock->Update();
@@ -142,11 +147,6 @@ void Scene_04::Update()
 	if (testPlayer != nullptr) testPlayer->Update();
 	if (windObject != nullptr) windObject->Update();
 	if (bridge != nullptr) bridge->Update();
-	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
-	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
-	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
-	for (const auto& t : text) if (t != nullptr) t->Update();
-	for (const auto& tp : textPoint) if (tp != nullptr) tp->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 

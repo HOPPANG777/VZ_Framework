@@ -5,7 +5,7 @@
 class LadderTransComponent : public Component
 {
 public:
-	LadderTransComponent(const std::string& name = "LadderTransComponent") : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0) {}
+	LadderTransComponent(const std::string& name = "LadderTransComponent") : Component(name), collisionCount(0), transformed(false), newColliderSize(100, 520, 0) {}
 	~LadderTransComponent() override = default;
 
 public:

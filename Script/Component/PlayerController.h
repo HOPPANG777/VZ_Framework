@@ -17,6 +17,7 @@ public:
     void SetCollision(bool col) { isCollision = col; }
 	void SetFall(bool fall) { isFall = fall; } // 낙하 상태 설정
 	void SetGravity(float g) { gravity = g; } // 중력 설정
+    void SetClimbing(bool c) { isClimbing = c; }
 
 public:
     // 상태 접근자
@@ -25,6 +26,7 @@ public:
     bool GetFalling() const { return isFall; }
     bool GetBetween() const { return isBetween; }
     bool GetRight() const { return isRight; }
+    bool GetClimbing() const { return isClimbing; }
     float GetSpeed() const { return currentSpeed; }
 
 public:
@@ -54,6 +56,7 @@ private:
     bool isAtking;        // 공격 상태 (추후 확장)
     bool isRolling;       // 구르는 상태 (추후 확장)
     bool isCollision;     // 외부 충돌(발판과의 접촉) 여부
+    bool isClimbing = false;
 
     bool isRight;         // 바라보는 방향 (true: 오른쪽)
 
