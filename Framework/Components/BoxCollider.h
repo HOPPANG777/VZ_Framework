@@ -34,8 +34,8 @@ public:
 private:
     bool IsBoxColliding(const BoxCollider* other) const
     {
-        return (abs(center.x - other->center.x) < (size.x * 0.5f + other->size.x * 0.5f)) &&
-            (abs(center.y - other->center.y) < (size.y * 0.5f + other->size.y * 0.5f));
+        return (abs(center.x - other->center.x) <= (size.x * 0.5f + other->size.x * 0.5f)) &&
+            (abs(center.y - other->center.y) <= (size.y * 0.5f + other->size.y * 0.5f));
     }
 
     Vector3 center;

@@ -57,9 +57,9 @@ void Scene_03::Awake()
 
 	// Background
 	{
-		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 6);
+		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
@@ -118,17 +118,13 @@ void Scene_03::Destroy()
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
-	
+	COLLISION->RemoveAllCollider();
 }
 
 void Scene_03::FixedUpdate() {}
 
 void Scene_03::Update()
 {
-	if (tmap != nullptr) tmap->Update();
-	if (testPlayer != nullptr) testPlayer->Update();
-	if (lumberAxe != nullptr) lumberAxe->Update();
-	if (backgroundObject != nullptr) backgroundObject->Update();
 	for (const auto& bg : bgLayer) if (bg != nullptr) bg->Update();
 	for (const auto& bgdup : bgLayerDup) if (bgdup != nullptr) bgdup->Update();
 	for (const auto& floors : floor) if (floors != nullptr) floors->Update();
@@ -136,6 +132,10 @@ void Scene_03::Update()
 	for (const auto& t : text) if (t != nullptr) t->Update();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Update();
 	for (const auto& l : log) if (l != nullptr) l->Update();
+	if (tmap != nullptr) tmap->Update();
+	if (testPlayer != nullptr) testPlayer->Update();
+	if (lumberAxe != nullptr) lumberAxe->Update();
+	if (backgroundObject != nullptr) backgroundObject->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
 

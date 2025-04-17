@@ -15,6 +15,11 @@ void CollisionManager::RemoveCollider(shared_ptr<Collider> collider)
     colliders.erase(remove(colliders.begin(), colliders.end(), collider), colliders.end());
 }
 
+void CollisionManager::RemoveAllCollider()
+{
+    colliders.clear();
+}
+
 void CollisionManager::Update()
 {
     // 모든 콜라이더에 대해 충돌 검사

@@ -7,6 +7,7 @@ class CollisionManager
 public:
     void AddCollider(shared_ptr<Collider> collider);
     void RemoveCollider(shared_ptr<Collider> collider);
+    void RemoveAllCollider();
     void Update();
     void RenderDebug();
 

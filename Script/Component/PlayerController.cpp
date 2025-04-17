@@ -31,11 +31,14 @@ void PlayerController::Update()
 
 void PlayerController::UpdateMovement(float dt)
 {
-    const std::shared_ptr<Transform>& transform = owner->GetComponent<Transform>("Transform");
+    auto transform = owner->GetComponent<Transform>("Transform");
     if (!transform) return;
-    Vector3 pos = transform->GetPosition();
 
-    // 수평 이동: A, D키에 따라 좌우 이동
+    // (1) 현재 위치 읽어오기
+    Vector3 cur = transform->GetPosition();
+    Vector3 pos = cur;
+    
+    // 수평 이동
     currentSpeed = isCrouch ? speed * 0.25f : speed;
     if (INPUT->KeyPressed('A'))
     {
@@ -48,22 +51,23 @@ void PlayerController::UpdateMovement(float dt)
         pos.x += currentSpeed * dt;
     }
 
-    // 점프 시작: Space 키를 누르면 (그리고 현재 점프/낙하 상태가 아니며, 충돌(땅 접촉)이 없는 경우)
-    if (INPUT->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && !isCollision)
+    // 점프 시작
+    if (INPUT->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && isCollision)
     {
         isJump = true;
-        jumpVelocity = speed * 2.0f; // 점프 초기 속도 (조정 가능)
+        jumpVelocity = speed * 2.0f;
         gravity = originGravity;
+        isCollision = false;
     }
 
-    // 수직 이동 및 중력 적용
+    // 수직 이동/중력 적용
     if (isJump)
     {
-        pos.y += jumpVelocity * TIME->GetDeltaTime();
-        jumpVelocity -= gravity * TIME->GetDeltaTime();
-        gravity += (gravity * 2.0f) * TIME->GetDeltaTime();
+        pos.y += jumpVelocity * dt;
+        jumpVelocity -= gravity * dt;
+        gravity += (gravity * 2.0f) * dt;
 
-        if (gravity > (speed * 1.5f) && gravity < (speed * 2.0f) || isCollision)
+        if (gravity > speed * 1.5f && gravity < speed * 2.0f)
         {
             isJump = false;
             isBetween = true;
@@ -71,44 +75,53 @@ void PlayerController::UpdateMovement(float dt)
     }
     else if (isBetween)
     {
-        pos.y += jumpVelocity * TIME->GetDeltaTime();
-        pos.y -= gravity * TIME->GetDeltaTime();
-        gravity += (gravity * 2.0f) * TIME->GetDeltaTime();
+        pos.y += jumpVelocity * dt - gravity * dt;
+        gravity += (gravity * 2.0f) * dt;
 
-        if (gravity > (speed * 2.0f) || isCollision)
+        if (gravity > speed * 2.0f)
         {
             isBetween = false;
             isFall = true;
         }
     }
-    else if (isFall == true && isCollision == false)
+    else if (isFall)
     {
-        pos.y -= gravity * TIME->GetDeltaTime();
-        gravity += (gravity * 2.0f) * TIME->GetDeltaTime();
+        pos.y -= gravity * dt;
+        gravity += (gravity * 2.0f) * dt;
+    }
+    else
+    {
+        pos.y = cur.y;
     }
 
-    // 만약 외부에서 충돌(플랫폼 접촉)이 감지되면 Land()를 호출해 점프 상태 리셋
-    if (isCollision)
+    // 착지 시점: 실제 낙하 중일 때만 Land() 호출
+    //if (isCollision && isFall)
     {
-        Land();
+        //Land();
     }
 
-    transform->SetPosition(pos);
+    
+    //Vector3 newPos = cur;
+    //newPos.x = pos.x;                     // 언제나 X 갱신
+    //if (!isCollision) newPos.y = pos.y;   // 땅에 닿아 있을 때는 Y 덮어쓰지 않음 → 충돌 보정 유지 
+    //transform->SetPosition(newPos);
+
+    //transform->SetPosition(pos);
+
+    transform->SetPosition({ pos.x,(isCollision ? cur.y : pos.y),0 });
 }
 
 void PlayerController::UpdateAnimation()
 {
-    const std::shared_ptr<Animator>& animator = owner->GetComponent<Animator>("Animator");
+    auto animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
     UnitAnimationType newState = currentAnimation;
 
-    // (A) 사망 상태 처리
     if (isDead)
     {
         newState = isRight ? UnitAnimationType::DIE_R : UnitAnimationType::DIE_L;
     }
-    // (B) 점프/낙하 상태 처리
     else if (isJump)
     {
         newState = isRight ? UnitAnimationType::JUMP_R : UnitAnimationType::JUMP_L;
@@ -121,7 +134,6 @@ void PlayerController::UpdateAnimation()
     {
         newState = isRight ? UnitAnimationType::JUMP_FALL_R : UnitAnimationType::JUMP_FALL_L;
     }
-    // (C) 수평 이동 처리
     else if (INPUT->KeyPressed('A'))
     {
         newState = UnitAnimationType::RUN_L;
@@ -135,7 +147,7 @@ void PlayerController::UpdateAnimation()
         newState = isRight ? UnitAnimationType::IDLE_R : UnitAnimationType::IDLE_L;
     }
 
-    // (D) 도끼 관련 입력 처리 (예시)
+    // 도끼 입력 처리
     if (INPUT->MouseDown(2))
     {
         newState = isRight ? UnitAnimationType::AXE_THROW_PREPARE_R : UnitAnimationType::AXE_THROW_PREPARE_L;
@@ -149,54 +161,37 @@ void PlayerController::UpdateAnimation()
         newState = isRight ? UnitAnimationType::AXE_RETURN_R : UnitAnimationType::AXE_RETURN_L;
     }
 
-    // 상태가 바뀌었으면 애니메이터에 해당 애니메이션 클립 설정
     if (newState != currentAnimation)
     {
         currentAnimation = newState;
         switch (currentAnimation)
         {
-        case UnitAnimationType::IDLE_R:
-            animator->SetCurrentAnimClip(L"IdleR"); break;
-        case UnitAnimationType::IDLE_L:
-            animator->SetCurrentAnimClip(L"IdleL"); break;
-        case UnitAnimationType::RUN_R:
-            animator->SetCurrentAnimClip(L"RunR"); break;
-        case UnitAnimationType::RUN_L:
-            animator->SetCurrentAnimClip(L"RunL"); break;
-        case UnitAnimationType::JUMP_R:
-            animator->SetCurrentAnimClip(L"JumpR"); break;
-        case UnitAnimationType::JUMP_L:
-            animator->SetCurrentAnimClip(L"JumpL"); break;
-        case UnitAnimationType::JUMP_BETWEEN_R:
-            animator->SetCurrentAnimClip(L"JumpBetweenR"); break;
-        case UnitAnimationType::JUMP_BETWEEN_L:
-            animator->SetCurrentAnimClip(L"JumpBetweenL"); break;
-        case UnitAnimationType::JUMP_FALL_R:
-            animator->SetCurrentAnimClip(L"JumpFallR"); break;
-        case UnitAnimationType::JUMP_FALL_L:
-            animator->SetCurrentAnimClip(L"JumpFallL"); break;
-        case UnitAnimationType::AXE_THROW_PREPARE_R:
-            animator->SetCurrentAnimClip(L"AxeThrowPrepareR"); break;
-        case UnitAnimationType::AXE_THROW_PREPARE_L:
-            animator->SetCurrentAnimClip(L"AxeThrowPrepareL"); break;
-        case UnitAnimationType::AXE_THROW_R:
-            animator->SetCurrentAnimClip(L"AxeThrowR"); break;
-        case UnitAnimationType::AXE_THROW_L:
-            animator->SetCurrentAnimClip(L"AxeThrowL"); break;
-        case UnitAnimationType::AXE_RETURN_R:
-            animator->SetCurrentAnimClip(L"AxeReturnR"); break;
-        case UnitAnimationType::AXE_RETURN_L:
-            animator->SetCurrentAnimClip(L"AxeReturnL"); break;
-        default:
-            break;
+        case UnitAnimationType::IDLE_R:             animator->SetCurrentAnimClip(L"IdleR"); break;
+        case UnitAnimationType::IDLE_L:             animator->SetCurrentAnimClip(L"IdleL"); break;
+        case UnitAnimationType::RUN_R:              animator->SetCurrentAnimClip(L"RunR");  break;
+        case UnitAnimationType::RUN_L:              animator->SetCurrentAnimClip(L"RunL");  break;
+        case UnitAnimationType::JUMP_R:             animator->SetCurrentAnimClip(L"JumpR"); break;
+        case UnitAnimationType::JUMP_L:             animator->SetCurrentAnimClip(L"JumpL"); break;
+        case UnitAnimationType::JUMP_BETWEEN_R:     animator->SetCurrentAnimClip(L"JumpBetweenR"); break;
+        case UnitAnimationType::JUMP_BETWEEN_L:     animator->SetCurrentAnimClip(L"JumpBetweenL"); break;
+        case UnitAnimationType::JUMP_FALL_R:        animator->SetCurrentAnimClip(L"JumpFallR");    break;
+        case UnitAnimationType::JUMP_FALL_L:        animator->SetCurrentAnimClip(L"JumpFallL");    break;
+        case UnitAnimationType::AXE_THROW_PREPARE_R:animator->SetCurrentAnimClip(L"AxeThrowPrepareR"); break;
+        case UnitAnimationType::AXE_THROW_PREPARE_L:animator->SetCurrentAnimClip(L"AxeThrowPrepareL"); break;
+        case UnitAnimationType::AXE_THROW_R:        animator->SetCurrentAnimClip(L"AxeThrowR");    break;
+        case UnitAnimationType::AXE_THROW_L:        animator->SetCurrentAnimClip(L"AxeThrowL");    break;
+        case UnitAnimationType::AXE_RETURN_R:       animator->SetCurrentAnimClip(L"AxeReturnR");   break;
+        case UnitAnimationType::AXE_RETURN_L:       animator->SetCurrentAnimClip(L"AxeReturnL");   break;
+        default: break;
         }
     }
+
     animator->Update();
 }
 
 void PlayerController::Land()
 {
-    // Land() 호출 시, 점프 관련 상태를 리셋합니다.
+    // 한번만 호출되도록 조건을 걸었으므로, 착지 시 완전히 리셋
     isJump = false;
     isBetween = false;
     isFall = false;

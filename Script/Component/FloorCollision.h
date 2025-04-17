@@ -22,8 +22,12 @@ public:
     Object* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
+    // 이전 프레임 충돌 여부 저장
+    bool wasColliding = false;
+    
+    const float EPSILON = 0.01f;
+    
     Object* player = nullptr;
     Object* lumberAxe = nullptr;
-
 };
 
