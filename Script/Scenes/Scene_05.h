@@ -37,6 +37,8 @@ private:
 	shared_ptr<Object> testPlayer;
 	shared_ptr<Object> lumberAxe;
 
+	shared_ptr<Object> bback;
+
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> wall;
 	vector<shared_ptr<Object>> text;

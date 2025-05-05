@@ -98,6 +98,9 @@ void Scene_05::Awake()
 		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
+	{
+		bback = std::make_shared<TextureRect>(CENTER + Vector3(1200, 270, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Animation/Bback/Bback.png");
+	}
 
 	isLoaded = true;
 }
@@ -120,6 +123,7 @@ void Scene_05::Destroy()
 	for (auto& wal : wall) if (wal != nullptr) wal.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
+	if (bback != nullptr) bback.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (ladder != nullptr) ladder.reset();
 	if (ladder2 != nullptr) ladder2.reset();
@@ -146,6 +150,7 @@ void Scene_05::Update()
 	if (ladder2 != nullptr) ladder2->Update();
 	if (testPlayer != nullptr) testPlayer->Update();
 	if (lumberAxe != nullptr) lumberAxe->Update();
+	if (bback != nullptr) bback->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.1f);
 	CAMERA->UpdateVerticalScroll(testPlayer.get(), 0.5f, 1.5f);
@@ -212,6 +217,7 @@ void Scene_05::Render()
 	if (ladder2 != nullptr) ladder2->Render();
 	if (lumberAxe != nullptr) lumberAxe->Render();
 	if (testPlayer != nullptr) testPlayer->Render();
+	if (bback != nullptr) bback->Render();
 	for (const auto& t : text) if (t != nullptr) t->Render();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
 }
