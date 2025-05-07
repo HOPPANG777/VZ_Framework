@@ -1,3 +1,4 @@
+// Animator.h
 #pragma once
 
 // Animator가 Component를 상속받도록 변경
@@ -5,7 +6,11 @@ class Animator : public Component
 {
 public:
     // 생성자에서 Component 이름 "Animator" 지정
-    Animator(const string& compName = "Animator") : Component(compName) {}
+    Animator(const string& compName = "Animator")
+        : Component(compName)
+    {
+    }
+
     virtual ~Animator() override = default;
 
     // Component의 순수 가상함수 구현
@@ -34,6 +39,11 @@ public:
         return currentClip ? currentClip->clipName : L"";
     }
 
+    // ---------- 루프 옵션 추가 ----------
+    // true = 계속 루프, false = 한 번만 재생
+    void SetLoop(bool loop) { bLoop = loop; if (loop) bFinished = false; }
+    bool IsFinished() const { return bFinished; }
+
 private:
     bool CheckExist(const std::wstring& clipName) const;
 
@@ -43,9 +53,12 @@ private:
     shared_ptr<AnimationClip> currentClip = nullptr;
 
     // 애니메이션 재생 관련
-    UINT currentFrameIndex = 0;
+    UINT    currentFrameIndex = 0;
     Vector2 currentFrame = Values::ZeroVec2;
-    float frameTime = 0.0f;
-    float animationTime = 1.0f / 15.0f; // 기본 15FPS
-    // ----------------------------------------------
+    float   frameTime = 0.0f;
+    float   animationTime = 1.0f / 15.0f; // 기본 15FPS
+
+    // 루프 제어 플래그
+    bool bLoop = true;   // 기본은 루프 모드
+    bool bFinished = false;  // 한 번만 재생 후 완료 여부
 };
