@@ -8,6 +8,7 @@ void BoxCollider::Update()
         // 소유 객체의 위치를 기반으로 중심을 업데이트
         Vector3 ownerPosition = GetOwner()->GetPosition();
         center = ownerPosition;
+        UpdateEdge();
     }
 }
 

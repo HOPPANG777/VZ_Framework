@@ -232,6 +232,7 @@ const string BuildTilePath = "_Data/_TileData/";
 #include "Structs/FontTextDesc.h"
 #include "Structs/TextureDesc.h"
 #include "Structs/WinDesc.h"
+#include "Structs/BoxEdge.h"
 
 //Enum
 #include "Enums/UnitAnimationType.h"

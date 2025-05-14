@@ -350,6 +350,9 @@
     <ClInclude Include="Enums\AxeState.h">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="Structs\BoxEdge.h">
+      <Filter>Structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
