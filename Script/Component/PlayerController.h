@@ -56,13 +56,17 @@ private:
     bool isAtking;        // 공격 상태 (추후 확장)
     bool isRolling;       // 구르는 상태 (추후 확장)
     bool isCollision;     // 외부 충돌(발판과의 접촉) 여부
-    bool isClimbing = false;
-
+    bool isClimbing;      // 등반 상태
+	bool isAxeing;        // 도끼 공격 상태
+	bool isAxeThrow;      // 도끼 공격 종료 상태
+	bool isAxePrepare;    // 도끼 공격 종료 상태
+	bool isAxeReturn;     // 도끼가 돌아오는 상태
     bool isRight;         // 바라보는 방향 (true: 오른쪽)
 
     // 애니메이션 상태 관리
     UnitAnimationType currentAnimation;
     bool isDead;          // 사망 상태
+   
 
 };
 

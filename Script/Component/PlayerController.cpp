@@ -18,7 +18,12 @@ PlayerController::PlayerController(const string& name, float spd)
     isCollision(false),
     isRight(true),
     currentAnimation(UnitAnimationType::IDLE_R),
-    isDead(false)
+    isDead(false),
+    isAxeing(false),
+	isAxeThrow(false),
+	isAxePrepare(false),
+	isAxeReturn(false),
+	isClimbing(false)
 {
 }
 
@@ -38,6 +43,10 @@ void PlayerController::UpdateMovement(float dt)
     Vector3 cur = transform->GetPosition();
     Vector3 pos = cur;
     
+    // 숙이기 상태 업데이트
+    if (INPUT->KeyPressed(VK_CONTROL)) isCrouch = true;
+    else if (INPUT->KeyUp(VK_CONTROL)) isCrouch = false;
+
     // 수평 이동
     currentSpeed = isCrouch ? speed * 0.25f : speed;
     if (INPUT->KeyPressed('A'))
@@ -116,72 +125,134 @@ void PlayerController::UpdateAnimation()
     auto animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
+    if ((isAxePrepare || isAxeThrow || isAxeReturn) && !animator->IsAnimationFinished())
+    {
+        animator->Update();
+        return;
+    }
+
+    // (b) 던지기 애니메이션이 끝났다면 isAxeThrow 비활성화 (던진 후 대기 상태로 전환)
+    if (isAxeThrow && animator->IsAnimationFinished())
+    {
+        isAxeThrow = false;
+        // 던진 상태에서는 별도 처리 없이 isAxeing만 유지 (나중에 'E' 키로 반환 시작)
+    }
+
+    // (c) 반환 애니메이션이 끝났다면 모든 도끼 액션 플래그 해제
+    if (isAxeReturn && animator->IsAnimationFinished())
+    {
+        isAxeReturn = false;
+        isAxeing = false;
+    }
+
+    // (d) 아직 도끼 액션을 시작하지 않은 상태에서 마우스 오른쪽 클릭 → 준비 상태로 진입
+    if (!isAxeing && INPUT->MouseDown(1))
+    {
+        isAxeing = true;
+        isAxePrepare = true;
+        isAxeThrow = false;
+        isAxeReturn = false;
+    }
+
     UnitAnimationType newState = currentAnimation;
 
-    if (isDead)
+    if (isAxeing && INPUT->MouseDown(1)) 
+    {
+        newState = isRight ? UnitAnimationType::AXE_THROW_PREPARE_R : UnitAnimationType::AXE_THROW_PREPARE_L;
+    }
+    else if (isAxeing && INPUT->MousePressed(1) && INPUT->MouseDown(0)) 
+    {
+        newState = isRight ? UnitAnimationType::AXE_THROW_R : UnitAnimationType::AXE_THROW_L;
+    }
+    else if (isAxeing && INPUT->MousePressed(1)) 
+    {
+        newState = isRight ? UnitAnimationType::AXE_THROW_PREPARE_HOLD_R : UnitAnimationType::AXE_THROW_PREPARE_HOLD_L;
+    }
+    else if (isAxeing && INPUT->KeyDown('E')) 
+    {
+        newState = isRight ? UnitAnimationType::AXE_RETURN_R : UnitAnimationType::AXE_RETURN_L;
+        isAxeing = false; // 반환 시작 시 도끼 액션 종료
+    }
+    else if (isDead) 
     {
         newState = isRight ? UnitAnimationType::DIE_R : UnitAnimationType::DIE_L;
     }
-    else if (isJump)
+    else if (isJump) 
     {
         newState = isRight ? UnitAnimationType::JUMP_R : UnitAnimationType::JUMP_L;
     }
-    else if (isBetween)
+    else if (isBetween) 
     {
         newState = isRight ? UnitAnimationType::JUMP_BETWEEN_R : UnitAnimationType::JUMP_BETWEEN_L;
     }
-    else if (isFall)
+    else if (isFall) 
     {
         newState = isRight ? UnitAnimationType::JUMP_FALL_R : UnitAnimationType::JUMP_FALL_L;
     }
-    else if (INPUT->KeyPressed('A'))
+    else if (isCrouch && INPUT->KeyPressed('A')) 
+    {
+        newState = UnitAnimationType::CROUCH_WALK_L;
+    }
+    else if (isCrouch && INPUT->KeyPressed('D')) 
+    {
+        newState = UnitAnimationType::CROUCH_WALK_R;
+    }
+    else if (isCrouch && !INPUT->KeyPressed('A') && !INPUT->KeyPressed('D') && !INPUT->KeyPressed(VK_SPACE) && !INPUT->MouseDown(1) && !INPUT->KeyDown('E')) 
+    {
+        newState = isRight ? UnitAnimationType::CROUCH_HOLD_R : UnitAnimationType::CROUCH_HOLD_L;
+    }
+    else if (isCrouch) 
+    {
+        newState = isRight ? UnitAnimationType::CROUCH_R : UnitAnimationType::CROUCH_L;
+    }
+    else if (INPUT->KeyPressed('A')) 
     {
         newState = UnitAnimationType::RUN_L;
     }
-    else if (INPUT->KeyPressed('D'))
+    else if (INPUT->KeyPressed('D')) 
     {
         newState = UnitAnimationType::RUN_R;
     }
-    else
+    else if (INPUT->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && isCollision) 
+    {
+        newState = isRight ? UnitAnimationType::JUMP_R : UnitAnimationType::JUMP_L;
+    }
+    else 
     {
         newState = isRight ? UnitAnimationType::IDLE_R : UnitAnimationType::IDLE_L;
     }
 
-    // 도끼 입력 처리
-    if (INPUT->MouseDown(2))
-    {
-        newState = isRight ? UnitAnimationType::AXE_THROW_PREPARE_R : UnitAnimationType::AXE_THROW_PREPARE_L;
-    }
-    if (INPUT->MousePressed(2) && INPUT->MouseDown(1))
-    {
-        newState = isRight ? UnitAnimationType::AXE_THROW_R : UnitAnimationType::AXE_THROW_L;
-    }
-    if (INPUT->KeyDown('E'))
-    {
-        newState = isRight ? UnitAnimationType::AXE_RETURN_R : UnitAnimationType::AXE_RETURN_L;
-    }
-
-    if (newState != currentAnimation)
+    if (newState != currentAnimation) 
     {
         currentAnimation = newState;
-        switch (currentAnimation)
+        switch (currentAnimation) 
         {
-        case UnitAnimationType::IDLE_R:             animator->SetCurrentAnimClip(L"IdleR"); break;
-        case UnitAnimationType::IDLE_L:             animator->SetCurrentAnimClip(L"IdleL"); break;
-        case UnitAnimationType::RUN_R:              animator->SetCurrentAnimClip(L"RunR");  break;
-        case UnitAnimationType::RUN_L:              animator->SetCurrentAnimClip(L"RunL");  break;
-        case UnitAnimationType::JUMP_R:             animator->SetCurrentAnimClip(L"JumpR"); break;
-        case UnitAnimationType::JUMP_L:             animator->SetCurrentAnimClip(L"JumpL"); break;
-        case UnitAnimationType::JUMP_BETWEEN_R:     animator->SetCurrentAnimClip(L"JumpBetweenR"); break;
-        case UnitAnimationType::JUMP_BETWEEN_L:     animator->SetCurrentAnimClip(L"JumpBetweenL"); break;
-        case UnitAnimationType::JUMP_FALL_R:        animator->SetCurrentAnimClip(L"JumpFallR");    break;
-        case UnitAnimationType::JUMP_FALL_L:        animator->SetCurrentAnimClip(L"JumpFallL");    break;
-        case UnitAnimationType::AXE_THROW_PREPARE_R:animator->SetCurrentAnimClip(L"AxeThrowPrepareR"); break;
-        case UnitAnimationType::AXE_THROW_PREPARE_L:animator->SetCurrentAnimClip(L"AxeThrowPrepareL"); break;
-        case UnitAnimationType::AXE_THROW_R:        animator->SetCurrentAnimClip(L"AxeThrowR");    break;
-        case UnitAnimationType::AXE_THROW_L:        animator->SetCurrentAnimClip(L"AxeThrowL");    break;
-        case UnitAnimationType::AXE_RETURN_R:       animator->SetCurrentAnimClip(L"AxeReturnR");   break;
-        case UnitAnimationType::AXE_RETURN_L:       animator->SetCurrentAnimClip(L"AxeReturnL");   break;
+        case UnitAnimationType::IDLE_R:              animator->SetCurrentAnimClip(L"IdleR"); break;
+        case UnitAnimationType::IDLE_L:              animator->SetCurrentAnimClip(L"IdleL"); break;
+        case UnitAnimationType::RUN_R:               animator->SetCurrentAnimClip(L"RunR"); break;
+        case UnitAnimationType::RUN_L:               animator->SetCurrentAnimClip(L"RunL"); break;
+        case UnitAnimationType::CROUCH_R:            animator->SetCurrentAnimClip(L"CrouchR"); break;
+        case UnitAnimationType::CROUCH_L:            animator->SetCurrentAnimClip(L"CrouchL"); break;
+        case UnitAnimationType::CROUCH_WALK_R:       animator->SetCurrentAnimClip(L"CrouchWalkR"); break;
+        case UnitAnimationType::CROUCH_WALK_L:       animator->SetCurrentAnimClip(L"CrouchWalkL"); break;
+        case UnitAnimationType::CROUCH_HOLD_R:       animator->SetCurrentAnimClip(L"CrouchHoldR"); break;
+        case UnitAnimationType::CROUCH_HOLD_L:       animator->SetCurrentAnimClip(L"CrouchHoldL"); break;
+        case UnitAnimationType::JUMP_R:              animator->SetCurrentAnimClip(L"JumpR"); break;
+        case UnitAnimationType::JUMP_L:              animator->SetCurrentAnimClip(L"JumpL"); break;
+        case UnitAnimationType::JUMP_BETWEEN_R:      animator->SetCurrentAnimClip(L"JumpBetweenR"); break;
+        case UnitAnimationType::JUMP_BETWEEN_L:      animator->SetCurrentAnimClip(L"JumpBetweenL"); break;
+        case UnitAnimationType::JUMP_FALL_R:         animator->SetCurrentAnimClip(L"JumpFallR"); break;
+        case UnitAnimationType::JUMP_FALL_L:         animator->SetCurrentAnimClip(L"JumpFallL"); break;
+        case UnitAnimationType::AXE_THROW_PREPARE_R: animator->SetCurrentAnimClip(L"AxePrepareR"); break;
+        case UnitAnimationType::AXE_THROW_PREPARE_L: animator->SetCurrentAnimClip(L"AxePrepareL"); break;
+        case UnitAnimationType::AXE_THROW_PREPARE_HOLD_R: animator->SetCurrentAnimClip(L"AxePrepareHoldR"); break;
+        case UnitAnimationType::AXE_THROW_PREPARE_HOLD_L: animator->SetCurrentAnimClip(L"AxePrepareHoldL"); break;
+        case UnitAnimationType::AXE_THROW_R:         animator->SetCurrentAnimClip(L"AxeThrowR"); break;
+        case UnitAnimationType::AXE_THROW_L:         animator->SetCurrentAnimClip(L"AxeThrowL"); break;
+        case UnitAnimationType::AXE_RETURN_R:        animator->SetCurrentAnimClip(L"AxeReturnR"); break;
+        case UnitAnimationType::AXE_RETURN_L:        animator->SetCurrentAnimClip(L"AxeReturnL"); break;
+        case UnitAnimationType::DIE_R:               animator->SetCurrentAnimClip(L"DieR"); break;
+        case UnitAnimationType::DIE_L:               animator->SetCurrentAnimClip(L"DieL"); break;
         default: break;
         }
     }

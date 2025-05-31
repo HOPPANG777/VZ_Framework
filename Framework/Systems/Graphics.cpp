@@ -432,19 +432,25 @@ bool Graphics::LoadCustomFont(const wstring& fontFilePath)
     }
 
     // 필요하다면 전체 윈도우에 폰트가 변경되었음을 알림
-    // SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+    SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
 
     return true;
 }
 
 bool Graphics::UnloadCustomFont(const wstring& fontFilePath)
 {
+    // FR_PRIVATE: 현재 프로세스에서만 등록
     int ret = RemoveFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);
     if (ret == 0)
     {
-        // 해제 실패 시 처리
+        // 해제 실패
+        // 보통은 여기서 로그 출력, 에러 처리
         return false;
     }
+
+    // 필요하다면 전체 윈도우에 폰트가 제거되었음을 알림
+    SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
     return true;
 }
 
