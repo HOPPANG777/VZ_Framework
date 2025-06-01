@@ -99,6 +99,11 @@ void Scene_04::Awake()
 		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
+	// Sound
+	{
+		SOUNDS->AddSound("Wind", SoundPath + L"_NordicLumberJack/Wind.wav", true);
+		SOUNDS->SetVolume("Wind", 0.2f);
+	}
 
 	isLoaded = true;
 }
@@ -108,7 +113,7 @@ void Scene_04::Start()
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
 	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
 	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
-
+	SOUNDS->Play("Wind");
 }
 
 void Scene_04::Destroy()
@@ -127,6 +132,8 @@ void Scene_04::Destroy()
 	for (auto& tp : textPoint) if (tp != nullptr) tp.reset();
 	SCENE->ResetPlayer();
 	COLLISION->RemoveAllCollider();
+	SOUNDS->Stop("Wind");
+	SOUNDS->RemoveSound("Wind");
 }
 
 void Scene_04::FixedUpdate()
