@@ -36,6 +36,7 @@ public:
     // 내부 업데이트 함수
     void UpdateMovement(float dt);
     void UpdateAnimation();
+    void UpdateAxeInput();
 
     // Land()를 호출하면 점프/낙하 상태를 리셋
     void Land();
@@ -57,9 +58,9 @@ private:
     bool isRolling;       // 구르는 상태 (추후 확장)
     bool isCollision;     // 외부 충돌(발판과의 접촉) 여부
     bool isClimbing;      // 등반 상태
-	bool isAxeing;        // 도끼 공격 상태
-	bool isAxeThrow;      // 도끼 공격 종료 상태
-	bool isAxePrepare;    // 도끼 공격 종료 상태
+	bool isAxeThrow;      // 도끼 던지는 상태
+	bool isAxePrepare;      // 도끼 던지는 모션 재생 상태
+	bool isAxePrepareHold;   // 도끼 던지는 모션 고정 재생 상태
 	bool isAxeReturn;     // 도끼가 돌아오는 상태
     bool isRight;         // 바라보는 방향 (true: 오른쪽)
 
