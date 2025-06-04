@@ -63,10 +63,10 @@ RECT RectTransform::GetRect()
     float finalHeight = anchoredHeight + scale.y;
 
     // 최종 중심과 크기를 이용해 RECT 계산 (중심 기준 좌표)
-    UINT left   = (UINT)(finalCenterX - finalWidth * 0.5f);
-    UINT right  = (UINT)(finalCenterX + finalWidth * 0.5f);
-    UINT top    = (UINT)(finalCenterY - finalHeight * 0.5f);
-    UINT bottom = (UINT)(finalCenterY + finalHeight * 0.5f);
+    LONG left   = (LONG)(finalCenterX - finalWidth * 0.5f);
+    LONG right  = (LONG)(finalCenterX + finalWidth * 0.5f);
+    LONG top    = (LONG)(finalCenterY - finalHeight * 0.5f);
+    LONG bottom = (LONG)(finalCenterY + finalHeight * 0.5f);
 
     RECT rect = { left, top, right, bottom };
     return rect;

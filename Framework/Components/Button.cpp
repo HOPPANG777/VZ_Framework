@@ -67,7 +67,7 @@ bool Button::IsMouseOver()
 
 	// 마우스 현재 위치
 	Vector3 mousePos = INPUT->GetMousePos();
-	//  (오쏘그래픽 매트릭스나 기타 변환이 있다면 별도 보정 필요)
+	// (오쏘그래픽 매트릭스나 기타 변환이 있다면 별도 보정 필요)
 
 	// RECT 내부 판정
 	bool inside = (mousePos.x >= rect.left && mousePos.x <= rect.right && mousePos.y >= rect.top && mousePos.y <= rect.bottom);

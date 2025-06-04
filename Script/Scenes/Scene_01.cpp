@@ -11,7 +11,7 @@ void Scene_01::Awake()
 	}
 
 	{
-		startButton = make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button01.png", TransformType::Rect);
+		startButton = make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect);
 		startButton->AddComponent(make_shared<Texts>());
 	}
 	

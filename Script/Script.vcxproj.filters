@@ -298,5 +298,8 @@
     <Filter Include="Component\LadderComponent">
       <UniqueIdentifier>{c36902e1-9522-4734-8b43-9581f2f7d881}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\ButtonObject">
+      <UniqueIdentifier>{769ba0ee-f81e-48ad-9a1b-adc18731b858}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
