@@ -86,9 +86,9 @@ void Scene_05::Awake()
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저 절벽은 너무 높아... 사다리를 내려야겠어.", 25.0f, L"마비옛체_OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저 절벽은 너무 높아... 사다리를 내려야겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_01", CENTER + Vector3(-320, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(770, -10, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"감히 내 앞길을 가로막다니! 죽인다!!! (Enter를 입력해주세요, 전투 씬으로 넘어갑니다.)", 25.0f, L"마비옛체_OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(770, -10, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"감히 내 앞길을 가로막다니! 죽인다!!! (Enter를 입력해주세요, 전투 씬으로 넘어갑니다.)", 25.0f, L"메이플스토리 OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_02", CENTER + Vector3(840, 300, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 

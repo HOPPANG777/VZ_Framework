@@ -46,6 +46,7 @@
     <ClCompile Include="Scenes\Scene_05.cpp" />
     <ClCompile Include="Scenes\Scene_06.cpp" />
     <ClCompile Include="Component\SolidCollider.cpp" />
+    <ClCompile Include="Scenes\Scene_07.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -87,6 +88,7 @@
     <ClInclude Include="Scenes\Scene_05.h" />
     <ClInclude Include="Scenes\Scene_06.h" />
     <ClInclude Include="Component\SolidCollider.h" />
+    <ClInclude Include="Scenes\Scene_07.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Component\WallCollision.h" />
     <ClInclude Include="Component\WindZone.h" />

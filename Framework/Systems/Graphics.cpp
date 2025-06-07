@@ -9,38 +9,12 @@ Graphics::Graphics()
 
 Graphics::~Graphics() 
 {
-    UnloadCustomFont(FontPath + L"Bazzi OTF.otf");
-    UnloadCustomFont(FontPath + L"DNFBitBitv2.otf");
-    UnloadCustomFont(FontPath + L"DNFForgedBlade-Bold.otf");
-    UnloadCustomFont(FontPath + L"DNFForgedBlade-Light.otf");
-    UnloadCustomFont(FontPath + L"DNFForgedBlade-Medium.otf");
-    UnloadCustomFont(FontPath + L"Mabinogi_Classic_OTF.otf");
-    UnloadCustomFont(FontPath + L"Maplestory OTF Bold.otf");
-    UnloadCustomFont(FontPath + L"Maplestory OTF Light.otf");
-    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF Bold.otf");
-    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF ExtraBold.otf");
-    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF Medium.otf");
-    UnloadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Bold.otf");
-    UnloadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Regular.otf");
-    UnloadCustomFont(FontPath + L"PretendardJP-Medium.otf");
+    UnloadFont();
 }
 
 void Graphics::Init()
 {
-    LoadCustomFont(FontPath + L"Bazzi OTF.otf");
-    LoadCustomFont(FontPath + L"DNFBitBitv2.otf");
-    LoadCustomFont(FontPath + L"DNFForgedBlade-Bold.otf");
-    LoadCustomFont(FontPath + L"DNFForgedBlade-Light.otf");
-    LoadCustomFont(FontPath + L"DNFForgedBlade-Medium.otf");
-    LoadCustomFont(FontPath + L"Mabinogi_Classic_OTF.otf");
-    LoadCustomFont(FontPath + L"Maplestory OTF Bold.otf");
-    LoadCustomFont(FontPath + L"Maplestory OTF Light.otf");
-    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF Bold.otf");
-    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF ExtraBold.otf");
-    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF Medium.otf");
-    LoadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Bold.otf");
-    LoadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Regular.otf");
-    LoadCustomFont(FontPath + L"PretendardJP-Medium.otf");
+    LoadFont();
 
     CreateDirect3D();
 
@@ -452,6 +426,42 @@ bool Graphics::UnloadCustomFont(const wstring& fontFilePath)
     SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
 
     return true;
+}
+
+void Graphics::LoadFont()
+{
+    LoadCustomFont(FontPath + L"Bazzi OTF.otf");
+    LoadCustomFont(FontPath + L"DNFBitBitv2.otf");
+    LoadCustomFont(FontPath + L"DNFForgedBlade-Bold.otf");
+    LoadCustomFont(FontPath + L"DNFForgedBlade-Light.otf");
+    LoadCustomFont(FontPath + L"DNFForgedBlade-Medium.otf");
+    LoadCustomFont(FontPath + L"Mabinogi_Classic_OTF.otf");
+    LoadCustomFont(FontPath + L"Maplestory OTF Bold.otf");
+    LoadCustomFont(FontPath + L"Maplestory OTF Light.otf");
+    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF Bold.otf");
+    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF ExtraBold.otf");
+    LoadCustomFont(FontPath + L"NEXON Kart Gothic OTF Medium.otf");
+    LoadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Bold.otf");
+    LoadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Regular.otf");
+    LoadCustomFont(FontPath + L"PretendardJP-Medium.otf");
+}
+
+void Graphics::UnloadFont()
+{
+    UnloadCustomFont(FontPath + L"Bazzi OTF.otf");
+    UnloadCustomFont(FontPath + L"DNFBitBitv2.otf");
+    UnloadCustomFont(FontPath + L"DNFForgedBlade-Bold.otf");
+    UnloadCustomFont(FontPath + L"DNFForgedBlade-Light.otf");
+    UnloadCustomFont(FontPath + L"DNFForgedBlade-Medium.otf");
+    UnloadCustomFont(FontPath + L"Mabinogi_Classic_OTF.otf");
+    UnloadCustomFont(FontPath + L"Maplestory OTF Bold.otf");
+    UnloadCustomFont(FontPath + L"Maplestory OTF Light.otf");
+    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF Bold.otf");
+    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF ExtraBold.otf");
+    UnloadCustomFont(FontPath + L"NEXON Kart Gothic OTF Medium.otf");
+    UnloadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Bold.otf");
+    UnloadCustomFont(FontPath + L"NEXON_Warhaven_OTF_Regular.otf");
+    UnloadCustomFont(FontPath + L"PretendardJP-Medium.otf");
 }
 
 D3DEnumAdapterInfo::~D3DEnumAdapterInfo() {}

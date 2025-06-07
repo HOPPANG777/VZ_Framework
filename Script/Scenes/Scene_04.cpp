@@ -87,9 +87,9 @@ void Scene_04::Awake()
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저기 엄청난 바람이 불어오는군, 저 바위를 들고가면 밀려나지 않을 수 있겠어.", 25.0f, L"마비옛체_OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저기 엄청난 바람이 불어오는군, 저 바위를 들고가면 밀려나지 않을 수 있겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_01", CENTER + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 다음으로 가자. (Enter를 입력해주세요.)", 25.0f, L"마비옛체_OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 다음으로 가자. (Enter를 입력해주세요.)", 25.0f, L"메이플스토리 OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_02", CENTER + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
@@ -167,7 +167,7 @@ void Scene_04::Update()
 		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (INPUT->KeyDown(VK_RETURN))
 		{
-			SCENE->LoadScene("Stage02");
+			SCENE->LoadScene("PuzzleStage");
 		}
 	}
 }

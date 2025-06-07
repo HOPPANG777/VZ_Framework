@@ -92,6 +92,9 @@
     <ClCompile Include="Component\LadderComponent.cpp">
       <Filter>Component\LadderComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\Scene_07.cpp">
+      <Filter>Scenes\Scene_07_PuzzleStage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Component\LadderComponent.h">
       <Filter>Component\LadderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Scene_07.h">
+      <Filter>Scenes\Scene_07_PuzzleStage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +306,9 @@
     </Filter>
     <Filter Include="Object\ButtonObject">
       <UniqueIdentifier>{769ba0ee-f81e-48ad-9a1b-adc18731b858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Scene_07_PuzzleStage">
+      <UniqueIdentifier>{b6a28d96-eeb1-4a26-a2b1-3273edd2f6ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

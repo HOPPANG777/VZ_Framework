@@ -35,6 +35,10 @@ public:
 
 	bool UnloadCustomFont(const wstring& fontFilePath);
 
+public:
+	void LoadFont();
+	void UnloadFont();
+
 private:
 	void EnumerateAdapters();
 	bool EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo);
@@ -49,13 +53,13 @@ private:
 	ComPtr<ID3D11DeviceContext> deviceContext = nullptr;
 	ComPtr<IDXGISwapChain> swapChain = nullptr;
 
-	ComPtr<ID2D1Device>            d2Device = nullptr;
-	ComPtr<ID2D1DeviceContext>     d2DeviceContext = nullptr;
+	ComPtr<ID2D1Device> d2Device = nullptr;
+	ComPtr<ID2D1DeviceContext> d2DeviceContext = nullptr;
 
-	ComPtr<ID2D1Factory1>          d2Factory = nullptr;
-	ComPtr<IDWriteFactory>         writeFactory = nullptr;
+	ComPtr<ID2D1Factory1> d2Factory = nullptr;
+	ComPtr<IDWriteFactory> writeFactory = nullptr;
 
-	ComPtr<ID2D1Bitmap1>           d2Bitmap = nullptr;
+	ComPtr<ID2D1Bitmap1> d2Bitmap = nullptr;
 
 	ComPtr<IDXGIDevice> dxgiDevice = nullptr;
 	ComPtr<IDXGISurface> dxgiSurface = nullptr;
@@ -63,7 +67,6 @@ private:
 	ComPtr<ID3D11RenderTargetView> rtv = nullptr;
 	D3D11_VIEWPORT viewport = { 0 };
 	Color clearColor = { 0.4f, 0.4f, 0.4f, 1.0f };
-	//Color clearColor = Color(0xcff0cc);
 
 	UINT numerator = 0;
 	UINT denominator = 1;
@@ -76,6 +79,8 @@ private:
 
 	bool bVsync = true;
 };
+
+//Color clearColor = Color(0xcff0cc);
 
 class D3DEnumAdapterInfo
 {
