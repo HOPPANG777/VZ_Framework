@@ -6,8 +6,14 @@ void Scene_01::Awake()
 	isLoaded = false;
 
 	{
-		objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/TitleScreen3.png"));
+		objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/NordicLumberJacTitleBackground.png"));
 		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(-260, 210, 0), Vector3(700, 700, 0), 0.0f, TexturePath + L"UI/NordicLumberJackTitle.png"));
+		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(495, -120, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(495, -180, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(495, -240, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects[2]->AddComponent(make_shared<Texts>());
+		objects[3]->AddComponent(make_shared<Texts>());
+		objects[4]->AddComponent(make_shared<Texts>());
 	}
 
 	{
@@ -23,6 +29,9 @@ void Scene_01::Start()
 	const auto& startButtonComp = make_shared<Button>();
 	startButtonComp->SetOnClick([this]() { SCENE->LoadScene("StartStage"); });
 	startButton->AddComponent(startButtonComp);
+	const auto& exitButtonComp = make_shared<Button>();
+	exitButtonComp->SetOnClick([]() { PostQuitMessage(0); });
+	objects[4]->AddComponent(exitButtonComp);
 }
 
 void Scene_01::Destroy()
@@ -61,6 +70,9 @@ void Scene_01::Render()
 void Scene_01::PostRender() 
 {
 	startButton->GetComponent<Texts>("Texts")->RenderText(L"Start", startButton->GetRect(), 37.0f, WHITE);
+	objects[2]->GetComponent<Texts>("Texts")->RenderText(L"Setting", objects[2]->GetRect(), 37.0f, WHITE);
+	objects[3]->GetComponent<Texts>("Texts")->RenderText(L"Credit", objects[3]->GetRect(), 37.0f, WHITE);
+	objects[4]->GetComponent<Texts>("Texts")->RenderText(L"Quit", objects[4]->GetRect(), 37.0f, WHITE);
 }
 
 void Scene_01::ImGUI()

@@ -32,4 +32,5 @@ private:
 	WinDesc desc;
 
 	static unique_ptr<class Program> program;
+
 };
