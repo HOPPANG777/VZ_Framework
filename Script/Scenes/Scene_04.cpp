@@ -167,7 +167,7 @@ void Scene_04::Update()
 		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (INPUT->KeyDown(VK_RETURN))
 		{
-			SCENE->LoadScene("PuzzleStage");
+			SCENE->LoadScene("Stage02");
 		}
 	}
 }
