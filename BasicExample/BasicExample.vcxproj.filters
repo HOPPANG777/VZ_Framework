@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Example.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Example.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="ReadData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="_Shaders">
+      <UniqueIdentifier>{b1637508-4795-4e37-892b-8e255b69e996}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="_Shaders\PixelShader.hlsl">
+      <Filter>_Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="_Shaders\VertexShader.hlsl">
+      <Filter>_Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
