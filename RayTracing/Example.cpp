@@ -1,10 +1,11 @@
 
+// 레이트레이싱 예제 구현 파일
 #include "pch.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "Example.h"
 
 Example::Example(HWND window, UINT width, UINT height)
-	: rayTracer(width/8, height/8) //width / 2.0f, height / 2.0f �̰ɷ� �ػ� ����� ����
+	: rayTracer(width/8, height/8) //width / 2.0f, height / 2.0f 이걸로 해상도 낮출수 있음
 {
 	Initialize(window, width, height);
 }
