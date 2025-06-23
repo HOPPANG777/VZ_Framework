@@ -1,3 +1,4 @@
+// ì´ë¯¸ì§€ ì²˜ë¦¬ ì˜ˆì œ í—¤ë” íŒŒì¼
 #pragma once
 
 struct Vertex
@@ -47,7 +48,7 @@ public:
 	ID3D11DeviceContext* GetSDeviceContext() const { return deviceContext.Get(); }
 
 private:
-	// À¯´ÏÅ© Æ÷ÀÎÅÍ °°Àº ¾Ö
+	// ìœ ë‹ˆí¬ í¬ì¸í„° ê°™ì€ ì• 
 	ComPtr<ID3D11Device> device;
 	ComPtr<ID3D11DeviceContext> deviceContext;
 	ComPtr<IDXGISwapChain> swapChain;
@@ -57,7 +58,7 @@ private:
 	ComPtr<ID3D11PixelShader> pixelShader;
 	ComPtr<ID3D11InputLayout> inputLayout;
 
-	//ÀÚ¿ø : ¹öÆÛ, ÅØ½ºÃÄ
+	//ìì› : ë²„í¼, í…ìŠ¤ì³
 	ComPtr <ID3D11Buffer> vertexBuffer;
 	ComPtr<ID3D11Buffer> indexBuffer;
 	ComPtr<ID3D11Texture2D> canvasTexture;

@@ -1,4 +1,5 @@
 #pragma once
+// 간단한 레이트레이싱 로직을 담고 있는 클래스
 
 #include "Sphere.h"
 #include "Light.h"
@@ -145,7 +146,7 @@ namespace THC
 
 
 				/*
-				* �׸��� Off
+				* ±×¸²ÀÚ Off
 				Ray shadowRay = { hit.point + 1e-4f * l, l };
 				
 

@@ -1,6 +1,13 @@
 #pragma once
 
 #include <stb_image.h>
+// C++14 í™˜ê²½ì„ ìœ„í•œ clamp í•¨ìˆ˜
+template <typename T>
+static T ClampValue(const T& v, const T& lo, const T& hi)
+{
+    return v < lo ? lo : (hi < v ? hi : v);
+}
+
 
 namespace THC
 {
@@ -38,8 +45,8 @@ namespace THC
 
 		Color GetClamped(int i, int j)
 		{
-			i = clamp(i, 0, width - 1);
-			j = clamp(j, 0, height - 1);
+			i = ClampValue(i, 0, width - 1);
+			j = ClampValue(j, 0, height - 1);
 
 			const float r = image[(i + j * width) * channels + 0] / 255.0f;
 			const float g = image[(i + j * width) * channels + 1] / 255.0f;
@@ -78,7 +85,7 @@ namespace THC
 
 		Color SamplePoint(const Vector2& uv)
 		{
-			//x¿Í y¸¦ ±¸ÇÏ°í ÀÌ¸¦ ÅëÇØ i¿Í j¸¦ ±¸ÇÏ¶ó ±× ÀÌÈÄ wrapÀÌ³ª  clamp¸¦ ½á¼­ »öÀ» ±¸ÇÏ¸é µÈ´Ù
+			//xì™€ yë¥¼ êµ¬í•˜ê³  ì´ë¥¼ í†µí•´ iì™€ jë¥¼ êµ¬í•˜ë¼ ê·¸ ì´í›„ wrapì´ë‚˜  clampë¥¼ ì¨ì„œ ìƒ‰ì„ êµ¬í•˜ë©´ ëœë‹¤
 			//const Vector2 xy = Vector2(uv.x * width - 0.5f, uv.y * height - 0.5f);
 			const Vector2 xy = uv * Vector2(float(width), float(height)) - Vector2(0.5f);
 			const int i = int(round(xy.x));
