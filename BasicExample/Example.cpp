@@ -1,4 +1,3 @@
-// ì´ë¯¸ì§€ ì²˜ë¦¬ ì˜ˆì œ íŒŒì¼
 #include "pch.h"
 #include "Example.h"
 
@@ -6,13 +5,6 @@
 #include <stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
-
-// C++14 í™˜ê²½ì„ ìœ„í•œ ê°„ë‹¨í•œ clamp í•¨ìˆ˜
-template <typename T>
-static T Clamp(const T& v, const T& lo, const T& hi)
-{
-    return v < lo ? lo : (hi < v ? hi : v);
-}
 
 void Image::ReadFromFile(const char* fileName)
 {
@@ -51,8 +43,8 @@ void Image::WritePNG(const char* fileName)
 
 Color& Image::GetPixel(int x, int y)
 {
-	x = Clamp(x, 0, width - 1);
-	y = Clamp(y, 0, height - 1);
+	x = std::clamp(x, 0, width - 1);
+	y = std::clamp(y, 0, height - 1);
 
 	return pixels[x + width * y];
 }
@@ -60,7 +52,7 @@ Color& Image::GetPixel(int x, int y)
 void Image::BoxBlur5()
 {
 	vector<Color> pixelsBuffer(pixels.size());
-	int blurSize = 2;  // 5x5 ë¸”ëŸ¬
+	int blurSize = 2;  // 5x5 ºí·¯
 
 #pragma omp parallel for
 	for (int j = 0; j < height; ++j)
@@ -82,7 +74,7 @@ void Image::BoxBlur5()
 
 	swap(pixels, pixelsBuffer);
 
-	// ì„¸ë¡œ ë¸”ëŸ¬
+	// ¼¼·Î ºí·¯
 #pragma omp parallel for
 	for (int j = 0; j < height; ++j)
 	{
@@ -109,9 +101,9 @@ void Image::GaussianBlur5()
 	vector<Color> pixelsBuffer(pixels.size());
 
 	float gaussianKernel[5] = { 0.0545f, 0.2442f, 0.4026f, 0.2442f, 0.0545f };
-	int blurSize = 2; // 5x5 ë¸”ëŸ¬
+	int blurSize = 2; // 5x5 ºí·¯
 
-	// ê°€ë¡œ ë¸”ëŸ¬
+	// °¡·Î ºí·¯
 #pragma omp parallel for
 	for (int j = 0; j < height; ++j)
 	{
@@ -129,7 +121,7 @@ void Image::GaussianBlur5()
 	}
 	swap(pixels, pixelsBuffer);
 
-	// ì„¸ë¡œ ë¸”ëŸ¬
+	// ¼¼·Î ºí·¯
 #pragma omp parallel for
 	for (int j = 0; j < height; ++j)
 	{
@@ -151,12 +143,12 @@ void Image::GaussianBlur5()
 
 void Image::Bloom(float th, int numRepeat, float weight)
 {
-	//1. ì›ë³¸ ì´ë¯¸ì§€ë¥¼ ë°±ì—….
+	//1. ¿øº» ÀÌ¹ÌÁö¸¦ ¹é¾÷.
 	vector<Color> pixelsBackup(pixels.size());
 	pixelsBackup = pixels;
 
-	//2. ë°ì€ í”½ì…€ì€ ê·¸ëŒ€ë¡œ ë‘ê³  ì–´ë‘ë¶„ í”½ì…€ì€ ì™„ì „íˆ ê²€ê²Œ ë§Œë“¦
-	//	(ë°ë‹¤ëŠ” ê¸°ì¤€ì€ ìš°ë¦¬ê°€ ì •í•´ì£¼ë©´ ëœë‹¤.)
+	//2. ¹àÀº ÇÈ¼¿Àº ±×´ë·Î µÎ°í ¾îµÎºĞ ÇÈ¼¿Àº ¿ÏÀüÈ÷ °Ë°Ô ¸¸µê
+	//	(¹à´Ù´Â ±âÁØÀº ¿ì¸®°¡ Á¤ÇØÁÖ¸é µÈ´Ù.)
 #pragma omp parallel for
 	for (int y = 0; y < height; y++)
 	{
@@ -172,14 +164,14 @@ void Image::Bloom(float th, int numRepeat, float weight)
 		}
 	}
 
-		pixelsBackup[i].x = Clamp(pixels[i].x * weight + pixelsBackup[i].x, 0.0f, 1.0f);
-		pixelsBackup[i].y = Clamp(pixels[i].y * weight + pixelsBackup[i].y, 0.0f, 1.0f);
-		pixelsBackup[i].z = Clamp(pixels[i].z * weight + pixelsBackup[i].z, 0.0f, 1.0f);
+	//3. ±×´ë·Î µĞ ÇÈ¼¿¿¡¸¸ ºí·¯¸¦ Àû¿ëÇÏ°í
+	for (int count = 0; count < numRepeat; count++)
+	{
 		GaussianBlur5();
 	}
 
-	//4. ë°±ì—… ì´ë¯¸ì§€ì™€ ë°ì€ ë¶€ë¶„ë§Œ ê°€ìš°ì‹œì•ˆë¸”ëŸ¬ë¥¼ ì ìš©í•œ ì´ë¯¸ì§€ë¥¼ ë”í•œë‹¤.  
-	//5. ê°€ìš°ì‹œì•ˆ ë¸”ëŸ¬ ì ìš©í•œ ì´ë¯¸ì§€ì— ê°€ì¤‘ì¹˜ë¥¼ ê³±í•´ì„œ ê°•ë„ ì¡°ì ˆ
+	//4. ¹é¾÷ ÀÌ¹ÌÁö¿Í ¹àÀº ºÎºĞ¸¸ °¡¿ì½Ã¾Èºí·¯¸¦ Àû¿ëÇÑ ÀÌ¹ÌÁö¸¦ ´õÇÑ´Ù.  
+	//5. °¡¿ì½Ã¾È ºí·¯ Àû¿ëÇÑ ÀÌ¹ÌÁö¿¡ °¡ÁßÄ¡¸¦ °öÇØ¼­ °­µµ Á¶Àı
 	for (size_t i = 0; i < pixelsBackup.size(); i++)
 	{
 		pixelsBackup[i].x = std::clamp(pixels[i].x * weight + pixelsBackup[i].x, 0.0f, 1.0f);
@@ -222,32 +214,32 @@ Example::Example(HWND window, UINT width, UINT height)
 
 void Example::InitShaders()
 {
-	//Blob ì€ ì´ì§„ì„ ì˜ë¯¸
+	//Blob Àº ÀÌÁøÀ» ÀÇ¹Ì
 	ComPtr<ID3DBlob> vsBlob;
 	ComPtr<ID3DBlob> psBlob;
 
 #ifdef _DEBUG
 	ComPtr<ID3DBlob> errorBlob;
 
-	// DXëŠ” ê¸°ë³¸ì ìœ¼ë¡œ í•¨ìˆ˜ì˜ ë°˜í™˜ê°’ì´ HRESULTë¡œ ì„±ê³µ/ì‹¤íŒ¨ ì—¬ë¶€ë¥¼ ë‚˜íƒ€ë‚¸ë‹¤.
-	// ìš°ë¦¬ê°€ ë§Œë“  vs(ê¼­ì§“ì  ì‰ì´ë”íŒŒì¼ì˜ mainì´ ì‹¤í–‰ë˜ë„ë¡ ì§„ì…ì ì„ ì„¤ì •í•´ì¤Œ)
+	// DX´Â ±âº»ÀûÀ¸·Î ÇÔ¼öÀÇ ¹İÈ¯°ªÀÌ HRESULT·Î ¼º°ø/½ÇÆĞ ¿©ºÎ¸¦ ³ªÅ¸³½´Ù.
+	// ¿ì¸®°¡ ¸¸µç vs(²ÀÁşÁ¡ ½¦ÀÌ´õÆÄÀÏÀÇ mainÀÌ ½ÇÇàµÇµµ·Ï ÁøÀÔÁ¡À» ¼³Á¤ÇØÁÜ)
 	if (FAILED(D3DCompileFromFile(L"_Shaders/VertexShader.hlsl", 0, 0, "main", "vs_5_0",
 		0, 0, &vsBlob, &errorBlob)))
 	{
-		// ì—ëŸ¬ê°€ ìˆëŠ”ì§€ í™•ì¸
+		// ¿¡·¯°¡ ÀÖ´ÂÁö È®ÀÎ
 		if (errorBlob.Get())
 		{
-			// ì—ëŸ¬ë¥¼ ë¬¸ìì—´ í˜•íƒœë¡œ ë°›ì•„ì˜´.
+			// ¿¡·¯¸¦ ¹®ÀÚ¿­ ÇüÅÂ·Î ¹Ş¾Æ¿È.
 			const std::string& str = (const char*)errorBlob->GetBufferPointer();
-			// ì—ëŸ¬ë¥¼ ë„ì›Œì¤Œ
+			// ¿¡·¯¸¦ ¶ç¿öÁÜ
 			MessageBoxA(nullptr, str.c_str(), "Vertex Shader Compile Error!", MB_OK);
 		}
-		// ìœ„ ifë¬¸ì— ê±¸ë¦¬ì§€ ì•Šì•˜ë”ë¼ë„, ë¬¸ì œê°€ ìˆë‹¤ë©´ ì´ ifë¬¸ì— ë“¤ì–´ì˜¤ê¸° ë•Œë¬¸ì—
-		// assertë¡œ ì²˜ë¦¬í•´ì¤€ë‹¤.
+		// À§ if¹®¿¡ °É¸®Áö ¾Ê¾Ò´õ¶óµµ, ¹®Á¦°¡ ÀÖ´Ù¸é ÀÌ if¹®¿¡ µé¾î¿À±â ¶§¹®¿¡
+		// assert·Î Ã³¸®ÇØÁØ´Ù.
 		assert(false);
 	}
 
-	// ìœ„ ê³¼ì •ì„ vsë¿ ì•„ë‹Œ psì—ì„œë„ ë˜‘ê°™ì´ í•´ì¤Œ.
+	// À§ °úÁ¤À» vs»Ó ¾Æ´Ñ ps¿¡¼­µµ ¶È°°ÀÌ ÇØÁÜ.
 	if (FAILED(D3DCompileFromFile(L"_Shaders/PixelShader.hlsl", 0, 0, "main", "ps_5_0",
 		0, 0, &psBlob, &errorBlob)))
 	{
@@ -266,8 +258,8 @@ void Example::InitShaders()
 
 #endif
 
-	// ì—°ì‚°ì ì˜¤ë²„ë¡œë”©ìœ¼ë¡œ ì¸í•´ vertexShaderëŠ” ë¡œí¬ì¸í„°ê°€ ì•„ë‹Œ ì´ì¤‘ í¬ì¸í„°ë¡œ ì „ë‹¬ì´ ë¨.
-	// ì£¼ì†Œê°’ì„ ë„˜ê²¨ì¤„ ë•Œ í•´ì œë¥¼ í•´ì„œ ë„˜ê²¨ì¤Œ. ì£¼ì†Œê°’ë§Œ ë„˜ê²¨ì£¼ëŠ” í•¨ìˆ˜ëŠ” ë”°ë¡œ ì¡´ì¬í•¨.
+	// ¿¬»êÀÚ ¿À¹ö·ÎµùÀ¸·Î ÀÎÇØ vertexShader´Â ·ÎÆ÷ÀÎÅÍ°¡ ¾Æ´Ñ ÀÌÁß Æ÷ÀÎÅÍ·Î Àü´ŞÀÌ µÊ.
+	// ÁÖ¼Ò°ªÀ» ³Ñ°ÜÁÙ ¶§ ÇØÁ¦¸¦ ÇØ¼­ ³Ñ°ÜÁÜ. ÁÖ¼Ò°ª¸¸ ³Ñ°ÜÁÖ´Â ÇÔ¼ö´Â µû·Î Á¸ÀçÇÔ.
 	CHECK(device->CreateVertexShader(vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), nullptr, &vertexShader));
 	CHECK(device->CreatePixelShader(psBlob->GetBufferPointer(), psBlob->GetBufferSize(), nullptr, &pixelShader));
 
@@ -286,8 +278,8 @@ void Example::Initialze(HWND window, UINT width, UINT height, UINT canvasWidth, 
 	this->canvasWidth = canvasWidth;
 	this->canvasHeight = canvasHeight;
 
-	// DXì—ì„  ë”ë¸”ë²„í¼ë§ì´ ê¸°ë³¸ì´ë©°, í”„ë¡ íŠ¸ ë²„í¼ì™€ ë°± ë²„í¼ë¥¼ ë²ˆê°ˆì•„ ê°€ê²Œ ëœë‹¤.(ìŠ¤ì™‘ì²´ì¸)
-	// ë°± ë²„í¼ê°€ ëª¨ë‘ ê·¸ë ¤ì§„ í›„ í”„ë¡ íŠ¸ ë²„í¼ì™€ êµì²´í•˜ëŠ” ë°©ì‹. ê·¸ë ‡ê¸° ë•Œë¬¸ì— ë¹ˆ ë²„í¼ë¡œ ì¸í•œ ê¹œë¹¡ì„ì´ ì—†ìŒ.
+	// DX¿¡¼± ´õºí¹öÆÛ¸µÀÌ ±âº»ÀÌ¸ç, ÇÁ·ĞÆ® ¹öÆÛ¿Í ¹é ¹öÆÛ¸¦ ¹ø°¥¾Æ °¡°Ô µÈ´Ù.(½º¿ÒÃ¼ÀÎ)
+	// ¹é ¹öÆÛ°¡ ¸ğµÎ ±×·ÁÁø ÈÄ ÇÁ·ĞÆ® ¹öÆÛ¿Í ±³Ã¼ÇÏ´Â ¹æ½Ä. ±×·¸±â ¶§¹®¿¡ ºó ¹öÆÛ·Î ÀÎÇÑ ±ôºıÀÓÀÌ ¾øÀ½.
 	DXGI_SWAP_CHAIN_DESC swapChainDesc;
 	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
 
@@ -323,7 +315,7 @@ void Example::Initialze(HWND window, UINT width, UINT height, UINT canvasWidth, 
 
 	// CreateRenderTarget
 	ComPtr<ID3D11Texture2D> backBuffer;
-	// ìë£Œí˜•ì˜ idë¥¼ ì•Œë ¤ì£¼ëŠ” ì—°ì‚°ì __uuidof() ì•„ë˜ì—ì„  ë§¤í¬ë¡œ í™œìš©
+	// ÀÚ·áÇüÀÇ id¸¦ ¾Ë·ÁÁÖ´Â ¿¬»êÀÚ __uuidof() ¾Æ·¡¿¡¼± ¸ÅÅ©·Î È°¿ë
 	CHECK(swapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer)));
 	CHECK(device->CreateRenderTargetView(backBuffer.Get(), nullptr, &renderTargetView));
 	backBuffer.Reset();
@@ -379,8 +371,8 @@ void Example::Initialze(HWND window, UINT width, UINT height, UINT canvasWidth, 
 	{
 		const vector<Vertex> vertices =
 		{
-			// í…ìŠ¤ì³ ì¢Œí‘œë¥¼ uvì¢Œí‘œì— ëŒ€ì‘ ì‹œì¼œì£¼ëŠ” ê²ƒ.
-			// 4ê°œ ì¤‘ ë§ˆì§€ë§‰ì€ í¬ì§€ì…˜, ë°©í–¥ì„ ë‚˜íƒ€ë‚´ëŠ” ë²¡í„°, í˜„ì¬ í¬ì§€ì…˜ìœ¼ë¡œ ê³ ì •
+			// ÅØ½ºÃÄ ÁÂÇ¥¸¦ uvÁÂÇ¥¿¡ ´ëÀÀ ½ÃÄÑÁÖ´Â °Í.
+			// 4°³ Áß ¸¶Áö¸·Àº Æ÷Áö¼Ç, ¹æÇâÀ» ³ªÅ¸³»´Â º¤ÅÍ, ÇöÀç Æ÷Áö¼ÇÀ¸·Î °íÁ¤
 			{ { -1.0f, -1.0f, 0.0f, 1.0f }, { 0.0f, 1.0f } },
 			{ { 1.0f, -1.0f, 0.0f, 1.0f }, { 1.0f, 1.0f } },
 			{ { 1.0f, 1.0f, 0.0f, 1.0f }, { 1.0f, 0.0f } },
@@ -404,8 +396,8 @@ void Example::Initialze(HWND window, UINT width, UINT height, UINT canvasWidth, 
 
 	//CreateIndexBuffer
 	{
-		// ì‚¼ê°í˜• ë‘ ê°œ, ì‹œê³„ë°©í–¥
-		const vector<uint16_t> indices = //16ë¹„íŠ¸ unsigned Short
+		// »ï°¢Çü µÎ °³, ½Ã°è¹æÇâ
+		const vector<uint16_t> indices = //16ºñÆ® unsigned Short
 		{
 			3, 1, 0,
 			2, 1, 3,
@@ -448,10 +440,10 @@ void Example::Render()
 	deviceContext->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), nullptr);
 	deviceContext->ClearRenderTargetView(renderTargetView.Get(), clearColor);
 
-	//ë Œë”ë§ íŒŒì´í”„ë¼ì¸ ìˆœì„œ
+	//·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ ¼ø¼­
 	//IA(Input Assembler) - VS(Vertex Shader) - RS(Rasterize) - PS(Pixel Shader) - OM(Output Merge)
-	//ì´ ëª¨ë“  ê³¼ì •ì„ ê°€ë™í•˜ê¸° ìœ„í•´ì„  DrawCall or DPCallì„ í†µí•´ì„œ í•˜ê²Œë¨
-	//ê·¸ëŸ¼ìœ¼ë¡œ ëª¨ë“  ë‹¨ê³„ì—ì„œ í•„ìš”í•œ ì •ë³´ë¥¼ ëª¨ë‘ ê½‚ì•„ì¤€ í›„(ìˆœì„œ ìƒê´€X) DrawCallì„ í†µí•´ ë Œë”ë§ íŒŒì´í”„ ë¼ì¸ì´ í•œë°”í€´ë¥¼ ëŒê²Œë¨.
+	//ÀÌ ¸ğµç °úÁ¤À» °¡µ¿ÇÏ±â À§ÇØ¼± DrawCall or DPCallÀ» ÅëÇØ¼­ ÇÏ°ÔµÊ
+	//±×·³À¸·Î ¸ğµç ´Ü°è¿¡¼­ ÇÊ¿äÇÑ Á¤º¸¸¦ ¸ğµÎ ²È¾ÆÁØ ÈÄ(¼ø¼­ »ó°üX) DrawCallÀ» ÅëÇØ ·»´õ¸µ ÆÄÀÌÇÁ ¶óÀÎÀÌ ÇÑ¹ÙÄû¸¦ µ¹°ÔµÊ.
 
 	//IA
 	UINT stride = sizeof(Vertex);

@@ -1,4 +1,3 @@
-// 레이트레이싱 실행을 위한 메인 파일
 #include "pch.h"
 #include "Example.h"
 
