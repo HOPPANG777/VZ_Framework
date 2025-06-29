@@ -367,26 +367,14 @@
     <Filter Include="Interfaces">
       <UniqueIdentifier>{fe66446a-6749-422d-b817-14ad2adf72e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renders">
-      <UniqueIdentifier>{6caefbae-bb90-4468-8a73-26849cc5c884}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems">
       <UniqueIdentifier>{8532e353-f2c4-4ad3-8761-1204cb1f4aee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders\IA">
-      <UniqueIdentifier>{4c80fe29-4578-44c6-a710-a7b12d6e52db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders\Shaders">
-      <UniqueIdentifier>{41fa61ae-9ae0-46dd-b1c5-b3f14b916782}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\ColorObject">
       <UniqueIdentifier>{c8e1254e-9e05-466a-a2c9-4a0472baa715}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\BaseObject">
       <UniqueIdentifier>{e121b46d-0206-4c42-9432-6541d40372c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renders\RenderResources">
-      <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
     </Filter>
     <Filter Include="Managers">
       <UniqueIdentifier>{d93cd37b-b56b-4f58-89b0-69741b98752b}</UniqueIdentifier>
@@ -438,6 +426,18 @@
     </Filter>
     <Filter Include="Enums">
       <UniqueIdentifier>{8823b7f9-477d-4b4d-831f-f730a602e7df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders">
+      <UniqueIdentifier>{6caefbae-bb90-4468-8a73-26849cc5c884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\IA">
+      <UniqueIdentifier>{4c80fe29-4578-44c6-a710-a7b12d6e52db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\Shaders">
+      <UniqueIdentifier>{41fa61ae-9ae0-46dd-b1c5-b3f14b916782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renders\RenderResources">
+      <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
