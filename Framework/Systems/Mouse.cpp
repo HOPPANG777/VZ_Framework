@@ -1,5 +1,4 @@
 #include "Framework.h"
-#include "Platform/Platform.h"
 #include "Mouse.h"
 
 Mouse::Mouse() 
@@ -90,7 +89,7 @@ void Mouse::Update()
 	}//for(i)
 
 
-	// ë§ˆì§€ë§‰ì— ì´ì „ ìƒíƒœë¥¼ í˜„ì¬ ìƒíƒœë¡œ ì—…ë°ì´íŠ¸
+	// ¸¶Áö¸·¿¡ ÀÌÀü »óÅÂ¸¦ ÇöÀç »óÅÂ·Î ¾÷µ¥ÀÌÆ®
 	for (DWORD i = 0; i < MAX_INPUT_MOUSE; i++)
 	{
 		buttonOldStatus[i] = buttonStatus[i];

@@ -8,7 +8,7 @@
 
 //미리 컴파일된 헤더.
 //pch pre compiled header
-#include "Platform/Platform_Base.h"
+#include "Platform/Platform.h"
 
 // C, C++ 헤더입니다.
 #include <iostream>
@@ -112,7 +112,7 @@ public:                                                         \
 //ExternGlobals
 extern float gWinWidth;
 extern float gWinHeight;
-extern Platform::WindowHandle gHandle;
+extern HWND gHandle;
 #if defined(_WIN32) || defined(_WIN64)
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif

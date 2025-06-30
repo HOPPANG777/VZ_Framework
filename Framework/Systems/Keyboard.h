@@ -1,6 +1,5 @@
 #pragma once
 #include "Framework.h"
-#include "Platform/Platform.h"
 
 #define MAX_INPUT_KEY 256
 

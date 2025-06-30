@@ -4,8 +4,8 @@
 
 #include "Systems/Window.h"
 
-Platform::WindowHandle gHandle;
-// call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)" $(Platform) // ì´ê±¸ Client í”„ë¡œì íŠ¸ ì„¤ì • ë¹Œë“œ í›„ ì´ë²¤íŠ¸ì— ì…ë ¥í•˜ì‹œì˜¤
+// $(SolutionDir)_Build\$(Platform)\$(Configuration)\  //$(ProjectName)\ // ÀÌ°É Client ÇÁ·ÎÁ§Æ® ¼³Á¤ µğ¹ö±ë¿¡ ÀÔ·ÂÇÏ½Ã¿À
+// call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)" $(Platform) // ÀÌ°É Client ÇÁ·ÎÁ§Æ® ¼³Á¤ ºôµå ÈÄ ÀÌº¥Æ®¿¡ ÀÔ·ÂÇÏ½Ã¿À
 
 float gWinWidth = WIN_DEFAULT_WIDTH;
 float gWinHeight = WIN_DEFAULT_HEIGHT;
@@ -17,13 +17,13 @@ Program::~Program() {}
 
 void Program::Awake() 
 {
-	//ë‹¤ì´ë ‰íŠ¸ ì‹±ê¸€í†¤ ì„¸íŒ…
+	//´ÙÀÌ·ºÆ® ½Ì±ÛÅæ ¼¼ÆÃ
 	RenderStates::Init();
 
-	//ì¹´ë©”ë¼ ì„¸íŒ…
+	//Ä«¸Ş¶ó ¼¼ÆÃ
 	CAMERA->Init();
 
-	//Scene ì„¸íŒ…
+	//Scene ¼¼ÆÃ
 	{
 		SCENE->AddScene("MapTools", make_shared<MapTools>());
 
@@ -62,14 +62,14 @@ void Program::ImGUI()
 
 int APIENTRY wWinMain
 (
-	_In_ HINSTANCE hInstance, // ìœˆë„ìš° ì‹¤í–‰ì„ ìœ„í•œ ê³ ìœ ê°’
+	_In_ HINSTANCE hInstance, // À©µµ¿ì ½ÇÇàÀ» À§ÇÑ °íÀ¯°ª
 	_In_opt_ HINSTANCE hPrevInstance,	
-	_In_ LPWSTR    lpCmdLine, // ì»¤ë§¨ë“œ ì „ë‹¬ì¸ì
+	_In_ LPWSTR    lpCmdLine, // Ä¿¸Çµå Àü´ŞÀÎÀÚ
 	_In_ int       nCmdShow
 )
 {
 	WinDesc desc;
-	desc.appName = L"Tools";	// ì°½ ì´ë¦„
+	desc.appName = L"Tools";	// Ã¢ ÀÌ¸§
 	desc.instance = hInstance;	
 	desc.handle = nullptr;
 	desc.width = gWinWidth;
