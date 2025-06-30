@@ -362,6 +362,8 @@
     <ClInclude Include="Utilities\ServiceLocator.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Platform\Platform.h" />
+    <ClInclude Include="Platform\Platform_Windows.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
