@@ -33,6 +33,7 @@
 #include <sstream>
 #include <exception>
 #include "Utilities/ServiceLocator.h"
+#include "Utilities/ServiceRegister.h"
 
 using namespace std;
 
@@ -176,6 +177,5 @@ const string BuildTilePath = "_Data/_TileData/";
 #include "Utilities/Path.h"
 #include "Utilities/Random.h"
 #include "Utilities/String.h"
-#include "Utilities/ServiceRegister.h"
 
 
