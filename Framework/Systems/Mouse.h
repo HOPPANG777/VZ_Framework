@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework.h"
+#include "Platform/Platform.h"
 
 #include "Utilities/DirectHelper.h"
 

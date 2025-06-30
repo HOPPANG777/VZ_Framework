@@ -1,5 +1,7 @@
 #pragma once
 #include "Framework.h"
+#include "Platform/Platform.h"
+#include "Interfaces/IGraphics.h"
 
 /*
 DirectX 11
@@ -9,13 +11,13 @@ software development kit
 class D3DEnumAdapterInfo;
 class D3DEnumOutputInfo;
 
-class Graphics
+class Graphics : public IGraphics
 {
 	DECLARE_SINGLETON(Graphics);
 
 public:
-	void Init();
-	void CreateBackBuffer();
+        void Init() override;
+        void CreateBackBuffer() override;
 
 	ID3D11Device* GetDevice() const { return device.Get(); }
 	ID3D11DeviceContext* GetDC() const { return deviceContext.Get(); }
@@ -23,18 +25,18 @@ public:
 	ID2D1DeviceContext* GetD2DC() const { return d2DeviceContext.Get(); }
 	IDWriteFactory* GetWrite() const { return writeFactory.Get(); }
 
-	void Begin();
-	void End();
+        void Begin() override;
+        void End() override;
 
 	void GUI();
 
-	void SetFullScreen(bool fullscreen);
+        void SetFullScreen(bool fullscreen) override;
 
-	void SetResolution(UINT width, UINT height);
+        void SetResolution(unsigned int width, unsigned int height) override;
 
-	bool LoadCustomFont(const wstring& fontFilePath);
+        bool LoadCustomFont(const wstring& fontFilePath) override;
 
-	bool UnloadCustomFont(const wstring& fontFilePath);
+        bool UnloadCustomFont(const wstring& fontFilePath) override;
 
 public:
 	void LoadFont();

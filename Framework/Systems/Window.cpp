@@ -1,4 +1,5 @@
 #include "Framework.h"
+#include "Platform/Platform.h"
 #include "Window.h"
 #include "Systems/Input.h"
 #include "Systems/Time.h"
