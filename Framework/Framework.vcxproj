@@ -190,6 +190,7 @@
     <ClInclude Include="Managers\EntityManager.h" />
     <ClInclude Include="Interfaces\ISystem.h" />
     <ClInclude Include="Platform\Platform.h" />
+    <ClInclude Include="Platform\Platform_Base.h" />
     <ClInclude Include="Platform\Platform_Windows.h" />
     <ClInclude Include="Structs\BoxEdge.h" />
     <ClInclude Include="Enums\AxeState.h" />
@@ -231,6 +232,7 @@
     <ClInclude Include="Utilities\Path.h" />
     <ClInclude Include="Renders\RenderStates.h" />
     <ClInclude Include="Objects\ColorObject\ColorFilledCircle.h" />
+    <ClInclude Include="Utilities\ServiceRegister.h" />
     <ClInclude Include="Utilities\String.h" />
     <ClInclude Include="Systems\Sounds.h" />
     <ClInclude Include="Managers\SceneManager.h" />
@@ -260,6 +262,7 @@
     <ClInclude Include="Systems\Time.h" />
     <ClInclude Include="Systems\Window.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
+    <ClInclude Include="Utilities\targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\AnimationMove.cpp" />
