@@ -32,6 +32,7 @@
 #include <future>
 #include <sstream>
 #include <exception>
+#include "Utilities/ServiceLocator.h"
 
 using namespace std;
 
@@ -116,30 +117,28 @@ extern HWND gHandle;
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 
-//SingletonMacros
-#define INPUT Input::Get()
-#define TIME Time::Get()
-#define DELTA Time::Get()->GetDeltaTime()
-#define GRAPHICS Graphics::Get()
-#define DEVICE GRAPHICS->GetDevice()
-#define DC GRAPHICS->GetDC()
-#define SWAPCHAIN GRAPHICS->GetSwapChain()
-#define D2DC GRAPHICS->GetD2DC()
-#define WRITE GRAPHICS->GetWrite()	
-#define FONT Texts::Get()
-#define DEBUG HelpMe::Get()
-#define CAMERA Camera::Get()
-#define SCENE SceneManager::Get()
-#define SOUNDS Sounds::Get()
-#define IMGUI Gui::Get()
-#define KEYBOARD Keyboard::Get()
-#define MOUSE Mouse::Get()
-#define COLLISION CollisionManager::Get()
-#define GIZMO Gizmo::Get()
-#define REALDELTA TIME->GetRealDeltaTime()
-#define TILESET TileSetManager::Get()
-#define TEXTURE2D Texture2DManager::Get()
-#define INPUT Input::Get()
+//Singleton accessors via ServiceLocator
+#define INPUT ServiceLocator::Get<Input>("Input").get()
+#define TIME ServiceLocator::Get<Time>("Time").get()
+#define DELTA ServiceLocator::Get<Time>("Time")->GetDeltaTime()
+#define GRAPHICS ServiceLocator::Get<Graphics>("Graphics").get()
+#define DEVICE ServiceLocator::Get<Graphics>("Graphics")->GetDevice()
+#define DC ServiceLocator::Get<Graphics>("Graphics")->GetDC()
+#define SWAPCHAIN ServiceLocator::Get<Graphics>("Graphics")->GetSwapChain()
+#define D2DC ServiceLocator::Get<Graphics>("Graphics")->GetD2DC()
+#define WRITE ServiceLocator::Get<Graphics>("Graphics")->GetWrite()
+#define DEBUG ServiceLocator::Get<HelpMe>("HelpMe").get()
+#define CAMERA ServiceLocator::Get<Camera>("Camera").get()
+#define SCENE ServiceLocator::Get<SceneManager>("SceneManager").get()
+#define SOUNDS ServiceLocator::Get<Sounds>("Sounds").get()
+#define IMGUI ServiceLocator::Get<Gui>("Gui").get()
+#define KEYBOARD ServiceLocator::Get<Keyboard>("Keyboard").get()
+#define MOUSE ServiceLocator::Get<Mouse>("Mouse").get()
+#define COLLISION ServiceLocator::Get<CollisionManager>("CollisionManager").get()
+#define GIZMO ServiceLocator::Get<Gizmo>("Gizmo").get()
+#define REALDELTA ServiceLocator::Get<Time>("Time")->GetRealDeltaTime()
+#define TILESET ServiceLocator::Get<TileSetManager>("TileSetManager").get()
+#define TEXTURE2D ServiceLocator::Get<Texture2DManager>("Texture2DManager").get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)

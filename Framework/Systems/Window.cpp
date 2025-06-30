@@ -3,6 +3,7 @@
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 #include "Systems/Sounds.h"
+#include "Utilities/ServiceRegister.h"
 #include "../Client/Program.h"
 
 unique_ptr<Program> Window::program = nullptr;
@@ -82,9 +83,10 @@ ATOM Window::MyRegisterClass(const WinDesc& desc)
 
 WPARAM Window::Run()
 {
-	program = make_unique<Program>();
-	program->Awake();
-	program->Start();
+        RegisterServices();
+        program = make_unique<Program>();
+        program->Awake();
+        program->Start();
 
 	MSG msg = { 0 };
 
