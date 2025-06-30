@@ -1,4 +1,7 @@
 #pragma once
+#include "Framework.h"
+#include "Objects/BaseObject/Object.h"
+#include "Renders/RenderResources/GlobalBuffers.h"
 
 class Camera
 {

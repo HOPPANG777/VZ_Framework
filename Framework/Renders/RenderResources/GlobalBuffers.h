@@ -1,8 +1,10 @@
 #pragma once
+#include "Framework.h"
+#include "ConstantBuffer.h"
 
 class WorldBuffer : public ConstantBuffer
 {
-	// 16¹ÙÀÌÆ® ´ÜÀ§·Î µ¥ÀÌÅÍ ÆĞµùÀ» ÇØÁà¾ß ÇÑ´Ù.
+	// 16ë°”ì´íŠ¸ ë‹¨ìœ„ë¡œ ë°ì´í„° íŒ¨ë”©ì„ í•´ì¤˜ì•¼ í•œë‹¤.
 	struct WorldStruct
 	{
 		Matrix world;
@@ -55,17 +57,17 @@ class ColorBuffer : public ConstantBuffer
 public:
 	ColorBuffer() : ConstantBuffer(&data, sizeof(data))
 	{
-		// ±âº» º¯È¯ »ö»óÀº Èò»öÀ¸·Î ¼³Á¤ (Áï, »ö»ó º¯È­ ¾øÀ½)
+		// ê¸°ë³¸ ë³€í™˜ ìƒ‰ìƒì€ í°ìƒ‰ìœ¼ë¡œ ì„¤ì • (ì¦‰, ìƒ‰ìƒ ë³€í™” ì—†ìŒ)
 		data.color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
-	// »ö»ó º¯È¯ °ª ¼³Á¤ (¿¹: ÅØ½ºÃ³ »ö»ó¿¡ °öÇØÁú °ª)
+	// ìƒ‰ìƒ ë³€í™˜ ê°’ ì„¤ì • (ì˜ˆ: í…ìŠ¤ì²˜ ìƒ‰ìƒì— ê³±í•´ì§ˆ ê°’)
 	void SetColor(const Color& color)
 	{
 		data.color = color;
 	}
 
-	// ÇöÀç ¼³Á¤µÈ »ö»ó º¯È¯ °ªÀ» ¹İÈ¯ (ÀĞ±â Àü¿ë)
+	// í˜„ì¬ ì„¤ì •ëœ ìƒ‰ìƒ ë³€í™˜ ê°’ì„ ë°˜í™˜ (ì½ê¸° ì „ìš©)
 	Color GetColor() const
 	{
 		return data.color;
