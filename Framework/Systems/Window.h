@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework.h"
+#include "Structs/WinDesc.h"
 
 class Window
 {
@@ -21,11 +23,11 @@ private:
 	(
 		//Window handle
 		HWND handle,
-		//Message Queue¿¡¼­ ¹ŞÀº ¸Ş½ÃÁö
+		//Message Queueì—ì„œ ë°›ì€ ë©”ì‹œì§€
 		UINT message,
-		//¿öµå ÆÄ¶ó¹ÌÅÍ(Á¤¼ö°ª)
+		//ì›Œë“œ íŒŒë¼ë¯¸í„°(ì •ìˆ˜ê°’)
 		WPARAM wParam,
-		//·Õ ÆÄ¶ó¹ÌÅÍ(Æ÷ÀÎÅÍ)
+		//ë¡± íŒŒë¼ë¯¸í„°(í¬ì¸í„°)
 		LPARAM lParam
 	);
 

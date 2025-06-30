@@ -1,4 +1,5 @@
 #pragma once
+#include "Framework.h"
 
 /*
 DirectX 11
@@ -50,13 +51,13 @@ private:
 
 private:
 	ComPtr<ID3D11Device> device = nullptr;
-	// ±×·¡ÇÈ ¸®¼Ò½º »ý¼º, GPU±â´É Á¤ÀÇÇÏ´Â ¿µ¿ª
+	// ê·¸ëž˜í”½ ë¦¬ì†ŒìŠ¤ ìƒì„±, GPUê¸°ëŠ¥ ì •ì˜í•˜ëŠ” ì˜ì—­
 
 	ComPtr<ID3D11DeviceContext> deviceContext = nullptr;
-	// ¸ðµç ·»´õ¸µ ¸í·É, ÆÄÀÌÇÁ¶óÀÎ »óÅÂ ¼³Á¤, ¸®¼Ò½º ¹ÙÀÎµù, ±×¸®±â, µ¥ÀÌÅÍ Àü¼Û µî GPU¿¡ ¸í·ÉÀ» ³»¸®´Â ¿µ¿ª
+	// ëª¨ë“  ë Œë”ë§ ëª…ë ¹, íŒŒì´í”„ë¼ì¸ ìƒíƒœ ì„¤ì •, ë¦¬ì†ŒìŠ¤ ë°”ì¸ë”©, ê·¸ë¦¬ê¸°, ë°ì´í„° ì „ì†¡ ë“± GPUì— ëª…ë ¹ì„ ë‚´ë¦¬ëŠ” ì˜ì—­
 
 	ComPtr<IDXGISwapChain> swapChain = nullptr;
-	// ÇÁ·¹ÀÓ ¹öÆÛ¸¦ °ü¸®ÇÏ´Â ½º¿Ò Ã¼ÀÎ, È­¸é¿¡ Ç¥½ÃÇÒ ¹é ¹öÆÛ¿Í ÇÁ·ÐÆ® ¹öÆÛ¸¦ °ü¸®
+	// í”„ë ˆìž„ ë²„í¼ë¥¼ ê´€ë¦¬í•˜ëŠ” ìŠ¤ì™‘ ì²´ì¸, í™”ë©´ì— í‘œì‹œí•  ë°± ë²„í¼ì™€ í”„ë¡ íŠ¸ ë²„í¼ë¥¼ ê´€ë¦¬
 
 	ComPtr<ID2D1Device> d2Device = nullptr;
 	ComPtr<ID2D1DeviceContext> d2DeviceContext = nullptr;

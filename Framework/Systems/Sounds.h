@@ -1,4 +1,5 @@
 #pragma once
+#include "Framework.h"
 
 using namespace FMOD;
 
@@ -7,33 +8,33 @@ class Sounds
     DECLARE_SINGLETON(Sounds);
 
 public:
-    // ÃÊ±âÈ­ ¹× Á¾·á
+    // ì´ˆê¸°í™” ë° ì¢…ë£Œ
     void Init();
     void Update();
 
-    // »ç¿îµå Ãß°¡/Á¦°Å
+    // ì‚¬ìš´ë“œ ì¶”ê°€/ì œê±°
     void AddSound(const string& name, const wstring& file, bool loop = false);
     void RemoveSound(const string& name);
 
-    // Àç»ı ÄÁÆ®·Ñ
+    // ì¬ìƒ ì»¨íŠ¸ë¡¤
     void Play(const string& name, float volume = 1.0f);
     void Stop(const string& name);
     void Pause(const string& name);
     void Resum(const string& name);
 
-    // »óÅÂ Á¶È¸
+    // ìƒíƒœ ì¡°íšŒ
     bool IsPlaying(const string& name);
     bool IsPause(const string& name);
 
-    // º¼·ı
+    // ë³¼ë¥¨
     void  SetVolume(const string& name, float volume);
     float GetVolume(const string& name);
 
-    // »ç¿îµå ±æÀÌ(ÃÊ ´ÜÀ§ ¹İÈ¯ µî)
+    // ì‚¬ìš´ë“œ ê¸¸ì´(ì´ˆ ë‹¨ìœ„ ë°˜í™˜ ë“±)
     float GetSoundLength(const string& name);
 
 private:
-    // FMOD System ÇØÁ¦¸¦ À§ÇÑ Ä¿½ºÅÒ deleter
+    // FMOD System í•´ì œë¥¼ ìœ„í•œ ì»¤ìŠ¤í…€ deleter
     struct FModSystemDeleter
     {
         void operator()(System* ptr)
@@ -46,7 +47,7 @@ private:
         }
     };
 
-    // FMOD Sound ÇØÁ¦¸¦ À§ÇÑ Ä¿½ºÅÒ deleter
+    // FMOD Sound í•´ì œë¥¼ ìœ„í•œ ì»¤ìŠ¤í…€ deleter
     struct FModSoundDeleter
     {
         void operator()(Sound* ptr)
@@ -56,32 +57,32 @@ private:
         }
     };
 
-    // Ã¤³ÎÀº Æ¯º°È÷ release() °°Àº °ÍÀÌ ¾øÀ¸³ª,
-    // »ç¿ë Áß¿¡ stop()ÀÌ ÇÊ¿äÇÏ´Ù¸é Ä¿½ºÅÒ deleter¿¡¼­ Ã³¸®ÇÒ ¼ö ÀÖÀ½
+    // ì±„ë„ì€ íŠ¹ë³„íˆ release() ê°™ì€ ê²ƒì´ ì—†ìœ¼ë‚˜,
+    // ì‚¬ìš© ì¤‘ì— stop()ì´ í•„ìš”í•˜ë‹¤ë©´ ì»¤ìŠ¤í…€ deleterì—ì„œ ì²˜ë¦¬í•  ìˆ˜ ìˆìŒ
     struct FModChannelDeleter
     {
         void operator()(Channel* ptr)
         {
-            // ChannelÀº ÀûÀıÈ÷ Á¤¸®ÇÏ°í ½Í´Ù¸é stop() È£Ãâ Á¤µµ °¡´É
-            // ½ÇÁ¦·Î´Â Ã¤³ÎÀÌ Àç»ıÀÌ ³¡³ª¸é ÀÚµ¿À¸·Î Á¤¸®µÇ¹Ç·Î,
-            // ¿©±â¼­ ²À stopÀ» ÇØ¾ß¸¸ ÇÏ´Â °ÍÀº ¾Æ´Ô. ÇÊ¿ä¿¡ µû¶ó »ç¿ë.
+            // Channelì€ ì ì ˆíˆ ì •ë¦¬í•˜ê³  ì‹¶ë‹¤ë©´ stop() í˜¸ì¶œ ì •ë„ ê°€ëŠ¥
+            // ì‹¤ì œë¡œëŠ” ì±„ë„ì´ ì¬ìƒì´ ëë‚˜ë©´ ìë™ìœ¼ë¡œ ì •ë¦¬ë˜ë¯€ë¡œ,
+            // ì—¬ê¸°ì„œ ê¼­ stopì„ í•´ì•¼ë§Œ í•˜ëŠ” ê²ƒì€ ì•„ë‹˜. í•„ìš”ì— ë”°ë¼ ì‚¬ìš©.
             if (ptr)
                 ptr->stop();
         }
     };
 
 private:
-    // FMOD ½Ã½ºÅÛÀº À¯´ÏÅ© Æ÷ÀÎÅÍ·Î °ü¸® (ÇÁ·Î±×·¥ Á¾·á ½Ã 1°³¸¸ Á¸Àç)
+    // FMOD ì‹œìŠ¤í…œì€ ìœ ë‹ˆí¬ í¬ì¸í„°ë¡œ ê´€ë¦¬ (í”„ë¡œê·¸ë¨ ì¢…ë£Œ ì‹œ 1ê°œë§Œ ì¡´ì¬)
     unique_ptr<System, FModSystemDeleter> system;
 
-    // »ç¿îµå + Ã¤³ÎÀ» µ¿½Ã¿¡ °ü¸®ÇÏ±â À§ÇØ pair·Î ¹­¾î¼­ map¿¡ ÀúÀå
-    // key : »ç¿îµå ÀÌ¸§
+    // ì‚¬ìš´ë“œ + ì±„ë„ì„ ë™ì‹œì— ê´€ë¦¬í•˜ê¸° ìœ„í•´ pairë¡œ ë¬¶ì–´ì„œ mapì— ì €ì¥
+    // key : ì‚¬ìš´ë“œ ì´ë¦„
     // value : (Sound, Channel)
-    //  - Sound : shared_ptr (FModSoundDeleter ·Î release)
-    //  - Channel : shared_ptr (FModChannelDeleter ·Î stop)
+    //  - Sound : shared_ptr (FModSoundDeleter ë¡œ release)
+    //  - Channel : shared_ptr (FModChannelDeleter ë¡œ stop)
     map<string, pair<shared_ptr<Sound>,shared_ptr<Channel>>> sounds;
 
-    // ÀüÃ¼ »ç¿îµå °³¼ö Á¦ÇÑ (FMOD ÃÊ±âÈ­ ½Ã µ¿½Ã Àç»ı °¡´ÉÇÑ Ã¤³Î ¼ö)
+    // ì „ì²´ ì‚¬ìš´ë“œ ê°œìˆ˜ ì œí•œ (FMOD ì´ˆê¸°í™” ì‹œ ë™ì‹œ ì¬ìƒ ê°€ëŠ¥í•œ ì±„ë„ ìˆ˜)
     UINT count = 0;
     float volum = 1.0f;
 };
