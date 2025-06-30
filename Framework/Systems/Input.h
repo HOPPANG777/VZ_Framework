@@ -1,8 +1,5 @@
 #pragma once
-#include "Framework.h"
 #include "Utilities/DirectHelper.h"
-#include "Keyboard.h"
-#include "Mouse.h"
 
 #define MAX_INPUT_KEY 256
 
@@ -13,19 +10,19 @@ class Input
     DECLARE_SINGLETON(Input);
 
 public:
-    // ë§¤ í”„ë ˆìž„ë§ˆë‹¤ í‚¤ë³´ë“œì™€ ë§ˆìš°ìŠ¤ ì—…ë°ì´íŠ¸ í˜¸ì¶œ
+    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù Å°º¸µå¿Í ¸¶¿ì½º ¾÷µ¥ÀÌÆ® È£Ãâ
     void Update()
     {
         KEYBOARD->Update();
         MOUSE->Update();
     }
 
-    // Keyboard ê´€ë ¨ ëž˜í¼ í•¨ìˆ˜ë“¤
+    // Keyboard °ü·Ã ·¡ÆÛ ÇÔ¼öµé
     bool KeyDown(DWORD key) const { return KEYBOARD->Down(key); }
     bool KeyUp(DWORD key) const { return KEYBOARD->Up(key); }
     bool KeyPressed(DWORD key) const { return KEYBOARD->Press(key); }
 
-    // Mouse ê´€ë ¨ ëž˜í¼ í•¨ìˆ˜ë“¤
+    // Mouse °ü·Ã ·¡ÆÛ ÇÔ¼öµé
     DirectX::SimpleMath::Vector3 GetMousePos() const { return MOUSE->GetMousePos(); }
     bool MouseDown(DWORD button) const { return MOUSE->Down(button); }
     bool MouseUp(DWORD button) const { return MOUSE->Up(button); }

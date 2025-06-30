@@ -1,13 +1,9 @@
 #pragma once
-#include <string>
-#include <map>
-#include <memory>
-#include <vector>
 
 enum class TransformType 
 {
-	Normal,   // ì¼ë°˜ ê²Œì„ ì›”ë“œìš© Transform
-	Rect      // UIìš© RectTransform
+	Normal,   // ÀÏ¹İ °ÔÀÓ ¿ùµå¿ë Transform
+	Rect      // UI¿ë RectTransform
 };
 
 class Object
@@ -19,20 +15,20 @@ protected:
 	unique_ptr<WorldBuffer> worldBuffer;
 
 public:
-	// ê¸°ë³¸ ìƒì„±ì (Object ì´ë¦„ë§Œ ì§€ì •)
+	// ±âº» »ı¼ºÀÚ (Object ÀÌ¸§¸¸ ÁöÁ¤)
 	Object(const string& name, TransformType type = TransformType::Normal);
 
-	// ìœ„ì¹˜/ìŠ¤ì¼€ì¼/íšŒì „ì„ ì´ˆê¸°ì— ì§€ì •í•˜ëŠ” ìƒì„±ì
+	// À§Ä¡/½ºÄÉÀÏ/È¸ÀüÀ» ÃÊ±â¿¡ ÁöÁ¤ÇÏ´Â »ı¼ºÀÚ
 	Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type = TransformType::Normal);
 
-	// ë³µì‚¬ ìƒì„±/ëŒ€ì… ì—°ì‚°ì
+	// º¹»ç »ı¼º/´ëÀÔ ¿¬»êÀÚ
 	Object(const Object& other);
 	Object& operator=(const Object& other)
 	{
 		if (this != &other)
 		{
 			name = other.name;
-			// í•„ìš”í•œ ê²½ìš° componentsë¥¼ ë³µì œ
+			// ÇÊ¿äÇÑ °æ¿ì components¸¦ º¹Á¦
 		}
 		return *this;
 	}
@@ -51,22 +47,22 @@ public:
 	}
 	
 public:
-	// GetName í•¨ìˆ˜ ì¶”ê°€
+	// GetName ÇÔ¼ö Ãß°¡
 	string GetName() const { return name; }
 	void SetName(const string& newName) { name = newName; }
 
 public:
-	// Helper í•¨ìˆ˜ ì¶”ê°€: ê° Transform ì»´í¬ë„ŒíŠ¸ë¥¼ ë°˜í™˜
+	// Helper ÇÔ¼ö Ãß°¡: °¢ Transform ÄÄÆ÷³ÍÆ®¸¦ ¹İÈ¯
 	shared_ptr<Transform> GetTransform() const;
 	shared_ptr<RectTransform> GetRectTransform() const;
 
 public:
-	// ë§¤ í”„ë ˆì„ ì—…ë°ì´íŠ¸ & ë Œë”
+	// ¸Å ÇÁ·¹ÀÓ ¾÷µ¥ÀÌÆ® & ·»´õ
 	virtual void Update();
 	virtual void Render();
 
 public:
-	// Transform ì»´í¬ë„ŒíŠ¸ì— ëŒ€í•œ í¸ì˜ í•¨ìˆ˜ë“¤
+	// Transform ÄÄÆ÷³ÍÆ®¿¡ ´ëÇÑ ÆíÀÇ ÇÔ¼öµé
 	Vector3 GetPosition() const;
 	Vector3 GetScale() const;
 	float GetRotation() const;
@@ -91,13 +87,13 @@ public:
 	{
 		try
 		{
-			// ì»¨í…Œì´ë„ˆê°€ ë¹„ì–´ìˆëŠ”ì§€ ë¨¼ì € í™•ì¸
+			// ÄÁÅ×ÀÌ³Ê°¡ ºñ¾îÀÖ´ÂÁö ¸ÕÀú È®ÀÎ
 			if (components.empty())
 			{
 				return nullptr;
 			}
 
-			// componentsì˜ íƒ€ì…: std::unordered_map<std::string, std::unique_ptr<Component>>
+			// componentsÀÇ Å¸ÀÔ: std::unordered_map<std::string, std::unique_ptr<Component>>
 			for (const auto& pair : components)
 			{
 				T* comp = dynamic_cast<T*>(pair.second.get());
@@ -109,8 +105,8 @@ public:
 		}
 		catch (const std::exception& e)
 		{
-			std::cerr << "[FindComponentByInterface] ì˜ˆì™¸ ë°œìƒ: " << e.what() << std::endl;
-			// í•„ìš”í•œ ê²½ìš° ì¶”ê°€ì ì¸ ë³µêµ¬ ë˜ëŠ” ë¡œê·¸ ì²˜ë¦¬
+			std::cerr << "[FindComponentByInterface] ¿¹¿Ü ¹ß»ı: " << e.what() << std::endl;
+			// ÇÊ¿äÇÑ °æ¿ì Ãß°¡ÀûÀÎ º¹±¸ ¶Ç´Â ·Î±× Ã³¸®
 		}
 		return nullptr;
 	}
@@ -126,7 +122,7 @@ public:
 				return result;
 			}
 
-			// componentsì˜ íƒ€ì…: std::unordered_map<std::string, std::unique_ptr<Component>>
+			// componentsÀÇ Å¸ÀÔ: std::unordered_map<std::string, std::unique_ptr<Component>>
 			for (const auto& pair : components)
 			{
 				T* comp = dynamic_cast<T*>(pair.second.get());
@@ -138,7 +134,7 @@ public:
 		}
 		catch (const std::exception& e)
 		{
-			std::cerr << "[GetAllComponentsByInterface] ì˜ˆì™¸ ë°œìƒ: " << e.what() << std::endl;
+			std::cerr << "[GetAllComponentsByInterface] ¿¹¿Ü ¹ß»ı: " << e.what() << std::endl;
 		}
 		return result;
 	}

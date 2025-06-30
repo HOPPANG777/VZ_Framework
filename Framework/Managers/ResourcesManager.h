@@ -1,5 +1,4 @@
 #pragma once
-#include "../Framework.h"
 
 
 class ResourcesManager
@@ -7,7 +6,7 @@ class ResourcesManager
 	DECLARE_SINGLETON(ResourcesManager);
 
 public:
-    // ë‹¨ìˆœ ì‹œë®¬ë ˆì´ì…˜: ê° ë¦¬ì†ŒìŠ¤ ë‹¹ 100ms ì†Œìš”
+    // ´Ü¼ø ½Ã¹Ä·¹ÀÌ¼Ç: °¢ ¸®¼Ò½º ´ç 100ms ¼Ò¿ä
     void LoadResource(const string& resource);
     bool IsResourceLoaded(const string& resource);
     bool AreResourcesLoaded(const vector<string>& resources);

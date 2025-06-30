@@ -1,6 +1,4 @@
 #pragma once
-#include "Component.h"
-#include "../Enums/UnitAnimationType.h"
 
 class AnimationMove : public Component
 {
@@ -15,11 +13,11 @@ public:
     void SetPlayerDead(bool dead) { isDead = dead; }
 
 private:
-    // í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ (ì˜ˆ: Idle_R, Run_R, Jump_R ë“±)
+    // ÇöÀç ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ (¿¹: Idle_R, Run_R, Jump_R µî)
     UnitAnimationType currentAnimation;
     bool isDead;
 
-    // í˜„ì¬ ìƒíƒœê°€ ì™¼ìª½ì„ í–¥í•˜ëŠ”ì§€ íŒë‹¨ (ì• ë‹ˆë©”ì´ì…˜ ì´ë¦„ ê¸°ì¤€)
+    // ÇöÀç »óÅÂ°¡ ¿ŞÂÊÀ» ÇâÇÏ´ÂÁö ÆÇ´Ü (¾Ö´Ï¸ŞÀÌ¼Ç ÀÌ¸§ ±âÁØ)
     bool IsFacingLeft(UnitAnimationType anim) const;
 };
 

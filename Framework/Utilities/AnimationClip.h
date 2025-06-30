@@ -1,5 +1,4 @@
 #pragma once
-#include "Framework.h"
 
 #include "Renders/RenderResources/Texture2D.h"
 
@@ -8,31 +7,31 @@ class AnimationClip
 public:
     friend class Animator;
 
-    // AnimationClip ìƒì„±ì
-    // SRVëŠ” Texture2Dë¡œë¶€í„° ì–»ì–´ì˜¤ê³ , ê³„ì‚°ëœ UV í”„ë ˆì„ë“¤ì„ ì €ì¥
+    // AnimationClip »ı¼ºÀÚ
+    // SRV´Â Texture2D·ÎºÎÅÍ ¾ò¾î¿À°í, °è»êµÈ UV ÇÁ·¹ÀÓµéÀ» ÀúÀå
     AnimationClip
     (
         const wstring& clipName,
         Texture2D* srcTex,
-        UINT columns,    // ê°€ë¡œ í”„ë ˆì„ ìˆ˜
-        UINT rows,       // ì„¸ë¡œ í”„ë ˆì„ ìˆ˜
+        UINT columns,    // °¡·Î ÇÁ·¹ÀÓ ¼ö
+        UINT rows,       // ¼¼·Î ÇÁ·¹ÀÓ ¼ö
         Vector2 startPos,
         Vector2 endPos,
         bool bReversed = false
-        //float playRate = 1.0f / 15.0f  // â˜… ë””í´íŠ¸ 1/15ì´ˆë¡œ ì„¤ì •
+        //float playRate = 1.0f / 15.0f  // ¡Ú µğÆúÆ® 1/15ÃÊ·Î ¼³Á¤
     );
 
 private:
     wstring clipName = L"";
-    vector<Vector2> keyFrames;          // ê° í”„ë ˆì„ì˜ UV(í…ì…€) ì¢Œí‘œ
+    vector<Vector2> keyFrames;          // °¢ ÇÁ·¹ÀÓÀÇ UV(ÅØ¼¿) ÁÂÇ¥
     UINT frameCount = 0;
 
-    // ì›ë³¸ì—ì„œëŠ” Raw Pointerì˜€ì§€ë§Œ, ì´ì œëŠ” ComPtr
+    // ¿øº»¿¡¼­´Â Raw Pointer¿´Áö¸¸, ÀÌÁ¦´Â ComPtr
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> srv = nullptr;
 
     Vector2 texelFrameSize = Values::ZeroVec2;
     bool bReversed = false;
 
-    // â˜… ì¶”ê°€: ì´ ì• ë‹ˆë©”ì´ì…˜ì˜ ì¬ìƒ ì†ë„
-    //float playRate = 0.0f;   // ê¸°ë³¸ 1/15ì´ˆ (15FPS)
+    // ¡Ú Ãß°¡: ÀÌ ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ Àç»ı ¼Óµµ
+    //float playRate = 0.0f;   // ±âº» 1/15ÃÊ (15FPS)
 };

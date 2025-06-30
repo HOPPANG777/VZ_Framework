@@ -1,5 +1,4 @@
 #pragma once
-#include "IShader.h"
 
 class VertexShader : public IShader
 {

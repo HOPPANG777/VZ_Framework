@@ -1,5 +1,4 @@
 #pragma once
-#include "Component.h"
 
 class MoveComponent : public Component
 {
@@ -8,7 +7,7 @@ public:
 	~MoveComponent() override = default;
 
 public:
-	// ComponentÃ€Â»(Â¸Â¦) Ã…Ã«Ã‡Ã˜ Â»Ã³Â¼Ã“ÂµÃŠ
+	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Update() override;
 	void Render() override;
 

@@ -1,8 +1,5 @@
 ﻿#include "Framework.h"
 #include "PlayerMove.h"
-#include "Systems/Input.h"
-#include "Systems/Time.h"
-#include "Components/Transform.h"
 
 PlayerMove::PlayerMove(const string& name, float spd)
     : Component(name), speed(spd), currentSpeed(spd),

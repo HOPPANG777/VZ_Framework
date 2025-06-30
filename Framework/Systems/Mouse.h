@@ -1,5 +1,4 @@
 #pragma once
-#include "Framework.h"
 
 #include "Utilities/DirectHelper.h"
 

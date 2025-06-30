@@ -1,5 +1,4 @@
 #pragma once
-#include "Framework.h"
 
 class Time
 {
@@ -21,19 +20,19 @@ public:
 		cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime << ", WorldTime : " << worldTime << '\n';
 	}
 
-	// UTC ì‹œê°„ ë°˜í™˜
+	// UTC ½Ã°£ ¹ÝÈ¯
 	SYSTEMTIME GetUTCTime() const
 	{
 		SYSTEMTIME st;
-		::GetSystemTime(&st);  // í˜„ìž¬ ë¡œì»¬ ì‹œê°„ì„ stì— ì €ìž¥
+		::GetSystemTime(&st);  // ÇöÀç ·ÎÄÃ ½Ã°£À» st¿¡ ÀúÀå
 		return st;
 	}
 
-	// ì»´í“¨í„° ë¡œì»¬ ì‹œê°„ ë°˜í™˜
+	// ÄÄÇ»ÅÍ ·ÎÄÃ ½Ã°£ ¹ÝÈ¯
 	SYSTEMTIME GetLocalPCTime() const
 	{
 		SYSTEMTIME st;
-		::GetLocalTime(&st);  // í˜„ìž¬ ë¡œì»¬ ì‹œê°„ì„ stì— ì €ìž¥
+		::GetLocalTime(&st);  // ÇöÀç ·ÎÄÃ ½Ã°£À» st¿¡ ÀúÀå
 		return st;
 	}
 
@@ -50,5 +49,5 @@ private:
 	double fpsTimeElapsed = 0.0;
 
 	float scaleDeltaTime = 0.0f;
-	float timeScale = 1.0f;		// íƒ€ìž„ìŠ¤ì¼€ì¼
+	float timeScale = 1.0f;		// Å¸ÀÓ½ºÄÉÀÏ
 };

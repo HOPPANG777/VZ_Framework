@@ -1,5 +1,4 @@
 #pragma once
-#include "Framework.h"
 
 #include "AnimationClip.h"
 
@@ -7,64 +6,64 @@ class Animator
 {
 public:
     Animator();
-    // ìŠ¤ë§ˆíŠ¸ í¬ì¸í„°ë¡œ ê´€ë¦¬í•˜ë¯€ë¡œ íŠ¹ë³„íˆ ë¦¬ì†ŒìŠ¤ë¥¼ ì§€ìš¸ í•„ìš”ê°€ ì—†ê¸°ì—
-    // êµ³ì´ êµ¬í˜„í•  í•„ìš”ê°€ ì—†ìœ¼ë©´ defaultë¡œ ë‘˜ ìˆ˜ ìˆìŒ
+    // ½º¸¶Æ® Æ÷ÀÎÅÍ·Î °ü¸®ÇÏ¹Ç·Î Æ¯º°È÷ ¸®¼Ò½º¸¦ Áö¿ï ÇÊ¿ä°¡ ¾ø±â¿¡
+    // ±»ÀÌ ±¸ÇöÇÒ ÇÊ¿ä°¡ ¾øÀ¸¸é default·Î µÑ ¼ö ÀÖÀ½
     ~Animator();
 
-    // ë§¤ í”„ë ˆì„ë§ˆë‹¤ ì• ë‹ˆë©”ì´ì…˜ ì—…ë°ì´íŠ¸
+    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù ¾Ö´Ï¸ŞÀÌ¼Ç ¾÷µ¥ÀÌÆ®
     void Update();
 
-    // í˜„ì¬ ì‹¤í–‰ì¤‘ì¸ ì´ë¯¸ì§€ ì¢Œí‘œê°’(UV) ë°˜í™˜
+    // ÇöÀç ½ÇÇàÁßÀÎ ÀÌ¹ÌÁö ÁÂÇ¥°ª(UV) ¹İÈ¯
     Vector2 GetCurrentFrame() const { return currentFrame; }
 
-    // í˜„ì¬ ì‹¤í–‰ì¤‘ì¸ ì´ë¯¸ì§€ í•œ í”„ë ˆì„ì˜ UV í¬ê¸°
+    // ÇöÀç ½ÇÇàÁßÀÎ ÀÌ¹ÌÁö ÇÑ ÇÁ·¹ÀÓÀÇ UV Å©±â
     Vector2 GetTexelFrameSize() const
     {
-        // currentClipì´ í•­ìƒ ì¡´ì¬í•œë‹¤ê³  ê°€ì •
+        // currentClipÀÌ Ç×»ó Á¸ÀçÇÑ´Ù°í °¡Á¤
         return currentClip->texelFrameSize;
     }
 
-    // í˜„ì¬ ì‹¤í–‰ì¤‘ì¸ ì´ë¯¸ì§€ SRV (COM í¬ì¸í„°)
+    // ÇöÀç ½ÇÇàÁßÀÎ ÀÌ¹ÌÁö SRV (COM Æ÷ÀÎÅÍ)
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> GetCurrentSRV() const
     {
         return currentClip->srv;
     }
 
-    // Animatorê°€ ì‹¤í–‰í•  í´ë¦½(ì• ë‹ˆë©”ì´ì…˜) ì¶”ê°€
-    // ìŠ¤ë§ˆíŠ¸ í¬ì¸í„°ë¡œ AnimationClip ê´€ë¦¬
+    // Animator°¡ ½ÇÇàÇÒ Å¬¸³(¾Ö´Ï¸ŞÀÌ¼Ç) Ãß°¡
+    // ½º¸¶Æ® Æ÷ÀÎÅÍ·Î AnimationClip °ü¸®
     void AddAnimClip(const std::shared_ptr<AnimationClip>& animClip);
 
-    // í˜„ì¬ ì‹¤í–‰ì‹œí‚¬ í´ë¦½ ì§€ì •
+    // ÇöÀç ½ÇÇà½ÃÅ³ Å¬¸³ ÁöÁ¤
     void SetCurrentAnimClip(const std::wstring& clipName);
 
-    // í˜„ì¬ ì‹¤í–‰ì¤‘ì¸ í´ë¦½ ì´ë¦„
+    // ÇöÀç ½ÇÇàÁßÀÎ Å¬¸³ ÀÌ¸§
     std::wstring GetCurrentClipName() const
     {
         return currentClip ? currentClip->clipName : L"";
     }
 
-    // ì´ë¯¸ì§€ ì „í™˜ ì†ë„ ì§€ì • (ê¸°ë³¸ 1/15ì´ˆ)
+    // ÀÌ¹ÌÁö ÀüÈ¯ ¼Óµµ ÁöÁ¤ (±âº» 1/15ÃÊ)
     void SetPlayRate(float rate) { playRate = rate; }
 
 private:
-    // animClipsì—ì„œ clipNameì— í•´ë‹¹í•˜ëŠ” í´ë¦½ì´ ìˆëŠ”ì§€ í™•ì¸
+    // animClips¿¡¼­ clipName¿¡ ÇØ´çÇÏ´Â Å¬¸³ÀÌ ÀÖ´ÂÁö È®ÀÎ
     bool CheckExist(const std::wstring& clipName) const
     {
         return (animClips.find(clipName) != animClips.end());
     }
 
 private:
-    // í´ë¦½ë“¤ì„ shared_ptrë¡œ ë³´ê´€
+    // Å¬¸³µéÀ» shared_ptr·Î º¸°ü
     std::unordered_map<std::wstring, std::shared_ptr<AnimationClip>> animClips;
 
-    // í˜„ì¬ ì‹¤í–‰ì¤‘ì¸ í´ë¦½
+    // ÇöÀç ½ÇÇàÁßÀÎ Å¬¸³
     std::shared_ptr<AnimationClip> currentClip = nullptr;
 
-    // í˜„ì¬ ê·¸ë ¤ì•¼ í•  í”„ë ˆì„ ì¸ë±ìŠ¤/UV
+    // ÇöÀç ±×·Á¾ß ÇÒ ÇÁ·¹ÀÓ ÀÎµ¦½º/UV
     UINT currentFrameIndex = 0;
     Vector2 currentFrame = Values::ZeroVec2;
 
-    // ì• ë‹ˆë©”ì´ì…˜ í”Œë ˆì´ì— ì‚¬ìš©ë˜ëŠ” ì‹œê°„ ê´€ë¦¬
+    // ¾Ö´Ï¸ŞÀÌ¼Ç ÇÃ·¹ÀÌ¿¡ »ç¿ëµÇ´Â ½Ã°£ °ü¸®
     float deltaTime = 0.0f;
-    float playRate = 1.0f / 15.0f; // ê¸°ë³¸ 15fps
+    float playRate = 1.0f / 15.0f; // ±âº» 15fps
 };

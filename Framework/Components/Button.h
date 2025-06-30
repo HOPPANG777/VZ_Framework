@@ -1,6 +1,4 @@
 #pragma once
-#include <functional>
-#include "Component.h"
 
 class Button : public Component
 {
@@ -9,29 +7,29 @@ public:
 	~Button() override = default;
 
 public:
-	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Update() override;
 	void Render() override;
 
 public:
-	// ì™¸ë¶€ì—ì„œ ì½œë°±ì„ ë“±ë¡í•  ìˆ˜ ìˆë„ë¡ SetOnClick í•¨ìˆ˜ë¥¼ ì œê³µ
+	// ¿ÜºÎ¿¡¼­ Äİ¹éÀ» µî·ÏÇÒ ¼ö ÀÖµµ·Ï SetOnClick ÇÔ¼ö¸¦ Á¦°ø
 	void SetOnClick(const function<void()>& callback) { onClick = callback; }
 	void SetOnPress(const function<void()>& callback) { onPress = callback; }
 
 private:
-	bool IsMouseOver(); // ë‚´ë¶€ì—ì„œ ë§ˆìš°ìŠ¤ê°€ ë²„íŠ¼ ìœ„ì— ìˆëŠ”ì§€ íŒë‹¨
+	bool IsMouseOver(); // ³»ºÎ¿¡¼­ ¸¶¿ì½º°¡ ¹öÆ° À§¿¡ ÀÖ´ÂÁö ÆÇ´Ü
 
 private:
-	// í´ë¦­ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•  ì½œë°± í•¨ìˆ˜
+	// Å¬¸¯ ÀÌº¥Æ®¸¦ Ã³¸®ÇÒ Äİ¹é ÇÔ¼ö
 	function<void()> onClick = nullptr;
 	function<void()> onPress = nullptr;
 
-	// í´ë¦­ ì—¬ë¶€ë¥¼ ê´€ë¦¬í•  ê°„ë‹¨í•œ ìƒíƒœ ë³€ìˆ˜
-	bool wasPressed = false; // ì´ì „ í”„ë ˆì„ì—ì„œ ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ê³  ìˆì—ˆëŠ”ì§€
+	// Å¬¸¯ ¿©ºÎ¸¦ °ü¸®ÇÒ °£´ÜÇÑ »óÅÂ º¯¼ö
+	bool wasPressed = false; // ÀÌÀü ÇÁ·¹ÀÓ¿¡¼­ ¸¶¿ì½º¸¦ ´©¸£°í ÀÖ¾ú´ÂÁö
 
-	// í´ë¦­ í•œë²ˆ ì”©ë§Œ.
+	// Å¬¸¯ ÇÑ¹ø ¾¿¸¸.
 	bool clickLock = false;
 
-	float clickEffectTime = 0.0f; // ë‹¨ì¼ í´ë¦­ ì‹œ íš¨ê³¼ ì§€ì† ì‹œê°„ (ì´ˆ ë‹¨ìœ„)
+	float clickEffectTime = 0.0f; // ´ÜÀÏ Å¬¸¯ ½Ã È¿°ú Áö¼Ó ½Ã°£ (ÃÊ ´ÜÀ§)
 
 };

@@ -1,6 +1,5 @@
 	#pragma once
 
-#include <string>
 #include "Objects/TextureObject/AnimationRect.h"
 
 class JumpHoppang : public AnimationRect

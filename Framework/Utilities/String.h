@@ -1,7 +1,4 @@
 #pragma once
-#include "Framework.h"
-#include <string>
-#include <vector>
 
 class String
 {

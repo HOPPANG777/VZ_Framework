@@ -32,7 +32,6 @@
 #include <future>
 #include <sstream>
 #include <exception>
-#include "Utilities/ServiceLocator.h"
 
 using namespace std;
 
@@ -117,28 +116,30 @@ extern HWND gHandle;
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 
-//Singleton accessors via ServiceLocator
-#define INPUT ServiceLocator::Get<Input>("Input").get()
-#define TIME ServiceLocator::Get<Time>("Time").get()
-#define DELTA ServiceLocator::Get<Time>("Time")->GetDeltaTime()
-#define GRAPHICS ServiceLocator::Get<Graphics>("Graphics").get()
-#define DEVICE ServiceLocator::Get<Graphics>("Graphics")->GetDevice()
-#define DC ServiceLocator::Get<Graphics>("Graphics")->GetDC()
-#define SWAPCHAIN ServiceLocator::Get<Graphics>("Graphics")->GetSwapChain()
-#define D2DC ServiceLocator::Get<Graphics>("Graphics")->GetD2DC()
-#define WRITE ServiceLocator::Get<Graphics>("Graphics")->GetWrite()
-#define DEBUG ServiceLocator::Get<HelpMe>("HelpMe").get()
-#define CAMERA ServiceLocator::Get<Camera>("Camera").get()
-#define SCENE ServiceLocator::Get<SceneManager>("SceneManager").get()
-#define SOUNDS ServiceLocator::Get<Sounds>("Sounds").get()
-#define IMGUI ServiceLocator::Get<Gui>("Gui").get()
-#define KEYBOARD ServiceLocator::Get<Keyboard>("Keyboard").get()
-#define MOUSE ServiceLocator::Get<Mouse>("Mouse").get()
-#define COLLISION ServiceLocator::Get<CollisionManager>("CollisionManager").get()
-#define GIZMO ServiceLocator::Get<Gizmo>("Gizmo").get()
-#define REALDELTA ServiceLocator::Get<Time>("Time")->GetRealDeltaTime()
-#define TILESET ServiceLocator::Get<TileSetManager>("TileSetManager").get()
-#define TEXTURE2D ServiceLocator::Get<Texture2DManager>("Texture2DManager").get()
+//SingletonMacros
+#define INPUT Input::Get()
+#define TIME Time::Get()
+#define DELTA Time::Get()->GetDeltaTime()
+#define GRAPHICS Graphics::Get()
+#define DEVICE GRAPHICS->GetDevice()
+#define DC GRAPHICS->GetDC()
+#define SWAPCHAIN GRAPHICS->GetSwapChain()
+#define D2DC GRAPHICS->GetD2DC()
+#define WRITE GRAPHICS->GetWrite()	
+#define FONT Texts::Get()
+#define DEBUG HelpMe::Get()
+#define CAMERA Camera::Get()
+#define SCENE SceneManager::Get()
+#define SOUNDS Sounds::Get()
+#define IMGUI Gui::Get()
+#define KEYBOARD Keyboard::Get()
+#define MOUSE Mouse::Get()
+#define COLLISION CollisionManager::Get()
+#define GIZMO Gizmo::Get()
+#define REALDELTA TIME->GetRealDeltaTime()
+#define TILESET TileSetManager::Get()
+#define TEXTURE2D Texture2DManager::Get()
+#define INPUT Input::Get()
 
 //ColorMacros
 #define RED Color(1, 0, 0, 1)
@@ -160,5 +161,93 @@ const wstring FontPath = L"_Data/_Fonts/";
 const string TilePath = "../../../_Data/_TileData/";
 const string BuildTilePath = "_Data/_TileData/";
 
-// Editor
+//Interface
+#include "Interfaces/IScene.h"
+#include "Interfaces/IColorable.h"
 
+//Struct
+#include "Structs/FontBrushDesc.h"
+#include "Structs/FontTextDesc.h"
+#include "Structs/TextureDesc.h"
+#include "Structs/WinDesc.h"
+#include "Structs/BoxEdge.h"
+
+//Enum
+#include "Enums/UnitAnimationType.h"
+
+//Systems
+#include "Systems/Keyboard.h"
+#include "Systems/Mouse.h"
+#include "Systems/Input.h"
+#include "Systems/Time.h"
+#include "Systems/Graphics.h"
+
+#include "Utilities/Gui.h"
+
+//Utilities
+#include "Utilities/DirectHelper.h"
+#include "Utilities/HelpMe.h"
+#include "Utilities/Random.h"
+#include "Utilities/String.h"
+#include "Utilities/Path.h"
+#include "Utilities/FileStream.h"
+#include "Utilities/Gizmo.h"
+#include "Utilities/AnimationClip.h"
+
+//Renders
+#include "Renders/RenderResources/ConstantBuffer.h"
+#include "Renders/RenderResources/GlobalBuffers.h"
+#include "Renders/RenderResources/VertexType.h"
+#include "Renders/RenderResources/Texture2D.h"
+
+#include "Renders/IA/IndexBuffer.h"
+#include "Renders/IA/InputLayout.h"
+#include "Renders/IA/VertexBuffer.h"
+#include "Renders/RenderStates.h"
+
+#include "Renders/Shaders/IShader.h"
+#include "Renders/Shaders/PixelShader.h"
+#include "Renders/Shaders/VertexShader.h"
+
+//Components
+#include "Components/Component.h"
+#include "Components/MoveComponent.h"
+#include "Components/Collider.h"
+#include "Components/BoxCollider.h"
+#include "Components/CircleCollider.h"
+#include "Components/Texts.h"
+#include "Components/TypingText.h"
+#include "Components/ShakingText.h"
+#include "Components/Transform.h"
+#include "Components/Animator.h"
+#include "Components/RectTransform.h"
+#include "Components/Button.h"
+#include "Components/AnimationMove.h"
+#include "Components/PlayerMove.h"
+
+//Object
+#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/Drawable.h"
+#include "Objects/ColorObject/ColorRect.h"
+#include "Objects/ColorObject/ColorCircle.h"
+#include "Objects/ColorObject/ColorFilledCircle.h"
+#include "Objects/ColorObject/ColorLine.h"
+#include "Objects/TextureObject/TextureRect.h"
+#include "Objects/TextureObject/AnimationRect.h"
+#include "Objects/TileObject/Tile.h"
+#include "Objects/SpriteObject/Sprite.h"
+#include "Objects/TileObject/TileMap.h"
+
+//Camera
+#include "Systems/Camera.h"
+
+//Sounds
+#include "Systems/Sounds.h"
+
+//Managers
+#include "Managers/SceneManager.h"
+#include "Managers/CollisionManager.h"
+#include "Managers/TileSetManager.h"
+#include "Managers/Texture2DManager.h"
+
+// Editor

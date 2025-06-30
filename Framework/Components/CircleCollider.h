@@ -1,6 +1,4 @@
 #pragma once
-#include <cmath>
-#include "Collider.h"
 
 class CircleCollider : public Collider
 {
@@ -9,7 +7,7 @@ public:
     ~CircleCollider() override = default;
 
 public:
-    // ComponentÃ€Â»(Â¸Â¦) Ã…Ã«Ã‡Ã˜ Â»Ã³Â¼Ã“ÂµÃŠ
+    // ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
     void Update() override;
     void Render() override;
 

@@ -1,6 +1,4 @@
 #pragma once
-#include <functional>
-#include "Component.h"
 
 class Collider : public Component
 {

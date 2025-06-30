@@ -186,9 +186,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Components\Entity.h" />
-    <ClInclude Include="Managers\EntityManager.h" />
-    <ClInclude Include="Interfaces\ISystem.h" />
     <ClInclude Include="Platform\Platform.h" />
     <ClInclude Include="Platform\Platform_Windows.h" />
     <ClInclude Include="Structs\BoxEdge.h" />
@@ -223,7 +220,7 @@
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
     <ClInclude Include="Managers\ResourcesManager.h" />
     <ClInclude Include="Objects\TextureObject\TextureRect.h" />
-    <ClInclude Include="Utilities\ServiceLocator.h" />
+    <ClInclude Include="Utilities\targetver.h" />
     <ClInclude Include="Systems\Keyboard.h" />
     <ClInclude Include="Systems\Mouse.h" />
     <ClInclude Include="Utilities\FileStream.h" />
@@ -317,10 +314,6 @@
     <ClCompile Include="Systems\Input.cpp" />
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Comment.txt" />
-    <Text Include="BackupCode.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

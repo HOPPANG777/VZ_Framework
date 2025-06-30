@@ -1,5 +1,4 @@
 #pragma once
-#include "../Framework.h"
 
 #include "Interfaces/IScene.h"
 
@@ -23,9 +22,9 @@ public:
 public:
     void SetLoadingScene(const string& sceneName);
 
-    // â˜… ìŠ¤í”Œë˜ì‹œ ì”¬ ì„¤ì •
+    // ¡Ú ½ºÇÃ·¡½Ã ¾À ¼³Á¤
     void SetSplashScene(const string& sceneName);
-    // â˜… ê²Œì„ ìŠ¤íƒ€íŠ¸ ì‹œ, ë¡œë”©ì”¬ì„ ê±°ì¹˜ì§€ ì•Šê³  ë°”ë¡œ ìŠ¤í”Œë˜ì‹œ â†’ íƒ€ì´í‹€ë¡œ ê°€ë„ë¡ ì²˜ë¦¬
+    // ¡Ú °ÔÀÓ ½ºÅ¸Æ® ½Ã, ·Îµù¾ÀÀ» °ÅÄ¡Áö ¾Ê°í ¹Ù·Î ½ºÇÃ·¡½Ã ¡æ Å¸ÀÌÆ²·Î °¡µµ·Ï Ã³¸®
     void StartGame(const string& titleSceneName);
 
 public:
@@ -34,22 +33,22 @@ public:
 	void ResetPlayer() { this->player = nullptr; }
 
 private:
-    // ì•ˆì „í•œ ì”¬ ì „í™˜ì„ ì²˜ë¦¬í•˜ëŠ” ë‚´ë¶€ í•¨ìˆ˜
+    // ¾ÈÀüÇÑ ¾À ÀüÈ¯À» Ã³¸®ÇÏ´Â ³»ºÎ ÇÔ¼ö
     void ProcessSceneChange();
 
 private:
     unordered_map<string, shared_ptr<Scene>> sceneList;
     shared_ptr<Scene> currentScene;
-    shared_ptr<Scene> nextScene;                         // ë¡œë“œ ì¤‘ì¸ Scene
+    shared_ptr<Scene> nextScene;                         // ·Îµå ÁßÀÎ Scene
 
 
-    shared_ptr<Scene> loadingScene;                      // ë¡œë”© Scene
-    bool isLoading = false;                              // ë¡œë”© ìƒíƒœ í”Œë˜ê·¸
-    float loadingProgress = 0.0f;                        // ë¡œë”© ì§„í–‰ë¥ 
+    shared_ptr<Scene> loadingScene;                      // ·Îµù Scene
+    bool isLoading = false;                              // ·Îµù »óÅÂ ÇÃ·¡±×
+    float loadingProgress = 0.0f;                        // ·Îµù ÁøÇà·ü
 
-    // â˜… ìŠ¤í”Œë˜ì‹œ ì”¬
+    // ¡Ú ½ºÇÃ·¡½Ã ¾À
     shared_ptr<Scene> splashScene;
-    // â€œìµœì´ˆ ì‹¤í–‰ì¸ê°€?â€ ë¥¼ ê°„ë‹¨íˆ ì²´í¬í•˜ê¸° ìœ„í•œ í”Œë˜ê·¸
+    // ¡°ÃÖÃÊ ½ÇÇàÀÎ°¡?¡± ¸¦ °£´ÜÈ÷ Ã¼Å©ÇÏ±â À§ÇÑ ÇÃ·¡±×
     bool isFirstLaunch = true;
 
     bool sceneChangeRequested = false;

@@ -1,5 +1,4 @@
 #pragma once
-#include "Framework.h"
 
 /*
 DirectX 11
@@ -51,13 +50,8 @@ private:
 
 private:
 	ComPtr<ID3D11Device> device = nullptr;
-	// 그래픽 리소스 생성, GPU기능 정의하는 영역
-
 	ComPtr<ID3D11DeviceContext> deviceContext = nullptr;
-	// 모든 렌더링 명령, 파이프라인 상태 설정, 리소스 바인딩, 그리기, 데이터 전송 등 GPU에 명령을 내리는 영역
-
 	ComPtr<IDXGISwapChain> swapChain = nullptr;
-	// 프레임 버퍼를 관리하는 스왑 체인, 화면에 표시할 백 버퍼와 프론트 버퍼를 관리
 
 	ComPtr<ID2D1Device> d2Device = nullptr;
 	ComPtr<ID2D1DeviceContext> d2DeviceContext = nullptr;

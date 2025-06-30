@@ -1,21 +1,19 @@
 #include "Framework.h"
 #include "TileMap.h"
-#include "Managers/TileSetManager.h"
-#include "Systems/Camera.h"
 
 TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 	: width(width), height(height), spacing(spacing), editNow(editNow)
 {
-	// íƒ€ì¼ì…‹(ì´ë¯¸ì§€) ê´€ë ¨ ì„¤ì •ì€ TileSetManager ì‹±ê¸€í†¤ì„ ì‚¬ìš©
-	// íƒ€ì¼ì…‹ ë§¤ë‹ˆì €ëŠ” ë‚´ë¶€ì—ì„œ í…ìŠ¤ì²˜(SRV)ì™€ íƒ€ì¼ ë¶„í•  ì •ë³´ë¥¼ ê´€ë¦¬í•©ë‹ˆë‹¤.
+	// Å¸ÀÏ¼Â(ÀÌ¹ÌÁö) °ü·Ã ¼³Á¤Àº TileSetManager ½Ì±ÛÅæÀ» »ç¿ë
+	// Å¸ÀÏ¼Â ¸Å´ÏÀú´Â ³»ºÎ¿¡¼­ ÅØ½ºÃ³(SRV)¿Í Å¸ÀÏ ºĞÇÒ Á¤º¸¸¦ °ü¸®ÇÕ´Ï´Ù.
 	//TILESET->Init();
 
-	// íƒ€ì¼ë§µ ìƒì„± (2ì°¨ì› vector í˜•íƒœ)
+	// Å¸ÀÏ¸Ê »ı¼º (2Â÷¿ø vector ÇüÅÂ)
 	GenerateTileMap();
 
 	//vertices
 	{
-		// íƒ€ì¼ í•˜ë‚˜ë¥¼ ê·¸ë¦¬ê¸° ìœ„í•œ ê¸°ë³¸ ë²„í…ìŠ¤ ë°ì´í„° (ì‚¬ê°í˜•)
+		// Å¸ÀÏ ÇÏ³ª¸¦ ±×¸®±â À§ÇÑ ±âº» ¹öÅØ½º µ¥ÀÌÅÍ (»ç°¢Çü)
 		//vertices.resize(4);
 		vertices.assign(4, VertexTile());
 
@@ -27,13 +25,13 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 
 	//indices
 	{
-		// ì¸ë±ìŠ¤ ë°ì´í„° (ì‚¬ê°í˜• 2ê°œì˜ ì‚¼ê°í˜•)
+		// ÀÎµ¦½º µ¥ÀÌÅÍ (»ç°¢Çü 2°³ÀÇ »ï°¢Çü)
 		indices = { 0, 1, 2, 2, 1, 3 };
 	}
 
 	//vertexBuffer
 	{
-		// D3D ë¦¬ì†ŒìŠ¤ ìƒì„± (Frameworkì˜ ë§¤í¬ë¡œë‚˜ unique_ptr í™œìš©)
+		// D3D ¸®¼Ò½º »ı¼º (FrameworkÀÇ ¸ÅÅ©·Î³ª unique_ptr È°¿ë)
 		vertexBuffer = make_unique<VertexBuffer>();
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
@@ -75,23 +73,23 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 	}
 
 	// Rasterizer State
-	// ë ˆìŠ¤í„°ë¼ì´ì €ëŠ” ë²„í…ìŠ¤ ì‰ì´ë”ë¡œ ì°ì€ ì •ì ë“¤ì˜ ì‚¬ì´ì™€ ë‚´ë¶€ë¥¼
-	// ì±„ì›Œì£¼ëŠ” ì—­í• ì´ë‹¤.
-	// ì´ê±° ì•ˆë§Œë“¤ë©´ ê¸°ë³¸ê°’ìœ¼ë¡œ ë„£ì–´ì£¼ê³  ë§Œë“¤ë©´ ë§Œë“ ê±° ë„£ì–´ì¤Œ
+	// ·¹½ºÅÍ¶óÀÌÀú´Â ¹öÅØ½º ½¦ÀÌ´õ·Î ÂïÀº Á¤Á¡µéÀÇ »çÀÌ¿Í ³»ºÎ¸¦
+	// Ã¤¿öÁÖ´Â ¿ªÇÒÀÌ´Ù.
+	// ÀÌ°Å ¾È¸¸µé¸é ±âº»°ªÀ¸·Î ³Ö¾îÁÖ°í ¸¸µé¸é ¸¸µç°Å ³Ö¾îÁÜ
 	{
 		D3D11_RASTERIZER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_RASTERIZER_DESC));
 
-		// CullMode : ê·¸ë¦¬ì§€ ì•Šì„ ë¶€ë¶„ ì„¤ì •
-		// d3d11_cull_back == ë’·ë©´ ì§€ìš°ê² ë‹¤. (ë°˜ì‹œê³„ ë°©í–¥ ì•ˆê·¸ë¦¼)
+		// CullMode : ±×¸®Áö ¾ÊÀ» ºÎºĞ ¼³Á¤
+		// d3d11_cull_back == µŞ¸é Áö¿ì°Ú´Ù. (¹İ½Ã°è ¹æÇâ ¾È±×¸²)
 		desc.CullMode = D3D11_CULL_BACK;
 		//desc.CullMode = D3D11_CULL_NONE;
 
-		// FillMode : ì²´ìš°ëŠ” ë°©ì‹ ì„¤ì •
-		// d3d11_fill_solid == ì „ë¶€ ì²´ìš°ê² ë‹¤. (ë¹ˆê³µê°„ ì•ˆë§Œë“ ë‹¤)
+		// FillMode : Ã¼¿ì´Â ¹æ½Ä ¼³Á¤
+		// d3d11_fill_solid == ÀüºÎ Ã¼¿ì°Ú´Ù. (ºó°ø°£ ¾È¸¸µç´Ù)
 		desc.FillMode = D3D11_FILL_SOLID;
 
-		// ì‹œê³„ë°©í–¥ ì„¤ì • (false == ì‹œê³„ ë°©í–¥ // true == ë°˜ ì‹œê³„ ë°©í–¥)
+		// ½Ã°è¹æÇâ ¼³Á¤ (false == ½Ã°è ¹æÇâ // true == ¹İ ½Ã°è ¹æÇâ)
 		desc.FrontCounterClockwise = false;
 
 		HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
@@ -104,7 +102,7 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 		RenderStates::GetSamplerDesc(&desc);
 		RenderStates::CreateSampler(&desc, sampler[0].GetAddressOf());
 
-		// ì„ í˜•ë³´ê°„
+		// ¼±Çüº¸°£
 		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 		RenderStates::CreateSampler(&desc, sampler[1].GetAddressOf());
 	}
@@ -135,18 +133,18 @@ void TileMap::GenerateTileMap()
 {
 	if (width == 0 || height == 0 || spacing == 0) assert(false);
 
-	// 2ì°¨ì› ë²¡í„°ë¥¼ ì‚¬ìš©í•˜ì—¬ ê° í–‰ì— ëŒ€í•´ vector<shared_ptr<Tile>>ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
+	// 2Â÷¿ø º¤ÅÍ¸¦ »ç¿ëÇÏ¿© °¢ Çà¿¡ ´ëÇØ vector<shared_ptr<Tile>>¸¦ »ı¼ºÇÕ´Ï´Ù.
 	//vector<vector<shared_ptr<Tile>>> tiles;
 	tiles.resize(height);
 
 	int index = 0;
 	for (UINT y = 0; y < height; y++)
 	{
-		// ê° í–‰ì˜ ì—´ í¬ê¸°ë¥¼ ë¯¸ë¦¬ í• ë‹¹í•©ë‹ˆë‹¤.
+		// °¢ ÇàÀÇ ¿­ Å©±â¸¦ ¹Ì¸® ÇÒ´çÇÕ´Ï´Ù.
 		tiles[y].resize(width);
 		for (UINT x = 0; x < width; x++)
 		{
-			// ê° íƒ€ì¼ì„ make_sharedë¡œ ìƒì„±í•©ë‹ˆë‹¤.
+			// °¢ Å¸ÀÏÀ» make_shared·Î »ı¼ºÇÕ´Ï´Ù.
 			tiles[y][x] = make_shared<Tile>();
 			tiles[y][x]->SetPosition(Vector3(static_cast<float>(x * spacing), static_cast<float>(y * spacing), 0.0f));
 			tiles[y][x]->SetIndex(index++);
@@ -167,11 +165,11 @@ void TileMap::UnmapVertexBuffer()
 
 void TileMap::ResizeMap(UINT newWidth, UINT newHeight)
 {
-    // ìƒˆë¡œìš´ 2ì°¨ì› ë²¡í„° ì¤€ë¹„
+    // »õ·Î¿î 2Â÷¿ø º¤ÅÍ ÁØºñ
     vector<vector<shared_ptr<Tile>>> newTiles;
     newTiles.resize(newHeight);
 
-    // ì¸ë±ìŠ¤ë¥¼ ìƒˆë¡œ ë¶€ì—¬í•  ë•Œ ì‚¬ìš©í•  ë³€ìˆ˜
+    // ÀÎµ¦½º¸¦ »õ·Î ºÎ¿©ÇÒ ¶§ »ç¿ëÇÒ º¯¼ö
     int index = 0;
 
     for (UINT y = 0; y < newHeight; y++)
@@ -182,16 +180,16 @@ void TileMap::ResizeMap(UINT newWidth, UINT newHeight)
         {
             if (x < width && y < height)
             {
-                // ê¸°ì¡´ ë§µ ë²”ìœ„ ì•ˆì— ìˆìœ¼ë©´, ê¸°ì¡´ íƒ€ì¼ì„ ê·¸ëŒ€ë¡œ ê°€ì ¸ì˜´
+                // ±âÁ¸ ¸Ê ¹üÀ§ ¾È¿¡ ÀÖÀ¸¸é, ±âÁ¸ Å¸ÀÏÀ» ±×´ë·Î °¡Á®¿È
                 newTiles[y][x] = tiles[y][x];
             }
             else
             {
-                // ìƒˆë¡œ í™•ì¥ëœ ì˜ì—­ì´ë©´, ìƒˆë¡œìš´ íƒ€ì¼ì„ ìƒì„±
+                // »õ·Î È®ÀåµÈ ¿µ¿ªÀÌ¸é, »õ·Î¿î Å¸ÀÏÀ» »ı¼º
 				const auto& tile = make_shared<Tile>();
                 tile->SetPosition(Vector3((float)x * spacing, (float)y * spacing, 0.0f));
                 tile->SetIndex(index);
-                // ìƒˆë¡œ ìƒì„±ë˜ëŠ” íƒ€ì¼ì€ ê²€ì€ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                // »õ·Î »ı¼ºµÇ´Â Å¸ÀÏÀº °ËÀº»öÀ¸·Î ¼³Á¤
                 tile->SetColor(Values::Black);
                 newTiles[y][x] = tile;
             }
@@ -199,9 +197,9 @@ void TileMap::ResizeMap(UINT newWidth, UINT newHeight)
         }
     }
 
-    // ê¸°ì¡´ tilesë¥¼ ìƒˆ tilesë¡œ êµì²´
+    // ±âÁ¸ tiles¸¦ »õ tiles·Î ±³Ã¼
     tiles = move(newTiles);
-    // width/heightë¥¼ ê°±ì‹ 
+    // width/height¸¦ °»½Å
     width = newWidth;
     height = newHeight;
 }
@@ -210,23 +208,23 @@ void TileMap::Update()
 {
 	if (editNow == true)
 	{
-		// ì˜ˆì‹œ: ì¹´ë©”ë¼ ìœ„ì¹˜ë¥¼ ê³ ë ¤í•˜ì—¬ ë§ˆìš°ìŠ¤ ì¢Œí‘œë¥¼ ì›”ë“œ ì¢Œí‘œë¡œ ë³€í™˜
+		// ¿¹½Ã: Ä«¸Ş¶ó À§Ä¡¸¦ °í·ÁÇÏ¿© ¸¶¿ì½º ÁÂÇ¥¸¦ ¿ùµå ÁÂÇ¥·Î º¯È¯
 		Vector3 mPos = INPUT->GetMousePos();
 
-		// ì¹´ë©”ë¼ê°€ ì§êµ ì¹´ë©”ë¼ì´ê³ , GetPosition()ì´ ì¹´ë©”ë¼ì˜ ì›”ë“œ ìœ„ì¹˜ë¥¼ ë°˜í™˜í•œë‹¤ê³  ê°€ì •í•˜ë©´:
+		// Ä«¸Ş¶ó°¡ Á÷±³ Ä«¸Ş¶óÀÌ°í, GetPosition()ÀÌ Ä«¸Ş¶óÀÇ ¿ùµå À§Ä¡¸¦ ¹İÈ¯ÇÑ´Ù°í °¡Á¤ÇÏ¸é:
 		mPos += CAMERA->GetPosition();
 
 		Tile* tile = GetTile(mPos);
 
 		if (tile) indexNumBuffer->SetIndex(tile->GetIndex());
 
-		// í´ë¦­ ì´ë²¤íŠ¸ ì²˜ë¦¬ ë“± ë‹¤ë¥¸ ì…ë ¥ ë¡œì§ì€ í•„ìš”ì— ë”°ë¼ ì—¬ê¸°ì— ì¶”ê°€
-		// ì˜ˆ: ì¢Œí´ë¦­ ì‹œ íƒ€ì¼ì˜ UVë¥¼ ë³€ê²½í•˜ëŠ” ë“±ì˜ í¸ì§‘ ì‘ì—…
+		// Å¬¸¯ ÀÌº¥Æ® Ã³¸® µî ´Ù¸¥ ÀÔ·Â ·ÎÁ÷Àº ÇÊ¿ä¿¡ µû¶ó ¿©±â¿¡ Ãß°¡
+		// ¿¹: ÁÂÅ¬¸¯ ½Ã Å¸ÀÏÀÇ UV¸¦ º¯°æÇÏ´Â µîÀÇ ÆíÁı ÀÛ¾÷
 		if (INPUT->MousePressed(0x0000))
 		{
 			if (tile)
 			{
-				// í¸ì§‘ ì‘ì—…ì€ ë³„ë„ë¡œ ì²˜ë¦¬(ì˜ˆ: UV ë³€ê²½ ë“±)
+				// ÆíÁı ÀÛ¾÷Àº º°µµ·Î Ã³¸®(¿¹: UV º¯°æ µî)
 				Vector2 startUV = TILESET->selectedStartUV;
 				Vector2 endUV = startUV + TILESET->texelTileSize;
 				tile->SetStartUV(startUV);
@@ -236,7 +234,7 @@ void TileMap::Update()
 	}
 	else
 	{
-		// íƒ€ì¼ ìœ„ì— ì—†ìœ¼ë©´ ë¬´íš¨ê°’(ì˜ˆ: UINT_MAX)ìœ¼ë¡œ ì„¤ì •
+		// Å¸ÀÏ À§¿¡ ¾øÀ¸¸é ¹«È¿°ª(¿¹: UINT_MAX)À¸·Î ¼³Á¤
 		indexNumBuffer->SetIndex(0xFFFFFFFF);
 	}
 
@@ -254,16 +252,16 @@ void TileMap::Render()
 
 	DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 
-	// íƒ€ì¼ì…‹ ë§¤ë‹ˆì €ì—ì„œ ê´€ë¦¬í•˜ëŠ” SRVë¥¼ í”½ì…€ ì…°ì´ë”ì— ë°”ì¸ë”©
+	// Å¸ÀÏ¼Â ¸Å´ÏÀú¿¡¼­ °ü¸®ÇÏ´Â SRV¸¦ ÇÈ¼¿ ¼ÎÀÌ´õ¿¡ ¹ÙÀÎµù
 	DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
 
-	// ë ˆìŠ¤í„°ë¼ì´ì € ë° ë¸”ë Œë“œ ìƒíƒœ ì„¤ì •
+	// ·¹½ºÅÍ¶óÀÌÀú ¹× ºí·»µå »óÅÂ ¼³Á¤
 	DC->RSSetState(rs.Get());
 
 	DC->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
 
 
-	// ê° íƒ€ì¼ë§ˆë‹¤ ë²„í…ìŠ¤ ë²„í¼ë¥¼ ì—…ë°ì´íŠ¸í•˜ì—¬ ê·¸ë¦¬ê¸°
+	// °¢ Å¸ÀÏ¸¶´Ù ¹öÅØ½º ¹öÆÛ¸¦ ¾÷µ¥ÀÌÆ®ÇÏ¿© ±×¸®±â
 	for (UINT y = 0; y < height; y++)
 	{
 		for (UINT x = 0; x < width; x++)
@@ -273,7 +271,7 @@ void TileMap::Render()
 
 			MapVertexBuffer();
 			{
-				// ê° íƒ€ì¼ì— ë§ê²Œ ë²„í…ìŠ¤ ë°ì´í„° ì—…ë°ì´íŠ¸
+				// °¢ Å¸ÀÏ¿¡ ¸Â°Ô ¹öÅØ½º µ¥ÀÌÅÍ ¾÷µ¥ÀÌÆ®
 				for (VertexTile& v : vertices)
 				{
 					v.color = tile->GetColor();
@@ -285,7 +283,7 @@ void TileMap::Render()
 				vertices[2].uv = tile->GetEndUV();
 				vertices[3].uv = Vector2(tile->GetEndUV().x, tile->GetStartUV().y);
 
-				// uv2 (ì¶”ê°€ í…ìŠ¤ì²˜ ì¢Œí‘œ, ê¸°ë³¸ê°’)
+				// uv2 (Ãß°¡ ÅØ½ºÃ³ ÁÂÇ¥, ±âº»°ª)
 				vertices[0].uv2 = Vector2(0, 1);
 				vertices[1].uv2 = Vector2(0, 0);
 				vertices[2].uv2 = Vector2(1, 1);
@@ -304,7 +302,7 @@ void TileMap::Render()
 
 void TileMap::ImGUI()
 {
-	// íƒ€ì¼ì…‹ ë§¤ë‹ˆì €ì˜ GUI (íƒ€ì¼ íŒ”ë ˆíŠ¸)
+	// Å¸ÀÏ¼Â ¸Å´ÏÀúÀÇ GUI (Å¸ÀÏ ÆÈ·¹Æ®)
 	TILESET->ImGUI();
 }
 
@@ -313,7 +311,7 @@ void TileMap::Save(const string& path)
 	ofstream fout(path);
 	fout << to_string(width) << ' ' << to_string(height) << ' ' << to_string(spacing) << endl;
 
-	// íƒ€ì¼ì…‹ ì •ë³´
+	// Å¸ÀÏ¼Â Á¤º¸
 	string imagePath = "";
 	wstring tsPath = TILESET->GetTilePath();
 	imagePath.assign(tsPath.begin(), tsPath.end());
@@ -321,14 +319,14 @@ void TileMap::Save(const string& path)
 	string yCount = to_string(TILESET->GetYCount());
 	fout << imagePath << ' ' << xCount << ' ' << yCount << endl;
 
-	// ê° íƒ€ì¼ì˜ UV ì •ë³´ë¥¼ row-major ìˆœì„œë¡œ ì €ì¥í•˜ë©´ì„œ,
-	// íƒ€ì¼ì´ "ë¹ˆ íƒ€ì¼"ì´ë©´ í”Œë˜ê·¸ 0, ì•„ë‹ˆë©´ 1ê³¼ í•¨ê»˜ UVì •ë³´ ì €ì¥
+	// °¢ Å¸ÀÏÀÇ UV Á¤º¸¸¦ row-major ¼ø¼­·Î ÀúÀåÇÏ¸é¼­,
+	// Å¸ÀÏÀÌ "ºó Å¸ÀÏ"ÀÌ¸é ÇÃ·¡±× 0, ¾Æ´Ï¸é 1°ú ÇÔ²² UVÁ¤º¸ ÀúÀå
 	for (UINT y = 0; y < height; y++)
 	{
 		for (UINT x = 0; x < width; x++)
 		{
 			std::shared_ptr<Tile>& tile = tiles[y][x];
-			// ì˜ˆë¥¼ ë“¤ì–´, ë¹ˆ íƒ€ì¼ì€ ìƒ‰ìƒì´ ê¸°ë³¸ ê²€ì€ìƒ‰(í˜¹ì€ UVê°€ ëª¨ë‘ 0)ìœ¼ë¡œ ì„¤ì •ë˜ì–´ ìˆë‹¤ê³  ê°€ì •
+			// ¿¹¸¦ µé¾î, ºó Å¸ÀÏÀº »ö»óÀÌ ±âº» °ËÀº»ö(È¤Àº UV°¡ ¸ğµÎ 0)À¸·Î ¼³Á¤µÇ¾î ÀÖ´Ù°í °¡Á¤
 			bool isEmpty = (tile->GetStartUV() == Vector2(0, 0) && tile->GetEndUV() == Vector2(0, 0));
 			fout << (isEmpty ? "0 " : "1 ");
 			fout << to_string(tile->GetStartUV().x) << ' '
@@ -344,14 +342,14 @@ void TileMap::Load(const string& path)
 	ifstream fin(path);
 	if (fin.fail())
 	{
-		cout << "íŒŒì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ì´ë¦„ì„ ì •í™•íˆ ì ì–´ì£¼ì„¸ìš”." << endl;
+		cout << "ÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù. ÀÌ¸§À» Á¤È®È÷ Àû¾îÁÖ¼¼¿ä." << endl;
 		return;
 	}
 
 	tiles.clear();
 	char temp[256];
 
-	// (1) width, height, spacing ì½ê¸°
+	// (1) width, height, spacing ÀĞ±â
 	{
 		fin.getline(temp, 256);
 		istringstream iss(temp);
@@ -359,7 +357,7 @@ void TileMap::Load(const string& path)
 		if (width == 0 || height == 0 || spacing == 0) assert(false);
 	}
 
-	// (2) íƒ€ì¼ì…‹ ì •ë³´ ì½ê¸°
+	// (2) Å¸ÀÏ¼Â Á¤º¸ ÀĞ±â
 	{
 		fin.getline(temp, 256);
 		istringstream iss(temp);
@@ -370,7 +368,7 @@ void TileMap::Load(const string& path)
 		TILESET->ChangeTileMap(tsPath, xCount, yCount);
 	}
 
-	// (3) 2ì°¨ì› ë²¡í„° ì¬ìƒì„± ë° íƒ€ì¼ ìƒì„±
+	// (3) 2Â÷¿ø º¤ÅÍ Àç»ı¼º ¹× Å¸ÀÏ »ı¼º
 	tiles.resize(height);
 	int index = 0;
 	for (UINT y = 0; y < height; y++)
@@ -379,12 +377,12 @@ void TileMap::Load(const string& path)
 		for (UINT x = 0; x < width; x++)
 		{
 			const std::shared_ptr<Tile>& tile = make_shared<Tile>();
-			// ìœ„ì¹˜ ì„¤ì •
+			// À§Ä¡ ¼³Á¤
 			Vector3 position(static_cast<float>(x * spacing), static_cast<float>(y * spacing), 0.0f);
 			tile->SetPosition(position);
 			tile->SetIndex(index++);
 
-			// UV ì •ë³´ì™€ í™œì„± í”Œë˜ê·¸ ì½ê¸°
+			// UV Á¤º¸¿Í È°¼º ÇÃ·¡±× ÀĞ±â
 			fin.getline(temp, 256);
 			istringstream uvStream(temp);
 			int activeFlag;
@@ -395,21 +393,21 @@ void TileMap::Load(const string& path)
 			{
 				tile->SetStartUV(Vector2(sx, sy));
 				tile->SetEndUV(Vector2(ex, ey));
-				// ì €ì¥ ì‹œ ë¹¨ê°„ìƒ‰ì´ ì„ì‹œë¡œ ì„¤ì •ë˜ì—ˆë”ë¼ë„, ë¶ˆëŸ¬ì˜¬ ë•ŒëŠ” ê¸°ë³¸ ìƒ‰ìƒ(ì˜ˆ: í°ìƒ‰)ìœ¼ë¡œ ë®ì–´ì”ë‹ˆë‹¤.
+				// ÀúÀå ½Ã »¡°£»öÀÌ ÀÓ½Ã·Î ¼³Á¤µÇ¾ú´õ¶óµµ, ºÒ·¯¿Ã ¶§´Â ±âº» »ö»ó(¿¹: Èò»ö)À¸·Î µ¤¾î¾¹´Ï´Ù.
 				tile->SetColor(Values::White);
 			}
 			else
 			{
-				// ë¹ˆ íƒ€ì¼ì€ íˆ¬ëª…í•˜ê²Œ ì²˜ë¦¬
+				// ºó Å¸ÀÏÀº Åõ¸íÇÏ°Ô Ã³¸®
 				tile->SetColor(Values::Transparent);
 			}
 			tiles[y][x] = tile;
 		}
 	}
 
-	// ë””ë²„ê·¸ìš© ë°±ì—… (ì›í•˜ëŠ” ê²½ìš°)
+	// µğ¹ö±×¿ë ¹é¾÷ (¿øÇÏ´Â °æ¿ì)
 	Save(BuildTilePath + "After.txt");
-	cout << "íƒ€ì¼ë§µ ë¶ˆëŸ¬ì˜¤ê¸° ì™„ë£Œ!" << endl;
+	cout << "Å¸ÀÏ¸Ê ºÒ·¯¿À±â ¿Ï·á!" << endl;
 }
 
 Tile* TileMap::GetTile(Vector3 mPos)

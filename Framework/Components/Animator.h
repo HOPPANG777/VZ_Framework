@@ -1,14 +1,11 @@
-#pragma once
 // Animator.h
-#include <unordered_map>
-#include "Component.h"
-#include "Utilities/AnimationClip.h"
+#pragma once
 
-// Animatorê°€ Componentë¥¼ ìƒì†ë°›ë„ë¡ ë³€ê²½
+// Animator°¡ Component¸¦ »ó¼Ó¹Şµµ·Ï º¯°æ
 class Animator : public Component
 {
 public:
-    // ìƒì„±ìì—ì„œ Component ì´ë¦„ "Animator" ì§€ì •
+    // »ı¼ºÀÚ¿¡¼­ Component ÀÌ¸§ "Animator" ÁöÁ¤
     Animator(const string& compName = "Animator")
         : Component(compName)
     {
@@ -16,12 +13,12 @@ public:
 
     virtual ~Animator() override = default;
 
-    // Componentì˜ ìˆœìˆ˜ ê°€ìƒí•¨ìˆ˜ êµ¬í˜„
+    // ComponentÀÇ ¼ø¼ö °¡»óÇÔ¼ö ±¸Çö
     virtual void Update() override;
-    virtual void Render() override; // ë³´í†µì€ ë¹„ì›Œë‘ì§€ë§Œ í•„ìš”ì‹œ êµ¬í˜„
+    virtual void Render() override; // º¸ÅëÀº ºñ¿öµÎÁö¸¸ ÇÊ¿ä½Ã ±¸Çö
 
 public:
-    // ---------- ê¸°ì¡´ Animator ë©¤ë²„ë“¤ ê·¸ëŒ€ë¡œ ìœ ì§€ ----------
+    // ---------- ±âÁ¸ Animator ¸â¹öµé ±×´ë·Î À¯Áö ----------
     void AddAnimClip(const shared_ptr<AnimationClip>& animClip);
     void SetCurrentAnimClip(const wstring& clipName);
 
@@ -45,50 +42,50 @@ public:
     }
 
 public:
-    // ---------- ë£¨í”„ ì˜µì…˜ ì¶”ê°€ ----------
-    // true = ê³„ì† ë£¨í”„, false = í•œ ë²ˆë§Œ ì¬ìƒ
+    // ---------- ·çÇÁ ¿É¼Ç Ãß°¡ ----------
+    // true = °è¼Ó ·çÇÁ, false = ÇÑ ¹ø¸¸ Àç»ı
     void SetLoop(bool loop) { bLoop = loop; if (loop) bFinished = false; }
     bool IsFinished() const { return bFinished; }
 
 public:
-    // â–¶ ìƒˆë¡œ ì¶”ê°€í•  ì¬ìƒ ì†ë„ / ì‹œê°„ ì œì–´ í•¨ìˆ˜ë“¤
+    // ¢º »õ·Î Ãß°¡ÇÒ Àç»ı ¼Óµµ / ½Ã°£ Á¦¾î ÇÔ¼öµé
     // playbackSpeed:
-    //   > 0 â†’ ì •ë°©í–¥ ì¬ìƒ (1.0f = ê¸°ë³¸ ì†ë„, 2.0f = ë‘ ë°°ì† ë“±)
-    //   < 0 â†’ ì—­ë°©í–¥ ì¬ìƒ (-1.0f = í•œ ë°°ì† ì—­ë°©í–¥)
-    //   = 0 â†’ ì •ì§€ (í”„ë ˆì„ ë©ˆì¶¤)
+    //   > 0 ¡æ Á¤¹æÇâ Àç»ı (1.0f = ±âº» ¼Óµµ, 2.0f = µÎ ¹è¼Ó µî)
+    //   < 0 ¡æ ¿ª¹æÇâ Àç»ı (-1.0f = ÇÑ ¹è¼Ó ¿ª¹æÇâ)
+    //   = 0 ¡æ Á¤Áö (ÇÁ·¹ÀÓ ¸ØÃã)
     void                    SetPlaybackSpeed(float speed);
     float                   GetPlaybackSpeed() const { return playbackSpeed; }
 
 public:
-    // normalizedTime: 0.0f ~ 1.0f ì‚¬ì´ ê°’ìœ¼ë¡œ ì „ì²´ ì• ë‹ˆë©”ì´ì…˜ì˜ ì¬ìƒ ìœ„ì¹˜ë¥¼ ì§€ì •
-    //   0.0f â†’ ì²« í”„ë ˆì„, 1.0f â†’ ë§ˆì§€ë§‰ í”„ë ˆì„
+    // normalizedTime: 0.0f ~ 1.0f »çÀÌ °ªÀ¸·Î ÀüÃ¼ ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ Àç»ı À§Ä¡¸¦ ÁöÁ¤
+    //   0.0f ¡æ Ã¹ ÇÁ·¹ÀÓ, 1.0f ¡æ ¸¶Áö¸· ÇÁ·¹ÀÓ
     void                    SetNormalizedTime(float t);
     float                   GetNormalizedTime() const;
 
 public:
-    // í˜„ì¬ ì¬ìƒ ì†ë„(playbackSpeed)ì— ë”°ë¼,
-    // ì •ë°©í–¥ì´ë©´ ë§ˆì§€ë§‰ í”„ë ˆì„(1.0) ë˜ëŠ” ì—­ë°©í–¥ì´ë©´ ì²« í”„ë ˆì„(0.0)ì— ë„ë‹¬í–ˆëŠ”ì§€ ì—¬ë¶€
+    // ÇöÀç Àç»ı ¼Óµµ(playbackSpeed)¿¡ µû¶ó,
+    // Á¤¹æÇâÀÌ¸é ¸¶Áö¸· ÇÁ·¹ÀÓ(1.0) ¶Ç´Â ¿ª¹æÇâÀÌ¸é Ã¹ ÇÁ·¹ÀÓ(0.0)¿¡ µµ´ŞÇß´ÂÁö ¿©ºÎ
     bool                    IsAnimationFinished() const;
 
 private:
     bool CheckExist(const std::wstring& clipName) const;
 
 private:
-    // ---------- ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ìë£Œêµ¬ì¡° ----------
+    // ---------- ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ ÀÚ·á±¸Á¶ ----------
     unordered_map<wstring, shared_ptr<AnimationClip>> animClips;
     shared_ptr<AnimationClip> currentClip = nullptr;
 
-    // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ ê´€ë ¨
+    // ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı °ü·Ã
     UINT    currentFrameIndex = 0;
     Vector2 currentFrame = Values::ZeroVec2;
     float   frameTime = 0.0f;
-    float   animationTime = 1.0f / 15.0f; // ê¸°ë³¸ 15FPS
+    float   animationTime = 1.0f / 15.0f; // ±âº» 15FPS
 
-    // ë£¨í”„ ì œì–´ í”Œë˜ê·¸
-    bool bLoop = true;   // ê¸°ë³¸ì€ ë£¨í”„ ëª¨ë“œ
-    bool bFinished = false;  // í•œ ë²ˆë§Œ ì¬ìƒ í›„ ì™„ë£Œ ì—¬ë¶€
+    // ·çÇÁ Á¦¾î ÇÃ·¡±×
+    bool bLoop = true;   // ±âº»Àº ·çÇÁ ¸ğµå
+    bool bFinished = false;  // ÇÑ ¹ø¸¸ Àç»ı ÈÄ ¿Ï·á ¿©ºÎ
 
-    // â–¶ ìƒˆë¡œ ì¶”ê°€í•  ë©¤ë²„ ë³€ìˆ˜ë“¤
-    float playbackSpeed = 1.0f;     // 1.0f = ê¸°ë³¸ ì •ë°©í–¥, -1.0f = ê¸°ë³¸ ì—­ë°©í–¥, 0.0f = ì •ì§€
-    float normalizedTime = 0.0f;    // 0.0f ~ 1.0f (0=ì²« í”„ë ˆì„, 1=ë§ˆì§€ë§‰ í”„ë ˆì„)
+    // ¢º »õ·Î Ãß°¡ÇÒ ¸â¹ö º¯¼öµé
+    float playbackSpeed = 1.0f;     // 1.0f = ±âº» Á¤¹æÇâ, -1.0f = ±âº» ¿ª¹æÇâ, 0.0f = Á¤Áö
+    float normalizedTime = 0.0f;    // 0.0f ~ 1.0f (0=Ã¹ ÇÁ·¹ÀÓ, 1=¸¶Áö¸· ÇÁ·¹ÀÓ)
 };
