@@ -362,12 +362,8 @@
     <ClInclude Include="Utilities\ServiceLocator.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Platform.h">
-      <Filter>Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Platform_Windows.h">
-      <Filter>Platform\Platform_Windows</Filter>
-    </ClInclude>
+    <ClInclude Include="Platform\Platform.h" />
+    <ClInclude Include="Platform\Platform_Windows.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -460,11 +456,9 @@
     <Filter Include="Managers\ECS">
       <UniqueIdentifier>{5f93f92a-9349-48c3-879d-ac3d174144db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform">
-      <UniqueIdentifier>{b14672d5-6634-4da9-bf3f-0d82420152a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Platform\Platform_Windows">
-      <UniqueIdentifier>{5f94945d-f827-4861-8aa3-65d0de4b9330}</UniqueIdentifier>
-    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Comment.txt" />
+    <Text Include="BackupCode.txt" />
   </ItemGroup>
 </Project>

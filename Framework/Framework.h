@@ -160,22 +160,5 @@ const wstring FontPath = L"_Data/_Fonts/";
 const string TilePath = "../../../_Data/_TileData/";
 const string BuildTilePath = "_Data/_TileData/";
 
-// Managers
-#include "Systems/Camera.h"
-#include "Systems/Graphics.h"
-#include "Systems/Input.h"
-#include "Systems/Keyboard.h"
-#include "Systems/Mouse.h"
-#include "Systems/Sounds.h"
-#include "Systems/Time.h"
-#include "Systems/Window.h"
-
-#include "Utilities/DirectHelper.h"
-#include "Utilities/FileStream.h"
-#include "Utilities/HelpMe.h"
-#include "Utilities/Path.h"
-#include "Utilities/Random.h"
-#include "Utilities/String.h"
-#include "Utilities/ServiceRegister.h"
-
+// Editor
 
