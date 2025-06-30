@@ -1,22 +1,24 @@
 // Animator.cpp
 #include "Framework.h"
+#include "Utilities/AnimationClip.h"
+#include "Systems/Time.h"
 #include "Animator.h"
 
 void Animator::Update()
 {
-    // Àç»ıÇÒ Å¬¸³ÀÌ ¾ø°Å³ª, ÇÑ ¹ø¸¸ Àç»ı ÈÄ ¿Ï·áµÈ »óÅÂ¸é ¸®ÅÏ
+    // ì¬ìƒí•  í´ë¦½ì´ ì—†ê±°ë‚˜, í•œ ë²ˆë§Œ ì¬ìƒ í›„ ì™„ë£Œëœ ìƒíƒœë©´ ë¦¬í„´
     if (!currentClip || (bFinished && !bLoop))
     {
         return;
     }
 
-    // ¢º 1) playbackSpeed == 0 ÀÌ¸é Á¤Áö »óÅÂÀÌ¹Ç·Î ¾Æ¹«°Íµµ ÇÏÁö ¾ÊÀ½
+    // â–¶ 1) playbackSpeed == 0 ì´ë©´ ì •ì§€ ìƒíƒœì´ë¯€ë¡œ ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ
     if (playbackSpeed == 0.0f)
     {
         return;
     }
 
-    // ¢º 2) normalizedTime ¾÷µ¥ÀÌÆ®
+    // â–¶ 2) normalizedTime ì—…ë°ì´íŠ¸
     float dt = TIME->GetDeltaTime();
 
     if (currentClip->frameCount > 0 && animationTime > 0.0f)
@@ -25,7 +27,7 @@ void Animator::Update()
 
         normalizedTime += (playbackSpeed * dt) / clipDuration;
 
-        // ¢º std::clamp ´ë½Å ¼öµ¿ Å¬·¥ÇÁ
+        // â–¶ std::clamp ëŒ€ì‹  ìˆ˜ë™ í´ë¨í”„
         if (normalizedTime < 0.0f)
         {
             normalizedTime = 0.0f;
@@ -36,7 +38,7 @@ void Animator::Update()
         }
     }
 
-    // ¢º 3) normalizedTime¿¡ µû¶ó currentFrameIndex °è»ê
+    // â–¶ 3) normalizedTimeì— ë”°ë¼ currentFrameIndex ê³„ì‚°
     if (currentClip->frameCount > 0)
     {
         float rawIndex = normalizedTime * static_cast<float>(currentClip->frameCount - 1);
@@ -48,7 +50,7 @@ void Animator::Update()
         }
     }
 
-    // ¢º 4) bLoop / bFinished Ã³¸®
+    // â–¶ 4) bLoop / bFinished ì²˜ë¦¬
     if (playbackSpeed > 0.0f)
     {
         if (normalizedTime >= 1.0f)
@@ -84,13 +86,13 @@ void Animator::Update()
         }
     }
 
-    // ¢º 5) ½ÇÁ¦ ·»´õ·¯¿¡°Ô currentFrameÀ» ³Ñ±è
+    // â–¶ 5) ì‹¤ì œ ë Œë”ëŸ¬ì—ê²Œ currentFrameì„ ë„˜ê¹€
     currentFrame = currentClip->keyFrames[currentFrameIndex];
 }
 
 void Animator::Render()
 {
-    // Æ¯º°È÷ ·»´õÇÒ °Ô ¾øÁö¸¸, µğ¹ö±×¿ë ÄÚµå°¡ ÇÊ¿äÇÏ¸é ¿©±â¿¡ ÀÛ¼º
+    // íŠ¹ë³„íˆ ë Œë”í•  ê²Œ ì—†ì§€ë§Œ, ë””ë²„ê·¸ìš© ì½”ë“œê°€ í•„ìš”í•˜ë©´ ì—¬ê¸°ì— ì‘ì„±
 }
 
 void Animator::AddAnimClip(const std::shared_ptr<AnimationClip>& animClip)
@@ -105,7 +107,7 @@ bool Animator::CheckExist(const std::wstring& clipName) const
 
 void Animator::SetCurrentAnimClip(const std::wstring& clipName)
 {
-    // ÀÌ¹Ì °°Àº Å¬¸³ÀÌ¸é ¹«½Ã
+    // ì´ë¯¸ ê°™ì€ í´ë¦½ì´ë©´ ë¬´ì‹œ
     if (currentClip && currentClip->clipName == clipName)
     {
         return;
@@ -115,15 +117,15 @@ void Animator::SetCurrentAnimClip(const std::wstring& clipName)
     {
         currentClip = animClips.at(clipName);
 
-        // ±âÁ¸ frameTime ÃÊ±âÈ­ (ÀÌÁ¦ normalizedTime ±â¹İÀ¸·Î º¯°æµÇ¹Ç·Î Å« ÀÇ¹Ì ¾øÀ½)
+        // ê¸°ì¡´ frameTime ì´ˆê¸°í™” (ì´ì œ normalizedTime ê¸°ë°˜ìœ¼ë¡œ ë³€ê²½ë˜ë¯€ë¡œ í° ì˜ë¯¸ ì—†ìŒ)
         frameTime = 0.0f;
         normalizedTime = 0.0f;
         bFinished = false;
-        playbackSpeed = 1.0f;    // ±âº» Á¤¹æÇâ 1¹è¼Ó
+        playbackSpeed = 1.0f;    // ê¸°ë³¸ ì •ë°©í–¥ 1ë°°ì†
 
         if (currentClip->bReversed)
         {
-            // ¸¸¾à Å¬¸³ ÀÚÃ¼°¡ bReversed=trueÀÎ °æ¿ì ¿ª¹æÇâ ±âº» ½ÃÀÛ
+            // ë§Œì•½ í´ë¦½ ìì²´ê°€ bReversed=trueì¸ ê²½ìš° ì—­ë°©í–¥ ê¸°ë³¸ ì‹œì‘
             normalizedTime = 1.0f;
             playbackSpeed = -1.0f;
             currentFrameIndex = currentClip->frameCount - 1;
@@ -141,16 +143,16 @@ void Animator::SetCurrentAnimClip(const std::wstring& clipName)
     }
 }
 
-// ¢º »õ·Î Ãß°¡: Àç»ı ¼Óµµ¸¦ ¼³Á¤
+// â–¶ ìƒˆë¡œ ì¶”ê°€: ì¬ìƒ ì†ë„ë¥¼ ì„¤ì •
 void Animator::SetPlaybackSpeed(float speed)
 {
     playbackSpeed = speed;
 }
 
-// ¢º »õ·Î Ãß°¡: normalizedTime ¼³Á¤
+// â–¶ ìƒˆë¡œ ì¶”ê°€: normalizedTime ì„¤ì •
 void Animator::SetNormalizedTime(float t)
 {
-    // ¢º ¼öµ¿ Å¬·¥ÇÁ·Î 0.0f ~ 1.0f ¹üÀ§ À¯Áö
+    // â–¶ ìˆ˜ë™ í´ë¨í”„ë¡œ 0.0f ~ 1.0f ë²”ìœ„ ìœ ì§€
     if (t < 0.0f)
     {
         normalizedTime = 0.0f;
@@ -183,7 +185,7 @@ float Animator::GetNormalizedTime() const
     return normalizedTime;
 }
 
-// ¢º »õ·Î Ãß°¡: Àç»ı ¼Óµµ¿¡ µû¶ó ³¡/Ã³À½¿¡ µµ´ŞÇß´ÂÁö È®ÀÎ
+// â–¶ ìƒˆë¡œ ì¶”ê°€: ì¬ìƒ ì†ë„ì— ë”°ë¼ ë/ì²˜ìŒì— ë„ë‹¬í–ˆëŠ”ì§€ í™•ì¸
 bool Animator::IsAnimationFinished() const
 {
     if (!currentClip)
@@ -200,6 +202,6 @@ bool Animator::IsAnimationFinished() const
         return (normalizedTime <= 0.0f);
     }
 
-    // playbackSpeed == 0.0f ¡æ ÀÌ¹Ì Á¤ÁöµÈ »óÅÂ¶ó¸é bFinished °ªÀ» ¸®ÅÏ
+    // playbackSpeed == 0.0f â†’ ì´ë¯¸ ì •ì§€ëœ ìƒíƒœë¼ë©´ bFinished ê°’ì„ ë¦¬í„´
     return bFinished;
 }
