@@ -1,4 +1,5 @@
 #pragma once
+#include "Component.h"
 
 class PlayerMove : public Component
 {
@@ -11,37 +12,37 @@ public:
     virtual void Render() override;
 
 public:
-    // Ãæµ¹(¶¥ Á¢ÃË) ½Ã ¿ÜºÎ¿¡¼­ ¼³Á¤ÇÒ ¼ö ÀÖµµ·Ï
+    // ì¶©ëŒ(ë•… ì ‘ì´‰) ì‹œ ì™¸ë¶€ì—ì„œ ì„¤ì •í•  ìˆ˜ ìˆë„ë¡
     void SetCollision(bool col) { isCollision = col; }
     bool IsCollision() const { return isCollision; }
 
 public:
-    // ÇÃ·¹ÀÌ¾îÀÇ ÀÌµ¿ °ü·Ã °ªµéÀ» ¿ÜºÎ¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï
+    // í”Œë ˆì´ì–´ì˜ ì´ë™ ê´€ë ¨ ê°’ë“¤ì„ ì™¸ë¶€ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìˆë„ë¡
     bool GetRight() const { return isRight; }
     float GetSpeed() const { return currentSpeed; }
     bool IsJumping() const { return isJump; }
 
 public:
-    // Land() È£Ãâ ½Ã, ¶¥¿¡ ´ê¾ÒÀ» ¶§ »óÅÂ ¸®¼Â
+    // Land() í˜¸ì¶œ ì‹œ, ë•…ì— ë‹¿ì•˜ì„ ë•Œ ìƒíƒœ ë¦¬ì…‹
     void Land();
 
 private:
-    float speed;          // ±âº» ÀÌµ¿ ¼Óµµ
-    float currentSpeed;   // ÇöÀç ¼Óµµ (»óÅÂ¿¡ µû¶ó º¯µ¿)
-    float gravity;        // ÇöÀç Áß·Â°ª
-    float originGravity;  // ÃÊ±â Áß·Â°ª
-    float jumpVelocity;   // Á¡ÇÁ ½Ã ÃÊ±â ¼Óµµ
+    float speed;          // ê¸°ë³¸ ì´ë™ ì†ë„
+    float currentSpeed;   // í˜„ì¬ ì†ë„ (ìƒíƒœì— ë”°ë¼ ë³€ë™)
+    float gravity;        // í˜„ì¬ ì¤‘ë ¥ê°’
+    float originGravity;  // ì´ˆê¸° ì¤‘ë ¥ê°’
+    float jumpVelocity;   // ì í”„ ì‹œ ì´ˆê¸° ì†ë„
 
-    bool isJump;          // Á¡ÇÁ Áß ¿©ºÎ
-    bool isBetween;       // Á¡ÇÁ ÃÖ°íÁ¡ »çÀÌ »óÅÂ
-    bool isFall;          // ³«ÇÏ Áß ¿©ºÎ
-    bool isCrouch;        // ¼÷ÀÌ±â »óÅÂ ¿©ºÎ
-    bool rightMove;       // ÀÌµ¿ ¹æÇâ ¿©ºÎ (true: ¿À¸¥ÂÊ)
-    bool isRight;         // ¹Ù¶óº¸´Â ¹æÇâ (true: ¿À¸¥ÂÊ)
-    bool isAtking;        // °ø°İ Áß ¿©ºÎ (»ç¿ë ½Ã)
-    bool isRolling;       // ±¸¸£´Â »óÅÂ ¿©ºÎ (»ç¿ëÇÏÁö ¾Ê´Â´Ù¸é false)
-    bool isCollision;     // ¶¥°ú Ãæµ¹(Á¢ÃË) ¿©ºÎ
+    bool isJump;          // ì í”„ ì¤‘ ì—¬ë¶€
+    bool isBetween;       // ì í”„ ìµœê³ ì  ì‚¬ì´ ìƒíƒœ
+    bool isFall;          // ë‚™í•˜ ì¤‘ ì—¬ë¶€
+    bool isCrouch;        // ìˆ™ì´ê¸° ìƒíƒœ ì—¬ë¶€
+    bool rightMove;       // ì´ë™ ë°©í–¥ ì—¬ë¶€ (true: ì˜¤ë¥¸ìª½)
+    bool isRight;         // ë°”ë¼ë³´ëŠ” ë°©í–¥ (true: ì˜¤ë¥¸ìª½)
+    bool isAtking;        // ê³µê²© ì¤‘ ì—¬ë¶€ (ì‚¬ìš© ì‹œ)
+    bool isRolling;       // êµ¬ë¥´ëŠ” ìƒíƒœ ì—¬ë¶€ (ì‚¬ìš©í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´ false)
+    bool isCollision;     // ë•…ê³¼ ì¶©ëŒ(ì ‘ì´‰) ì—¬ë¶€
 
-    // Ãæµ¹ ´ë»ó(¹Ù´Ú µî)À» ¼³Á¤ÇÒ ¼ö ÀÖ´Ù¸é Ãß°¡
+    // ì¶©ëŒ ëŒ€ìƒ(ë°”ë‹¥ ë“±)ì„ ì„¤ì •í•  ìˆ˜ ìˆë‹¤ë©´ ì¶”ê°€
     shared_ptr<Object> overObject;
 };
