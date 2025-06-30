@@ -251,9 +251,6 @@
     <ClInclude Include="Renders\RenderResources\Texture2D.h">
       <Filter>Renders\RenderResources</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\targetver.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="Objects\TextureObject\TextureRect.h">
       <Filter>Objects\TextureObject</Filter>
     </ClInclude>
@@ -353,6 +350,18 @@
     <ClInclude Include="Structs\BoxEdge.h">
       <Filter>Structs</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Entity.h">
+      <Filter>Components\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\EntityManager.h">
+      <Filter>Managers\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\ISystem.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\ServiceLocator.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -438,6 +447,12 @@
     </Filter>
     <Filter Include="Renders\RenderResources">
       <UniqueIdentifier>{eaf8ef12-4fad-4588-9efd-fe7254d4f950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\ECS">
+      <UniqueIdentifier>{957011fb-d167-4c69-a337-d60b1ab86543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\ECS">
+      <UniqueIdentifier>{5f93f92a-9349-48c3-879d-ac3d174144db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

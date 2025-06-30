@@ -186,6 +186,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Entity.h" />
+    <ClInclude Include="Managers\EntityManager.h" />
+    <ClInclude Include="Interfaces\ISystem.h" />
     <ClInclude Include="Structs\BoxEdge.h" />
     <ClInclude Include="Enums\AxeState.h" />
     <ClInclude Include="Components\AnimationMove.h" />
@@ -218,7 +221,7 @@
     <ClInclude Include="Renders\RenderResources\Texture2D.h" />
     <ClInclude Include="Managers\ResourcesManager.h" />
     <ClInclude Include="Objects\TextureObject\TextureRect.h" />
-    <ClInclude Include="Utilities\targetver.h" />
+    <ClInclude Include="Utilities\ServiceLocator.h" />
     <ClInclude Include="Systems\Keyboard.h" />
     <ClInclude Include="Systems\Mouse.h" />
     <ClInclude Include="Utilities\FileStream.h" />
