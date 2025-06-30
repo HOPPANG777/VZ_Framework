@@ -318,10 +318,6 @@
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="Comment.txt" />
-    <Text Include="BackupCode.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
