@@ -368,15 +368,6 @@
     <ClInclude Include="Platform\Platform_Windows.h">
       <Filter>Platform\Platform_Windows</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\targetver.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Platform_Base.h">
-      <Filter>Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities\ServiceRegister.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
