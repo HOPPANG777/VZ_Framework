@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include "Collider.h"
 
 class CircleCollider : public Collider

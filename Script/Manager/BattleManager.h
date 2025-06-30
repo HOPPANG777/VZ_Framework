@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include <memory>
 
 #include "Enum/BattleState.h"
 #include "Object/UnitBase.h"
@@ -8,35 +10,35 @@ class BattleManager
 	DECLARE_SINGLETON(BattleManager);
 
 public:
-    // ÃÊ±âÈ­ ¹× Àç¼³Á¤
+    // ì´ˆê¸°í™” ë° ì¬ì„¤ì •
     void Initialize();
     void Reset();
 
-    // ¸Å ÇÁ·¹ÀÓ È£ÃâµÇ´Â ¾÷µ¥ÀÌÆ® ÇÔ¼ö
+    // ë§¤ í”„ë ˆì„ í˜¸ì¶œë˜ëŠ” ì—…ë°ì´íŠ¸ í•¨ìˆ˜
     void Update();
 
-    // ÇÃ·¹ÀÌ¾îÀÇ ¸í·É ÀÔ·ÂÀ» ¿ÜºÎ¿¡¼­ ¹ŞÀ» ¼ö ÀÖ´Â ÇÔ¼ö (¿¹: UI ¹öÆ°¿¡¼­ È£Ãâ)
+    // í”Œë ˆì´ì–´ì˜ ëª…ë ¹ ì…ë ¥ì„ ì™¸ë¶€ì—ì„œ ë°›ì„ ìˆ˜ ìˆëŠ” í•¨ìˆ˜ (ì˜ˆ: UI ë²„íŠ¼ì—ì„œ í˜¸ì¶œ)
     void OnPlayerCommandSelected(int commandIndex);
 
-    // ÇöÀç ÀüÅõ »óÅÂ ¹İÈ¯
+    // í˜„ì¬ ì „íˆ¬ ìƒíƒœ ë°˜í™˜
     BattleState GetCurrentState() const { return currentState; }
 
 private:
-    // »óÅÂº° Ã³¸® ÇÔ¼ö
+    // ìƒíƒœë³„ ì²˜ë¦¬ í•¨ìˆ˜
     void ProcessPlayerCommand();
     void ProcessPlayerAction();
     void ProcessEnemyAction();
     void EndTurn();
     void CheckBattleOutcome();
 
-    // ÀüÅõ »óÅÂ¸¦ ÀúÀåÇÏ´Â º¯¼ö
+    // ì „íˆ¬ ìƒíƒœë¥¼ ì €ì¥í•˜ëŠ” ë³€ìˆ˜
     BattleState currentState;
 
-    // ¿¹½Ã: ÀüÅõ¿¡ Âü¿©ÇÏ´Â À¯´Ö ¸®½ºÆ®
+    // ì˜ˆì‹œ: ì „íˆ¬ì— ì°¸ì—¬í•˜ëŠ” ìœ ë‹› ë¦¬ìŠ¤íŠ¸
     std::vector<std::shared_ptr<UnitBase>> playerUnits;
     std::vector<std::shared_ptr<UnitBase>> enemyUnits;
 
-    // Ãß°¡: ÀüÅõ UI, ¸í·É ¼±ÅÃ ÀÎµ¦½º µî ÇÊ¿äÇÑ º¯¼öµé
+    // ì¶”ê°€: ì „íˆ¬ UI, ëª…ë ¹ ì„ íƒ ì¸ë±ìŠ¤ ë“± í•„ìš”í•œ ë³€ìˆ˜ë“¤
 
 };
 
