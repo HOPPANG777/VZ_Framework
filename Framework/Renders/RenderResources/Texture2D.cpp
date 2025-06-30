@@ -1,17 +1,18 @@
 #include "Framework.h"
 #include "Texture2D.h"
+#include "Managers/Texture2DManager.h"
 
-// Texture2D »ı¼ºÀÚ
+// Texture2D ìƒì„±ì
 Texture2D::Texture2D(const wstring& filePath)
     : filePath(filePath)
 {
     TEXTURE2D->Load(this);
 }
 
-// ReadPixel ¸â¹ö ÇÔ¼ö
+// ReadPixel ë©¤ë²„ í•¨ìˆ˜
 void Texture2D::ReadPixel(vector<Color>* pixels)
 {
-    // srv¿¡¼­ ½ÇÁ¦ Texture2D COM Æ÷ÀÎÅÍ °¡Á®¿À±â
+    // srvì—ì„œ ì‹¤ì œ Texture2D COM í¬ì¸í„° ê°€ì ¸ì˜¤ê¸°
     ComPtr<ID3D11Resource> resource;
     srv->GetResource(&resource);
 
@@ -21,14 +22,14 @@ void Texture2D::ReadPixel(vector<Color>* pixels)
     ReadPixel(texture2D, pixels);
 }
 
-// ReadPixel Á¤Àû ÇÔ¼ö
+// ReadPixel ì •ì  í•¨ìˆ˜
 void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels)
 {
-    // ¿øº» ÅØ½ºÃ³ Á¤º¸
+    // ì›ë³¸ í…ìŠ¤ì²˜ ì •ë³´
     D3D11_TEXTURE2D_DESC srvDesc;
     texture->GetDesc(&srvDesc);
 
-    // º¹»çº» desc ¼³Á¤
+    // ë³µì‚¬ë³¸ desc ì„¤ì •
     D3D11_TEXTURE2D_DESC destDesc = {};
     destDesc.Usage = D3D11_USAGE_STAGING;
     destDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
@@ -44,28 +45,28 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
     HRESULT hr = DEVICE->CreateTexture2D(&destDesc, nullptr, &destTex);
     CHECK(hr);
 
-    // ¿øº» texture¸¦ º¹»çº» destTex¿¡ ·Îµå
+    // ì›ë³¸ textureë¥¼ ë³µì‚¬ë³¸ destTexì— ë¡œë“œ
     hr = D3DX11LoadTextureFromTexture(DC, texture.Get(), nullptr, destTex.Get());
     CHECK(hr);
 
-    // ÇÈ¼¿ µ¥ÀÌÅÍ ´ãÀ» ¸Ş¸ğ¸®(Width * Height)
+    // í”½ì…€ ë°ì´í„° ë‹´ì„ ë©”ëª¨ë¦¬(Width * Height)
     const size_t pixelCount = static_cast<size_t>(destDesc.Width) * static_cast<size_t>(destDesc.Height);
 
-    // unique_ptr·Î ¹è¿­ °ü¸®
+    // unique_ptrë¡œ ë°°ì—´ ê´€ë¦¬
     const unique_ptr<UINT[]>& colors = make_unique<UINT[]>(pixelCount);
 
-    // MapÀ» ÅëÇØ CPU·Î ÀĞ¾î¿Â´Ù
+    // Mapì„ í†µí•´ CPUë¡œ ì½ì–´ì˜¨ë‹¤
     D3D11_MAPPED_SUBRESOURCE subRe;
     DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
     {
-        // º¹»ç
+        // ë³µì‚¬
         memcpy(colors.get(), subRe.pData, sizeof(UINT) * pixelCount);
     }
     DC->Unmap(destTex.Get(), 0);
 
-    // OpenGL È£È¯¿ë(BGR ¡æ RGB ¼ø¼­ ±³Ã¼)
+    // OpenGL í˜¸í™˜ìš©(BGR â†’ RGB ìˆœì„œ êµì²´)
     {
-        // ÀÓ½Ã ¹öÆÛµé
+        // ì„ì‹œ ë²„í¼ë“¤
         const unique_ptr<UINT[]>& alpha = make_unique<UINT[]>(pixelCount);
         const unique_ptr<UINT[]>& red = make_unique<UINT[]>(pixelCount);
         const unique_ptr<UINT[]>& green = make_unique<UINT[]>(pixelCount);
@@ -78,14 +79,14 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
             green[i] = (colors[i] & 0x0000FF00);
             blue[i] = (colors[i] & 0x000000FF);
 
-            // R°ú B À§Ä¡ ±³Ã¼
-            red[i] = colors[i] >> 16;    // 16ºñÆ® ½¬ÇÁÆ® ¡æ R ÃßÃâ
-            blue[i] = colors[i] << 16;    // <<16 ¡æ B¸¦ »óÀ§ ºñÆ®·Î
+            // Rê³¼ B ìœ„ì¹˜ êµì²´
+            red[i] = colors[i] >> 16;    // 16ë¹„íŠ¸ ì‰¬í”„íŠ¸ â†’ R ì¶”ì¶œ
+            blue[i] = colors[i] << 16;    // <<16 â†’ Bë¥¼ ìƒìœ„ ë¹„íŠ¸ë¡œ
 
             colors[i] = alpha[i] | red[i] | green[i] | blue[i];
         }
 
-        // ÃÖÁ¾ ÇÈ¼¿À» °á°ú º¤ÅÍ¿¡ ÀúÀå
+        // ìµœì¢… í”½ì…€ì„ ê²°ê³¼ ë²¡í„°ì— ì €ì¥
         pixels->assign(colors.get(), colors.get() + pixelCount);
     }
 }
