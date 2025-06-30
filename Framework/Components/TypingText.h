@@ -1,4 +1,5 @@
 #pragma once
+#include "Texts.h"
 
 class TypingText : public Texts
 {
@@ -9,7 +10,7 @@ public:
 
     }
 
-    // RenderText: Å¸ÀÌÇÎ È¿°ú·Î Ãâ·ÂµÈ ÅØ½ºÆ®¸¦ ·»´õ¸µ (±âÁ¸ Texts::RenderText¸¦ ³»ºÎÀûÀ¸·Î È£Ãâ)
+    // RenderText: íƒ€ì´í•‘ íš¨ê³¼ë¡œ ì¶œë ¥ëœ í…ìŠ¤íŠ¸ë¥¼ ë Œë”ë§ (ê¸°ì¡´ Texts::RenderTextë¥¼ ë‚´ë¶€ì ìœ¼ë¡œ í˜¸ì¶œ)
     virtual void RenderText
     (
         const wstring& text,
@@ -27,16 +28,16 @@ public:
     virtual void Render() override;
 
 public:
-    // ÅØ½ºÆ® Ãâ·ÂÀÌ ¸ğµÎ ¿Ï·áµÇ¾ú´ÂÁö ¿©ºÎ ¹İÈ¯
+    // í…ìŠ¤íŠ¸ ì¶œë ¥ì´ ëª¨ë‘ ì™„ë£Œë˜ì—ˆëŠ”ì§€ ì—¬ë¶€ ë°˜í™˜
     bool IsComplete() const { return complete; }
-    // ÅØ½ºÆ® Ãâ·Â ½ºÅµ
+    // í…ìŠ¤íŠ¸ ì¶œë ¥ ìŠ¤í‚µ
 	void SkipToEnd() { visibleCharacters = fullText.size(); complete = true; }
 
 private:
-    float typingSpeed;        // ÇÑ ±ÛÀÚ Ãâ·Â¿¡ °É¸®´Â ½Ã°£ (ÃÊ)
-    float elapsedTime;        // ´©Àû ½Ã°£
-    size_t visibleCharacters; // ÇöÀç±îÁö Ãâ·ÂµÈ ¹®ÀÚ ¼ö
-    wstring fullText;         // ÀüÃ¼ ÅØ½ºÆ® ³»¿ë
-    bool complete = false;    // ÅØ½ºÆ® Ãâ·Â ¿Ï·á ¿©ºÎ
+    float typingSpeed;        // í•œ ê¸€ì ì¶œë ¥ì— ê±¸ë¦¬ëŠ” ì‹œê°„ (ì´ˆ)
+    float elapsedTime;        // ëˆ„ì  ì‹œê°„
+    size_t visibleCharacters; // í˜„ì¬ê¹Œì§€ ì¶œë ¥ëœ ë¬¸ì ìˆ˜
+    wstring fullText;         // ì „ì²´ í…ìŠ¤íŠ¸ ë‚´ìš©
+    bool complete = false;    // í…ìŠ¤íŠ¸ ì¶œë ¥ ì™„ë£Œ ì—¬ë¶€
 
 };

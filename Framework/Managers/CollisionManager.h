@@ -1,4 +1,6 @@
 #pragma once
+#include "../Components/Collider.h"
+#include "../Objects/BaseObject/Object.h"
 
 class CollisionManager
 {
@@ -13,11 +15,11 @@ public:
 
 public:
     bool GetColliderDebug() const { return isColliderDebug; }
-    // Ãß°¡: ÀÔ·ÂµÈ ¿ÀºêÁ§Æ®¿Í Ãæµ¹ ÁßÀÎ ¸ğµç ¿ÀºêÁ§Æ®¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+    // ì¶”ê°€: ì…ë ¥ëœ ì˜¤ë¸Œì íŠ¸ì™€ ì¶©ëŒ ì¤‘ì¸ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
     vector<Object*> GetCollidingObjects(Object* obj) const;
 
 private:
-    vector<shared_ptr<Collider>> colliders; // °ü¸®ÇÏ´Â Äİ¶óÀÌ´õ ¸®½ºÆ®
+    vector<shared_ptr<Collider>> colliders; // ê´€ë¦¬í•˜ëŠ” ì½œë¼ì´ë” ë¦¬ìŠ¤íŠ¸
     bool isColliderDebug = false;
 
 };
