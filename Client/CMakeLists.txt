@@ -17,6 +17,14 @@ set_target_properties(Client PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
 
+if(MSVC)
+    set_target_properties(Client PROPERTIES
+        VS_DEBUGGER_WORKING_DIRECTORY
+            "${CMAKE_SOURCE_DIR}/_Build/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>"
+    )
+endif()
+
+
 if(WIN32)
     if(CMAKE_SIZEOF_VOID_P EQUAL 8)
         set(FMOD_DLL ${CMAKE_SOURCE_DIR}/_Data/_Libraries/FMOD/lib/x64/fmod.dll)
