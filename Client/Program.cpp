@@ -4,8 +4,8 @@
 
 #include "Systems/Window.h"
 
-// $(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\  //$(ProjectName)\ // ÀÌ°É Client ÇÁ·ÎÁ§Æ® ¼³Á¤ µğ¹ö±ë¿¡ ÀÔ·ÂÇÏ½Ã¿À
-// call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)" $(PlatformTarget) // ÀÌ°É Client ÇÁ·ÎÁ§Æ® ¼³Á¤ ºôµå ÈÄ ÀÌº¥Æ®¿¡ ÀÔ·ÂÇÏ½Ã¿À
+Platform::WindowHandle gHandle;
+// call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)" $(PlatformTarget) // ì´ê±¸ Client í”„ë¡œì íŠ¸ ì„¤ì • ë¹Œë“œ í›„ ì´ë²¤íŠ¸ì— ì…ë ¥í•˜ì‹œì˜¤
 
 float gWinWidth = WIN_DEFAULT_WIDTH;
 float gWinHeight = WIN_DEFAULT_HEIGHT;
@@ -17,13 +17,13 @@ Program::~Program() {}
 
 void Program::Awake() 
 {
-	//´ÙÀÌ·ºÆ® ½Ì±ÛÅæ ¼¼ÆÃ
+	//ë‹¤ì´ë ‰íŠ¸ ì‹±ê¸€í†¤ ì„¸íŒ…
 	RenderStates::Init();
 
-	//Ä«¸Ş¶ó ¼¼ÆÃ
+	//ì¹´ë©”ë¼ ì„¸íŒ…
 	CAMERA->Init();
 
-	//Scene ¼¼ÆÃ
+	//Scene ì„¸íŒ…
 	{
 		SCENE->AddScene("LoadingScene", make_shared<Scene_00>());
 		SCENE->AddScene("TitleScene", make_shared<Scene_01>());
@@ -97,14 +97,14 @@ void Program::ImGUI()
 
 int APIENTRY wWinMain
 (
-	_In_ HINSTANCE hInstance, // À©µµ¿ì ½ÇÇàÀ» À§ÇÑ °íÀ¯°ª
+	_In_ HINSTANCE hInstance, // ìœˆë„ìš° ì‹¤í–‰ì„ ìœ„í•œ ê³ ìœ ê°’
 	_In_opt_ HINSTANCE hPrevInstance,	
-	_In_ LPWSTR    lpCmdLine, // Ä¿¸Çµå Àü´ŞÀÎÀÚ
+	_In_ LPWSTR    lpCmdLine, // ì»¤ë§¨ë“œ ì „ë‹¬ì¸ì
 	_In_ int       nCmdShow
 )
 {
 	WinDesc desc;
-	desc.appName = L"NordicLumberjack";	// Ã¢ ÀÌ¸§
+	desc.appName = L"NordicLumberjack";	// ì°½ ì´ë¦„
 	desc.instance = hInstance;	
 	desc.handle = nullptr;
 	desc.width = gWinWidth;

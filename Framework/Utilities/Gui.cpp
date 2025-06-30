@@ -1,9 +1,10 @@
 #include "Framework.h"
+#include "Platform/Platform.h"
 #include "Gui.h"
 
 LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// ImGui가 메시지를 처리한 경우
+	ImGui_ImplWin32_Init(static_cast<HWND>(gHandle));
 	return ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam);
 }
 
