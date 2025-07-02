@@ -60,6 +60,7 @@ bool Button::IsMouseOver()
 {
 	// Button이 속한 Object에 RectTransform이 있다고 가정
 	std::shared_ptr<RectTransform> rectTrans = GetOwner()->GetComponent<RectTransform>("RectTransform");
+	rectTrans->SetAnchorAndOffset({ 0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, 0.0f }, { 0.0f, 0.0f });
 	if (!rectTrans) return false;
 
 	// RectTransform에서 픽셀 좌표 RECT 가져오기
