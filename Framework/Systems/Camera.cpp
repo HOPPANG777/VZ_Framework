@@ -14,12 +14,23 @@ void Camera::Init()
 
 	VPBuffer->SetView(view);
 	VPBuffer->SetProjection(proj);
+
+    prevWidth = gWinWidth;
+    prevHeight = gWinHeight;
 }
 
 void Camera::Update()
 {
 	Move();
 	UpdateView();
+
+    if (prevWidth != gWinWidth || prevHeight != gWinHeight)
+    {
+        proj = XMMatrixOrthographicOffCenterLH(0, gWinWidth, 0, gWinHeight, 0, 1);
+        VPBuffer->SetProjection(proj);
+        prevWidth = gWinWidth;
+        prevHeight = gWinHeight;
+    }
 }
 
 void Camera::Render()

@@ -51,7 +51,7 @@ void Scene_01::Update()
 	{
 		SceneManager::Get()->LoadScene("GeometryScene");
 	}
-
+	std::cout << Values::CenterX << std::endl;
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 	if (startButton != nullptr) startButton->Update();
 }

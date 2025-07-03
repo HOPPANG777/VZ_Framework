@@ -48,5 +48,8 @@ private:
 
 	float accelerationTime = 0.0f;
 	float currentSpeed = 0.0f; 
+
+	float prevWidth = 0.0f;
+	float prevHeight = 0.0f;
 };
 
