@@ -22,9 +22,6 @@
     <ResourceCompile Include="Tools.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tools.aps" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="Tools.ico" />
     <Image Include="SMALLTools.ico" />
   </ItemGroup>

@@ -232,9 +232,6 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
     <ResourceCompile Include="Tools.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tools.aps" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="SMALLTools.ico" />
     <Image Include="Tools.ico" />
   </ItemGroup>
