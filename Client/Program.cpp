@@ -89,9 +89,6 @@ int APIENTRY wWinMain(
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
 {
-    // 렌더러 생성 (DirectX11)
-    RendererManager::Create(RenderAPI::DirectX11);
-
     WinDesc desc;
     desc.appName = L"NordicLumberjack";
     desc.instance = hInstance;
@@ -101,6 +98,9 @@ int APIENTRY wWinMain(
     desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
 
     auto window = std::make_unique<Window>(desc);
+
+    // 렌더러 생성 (DirectX11)
+    RendererManager::Create(RenderAPI::DirectX11);
     WPARAM wParam = window->Run();
 
     return static_cast<int>(wParam);
