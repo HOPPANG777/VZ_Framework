@@ -8,38 +8,35 @@
 #include "Time.h"
 #include "Utilities/Gui.h"
 #include "Managers/CollisionManager.h"
+#include "Interfaces/IWindow.h"
 
-class Window
+// Windows í”Œë«í¼ ì „ìš© ì°½ êµ¬í˜„ì²´ì…ë‹ˆë‹¤.
+class Window : public IWindow
 {
 public:
-	Window(const WinDesc& initDesc);
-	~Window();
+    Window(const WinDesc& initDesc);   // ìƒì„±ì
+    ~Window();                         // ì†Œë©¸ì
 
-	ATOM MyRegisterClass(const WinDesc& desc);
+    ATOM MyRegisterClass(const WinDesc& desc); // ìœˆë„ìš° í´ë˜ìŠ¤ ë“±ë¡
 
-	WPARAM Run();
+    WPARAM Run() override;                     // ë©”ì‹œì§€ ë£¨í”„ ì‹¤í–‰
 
-	void MainRender();
+    void MainRender();                         // í”„ë ˆì„ ë Œë”ë§
 
-	void SetBorderlessWindow();
+    void SetBorderlessWindow();                // ì „ì²´ í™”ë©´ ë¬´í…Œë‘ë¦¬ ì°½ìœ¼ë¡œ ì „í™˜
 
-	//HICON LoadMyIcon();
+    //HICON LoadMyIcon();
 
 private:
-	static LRESULT CALLBACK WndProc
-	(
-		//Window handle
-		HWND handle,
-		//Message Queue¿¡¼­ ¹ŞÀº ¸Ş½ÃÁö
-		UINT message,
-		//¿öµå ÆÄ¶ó¹ÌÅÍ(Á¤¼ö°ª)
-		WPARAM wParam,
-		//·Õ ÆÄ¶ó¹ÌÅÍ(Æ÷ÀÎÅÍ)
-		LPARAM lParam
-	);
+    static LRESULT CALLBACK WndProc
+    (
+        HWND handle,
+        UINT message,
+        WPARAM wParam,
+        LPARAM lParam
+    );
 
-	WinDesc desc;
+    WinDesc desc;
 
-	static std::unique_ptr<class Program> program;
-
+    static std::unique_ptr<class Program> program;
 };
