@@ -7,12 +7,6 @@
     <ClInclude Include="Editor\EditorList.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\MapEditor.h">
-      <Filter>Editor\MapEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\\MapEditorPanel.h">
-      <Filter>Editor\\MapEditor</Filter>
-    </ClInclude>
     <ClInclude Include="Editor\AnimationEditorPanel.h">
       <Filter>Editor\AnimationEditor</Filter>
     </ClInclude>
@@ -28,13 +22,16 @@
     <ClInclude Include="Editor\IEditorPanel.h">
       <Filter>Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Editor\MapEditorPanel.h">
+      <Filter>Editor\MapEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPipeline\AssetPipeline.h">
+      <Filter>AssetPipeline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Editor\MapEditor.cpp">
-      <Filter>Editor\MapEditor</Filter>
-    </ClCompile>
     <ClCompile Include="Editor\MapEditorPanel.cpp">
       <Filter>Editor\MapEditor</Filter>
     </ClCompile>
@@ -49,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Editor\SceneEditorPanel.cpp">
       <Filter>Editor\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetPipeline\AssetPipeline.cpp">
+      <Filter>AssetPipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +76,9 @@
     </Filter>
     <Filter Include="Editor\MapEditor">
       <UniqueIdentifier>{10f54a82-1b08-4192-a145-e9d51e323303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AssetPipeline">
+      <UniqueIdentifier>{8267958a-ea68-4fcb-802b-d6e0bcbdab1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
