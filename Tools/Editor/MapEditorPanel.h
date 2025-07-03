@@ -7,6 +7,7 @@
 class MapEditorPanel : public IEditorPanel
 {
 public:
+    ~MapEditorPanel();
     void Init() override;
     void Update() override;
     void Render() override;
@@ -29,6 +30,8 @@ private:
 
     ImVec2 mapOrigin = ImVec2(400, 50);
 
+    // 맵 편집 시 사용될 카메라
+    Camera* previewCamera = nullptr;
 private:
     void CreateDefaultMap();
 };

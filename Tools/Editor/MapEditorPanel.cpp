@@ -3,13 +3,26 @@
 #include "Managers/TileSetManager.h"
 #include "Utilities/String.h"
 
+MapEditorPanel::~MapEditorPanel()
+{
+    if (tmap)
+        tmap.reset();
+}
+
 void MapEditorPanel::Init()
 {
     // 초기화 시 특별한 동작은 필요하지 않음
+        // 맵 편집에 사용할 카메라 초기화
+    previewCamera = Camera::Get();
+    previewCamera->Init();
 }
 
 void MapEditorPanel::Update()
 {
+    // 카메라 이동 및 기타 업데이트 처리
+    if (previewCamera)
+        previewCamera->Update();
+
     // ImGui에서 마우스를 사용 중이라면 편집 로직을 건너뜁니다
     if (ImGui::GetIO().WantCaptureMouse)
         return;
@@ -20,6 +33,9 @@ void MapEditorPanel::Update()
 
 void MapEditorPanel::Render()
 {
+    if (previewCamera)
+        previewCamera->Render();
+
     if (tmap)
         tmap->Render();
 }
