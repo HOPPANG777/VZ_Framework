@@ -1,20 +1,22 @@
 #pragma once
 
 /*
-DirectX 11
-DirectX June 2010 SDK
-software development kit
+DirectX 11 전용 구현체입니다.
+다른 그래픽 API를 사용하려면 IRenderer 인터페이스를 상속받아 구현합니다.
 */
+#include "Interfaces/IRenderer.h"
 class D3DEnumAdapterInfo;
 class D3DEnumOutputInfo;
 
-class Graphics
+class Graphics : public IRenderer
 {
-	DECLARE_SINGLETON(Graphics);
+        DECLARE_SINGLETON(Graphics);
 
 public:
-	void Init();
-	void CreateBackBuffer();
+        Graphics();                                    // 생성자
+        ~Graphics() override;                          // 소멸자
+        void Init() override;                            // 렌더러 초기화
+        void CreateBackBuffer();                        // 백 버퍼 생성
 
 	ID3D11Device* GetDevice() const { return device.Get(); }
 	ID3D11DeviceContext* GetDC() const { return deviceContext.Get(); }
@@ -22,14 +24,14 @@ public:
 	ID2D1DeviceContext* GetD2DC() const { return d2DeviceContext.Get(); }
 	IDWriteFactory* GetWrite() const { return writeFactory.Get(); }
 
-	void Begin();
-	void End();
+        void Begin() override;                          // 프레임 시작
+        void End() override;                            // 프레임 종료
 
 	void GUI();
 
-	void SetFullScreen(bool fullscreen);
+        void SetFullScreen(bool fullscreen) override;   // 전체 화면 설정
 
-	void SetResolution(UINT width, UINT height);
+        void SetResolution(UINT width, UINT height) override; // 해상도 변경
 
 	bool LoadCustomFont(const std::wstring& fontFilePath);
 

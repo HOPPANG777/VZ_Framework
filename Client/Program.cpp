@@ -3,117 +3,105 @@
 #include "Script/Scenes/SceneList.h"
 
 #include "Systems/Window.h"
-
-// $(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)\  //$(ProjectName)\ // ¿Ã∞… Client «¡∑Œ¡ß∆Æ º≥¡§ µπˆ±Îø° ¿‘∑¬«œΩ√ø¿
-// call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Configuration)" $(PlatformTarget) // ¿Ã∞… Client «¡∑Œ¡ß∆Æ º≥¡§ ∫ÙµÂ »ƒ ¿Ã∫•∆Æø° ¿‘∑¬«œΩ√ø¿
+#include "Managers/RendererManager.h"
+#include "Renders/RenderAPI.h"
 
 float gWinWidth = WIN_DEFAULT_WIDTH;
 float gWinHeight = WIN_DEFAULT_HEIGHT;
 HWND gHandle;
 
 Program::Program() {}
-
 Program::~Program() {}
 
-void Program::Awake() 
+void Program::Awake()
 {
-	//¥Ÿ¿Ã∑∫∆Æ ΩÃ±€≈Ê ºº∆√
-	RenderStates::Init();
+    RenderStates::Init();
+    Camera::Get()->Init();
 
-	//ƒ´∏ﬁ∂Û ºº∆√
-	Camera::Get()->Init();
+    // Í≤åÏûÑ Ïî¨ ÏÑ§Ï†ï
+    {
+        SceneManager::Get()->AddScene("LoadingScene", std::make_shared<Scene_00>());
+        SceneManager::Get()->AddScene("TitleScene", std::make_shared<Scene_01>());
+        SceneManager::Get()->AddScene("SplashScene", std::make_shared<Scene_02>());
+        SceneManager::Get()->AddScene("StartStage", std::make_shared<Scene_03>());
+        SceneManager::Get()->AddScene("Stage01", std::make_shared<Scene_04>());
+        SceneManager::Get()->AddScene("Stage02", std::make_shared<Scene_05>());
+        SceneManager::Get()->AddScene("Stage03", std::make_shared<Scene_06>());
+        SceneManager::Get()->AddScene("PuzzleStage", std::make_shared<Scene_07>());
 
-	//Scene ºº∆√
-	{
-		SceneManager::Get()->AddScene("LoadingScene", std::make_shared<Scene_00>());
-		SceneManager::Get()->AddScene("TitleScene", std::make_shared<Scene_01>());
-		SceneManager::Get()->AddScene("SplashScene", std::make_shared<Scene_02>());
-		SceneManager::Get()->AddScene("StartStage", std::make_shared<Scene_03>());
-		SceneManager::Get()->AddScene("Stage01", std::make_shared<Scene_04>());
-		SceneManager::Get()->AddScene("Stage02", std::make_shared<Scene_05>());
-		SceneManager::Get()->AddScene("Stage03", std::make_shared<Scene_06>());
-		SceneManager::Get()->AddScene("PuzzleStage", std::make_shared<Scene_07>());
-
-		SceneManager::Get()->SetSplashScene("SplashScene");
-
-		SceneManager::Get()->SetLoadingScene("LoadingScene");
-
-		SceneManager::Get()->StartGame("StartStage");
-		//SCENE->StartGame("Stage02");
-	}
+        SceneManager::Get()->SetSplashScene("SplashScene");
+        SceneManager::Get()->SetLoadingScene("LoadingScene");
+        SceneManager::Get()->StartGame("StartStage");
+    }
 }
 
 void Program::Start()
 {
-	SceneManager::Get()->Start();
+    SceneManager::Get()->Start();
 }
 
 void Program::Update()
 {
-	Camera::Get()->Update();
+    Camera::Get()->Update();
+    SceneManager::Get()->Update();
 
-	SceneManager::Get()->Update();
+    if (Input::Get()->KeyDown(VK_F2))
+    {
+        CollisionManager::Get()->RenderDebug();
+    }
 
-	if (Input::Get()->KeyDown(VK_F2))
-	{
-		CollisionManager::Get()->RenderDebug();
-	}
+    if (Input::Get()->KeyDown(VK_F3))
+    {
+        if (!isFullScreen)
+            Graphics::Get()->SetFullScreen(isFullScreen = true);
+        else
+            Graphics::Get()->SetFullScreen(isFullScreen = false);
+    }
 
-	if (Input::Get()->KeyDown(VK_F3))
-	{
-		if (isFullScreen == false) Graphics::Get()->SetFullScreen(isFullScreen = true);
-		else if (isFullScreen == true) Graphics::Get()->SetFullScreen(isFullScreen = false);
-	}
-
-	if (Input::Get()->KeyDown(VK_F5))
-	{
-		if (Time::Get()->GetTimeScale() != 0)
-		{
-			Time::Get()->SetTimeScale(0);
-		}
-		else
-		{
-			Time::Get()->SetTimeScale(1);
-		}
-	}
+    if (Input::Get()->KeyDown(VK_F5))
+    {
+        if (Time::Get()->GetTimeScale() != 0)
+            Time::Get()->SetTimeScale(0);
+        else
+            Time::Get()->SetTimeScale(1);
+    }
 }
 
 void Program::Render()
 {
-	Camera::Get()->Render();
-
-	SceneManager::Get()->Render();
+    Camera::Get()->Render();
+    SceneManager::Get()->Render();
 }
 
-void Program::PostRender() 
+void Program::PostRender()
 {
-	SceneManager::Get()->PostRender();
+    SceneManager::Get()->PostRender();
 }
 
 void Program::ImGUI()
 {
-	SceneManager::Get()->ImGUI();
+    SceneManager::Get()->ImGUI();
 }
 
-int APIENTRY wWinMain
-(
-	_In_ HINSTANCE hInstance, // ¿©µµøÏ Ω««‡¿ª ¿ß«— ∞Ì¿Ø∞™
-	_In_opt_ HINSTANCE hPrevInstance,	
-	_In_ LPWSTR    lpCmdLine, // ƒø∏«µÂ ¿¸¥ﬁ¿Œ¿⁄
-	_In_ int       nCmdShow
-)
+int APIENTRY wWinMain(
+    _In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
-	WinDesc desc;
-	desc.appName = L"NordicLumberjack";	// √¢ ¿Ã∏ß
-	desc.instance = hInstance;	
-	desc.handle = nullptr;
-	desc.width = gWinWidth;
-	desc.height = gWinHeight;
-	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
+    // Î†åÎçîÎü¨ ÏÉùÏÑ± (DirectX11)
+    RendererManager::Create(RenderAPI::DirectX11);
 
-	auto window = std::make_unique<Window>(desc);
-	WPARAM wParam = window->Run();
+    WinDesc desc;
+    desc.appName = L"NordicLumberjack";
+    desc.instance = hInstance;
+    desc.handle = nullptr;
+    desc.width = gWinWidth;
+    desc.height = gWinHeight;
+    desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
 
-	return int(wParam);
+    auto window = std::make_unique<Window>(desc);
+    WPARAM wParam = window->Run();
+
+    return static_cast<int>(wParam);
 }
-

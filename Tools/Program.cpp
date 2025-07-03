@@ -3,82 +3,75 @@
 #include "Editor/EditorList.h"
 
 #include "Systems/Window.h"
+#include "Managers/RendererManager.h"
+#include "Renders/RenderAPI.h"
 
-// $(SolutionDir)_Build\$(Platform)\$(Configuration)\  //$(ProjectName)\ // ¿Ã∞… Client «¡∑Œ¡ß∆Æ º≥¡§ µπˆ±Îø° ¿‘∑¬«œΩ√ø¿
-// call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configuration)" $(Platform) // ¿Ã∞… Client «¡∑Œ¡ß∆Æ º≥¡§ ∫ÙµÂ »ƒ ¿Ã∫•∆Æø° ¿‘∑¬«œΩ√ø¿
-
+// Ïã§Ìñâ Ïãú ÏúàÎèÑÏö∞ ÌÅ¨Í∏∞ ÏÑ§Ï†ï
 float gWinWidth = WIN_DEFAULT_WIDTH;
 float gWinHeight = WIN_DEFAULT_HEIGHT;
 HWND gHandle;
 
 Program::Program() {}
-
 Program::~Program() {}
 
-void Program::Awake() 
+void Program::Awake()
 {
-	//¥Ÿ¿Ã∑∫∆Æ ΩÃ±€≈Ê ºº∆√
-	RenderStates::Init();
+    RenderStates::Init();
+    Camera::Get()->Init();
 
-	//ƒ´∏ﬁ∂Û ºº∆√
-	Camera::Get()->Init();
-
-	//Scene ºº∆√
-	{
-		SceneManager::Get()->AddScene("MapTools", std::make_shared<MapTools>());
-
-		SceneManager::Get()->LoadScene("MapTools");
-	}
+    // Ïî¨ ÏÑ§Ï†ï
+    {
+        SceneManager::Get()->AddScene("MapTools", std::make_shared<MapTools>());
+        SceneManager::Get()->LoadScene("MapTools");
+    }
 }
 
 void Program::Start()
 {
-	SceneManager::Get()->Start();
+    SceneManager::Get()->Start();
 }
 
 void Program::Update()
 {
-	Camera::Get()->Update();
-
-	SceneManager::Get()->Update();
+    Camera::Get()->Update();
+    SceneManager::Get()->Update();
 }
 
 void Program::Render()
 {
-	Camera::Get()->Render();
-
-	SceneManager::Get()->Render();
+    Camera::Get()->Render();
+    SceneManager::Get()->Render();
 }
 
-void Program::PostRender() 
+void Program::PostRender()
 {
-	SceneManager::Get()->PostRender();
+    SceneManager::Get()->PostRender();
 }
 
 void Program::ImGUI()
 {
-	SceneManager::Get()->ImGUI();
+    SceneManager::Get()->ImGUI();
 }
 
-int APIENTRY wWinMain
-(
-	_In_ HINSTANCE hInstance, // ¿©µµøÏ Ω««‡¿ª ¿ß«— ∞Ì¿Ø∞™
-	_In_opt_ HINSTANCE hPrevInstance,	
-	_In_ LPWSTR    lpCmdLine, // ƒø∏«µÂ ¿¸¥ﬁ¿Œ¿⁄
-	_In_ int       nCmdShow
-)
+int APIENTRY wWinMain(
+    _In_ HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
-	WinDesc desc;
-	desc.appName = L"Tools";	// √¢ ¿Ã∏ß
-	desc.instance = hInstance;	
-	desc.handle = nullptr;
-	desc.width = gWinWidth;
-	desc.height = gWinHeight;
-	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_Tools));
+    // Î†åÎçîÎü¨ ÏÉùÏÑ± (DirectX11)
+    RendererManager::Create(RenderAPI::DirectX11);
 
-	auto window = std::make_unique<Window>(desc);
-	WPARAM wParam = window->Run();
+    WinDesc desc;
+    desc.appName = L"Tools";
+    desc.instance = hInstance;
+    desc.handle = nullptr;
+    desc.width = gWinWidth;
+    desc.height = gWinHeight;
+    desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_Tools));
 
-	return int(wParam);
+    auto window = std::make_unique<Window>(desc);
+    WPARAM wParam = window->Run();
+
+    return static_cast<int>(wParam);
 }
-
