@@ -45,8 +45,8 @@ void MapEditorPanel::ImGUI()
     ImGui::Begin("Map Editor");
     {
         ImGui::InputInt("Spacing", reinterpret_cast<int*>(&spacing));
-        width = (WIN_DEFAULT_WIDTH * 2) / spacing;
-        height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+        width = (Values::WinDefaultWidth * 2) / spacing;
+        height = (Values::WinDefaultHeight * 2) / spacing;
         ImGui::Text("Calculated Map Width: %d", width);
         ImGui::Text("Calculated Map Height: %d", height);
 

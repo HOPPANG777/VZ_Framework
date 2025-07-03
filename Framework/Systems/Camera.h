@@ -1,7 +1,6 @@
 #pragma once
 #include "Objects/BaseObject/Object.h"
 #include "Utilities/DirectHelper.h"
-//#include "Renders/RenderResources/GlobalBuffers.h"
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 

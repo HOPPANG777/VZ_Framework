@@ -46,8 +46,8 @@ void ParallaxBackground::Update()
             bgLayer[i]->SetPosition(newBgPos);
             bgLayerDup[i]->SetPosition(newBgDupPos);
 
-            // 무한 X 스크롤 처리 (배경 너비는 WIN_DEFAULT_WIDTH * 1.2로 가정)
-            float bgWidth = WIN_DEFAULT_WIDTH * 1.2f;
+            // 무한 X 스크롤 처리 (배경 너비는 Values::WinDefaultWidth * 1.2로 가정)
+            float bgWidth = Values::WinDefaultWidth * 1.2f;
 
             // 왼쪽 경계 넘김: bgLayer가 화면 왼쪽 밖으로 나가면 오른쪽으로 배치
             while (newBgPos.x + bgWidth * 0.5f < camPos.x)
@@ -58,7 +58,7 @@ void ParallaxBackground::Update()
             }
 
             // 오른쪽 경계 넘김: bgLayer가 화면 오른쪽 밖으로 나가면 왼쪽으로 배치
-            float rightBound = camPos.x + (WIN_DEFAULT_WIDTH * 1.2f) - bgWidth * 0.5f;
+            float rightBound = camPos.x + (Values::WinDefaultWidth * 1.2f) - bgWidth * 0.5f;
 
             while (newBgPos.x > rightBound)
             {

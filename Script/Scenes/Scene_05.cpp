@@ -7,17 +7,17 @@ void Scene_05::Awake()
 	
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -300, 0));
-		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -310, 0));
+		testPlayer = std::make_shared<PlayerUnit>(Values::Center + Vector3(-550, -300, 0));
+		lumberAxe = std::make_shared<LumberAxe>(Values::Center + Vector3(-550, -310, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SceneManager::Get()->SetPlayer(testPlayer);
 	}
 
 	// Floor
 	{
-		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(-250, -320, 0), 0, 0.0f, CLEAR));
+		floor.push_back(std::make_shared<ColorLine>(Values::Center + Vector3(-250, -320, 0), 0, 0.0f, CLEAR));
 		floor[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(750, 5, 0), GREEN));
-		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(1100, 230, 0), 0, 0.0f, CLEAR));
+		floor.push_back(std::make_shared<ColorLine>(Values::Center + Vector3(1100, 230, 0), 0, 0.0f, CLEAR));
 		floor[1]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(2000, 5, 0), GREEN));
 	}
 
@@ -31,7 +31,7 @@ void Scene_05::Awake()
 
 	// Wall
 	{
-		wall.push_back(std::make_shared<ColorLine>(CENTER + Vector3(120, -150, 0), 0, 0.0f, CLEAR));
+		wall.push_back(std::make_shared<ColorLine>(Values::Center + Vector3(120, -150, 0), 0, 0.0f, CLEAR));
 		wall[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10, 700, 0), GREEN));
 	}
 
@@ -51,8 +51,8 @@ void Scene_05::Awake()
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(Values::Center + Vector3(0, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(Values::Center + Vector3(Values::WinDefaultWidth * 1.2f, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -67,8 +67,8 @@ void Scene_05::Awake()
 	// TileMap
 	{
 		UINT spacing = 50;
-		UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
-		UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+		UINT width = (Values::WinDefaultWidth * 2) / spacing;
+		UINT height = (Values::WinDefaultHeight * 2) / spacing;
 
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map03.data");
@@ -76,20 +76,20 @@ void Scene_05::Awake()
 
 	// Ladder
 	{
-		ladder = std::make_shared<TextureRect>(CENTER + Vector3(100, 230, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Object/Ladder1.png");
+		ladder = std::make_shared<TextureRect>(Values::Center + Vector3(100, 230, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Object/Ladder1.png");
 		ladder->AddComponent(std::make_shared<LadderTransComponent>());
 		ladder->AddComponent(std::make_shared<HitComponent>());
-		ladder2 = std::make_shared<TextureRect>(CENTER + Vector3(100, 0, 0), Vector3(100, 550, 0), 0.0f, TexturePath + L"Object/Ladder2.png");
+		ladder2 = std::make_shared<TextureRect>(Values::Center + Vector3(100, 0, 0), Vector3(100, 550, 0), 0.0f, TexturePath + L"Object/Ladder2.png");
 		ladder->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), GREEN));
 		CollisionManager::Get()->AddCollider(ladder->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저 절벽은 너무 높아... 사다리를 내려야겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_01", CENTER + Vector3(-320, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(770, -10, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"감히 내 앞길을 가로막다니! 죽인다!!! (Enter를 입력해주세요, 전투 씬으로 넘어갑니다.)", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_02", CENTER + Vector3(840, 300, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저 절벽은 너무 높아... 사다리를 내려야겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::Center + Vector3(-320, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(770, -10, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"감히 내 앞길을 가로막다니! 죽인다!!! (Enter를 입력해주세요, 전투 씬으로 넘어갑니다.)", 25.0f, L"메이플스토리 OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::Center + Vector3(840, 300, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider
@@ -99,7 +99,7 @@ void Scene_05::Awake()
 	}
 
 	{
-		bback = std::make_shared<TextureRect>(CENTER + Vector3(1200, 270, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Animation/Bback/Bback.png");
+		bback = std::make_shared<TextureRect>(Values::Center + Vector3(1200, 270, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Animation/Bback/Bback.png");
 	}
 
 	isLoaded = true;

@@ -170,8 +170,8 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
 	for (UINT i = 0; i < numModes; i++)
 	{
 		bool bCheck = true;
-		bCheck &= displayModes[i].Width == WIN_DEFAULT_WIDTH;
-		bCheck &= displayModes[i].Height == WIN_DEFAULT_HEIGHT;
+		bCheck &= displayModes[i].Width == Values::WinDefaultWidth;
+		bCheck &= displayModes[i].Height == Values::WinDefaultHeight;
 
 		if (bCheck == true)
 		{
@@ -361,18 +361,21 @@ void Graphics::SetResolution(UINT width, UINT height)
 	UINT top = (GetSystemMetrics(SM_CYSCREEN) - height) / 2 + rect.top;
 	MoveWindow(gHandle, left, top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 
+	deviceContext->OMSetRenderTargets(0, nullptr, nullptr);
+	d2DeviceContext->SetTarget(nullptr);
 	// 1. 기존 리소스 해제
 	rtv.Reset();               // Render Target View 해제
 	d2Bitmap.Reset();          // Direct2D 비트맵 해제
 	dxgiSurface.Reset();       // DXGI 서피스 해제
 
 	// 2. 스왑 체인 크기 조정
-	HRESULT hr = swapChain->ResizeBuffers(
-		0,                      // 버퍼 수 (0이면 변경 없음)
-		width,                  // 새로운 너비
-		height,                 // 새로운 높이
+	HRESULT hr = swapChain->ResizeBuffers
+	(
+		0,							// 버퍼 수 (0이면 변경 없음)
+		width,						// 새로운 너비
+		height,						// 새로운 높이
 		DXGI_FORMAT_B8G8R8A8_UNORM, // 픽셀 포맷
-		0                       // 추가 플래그 (보통 0)
+		0							// 추가 플래그 (보통 0)
 	);
 	CHECK(hr);
 

@@ -17,8 +17,8 @@ private:
     std::unique_ptr<TileMap> tmap;
 
     UINT spacing = 50;
-    UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
-    UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+    UINT width = (Values::WinDefaultWidth * 2) / spacing;
+    UINT height = (Values::WinDefaultHeight * 2) / spacing;
     Vector3 tileSize = Vector3(64, 64, 0);
 
     std::wstring tileSetPath = TexturePath + L"tile.png";

@@ -7,15 +7,15 @@ void Scene_04::Awake()
 
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -45, 0));
-		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
+		testPlayer = std::make_shared<PlayerUnit>(Values::Center + Vector3(-550, -45, 0));
+		lumberAxe = std::make_shared<LumberAxe>(Values::Center + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SceneManager::Get()->SetPlayer(testPlayer);
 	}
 
 	// Floor
 	{
-		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
+		floor.push_back(std::make_shared<ColorLine>(Values::Center + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
 		floor[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 	}
 
@@ -34,8 +34,8 @@ void Scene_04::Awake()
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(Values::Center + Vector3(0, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(Values::Center + Vector3(Values::WinDefaultWidth * 1.2f, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -50,8 +50,8 @@ void Scene_04::Awake()
 	// TileMap
 	{
 		UINT spacing = 50;
-		UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
-		UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
+		UINT width = (Values::WinDefaultWidth * 2) / spacing;
+		UINT height = (Values::WinDefaultHeight * 2) / spacing;
 
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map02.data");
@@ -59,7 +59,7 @@ void Scene_04::Awake()
 
 	// Puzzle Rock
 	{
-		puzzleRock = std::make_shared<TextureRect>(CENTER + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
+		puzzleRock = std::make_shared<TextureRect>(Values::Center + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
 		puzzleRock->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
 		CollisionManager::Get()->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
 		puzzleRock->AddComponent(std::make_shared<PushableComponent>());
@@ -68,7 +68,7 @@ void Scene_04::Awake()
 
 	// bridge
 	{
-		bridge = std::make_shared<TextureRect>(CENTER + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
+		bridge = std::make_shared<TextureRect>(Values::Center + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
 	}
 
 	// Wind
@@ -81,16 +81,16 @@ void Scene_04::Awake()
 		Vector3 windDirection = { -1, 0, 0 };
 		float windIntensity = 220.0f; // 적절한 값 조절
 		
-		windObject = std::make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
-		windObject->AddComponent(std::make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));
+		windObject = std::make_shared<Wind>(Values::Center + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
+		windObject->AddComponent(std::make_shared<WindZone>("WindZone", Values::Center + windRegionMin, Values::Center + windRegionMax, windDirection, windIntensity));
 	}
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", CENTER + Vector3(0, -300, 0), CENTER + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저기 엄청난 바람이 불어오는군, 저 바위를 들고가면 밀려나지 않을 수 있겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_01", CENTER + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", CENTER + Vector3(0, -300, 0), CENTER + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 다음으로 가자. (Enter를 입력해주세요.)", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_02", CENTER + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저기 엄청난 바람이 불어오는군, 저 바위를 들고가면 밀려나지 않을 수 있겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::Center + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 다음으로 가자. (Enter를 입력해주세요.)", 25.0f, L"메이플스토리 OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::Center + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider

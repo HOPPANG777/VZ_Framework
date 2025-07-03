@@ -101,7 +101,7 @@ LRESULT Mouse::MouseProc(UINT message, WPARAM wParam, LPARAM lParam)
 	if (message == WM_LBUTTONDOWN || message == WM_MOUSEMOVE)
 	{
 		mousePos.x = (float)LOWORD(lParam);
-		mousePos.y = (float)(WIN_DEFAULT_HEIGHT - HIWORD(lParam));
+		mousePos.y = (float)(Values::WinDefaultHeight - HIWORD(lParam));
 	}
 
 	if (message == WM_MOUSEWHEEL)
