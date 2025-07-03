@@ -10,20 +10,20 @@
     <ClInclude Include="Editor\MapTools.h">
       <Filter>Editor\MapTools</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\AnimationEditorPanel.h">
-      <Filter>Editor\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\AssetViewerPanel.h">
-      <Filter>Editor\Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Editor\IEditorPanel.h">
       <Filter>Editor\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Editor\AnimationEditorPanel.h">
+      <Filter>Editor\Editor\AnimationEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\AssetViewerPanel.h">
+      <Filter>Editor\Editor\AssetViewer</Filter>
+    </ClInclude>
     <ClInclude Include="Editor\IntegratedEditor.h">
-      <Filter>Editor\Editor</Filter>
+      <Filter>Editor\Editor\IntergratedEditor</Filter>
     </ClInclude>
     <ClInclude Include="Editor\SceneEditorPanel.h">
-      <Filter>Editor\Editor</Filter>
+      <Filter>Editor\Editor\SceneEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,16 +33,16 @@
       <Filter>Editor\MapTools</Filter>
     </ClCompile>
     <ClCompile Include="Editor\AnimationEditorPanel.cpp">
-      <Filter>Editor\Editor</Filter>
+      <Filter>Editor\Editor\AnimationEditor</Filter>
     </ClCompile>
     <ClCompile Include="Editor\AssetViewerPanel.cpp">
-      <Filter>Editor\Editor</Filter>
+      <Filter>Editor\Editor\AssetViewer</Filter>
     </ClCompile>
     <ClCompile Include="Editor\IntegratedEditor.cpp">
-      <Filter>Editor\Editor</Filter>
+      <Filter>Editor\Editor\IntergratedEditor</Filter>
     </ClCompile>
     <ClCompile Include="Editor\SceneEditorPanel.cpp">
-      <Filter>Editor\Editor</Filter>
+      <Filter>Editor\Editor\SceneEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +61,18 @@
     </Filter>
     <Filter Include="Editor\Editor">
       <UniqueIdentifier>{4c20554d-4eed-4ef2-b3db-cd0d217c35cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Editor\AssetViewer">
+      <UniqueIdentifier>{36eb82db-deb7-4145-9ae4-f6416243f37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Editor\IntergratedEditor">
+      <UniqueIdentifier>{3199002a-f19b-48b4-a3fc-3d11925c7d06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Editor\SceneEditor">
+      <UniqueIdentifier>{0e35a7b8-c583-46dd-ad84-ffc529a84d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Editor\AnimationEditor">
+      <UniqueIdentifier>{33322e5b-6ad4-4371-8b02-5d4b101112a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
