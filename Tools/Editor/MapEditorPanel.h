@@ -17,8 +17,8 @@ private:
     std::unique_ptr<TileMap> tmap;
 
     UINT spacing = 50;
-    UINT width = (Values::WinDefaultWidth * 2) / spacing;
-    UINT height = (Values::WinDefaultHeight * 2) / spacing;
+    UINT width = (Values::GetWinWidth() * 2) / spacing;
+    UINT height = (Values::GetWinHeight() * 2) / spacing;
     Vector3 tileSize = Vector3(64, 64, 0);
 
     std::wstring tileSetPath = TexturePath + L"tile.png";
@@ -30,7 +30,7 @@ private:
 
     ImVec2 mapOrigin = ImVec2(400, 50);
 
-    // ¸Ê ÆíÁı ½Ã »ç¿ëµÉ Ä«¸Ş¶ó
+    // Â¸ÃŠ Ã†Ã­ÃÃ½ Â½Ãƒ Â»Ã§Â¿Ã«ÂµÃ‰ Ã„Â«Â¸ÃÂ¶Ã³
     Camera* previewCamera = nullptr;
 private:
     void CreateDefaultMap();
