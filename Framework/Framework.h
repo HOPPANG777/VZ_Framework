@@ -33,8 +33,10 @@
 #include <sstream>
 #include <exception>
 
-#define WIN_DEFAULT_WIDTH 1280
-#define WIN_DEFAULT_HEIGHT 720
+//#define WIN_DEFAULT_WIDTH 1280
+#define WIN_DEFAULT_WIDTH 1600
+//#define WIN_DEFAULT_HEIGHT 720
+#define WIN_DEFAULT_HEIGHT 900
 
 #define CENTER_X (WIN_DEFAULT_WIDTH / 2)
 #define CENTER_X_2_1 (WIN_DEFAULT_WIDTH / 2.1f)
