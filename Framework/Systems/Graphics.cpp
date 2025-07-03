@@ -354,6 +354,7 @@ void Graphics::SetResolution(UINT width, UINT height)
 	
 	gWinWidth = float(width);
 	gWinHeight = float(height);
+	Camera::Get()->SetProjection(gWinWidth, gWinHeight);
 
 	RECT rect = { 0,0,(LONG)width,(LONG)height };
 	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, FALSE, 0);

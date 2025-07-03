@@ -15,6 +15,7 @@ public:
 	void Render();
 
 public:
+	void SetProjection(float width, float height);
 	void UpdateView();
 	void Move();
 	const Vector3 Drag();

@@ -37,7 +37,7 @@ float RectTransform::GetRotation() const
 RECT RectTransform::GetRect()
 {
     // 부모 사각형 (여기서는 전체 창 크기를 사용)
-    RECT parentRect = { -(LONG)(gWinWidth * 0.5f), -(LONG)(gWinHeight * 0.5f), (LONG)(gWinWidth * 0.5f), (LONG)(gWinHeight * 0.5f) };
+    RECT parentRect = { -(LONG)(Values::GetWinWidth() * 0.5f), -(LONG)(Values::GetWinHeight() * 0.5f), (LONG)(Values::GetWinWidth() * 0.5f), (LONG)(Values::GetWinHeight() * 0.5f) };
     float parentWidth  = (parentRect.right  - parentRect.left);
     float parentHeight = (parentRect.bottom - parentRect.top);
 

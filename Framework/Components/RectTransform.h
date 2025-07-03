@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "Systems/Time.h"
+#include "Utilities/DirectHelper.h"
 
 class RectTransform : public Component
 {
