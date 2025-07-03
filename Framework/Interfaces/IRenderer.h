@@ -1,12 +1,12 @@
 #pragma once
-#include "Renders/RenderAPI.h"
+#include "Enums/RenderAPI.h"
 
 // 렌더러 공통 인터페이스입니다.
 // 다양한 그래픽 API 구현체가 해당 인터페이스를 상속받아 사용됩니다.
 class IRenderer
 {
 public:
-    virtual ~IRenderer() = default;
+    //virtual ~IRenderer() = default;
 
     // 렌더러 초기화
     virtual void Init() = 0;

@@ -1,6 +1,6 @@
 #pragma once
 #include "Interfaces/IRenderer.h"
-#include <memory>
+//#include <memory>
 
 // 렌더러 생성 및 접근을 관리하는 매니저 클래스입니다.
 class RendererManager
@@ -12,5 +12,5 @@ public:
     static IRenderer* Get();
 
 private:
-    static std::unique_ptr<IRenderer> renderer; // 현재 사용 중인 렌더러
+    static IRenderer* renderer; // 현재 사용 중인 렌더러
 };

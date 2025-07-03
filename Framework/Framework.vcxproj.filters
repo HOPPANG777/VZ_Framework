@@ -146,6 +146,9 @@
     <ClCompile Include="Components\PlayerMove.cpp">
       <Filter>Components\Move</Filter>
     </ClCompile>
+    <ClCompile Include="Managers\RendererManager.cpp">
+      <Filter>Managers\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -359,6 +362,21 @@
     <ClInclude Include="Platform\Platform_Windows.h">
       <Filter>Platform\Platform_Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Interfaces\IWindow.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\ITexture.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IRenderer.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\RendererManager.h">
+      <Filter>Managers\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums\RenderAPI.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -450,6 +468,9 @@
     </Filter>
     <Filter Include="Platform\Platform_Windows">
       <UniqueIdentifier>{84cec3a4-6473-48c7-8cc9-33a60352374e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Render">
+      <UniqueIdentifier>{0c35d2a4-0c62-464c-92f5-c52b59a0618e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

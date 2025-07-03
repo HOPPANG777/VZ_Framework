@@ -186,8 +186,13 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Interfaces\IRenderer.h" />
+    <ClInclude Include="Interfaces\ITexture.h" />
+    <ClInclude Include="Interfaces\IWindow.h" />
+    <ClInclude Include="Managers\RendererManager.h" />
     <ClInclude Include="Platform\Platform.h" />
     <ClInclude Include="Platform\Platform_Windows.h" />
+    <ClInclude Include="Enums\RenderAPI.h" />
     <ClInclude Include="Structs\BoxEdge.h" />
     <ClInclude Include="Enums\AxeState.h" />
     <ClInclude Include="Components\AnimationMove.h" />
@@ -270,6 +275,7 @@
     <ClCompile Include="Components\TypingText.cpp" />
     <ClCompile Include="Managers\CollisionManager.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
+    <ClCompile Include="Managers\RendererManager.cpp" />
     <ClCompile Include="Objects\TileObject\Tile.cpp" />
     <ClCompile Include="Objects\SpriteObject\Sprite.cpp" />
     <ClCompile Include="Managers\TileSetManager.cpp" />

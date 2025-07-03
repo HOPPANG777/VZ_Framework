@@ -7,5 +7,5 @@ public:
     virtual ~IWindow() = default;
 
     // 윈도우 실행 루프 진입
-    virtual unsigned int Run() = 0;
+    virtual WPARAM Run() = 0;
 };

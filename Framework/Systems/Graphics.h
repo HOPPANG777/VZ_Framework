@@ -10,13 +10,11 @@ class D3DEnumOutputInfo;
 
 class Graphics : public IRenderer
 {
-        DECLARE_SINGLETON(Graphics);
+	DECLARE_SINGLETON(Graphics);
 
 public:
-        Graphics();                                    // 생성자
-        ~Graphics() override;                          // 소멸자
-        void Init() override;                            // 렌더러 초기화
-        void CreateBackBuffer();                        // 백 버퍼 생성
+	void Init() override;                            // 렌더러 초기화
+	void CreateBackBuffer();                        // 백 버퍼 생성
 
 	ID3D11Device* GetDevice() const { return device.Get(); }
 	ID3D11DeviceContext* GetDC() const { return deviceContext.Get(); }
@@ -24,14 +22,14 @@ public:
 	ID2D1DeviceContext* GetD2DC() const { return d2DeviceContext.Get(); }
 	IDWriteFactory* GetWrite() const { return writeFactory.Get(); }
 
-        void Begin() override;                          // 프레임 시작
-        void End() override;                            // 프레임 종료
+	void Begin() override;                          // 프레임 시작
+	void End() override;                            // 프레임 종료
 
 	void GUI();
 
-        void SetFullScreen(bool fullscreen) override;   // 전체 화면 설정
+	void SetFullScreen(bool fullscreen) override;   // 전체 화면 설정
 
-        void SetResolution(UINT width, UINT height) override; // 해상도 변경
+	void SetResolution(UINT width, UINT height) override; // 해상도 변경
 
 	bool LoadCustomFont(const std::wstring& fontFilePath);
 
