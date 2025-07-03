@@ -19,12 +19,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tools", "Tools\Tools.vcxpro
 		{3C26F10E-6EF1-4A45-A635-4D82FFA32B18} = {3C26F10E-6EF1-4A45-A635-4D82FFA32B18}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{2A3A057F-5D22-31FD-628C-DF5EF75AEF1E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
 	ProjectSection(SolutionItems) = preProject
 		_Data\_Shaders\Color.hlsl = _Data\_Shaders\Color.hlsl
+		_Data\_Shaders\FlatShader.hlsl = _Data\_Shaders\FlatShader.hlsl
+		_Data\_Shaders\GouraudShader.hlsl = _Data\_Shaders\GouraudShader.hlsl
 		_Data\_Shaders\Texture.hlsl = _Data\_Shaders\Texture.hlsl
-		FlatShader.hlsl = FlatShader.hlsl
-		GouraudShader.hlsl = GouraudShader.hlsl
 		_Data\_Shaders\TextureAlpha.hlsl = _Data\_Shaders\TextureAlpha.hlsl
 		_Data\_Shaders\TextureShader.hlsl = _Data\_Shaders\TextureShader.hlsl
 		_Data\_Shaders\VertexColor.hlsl = _Data\_Shaders\VertexColor.hlsl

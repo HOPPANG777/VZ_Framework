@@ -1,5 +1,6 @@
 #pragma once
 #include "Objects/BaseObject/Object.h"
+#include "Renders/RenderResources/GlobalBuffers.h"
 #include "Utilities/DirectHelper.h"
 #include "Systems/Input.h"
 #include "Systems/Time.h"
@@ -15,7 +16,8 @@ public:
 	void Render();
 
 public:
-	void SetProjection(float width, float height);
+	void SetProjection(const float width, const float height);
+	
 	void UpdateView();
 	void Move();
 	const Vector3 Drag();

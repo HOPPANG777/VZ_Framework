@@ -44,7 +44,6 @@ void Camera::SetProjection(float width, float height)
     if (VPBuffer) VPBuffer->SetProjection(proj);
 }
 
-
 void Camera::UpdateView()
 {
 	// 카메라가 보는 방향을 position에서 (0,0,1) 방향으로 설정
