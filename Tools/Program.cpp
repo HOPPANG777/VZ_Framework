@@ -21,8 +21,9 @@ void Program::Awake()
 
     // 씬 설정
     {
-        SceneManager::Get()->AddScene("MapTools", std::make_shared<MapTools>());
-        SceneManager::Get()->LoadScene("MapTools");
+        // 통합 에디터 씬을 등록하고 바로 로드합니다.
+        SceneManager::Get()->AddScene("IntegratedEditor", std::make_shared<IntegratedEditor>());
+        SceneManager::Get()->LoadScene("IntegratedEditor");
     }
 }
 
