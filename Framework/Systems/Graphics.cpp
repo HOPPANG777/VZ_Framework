@@ -27,7 +27,7 @@ void Graphics::Init()
 
 void Graphics::CreateBackBuffer()
 {
-	// ìš°ë¦¬ê°€ ë°”ê¿€ê°’ë§Œ ì œëŒ€ë¡œ ë„£ìœ¼ë©´ ëœë‹¤.
+	// ¿ì¸®°¡ ¹Ù²Ü°ª¸¸ Á¦´ë·Î ³ÖÀ¸¸é µÈ´Ù.
 	//HRESULT hr = swapChain->ResizeBuffers
 	//(
 	//	0,
@@ -42,12 +42,12 @@ void Graphics::CreateBackBuffer()
 	HRESULT hr = S_OK;
 	CHECK(hr);
 
-	// ComPtr -> ìŠ¤ë§ˆíŠ¸ í¬ì¸í„° -> ë¡œí¬ì¸í„°
+	// ComPtr -> ½º¸¶Æ® Æ÷ÀÎÅÍ -> ·ÎÆ÷ÀÎÅÍ
 	ComPtr<ID3D11Texture2D> backBuffer = nullptr;
 	// backBuffer.GetAddressOf 
-	// &ë¥¼ ì“¸ë•Œ ì´ê±¸ ì“¸ë†ˆì´ ë¬´ì–¸ê°€ ë‹´ê²¨ìˆì§€ ì•Šì€ì§€ í™•ì¸í•´ì•¼ í•˜ê³  
-	// ë§Œì•½ ì§€ìš°ë©´ ì•ˆë˜ëŠ”ë° &ë¥¼ ì¨ì•¼ í•œë‹¤ë©´ ì´ê±¸ ì“°ë©´ ëœë‹¤.
-	// surface ê·¸ë ¤ì§ˆ í‘œë©´
+	// &¸¦ ¾µ¶§ ÀÌ°É ¾µ³ğÀÌ ¹«¾ğ°¡ ´ã°ÜÀÖÁö ¾ÊÀºÁö È®ÀÎÇØ¾ß ÇÏ°í 
+	// ¸¸¾à Áö¿ì¸é ¾ÈµÇ´Âµ¥ &¸¦ ½á¾ß ÇÑ´Ù¸é ÀÌ°É ¾²¸é µÈ´Ù.
+	// surface ±×·ÁÁú Ç¥¸é
 	hr = swapChain->GetBuffer
 	(
 		0,
@@ -57,7 +57,7 @@ void Graphics::CreateBackBuffer()
 
 	CHECK(hr);
 
-	// íŒŒìƒí´ë˜ìŠ¤ì˜ ì£¼ì†Œë¥¼ ê°€ì§ˆìˆ˜ìˆë‹¤ ì´ê±¸ ì—…ìºìŠ¤íŒ…ì´ë¼ ë¶€ë¥¸ë‹¤.
+	// ÆÄ»ıÅ¬·¡½ºÀÇ ÁÖ¼Ò¸¦ °¡Áú¼öÀÖ´Ù ÀÌ°É ¾÷Ä³½ºÆÃÀÌ¶ó ºÎ¸¥´Ù.
 	hr = device->CreateRenderTargetView
 	(
 		backBuffer.Get(),
@@ -81,7 +81,7 @@ void Graphics::Begin()
 	deviceContext->OMSetRenderTargets(1, rtv.GetAddressOf(), nullptr);
 	deviceContext->ClearRenderTargetView(rtv.Get(), clearColor);
 
-	// Direct2D ê·¸ë¦¬ê¸° ì‹œì‘
+	// Direct2D ±×¸®±â ½ÃÀÛ
 	d2DeviceContext->BeginDraw();
 }
 
@@ -98,7 +98,7 @@ void Graphics::GUI()
 {
 	static bool bOpen = true;
 	ImGui::SetNextWindowPos({ 0, 15 });
-	ImGui::SetNextWindowSize(ImVec2(200, 30)); // ìœ„ì ¯ ì°½ í¬ê¸° ì„¤ì •
+	ImGui::SetNextWindowSize(ImVec2(200, 30)); // À§Á¬ Ã¢ Å©±â ¼³Á¤
 	ImGui::Begin
 	(
 		"Vstnc",
@@ -131,8 +131,8 @@ void Graphics::EnumerateAdapters()
 		std::unique_ptr<D3DEnumAdapterInfo> adapterInfo = std::make_unique<D3DEnumAdapterInfo>();
 		adapterInfo->adapterOrdinal = index;
 
-		// ê¸°ìˆ˜ / ì„œìˆ˜
-		// ì¼ì´ì‚¼ì‚¬ ì²«ë²ˆì§¸ ë‘ë²ˆì§¸
+		// ±â¼ö / ¼­¼ö
+		// ÀÏÀÌ»ï»ç Ã¹¹øÂ° µÎ¹øÂ°
 		adapter->GetDesc1(&adapterInfo->adapterDesc);
 		adapterInfo->adapter = adapter;
 
@@ -170,8 +170,8 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
 	for (UINT i = 0; i < numModes; i++)
 	{
 		bool bCheck = true;
-		bCheck &= displayModes[i].Width == Values::GetWinWidth();
-		bCheck &= displayModes[i].Height == Values::GetWinHeight();
+		bCheck &= displayModes[i].Width == Values::WinDefaultWidth;
+		bCheck &= displayModes[i].Height == Values::WinDefaultHeight;
 
 		if (bCheck == true)
 		{
@@ -229,7 +229,7 @@ void Graphics::CreateDirect3D()
 	UINT maxVRam = 0;
 	for (UINT i = 0; i < adapterInfos.size(); i++)
 	{
-		// adapterInfos[i]ëŠ” std::unique_ptr
+		// adapterInfos[i]´Â std::unique_ptr
 		std::unique_ptr<D3DEnumAdapterInfo>& info = adapterInfos[i];
 		UINT64 dedicatedMem = info->adapterDesc.DedicatedVideoMemory;
 
@@ -240,7 +240,7 @@ void Graphics::CreateDirect3D()
 		}
 	}
 
-	// ì¶œë ¥í•´ë³´ê¸°
+	// Ãâ·ÂÇØº¸±â
 	for (size_t i = 0; i < adapterInfos.size(); i++)
 	{
 		std::wcout << L"GPU Name : " << adapterInfos[i]->adapterDesc.Description << std::endl;
@@ -252,16 +252,16 @@ void Graphics::CreateDirect3D()
 
 	ComPtr<IDXGIAdapter1> chosenAdapter = adapterInfos[selectedAdapterIndex]->adapter;
 
-	UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT; // Direct2Dì™€ í˜¸í™˜
+	UINT createDeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT; // Direct2D¿Í È£È¯
 #ifdef _DEBUG
-	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG; // ë””ë²„ê·¸ ë ˆì´ì–´ í™œì„±í™”
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG; // µğ¹ö±× ·¹ÀÌ¾î È°¼ºÈ­
 #endif
 	HRESULT hr = D3D11CreateDeviceAndSwapChain
 	(
 		chosenAdapter.Get(),//nullptr,
 		D3D_DRIVER_TYPE_UNKNOWN,//D3D_DRIVER_TYPE_HARDWARE,//D3D_DRIVER_TYPE_WARP,
 		nullptr,
-		createDeviceFlags, // <- ì—¬ê¸°ì— Direct2Dë¥¼ ìœ„í•œ ë””ë°”ì´ìŠ¤ë¥¼ ì—¬ëŸ¬ê°œ ì¨ì•¼í•´
+		createDeviceFlags, // <- ¿©±â¿¡ Direct2D¸¦ À§ÇÑ µğ¹ÙÀÌ½º¸¦ ¿©·¯°³ ½á¾ßÇØ
 		featureLevels.data(),
 		UINT(featureLevels.size()),
 		D3D11_SDK_VERSION,
@@ -271,14 +271,14 @@ void Graphics::CreateDirect3D()
 		nullptr,
 		deviceContext.GetAddressOf()
 	);
-	CHECK(hr);  // HRESULTê°€ ì„±ê³µí–ˆëŠ”ì§€ í™•ì¸.
+	CHECK(hr);  // HRESULT°¡ ¼º°øÇß´ÂÁö È®ÀÎ.
 
-	// ì—¬ê¸°ì„œ deviceê°€ ìƒì„±ë˜ì—ˆìœ¼ë¯€ë¡œ InfoQueueë¥¼ ì„¤ì •í•  ìˆ˜ ìˆìŒ
+	// ¿©±â¼­ device°¡ »ı¼ºµÇ¾úÀ¸¹Ç·Î InfoQueue¸¦ ¼³Á¤ÇÒ ¼ö ÀÖÀ½
 	/*
 	ID3D11InfoQueue* pInfoQueue = nullptr;
 	if (SUCCEEDED(device->QueryInterface(__uuidof(ID3D11InfoQueue), (void**)&pInfoQueue)))
 	{
-		// ìˆ¨ê¸°ê³  ì‹¶ì€ ë©”ì‹œì§€ ID ëª©ë¡
+		// ¼û±â°í ½ÍÀº ¸Ş½ÃÁö ID ¸ñ·Ï
 		D3D11_MESSAGE_ID hideMessages[] =
 		{
 			D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_NOT_SET,
@@ -289,7 +289,7 @@ void Graphics::CreateDirect3D()
 		filter.DenyList.NumIDs = _countof(hideMessages);
 		filter.DenyList.pIDList = hideMessages;
 
-		// ë©”ì‹œì§€ í•„í„° ì ìš©
+		// ¸Ş½ÃÁö ÇÊÅÍ Àû¿ë
 		pInfoQueue->AddStorageFilterEntries(&filter);
 
 		pInfoQueue->Release();
@@ -299,27 +299,27 @@ void Graphics::CreateDirect3D()
 
 void Graphics::CreateDirect2D()
 {
-	// Direct2D Factory ìƒì„± (ë²„ì „ 1 ì‚¬ìš©)
+	// Direct2D Factory »ı¼º (¹öÀü 1 »ç¿ë)
 	HRESULT hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_MULTI_THREADED, __uuidof(ID2D1Factory1), nullptr, &d2Factory);
 	CHECK(hr);
 
-	// DXGI Device ì–»ê¸°: ê¸°ì¡´ D3D11Deviceì—ì„œ IDXGIDevice ì¸í„°í˜ì´ìŠ¤ íšë“
+	// DXGI Device ¾ò±â: ±âÁ¸ D3D11Device¿¡¼­ IDXGIDevice ÀÎÅÍÆäÀÌ½º È¹µæ
 	hr = device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(dxgiDevice.GetAddressOf()));
 	CHECK(hr);
 
-	// Direct2D Device ìƒì„±
-	hr = d2Factory->CreateDevice(dxgiDevice.Get(), &d2Device);  // ì‹œë°œ ì™œ ì•ˆë˜ëŠ”ë° ëŒ€ì²´ ë­ê°€ ë¬¸ì œì•¼!!!!!!!!!
+	// Direct2D Device »ı¼º
+	hr = d2Factory->CreateDevice(dxgiDevice.Get(), &d2Device);  // ½Ã¹ß ¿Ö ¾ÈµÇ´Âµ¥ ´ëÃ¼ ¹¹°¡ ¹®Á¦¾ß!!!!!!!!!
 	CHECK(hr);
 
-	// Direct2D Device Context ìƒì„±
+	// Direct2D Device Context »ı¼º
 	hr = d2Device->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_ENABLE_MULTITHREADED_OPTIMIZATIONS, &d2DeviceContext);
 	CHECK(hr);
 
-	// Swap Chainì˜ ë°±ë²„í¼ë¥¼ Direct2D ë¹„íŠ¸ë§µìœ¼ë¡œ ì—°ê²°
+	// Swap ChainÀÇ ¹é¹öÆÛ¸¦ Direct2D ºñÆ®¸ÊÀ¸·Î ¿¬°á
 	hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), reinterpret_cast<void**>(dxgiSurface.GetAddressOf()));
 	CHECK(hr);
 
-	// Direct2D ë¹„íŠ¸ë§µ í”„ë¡œí¼í‹° ì •ì˜ (í”½ì…€ í¬ë§·, DPI ë“±)
+	// Direct2D ºñÆ®¸Ê ÇÁ·ÎÆÛÆ¼ Á¤ÀÇ (ÇÈ¼¿ Æ÷¸Ë, DPI µî)
 	D2D1_BITMAP_PROPERTIES1 bitmapProperties;
 	bitmapProperties.pixelFormat.format = DXGI_FORMAT_B8G8R8A8_UNORM;
 	bitmapProperties.pixelFormat.alphaMode = D2D1_ALPHA_MODE_PREMULTIPLIED;
@@ -328,7 +328,7 @@ void Graphics::CreateDirect2D()
 	bitmapProperties.bitmapOptions = D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW;
 	bitmapProperties.colorContext = NULL;
 
-	// Direct2D Bitmap ìƒì„± í›„ Device Contextì˜ íƒ€ê¹ƒìœ¼ë¡œ ì„¤ì •
+	// Direct2D Bitmap »ı¼º ÈÄ Device ContextÀÇ Å¸±êÀ¸·Î ¼³Á¤
 	hr = d2DeviceContext->CreateBitmapFromDxgiSurface(dxgiSurface.Get(), &bitmapProperties, &d2Bitmap);
 	CHECK(hr);
 
@@ -337,7 +337,7 @@ void Graphics::CreateDirect2D()
 
 void Graphics::CreateDirectWrite()
 {
-	// IDWriteFactory ìƒì„±
+	// IDWriteFactory »ı¼º
 	HRESULT hr = DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory), reinterpret_cast<IUnknown**>(writeFactory.GetAddressOf()));
 	CHECK(hr);
 }
@@ -363,26 +363,26 @@ void Graphics::SetResolution(UINT width, UINT height)
 
 	deviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 	d2DeviceContext->SetTarget(nullptr);
-	// 1. ê¸°ì¡´ ë¦¬ì†ŒìŠ¤ í•´ì œ
-	rtv.Reset();               // Render Target View í•´ì œ
-	d2Bitmap.Reset();          // Direct2D ë¹„íŠ¸ë§µ í•´ì œ
-	dxgiSurface.Reset();       // DXGI ì„œí”¼ìŠ¤ í•´ì œ
+	// 1. ±âÁ¸ ¸®¼Ò½º ÇØÁ¦
+	rtv.Reset();               // Render Target View ÇØÁ¦
+	d2Bitmap.Reset();          // Direct2D ºñÆ®¸Ê ÇØÁ¦
+	dxgiSurface.Reset();       // DXGI ¼­ÇÇ½º ÇØÁ¦
 
-	// 2. ìŠ¤ì™‘ ì²´ì¸ í¬ê¸° ì¡°ì •
+	// 2. ½º¿Ò Ã¼ÀÎ Å©±â Á¶Á¤
 	HRESULT hr = swapChain->ResizeBuffers
 	(
-		0,							// ë²„í¼ ìˆ˜ (0ì´ë©´ ë³€ê²½ ì—†ìŒ)
-		width,						// ìƒˆë¡œìš´ ë„ˆë¹„
-		height,						// ìƒˆë¡œìš´ ë†’ì´
-		DXGI_FORMAT_B8G8R8A8_UNORM, // í”½ì…€ í¬ë§·
-		0							// ì¶”ê°€ í”Œë˜ê·¸ (ë³´í†µ 0)
+		0,							// ¹öÆÛ ¼ö (0ÀÌ¸é º¯°æ ¾øÀ½)
+		width,						// »õ·Î¿î ³Êºñ
+		height,						// »õ·Î¿î ³ôÀÌ
+		DXGI_FORMAT_B8G8R8A8_UNORM, // ÇÈ¼¿ Æ÷¸Ë
+		0							// Ãß°¡ ÇÃ·¡±× (º¸Åë 0)
 	);
 	CHECK(hr);
 
-	// 3. ë Œë” íƒ€ê²Ÿ ë·° ì¬ìƒì„±
+	// 3. ·»´õ Å¸°Ù ºä Àç»ı¼º
 	CreateBackBuffer();
 
-	// 4. Direct2D ë¹„íŠ¸ë§µ ì¬ìƒì„±
+	// 4. Direct2D ºñÆ®¸Ê Àç»ı¼º
 	hr = swapChain->GetBuffer(0, __uuidof(IDXGISurface), reinterpret_cast<void**>(dxgiSurface.GetAddressOf()));
 	CHECK(hr);
 
@@ -401,16 +401,16 @@ void Graphics::SetResolution(UINT width, UINT height)
 
 bool Graphics::LoadCustomFont(const std::wstring& fontFilePath)
 {
-	// FR_PRIVATE: í˜„ì¬ í”„ë¡œì„¸ìŠ¤ì—ì„œë§Œ ë“±ë¡
+	// FR_PRIVATE: ÇöÀç ÇÁ·Î¼¼½º¿¡¼­¸¸ µî·Ï
 	int ret = AddFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);
 	if (ret == 0)
 	{
-		// ë“±ë¡ ì‹¤íŒ¨
-		// ë³´í†µì€ ì—¬ê¸°ì„œ ë¡œê·¸ ì¶œë ¥, ì—ëŸ¬ ì²˜ë¦¬
+		// µî·Ï ½ÇÆĞ
+		// º¸ÅëÀº ¿©±â¼­ ·Î±× Ãâ·Â, ¿¡·¯ Ã³¸®
 		return false;
 	}
 
-	// í•„ìš”í•˜ë‹¤ë©´ ì „ì²´ ìœˆë„ìš°ì— í°íŠ¸ê°€ ë³€ê²½ë˜ì—ˆìŒì„ ì•Œë¦¼
+	// ÇÊ¿äÇÏ´Ù¸é ÀüÃ¼ À©µµ¿ì¿¡ ÆùÆ®°¡ º¯°æµÇ¾úÀ½À» ¾Ë¸²
 	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
 
 	return true;
@@ -418,16 +418,16 @@ bool Graphics::LoadCustomFont(const std::wstring& fontFilePath)
 
 bool Graphics::UnloadCustomFont(const std::wstring& fontFilePath)
 {
-	// FR_PRIVATE: í˜„ì¬ í”„ë¡œì„¸ìŠ¤ì—ì„œë§Œ ë“±ë¡
+	// FR_PRIVATE: ÇöÀç ÇÁ·Î¼¼½º¿¡¼­¸¸ µî·Ï
 	int ret = RemoveFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);
 	if (ret == 0)
 	{
-		// í•´ì œ ì‹¤íŒ¨
-		// ë³´í†µì€ ì—¬ê¸°ì„œ ë¡œê·¸ ì¶œë ¥, ì—ëŸ¬ ì²˜ë¦¬
+		// ÇØÁ¦ ½ÇÆĞ
+		// º¸ÅëÀº ¿©±â¼­ ·Î±× Ãâ·Â, ¿¡·¯ Ã³¸®
 		return false;
 	}
 
-	// í•„ìš”í•˜ë‹¤ë©´ ì „ì²´ ìœˆë„ìš°ì— í°íŠ¸ê°€ ì œê±°ë˜ì—ˆìŒì„ ì•Œë¦¼
+	// ÇÊ¿äÇÏ´Ù¸é ÀüÃ¼ À©µµ¿ì¿¡ ÆùÆ®°¡ Á¦°ÅµÇ¾úÀ½À» ¾Ë¸²
 	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
 
 	return true;

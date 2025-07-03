@@ -1,38 +1,13 @@
 #include "Framework.h"
 #include "DirectHelper.h"
 
-UINT Values::GetWinWidth()
-{
-    return static_cast<UINT>(gWinWidth);
-}
-
-UINT Values::GetWinHeight()
-{
-    return static_cast<UINT>(gWinHeight);
-}
-
-float Values::GetCenterX()
-{
-    return gWinWidth * 0.5f;
-}
-
-float Values::GetCenterY()
-{
-    return gWinHeight * 0.5f;
-}
-
-Vector3 Values::GetCenter()
-{
-    return Vector3(GetCenterX(), GetCenterY(), 0);
-}
-
-Vector3 Values::GetScreenSize()
-{
-    return Vector3(gWinWidth, gWinHeight, 1);
-}
+const UINT Values::WinDefaultWidth = gWinWidth;
+const UINT Values::WinDefaultHeight = gWinHeight;
 
 const float Values::PI = 3.141592f;
 const float Values::Deg2Rad = PI / 180;
+const float Values::CenterX = gWinWidth / 2;
+const float Values::CenterY = gWinHeight / 2;
 
 const Vector3 Values::ZeroVec3 = Vector3(0, 0, 0);
 const Vector3 Values::OneVec3 = Vector3(1, 1, 1);
@@ -41,6 +16,8 @@ const Vector3 Values::RightVec = Vector3(1, 0, 0);
 const Vector3 Values::UpVec = Vector3(0, 1, 0);
 const Vector3 Values::DownVec = Vector3(0, -1, 0);
 const Vector3 Values::FwdVec = Vector3(0, 0, 1);
+const Vector3 Values::ScreenSize = Vector3((float)gWinWidth, (float)gWinWidth, 1);
+const Vector3 Values::Center = Vector3(CenterX, CenterY, 0);
 
 const Vector2 Values::ZeroVec2 = Vector2(0, 0);
 const Vector2 Values::OneVec2 = Vector2(1, 1);

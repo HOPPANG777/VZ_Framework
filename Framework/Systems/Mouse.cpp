@@ -89,7 +89,7 @@ void Mouse::Update()
 	}//for(i)
 
 
-		mousePos.y = (float)(Values::GetWinHeight() - HIWORD(lParam));
+	// 마지막에 이전 상태를 현재 상태로 업데이트
 	for (DWORD i = 0; i < MAX_INPUT_MOUSE; i++)
 	{
 		buttonOldStatus[i] = buttonStatus[i];

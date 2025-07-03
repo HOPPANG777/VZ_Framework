@@ -10,7 +10,7 @@ void Camera::Init()
 	VPBuffer = std::make_unique<ViewProjectionBuffer>();
 
 	view = XMMatrixLookAtLH(Vector3(0, 0, 0), Vector3(0, 0, 1), Vector3(0, 1, 0));
-	proj = XMMatrixOrthographicOffCenterLH(0, Values::GetWinWidth(), 0, Values::GetWinHeight(), 0, 1);
+	proj = XMMatrixOrthographicOffCenterLH(0, Values::WinDefaultWidth, 0, Values::WinDefaultHeight, 0, 1);
 
 	VPBuffer->SetView(view);
 	VPBuffer->SetProjection(proj);
@@ -56,8 +56,8 @@ void Camera::Move()
     // 타겟이 있을 경우
     if (target != nullptr)
     {
-        position.x = target->GetPosition().x - Values::GetWinWidth() * 0.5f;
-        position.y = target->GetPosition().y - Values::GetWinHeight() * 0.5f;
+        position.x = target->GetPosition().x - Values::WinDefaultWidth * 0.5f;
+        position.y = target->GetPosition().y - Values::WinDefaultHeight * 0.5f;
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
@@ -141,9 +141,9 @@ void Camera::UpdateFollow()
     float marginY = 200.0f;
 
     float viewLeft = camPos.x;
-    float viewRight = camPos.x + Values::GetWinWidth();
+    float viewRight = camPos.x + Values::WinDefaultWidth;
     float viewTop = camPos.y;
-    float viewBottom = camPos.y + Values::GetWinHeight();
+    float viewBottom = camPos.y + Values::WinDefaultHeight;
 
     float deadLeft = viewLeft + marginX;
     float deadRight = viewRight - marginX;
@@ -152,11 +152,11 @@ void Camera::UpdateFollow()
 
     // x축
     if (targetPos.x < deadLeft) camPos.x = targetPos.x - marginX;
-    else if (targetPos.x > deadRight) camPos.x = targetPos.x + marginX - Values::GetWinWidth();
+    else if (targetPos.x > deadRight) camPos.x = targetPos.x + marginX - Values::WinDefaultWidth;
 
     // y축
     if (targetPos.y < deadTop) camPos.y = targetPos.y - marginY;
-    else if (targetPos.y > deadBottom) camPos.y = targetPos.y + marginY - Values::GetWinHeight();
+    else if (targetPos.y > deadBottom) camPos.y = targetPos.y + marginY - Values::WinDefaultHeight;
 
     // 최종 카메라 위치 갱신
     position = camPos;
@@ -173,10 +173,10 @@ void Camera::UpdateHorizontalScroll(Object* target, float minRatio, float maxRat
     Vector3 targetPos = target->GetPosition();
 
     // x와 y 모두 각각의 조건 범위 내에 있을 경우에만 업데이트
-    if (targetPos.x > Values::GetWinWidth() * minRatio && targetPos.x < Values::GetWinWidth() * maxRatio)
+    if (targetPos.x > Values::WinDefaultWidth * minRatio && targetPos.x < Values::WinDefaultWidth * maxRatio)
     {
         // target의 중앙이 화면 중앙에 오도록 카메라 위치 설정
-        float newX = targetPos.x - Values::GetWinWidth() / 2.0f;
+        float newX = targetPos.x - Values::WinDefaultWidth / 2.0f;
 
         SetPosition(Vector3(newX, position.y, position.z));
     }
@@ -190,9 +190,9 @@ void Camera::UpdateVerticalScroll(Object* target, float minRatio, float maxRatio
     // 타겟의 월드 좌표
     Vector3 targetPos = target->GetPosition();
 
-    if (targetPos.y > Values::GetWinHeight() * minRatio && targetPos.y < Values::GetWinHeight() * maxRatio)
+    if (targetPos.y > Values::WinDefaultHeight * minRatio && targetPos.y < Values::WinDefaultHeight * maxRatio)
     {
-        float newY = targetPos.y - Values::GetWinHeight() / 2.0f;
+        float newY = targetPos.y - Values::WinDefaultHeight / 2.0f;
 
         SetPosition(Vector3(position.x, newY, position.z));
     }

@@ -7,15 +7,15 @@ void Scene_04::Awake()
 
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -45, 0));
-		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
+		testPlayer = std::make_shared<PlayerUnit>(Values::Center + Vector3(-550, -45, 0));
+		lumberAxe = std::make_shared<LumberAxe>(Values::Center + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SceneManager::Get()->SetPlayer(testPlayer);
 	}
 
 	// Floor
 	{
-		floor.push_back(std::make_shared<ColorLine>(Values::GetCenter() + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
+		floor.push_back(std::make_shared<ColorLine>(Values::Center + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
 		floor[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 	}
 
@@ -31,19 +31,19 @@ void Scene_04::Awake()
 	{
 		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
 
-			bgLayer[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 1.2f, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-		UINT width = (Values::GetWinWidth() * 2) / spacing;
-		UINT height = (Values::GetWinHeight() * 2) / spacing;
-		puzzleRock = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
+		// ¹è°æ ·¹ÀÌ¾î 2°³¾¿ »ı¼º
+		for (int i = 0; i < 5; i++)
+		{
+			bgLayer[i] = std::make_shared<TextureRect>(Values::Center + Vector3(0, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(Values::Center + Vector3(Values::WinDefaultWidth * 1.2f, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
-		bridge = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
-		windObject = std::make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
-		windObject->AddComponent(std::make_shared<WindZone>("WindZone", Values::GetCenter() + windRegionMin, Values::GetCenter() + windRegionMax, windDirection, windIntensity));
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L" Ã» Ù¶ Ò¾Â±,    Ğ·   Ö°Ú¾.", 25.0f, L"Ã½ä¸® OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"  . (Enter Ô·Ö¼.)", 25.0f, L"Ã½ä¸® OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+			bgOrigin[i] = bgLayer[i]->GetPosition();
+			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
+
+			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
+		}
+
+		backgroundObject = std::make_shared<Object>("Background");
 		backgroundObject->AddComponent(parallax);
 	}
 
@@ -73,13 +73,13 @@ void Scene_04::Awake()
 
 	// Wind
 	{
-		// ì˜ˆì‹œ: í”Œë ˆì´ì–´ë¥¼ ë’¤ë¡œ ë°€ì–´ë‚´ëŠ” ë°”ëŒ ì˜ì—­ ìƒì„± 
-		// ì˜ˆë¥¼ ë“¤ì–´, xì¶• ê¸°ì¤€ìœ¼ë¡œ 300~500 ì‚¬ì´, yì¶•ì€ ì „ì²´, zëŠ” 0 (2D ê²Œì„ì´ë¼ ê°€ì •)
+		// ¿¹½Ã: ÇÃ·¹ÀÌ¾î¸¦ µÚ·Î ¹Ğ¾î³»´Â ¹Ù¶÷ ¿µ¿ª »ı¼º 
+		// ¿¹¸¦ µé¾î, xÃà ±âÁØÀ¸·Î 300~500 »çÀÌ, yÃàÀº ÀüÃ¼, z´Â 0 (2D °ÔÀÓÀÌ¶ó °¡Á¤)
 		Vector3 windRegionMin = { 45, -1000, 0 };
 		Vector3 windRegionMax = { 600, 1000, 0 };
-		// ë°”ëŒ ë°©í–¥: í”Œë ˆì´ì–´ë¥¼ ì™¼ìª½ìœ¼ë¡œ ë°€ì–´ë‚¸ë‹¤ê³  í•˜ë©´, (-1, 0, 0)
+		// ¹Ù¶÷ ¹æÇâ: ÇÃ·¹ÀÌ¾î¸¦ ¿ŞÂÊÀ¸·Î ¹Ğ¾î³½´Ù°í ÇÏ¸é, (-1, 0, 0)
 		Vector3 windDirection = { -1, 0, 0 };
-		float windIntensity = 220.0f; // ì ì ˆí•œ ê°’ ì¡°ì ˆ
+		float windIntensity = 220.0f; // ÀûÀıÇÑ °ª Á¶Àı
 		
 		windObject = std::make_shared<Wind>(Values::Center + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
 		windObject->AddComponent(std::make_shared<WindZone>("WindZone", Values::Center + windRegionMin, Values::Center + windRegionMax, windDirection, windIntensity));
@@ -87,9 +87,9 @@ void Scene_04::Awake()
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì €ê¸° ì—„ì²­ë‚œ ë°”ëŒì´ ë¶ˆì–´ì˜¤ëŠ”êµ°, ì € ë°”ìœ„ë¥¼ ë“¤ê³ ê°€ë©´ ë°€ë ¤ë‚˜ì§€ ì•Šì„ ìˆ˜ ìˆê² ì–´.", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"Àú±â ¾öÃ»³­ ¹Ù¶÷ÀÌ ºÒ¾î¿À´Â±º, Àú ¹ÙÀ§¸¦ µé°í°¡¸é ¹Ğ·Á³ªÁö ¾ÊÀ» ¼ö ÀÖ°Ú¾î.", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::Center + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì´ì œ ë‹¤ìŒìœ¼ë¡œ ê°€ì. (Enterë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.)", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ÀÌÁ¦ ´ÙÀ½À¸·Î °¡ÀÚ. (Enter¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.)", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::Center + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 

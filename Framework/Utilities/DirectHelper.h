@@ -2,17 +2,13 @@
 class Values
 {
 public:
-        // Screen related helpers are provided as functions so that
-        // they reflect the current resolution at any time.
-        static UINT GetWinWidth();
-        static UINT GetWinHeight();
-        static float GetCenterX();
-        static float GetCenterY();
-        static Vector3 GetCenter();
-        static Vector3 GetScreenSize();
+	const static UINT WinDefaultWidth;
+	const static UINT WinDefaultHeight;
 
-        const static float PI;
-        const static float Deg2Rad;
+	const static float PI;
+	const static float Deg2Rad;
+	const static float CenterX;
+	const static float CenterY;
 
 	const static Vector3 ZeroVec3;
 	const static Vector3 OneVec3;
@@ -21,6 +17,8 @@ public:
 	const static Vector3 UpVec;
 	const static Vector3 DownVec;
 	const static Vector3 FwdVec;
+	const static Vector3 ScreenSize;
+	const static Vector3 Center;
 
 	const static Vector2 ZeroVec2;
 	const static Vector2 OneVec2;
