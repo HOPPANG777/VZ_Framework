@@ -9,9 +9,9 @@
 class TextureRect : public Drawable, public IColorable
 {
 private:
-	vector<VertexTexture> vertices;
+	std::vector<VertexTexture> vertices;
 
-	vector<UINT> indices;
+	std::vector<UINT> indices;
 
 	ComPtr<ID3D11RasterizerState> rs = nullptr;
 
@@ -22,10 +22,10 @@ private:
 	ComPtr<ID3D11ShaderResourceView> srv = nullptr;
 
 	// 컬러 변환을 위한 상수 버퍼 (ColorBuffer)
-	unique_ptr<ColorBuffer> colorBuffer;
+	std::unique_ptr<ColorBuffer> colorBuffer;
 
 public:
-	TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path = L"", const TransformType type = TransformType::Normal, const wstring shaderPath = ShaderPath + L"VertexTexture.hlsl");
+	TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path = L"", const TransformType type = TransformType::Normal, const std::wstring shaderPath = ShaderPath + L"VertexTexture.hlsl");
 	~TextureRect();
 
 public:
@@ -35,7 +35,7 @@ public:
 public:
 	void SetSRV(ID3D11ShaderResourceView* srv) { this->srv = srv; }
 
-	void SetImage(wstring imagePath)
+	void SetImage(std::wstring imagePath)
 	{
 		// SRV 추출 // 그림 데이터 추출
 		HRESULT hr = D3DX11CreateShaderResourceViewFromFile

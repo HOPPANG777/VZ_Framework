@@ -2,7 +2,7 @@
 #include "LumberAxeComponent.h"
 
 // 생성자: 초기 상태, 속도, 중력, 직선 이동 시간 설정
-LumberAxeComponent::LumberAxeComponent(const string& name)
+LumberAxeComponent::LumberAxeComponent(const std::string& name)
     : Component(name), state(AxeState::AXE_IDLE_R), velocity(Vector3::Zero), gravity(980.0f), returnDuration(0.5f), straightFlightTime(0.3f)
 {
 
@@ -45,7 +45,7 @@ void LumberAxeComponent::Render()
         Vector3 throwDir = ComputeThrowDirection();
         float throwSpeed = 1000.0f;
         Vector3 initialVel = throwDir * throwSpeed;
-        vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
+        std::vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
         DrawTrajectory(trajPoints, 3.0f, WHITE);
     }
 }
@@ -203,9 +203,9 @@ Vector3 LumberAxeComponent::ComputeThrowDirection()
 }
 
 // 궤적 시뮬레이션 함수
-vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps)
+std::vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps)
 {
-    vector<Vector3> points;
+    std::vector<Vector3> points;
     points.reserve(numSteps);
 
     Vector3 simPos = startPos;
@@ -232,7 +232,7 @@ vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, 
 }
 
 // 궤적 그리기 함수
-void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color)
+void LumberAxeComponent::DrawTrajectory(const std::vector<Vector3>& points, float thickness, const Color& color)
 {
     for (size_t i = 0; i < points.size() - 1; i += 2)
     {

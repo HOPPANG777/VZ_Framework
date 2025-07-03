@@ -82,8 +82,8 @@ void MapTools::ImGUI()
         ImGui::SameLine();
         if (ImGui::Button("Save Map"))
         {
-            string fullPath = string(TilePath.begin(), TilePath.end()) + fileNameBuffer + ".data";
-            string fulltextPath = string(TilePath.begin(), TilePath.end()) + fileNameBuffer + ".txt";
+            std::string fullPath = std::string(TilePath.begin(), TilePath.end()) + fileNameBuffer + ".data";
+            std::string fulltextPath = std::string(TilePath.begin(), TilePath.end()) + fileNameBuffer + ".txt";
             if (tmap) 
             {
                 tmap->Save(fullPath);
@@ -94,8 +94,8 @@ void MapTools::ImGUI()
         if (ImGui::Button("Load Map"))
         {
             // 새 타일맵 생성 후 파일명으로 로드
-            tmap = make_unique<TileMap>(width, height, spacing, true);
-            string fullPath = string(TilePath.begin(), TilePath.end()) + fileNameBuffer + ".data";
+            tmap = std::make_unique<TileMap>(width, height, spacing, true);
+            std::string fullPath = std::string(TilePath.begin(), TilePath.end()) + fileNameBuffer + ".data";
             tmap->Load(fullPath);
         }
         //ImGui::SameLine();
@@ -126,10 +126,10 @@ void MapTools::ImGUI()
 
             if (ImGui::Button("Apply Tileset"))
             {
-                // 입력받은 타일셋 이름을 wstring으로 변환
-                wstring tileSetName = String::ToWstring(string(tileSetNameBuffer));
+                // 입력받은 타일셋 이름을 std::wstring으로 변환
+                std::wstring tileSetName = String::ToWstring(std::string(tileSetNameBuffer));
                 // 기본 경로 + "Tilesets/" + 사용자 입력 타일셋 이름
-                wstring newTilePath = TexturePath + L"Tilesets/" + tileSetName + L".png";
+                std::wstring newTilePath = TexturePath + L"Tilesets/" + tileSetName + L".png";
                 TileSetManager::Get()->ChangeTileMap(newTilePath, tileSetColumns, tileSetRows);
             }
         }
@@ -145,5 +145,5 @@ void MapTools::ImGUI()
 void MapTools::CreateDefaultMap()
 {
     // 새로운 타일맵 생성 (mapWidth x mapHeight, spacing 사용)
-    tmap = make_unique<TileMap>(width, height, spacing, true);
+    tmap = std::make_unique<TileMap>(width, height, spacing, true);
 }

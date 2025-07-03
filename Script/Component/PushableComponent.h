@@ -10,7 +10,7 @@
 class PushableComponent : public Component, public IInteractable
 {
 public:
-    PushableComponent(const string& name = "PushableComponent", float pushSpeed = 250.0f) : Component(name), pushSpeed(pushSpeed), isBeingPushed(false) {}
+    PushableComponent(const std::string& name = "PushableComponent", float pushSpeed = 250.0f) : Component(name), pushSpeed(pushSpeed), isBeingPushed(false) {}
     virtual ~PushableComponent() override = default;
 
 public:

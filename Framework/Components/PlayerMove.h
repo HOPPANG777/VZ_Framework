@@ -8,7 +8,7 @@
 class PlayerMove : public Component
 {
 public:
-    PlayerMove(const string& name = "PlayerMove", float spd = 250.0f);
+    PlayerMove(const std::string& name = "PlayerMove", float spd = 250.0f);
     virtual ~PlayerMove() override = default;
 
 public:
@@ -48,5 +48,5 @@ private:
     bool isCollision;     // 땅과 충돌(접촉) 여부
 
     // 충돌 대상(바닥 등)을 설정할 수 있다면 추가
-    shared_ptr<Object> overObject;
+    std::shared_ptr<Object> overObject;
 };

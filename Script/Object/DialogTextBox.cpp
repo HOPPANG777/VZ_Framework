@@ -1,21 +1,21 @@
 #include "stdafx.h"
 #include "DialogTextBox.h"
 
-DialogTextBox::DialogTextBox(const string& name, const Vector3& position, const Vector3& texturePosition, const Vector3& scale, const float rotation, const wstring& backgroundTexturePath, const wstring& arrowTexturePath, const wstring& text, const float fontSize, const wstring& font, const Color& fontColor)
+DialogTextBox::DialogTextBox(const std::string& name, const Vector3& position, const Vector3& texturePosition, const Vector3& scale, const float rotation, const std::wstring& backgroundTexturePath, const std::wstring& arrowTexturePath, const std::wstring& text, const float fontSize, const std::wstring& font, const Color& fontColor)
 	: Object(name, position, scale, rotation, TransformType::Rect), dialogText(text), fontSize(fontSize), fontName(font), fontColor(fontColor)
 {
     // 배경 생성
-    background = make_shared<TextureRect>(texturePosition, scale + Vector3(200, 0, 0), rotation, backgroundTexturePath, TransformType::Rect);
+    background = std::make_shared<TextureRect>(texturePosition, scale + Vector3(200, 0, 0), rotation, backgroundTexturePath, TransformType::Rect);
 
-	playerTexture = make_shared<TextureRect>(texturePosition + Vector3(-400, 100, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/Player.png");
+	playerTexture = std::make_shared<TextureRect>(texturePosition + Vector3(-400, 100, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/Player.png");
 
     // TypingText 컴포넌트 추가 (타이핑 효과)
-    std::shared_ptr<TypingText> typing = make_shared<TypingText>();
+    std::shared_ptr<TypingText> typing = std::make_shared<TypingText>();
     this->AddComponent(typing);
 
     // 화살표 인디케이터 생성 (배경 오른쪽 아래 위치에)
     Vector3 arrowPos = texturePosition + Vector3((scale.x + 200) * 0.45f, -scale.y * 0.18f, 0.0f);
-    arrowIndicator = make_shared<TextureRect>(arrowPos, Vector3(25, 25, 0), 0.0f, TexturePath + L"UI/Arrow.png");
+    arrowIndicator = std::make_shared<TextureRect>(arrowPos, Vector3(25, 25, 0), 0.0f, TexturePath + L"UI/Arrow.png");
 }
 
 void DialogTextBox::Update()

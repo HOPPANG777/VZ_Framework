@@ -15,7 +15,7 @@ class LumberAxeComponent : public Component
 {
 public:
     // 생성자: 기본 이름 "LumberAxeComponent"를 사용하며, 초기 상태는 Idle
-    LumberAxeComponent(const string& name = "LumberAxeComponent");
+    LumberAxeComponent(const std::string& name = "LumberAxeComponent");
     ~LumberAxeComponent() override = default;
 
 public:
@@ -54,8 +54,8 @@ private:
 private:
     // 도끼 던짐 관련 함수
     Vector3 ComputeThrowDirection();                                                                                    // 마우스 위치 또는 애니메이션 방향에 따른 던질 방향 계산
-    vector<Vector3> SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps);     // 주어진 초기 조건과 시간 간격에 따라 궤적 시뮬레이션
-    void DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color);                            // 계산된 궤적 점들을 화면에 점선 형태로 그리기
+    std::vector<Vector3> SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps);     // 주어진 초기 조건과 시간 간격에 따라 궤적 시뮬레이션
+    void DrawTrajectory(const std::vector<Vector3>& points, float thickness, const Color& color);                            // 계산된 궤적 점들을 화면에 점선 형태로 그리기
     
 
 private:

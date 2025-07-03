@@ -20,7 +20,7 @@ private:
     Vector2 offsetMax = { 50.0f,  50.0f }; // 앵커에 상대적인 최대 오프셋 (픽셀 단위)
 
 public:
-    RectTransform(const string& compName = "RectTransform") : Component(compName) {}
+    RectTransform(const std::string& compName = "RectTransform") : Component(compName) {}
     virtual ~RectTransform() override = default;
 
     virtual void Update() override;

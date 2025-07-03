@@ -2,11 +2,11 @@
 #include "ShakingText.h"
 
 void ShakingText::RenderText(
-    const wstring& text, 
+    const std::wstring& text, 
     const RECT& rect, 
     const float size, 
     const Color& color, 
-    const wstring& font, 
+    const std::wstring& font, 
     const DWRITE_FONT_WEIGHT& weight, 
     const DWRITE_FONT_STYLE& style, 
     const DWRITE_FONT_STRETCH& stretch)

@@ -2,7 +2,7 @@
 
 struct WinDesc
 {
-	wstring appName = L"";
+	std::wstring appName = L"";
 	HINSTANCE instance = nullptr;
 	HWND handle = nullptr;
 	UINT width;

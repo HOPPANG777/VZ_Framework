@@ -9,7 +9,7 @@
 class AnimationMove : public Component
 {
 public:
-    AnimationMove(const string& name = "AnimationMove");
+    AnimationMove(const std::string& name = "AnimationMove");
     virtual ~AnimationMove() override = default;
 
     virtual void Update() override;

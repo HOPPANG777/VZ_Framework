@@ -11,7 +11,7 @@ private:
 	UINT count = 0;
 
 public:
-	void Create(const vector<UINT>& indices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT)
+	void Create(const std::vector<UINT>& indices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT)
 	{
 		stride = sizeof(UINT);
 		count = UINT(indices.size());

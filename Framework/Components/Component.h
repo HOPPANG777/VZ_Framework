@@ -4,16 +4,16 @@ class Object;
 class Component
 {
 protected:
-	string name;
+	std::string name;
 	Object* owner = nullptr;
 
 public:
-	Component(const string& compName) : name(compName) {}
+	Component(const std::string& compName) : name(compName) {}
 	virtual ~Component() = default;
 
 public:
 	Object* GetOwner() const { return owner; }
-	string GetName() const { return name; }
+	std::string GetName() const { return name; }
 
 	void SetOwner(Object* obj) { owner = obj; }
 

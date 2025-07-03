@@ -1,25 +1,25 @@
 #include "Framework.h"
 #include "Object.h"
 
-Object::Object(const string& name, TransformType type)
+Object::Object(const std::string& name, TransformType type)
     : name(name)
 {
-    worldBuffer = make_unique<WorldBuffer>();
+    worldBuffer = std::make_unique<WorldBuffer>();
 
     // 선택에 따라 적절한 Transform 컴포넌트 추가
     if (type == TransformType::Normal)
     {
-        const auto& transform = make_shared<Transform>("Transform");
+        const auto& transform = std::make_shared<Transform>("Transform");
         AddComponent(transform);
     }
     else if (type == TransformType::Rect)
     {
-        const auto& rectTransform = make_shared<RectTransform>("RectTransform");
+        const auto& rectTransform = std::make_shared<RectTransform>("RectTransform");
         AddComponent(rectTransform);
     }
 }
 
-Object::Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
+Object::Object(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
     : Object(name, type)
 {
     // 타입에 따라 초기값 설정
@@ -51,7 +51,7 @@ Object::Object(const Object& other)
     // 복사 생성자 구현 (필요 시 components 복사)
 }
 
-void Object::AddComponent(const shared_ptr<Component>& component)
+void Object::AddComponent(const std::shared_ptr<Component>& component)
 {
     if (components.count(component->GetName())) return;
 
@@ -64,12 +64,12 @@ void Object::RemoveComponent(const std::string& compName)
     components.erase(compName);
 }
 
-shared_ptr<Transform> Object::GetTransform() const
+std::shared_ptr<Transform> Object::GetTransform() const
 {
     return GetComponent<Transform>("Transform");
 }
 
-shared_ptr<RectTransform> Object::GetRectTransform() const
+std::shared_ptr<RectTransform> Object::GetRectTransform() const
 {
     return GetComponent<RectTransform>("RectTransform");
 }

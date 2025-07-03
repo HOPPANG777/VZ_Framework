@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "Texture2DManager.h"
 
-vector<TextureDesc> Texture2DManager::descs;
+std::vector<TextureDesc> Texture2DManager::descs;
 
 Texture2DManager::Texture2DManager() {}
 
@@ -24,7 +24,7 @@ void Texture2DManager::Load(Texture2D* texture)
     TexMetadata metaData;
 
     // 파일 확장자 추출
-    wstring ext = Path::GetExtension(texture->filePath);
+    std::wstring ext = Path::GetExtension(texture->filePath);
 
     // 확장자에 따라 메타데이터 읽기
     if (ext == L"tga")

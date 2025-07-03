@@ -8,7 +8,7 @@
 class InteractionComponent : public Component
 {
 public:
-    InteractionComponent(const string& name = "InteractionComponent") : Component(name) {}
+    InteractionComponent(const std::string& name = "InteractionComponent") : Component(name) {}
     virtual ~InteractionComponent() override = default;
 
 public:

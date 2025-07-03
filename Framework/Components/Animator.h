@@ -10,7 +10,7 @@ class Animator : public Component
 {
 public:
     // 생성자에서 Component 이름 "Animator" 지정
-    Animator(const string& compName = "Animator")
+    Animator(const std::string& compName = "Animator")
         : Component(compName)
     {
     }
@@ -23,8 +23,8 @@ public:
 
 public:
     // ---------- 기존 Animator 멤버들 그대로 유지 ----------
-    void AddAnimClip(const shared_ptr<AnimationClip>& animClip);
-    void SetCurrentAnimClip(const wstring& clipName);
+    void AddAnimClip(const std::shared_ptr<AnimationClip>& animClip);
+    void SetCurrentAnimClip(const std::wstring& clipName);
 
 public:
     Vector2 GetCurrentFrame() const { return currentFrame; }
@@ -76,8 +76,8 @@ private:
 
 private:
     // ---------- 애니메이션 클립 자료구조 ----------
-    unordered_map<wstring, shared_ptr<AnimationClip>> animClips;
-    shared_ptr<AnimationClip> currentClip = nullptr;
+    std::unordered_map<std::wstring, std::shared_ptr<AnimationClip>> animClips;
+    std::shared_ptr<AnimationClip> currentClip = nullptr;
 
     // 애니메이션 재생 관련
     UINT    currentFrameIndex = 0;

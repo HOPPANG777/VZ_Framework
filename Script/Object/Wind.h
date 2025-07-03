@@ -5,7 +5,7 @@
 class Wind : public AnimationRect
 {
 public:
-	Wind(const Vector3& position, const Vector3& scale, const float rotation, const wstring path = L"");
+	Wind(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path = L"");
 	~Wind();
 
 public:

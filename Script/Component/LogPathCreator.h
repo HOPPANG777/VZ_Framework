@@ -6,7 +6,7 @@
 class LogPathCreator : public Component
 {
 public:
-    LogPathCreator(const string& name = "LogPathCreator") : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0) {}
+    LogPathCreator(const std::string& name = "LogPathCreator") : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0) {}
     virtual ~LogPathCreator() override = default;
 
 public:

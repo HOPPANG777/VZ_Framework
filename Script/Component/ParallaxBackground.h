@@ -11,7 +11,7 @@ class ParallaxBackground : public Component
 
 public:
     // 생성자: layerCount는 실제 사용하는 레이어 수 (기본 5)
-    ParallaxBackground(const string& compName = "ParallaxBackground", int layerCount = 5);
+    ParallaxBackground(const std::string& compName = "ParallaxBackground", int layerCount = 5);
     virtual ~ParallaxBackground() override = default;
 
 public:

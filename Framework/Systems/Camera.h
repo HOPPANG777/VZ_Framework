@@ -38,7 +38,7 @@ public:
 
 private:
 	Matrix view, proj;
-	unique_ptr<ViewProjectionBuffer> VPBuffer;
+	std::unique_ptr<ViewProjectionBuffer> VPBuffer;
 
 	Vector3 position = Values::ZeroVec3;
 

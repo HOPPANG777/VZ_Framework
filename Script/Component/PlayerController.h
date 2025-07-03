@@ -12,7 +12,7 @@ class PlayerController : public Component
 {
 public:
     // 생성자: 기본 이동 속도(speed)를 전달 (기본값 250)
-    PlayerController(const string& name = "PlayerController", float speed = 250.0f);
+    PlayerController(const std::string& name = "PlayerController", float speed = 250.0f);
     virtual ~PlayerController() override = default;
 
 public:

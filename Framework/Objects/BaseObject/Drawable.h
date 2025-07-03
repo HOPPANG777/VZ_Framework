@@ -10,21 +10,21 @@
 class Drawable : public Object
 {
 protected:
-	unique_ptr<VertexBuffer> vertexBuffer;
-	unique_ptr<IndexBuffer> indexBuffer;
+	std::unique_ptr<VertexBuffer> vertexBuffer;
+	std::unique_ptr<IndexBuffer> indexBuffer;
 
-	unique_ptr<VertexShader> vertexShader;
+	std::unique_ptr<VertexShader> vertexShader;
 
-	unique_ptr<InputLayout> inputLayout;
+	std::unique_ptr<InputLayout> inputLayout;
 
-	unique_ptr<PixelShader> pixelShader;
+	std::unique_ptr<PixelShader> pixelShader;
 
-	wstring shaderPath = L"";
+	std::wstring shaderPath = L"";
 
 	TransformType type;
 
 public:
-	Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const wstring& shaderPath = L"");
+	Drawable(const std::string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const std::wstring& shaderPath = L"");
 	
 	Drawable(const Drawable& other)
 		: Drawable(other.name, other.GetPosition(), other.GetScale(), other.GetRotation(), other.type, other.shaderPath)

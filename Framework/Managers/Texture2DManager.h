@@ -14,7 +14,7 @@ public:
 	void Delete();
 
 private:
-	static vector<TextureDesc> descs;
+	static std::vector<TextureDesc> descs;
 
 };
 

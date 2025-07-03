@@ -7,8 +7,8 @@
 class FloorCollision : public Component
 {
 public:
-    // player: 충돌 검사 대상인 플레이어 오브젝트 (shared_ptr 또는 raw pointer)
-    FloorCollision(const string& name) : Component(name) {}
+    // player: 충돌 검사 대상인 플레이어 오브젝트 (std::shared_ptr 또는 raw pointer)
+    FloorCollision(const std::string& name) : Component(name) {}
     virtual ~FloorCollision() override = default;
 
 public:

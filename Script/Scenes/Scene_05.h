@@ -36,27 +36,27 @@ private:
 	bool isTest = false;
 	bool isTest2 = false;
 
-	shared_ptr<Object> testPlayer;
-	shared_ptr<Object> lumberAxe;
+	std::shared_ptr<Object> testPlayer;
+	std::shared_ptr<Object> lumberAxe;
 
-	shared_ptr<Object> bback;
+	std::shared_ptr<Object> bback;
 
-	vector<shared_ptr<Object>> floor;
-	vector<shared_ptr<Object>> wall;
-	vector<shared_ptr<Object>> text;
-	vector<shared_ptr<Object>> textPoint;
+	std::vector<std::shared_ptr<Object>> floor;
+	std::vector<std::shared_ptr<Object>> wall;
+	std::vector<std::shared_ptr<Object>> text;
+	std::vector<std::shared_ptr<Object>> textPoint;
 
-	shared_ptr<Object> ladder;
-	shared_ptr<Object> ladder2;
+	std::shared_ptr<Object> ladder;
+	std::shared_ptr<Object> ladder2;
 
-	shared_ptr<Object> backgroundObject;
+	std::shared_ptr<Object> backgroundObject;
 
-	shared_ptr<Object> bgLayer[5];
-	shared_ptr<Object> bgLayerDup[5];
+	std::shared_ptr<Object> bgLayer[5];
+	std::shared_ptr<Object> bgLayerDup[5];
 	Vector3 bgOrigin[5];
 	Vector3 bgOriginDup[5];
 
-	unique_ptr<TileMap> tmap;
+	std::unique_ptr<TileMap> tmap;
 
 };
 

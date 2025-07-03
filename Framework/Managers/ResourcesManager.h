@@ -7,13 +7,13 @@ class ResourcesManager
 
 public:
     // 단순 시뮬레이션: 각 리소스 당 100ms 소요
-    void LoadResource(const string& resource);
-    bool IsResourceLoaded(const string& resource);
-    bool AreResourcesLoaded(const vector<string>& resources);
+    void LoadResource(const std::string& resource);
+    bool IsResourceLoaded(const std::string& resource);
+    bool AreResourcesLoaded(const std::vector<std::string>& resources);
 
 private:
-    mutex mtx;
-    unordered_set<string> loadedResources;
+    std::mutex mtx;
+    std::unordered_set<std::string> loadedResources;
 
 };
 

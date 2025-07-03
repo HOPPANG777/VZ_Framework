@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "AnimationRect.h"
 
-AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path)
+AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path)
     : Drawable("AnimationRect", position, scale, rotation, TransformType::Normal, ShaderPath + L"VertexTexture.hlsl")
 {
     // Vertex 설정
@@ -95,7 +95,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
 
     // 4) Animator 컴포넌트를 등록
     {
-        const std::shared_ptr<Animator>& animatorComp = make_shared<Animator>("Animator");
+        const std::shared_ptr<Animator>& animatorComp = std::make_shared<Animator>("Animator");
         AddComponent(animatorComp);
 
         // ※ 여기서 애니메이션 클립들을 등록할 수도 있음
@@ -107,14 +107,14 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
 
     // 5) ColorBuffer 생성
     {
-        colorBuffer = make_unique<ColorBuffer>();
+        colorBuffer = std::make_unique<ColorBuffer>();
     }
 
     #pragma region OldTestClip
     //// AnimationClip 생성
     //{
-    //    // Texture2D를 shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
-    //    shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
+    //    // Texture2D를 std::shared_ptr로 관리 (Animator, AnimationClip과 동일 생명주기 사용)
+    //    std::shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
     
     //    // 예: 아래 두 클립을 만든다고 가정
     //    auto RunD = std::make_shared<AnimationClip>(

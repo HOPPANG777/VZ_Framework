@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "AnimationMove.h"
 
-AnimationMove::AnimationMove(const string& name)
+AnimationMove::AnimationMove(const std::string& name)
     : Component(name), currentAnimation(UnitAnimationType::IDLE_R), isDead(false)
 {
 }

@@ -5,7 +5,7 @@
 class EnemyAI : public Component
 {
 public:
-	EnemyAI(const string& name = "EnemyAI") : Component(name) {}
+	EnemyAI(const std::string& name = "EnemyAI") : Component(name) {}
 	~EnemyAI() override = default;
 
 public:

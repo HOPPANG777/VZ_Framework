@@ -26,8 +26,8 @@ class AnimationRect : public Drawable, public IColorable
 private:
     AnimState animState = AnimState::ANIMATION_LEFT;
 
-    vector<VertexTexture> vertices;
-    vector<UINT> indices;
+    std::vector<VertexTexture> vertices;
+    std::vector<UINT> indices;
 
     // RS, Blend, Sampler 등 D3D 리소스
     ComPtr<ID3D11RasterizerState> rs = nullptr;
@@ -40,7 +40,7 @@ private:
     D3D11_MAPPED_SUBRESOURCE subRe;
 
     // 컬러 변환을 위한 상수 버퍼 (ColorBuffer)
-    unique_ptr<ColorBuffer> colorBuffer;
+    std::unique_ptr<ColorBuffer> colorBuffer;
 
 public:
     AnimationRect(const Vector3& position, const Vector3& scale, float rotation, const std::wstring path = L"");
@@ -81,6 +81,6 @@ public:
 
 public:
     // 필요 시 Animator를 직접 얻어올 수 있는 헬퍼함수
-    shared_ptr<Animator> GetAnimator() { return GetComponent<Animator>("Animator"); }
+    std::shared_ptr<Animator> GetAnimator() { return GetComponent<Animator>("Animator"); }
     
 };

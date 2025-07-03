@@ -25,8 +25,8 @@ public:
 	void ImGUI();
 
 private:
-	//vector<shared_ptr<Scene>> sceneList;
-	//shared_ptr<Scene> currentScene;
+	//std::vector<std::shared_ptr<Scene>> sceneList;
+	//std::shared_ptr<Scene> currentScene;
 
 	bool isFullScreen = false;
 };

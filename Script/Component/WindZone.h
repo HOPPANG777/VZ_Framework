@@ -9,7 +9,7 @@ class WindZone : public Component
 public:
     // regionMin, regionMax: 바람이 적용될 영역, windDirection: 바람의 방향 (정규화되어 있어야 함)
     // intensity: 바람 세기 (속도 단위, 예: 픽셀/초 또는 게임 단위)
-    WindZone(const string& name,
+    WindZone(const std::string& name,
         const Vector3& regionMin,
         const Vector3& regionMax,
         const Vector3& windDirection,

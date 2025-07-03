@@ -9,7 +9,7 @@
 class LadderComponent : public Component
 {
 public:
-	LadderComponent(const string& name = "LadderComponent") : Component(name) {}
+	LadderComponent(const std::string& name = "LadderComponent") : Component(name) {}
 	virtual ~LadderComponent() override = default;
 
 public:

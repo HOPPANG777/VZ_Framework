@@ -2,7 +2,7 @@
 #include "PlayerController.h"
 
 // 생성자: 속도, 중력 초기값 등 설정
-PlayerController::PlayerController(const string& name, float spd)
+PlayerController::PlayerController(const std::string& name, float spd)
     : Component(name),
     speed(spd),
     currentSpeed(spd),
@@ -127,7 +127,7 @@ void PlayerController::UpdateAnimation()
     if (!animator) return;
 
     // 현재 재생 중인 클립 이름을 가져옴
-    wstring currentClip = animator->GetCurrentClipName();
+    std::wstring currentClip = animator->GetCurrentClipName();
 
     UnitAnimationType newState = currentAnimation;
 

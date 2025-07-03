@@ -8,9 +8,9 @@
 class ColorRect : public Drawable, public IColorable
 {
 private:
-	vector<VertexColor> vertices;
+	std::vector<VertexColor> vertices;
 	
-	vector<UINT> indices;
+	std::vector<UINT> indices;
 
 	Color color;
 

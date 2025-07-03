@@ -125,7 +125,7 @@ void Graphics::EnumerateAdapters()
         if (hr == DXGI_ERROR_NOT_FOUND) break;
         assert(SUCCEEDED(hr));
 
-        std::unique_ptr<D3DEnumAdapterInfo> adapterInfo = make_unique<D3DEnumAdapterInfo>();
+        std::unique_ptr<D3DEnumAdapterInfo> adapterInfo = std::make_unique<D3DEnumAdapterInfo>();
         adapterInfo->adapterOrdinal = index;
 
         // 기수 / 서수
@@ -148,7 +148,7 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
     if (DXGI_ERROR_NOT_FOUND == hr) return false;
     CHECK(hr);
 
-    std::shared_ptr<D3DEnumOutputInfo> outputInfo = make_shared<D3DEnumOutputInfo>();
+    std::shared_ptr<D3DEnumOutputInfo> outputInfo = std::make_shared<D3DEnumOutputInfo>();
 
     output->GetDesc(&outputInfo->outputDesc);
     outputInfo->output = output;
@@ -159,7 +159,7 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
     hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &numModes, nullptr);
     CHECK(hr);
 
-    unique_ptr<DXGI_MODE_DESC[]> displayModes = make_unique<DXGI_MODE_DESC[]>(numModes);
+    std::unique_ptr<DXGI_MODE_DESC[]> displayModes = std::make_unique<DXGI_MODE_DESC[]>(numModes);
 
     hr = output->GetDisplayModeList(format, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModes.get());
     CHECK(hr);
@@ -215,7 +215,7 @@ void Graphics::CreateDirect3D()
     desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     desc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
-    vector<D3D_FEATURE_LEVEL> featureLevels
+    std::vector<D3D_FEATURE_LEVEL> featureLevels
     {
         D3D_FEATURE_LEVEL_11_1,
         D3D_FEATURE_LEVEL_11_0,
@@ -226,7 +226,7 @@ void Graphics::CreateDirect3D()
     UINT maxVRam = 0;
     for (UINT i = 0; i < adapterInfos.size(); i++)
     {
-        // adapterInfos[i]는 unique_ptr
+        // adapterInfos[i]는 std::unique_ptr
         std::unique_ptr<D3DEnumAdapterInfo>& info = adapterInfos[i];
         UINT64 dedicatedMem = info->adapterDesc.DedicatedVideoMemory;
 
@@ -240,12 +240,12 @@ void Graphics::CreateDirect3D()
     // 출력해보기
     for (size_t i = 0; i < adapterInfos.size(); i++)
     {
-        wcout << L"GPU Name : " << adapterInfos[i]->adapterDesc.Description << endl;
-        cout << "VRAM : " << adapterInfos[i]->adapterDesc.DedicatedVideoMemory << endl;
-        cout << endl;
+        std::wcout << L"GPU Name : " << adapterInfos[i]->adapterDesc.Description << std::endl;
+        std::cout << "VRAM : " << adapterInfos[i]->adapterDesc.DedicatedVideoMemory << std::endl;
+        std::cout << std::endl;
     }
 
-    wcout << L"Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << endl;
+    std::wcout << L"Selected GPU Name : " << adapterInfos[selectedAdapterIndex]->adapterDesc.Description << std::endl;
 
     ComPtr<IDXGIAdapter1> chosenAdapter = adapterInfos[selectedAdapterIndex]->adapter;
 
@@ -394,7 +394,7 @@ void Graphics::SetResolution(UINT width, UINT height)
     //}
 }
 
-bool Graphics::LoadCustomFont(const wstring& fontFilePath)
+bool Graphics::LoadCustomFont(const std::wstring& fontFilePath)
 {
     // FR_PRIVATE: 현재 프로세스에서만 등록
     int ret = AddFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);
@@ -411,7 +411,7 @@ bool Graphics::LoadCustomFont(const wstring& fontFilePath)
     return true;
 }
 
-bool Graphics::UnloadCustomFont(const wstring& fontFilePath)
+bool Graphics::UnloadCustomFont(const std::wstring& fontFilePath)
 {
     // FR_PRIVATE: 현재 프로세스에서만 등록
     int ret = RemoveFontResourceExW(fontFilePath.c_str(), FR_NOT_ENUM, 0);

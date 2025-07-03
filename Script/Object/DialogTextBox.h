@@ -8,7 +8,7 @@
 class DialogTextBox : public Object
 {
 public:
-    DialogTextBox(const string& name, const Vector3& position, const Vector3& texturePosition, const Vector3& scale, const float rotation, const wstring& backgroundTexturePath, const wstring& arrowTexturePath, const wstring& text, const float fontSize = 25.0f , const wstring& font = L"Pretendard JP", const Color& fontColor = BLACK);
+    DialogTextBox(const std::string& name, const Vector3& position, const Vector3& texturePosition, const Vector3& scale, const float rotation, const std::wstring& backgroundTexturePath, const std::wstring& arrowTexturePath, const std::wstring& text, const float fontSize = 25.0f , const std::wstring& font = L"Pretendard JP", const Color& fontColor = BLACK);
     virtual ~DialogTextBox() = default;
 
 public:
@@ -23,13 +23,13 @@ public:
 
 private:
     // 대화 텍스트
-    shared_ptr<Object> background;
-    shared_ptr<Object> arrowIndicator;
-	shared_ptr<Object> playerTexture;
+    std::shared_ptr<Object> background;
+    std::shared_ptr<Object> arrowIndicator;
+	std::shared_ptr<Object> playerTexture;
 
     // 배경, 텍스트, 화살표 아이콘 객체
-    wstring dialogText;
-	wstring fontName;
+    std::wstring dialogText;
+	std::wstring fontName;
 	Color fontColor;
     float fontSize;
     bool textComplete = false;

@@ -12,7 +12,7 @@ public:
     // SRV는 Texture2D로부터 얻어오고, 계산된 UV 프레임들을 저장
     AnimationClip
     (
-        const wstring& clipName,
+        const std::wstring& clipName,
         Texture2D* srcTex,
         UINT columns,    // 가로 프레임 수
         UINT rows,       // 세로 프레임 수
@@ -23,8 +23,8 @@ public:
     );
 
 private:
-    wstring clipName = L"";
-    vector<Vector2> keyFrames;          // 각 프레임의 UV(텍셀) 좌표
+    std::wstring clipName = L"";
+    std::vector<Vector2> keyFrames;          // 각 프레임의 UV(텍셀) 좌표
     UINT frameCount = 0;
 
     // 원본에서는 Raw Pointer였지만, 이제는 ComPtr

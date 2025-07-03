@@ -1,33 +1,33 @@
 #include "Framework.h"
 #include "Drawable.h"
 
-Drawable::Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const wstring& shaderPath)
+Drawable::Drawable(const std::string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const std::wstring& shaderPath)
 	: Object(name, position, scale, rotation, type), shaderPath(shaderPath)
 {
 	//VertexBuffer
 	{
-		vertexBuffer = make_unique<VertexBuffer>();
+		vertexBuffer = std::make_unique<VertexBuffer>();
 	}
 
 	//VertexShader
 	{
-		vertexShader = make_unique<VertexShader>();
+		vertexShader = std::make_unique<VertexShader>();
 		vertexShader->Create(shaderPath, "VS");
 	}
 
 	//IndexBuffer
 	{
-		indexBuffer = make_unique<IndexBuffer>();
+		indexBuffer = std::make_unique<IndexBuffer>();
 	}
 
 	//InputLayout
 	{
-		inputLayout = make_unique<InputLayout>();
+		inputLayout = std::make_unique<InputLayout>();
 	}
 
 	//PixelShader
 	{
-		pixelShader = make_unique <PixelShader>();
+		pixelShader = std::make_unique <PixelShader>();
 		pixelShader->Create(shaderPath, "PS");
 	}
 }

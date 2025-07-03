@@ -33,14 +33,8 @@
 #include <sstream>
 #include <exception>
 
-using namespace std;
-
 #define WIN_DEFAULT_WIDTH 1280
-//#define WIN_DEFAULT_WIDTH 1920
-//#define WIN_DEFAULT_WIDTH 2560
 #define WIN_DEFAULT_HEIGHT 720
-//#define WIN_DEFAULT_HEIGHT 1080
-//#define WIN_DEFAULT_HEIGHT 1440
 
 #define CENTER_X (WIN_DEFAULT_WIDTH / 2)
 #define CENTER_X_2_1 (WIN_DEFAULT_WIDTH / 2.1f)
@@ -129,9 +123,9 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 #define GRAY Color(0.4f, 0.4f, 0.4f, 1.0f)
 #define CLEAR_COLOR Color(0xcff0cc);
 
-const wstring ShaderPath = L"_Data/_Shaders/";
-const wstring TexturePath = L"_Data/_Textures/";
-const wstring SoundPath = L"_Data/_Sounds/";
-const wstring FontPath = L"_Data/_Fonts/";
-const string TilePath = "../../../_Data/_TileData/";
-const string BuildTilePath = "_Data/_TileData/";
+const std::wstring ShaderPath = L"_Data/_Shaders/";
+const std::wstring TexturePath = L"_Data/_Textures/";
+const std::wstring SoundPath = L"_Data/_Sounds/";
+const std::wstring FontPath = L"_Data/_Fonts/";
+const std::string TilePath = "../../../_Data/_TileData/";
+const std::string BuildTilePath = "_Data/_TileData/";

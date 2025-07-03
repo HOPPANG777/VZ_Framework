@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "JumpHoppang.h"
 
-JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
+JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring& path)
     : AnimationRect(position, scale, rotation, path)
 {
     // "path"로부터 Texture2D 로드 & Animator 생성은 
@@ -10,16 +10,16 @@ JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const fl
     // 이제 로딩 아이콘에 맞는 애니메이션 클립을 등록
     // 예: 가로 7프레임
     //    한 프레임 크기는 50x50, 총 이미지(350×50)라 가정
-    const std::shared_ptr<Texture2D>& tex = make_shared<Texture2D>(path);
+    const std::shared_ptr<Texture2D>& tex = std::make_shared<Texture2D>(path);
 
     // AnimationClip 생성 (이름: "Loading")
     // - frameCount : 7
     // - startPos   : (0, 0)
     // - endPos     : (350, 50)  (tex->GetWidth(), tex->GetHeight() 라고 가정)
-    const std::shared_ptr<AnimationClip>& loadingClip = make_shared<AnimationClip>
+    const std::shared_ptr<AnimationClip>& loadingClip = std::make_shared<AnimationClip>
     (
         L"Loading",      // clipName
-        tex.get(),             // Texture2D (shared_ptr)
+        tex.get(),             // Texture2D (std::shared_ptr)
         7,               // frameCount
         1,
         Values::ZeroVec2,

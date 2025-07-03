@@ -1,16 +1,16 @@
 #include "Framework.h"
 #include "FileStream.h"
 
-FileStream::FileStream(string path, UINT flags)
+FileStream::FileStream(std::string path, UINT flags)
     : flag(flags)
 {
-    int iosFlags = ios::binary;
+    int iosFlags = std::ios::binary;
 
     // 쓰기 / 읽기 모드로 열리는지 확인
     iosFlags |= flags && FILE_STREAM_WRITE
-        ? ios::out : 0;
+        ? std::ios::out : 0;
     iosFlags |= flags && FILE_STREAM_READ
-        ? ios::in : 0;
+        ? std::ios::in : 0;
 
     if (flags & FILE_STREAM_WRITE)
     {

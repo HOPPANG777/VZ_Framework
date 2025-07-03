@@ -25,14 +25,14 @@ void Program::Awake()
 
 	//Scene ¼¼ÆÃ
 	{
-		SceneManager::Get()->AddScene("LoadingScene", make_shared<Scene_00>());
-		SceneManager::Get()->AddScene("TitleScene", make_shared<Scene_01>());
-		SceneManager::Get()->AddScene("SplashScene", make_shared<Scene_02>());
-		SceneManager::Get()->AddScene("StartStage", make_shared<Scene_03>());
-		SceneManager::Get()->AddScene("Stage01", make_shared<Scene_04>());
-		SceneManager::Get()->AddScene("Stage02", make_shared<Scene_05>());
-		SceneManager::Get()->AddScene("Stage03", make_shared<Scene_06>());
-		SceneManager::Get()->AddScene("PuzzleStage", make_shared<Scene_07>());
+		SceneManager::Get()->AddScene("LoadingScene", std::make_shared<Scene_00>());
+		SceneManager::Get()->AddScene("TitleScene", std::make_shared<Scene_01>());
+		SceneManager::Get()->AddScene("SplashScene", std::make_shared<Scene_02>());
+		SceneManager::Get()->AddScene("StartStage", std::make_shared<Scene_03>());
+		SceneManager::Get()->AddScene("Stage01", std::make_shared<Scene_04>());
+		SceneManager::Get()->AddScene("Stage02", std::make_shared<Scene_05>());
+		SceneManager::Get()->AddScene("Stage03", std::make_shared<Scene_06>());
+		SceneManager::Get()->AddScene("PuzzleStage", std::make_shared<Scene_07>());
 
 		SceneManager::Get()->SetSplashScene("SplashScene");
 
@@ -111,7 +111,7 @@ int APIENTRY wWinMain
 	desc.height = gWinHeight;
 	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_HOPPANG));
 
-	auto window = make_unique<Window>(desc);
+	auto window = std::make_unique<Window>(desc);
 	WPARAM wParam = window->Run();
 
 	return int(wParam);

@@ -16,7 +16,7 @@ void TileSetManager::Init()
     // 기본 타일셋 경로 설정
     tilePath = TexturePath + L"Tilesets/tile.png";
 
-    // Texture2D 객체를 unique_ptr로 생성
+    // Texture2D 객체를 std::unique_ptr로 생성
     const auto& tex = std::make_unique<Texture2D>(tilePath);
     // Texture2D 내부에서 ComPtr<ID3D11ShaderResourceView>를 관리하고 있다면 GetSRV()를 사용
     tileSRV = tex->GetSRV();

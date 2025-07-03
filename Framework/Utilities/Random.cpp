@@ -3,9 +3,9 @@
 
 int Random::Range(int p_Min, int p_Max)
 {
-	random_device randDevice;
+	std::random_device randDevice;
 
-	uniform_int_distribution<int> intRand(p_Min, p_Max);
+	std::uniform_int_distribution<int> intRand(p_Min, p_Max);
 
 	int iValue = intRand(randDevice);
 
@@ -14,9 +14,9 @@ int Random::Range(int p_Min, int p_Max)
 
 float Random::Range(float p_Min, float p_Max)
 {
-	random_device randDevice;
+	std::random_device randDevice;
 
-	uniform_real_distribution<float> floatRand(p_Min, p_Max);
+	std::uniform_real_distribution<float> floatRand(p_Min, p_Max);
 
 	float fValue = floatRand(randDevice);
 

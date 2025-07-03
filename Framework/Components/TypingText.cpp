@@ -3,18 +3,18 @@
 
 void TypingText::RenderText
 (
-	const wstring& text,
+	const std::wstring& text,
 	const RECT& rect,
 	const float size,
 	const Color& color,
-	const wstring& font,
+	const std::wstring& font,
 	const DWRITE_FONT_WEIGHT& weight,
 	const DWRITE_FONT_STYLE& style,
 	const DWRITE_FONT_STRETCH& stretch
 )
 {
 	// 전체 텍스트(fullText) 대신, visibleCharacters만큼 자른 텍스트를 렌더링
-	wstring visibleText = text.substr(0, visibleCharacters);
+	std::wstring visibleText = text.substr(0, visibleCharacters);
 	fullText = text;
 	Texts::RenderText(visibleText, rect, size, color, font, weight, style, stretch);
 }

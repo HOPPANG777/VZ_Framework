@@ -8,7 +8,7 @@
 class LumberAxeAnimation : public Component
 {
 public:
-    LumberAxeAnimation(const string& name = "LumberAxeAnimation") : Component(name) {};
+    LumberAxeAnimation(const std::string& name = "LumberAxeAnimation") : Component(name) {};
     virtual ~LumberAxeAnimation() override = default;
 
     // Component 인터페이스

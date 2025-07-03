@@ -7,7 +7,7 @@
 class HitComponent : public Component
 {
 public:
-    HitComponent(const string& name = "HitComponent") : Component(name), active(false), timer(0.0f), duration(0.0f), originalColor(WHITE), flashColor(Color(1, 0, 0, 1))
+    HitComponent(const std::string& name = "HitComponent") : Component(name), active(false), timer(0.0f), duration(0.0f), originalColor(WHITE), flashColor(Color(1, 0, 0, 1))
     {
 
     }

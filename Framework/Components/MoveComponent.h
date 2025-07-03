@@ -7,7 +7,7 @@
 class MoveComponent : public Component
 {
 public:
-	MoveComponent(const string& name = "Move", const float maxSpeed = 300.0f) : Component(name), maxSpeed(maxSpeed) {}
+	MoveComponent(const std::string& name = "Move", const float maxSpeed = 300.0f) : Component(name), maxSpeed(maxSpeed) {}
 	~MoveComponent() override = default;
 
 public:

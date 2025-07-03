@@ -40,6 +40,6 @@ private:
 
 	WinDesc desc;
 
-	static unique_ptr<class Program> program;
+	static std::unique_ptr<class Program> program;
 
 };

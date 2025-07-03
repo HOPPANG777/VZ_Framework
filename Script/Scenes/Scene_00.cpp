@@ -8,13 +8,13 @@ void Scene_00::Start()
 	isLoaded = false;
 
 	{
-		objects.push_back(make_shared<ColorRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, BLACK));
-		objects.push_back(make_shared<JumpHoppang>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 0.93f, WIN_DEFAULT_HEIGHT * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/LoadingIcon.png"));
+		objects.push_back(std::make_shared<ColorRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, BLACK));
+		objects.push_back(std::make_shared<JumpHoppang>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 0.93f, WIN_DEFAULT_HEIGHT * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/LoadingIcon.png"));
 	}
 	
 	{
-		LoadingTextObject = make_shared<Object>("LoadingText", CENTER + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
-		LoadingTextObject->AddComponent(make_shared<Texts>());
+		LoadingTextObject = std::make_shared<Object>("LoadingText", CENTER + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+		LoadingTextObject->AddComponent(std::make_shared<Texts>());
 	}
 	
 	Camera::Get()->Reset();

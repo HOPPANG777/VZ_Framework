@@ -9,7 +9,7 @@ class WallCollision : public Component
 {
 public:
     // player: 충돌 검사 대상인 플레이어 오브젝트,
-    WallCollision(const string& name, bool isRight) : Component(name), rightWall(isRight) {}
+    WallCollision(const std::string& name, bool isRight) : Component(name), rightWall(isRight) {}
     virtual ~WallCollision() override = default;
 
 public:

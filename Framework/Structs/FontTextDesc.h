@@ -2,7 +2,7 @@
 
 struct FontTextDesc
 {
-	wstring font;
+	std::wstring font;
 	float fontSize;
 
 	DWRITE_FONT_WEIGHT weight;

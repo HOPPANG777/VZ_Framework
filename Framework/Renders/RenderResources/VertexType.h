@@ -13,7 +13,7 @@ struct VertexColor
 		
 	};
 
-	static vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
+	static std::vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
 };
 
 
@@ -30,7 +30,7 @@ struct VertexTexture
 
 	}
 
-	static vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
+	static std::vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
 };
 
 struct VertexTile
@@ -48,7 +48,7 @@ struct VertexTile
 
 	}
 
-	static vector<D3D11_INPUT_ELEMENT_DESC> isDescs;
+	static std::vector<D3D11_INPUT_ELEMENT_DESC> isDescs;
 };
 
 

@@ -2,7 +2,7 @@
 #include "Window.h"
 #include "../Client/Program.h"
 
-unique_ptr<Program> Window::program = nullptr;
+std::unique_ptr<Program> Window::program = nullptr;
 
 Window::Window(const WinDesc& initDesc)
 	: desc(initDesc)
@@ -79,7 +79,7 @@ ATOM Window::MyRegisterClass(const WinDesc& desc)
 
 WPARAM Window::Run()
 {
-	program = make_unique<Program>();
+	program = std::make_unique<Program>();
 	program->Awake();
 	program->Start();
 

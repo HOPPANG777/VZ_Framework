@@ -5,12 +5,12 @@ CollisionManager::CollisionManager() {}
 
 CollisionManager::~CollisionManager() {}
 
-void CollisionManager::AddCollider(shared_ptr<Collider> collider)
+void CollisionManager::AddCollider(std::shared_ptr<Collider> collider)
 {
     colliders.push_back(collider);
 }
 
-void CollisionManager::RemoveCollider(shared_ptr<Collider> collider)
+void CollisionManager::RemoveCollider(std::shared_ptr<Collider> collider)
 {
     colliders.erase(remove(colliders.begin(), colliders.end(), collider), colliders.end());
 }
@@ -51,13 +51,13 @@ void CollisionManager::RenderDebug()
     }
 }
 
-vector<Object*> CollisionManager::GetCollidingObjects(Object* obj) const
+std::vector<Object*> CollisionManager::GetCollidingObjects(Object* obj) const
 {
-    vector<Object*> result;
+    std::vector<Object*> result;
     if (!obj) return result;
 
     // Object에서 Collider 인터페이스를 구현하는 모든 컴포넌트를 가져옵니다.
-    vector<Collider*> myColliders = obj->GetAllComponentsByInterface<Collider>();
+    std::vector<Collider*> myColliders = obj->GetAllComponentsByInterface<Collider>();
     if (myColliders.empty()) return result;
 
     // CollisionManager에 등록된 모든 Collider와 비교합니다.

@@ -8,9 +8,9 @@
 class ColorFilledCircle : public Drawable, public IColorable
 {
 private:
-	vector<VertexColor> vertices;
+	std::vector<VertexColor> vertices;
 
-	vector<UINT> indices;
+	std::vector<UINT> indices;
 
 	size_t segments = 0;
 

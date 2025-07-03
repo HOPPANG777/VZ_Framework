@@ -11,12 +11,12 @@ public:
         Circle,
     };
 
-    Collider(const string& name, Type type) : Component(name), type(type) {}
+    Collider(const std::string& name, Type type) : Component(name), type(type) {}
     virtual ~Collider() = default;
 
     Type GetType() const { return type; }
 
-    void SetCollision(function<void(Collider*)> setCollision)
+    void SetCollision(std::function<void(Collider*)> setCollision)
     {
         collisionCallback = setCollision;
     }
@@ -30,5 +30,5 @@ public:
 
 protected:
     Type type;
-    function<void(Collider*)> collisionCallback;
+    std::function<void(Collider*)> collisionCallback;
 };

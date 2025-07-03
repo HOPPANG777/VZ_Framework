@@ -7,7 +7,7 @@ private:
 	ComPtr<ID3D11PixelShader> shader;
 
 public:
-	void Create(const wstring& path, const string& entryName) override
+	void Create(const std::wstring& path, const std::string& entryName) override
 	{
 		this->path = path;
 		this->entryName = entryName;

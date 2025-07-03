@@ -15,17 +15,17 @@ enum class TransformType
 class Object
 {
 protected:
-	string name;
-	map<string, shared_ptr<Component>> components;
+	std::string name;
+	std::map<std::string, std::shared_ptr<Component>> components;
 
-	unique_ptr<WorldBuffer> worldBuffer;
+	std::unique_ptr<WorldBuffer> worldBuffer;
 
 public:
 	// 기본 생성자 (Object 이름만 지정)
-	Object(const string& name, TransformType type = TransformType::Normal);
+	Object(const std::string& name, TransformType type = TransformType::Normal);
 
 	// 위치/스케일/회전을 초기에 지정하는 생성자
-	Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type = TransformType::Normal);
+	Object(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type = TransformType::Normal);
 
 	// 복사 생성/대입 연산자
 	Object(const Object& other);
@@ -42,25 +42,25 @@ public:
 	virtual ~Object() = default;
 
 public:
-	void AddComponent(const shared_ptr<Component>& component);
-	void RemoveComponent(const string& compName);
+	void AddComponent(const std::shared_ptr<Component>& component);
+	void RemoveComponent(const std::string& compName);
 
 	template<typename T>
-	shared_ptr<T> GetComponent(const string& compName) const
+	std::shared_ptr<T> GetComponent(const std::string& compName) const
 	{
 		if (!components.count(compName)) return nullptr;
-		return dynamic_pointer_cast<T>(components.at(compName));
+		return std::dynamic_pointer_cast<T>(components.at(compName));
 	}
 	
 public:
 	// GetName 함수 추가
-	string GetName() const { return name; }
-	void SetName(const string& newName) { name = newName; }
+	std::string GetName() const { return name; }
+	void SetName(const std::string& newName) { name = newName; }
 
 public:
 	// Helper 함수 추가: 각 Transform 컴포넌트를 반환
-	shared_ptr<Transform> GetTransform() const;
-	shared_ptr<RectTransform> GetRectTransform() const;
+	std::shared_ptr<Transform> GetTransform() const;
+	std::shared_ptr<RectTransform> GetRectTransform() const;
 
 public:
 	// 매 프레임 업데이트 & 렌더

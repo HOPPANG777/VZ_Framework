@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ParallaxBackground.h"
 
-ParallaxBackground::ParallaxBackground(const string& compName, int layerCount)
+ParallaxBackground::ParallaxBackground(const std::string& compName, int layerCount)
     : Component(compName), layerCount(layerCount)
 {
     // √ ±‚»≠

@@ -20,7 +20,7 @@ public:
     void ChangeTileMap(const std::wstring& imagePath, UINT xCount, UINT yCount);
 
 public:
-    wstring GetTilePath() { return tilePath; }
+    std::wstring GetTilePath() { return tilePath; }
 
     UINT GetXCount() { return tileXCount; }
     UINT GetYCount() { return tileYCount; }
@@ -37,7 +37,7 @@ private:
     UINT tileXCount = 0;
     UINT tileYCount = 0;
 
-    wstring tilePath = L"";
+    std::wstring tilePath = L"";
 
 };
 

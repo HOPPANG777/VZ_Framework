@@ -5,31 +5,31 @@ ResourcesManager::ResourcesManager() {}
 
 ResourcesManager::~ResourcesManager() {}
 
-void ResourcesManager::LoadResource(const string& resource)
+void ResourcesManager::LoadResource(const std::string& resource)
 {
 	// 이미 로드된 경우는 넘어감
 	{
-		lock_guard<mutex> lock(mtx);
+		std::lock_guard<std::mutex> lock(mtx);
 		if (loadedResources.find(resource) != loadedResources.end()) return;
 	}
 
 	// 실제 로딩 작업 (예: 파일 읽기, 디코딩 등)
-	this_thread::sleep_for(chrono::milliseconds(100));
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 	// 로딩 완료 후 기록
 	{
-		lock_guard<mutex> lock(mtx);
+		std::lock_guard<std::mutex> lock(mtx);
 		loadedResources.insert(resource);
 	}
 }
 
-bool ResourcesManager::IsResourceLoaded(const string& resource)
+bool ResourcesManager::IsResourceLoaded(const std::string& resource)
 {
-	lock_guard<mutex> lock(mtx);
+	std::lock_guard<std::mutex> lock(mtx);
 	return (loadedResources.find(resource) != loadedResources.end());
 }
 
-bool ResourcesManager::AreResourcesLoaded(const vector<string>& resources)
+bool ResourcesManager::AreResourcesLoaded(const std::vector<std::string>& resources)
 {
 	for (const auto& res : resources)
 	{

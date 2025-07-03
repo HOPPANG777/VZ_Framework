@@ -10,20 +10,20 @@ class Tile;
 class FileStream
 {
 public:
-    FileStream(string path, UINT flags);
+    FileStream(std::string path, UINT flags);
     ~FileStream();
 
-    template<typename T, typename = typename enable_if <
-        is_same<T, bool>::value ||
-        is_same<T, char>::value ||
-        is_same<T, int >::value ||
-        is_same<T, float>::value ||
-        is_same<T, UINT>::value ||
-        is_same<T, Vector2>::value ||
-        is_same<T, Vector3>::value ||
-        is_same<T, Matrix>::value ||
-        is_same<T, Color>::value ||
-        is_same<T, Tile>::value
+    template<typename T, typename = typename std::enable_if <
+        std::is_same<T, bool>::value ||
+        std::is_same<T, char>::value ||
+        std::is_same<T, int >::value ||
+        std::is_same<T, float>::value ||
+        std::is_same<T, UINT>::value ||
+        std::is_same<T, Vector2>::value ||
+        std::is_same<T, Vector3>::value ||
+        std::is_same<T, Matrix>::value ||
+        std::is_same<T, Color>::value ||
+        std::is_same<T, Tile>::value
     >::type>
     void Write(T value)
     {
@@ -31,17 +31,17 @@ public:
             sizeof(T));
     }
 
-    template<typename T, typename = typename enable_if <
-        is_same<T, bool>::value ||
-        is_same<T, char>::value ||
-        is_same<T, int >::value ||
-        is_same<T, float>::value ||
-        is_same<T, UINT>::value ||
-        is_same<T, Vector2>::value ||
-        is_same<T, Vector3>::value ||
-        is_same<T, Matrix>::value ||
-        is_same<T, Color>::value ||
-        is_same<T, Tile>::value
+    template<typename T, typename = typename std::enable_if <
+        std::is_same<T, bool>::value ||
+        std::is_same<T, char>::value ||
+        std::is_same<T, int >::value ||
+        std::is_same<T, float>::value ||
+        std::is_same<T, UINT>::value ||
+        std::is_same<T, Vector2>::value ||
+        std::is_same<T, Vector3>::value ||
+        std::is_same<T, Matrix>::value ||
+        std::is_same<T, Color>::value ||
+        std::is_same<T, Tile>::value
     >::type>
     T Read()
     {
@@ -54,8 +54,8 @@ public:
     }
 
 private:
-    ofstream out;
-    ifstream in;
+    std::ofstream out;
+    std::ifstream in;
 
     UINT flag;
 

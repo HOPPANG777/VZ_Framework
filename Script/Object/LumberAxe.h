@@ -9,7 +9,7 @@
 class LumberAxe : public AnimationRect
 {
 public:
-	LumberAxe(const Vector3& position, const Vector3& scale = Vector3(100, 100, 0), const float rotation = 0.0f, const wstring& path = TexturePath + L"Weapon/Axe_R.png");
+	LumberAxe(const Vector3& position, const Vector3& scale = Vector3(100, 100, 0), const float rotation = 0.0f, const std::wstring& path = TexturePath + L"Weapon/Axe_R.png");
 	~LumberAxe();
 
 public:
@@ -20,6 +20,6 @@ public:
 
 
 private:
-	shared_ptr<LumberAxeComponent> lumberAxeComponent;
+	std::shared_ptr<LumberAxeComponent> lumberAxeComponent;
 
 };

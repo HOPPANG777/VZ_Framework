@@ -42,9 +42,9 @@ private:
 	HWND handle;
 	Vector3 mousePos;
 
-	array<unsigned char, MAX_INPUT_MOUSE> buttonStatus = { 0 };
-	array<unsigned char, MAX_INPUT_MOUSE> buttonOldStatus = { 0 };
-	array<unsigned char, MAX_INPUT_MOUSE> buttonMap = { 0 };
+	std::array<unsigned char, MAX_INPUT_MOUSE> buttonStatus = { 0 };
+	std::array<unsigned char, MAX_INPUT_MOUSE> buttonOldStatus = { 0 };
+	std::array<unsigned char, MAX_INPUT_MOUSE> buttonMap = { 0 };
 
 	Vector3 wheelStatus = Values::ZeroVec3;
 	Vector3 wheelOldStatus = Values::ZeroVec3;

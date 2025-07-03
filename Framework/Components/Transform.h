@@ -14,7 +14,7 @@ private:
 
 public:
     // 기본적으로 "Transform"이라는 이름으로 생성
-    Transform(const string& compName = "Transform") : Component(compName) {}
+    Transform(const std::string& compName = "Transform") : Component(compName) {}
     virtual ~Transform() override = default;
 
     virtual void Update() override;  // 매 프레임 S*R*T 계산

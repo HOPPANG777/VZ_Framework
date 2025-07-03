@@ -2,14 +2,14 @@
 #include "Texture2D.h"
 
 // Texture2D 생성자
-Texture2D::Texture2D(const wstring& filePath)
+Texture2D::Texture2D(const std::wstring& filePath)
     : filePath(filePath)
 {
     Texture2DManager::Get()->Load(this);
 }
 
 // ReadPixel 멤버 함수
-void Texture2D::ReadPixel(vector<Color>* pixels)
+void Texture2D::ReadPixel(std::vector<Color>* pixels)
 {
     // srv에서 실제 Texture2D COM 포인터 가져오기
     ComPtr<ID3D11Resource> resource;
@@ -22,7 +22,7 @@ void Texture2D::ReadPixel(vector<Color>* pixels)
 }
 
 // ReadPixel 정적 함수
-void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels)
+void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, std::vector<Color>* pixels)
 {
     // 원본 텍스처 정보
     D3D11_TEXTURE2D_DESC srvDesc;
@@ -51,8 +51,8 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
     // 픽셀 데이터 담을 메모리(Width * Height)
     const size_t pixelCount = static_cast<size_t>(destDesc.Width) * static_cast<size_t>(destDesc.Height);
 
-    // unique_ptr로 배열 관리
-    const unique_ptr<UINT[]>& colors = make_unique<UINT[]>(pixelCount);
+    // std::unique_ptr로 배열 관리
+    const std::unique_ptr<UINT[]>& colors = std::make_unique<UINT[]>(pixelCount);
 
     // Map을 통해 CPU로 읽어온다
     D3D11_MAPPED_SUBRESOURCE subRe;
@@ -66,10 +66,10 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
     // OpenGL 호환용(BGR → RGB 순서 교체)
     {
         // 임시 버퍼들
-        const unique_ptr<UINT[]>& alpha = make_unique<UINT[]>(pixelCount);
-        const unique_ptr<UINT[]>& red = make_unique<UINT[]>(pixelCount);
-        const unique_ptr<UINT[]>& green = make_unique<UINT[]>(pixelCount);
-        const unique_ptr<UINT[]>& blue = make_unique<UINT[]>(pixelCount);
+        const std::unique_ptr<UINT[]>& alpha = std::make_unique<UINT[]>(pixelCount);
+        const std::unique_ptr<UINT[]>& red = std::make_unique<UINT[]>(pixelCount);
+        const std::unique_ptr<UINT[]>& green = std::make_unique<UINT[]>(pixelCount);
+        const std::unique_ptr<UINT[]>& blue = std::make_unique<UINT[]>(pixelCount);
 
         for (size_t i = 0; i < pixelCount; i++)
         {

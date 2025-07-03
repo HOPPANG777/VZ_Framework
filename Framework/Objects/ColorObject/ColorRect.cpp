@@ -81,7 +81,7 @@ void ColorRect::Render()
 ////vertexBuffer
 //{
 //	//객체를 만들어 주어야 한다.
-//	//vertexBuffer = make_unique<VertexBuffer>();
+//	//vertexBuffer = std::make_unique<VertexBuffer>();
 //	vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 //}
 //
@@ -92,25 +92,25 @@ void ColorRect::Render()
 //
 ////indexBuffer
 //{
-//	//indexBuffer = make_unique<IndexBuffer>();
+//	//indexBuffer = std::make_unique<IndexBuffer>();
 //	indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
 //}
 //
 ////vertexShader
 //{
-//	//vertexShader = make_unique <VertexShader>();
+//	//vertexShader = std::make_unique <VertexShader>();
 //	//vertexShader->Create(L"../_Shaders/VertexColor.hlsl", "VS");
 //}
 //
 ////inputLayout
 //{
-//	//inputLayout = make_unique<InputLayout>();
+//	//inputLayout = std::make_unique<InputLayout>();
 //	//inputLayout->Create(VertexColor::ieDescs.data(), VertexColor::ieDescs.size(), vertexShader->GetBlob());
 //}
 //
 ////pixelShader
 //{
-//	//pixelShader = make_unique<PixelShader>();
+//	//pixelShader = std::make_unique<PixelShader>();
 //	//pixelShader->Create(L"../_Shaders/VertexColor.hlsl", "PS");
 //}
 //
@@ -128,7 +128,7 @@ void ColorRect::Render()
 //
 ////worldBuffer
 //{
-//	//worldBuffer = make_unique<WorldBuffer>();
+//	//worldBuffer = std::make_unique<WorldBuffer>();
 //	//worldBuffer->SetWorld(world);
 //}
 #pragma endregion

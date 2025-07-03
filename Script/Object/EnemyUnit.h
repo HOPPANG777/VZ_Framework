@@ -8,7 +8,7 @@ private:
 
 
 public:
-	EnemyUnit(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path);
+	EnemyUnit(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring& path);
 	~EnemyUnit();
 
 public:

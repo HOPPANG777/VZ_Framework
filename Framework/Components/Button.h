@@ -10,7 +10,7 @@
 class Button : public Component
 {
 public:
-	Button(const string& name = "Button") : Component(name) {}
+	Button(const std::string& name = "Button") : Component(name) {}
 	~Button() override = default;
 
 public:
@@ -20,16 +20,16 @@ public:
 
 public:
 	// 외부에서 콜백을 등록할 수 있도록 SetOnClick 함수를 제공
-	void SetOnClick(const function<void()>& callback) { onClick = callback; }
-	void SetOnPress(const function<void()>& callback) { onPress = callback; }
+	void SetOnClick(const std::function<void()>& callback) { onClick = callback; }
+	void SetOnPress(const std::function<void()>& callback) { onPress = callback; }
 
 private:
 	bool IsMouseOver(); // 내부에서 마우스가 버튼 위에 있는지 판단
 
 private:
 	// 클릭 이벤트를 처리할 콜백 함수
-	function<void()> onClick = nullptr;
-	function<void()> onPress = nullptr;
+	std::function<void()> onClick = nullptr;
+	std::function<void()> onPress = nullptr;
 
 	// 클릭 여부를 관리할 간단한 상태 변수
 	bool wasPressed = false; // 이전 프레임에서 마우스를 누르고 있었는지

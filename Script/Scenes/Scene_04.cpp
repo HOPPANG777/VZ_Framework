@@ -7,16 +7,16 @@ void Scene_04::Awake()
 
 	// Player
 	{
-		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -45, 0));
-		lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
+		testPlayer = std::make_shared<PlayerUnit>(CENTER + Vector3(-550, -45, 0));
+		lumberAxe = std::make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SceneManager::Get()->SetPlayer(testPlayer);
 	}
 
 	// Floor
 	{
-		floor.push_back(make_shared<ColorLine>(CENTER + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
-		floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
+		floor.push_back(std::make_shared<ColorLine>(CENTER + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
+		floor[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 	}
 
 	// Floor Collider
@@ -29,13 +29,13 @@ void Scene_04::Awake()
 
 	// Background
 	{
-		const auto& parallax = make_shared<ParallaxBackground>("Parallax", 5);
+		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
 
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -43,7 +43,7 @@ void Scene_04::Awake()
 			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
-		backgroundObject = make_shared<Object>("Background");
+		backgroundObject = std::make_shared<Object>("Background");
 		backgroundObject->AddComponent(parallax);
 	}
 
@@ -53,22 +53,22 @@ void Scene_04::Awake()
 		UINT width = (WIN_DEFAULT_WIDTH * 2) / spacing;
 		UINT height = (WIN_DEFAULT_HEIGHT * 2) / spacing;
 
-		tmap = make_unique<TileMap>(width, height, spacing);
+		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map02.data");
 	}
 
 	// Puzzle Rock
 	{
-		puzzleRock = make_shared<TextureRect>(CENTER + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
-		puzzleRock->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
+		puzzleRock = std::make_shared<TextureRect>(CENTER + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
+		puzzleRock->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
 		CollisionManager::Get()->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
-		puzzleRock->AddComponent(make_shared<PushableComponent>());
+		puzzleRock->AddComponent(std::make_shared<PushableComponent>());
 		puzzleRock->SetName("PuzzleRock");
 	}
 
 	// bridge
 	{
-		bridge = make_shared<TextureRect>(CENTER + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
+		bridge = std::make_shared<TextureRect>(CENTER + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
 	}
 
 	// Wind
@@ -81,8 +81,8 @@ void Scene_04::Awake()
 		Vector3 windDirection = { -1, 0, 0 };
 		float windIntensity = 220.0f; // 적절한 값 조절
 		
-		windObject = make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
-		windObject->AddComponent(make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));
+		windObject = std::make_shared<Wind>(CENTER + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
+		windObject->AddComponent(std::make_shared<WindZone>("WindZone", CENTER + windRegionMin, CENTER + windRegionMax, windDirection, windIntensity));
 	}
 
 	// Text
@@ -111,8 +111,8 @@ void Scene_04::Awake()
 void Scene_04::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
-	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
-	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
+	std::dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
+	std::dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
 	Sounds::Get()->Play("Wind");
 }
 
@@ -159,12 +159,12 @@ void Scene_04::Update()
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
+		std::dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
-		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
+		std::dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (Input::Get()->KeyDown(VK_RETURN))
 		{
 			SceneManager::Get()->LoadScene("Stage02");
@@ -192,8 +192,8 @@ void Scene_04::Render()
 
 void Scene_04::PostRender()
 {
-	if (text[0] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
-	if (text[1] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
+	if (text[0] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
+	if (text[1] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
 }
 
 void Scene_04::ImGUI()

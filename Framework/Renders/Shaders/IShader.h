@@ -5,14 +5,14 @@
 class IShader
 {
 protected:
-	wstring path = L"";
-	string entryName = "";
+	std::wstring path = L"";
+	std::string entryName = "";
 	ComPtr<ID3DBlob> blob;
 
 public:
 	virtual ~IShader() = default;
 
-	virtual void Create(const wstring& path, const string& entryName) = 0;
+	virtual void Create(const std::wstring& path, const std::string& entryName) = 0;
 
 	virtual void Clear() = 0;
 	virtual void SetShader() = 0;
@@ -21,7 +21,7 @@ public:
 	ID3DBlob* GetBlob() const { return blob.Get(); }
 
 protected:
-	void CompileShader(const wstring& path, const string& entryName, const string& profile, ID3DBlob** blob)
+	void CompileShader(const std::wstring& path, const std::string& entryName, const std::string& profile, ID3DBlob** blob)
 	{
 		ComPtr<ID3DBlob> error;
 		HRESULT hr = D3DCompileFromFile
@@ -46,7 +46,7 @@ private:
 		{
 			if (error)
 			{
-				const string& str = (const char*)error->GetBufferPointer();
+				const std::string& str = (const char*)error->GetBufferPointer();
 				MessageBoxA(nullptr, str.c_str(), "Shader Error", MB_OK);
 			}
 			assert(false);

@@ -7,7 +7,7 @@ Camera::~Camera() {}
 
 void Camera::Init()
 {
-	VPBuffer = make_unique<ViewProjectionBuffer>();
+	VPBuffer = std::make_unique<ViewProjectionBuffer>();
 
 	view = XMMatrixLookAtLH(Vector3(0, 0, 0), Vector3(0, 0, 1), Vector3(0, 1, 0));
 	proj = XMMatrixOrthographicOffCenterLH(0, WIN_DEFAULT_WIDTH, 0, WIN_DEFAULT_HEIGHT, 0, 1);

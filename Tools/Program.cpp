@@ -25,7 +25,7 @@ void Program::Awake()
 
 	//Scene ¼¼ÆÃ
 	{
-		SceneManager::Get()->AddScene("MapTools", make_shared<MapTools>());
+		SceneManager::Get()->AddScene("MapTools", std::make_shared<MapTools>());
 
 		SceneManager::Get()->LoadScene("MapTools");
 	}
@@ -76,7 +76,7 @@ int APIENTRY wWinMain
 	desc.height = gWinHeight;
 	desc.icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_Tools));
 
-	auto window = make_unique<Window>(desc);
+	auto window = std::make_unique<Window>(desc);
 	WPARAM wParam = window->Run();
 
 	return int(wParam);

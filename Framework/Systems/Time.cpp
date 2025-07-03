@@ -3,7 +3,7 @@
 
 Time::Time()
 {
-	currentTime = chrono::steady_clock::now();
+	currentTime = std::chrono::steady_clock::now();
 	lastTime = currentTime;
 }
 
@@ -13,9 +13,9 @@ void Time::Update()
 {
 	lastTime = currentTime;
 
-	currentTime = chrono::steady_clock::now();
+	currentTime = std::chrono::steady_clock::now();
 
-	chrono::duration<double> delta = currentTime - lastTime;
+	std::chrono::duration<double> delta = currentTime - lastTime;
 	deltaTime = delta.count();
 
 	worldTime += deltaTime;

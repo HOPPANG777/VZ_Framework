@@ -3,11 +3,11 @@
 
 void Texts::RenderText
 (
-	const wstring& text,
+	const std::wstring& text,
 	const RECT& rect,
 	const float size,
 	const Color& color,
-	const wstring& font,
+	const std::wstring& font,
 	const DWRITE_FONT_WEIGHT& weight,
 	const DWRITE_FONT_STYLE& style,
 	const DWRITE_FONT_STRETCH& stretch
@@ -52,11 +52,11 @@ void Texts::Detach()
 
 FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 {
-	auto newBrushDesc = make_unique<FontBrushDesc>();
+	auto newBrushDesc = std::make_unique<FontBrushDesc>();
 	newBrushDesc->color = color;
 
 	const auto& brushIt = find_if(fontBrush.begin(), fontBrush.end(),
-		[&newBrushDesc](const unique_ptr<FontBrushDesc>& ptr)
+		[&newBrushDesc](const std::unique_ptr<FontBrushDesc>& ptr)
 		{
 			return *ptr == *newBrushDesc;
 		});
@@ -74,14 +74,14 @@ FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 
 FontTextDesc* Texts::GetOrCreateTextFormat
 (
-	const wstring& font,
+	const std::wstring& font,
 	float size,
 	const DWRITE_FONT_WEIGHT& weight,
 	const DWRITE_FONT_STYLE& style,
 	const DWRITE_FONT_STRETCH& stretch
 )
 {
-	auto newTextDesc = make_unique<FontTextDesc>();
+	auto newTextDesc = std::make_unique<FontTextDesc>();
 	newTextDesc->font = font;
 	newTextDesc->fontSize = size;
 	newTextDesc->weight = weight;
@@ -89,7 +89,7 @@ FontTextDesc* Texts::GetOrCreateTextFormat
 	newTextDesc->stretch = stretch;
 
 	const auto& textIt = find_if(fontText.begin(), fontText.end(),
-		[&newTextDesc](const unique_ptr<FontTextDesc>& ptr)
+		[&newTextDesc](const std::unique_ptr<FontTextDesc>& ptr)
 		{
 			return *ptr == *newTextDesc;
 		});

@@ -17,7 +17,7 @@ public:
 
 	void CheckTime() const
 	{
-		cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime << ", WorldTime : " << worldTime << '\n';
+		std::cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime << ", WorldTime : " << worldTime << '\n';
 	}
 
 	// UTC 시간 반환
@@ -37,8 +37,8 @@ public:
 	}
 
 private:
-	chrono::steady_clock::time_point currentTime;
-	chrono::steady_clock::time_point lastTime;
+	std::chrono::steady_clock::time_point currentTime;
+	std::chrono::steady_clock::time_point lastTime;
 	double deltaTime = 0.0;
 	double scaledDeltaTime = 0.0;
 

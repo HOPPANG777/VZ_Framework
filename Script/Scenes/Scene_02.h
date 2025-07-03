@@ -29,11 +29,11 @@ private:
     float timer = 0.0f;
     bool isDone = false;
 
-    vector<shared_ptr<Object>> objects;
+    std::vector<std::shared_ptr<Object>> objects;
 
-    //vector<shared_ptr<UIElement>> UIs;
+    //std::vector<std::shared_ptr<UIElement>> UIs;
 
-    shared_ptr<Object> splash;
+    std::shared_ptr<Object> splash;
 
     bool isLoaded = false;
 

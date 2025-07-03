@@ -31,9 +31,9 @@ public:
 
 	void SetResolution(UINT width, UINT height);
 
-	bool LoadCustomFont(const wstring& fontFilePath);
+	bool LoadCustomFont(const std::wstring& fontFilePath);
 
-	bool UnloadCustomFont(const wstring& fontFilePath);
+	bool UnloadCustomFont(const std::wstring& fontFilePath);
 
 public:
 	void LoadFont();
@@ -72,9 +72,9 @@ private:
 	UINT denominator = 1;
 
 	UINT gpuMemorySize;
-	wstring gpuName;
+	std::wstring gpuName;
 
-	vector<unique_ptr<D3DEnumAdapterInfo>> adapterInfos;
+	std::vector<std::unique_ptr<D3DEnumAdapterInfo>> adapterInfos;
 	int selectedAdapterIndex = 0;
 
 	bool bVsync = true;
@@ -91,7 +91,7 @@ public:
 	ComPtr<IDXGIAdapter1> adapter = nullptr;
 	DXGI_ADAPTER_DESC1 adapterDesc = { 0 };
 
-	shared_ptr<D3DEnumOutputInfo> outputInfo = nullptr;
+	std::shared_ptr<D3DEnumOutputInfo> outputInfo = nullptr;
 };
 
 class D3DEnumOutputInfo

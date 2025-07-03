@@ -10,7 +10,7 @@ class SolidCollider : public Collider
 public:
     // offset: 소유 객체의 기준 위치에서의 상대 좌표
     // size: 충돌 영역 크기 (AABB)
-    SolidCollider(const string& name, const Vector3& offset, const Vector3& size, const Color& color = WHITE) : Collider(name, Type::Box), offset(offset), size(size), color(color)
+    SolidCollider(const std::string& name, const Vector3& offset, const Vector3& size, const Color& color = WHITE) : Collider(name, Type::Box), offset(offset), size(size), color(color)
     {
 
     }

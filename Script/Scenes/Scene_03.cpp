@@ -101,8 +101,8 @@ void Scene_03::Awake()
 void Scene_03::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
-	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
-	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
+	std::dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
+	std::dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
 }
 
 void Scene_03::Destroy()
@@ -141,12 +141,12 @@ void Scene_03::Update()
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
+		std::dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
-		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
+		std::dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (Input::Get()->KeyDown(VK_RETURN))
 		{
 			SceneManager::Get()->LoadScene("Stage01");
@@ -170,7 +170,7 @@ void Scene_03::Update()
 
 	if (log[0]->GetComponent<LogPathCreator>("LogPathCreator")->GetTransformed() == true && isTest2 == false)
 	{
-		log[0]->AddComponent(make_shared<FloorCollision>("FloorCollision"));
+		log[0]->AddComponent(std::make_shared<FloorCollision>("FloorCollision"));
 		log[0]->GetComponent<FloorCollision>("FloorCollision")->SetPlayer(testPlayer.get());
 		log[0]->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
 		isTest2 = true;
@@ -199,8 +199,8 @@ void Scene_03::Render()
 
 void Scene_03::PostRender()
 {
-	if (text[0] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
-	if (text[1] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
+	if (text[0] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
+	if (text[1] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
 }
 
 void Scene_03::ImGUI()

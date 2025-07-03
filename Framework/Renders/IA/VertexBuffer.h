@@ -12,7 +12,7 @@ private:
 
 public:
 	template <typename T>
-	void Create(const vector<T>& vertices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT);
+	void Create(const std::vector<T>& vertices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT);
 
 	void SetIA()
 	{
@@ -27,7 +27,7 @@ public:
 };
 
 template<typename T>
-inline void VertexBuffer::Create(const vector<T>& vertices, const D3D11_USAGE& usage)
+inline void VertexBuffer::Create(const std::vector<T>& vertices, const D3D11_USAGE& usage)
 {
 	stride = sizeof(T);
 	count = UINT(vertices.size());

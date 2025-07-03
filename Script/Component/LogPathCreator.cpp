@@ -27,7 +27,7 @@ void LogPathCreator::OnAxeCollision()
         owner->RemoveComponent("BoxCollider");
 
         // 새로운 BoxCollider 생성 (크기: 500,300,0)
-        const std::shared_ptr<BoxCollider>& newCollider = make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
+        const std::shared_ptr<BoxCollider>& newCollider = std::make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
         owner->AddComponent(newCollider);
 
         // CollisionManager에 새 콜라이더 등록
@@ -41,7 +41,7 @@ void LogPathCreator::OnAxeCollision()
 void LogPathCreator::OnLogCollision(Collider* other)
 {
     // 상대 오브젝트가 LumberAxe인지 체크 (예: 이름에 "LumberAxe" 포함)
-    if (other->GetOwner()->GetName().find("LumberAxe") != string::npos)
+    if (other->GetOwner()->GetName().find("LumberAxe") != std::string::npos)
     {
         // log[0]의 LogPathCreator 컴포넌트를 찾아 OnAxeCollision() 호출
         const std::shared_ptr<LogPathCreator>& logPathComp = GetOwner()->GetComponent<LogPathCreator>("LogPathCreator");

@@ -25,8 +25,8 @@ void BattleManager::Initialize()
 {
     // 전투 씬이 시작될 때 호출, 유닛 생성 및 UI 초기화
     // 예: 
-    // playerUnits.push_back(make_shared<PlayerUnit>(...));
-    // enemyUnits.push_back(make_shared<EnemyUnit>(...));
+    // playerUnits.push_back(std::make_shared<PlayerUnit>(...));
+    // enemyUnits.push_back(std::make_shared<EnemyUnit>(...));
 
     currentState = BattleState::PLAYER_COMMAND;
 }

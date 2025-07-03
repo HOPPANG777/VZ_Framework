@@ -6,19 +6,19 @@ void Scene_01::Awake()
 	isLoaded = false;
 
 	{
-		objects.push_back(make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/NordicLumberJacTitleBackground.png"));
-		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(-260, 210, 0), Vector3(700, 700, 0), 0.0f, TexturePath + L"UI/NordicLumberJackTitle.png"));
-		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(495, -120, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
-		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(495, -180, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
-		objects.push_back(make_shared<TextureRect>(CENTER + Vector3(495, -240, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
-		objects[2]->AddComponent(make_shared<Texts>());
-		objects[3]->AddComponent(make_shared<Texts>());
-		objects[4]->AddComponent(make_shared<Texts>());
+		objects.push_back(std::make_shared<TextureRect>(CENTER, Vector3(WIN_DEFAULT_WIDTH, WIN_DEFAULT_HEIGHT, 0), 0.0f, TexturePath + L"UI/NordicLumberJacTitleBackground.png"));
+		objects.push_back(std::make_shared<TextureRect>(CENTER + Vector3(-260, 210, 0), Vector3(700, 700, 0), 0.0f, TexturePath + L"UI/NordicLumberJackTitle.png"));
+		objects.push_back(std::make_shared<TextureRect>(CENTER + Vector3(495, -120, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(std::make_shared<TextureRect>(CENTER + Vector3(495, -180, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(std::make_shared<TextureRect>(CENTER + Vector3(495, -240, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects[2]->AddComponent(std::make_shared<Texts>());
+		objects[3]->AddComponent(std::make_shared<Texts>());
+		objects[4]->AddComponent(std::make_shared<Texts>());
 	}
 
 	{
-		startButton = make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect);
-		startButton->AddComponent(make_shared<Texts>());
+		startButton = std::make_shared<TextureRect>(CENTER + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect);
+		startButton->AddComponent(std::make_shared<Texts>());
 	}
 	
 	isLoaded = true;
@@ -26,10 +26,10 @@ void Scene_01::Awake()
 
 void Scene_01::Start()
 {
-	const auto& startButtonComp = make_shared<Button>();
+	const auto& startButtonComp = std::make_shared<Button>();
 	startButtonComp->SetOnClick([this]() { SceneManager::Get()->LoadScene("StartStage"); });
 	startButton->AddComponent(startButtonComp);
-	const auto& exitButtonComp = make_shared<Button>();
+	const auto& exitButtonComp = std::make_shared<Button>();
 	exitButtonComp->SetOnClick([]() { PostQuitMessage(0); });
 	objects[4]->AddComponent(exitButtonComp);
 }

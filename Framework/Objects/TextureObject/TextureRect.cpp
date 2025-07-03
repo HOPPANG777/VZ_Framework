@@ -2,7 +2,7 @@
 #include "TextureRect.h"
 
 //, texture(std::make_shared<Texture2D>(path))
-TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const wstring path, const TransformType type, const wstring shaderPath)
+TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path, const TransformType type, const std::wstring shaderPath)
 	: Drawable("TextureRect", position, scale, rotation, type, shaderPath)
 {
 	//vertices
@@ -108,7 +108,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 
 	// ColorBuffer »ý¼º
 	{
-		colorBuffer = make_unique<ColorBuffer>();
+		colorBuffer = std::make_unique<ColorBuffer>();
 	}
 
 }

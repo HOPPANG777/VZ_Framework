@@ -10,7 +10,7 @@ Sounds::Sounds()
 Sounds::~Sounds()
 {
 	// smart pointer들이 자동으로 해제 담당
-	// system unique_ptr도 소멸자에서 close(), release() 자동 호출
+	// system std::unique_ptr도 소멸자에서 close(), release() 자동 호출
 }
 ///////////////////////////////////////////////////////////////////////////
 
@@ -19,14 +19,14 @@ void Sounds::Init()
 	// FMOD 시스템을 유니크 포인터로 생성
 	System* rawSystem = nullptr;
 	System_Create(&rawSystem);
-	if (!rawSystem) throw  runtime_error("FMOD System Create Failed.");
+	if (!rawSystem) throw  std::runtime_error("FMOD System Create Failed.");
 
-	// unique_ptr에 소유권을 넘김
-	system = unique_ptr<System, FModSystemDeleter>(rawSystem);
+	// std::unique_ptr에 소유권을 넘김
+	system = std::unique_ptr<System, FModSystemDeleter>(rawSystem);
 
 	// 시스템 초기화
 	FMOD_RESULT result = system->init(count, FMOD_INIT_NORMAL, nullptr);
-	if (result != FMOD_OK) throw  runtime_error("FMOD System init Failed.");
+	if (result != FMOD_OK) throw  std::runtime_error("FMOD System init Failed.");
 }
 
 void Sounds::Update()
@@ -35,7 +35,7 @@ void Sounds::Update()
 		system->update();
 }
 
-void Sounds::AddSound(const  string& name, const  wstring& file, bool loop)
+void Sounds::AddSound(const  std::string& name, const  std::wstring& file, bool loop)
 {
 	if (!system) return;
 
@@ -50,34 +50,34 @@ void Sounds::AddSound(const  string& name, const  wstring& file, bool loop)
 	if (result != FMOD_OK || !rawSound)
 	{
 		// 실패 시 예외나 로그
-		throw  runtime_error("Failed to create FMOD Sound.");
+		throw  std::runtime_error("Failed to create FMOD Sound.");
 	}
 
-	// shared_ptr로 소유 (deleter는 FModSoundDeleter)
-	shared_ptr<Sound> spSound(rawSound, FModSoundDeleter());
+	// std::shared_ptr로 소유 (deleter는 FModSoundDeleter)
+	std::shared_ptr<Sound> spSound(rawSound, FModSoundDeleter());
 
 	// 채널은 아직 playSound() 호출 전이므로 nullptr
-	shared_ptr<Channel> spChannel(nullptr, FModChannelDeleter());
+	std::shared_ptr<Channel> spChannel(nullptr, FModChannelDeleter());
 
 	// map에 등록 (기존에 있으면 덮어씀)
 	sounds[name] = make_pair(spSound, spChannel);
 }
 
-void Sounds::RemoveSound(const  string& name)
+void Sounds::RemoveSound(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end())
 		return;
 
 	// 혹시 재생 중인 채널이 있다면 stop() 가능
-	if (iter->second.second) // shared_ptr<Channel>
+	if (iter->second.second) // std::shared_ptr<Channel>
 		iter->second.second->stop();
 
 	// map에서 삭제 -> 소멸자에서 sound release 자동 호출
 	sounds.erase(iter);
 }
 
-void Sounds::Play(const  string& name, float volume)
+void Sounds::Play(const  std::string& name, float volume)
 {
 	if (!system) return;
 
@@ -86,8 +86,8 @@ void Sounds::Play(const  string& name, float volume)
 	if (iter == sounds.end()) return;
 
 	// 이미 사운드가 존재
-	shared_ptr<Sound>  spSound = iter->second.first;
-	shared_ptr<Channel> spChannel = iter->second.second;
+	std::shared_ptr<Sound>  spSound = iter->second.first;
+	std::shared_ptr<Channel> spChannel = iter->second.second;
 
 	if (!spSound) return; // 사운드가 없으면 재생 불가
 
@@ -97,8 +97,8 @@ void Sounds::Play(const  string& name, float volume)
 	if (result != FMOD_OK)
 		return;
 
-	// 새로 받은 Channel*을 shared_ptr로 변환
-	shared_ptr<Channel> newChannel(rawChannel, FModChannelDeleter());
+	// 새로 받은 Channel*을 std::shared_ptr로 변환
+	std::shared_ptr<Channel> newChannel(rawChannel, FModChannelDeleter());
 
 	// 볼륨 설정
 	newChannel->setVolume(volume);
@@ -107,7 +107,7 @@ void Sounds::Play(const  string& name, float volume)
 	iter->second.second = newChannel;
 }
 
-void Sounds::Stop(const  string& name)
+void Sounds::Stop(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -116,7 +116,7 @@ void Sounds::Stop(const  string& name)
 		iter->second.second->stop();
 }
 
-void Sounds::Pause(const  string& name)
+void Sounds::Pause(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -125,7 +125,7 @@ void Sounds::Pause(const  string& name)
 		iter->second.second->setPaused(true);
 }
 
-void Sounds::Resum(const  string& name)
+void Sounds::Resum(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -134,7 +134,7 @@ void Sounds::Resum(const  string& name)
 		iter->second.second->setPaused(false);
 }
 
-bool Sounds::IsPlaying(const  string& name)
+bool Sounds::IsPlaying(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return false;
@@ -147,7 +147,7 @@ bool Sounds::IsPlaying(const  string& name)
 	return playing;
 }
 
-bool Sounds::IsPause(const  string& name)
+bool Sounds::IsPause(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return false;
@@ -160,7 +160,7 @@ bool Sounds::IsPause(const  string& name)
 	return paused;
 }
 
-void Sounds::SetVolume(const  string& name, float volume)
+void Sounds::SetVolume(const  std::string& name, float volume)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -169,7 +169,7 @@ void Sounds::SetVolume(const  string& name, float volume)
 		iter->second.second->setVolume(volume);
 }
 
-float Sounds::GetVolume(const  string& name)
+float Sounds::GetVolume(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return 0.0f;
@@ -182,13 +182,13 @@ float Sounds::GetVolume(const  string& name)
 	return volume;
 }
 
-float Sounds::GetSoundLength(const  string& name)
+float Sounds::GetSoundLength(const  std::string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end())
 		return 0.0f;
 
-	shared_ptr<Sound> spSound = iter->second.first;
+	std::shared_ptr<Sound> spSound = iter->second.first;
 	if (!spSound)
 		return 0.0f;
 

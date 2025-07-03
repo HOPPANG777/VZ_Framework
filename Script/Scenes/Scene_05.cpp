@@ -51,8 +51,8 @@ void Scene_05::Awake()
 		// 배경 레이어 2개씩 생성
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(CENTER + Vector3(0, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(CENTER + Vector3(WIN_DEFAULT_WIDTH * 1.2f, 0, 0), Vector3(WIN_DEFAULT_WIDTH * 1.2f, WIN_DEFAULT_HEIGHT * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -108,9 +108,9 @@ void Scene_05::Awake()
 void Scene_05::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
-	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
-	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
-	dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(CLEAR);
+	std::dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
+	std::dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
+	std::dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(CLEAR);
 }
 
 void Scene_05::Destroy()
@@ -157,12 +157,12 @@ void Scene_05::Update()
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
+		std::dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
-		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
+		std::dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
 		if (Input::Get()->KeyDown(VK_RETURN))
 		{
 			SceneManager::Get()->LoadScene("Stage03");
@@ -191,8 +191,8 @@ void Scene_05::Update()
 		isTest2 = true;
 		if (isTest2 == true)
 		{
-			dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
-			dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(WHITE);
+			std::dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
+			std::dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(WHITE);
 			ladder->AddComponent(std::make_shared<LadderComponent>());
 		}		
 	}
@@ -211,7 +211,7 @@ void Scene_05::Render()
 	for (const auto& wal : wall) if (wal != nullptr) wal->Render();
 	if (ladder->GetComponent<LadderTransComponent>("LadderTransComponent")->GetTransformed() == true)
 	{
-		dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
+		std::dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
 	}
 	if (ladder != nullptr) ladder->Render();
 	if (ladder2 != nullptr) ladder2->Render();
@@ -224,8 +224,8 @@ void Scene_05::Render()
 
 void Scene_05::PostRender()
 {
-	if (text[0] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
-	if (text[1] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
+	if (text[0] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
+	if (text[1] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
 }
 
 void Scene_05::ImGUI()

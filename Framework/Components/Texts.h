@@ -10,16 +10,16 @@
 class Texts : public Component
 {
 public:
-    Texts(const string& name = "Texts") : Component(name) {}
+    Texts(const std::string& name = "Texts") : Component(name) {}
     virtual ~Texts() = default;
 
     virtual void RenderText
     (
-        const wstring& text,
+        const std::wstring& text,
         const RECT& rect,
         const float size = 25.0f,
         const Color& color = WHITE,
-        const wstring& font = L"Pretendard JP",
+        const std::wstring& font = L"Pretendard JP",
         const DWRITE_FONT_WEIGHT& weight = DWRITE_FONT_WEIGHT_NORMAL,
         const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL,
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL
@@ -35,13 +35,13 @@ public:
 	bool GetTextOut() const { return textOut; }
 
 protected:
-    vector<unique_ptr<FontBrushDesc>> fontBrush;
-    vector<unique_ptr<FontTextDesc>> fontText;
+    std::vector<std::unique_ptr<FontBrushDesc>> fontBrush;
+    std::vector<std::unique_ptr<FontTextDesc>> fontText;
 
     FontBrushDesc* GetOrCreateBrush(const Color& color);
     FontTextDesc* GetOrCreateTextFormat
     (
-        const wstring& font,
+        const std::wstring& font,
         float size,
         const DWRITE_FONT_WEIGHT& weight,
         const DWRITE_FONT_STYLE& style,

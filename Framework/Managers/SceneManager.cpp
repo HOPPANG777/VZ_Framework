@@ -91,7 +91,7 @@ void SceneManager::SetSplashScene(const std::string& sceneName)
 	}
 }
 
-void SceneManager::StartGame(const string& titleSceneName)
+void SceneManager::StartGame(const std::string& titleSceneName)
 {
 	// ★ 게임을 처음 시작할 때 로딩씬 없이 “스플래시 씬”부터 보여주고,
 	//   스플래시 씬이 끝나면 titleSceneName(타이틀 씬)을 LoadScene() 방식으로 전환

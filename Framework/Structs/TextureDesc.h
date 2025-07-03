@@ -2,7 +2,7 @@
 
 struct TextureDesc
 {
-    wstring filePath = L"";
+    std::wstring filePath = L"";
     UINT width = 0;
     UINT height = 0;
 
