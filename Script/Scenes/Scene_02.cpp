@@ -13,11 +13,11 @@ void Scene_02::Start()
     timer = 0.0f;
     isDone = false;
 
-    // Ω∫«√∑°Ω√ æ¿ √ ±‚»≠
-    objects.push_back(std::make_shared<ColorRect>(Values::Center, Vector3(Values::WinDefaultWidth, Values::WinDefaultHeight, 0), 0.0f, BLACK));
+    objects.push_back(std::make_shared<ColorRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, BLACK));
+    splash = std::make_shared<TextureRect>(Values::GetCenter(), Vector3(300, 300, 0), 0.0f, TexturePath + L"UI/SplashLogo2.png");
     splash = std::make_shared<TextureRect>(Values::Center, Vector3(300, 300, 0), 0.0f, TexturePath + L"UI/SplashLogo2.png");
    
-    // øπ) ∑Œ∞Ì ¿ÃπÃ¡ˆ ∑ŒµÂ, ªÁøÓµÂ ¿Áª˝ µÓ
+    // Ïòà) Î°úÍ≥† Ïù¥ÎØ∏ÏßÄ Î°úÎìú, ÏÇ¨Ïö¥Îìú Ïû¨ÏÉù Îì±
 
     isLoaded = true;
 }
@@ -37,19 +37,19 @@ void Scene_02::Update()
     if (!isDone)
     {
         timer += Time::Get()->GetDeltaTime();
-        // øπ: 3√  »ƒ ¿⁄µø¿∏∑Œ ≈∏¿Ã∆≤ æ¿¿∏∑Œ
+        // Ïòà: 3Ï¥à ÌõÑ ÏûêÎèôÏúºÎ°ú ÌÉÄÏù¥ÌãÄ Ïî¨ÏúºÎ°ú
 
         rect->SetColor(Color(1.0f, 1.0f, 1.0f, timer));
 
         if (timer >= 2.0f)
         {
             isDone = true;
-            // Ω∫«√∑°Ω√ ¡æ∑· »ƒ ≈∏¿Ã∆≤ æ¿¿∏∑Œ ¿Ãµø
+            // Ïä§ÌîåÎûòÏãú Ï¢ÖÎ£å ÌõÑ ÌÉÄÏù¥ÌãÄ Ïî¨ÏúºÎ°ú Ïù¥Îèô
             SceneManager::Get()->LoadScene("TitleScene");
             //SCENE->LoadScene("GeometryScene");
         }
     }
-    // ±◊ ø‹ Ω∫«√∑°Ω√ æ÷¥œ∏ﬁ¿Ãº« æ˜µ•¿Ã∆Æ
+    // Í∑∏ Ïô∏ Ïä§ÌîåÎûòÏãú Ïï†ÎãàÎ©îÏù¥ÏÖò ÏóÖÎç∞Ïù¥Ìä∏
 
     for (const auto& obj : objects) if (obj != nullptr) obj->Update();
     if (splash != nullptr) splash->Update();

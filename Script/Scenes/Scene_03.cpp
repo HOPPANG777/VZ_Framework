@@ -7,18 +7,18 @@ void Scene_03::Awake()
 
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(Values::Center + Vector3(-550, -310, 0));
-		lumberAxe = std::make_shared<LumberAxe>(Values::Center + Vector3(-550, -200, 0));
+		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -310, 0));
+		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 	}
 	
 	// Floor
 	{
-		const auto& floorLine1 = std::make_shared<ColorLine>(Values::Center + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
+		const auto& floorLine1 = std::make_shared<ColorLine>(Values::GetCenter() + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
 		floorLine1->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 10, 0), GREEN));
 		floor.push_back(floorLine1);
 
-		const auto& floorLine2 = std::make_shared<ColorLine>(Values::Center + Vector3(-170, -320, 0), 0, 0.0f, CLEAR);
+		const auto& floorLine2 = std::make_shared<ColorLine>(Values::GetCenter() + Vector3(-170, -320, 0), 0, 0.0f, CLEAR);
 		floorLine2->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(950, 10, 0), GREEN));
 		floor.push_back(floorLine2);
 	}
@@ -33,20 +33,20 @@ void Scene_03::Awake()
 	
 	// House
 	{
-		house.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(-300, -280, 0), Vector3(70, 70, 0), 0.0f, TexturePath + L"Object/Wood.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(1300, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse01.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(2100, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse02.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-300, -280, 0), Vector3(70, 70, 0), 0.0f, TexturePath + L"Object/Wood.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(1300, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse01.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(2100, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse02.png"));
 	}
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"Á¦100È¸ÆÈ¾¾¸§Ã¨ÇÇ¾ð¼±¹ßÅä³Ê¸ÕÆ® ¼±¼ö µî·Ï ¸¶°¨ ±îÁö ÀÏÁÖÀÏ... ¼±¼ö µî·ÏÀ» ÁøÇàÇÏ´Â µµ½Ã±îÁö Àü¼Ó·ÂÀ¸·Î ´Þ¸°´Ù!", 25.0f, L"¸ÞÀÌÇÃ½ºÅä¸® OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::Center + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::Center + Vector3(0, -300, 0), Values::Center + Vector3(1920, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ÀÌÁ¦ ÀÌ°÷À» ¶°³¯ ¶§°¡ µÇ¾ú³ª? (Enter¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.)", 25.0f, L"¸ÞÀÌÇÃ½ºÅä¸® OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::Center + Vector3(2400, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"100È¸È¾Ã¨Ç¾ð¼±¹Ê¸Æ®     ...   Ï´ Ã± Ó· Þ¸!", 25.0f, L"Ã½ä¸® OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1920, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L" Ì°   Ç¾? (Enter Ô·Ö¼.)", 25.0f, L"Ã½ä¸® OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(2400, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider
@@ -61,8 +61,8 @@ void Scene_03::Awake()
 
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(Values::Center + Vector3(0, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(Values::Center + Vector3(Values::WinDefaultWidth * 1.2f, 0, 0), Vector3(Values::WinDefaultWidth * 1.2f, Values::WinDefaultHeight * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 1.2f, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -77,8 +77,8 @@ void Scene_03::Awake()
 	// TileMap
 	{
 		UINT spacing = 50;
-		UINT width = (Values::WinDefaultWidth * 2) / spacing;
-		UINT height = (Values::WinDefaultHeight * 2) / spacing;
+		UINT width = (Values::GetWinWidth() * 2) / spacing;
+		UINT height = (Values::GetWinHeight() * 2) / spacing;
 
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map01.data");
@@ -86,7 +86,7 @@ void Scene_03::Awake()
 	
 	// Log
 	{
-		const auto& logRect = std::make_shared<TextureRect>(Values::Center + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
+		const auto& logRect = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
 		logRect->AddComponent(std::make_shared<HitComponent>("HitComponent"));
 		logRect->AddComponent(std::make_shared<LogPathCreator>());
 		logRect->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 500, 0), BLACK));
