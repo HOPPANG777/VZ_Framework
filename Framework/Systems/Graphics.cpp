@@ -28,15 +28,18 @@ void Graphics::Init()
 void Graphics::CreateBackBuffer()
 {
 	// 우리가 바꿀값만 제대로 넣으면 된다.
-	HRESULT hr = swapChain->ResizeBuffers
-	(
-		0,
-		UINT(gWinWidth),
-		UINT(gWinHeight),
-		DXGI_FORMAT_B8G8R8A8_UNORM,
-		0
-	);
+	//HRESULT hr = swapChain->ResizeBuffers
+	//(
+	//	0,
+	//	UINT(gWinWidth),
+	//	UINT(gWinHeight),
+	//	DXGI_FORMAT_B8G8R8A8_UNORM,
+	//	0
+	//);
 
+
+	// ResizeBuffers is handled in SetResolution
+	HRESULT hr = S_OK;
 	CHECK(hr);
 
 	// ComPtr -> 스마트 포인터 -> 로포인터
@@ -348,6 +351,15 @@ void Graphics::SetFullScreen(bool fullscreen)
 void Graphics::SetResolution(UINT width, UINT height)
 {
 	if (width == 0 || height == 0) return;
+	
+	gWinWidth = float(width);
+	gWinHeight = float(height);
+
+	RECT rect = { 0,0,(LONG)width,(LONG)height };
+	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, FALSE, 0);
+	UINT left = (GetSystemMetrics(SM_CXSCREEN) - width) / 2 + rect.left;
+	UINT top = (GetSystemMetrics(SM_CYSCREEN) - height) / 2 + rect.top;
+	MoveWindow(gHandle, left, top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 
 	// 1. 기존 리소스 해제
 	rtv.Reset();               // Render Target View 해제
@@ -382,16 +394,6 @@ void Graphics::SetResolution(UINT width, UINT height)
 	CHECK(hr);
 
 	d2DeviceContext->SetTarget(d2Bitmap.Get());
-
-	// 5. 새로운 해상도 업데이트
-	gWinWidth = float(width);
-	gWinHeight = float(height);
-
-	// 씬과 UI에 알림
-	//if (SCENE)
-	//{
-	//    SCENE->OnResize(width, height);
-	//}
 }
 
 bool Graphics::LoadCustomFont(const std::wstring& fontFilePath)

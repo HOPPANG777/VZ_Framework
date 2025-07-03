@@ -65,6 +65,11 @@ void Program::Update()
         else
             Time::Get()->SetTimeScale(1);
     }
+
+    if (Input::Get()->KeyDown(VK_F6))
+    {
+        Graphics::Get()->SetResolution(1600, 900);
+    }
 }
 
 void Program::Render()
