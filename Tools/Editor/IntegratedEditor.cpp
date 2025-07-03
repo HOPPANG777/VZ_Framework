@@ -3,6 +3,7 @@
 #include "SceneEditorPanel.h"
 #include "AnimationEditorPanel.h"
 #include "AssetViewerPanel.h"
+#include "MapEditorPanel.h"
 
 void IntegratedEditor::Awake()
 {
@@ -12,6 +13,7 @@ void IntegratedEditor::Awake()
     panels.emplace_back(std::make_unique<SceneEditorPanel>());
     panels.emplace_back(std::make_unique<AnimationEditorPanel>());
     panels.emplace_back(std::make_unique<AssetViewerPanel>());
+    panels.emplace_back(std::make_unique<MapEditorPanel>());
 
     for (auto& panel : panels) panel->Init();
 

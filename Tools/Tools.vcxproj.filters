@@ -10,6 +10,9 @@
     <ClInclude Include="Editor\MapEditor.h">
       <Filter>Editor\MapEditor</Filter>
     </ClInclude>
+    <ClInclude Include="Editor\\MapEditorPanel.h">
+      <Filter>Editor\\MapEditor</Filter>
+    </ClInclude>
     <ClInclude Include="Editor\AnimationEditorPanel.h">
       <Filter>Editor\AnimationEditor</Filter>
     </ClInclude>
@@ -30,6 +33,9 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Editor\MapEditor.cpp">
+      <Filter>Editor\MapEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\MapEditorPanel.cpp">
       <Filter>Editor\MapEditor</Filter>
     </ClCompile>
     <ClCompile Include="Editor\AnimationEditorPanel.cpp">

@@ -217,6 +217,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
     <ClInclude Include="Editor\EditorList.h" />
     <ClInclude Include="Editor\IEditorPanel.h" />
     <ClInclude Include="Editor\IntegratedEditor.h" />
+    <ClInclude Include="Editor\MapEditorPanel.h" />
     <ClInclude Include="Editor\MapEditor.h" />
     <ClInclude Include="Editor\SceneEditorPanel.h" />
     <ClInclude Include="Program.h" />
@@ -227,6 +228,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
     <ClCompile Include="Editor\AnimationEditorPanel.cpp" />
     <ClCompile Include="Editor\AssetViewerPanel.cpp" />
     <ClCompile Include="Editor\IntegratedEditor.cpp" />
+    <ClCompile Include="Editor\MapEditorPanel.cpp" />
     <ClCompile Include="Editor\MapEditor.cpp" />
     <ClCompile Include="Editor\SceneEditorPanel.cpp" />
     <ClCompile Include="Program.cpp">
