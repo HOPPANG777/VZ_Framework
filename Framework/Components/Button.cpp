@@ -48,7 +48,7 @@ void Button::Update()
 	}
 
 	// 타이머 업데이트: 만약 효과 시간이 남아 있다면 감소
-	if (clickEffectTime > 0.0f) clickEffectTime -= DELTA;
+	if (clickEffectTime > 0.0f) clickEffectTime -= Time::Get()->GetDeltaTime();
 }
 
 void Button::Render()

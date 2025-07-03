@@ -92,7 +92,7 @@ TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 		// 시계방향 설정 (false == 시계 방향 // true == 반 시계 방향)
 		desc.FrontCounterClockwise = false;
 
-		HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
+		HRESULT hr = Graphics::Get()->GetDevice()->CreateRasterizerState(&desc, rs.GetAddressOf());
 		CHECK(hr);
 	}
 
@@ -154,13 +154,13 @@ void TileMap::GenerateTileMap()
 
 void TileMap::MapVertexBuffer()
 {
-	DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
+	Graphics::Get()->GetDC()->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subResource);
 }
 
 void TileMap::UnmapVertexBuffer()
 {
 	memcpy(subResource.pData, vertices.data(), sizeof(vertices[0]) * vertices.size());
-	DC->Unmap(vertexBuffer->GetResource(), 0);
+	Graphics::Get()->GetDC()->Unmap(vertexBuffer->GetResource(), 0);
 }
 
 void TileMap::ResizeMap(UINT newWidth, UINT newHeight)

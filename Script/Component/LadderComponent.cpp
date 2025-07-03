@@ -26,7 +26,7 @@ void LadderComponent::Update()
     }
 
     // 만약 플레이어가 W 키를 누른다면
-    if (INPUT->KeyPressed('W'))
+    if (Input::Get()->KeyPressed('W'))
     {
         // 사다리 오르기 시작
         playerController->SetClimbing(true);
@@ -39,7 +39,7 @@ void LadderComponent::Update()
         {
             const float climbSpeed = 300.0f;
             Vector3 pos = playerTransform->GetPosition();
-            pos.y += climbSpeed * TIME->GetDeltaTime();
+            pos.y += climbSpeed * Time::Get()->GetDeltaTime();
             playerTransform->SetPosition(pos);
         }
     }

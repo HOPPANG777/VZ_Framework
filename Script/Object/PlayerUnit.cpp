@@ -127,7 +127,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
     this->AddComponent(make_shared<PlayerController>());
 	this->AddComponent(make_shared<InteractionComponent>());
     this->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), scale, RED));
-    if (this->GetComponent<BoxCollider>("BoxCollider")) COLLISION->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
+    if (this->GetComponent<BoxCollider>("BoxCollider")) CollisionManager::Get()->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
 }
 
 PlayerUnit::~PlayerUnit()

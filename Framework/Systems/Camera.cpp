@@ -103,7 +103,7 @@ void Camera::Move()
 
 const Vector3 Camera::Drag()
 {
-	Vector3 mousePos = INPUT->GetMousePos();
+	Vector3 mousePos = Input::Get()->GetMousePos();
 
 	mousePos += position;
 

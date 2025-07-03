@@ -45,7 +45,7 @@ public:
 
 	void SetIA()
 	{
-		DC->IASetIndexBuffer(buffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		Graphics::Get()->GetDC()->IASetIndexBuffer(buffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 	};
 
 public:

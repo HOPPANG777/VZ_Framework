@@ -53,7 +53,7 @@ void SceneManager::LoadScene(const std::string& sceneName)
 		if (currentScene)
 		{
 			currentScene->Destroy();
-			CAMERA->Reset();
+			Camera::Get()->Reset();
 		}
 		currentScene = nextScene;
 		currentScene->Awake();

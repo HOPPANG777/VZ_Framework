@@ -22,7 +22,7 @@ void HitComponent::Update()
     if (!active) return;
 
     // 효과 진행 시간 증가
-    timer += DELTA;
+    timer += Time::Get()->GetDeltaTime();
     float t = timer / duration;
     if (t >= 1.0f)
     {

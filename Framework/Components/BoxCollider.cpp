@@ -18,7 +18,7 @@ void BoxCollider::Render()
 
     // collider의 center(월드 좌표)
     Vector3 center = GetCenter(); // 예: Transform 등에서 가져옴
-    Vector3 cameraPos = CAMERA->GetPosition();
+    Vector3 cameraPos = Camera::Get()->GetPosition();
 
     // 화면 좌표로 변환 (카메라가 이동한 만큼 빼기)
     Vector3 screenCenter = center - cameraPos;
