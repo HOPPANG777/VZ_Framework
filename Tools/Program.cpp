@@ -4,7 +4,7 @@
 
 #include "Systems/Window.h"
 #include "Managers/RendererManager.h"
-#include "Renders/RenderAPI.h"
+#include "Enums/RenderAPI.h"
 
 // 실행 시 윈도우 크기 설정
 float gWinWidth = WIN_DEFAULT_WIDTH;

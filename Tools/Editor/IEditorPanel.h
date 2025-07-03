@@ -5,8 +5,6 @@
 class IEditorPanel
 {
 public:
-    virtual ~IEditorPanel() = default;
-
     // 패널 초기화
     virtual void Init() = 0;
 

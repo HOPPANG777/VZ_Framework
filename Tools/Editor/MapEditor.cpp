@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "MapTools.h"
+#include "MapEditor.h"
 
-void MapTools::Awake()
+void MapEditor::Awake()
 {
     isLoaded = false;
 
@@ -12,23 +12,23 @@ void MapTools::Awake()
     isLoaded = true;
 }
 
-void MapTools::Start()
+void MapEditor::Start()
 {
     // 초기 맵 생성
     //CreateDefaultMap();
 }
 
-void MapTools::Destroy()
+void MapEditor::Destroy()
 {
     tmap.reset();
 }
 
-void MapTools::FixedUpdate()
+void MapEditor::FixedUpdate()
 {
     // 고정 업데이트 로직 (필요시)
 }
 
-void MapTools::Update()
+void MapEditor::Update()
 {
     // 마우스가 ImGui에 의해 캡처되고 있다면 타일 입력 처리 건너뛰기
     if (ImGui::GetIO().WantCaptureMouse) return;
@@ -36,22 +36,22 @@ void MapTools::Update()
     if (tmap) tmap->Update();
 }
 
-void MapTools::LateUpdate()
+void MapEditor::LateUpdate()
 {
     // 후처리 업데이트 (필요시)
 }
 
-void MapTools::Render()
+void MapEditor::Render()
 {
     if (tmap) tmap->Render();
 }
 
-void MapTools::PostRender()
+void MapEditor::PostRender()
 {
     // 포스트 렌더링 (필요시)
 }
 
-void MapTools::ImGUI()
+void MapEditor::ImGUI()
 {
     // "Map Editor"라는 제목의 독립 창으로 생성 (멀티 뷰포트 사용 시, 창을 분리할 수 있음)
     ImGui::Begin("Map Editor");
@@ -142,7 +142,7 @@ void MapTools::ImGUI()
     ImGui::End();
 }
 
-void MapTools::CreateDefaultMap()
+void MapEditor::CreateDefaultMap()
 {
     // 새로운 타일맵 생성 (mapWidth x mapHeight, spacing 사용)
     tmap = std::make_unique<TileMap>(width, height, spacing, true);

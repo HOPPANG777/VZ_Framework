@@ -1,9 +1,12 @@
 #pragma once
 
 #include "Systems/Graphics.h"
+#include "Systems/Input.h"
+#include "Systems/Time.h"
 #include "Systems/Window.h"
-#include "Utilities/Gui.h"
 #include "Managers/SceneManager.h"
+#include "Managers/CollisionManager.h"
+#include "Renders/RenderStates.h"
 
 class Program
 {

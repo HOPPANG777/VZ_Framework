@@ -104,7 +104,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;$(SolutionDir)Client/;</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -133,7 +133,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;$(SolutionDir)Client/;</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -162,7 +162,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;$(SolutionDir)Client/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -190,7 +190,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../;$(SolutionDir)Framework/;../_Data/_Libraries/;$(SolutionDir)Script/;$(SolutionDir)Client/;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -217,7 +217,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
     <ClInclude Include="Editor\EditorList.h" />
     <ClInclude Include="Editor\IEditorPanel.h" />
     <ClInclude Include="Editor\IntegratedEditor.h" />
-    <ClInclude Include="Editor\MapTools.h" />
+    <ClInclude Include="Editor\MapEditor.h" />
     <ClInclude Include="Editor\SceneEditorPanel.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="resource.h" />
@@ -227,7 +227,7 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(PlatformTarget)\$(Conf
     <ClCompile Include="Editor\AnimationEditorPanel.cpp" />
     <ClCompile Include="Editor\AssetViewerPanel.cpp" />
     <ClCompile Include="Editor\IntegratedEditor.cpp" />
-    <ClCompile Include="Editor\MapTools.cpp" />
+    <ClCompile Include="Editor\MapEditor.cpp" />
     <ClCompile Include="Editor\SceneEditorPanel.cpp" />
     <ClCompile Include="Program.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
