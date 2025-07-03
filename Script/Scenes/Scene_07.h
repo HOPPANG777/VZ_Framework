@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Interfaces/IScene.h"
+
 class Scene_07 : public Scene
 {
 public:

@@ -1,4 +1,6 @@
 #pragma once
+#include "Managers/Texture2DManager.h"
+#include "Systems/Graphics.h"
 
 class Texture2DManager;
 

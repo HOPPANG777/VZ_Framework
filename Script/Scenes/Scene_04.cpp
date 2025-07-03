@@ -10,7 +10,7 @@ void Scene_04::Awake()
 		testPlayer = make_shared<PlayerUnit>(CENTER + Vector3(-550, -45, 0));
 		lumberAxe = make_shared<LumberAxe>(CENTER + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
-		SCENE->SetPlayer(testPlayer);
+		SceneManager::Get()->SetPlayer(testPlayer);
 	}
 
 	// Floor
@@ -61,7 +61,7 @@ void Scene_04::Awake()
 	{
 		puzzleRock = make_shared<TextureRect>(CENTER + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
 		puzzleRock->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
-		COLLISION->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
+		CollisionManager::Get()->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
 		puzzleRock->AddComponent(make_shared<PushableComponent>());
 		puzzleRock->SetName("PuzzleRock");
 	}
@@ -96,13 +96,13 @@ void Scene_04::Awake()
 	// TextPoint Collider
 	{
 		for (const auto& textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& textP : textPoint) CollisionManager::Get()->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Sound
 	{
-		SOUNDS->AddSound("Wind", SoundPath + L"_NordicLumberJack/Wind.wav", true);
-		SOUNDS->SetVolume("Wind", 0.2f);
+		Sounds::Get()->AddSound("Wind", SoundPath + L"_NordicLumberJack/Wind.wav", true);
+		Sounds::Get()->SetVolume("Wind", 0.2f);
 	}
 
 	isLoaded = true;
@@ -113,7 +113,7 @@ void Scene_04::Start()
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
 	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
 	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
-	SOUNDS->Play("Wind");
+	Sounds::Get()->Play("Wind");
 }
 
 void Scene_04::Destroy()
@@ -130,10 +130,10 @@ void Scene_04::Destroy()
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
 	for (auto& t : text) if (t != nullptr) t.reset();
 	for (auto& tp : textPoint) if (tp != nullptr) tp.reset();
-	SCENE->ResetPlayer();
-	COLLISION->RemoveAllCollider();
-	SOUNDS->Stop("Wind");
-	SOUNDS->RemoveSound("Wind");
+	SceneManager::Get()->ResetPlayer();
+	CollisionManager::Get()->RemoveAllCollider();
+	Sounds::Get()->Stop("Wind");
+	Sounds::Get()->RemoveSound("Wind");
 }
 
 void Scene_04::FixedUpdate()
@@ -155,7 +155,7 @@ void Scene_04::Update()
 	if (windObject != nullptr) windObject->Update();
 	if (bridge != nullptr) bridge->Update();
 
-	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
+	Camera::Get()->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
@@ -165,9 +165,9 @@ void Scene_04::Update()
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
 		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
-		if (INPUT->KeyDown(VK_RETURN))
+		if (Input::Get()->KeyDown(VK_RETURN))
 		{
-			SCENE->LoadScene("Stage02");
+			SceneManager::Get()->LoadScene("Stage02");
 		}
 	}
 }

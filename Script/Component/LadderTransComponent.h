@@ -1,6 +1,8 @@
 #pragma once
 
 #include "HitComponent.h"
+#include "Components/Component.h"
+#include "Components/BoxCollider.h"
 
 class LadderTransComponent : public Component
 {

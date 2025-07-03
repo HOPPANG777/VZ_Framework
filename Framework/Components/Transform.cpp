@@ -55,15 +55,15 @@ void Transform::SetRotation(float degrees)
 
 void Transform::Move(const Vector3& speed)
 {
-    position += speed * DELTA;
+    position += speed * Time::Get()->GetDeltaTime();
 }
 
 void Transform::Rotate(float degrees)
 {
-    rotation += XMConvertToRadians(degrees) * DELTA;
+    rotation += XMConvertToRadians(degrees) * Time::Get()->GetDeltaTime();
 }
 
 void Transform::Scale(const Vector3& scale)
 {
-    this->scale += scale * DELTA;
+    this->scale += scale * Time::Get()->GetDeltaTime();
 }

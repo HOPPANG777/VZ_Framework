@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Systems/Graphics.h"
+#include "Systems/Window.h"
+#include "Utilities/Gui.h"
+#include "Managers/SceneManager.h"
+
 class Program
 {
 public:

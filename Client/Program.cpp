@@ -21,78 +21,78 @@ void Program::Awake()
 	RenderStates::Init();
 
 	//카메라 세팅
-	CAMERA->Init();
+	Camera::Get()->Init();
 
 	//Scene 세팅
 	{
-		SCENE->AddScene("LoadingScene", make_shared<Scene_00>());
-		SCENE->AddScene("TitleScene", make_shared<Scene_01>());
-		SCENE->AddScene("SplashScene", make_shared<Scene_02>());
-		SCENE->AddScene("StartStage", make_shared<Scene_03>());
-		SCENE->AddScene("Stage01", make_shared<Scene_04>());
-		SCENE->AddScene("Stage02", make_shared<Scene_05>());
-		SCENE->AddScene("Stage03", make_shared<Scene_06>());
-		SCENE->AddScene("PuzzleStage", make_shared<Scene_07>());
+		SceneManager::Get()->AddScene("LoadingScene", make_shared<Scene_00>());
+		SceneManager::Get()->AddScene("TitleScene", make_shared<Scene_01>());
+		SceneManager::Get()->AddScene("SplashScene", make_shared<Scene_02>());
+		SceneManager::Get()->AddScene("StartStage", make_shared<Scene_03>());
+		SceneManager::Get()->AddScene("Stage01", make_shared<Scene_04>());
+		SceneManager::Get()->AddScene("Stage02", make_shared<Scene_05>());
+		SceneManager::Get()->AddScene("Stage03", make_shared<Scene_06>());
+		SceneManager::Get()->AddScene("PuzzleStage", make_shared<Scene_07>());
 
-		SCENE->SetSplashScene("SplashScene");
+		SceneManager::Get()->SetSplashScene("SplashScene");
 
-		SCENE->SetLoadingScene("LoadingScene");
+		SceneManager::Get()->SetLoadingScene("LoadingScene");
 
-		SCENE->StartGame("StartStage");
+		SceneManager::Get()->StartGame("StartStage");
 		//SCENE->StartGame("Stage02");
 	}
 }
 
 void Program::Start()
 {
-	SCENE->Start();
+	SceneManager::Get()->Start();
 }
 
 void Program::Update()
 {
-	CAMERA->Update();
+	Camera::Get()->Update();
 
-	SCENE->Update();
+	SceneManager::Get()->Update();
 
-	if (INPUT->KeyDown(VK_F2))
+	if (Input::Get()->KeyDown(VK_F2))
 	{
-		COLLISION->RenderDebug();
+		CollisionManager::Get()->RenderDebug();
 	}
 
-	if (INPUT->KeyDown(VK_F3))
+	if (Input::Get()->KeyDown(VK_F3))
 	{
-		if (isFullScreen == false) GRAPHICS->SetFullScreen(isFullScreen = true);
-		else if (isFullScreen == true) GRAPHICS->SetFullScreen(isFullScreen = false);
+		if (isFullScreen == false) Graphics::Get()->SetFullScreen(isFullScreen = true);
+		else if (isFullScreen == true) Graphics::Get()->SetFullScreen(isFullScreen = false);
 	}
 
-	if (INPUT->KeyDown(VK_F5))
+	if (Input::Get()->KeyDown(VK_F5))
 	{
-		if (TIME->GetTimeScale() != 0)
+		if (Time::Get()->GetTimeScale() != 0)
 		{
-			TIME->SetTimeScale(0);
+			Time::Get()->SetTimeScale(0);
 		}
 		else
 		{
-			TIME->SetTimeScale(1);
+			Time::Get()->SetTimeScale(1);
 		}
 	}
 }
 
 void Program::Render()
 {
-	CAMERA->Render();
+	Camera::Get()->Render();
 
-	SCENE->Render();
+	SceneManager::Get()->Render();
 }
 
 void Program::PostRender() 
 {
-	SCENE->PostRender();
+	SceneManager::Get()->PostRender();
 }
 
 void Program::ImGUI()
 {
-	SCENE->ImGUI();
+	SceneManager::Get()->ImGUI();
 }
 
 int APIENTRY wWinMain

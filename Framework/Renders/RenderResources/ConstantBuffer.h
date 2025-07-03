@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework.h"
+#include "Systems/Graphics.h"
 
 class ConstantBuffer
 {
@@ -14,14 +16,14 @@ public:
 	{
 		MapData(data, dataSize);
 
-		DC->VSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
+		Graphics::Get()->GetDC()->VSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
 	}
 
 	void SetPSBuffer(const UINT slot)
 	{
 		MapData(data, dataSize);
 
-		DC->PSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
+		Graphics::Get()->GetDC()->PSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
 	}
 
 protected:
@@ -33,7 +35,7 @@ protected:
 		desc.ByteWidth = dataSize;
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-		HRESULT hr = DEVICE->CreateBuffer(&desc, nullptr, &buffer);
+		HRESULT hr = Graphics::Get()->GetDevice()->CreateBuffer(&desc, nullptr, &buffer);
 		CHECK(hr);
 	}
 
@@ -41,11 +43,11 @@ private:
 	void MapData(void* data, const UINT dataSize)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedSubResource;
-		DC->Map(buffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
+		Graphics::Get()->GetDC()->Map(buffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
 		{
 			memcpy(mappedSubResource.pData, data, dataSize);
 		}
-		DC->Unmap(buffer.Get(), 0);
+		Graphics::Get()->GetDC()->Unmap(buffer.Get(), 0);
 	}
 
 };

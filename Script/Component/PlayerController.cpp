@@ -45,24 +45,24 @@ void PlayerController::UpdateMovement(float dt)
     Vector3 pos = cur;
     
     // 숙이기 상태 업데이트
-    if (INPUT->KeyPressed(VK_CONTROL)) isCrouch = true;
-    else if (INPUT->KeyUp(VK_CONTROL)) isCrouch = false;
+    if (Input::Get()->KeyPressed(VK_CONTROL)) isCrouch = true;
+    else if (Input::Get()->KeyUp(VK_CONTROL)) isCrouch = false;
 
     // 수평 이동
     currentSpeed = isCrouch ? speed * 0.25f : speed;
-    if (INPUT->KeyPressed('A'))
+    if (Input::Get()->KeyPressed('A'))
     {
         isRight = false;
         pos.x -= currentSpeed * dt;
     }
-    if (INPUT->KeyPressed('D'))
+    if (Input::Get()->KeyPressed('D'))
     {
         isRight = true;
         pos.x += currentSpeed * dt;
     }
 
     // 점프 시작
-    if (INPUT->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && isCollision)
+    if (Input::Get()->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && isCollision)
     {
         isJump = true;
         jumpVelocity = speed * 2.0f;
@@ -165,15 +165,15 @@ void PlayerController::UpdateAnimation()
     {
         newState = isRight ? UnitAnimationType::JUMP_FALL_R : UnitAnimationType::JUMP_FALL_L;
     }
-    else if (isCrouch && INPUT->KeyPressed('A'))
+    else if (isCrouch && Input::Get()->KeyPressed('A'))
     {
         newState = UnitAnimationType::CROUCH_WALK_L;
     }
-    else if (isCrouch && INPUT->KeyPressed('D'))
+    else if (isCrouch && Input::Get()->KeyPressed('D'))
     {
         newState = UnitAnimationType::CROUCH_WALK_R;
     }
-    else if (isCrouch && !INPUT->KeyPressed('A') && !INPUT->KeyPressed('D') && !INPUT->KeyPressed(VK_SPACE) && !INPUT->MouseDown(1) && !INPUT->KeyDown('E'))
+    else if (isCrouch && !Input::Get()->KeyPressed('A') && !Input::Get()->KeyPressed('D') && !Input::Get()->KeyPressed(VK_SPACE) && !Input::Get()->MouseDown(1) && !Input::Get()->KeyDown('E'))
     {
         newState = isRight ? UnitAnimationType::CROUCH_HOLD_R : UnitAnimationType::CROUCH_HOLD_L;
     }
@@ -181,15 +181,15 @@ void PlayerController::UpdateAnimation()
     {
         newState = isRight ? UnitAnimationType::CROUCH_R : UnitAnimationType::CROUCH_L;
     }
-    else if (INPUT->KeyPressed('A'))
+    else if (Input::Get()->KeyPressed('A'))
     {
         newState = UnitAnimationType::RUN_L;
     }
-    else if (INPUT->KeyPressed('D'))
+    else if (Input::Get()->KeyPressed('D'))
     {
         newState = UnitAnimationType::RUN_R;
     }
-    else if (INPUT->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && isCollision)
+    else if (Input::Get()->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall && isCollision)
     {
         newState = isRight ? UnitAnimationType::JUMP_R : UnitAnimationType::JUMP_L;
     }
@@ -243,7 +243,7 @@ void PlayerController::UpdateAxeInput()
    // 1) 오른쪽 버튼 누른 첫 프레임 → Prepare 진입
    //    (다른 Axe 동작 중이 아닐 때만)
    //——————
-    if (INPUT->MouseDown(1))
+    if (Input::Get()->MouseDown(1))
     {
         if (!isAxePrepare && !isAxePrepareHold && !isAxeThrow && !isAxeReturn)
         {
@@ -264,7 +264,7 @@ void PlayerController::UpdateAxeInput()
     //——————
     // 3) 오른쪽 버튼을 뗀 순간 → Prepare / PrepareHold 초기화
     //——————
-    if (INPUT->MouseUp(1))
+    if (Input::Get()->MouseUp(1))
     {
         if (isAxePrepare || isAxePrepareHold)
         {
@@ -277,7 +277,7 @@ void PlayerController::UpdateAxeInput()
     // 4) PrepareHold 상태에서 왼쪽 버튼 클릭 → Throw 진입
     //    (isAxeThrow 플래그만 설정, 다음 UpdateAnimation에서 처리)
     //——————
-    if (isAxePrepareHold && INPUT->MouseDown(0) && !isAxeThrow && !isAxeReturn)        // 이미 Throw/Return 중이면 무시
+    if (isAxePrepareHold && Input::Get()->MouseDown(0) && !isAxeThrow && !isAxeReturn)        // 이미 Throw/Return 중이면 무시
     {
         isAxeThrow = true;
         isAxePrepareHold = false;
@@ -287,7 +287,7 @@ void PlayerController::UpdateAxeInput()
     // 5) E 키를 누르면 → Return 진입
     //    (다른 Axe 동작 중이 아닐 때만)
     //——————
-    if (INPUT->KeyDown('E') && !isAxePrepare && !isAxePrepareHold && !isAxeThrow && !isAxeReturn)
+    if (Input::Get()->KeyDown('E') && !isAxePrepare && !isAxePrepareHold && !isAxeThrow && !isAxeReturn)
     {
         isAxeReturn = true;
     }

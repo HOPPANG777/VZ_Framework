@@ -1,5 +1,11 @@
 #pragma once
 
+#include "Interfaces/IScene.h"
+#include "Objects/TextureObject/TextureRect.h"
+#include "Components/Button.h"
+#include "Components/Texts.h"
+#include "Managers/SceneManager.h"
+
 class Scene_01 : public Scene
 {
 public:

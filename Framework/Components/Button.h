@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Objects/BaseObject/Object.h"
+#include "Component.h"
+#include "RectTransform.h"
+#include "Systems/Input.h"
+#include "Systems/Time.h"
+#include "Interfaces/IColorable.h"
+
 class Button : public Component
 {
 public:

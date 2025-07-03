@@ -1,6 +1,10 @@
 #pragma once
 
 #include "Object/JumpHoppang.h"
+#include "Components/Texts.h"
+#include "Objects/ColorObject/ColorRect.h"
+#include "Interfaces/IScene.h"
+#include "Systems/Camera.h"
 
 class Scene_00 : public Scene
 {

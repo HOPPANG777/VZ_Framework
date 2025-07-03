@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Utilities/String.h"
+
 using namespace FMOD;
 
 class Sounds

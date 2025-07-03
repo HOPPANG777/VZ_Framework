@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Object.h"
+#include "Renders/Shaders/VertexShader.h"
+#include "Renders/Shaders/PixelShader.h"
+#include "Renders/IA/VertexBuffer.h"
+#include "Renders/IA/IndexBuffer.h"
+#include "Renders/IA/InputLayout.h"
+
 class Drawable : public Object
 {
 protected:

@@ -97,8 +97,8 @@ WPARAM Window::Run()
 			TranslateMessage(&msg);
 
 			//INPUT->InputProc(msg.message, msg.lParam);
-			INPUT->MouseProc(msg.message, msg.wParam, msg.lParam);
-			if (IMGUI->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
+			Input::Get()->MouseProc(msg.message, msg.wParam, msg.lParam);
+			if (Gui::Get()->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
 
 			// 메시지 처리함수로 전달
 			DispatchMessage(&msg);
@@ -115,23 +115,23 @@ WPARAM Window::Run()
 
 void Window::MainRender()
 {
-	INPUT->Update();
-	TIME->Update();
-	SOUNDS->Update();
-	IMGUI->Update();
-	COLLISION->Update();
+	Input::Get()->Update();
+	Time::Get()->Update();
+	Sounds::Get()->Update();
+	Gui::Get()->Update();
+	CollisionManager::Get()->Update();
 
 	program->Update();
 
-	GRAPHICS->Begin();
+	Graphics::Get()->Begin();
 	{
 		program->Render();
 		program->PostRender();
 
 		program->ImGUI();
-		IMGUI->Render();
+		Gui::Get()->Render();
 	}
-	GRAPHICS->End();
+	Graphics::Get()->End();
 }
 
 void Window::SetBorderlessWindow()

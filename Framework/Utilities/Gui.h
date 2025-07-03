@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Systems/Graphics.h"
+
 class Gui
 {
 	DECLARE_SINGLETON(Gui);

@@ -8,6 +8,9 @@
 #include "Object/Wind.h"
 #include "Component/WindZone.h"
 #include "Object/DialogTextBox.h"
+#include "Objects/ColorObject/ColorLine.h"
+#include "Systems/Sounds.h"
+#include "Objects/TileObject/TileMap.h"
 
 class Scene_04 : public Scene
 {

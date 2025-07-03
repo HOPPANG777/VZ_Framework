@@ -1,6 +1,7 @@
 #pragma once
 
 #include "HitComponent.h"
+#include "Components/BoxCollider.h"
 
 class LogPathCreator : public Component
 {

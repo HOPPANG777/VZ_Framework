@@ -17,7 +17,7 @@ void Scene_00::Start()
 		LoadingTextObject->AddComponent(make_shared<Texts>());
 	}
 	
-	CAMERA->Reset();
+	Camera::Get()->Reset();
 
 	isLoaded = true;
 }

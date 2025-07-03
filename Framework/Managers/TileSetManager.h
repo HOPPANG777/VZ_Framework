@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Renders/RenderResources/Texture2D.h"
+#include "Utilities/DirectHelper.h"
+
 class TileSetManager
 {
     DECLARE_SINGLETON(TileSetManager);

@@ -8,6 +8,8 @@
 #include "Component/LadderTransComponent.h"
 #include "Object/DialogTextBox.h"
 #include "Component/WallCollision.h"
+#include "Objects/TileObject/TileMap.h"
+#include "Objects/ColorObject/ColorLine.h"
 
 class Scene_05 : public Scene
 {

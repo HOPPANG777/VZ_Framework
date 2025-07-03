@@ -100,7 +100,7 @@ void Texture2DManager::Load(Texture2D* texture)
         ComPtr<ID3D11ShaderResourceView> shaderResourceView;
         hr = CreateShaderResourceView
         (
-            DEVICE,
+            Graphics::Get()->GetDevice(),
             image.GetImages(),
             image.GetImageCount(),
             metaData,

@@ -18,7 +18,7 @@ void SolidCollider::Render()
     Vector3 topLeft = center - half;
     Vector3 bottoisRight = center + half;
     // 예: Gizmo에서 DrawBox()를 호출해 사각형 경계선 표시
-    GIZMO->DrawBox(center, size, color, 1.0f);
+    Gizmo::Get()->DrawBox(center, size, color, 1.0f);
 }
 
 // GetCenter(): 소유 객체 위치 + offset 반환

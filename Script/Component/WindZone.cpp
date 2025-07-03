@@ -9,7 +9,7 @@ bool IsInsideRegion(const Vector3& pos, const Vector3& min, const Vector3& max)
 
 void WindZone::Update()
 {
-    auto player = SCENE->GetPlayer();
+    auto player = SceneManager::Get()->GetPlayer();
     if (!player) return;
 
     // InteractionComponent를 통해 플레이어가 상호작용 중인지 확인
@@ -32,7 +32,7 @@ void WindZone::Update()
     Vector3 playerPos = player->GetPosition();
     if (IsInsideRegion(playerPos, mRegionMin, mRegionMax))
     {
-        Vector3 displacement = mWindDirection * mIntensity * TIME->GetDeltaTime();
+        Vector3 displacement = mWindDirection * mIntensity * Time::Get()->GetDeltaTime();
         player->SetPosition(playerPos + displacement);
     }
 }

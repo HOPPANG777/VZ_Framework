@@ -50,7 +50,7 @@ void Camera::Move()
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
-        if (INPUT->KeyDown(VK_F4))
+        if (Input::Get()->KeyDown(VK_F4))
         {
             // 토글: 이동 모드 On/Off
             isMove = !isMove;
@@ -62,32 +62,32 @@ void Camera::Move()
         {
             bool moving = false;
             // 기본적으로 현재 속도(currentSpeed)를 사용하여 이동
-            if (Keyboard::Get()->Press('W'))
+            if (Input::Get()->KeyPressed('W'))
             {
-                position.y += currentSpeed * DELTA;
+                position.y += currentSpeed * Time::Get()->GetDeltaTime();
                 moving = true;
             }
-            else if (Keyboard::Get()->Press('S'))
+            else if (Input::Get()->KeyPressed('S'))
             {
-                position.y -= currentSpeed * DELTA;
+                position.y -= currentSpeed * Time::Get()->GetDeltaTime();
                 moving = true;
             }
 
-            if (Keyboard::Get()->Press('A'))
+            if (Input::Get()->KeyPressed('A'))
             {
-                position.x -= currentSpeed * DELTA;
+                position.x -= currentSpeed * Time::Get()->GetDeltaTime();
                 moving = true;
             }
-            else if (Keyboard::Get()->Press('D'))
+            else if (Input::Get()->KeyPressed('D'))
             {
-                position.x += currentSpeed * DELTA;
+                position.x += currentSpeed * Time::Get()->GetDeltaTime();
                 moving = true;
             }
 
             // 만약 한 개 이상의 이동 키가 눌려있으면 가속 누적, 아니면 가속 시간 초기화
             if (moving)
             {
-                accelerationTime += DELTA;
+                accelerationTime += Time::Get()->GetDeltaTime();
                 // 최소 5초 동안 누르고 있어야 최대 가속에 도달 (최대 가속은 5초에 해당)
                 if (accelerationTime > 3.0f) accelerationTime = 3.0f;
             }

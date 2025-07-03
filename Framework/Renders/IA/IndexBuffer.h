@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework.h"
+#include "Systems/Graphics.h"
 
 class IndexBuffer
 {
@@ -37,7 +39,7 @@ public:
 		ZeroMemory(&subData, sizeof(subData));
 		subData.pSysMem = indices.data();
 
-		HRESULT hr = DEVICE->CreateBuffer(&desc, &subData, &buffer);
+		HRESULT hr = Graphics::Get()->GetDevice()->CreateBuffer(&desc, &subData, &buffer);
 		CHECK(hr);
 	};
 

@@ -1,6 +1,13 @@
 #pragma once
 
 #include "Enums/AxeState.h"
+#include "Enums/UnitAnimationType.h"
+#include "Components/Component.h"
+//#include "Objects/BaseObject/Object.h"
+#include "Utilities/Gizmo.h"
+#include "Systems/Time.h"
+#include "Systems/Input.h"
+#include "Systems/Camera.h"
 
 // 도끼(axe) 컴포넌트 클래스
 // - 플레이어(또는 타겟)와 상호작용하며 도끼를 던지고 회수하는 기능 제공

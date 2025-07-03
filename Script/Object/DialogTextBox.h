@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Objects/BaseObject/Object.h"
+#include "Objects/TextureObject/TextureRect.h"
+#include "Components/TypingText.h"
+#include "Systems/Input.h"
+
 class DialogTextBox : public Object
 {
 public:

@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Systems/Input.h"
+#include "Objects/BaseObject/Object.h"
+#include "Enums/UnitAnimationType.h"
+#include "Components/Animator.h"
+#include "Components/Component.h"
+#include "Components/Transform.h"
+
 // PlayerController는 플레이어의 이동, 점프, 중력, 그리고 애니메이션 상태 전환을 통합 관리합니다.
 class PlayerController : public Component
 {

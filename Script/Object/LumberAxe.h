@@ -1,8 +1,10 @@
 #pragma once
 
-//#include "Objects/TextureObject/TextureRect.h"
+#include "Objects/TextureObject/AnimationRect.h"
 #include "Component/LumberAxeComponent.h"
 #include "Component/LumberAxeAnimation.h"
+#include "Components/BoxCollider.h"
+
 
 class LumberAxe : public AnimationRect
 {

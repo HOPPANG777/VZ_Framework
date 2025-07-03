@@ -1,5 +1,12 @@
 #pragma once
 
+#include "../BaseObject/Drawable.h"
+#include "Interfaces/IColorable.h"
+#include "Renders/RenderResources/VertexType.h"
+#include "Utilities/DirectHelper.h"
+#include "Renders/RenderStates.h"
+#include "Components/Animator.h"
+
 enum class AnimState
 {
     ANIMATION_NONE = 0,
@@ -52,7 +59,7 @@ public:
     {
         HRESULT hr = D3DX11CreateShaderResourceViewFromFile
         (
-            DEVICE,
+            Graphics::Get()->GetDevice(),
             imagePath.c_str(),
             nullptr,
             nullptr,

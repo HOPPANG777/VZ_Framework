@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Interfaces/IScene.h"
+#include "Component/ParallaxBackground.h"
+
 class Scene_06 : public Scene
 {
 public:

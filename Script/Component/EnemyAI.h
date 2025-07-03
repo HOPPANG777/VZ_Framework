@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Components/Component.h"
+
 class EnemyAI : public Component
 {
 public:

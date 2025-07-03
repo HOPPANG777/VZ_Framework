@@ -11,7 +11,7 @@ LumberAxeComponent::LumberAxeComponent(const string& name)
 // 매 프레임 호출되는 업데이트 함수
 void LumberAxeComponent::Update()
 {
-    float dt = DELTA;
+    float dt = Time::Get()->GetDeltaTime();
     if (isDead) return;
 
     switch (state)
@@ -120,7 +120,7 @@ void LumberAxeComponent::UpdateIdleState(float dt)
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     }
 
-    if (INPUT->MousePressed(1) && !isLand)
+    if (Input::Get()->MousePressed(1) && !isLand)
     {
         straightFlightTime = 0.3f;
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_PREPARE_L : AxeState::AXE_PREPARE_R;
@@ -134,9 +134,9 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
     Vector3 offset(10.0f, 0.0f, 0.0f);
     owner->SetPosition(targetPos + offset);
 
-    if (INPUT->MousePressed(0))
+    if (Input::Get()->MousePressed(0))
     {
-        Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
+        Vector3 mousePos = Input::Get()->GetMousePos() + Camera::Get()->GetPosition();
         Vector3 throwDir = mousePos - owner->GetPosition();
         if (throwDir.Length() > 0.001f) throwDir.Normalize();
         else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0);
@@ -144,7 +144,7 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
         velocity = throwDir * throwSpeed;
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_THROWN_L : AxeState::AXE_THROWN_R;
     }
-    else if (INPUT->MouseUp(1))
+    else if (Input::Get()->MouseUp(1))
     {
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     }
@@ -193,7 +193,7 @@ void LumberAxeComponent::UpdateReturningState(float dt)
 Vector3 LumberAxeComponent::ComputeThrowDirection()
 {
     Vector3 startPos = owner->GetPosition();
-    Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
+    Vector3 mousePos = Input::Get()->GetMousePos() + Camera::Get()->GetPosition();
     Vector3 throwDir = mousePos - startPos;
 
     if (throwDir.Length() > 0.001f) throwDir.Normalize();
@@ -236,6 +236,6 @@ void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thi
 {
     for (size_t i = 0; i < points.size() - 1; i += 2)
     {
-        GIZMO->DrawLine(points[i] - CAMERA->GetPosition(), points[i + 1] - CAMERA->GetPosition(), color, thickness);
+        Gizmo::Get()->DrawLine(points[i] - Camera::Get()->GetPosition(), points[i + 1] - Camera::Get()->GetPosition(), color, thickness);
     }
 }

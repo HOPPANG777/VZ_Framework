@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Objects/TextureObject/AnimationRect.h"
+
 class Wind : public AnimationRect
 {
 public:

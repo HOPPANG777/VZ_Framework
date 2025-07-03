@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Component.h"
+#include "Systems/Time.h"
+
 class RectTransform : public Component
 {
 private:

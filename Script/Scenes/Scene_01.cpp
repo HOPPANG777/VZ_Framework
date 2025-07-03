@@ -27,7 +27,7 @@ void Scene_01::Awake()
 void Scene_01::Start()
 {
 	const auto& startButtonComp = make_shared<Button>();
-	startButtonComp->SetOnClick([this]() { SCENE->LoadScene("StartStage"); });
+	startButtonComp->SetOnClick([this]() { SceneManager::Get()->LoadScene("StartStage"); });
 	startButton->AddComponent(startButtonComp);
 	const auto& exitButtonComp = make_shared<Button>();
 	exitButtonComp->SetOnClick([]() { PostQuitMessage(0); });
@@ -47,9 +47,9 @@ void Scene_01::FixedUpdate()
 
 void Scene_01::Update()
 {
-	if (INPUT->KeyDown(VK_F1))
+	if (Input::Get()->KeyDown(VK_F1))
 	{
-		SCENE->LoadScene("GeometryScene");
+		SceneManager::Get()->LoadScene("GeometryScene");
 	}
 
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();

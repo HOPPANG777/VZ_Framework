@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Component.h"
+#include "Objects/BaseObject/Object.h"
+#include "Systems/Input.h"
+#include "Systems/Time.h"
+
 class PlayerMove : public Component
 {
 public:

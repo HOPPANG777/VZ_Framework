@@ -1,6 +1,9 @@
 #pragma once
 
 #include "LumberAxeComponent.h"
+#include "Components/Component.h"
+#include "Components/Animator.h"
+#include "Objects/BaseObject/Object.h"
 
 class LumberAxeAnimation : public Component
 {

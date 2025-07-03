@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Interfaces/IScene.h"
+#include "Objects/TileObject/TileMap.h"
+#include "Utilities/Gui.h"
+
 class MapTools : public Scene
 {
 public:

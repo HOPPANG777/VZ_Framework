@@ -1,5 +1,11 @@
 #pragma once
 
+#include "Component.h"
+#include "Collider.h"
+#include "Managers/CollisionManager.h"
+#include "Systems/Camera.h"
+#include "Utilities/Gizmo.h"
+
 class CircleCollider : public Collider
 {
 public:

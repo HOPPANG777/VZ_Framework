@@ -209,10 +209,10 @@ void TileMap::Update()
 	if (editNow == true)
 	{
 		// 예시: 카메라 위치를 고려하여 마우스 좌표를 월드 좌표로 변환
-		Vector3 mPos = INPUT->GetMousePos();
+		Vector3 mPos = Input::Get()->GetMousePos();
 
 		// 카메라가 직교 카메라이고, GetPosition()이 카메라의 월드 위치를 반환한다고 가정하면:
-		mPos += CAMERA->GetPosition();
+		mPos += Camera::Get()->GetPosition();
 
 		Tile* tile = GetTile(mPos);
 
@@ -220,13 +220,13 @@ void TileMap::Update()
 
 		// 클릭 이벤트 처리 등 다른 입력 로직은 필요에 따라 여기에 추가
 		// 예: 좌클릭 시 타일의 UV를 변경하는 등의 편집 작업
-		if (INPUT->MousePressed(0x0000))
+		if (Input::Get()->MousePressed(0x0000))
 		{
 			if (tile)
 			{
 				// 편집 작업은 별도로 처리(예: UV 변경 등)
-				Vector2 startUV = TILESET->selectedStartUV;
-				Vector2 endUV = startUV + TILESET->texelTileSize;
+				Vector2 startUV = TileSetManager::Get()->selectedStartUV;
+				Vector2 endUV = startUV + TileSetManager::Get()->texelTileSize;
 				tile->SetStartUV(startUV);
 				tile->SetEndUV(endUV);
 			}
@@ -245,20 +245,20 @@ void TileMap::Render()
 	vertexBuffer->SetIA();
 	indexBuffer->SetIA();
 	inputLayout->SetIA();
-	DC->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	Graphics::Get()->GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	vertexShader->SetShader();
 	pixelShader->SetShader();
 
-	DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
+	Graphics::Get()->GetDC()->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 
 	// 타일셋 매니저에서 관리하는 SRV를 픽셀 셰이더에 바인딩
-	DC->PSSetShaderResources(0, 1, TILESET->GetSRV().GetAddressOf());
+	Graphics::Get()->GetDC()->PSSetShaderResources(0, 1, TileSetManager::Get()->GetSRV().GetAddressOf());
 
 	// 레스터라이저 및 블렌드 상태 설정
-	DC->RSSetState(rs.Get());
+	Graphics::Get()->GetDC()->RSSetState(rs.Get());
 
-	DC->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
+	Graphics::Get()->GetDC()->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
 
 
 	// 각 타일마다 버텍스 버퍼를 업데이트하여 그리기
@@ -295,7 +295,7 @@ void TileMap::Render()
 			worldBuffer->SetWorld(world);
 			worldBuffer->SetVSBuffer(0);
 			indexNumBuffer->SetPSBuffer(2);
-			DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
+			Graphics::Get()->GetDC()->DrawIndexed(indexBuffer->GetCount(), 0, 0);
 		}
 	}
 }
@@ -303,7 +303,7 @@ void TileMap::Render()
 void TileMap::ImGUI()
 {
 	// 타일셋 매니저의 GUI (타일 팔레트)
-	TILESET->ImGUI();
+	TileSetManager::Get()->ImGUI();
 }
 
 void TileMap::Save(const string& path)
@@ -313,10 +313,10 @@ void TileMap::Save(const string& path)
 
 	// 타일셋 정보
 	string imagePath = "";
-	wstring tsPath = TILESET->GetTilePath();
+	wstring tsPath = TileSetManager::Get()->GetTilePath();
 	imagePath.assign(tsPath.begin(), tsPath.end());
-	string xCount = to_string(TILESET->GetXCount());
-	string yCount = to_string(TILESET->GetYCount());
+	string xCount = to_string(TileSetManager::Get()->GetXCount());
+	string yCount = to_string(TileSetManager::Get()->GetYCount());
 	fout << imagePath << ' ' << xCount << ' ' << yCount << endl;
 
 	// 각 타일의 UV 정보를 row-major 순서로 저장하면서,
@@ -365,7 +365,7 @@ void TileMap::Load(const string& path)
 		UINT xCount = 0, yCount = 0;
 		iss >> imagePath >> xCount >> yCount;
 		wstring tsPath(imagePath.begin(), imagePath.end());
-		TILESET->ChangeTileMap(tsPath, xCount, yCount);
+		TileSetManager::Get()->ChangeTileMap(tsPath, xCount, yCount);
 	}
 
 	// (3) 2차원 벡터 재생성 및 타일 생성

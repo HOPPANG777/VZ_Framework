@@ -90,7 +90,7 @@ void Scene_03::Awake()
 		logRect->AddComponent(std::make_shared<HitComponent>("HitComponent"));
 		logRect->AddComponent(std::make_shared<LogPathCreator>());
 		logRect->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 500, 0), BLACK));
-		COLLISION->AddCollider(logRect->GetComponent<BoxCollider>("BoxCollider"));
+		CollisionManager::Get()->AddCollider(logRect->GetComponent<BoxCollider>("BoxCollider"));
 		log.push_back(logRect);
 	}
 	
@@ -118,7 +118,7 @@ void Scene_03::Destroy()
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
-	COLLISION->RemoveAllCollider();
+	CollisionManager::Get()->RemoveAllCollider();
 }
 
 void Scene_03::FixedUpdate() {}
@@ -137,7 +137,7 @@ void Scene_03::Update()
 	if (lumberAxe != nullptr) lumberAxe->Update();
 	if (backgroundObject != nullptr) backgroundObject->Update();
 
-	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
+	Camera::Get()->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
@@ -147,9 +147,9 @@ void Scene_03::Update()
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
 		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
-		if (INPUT->KeyDown(VK_RETURN))
+		if (Input::Get()->KeyDown(VK_RETURN))
 		{
-			SCENE->LoadScene("Stage01");
+			SceneManager::Get()->LoadScene("Stage01");
 		}
 	}
 

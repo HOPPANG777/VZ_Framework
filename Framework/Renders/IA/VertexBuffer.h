@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework.h"
+#include "Systems/Graphics.h"
 
 class VertexBuffer
 {
@@ -14,7 +16,7 @@ public:
 
 	void SetIA()
 	{
-		DC->IASetVertexBuffers(0, 1, buffer.GetAddressOf(), &stride, &offset);
+		Graphics::Get()->GetDC()->IASetVertexBuffers(0, 1, buffer.GetAddressOf(), &stride, &offset);
 	};
 
 public:
@@ -53,6 +55,6 @@ inline void VertexBuffer::Create(const vector<T>& vertices, const D3D11_USAGE& u
 	ZeroMemory(&subData, sizeof(subData));
 	subData.pSysMem = vertices.data();
 
-	HRESULT hr = DEVICE->CreateBuffer(&desc, &subData, &buffer);
+	HRESULT hr = Graphics::Get()->GetDevice()->CreateBuffer(&desc, &subData, &buffer);
 	CHECK(hr);
 }

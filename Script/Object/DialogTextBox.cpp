@@ -33,7 +33,7 @@ void DialogTextBox::Update()
     std::shared_ptr<TypingText> typing = this->GetComponent<TypingText>("TypingText");
 
     // 사용자가 클릭하면...
-    if (INPUT->MouseDown(0))
+    if (Input::Get()->MouseDown(0))
     {
         // 만약 아직 텍스트가 모두 출력되지 않았다면 타이핑 효과 건너뛰기
         if (!typing->IsComplete()) typing->SkipToEnd();

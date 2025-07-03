@@ -6,8 +6,8 @@ void PushableComponent::Update()
     if (isBeingPushed)
     {
         Vector3 pushDir = Vector3::Zero;
-        if (Keyboard::Get()->Press('A')) pushDir.x = -1;
-        if (Keyboard::Get()->Press('D')) pushDir.x = 1;
+        if (Input::Get()->KeyPressed('A')) pushDir.x = -1;
+        if (Input::Get()->KeyPressed('D')) pushDir.x = 1;
 
         if (pushDir.x != 0)
         {
@@ -16,7 +16,7 @@ void PushableComponent::Update()
             if (transform)
             {
                 Vector3 pos = transform->GetPosition();
-                pos += pushDir * pushSpeed * TIME->GetDeltaTime();
+                pos += pushDir * pushSpeed * Time::Get()->GetDeltaTime();
                 transform->SetPosition(pos);
             }
         }

@@ -31,7 +31,7 @@ void LogPathCreator::OnAxeCollision()
         owner->AddComponent(newCollider);
 
         // CollisionManager에 새 콜라이더 등록
-        COLLISION->AddCollider(newCollider);
+        CollisionManager::Get()->AddCollider(newCollider);
 
         transformed = true;
     }

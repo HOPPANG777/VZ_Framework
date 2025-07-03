@@ -36,7 +36,7 @@ void Scene_02::Update()
     
     if (!isDone)
     {
-        timer += DELTA;
+        timer += Time::Get()->GetDeltaTime();
         // 예: 3초 후 자동으로 타이틀 씬으로
 
         rect->SetColor(Color(1.0f, 1.0f, 1.0f, timer));
@@ -45,7 +45,7 @@ void Scene_02::Update()
         {
             isDone = true;
             // 스플래시 종료 후 타이틀 씬으로 이동
-            SCENE->LoadScene("TitleScene");
+            SceneManager::Get()->LoadScene("TitleScene");
             //SCENE->LoadScene("GeometryScene");
         }
     }

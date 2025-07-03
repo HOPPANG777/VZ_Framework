@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Utilities/DirectHelper.h"
+
 class Tile  
 {
 private:

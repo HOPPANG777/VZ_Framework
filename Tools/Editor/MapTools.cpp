@@ -119,8 +119,8 @@ void MapTools::ImGUI()
             static char tileSetNameBuffer[256] = "MyTileSet.png";
             ImGui::InputText("Tileset Name", tileSetNameBuffer, IM_ARRAYSIZE(tileSetNameBuffer));
 
-            static int tileSetColumns = TILESET->GetXCount();
-            static int tileSetRows = TILESET->GetYCount();
+            static int tileSetColumns = TileSetManager::Get()->GetXCount();
+            static int tileSetRows = TileSetManager::Get()->GetYCount();
             ImGui::InputInt("Tileset Columns", &tileSetColumns);
             ImGui::InputInt("Tileset Rows", &tileSetRows);
 
@@ -130,7 +130,7 @@ void MapTools::ImGUI()
                 wstring tileSetName = String::ToWstring(string(tileSetNameBuffer));
                 // 기본 경로 + "Tilesets/" + 사용자 입력 타일셋 이름
                 wstring newTilePath = TexturePath + L"Tilesets/" + tileSetName + L".png";
-                TILESET->ChangeTileMap(newTilePath, tileSetColumns, tileSetRows);
+                TileSetManager::Get()->ChangeTileMap(newTilePath, tileSetColumns, tileSetRows);
             }
         }
 

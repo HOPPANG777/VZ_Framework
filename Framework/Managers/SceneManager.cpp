@@ -113,7 +113,7 @@ void SceneManager::StartGame(const string& titleSceneName)
 	if (currentScene)
 	{
 		currentScene->Destroy();
-		CAMERA->Reset();
+		Camera::Get()->Reset();
 	}
 
 	// 스플래시 씬을 현재 씬으로 교체
@@ -135,7 +135,7 @@ void SceneManager::ProcessSceneChange()
 			if (currentScene != nullptr)
 			{
 				currentScene->Destroy();
-				CAMERA->Reset();
+				Camera::Get()->Reset();
 			}
 
 			// nextScene을 현재 씬으로 설정하고, 로딩씬을 시작합니다.
@@ -153,7 +153,7 @@ void SceneManager::ProcessSceneChange()
 			if (currentScene != nullptr)
 			{
 				currentScene->Destroy();
-				CAMERA->Reset();
+				Camera::Get()->Reset();
 			}
 			currentScene = nextScene;
 			currentScene->Awake();

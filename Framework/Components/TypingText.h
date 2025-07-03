@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Texts.h"
+
 class TypingText : public Texts
 {
 public:

@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework.h"
+#include "Systems/Graphics.h"
 
 class InputLayout
 {
@@ -8,7 +10,7 @@ private:
 public:
 	void Create(const D3D11_INPUT_ELEMENT_DESC* desc, const size_t& count, ID3DBlob* blob)
 	{
-		HRESULT hr = DEVICE->CreateInputLayout
+		HRESULT hr = Graphics::Get()->GetDevice()->CreateInputLayout
 		(
 			desc,
 			UINT(count),
@@ -21,7 +23,7 @@ public:
 
 	void SetIA()
 	{
-		DC->IASetInputLayout(inputLayout.Get());
+		Graphics::Get()->GetDC()->IASetInputLayout(inputLayout.Get());
 	}
 
 

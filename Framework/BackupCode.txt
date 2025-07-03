@@ -123,3 +123,28 @@
 //    bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() - Vector3(bgWidth, 0, 0));
 //    std::swap(bgLayer[i], bgLayerDup[i]);
 //}
+
+////SingletonMacros
+//#define INPUT Input::Get()
+//#define TIME Time::Get()
+//#define DELTA Time::Get()->GetDeltaTime()
+//#define GRAPHICS Graphics::Get()
+//#define DEVICE GRAPHICS->GetDevice()
+//#define DC GRAPHICS->GetDC()
+//#define SWAPCHAIN GRAPHICS->GetSwapChain()
+//#define D2DC GRAPHICS->GetD2DC()
+//#define WRITE GRAPHICS->GetWrite()	
+//#define FONT Texts::Get()
+//#define DEBUG HelpMe::Get()
+//#define CAMERA Camera::Get()
+//#define SCENE SceneManager::Get()
+//#define SOUNDS Sounds::Get()
+//#define IMGUI Gui::Get()
+//#define KEYBOARD Keyboard::Get()
+//#define MOUSE Mouse::Get()
+//#define COLLISION CollisionManager::Get()
+//#define GIZMO Gizmo::Get()
+//#define REALDELTA TIME->GetRealDeltaTime()
+//#define TILESET TileSetManager::Get()
+//#define TEXTURE2D Texture2DManager::Get()
+//#define INPUT Input::Get()

@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Component.h"
+#include "Collider.h"
+#include "Managers/CollisionManager.h"
+#include "Systems/Camera.h"
+#include "Utilities/Gizmo.h"
+#include "Structs/BoxEdge.h"
+
 class BoxCollider : public Collider
 {
 public:

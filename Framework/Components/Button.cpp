@@ -4,9 +4,9 @@
 void Button::Update()
 {
 	bool over = IsMouseOver();         // 버튼 영역 내에 마우스 존재 여부
-	bool pressedNow = INPUT->MousePressed(0);   // 현재 프레임에 버튼이 눌린 상태
-	bool downNow = INPUT->MouseDown(0);    // 이번 프레임에 새롭게 눌림
-	bool upNow = INPUT->MouseUp(0);        // 이번 프레임에 버튼을 뗀 상태
+	bool pressedNow = Input::Get()->MousePressed(0);   // 현재 프레임에 버튼이 눌린 상태
+	bool downNow = Input::Get()->MouseDown(0);    // 이번 프레임에 새롭게 눌림
+	bool upNow = Input::Get()->MouseUp(0);        // 이번 프레임에 버튼을 뗀 상태
 
 	IColorable* colorableOwner = dynamic_cast<IColorable*>(GetOwner());
 
@@ -67,7 +67,7 @@ bool Button::IsMouseOver()
 	RECT rect = rectTrans->GetRect();
 
 	// 마우스 현재 위치
-	Vector3 mousePos = INPUT->GetMousePos();
+	Vector3 mousePos = Input::Get()->GetMousePos();
 	// (오쏘그래픽 매트릭스나 기타 변환이 있다면 별도 보정 필요)
 
 	// RECT 내부 판정

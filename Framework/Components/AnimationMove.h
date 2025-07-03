@@ -1,5 +1,11 @@
 #pragma once
 
+#include "Component.h"
+#include "Enums/UnitAnimationType.h"
+#include "Objects/BaseObject/Object.h"
+#include "Systems/Input.h"
+#include "Animator.h"
+
 class AnimationMove : public Component
 {
 public:

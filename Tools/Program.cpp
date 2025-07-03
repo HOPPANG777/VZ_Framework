@@ -21,43 +21,43 @@ void Program::Awake()
 	RenderStates::Init();
 
 	//카메라 세팅
-	CAMERA->Init();
+	Camera::Get()->Init();
 
 	//Scene 세팅
 	{
-		SCENE->AddScene("MapTools", make_shared<MapTools>());
+		SceneManager::Get()->AddScene("MapTools", make_shared<MapTools>());
 
-		SCENE->LoadScene("MapTools");
+		SceneManager::Get()->LoadScene("MapTools");
 	}
 }
 
 void Program::Start()
 {
-	SCENE->Start();
+	SceneManager::Get()->Start();
 }
 
 void Program::Update()
 {
-	CAMERA->Update();
+	Camera::Get()->Update();
 
-	SCENE->Update();
+	SceneManager::Get()->Update();
 }
 
 void Program::Render()
 {
-	CAMERA->Render();
+	Camera::Get()->Render();
 
-	SCENE->Render();
+	SceneManager::Get()->Render();
 }
 
 void Program::PostRender() 
 {
-	SCENE->PostRender();
+	SceneManager::Get()->PostRender();
 }
 
 void Program::ImGUI()
 {
-	SCENE->ImGUI();
+	SceneManager::Get()->ImGUI();
 }
 
 int APIENTRY wWinMain

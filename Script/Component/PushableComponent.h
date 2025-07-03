@@ -1,6 +1,11 @@
 #pragma once
 
 #include "Interface/IInteractable.h"
+#include "Objects/BaseObject/Object.h"
+#include "Components/Component.h"
+#include "Components/Transform.h"
+#include "Systems/Input.h"
+//#include "Systems/Time.h"
 
 class PushableComponent : public Component, public IInteractable
 {

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Interface/IInteractable.h"
+#include "Components/Component.h"
+#include "Systems/Input.h"
+#include "Managers/CollisionManager.h"
 
 class InteractionComponent : public Component
 {

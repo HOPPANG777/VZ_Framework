@@ -43,7 +43,7 @@ LumberAxe::LumberAxe(const Vector3& position, const Vector3& scale, const float 
 	AddComponent(make_shared<LumberAxeAnimation>());
 
 	AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), scale * 0.5f));
-    if (this->GetComponent<BoxCollider>("BoxCollider")) COLLISION->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
+    if (this->GetComponent<BoxCollider>("BoxCollider")) CollisionManager::Get()->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
 }
 
 LumberAxe::~LumberAxe()
@@ -56,7 +56,7 @@ void LumberAxe::Update()
 	BASE::Update();
 
     // 'E' 키 입력과 타겟이 설정되어 있을 경우 회수 시작
-    if (INPUT->KeyPressed('E'))
+    if (Input::Get()->KeyPressed('E'))
     {
 		lumberAxeComponent->Recall();
     }

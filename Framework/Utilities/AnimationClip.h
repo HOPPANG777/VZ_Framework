@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Renders/RenderResources/Texture2D.h"
+#include "DirectHelper.h"
 
 class AnimationClip
 {

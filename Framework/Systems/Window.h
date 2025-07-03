@@ -1,5 +1,14 @@
 #pragma once
 
+#include "Structs/WinDesc.h"
+#include "Camera.h"
+#include "Graphics.h"
+#include "Input.h"
+#include "Sounds.h"
+#include "Time.h"
+#include "Utilities/Gui.h"
+#include "Managers/CollisionManager.h"
+
 class Window
 {
 public:

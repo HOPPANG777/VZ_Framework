@@ -1,4 +1,5 @@
 #pragma once
+#include "IShader.h"
 
 class PixelShader : public IShader
 {
@@ -12,7 +13,7 @@ public:
 		this->entryName = entryName;
 
 		CompileShader(path, entryName, "ps_5_0", blob.GetAddressOf());
-		HRESULT hr = DEVICE->CreatePixelShader
+		HRESULT hr = Graphics::Get()->GetDevice()->CreatePixelShader
 		(
 			blob->GetBufferPointer(),
 			blob->GetBufferSize(),
@@ -30,7 +31,7 @@ public:
 
 	void SetShader() override
 	{
-		DC->PSSetShader(shader.Get(), nullptr, 0);
+		Graphics::Get()->GetDC()->PSSetShader(shader.Get(), nullptr, 0);
 	}
 
 public:

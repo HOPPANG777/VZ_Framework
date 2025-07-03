@@ -55,7 +55,7 @@ void WallCollision::Update()
  /*           if (player->GetmRoll())
                 newPos.x += (speed * 2) * TIME->GetDeltaTime();
             else*/
-                newPos.x += speed * TIME->GetDeltaTime();
+                newPos.x += speed * Time::Get()->GetDeltaTime();
             player->SetPosition(newPos);
         }
         else if (!rightWall && playerX > wallEdge && playerFacingRight)
@@ -64,7 +64,7 @@ void WallCollision::Update()
             //if (player->GetmRoll())
             //    newPos.x -= (speed * 2) * TIME->GetDeltaTime();
             //else
-                newPos.x -= speed * TIME->GetDeltaTime();
+                newPos.x -= speed * Time::Get()->GetDeltaTime();
             player->SetPosition(newPos);
         }
     }
@@ -95,13 +95,13 @@ void WallCollision::Update()
                     if (rightWall && axeX < wallPos.x - halfWidth + (wallCollider->GetSize().x * 0.6f) && !axeFacingRight)
                     {
                         Vector3 newPos = lumberAxe->GetPosition();
-                        newPos.x += axeSpeed * TIME->GetDeltaTime();
+                        newPos.x += axeSpeed * Time::Get()->GetDeltaTime();
                         lumberAxe->SetPosition(newPos);
                     }
                     else if (!rightWall && axeX > wallPos.x + halfWidth - (wallCollider->GetSize().x * 0.6f) && axeFacingRight)
                     {
                         Vector3 newPos = lumberAxe->GetPosition();
-                        newPos.x -= axeSpeed * TIME->GetDeltaTime();
+                        newPos.x -= axeSpeed * Time::Get()->GetDeltaTime();
                         lumberAxe->SetPosition(newPos);
                     }
                 }

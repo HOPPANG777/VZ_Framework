@@ -54,7 +54,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         desc.FillMode = D3D11_FILL_SOLID;
         desc.FrontCounterClockwise = false;
 
-        HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
+        HRESULT hr = Graphics::Get()->GetDevice()->CreateRasterizerState(&desc, rs.GetAddressOf());
         CHECK(hr);
     }
 
@@ -62,7 +62,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
     {
         HRESULT hr = D3DX11CreateShaderResourceViewFromFile
         (
-            DEVICE,
+            Graphics::Get()->GetDevice(),
             path.c_str(),
             nullptr,
             nullptr,
@@ -170,7 +170,7 @@ void AnimationRect::Update()
         animator->Update();
 
         // 2) 애니메이션에 따른 UV 갱신
-        DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRe);
+        Graphics::Get()->GetDC()->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRe);
         {
             Vector2 framePos = animator->GetCurrentFrame();
             Vector2 frameSize = animator->GetTexelFrameSize();
@@ -193,7 +193,7 @@ void AnimationRect::Update()
 
             memcpy(subRe.pData, vertices.data(), sizeof(VertexTexture) * vertices.size());
         }
-        DC->Unmap(vertexBuffer->GetResource(), 0);
+        Graphics::Get()->GetDC()->Unmap(vertexBuffer->GetResource(), 0);
 
         // SRV 갱신 (Animator가 현재 재생중인 클립의 SRV)
         srv = animator->GetCurrentSRV();
@@ -211,13 +211,13 @@ void AnimationRect::Render()
     colorBuffer->SetPSBuffer(2);  // b2 슬롯에 바인딩 (셰이더 코드와 일치해야 함)
 
     // Sampler / RS / Blend State 세팅
-    DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
+    Graphics::Get()->GetDC()->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 
-    DC->PSSetShaderResources(0, 1, srv.GetAddressOf());
+    Graphics::Get()->GetDC()->PSSetShaderResources(0, 1, srv.GetAddressOf());
 
-    DC->RSSetState(rs.Get());
+    Graphics::Get()->GetDC()->RSSetState(rs.Get());
 
-    DC->OMSetBlendState(blend[1].Get(), nullptr, 0xFFFFFFFF);
+    Graphics::Get()->GetDC()->OMSetBlendState(blend[1].Get(), nullptr, 0xFFFFFFFF);
 
     // DrawCall
     DrawCall(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

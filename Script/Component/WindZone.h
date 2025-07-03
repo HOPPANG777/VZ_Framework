@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Object/PlayerUnit.h"
+#include "Managers/SceneManager.h"
+
 
 class WindZone : public Component
 {

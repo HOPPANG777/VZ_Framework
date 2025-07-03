@@ -26,7 +26,7 @@ void ParallaxBackground::SetLayer(int index, Object* layer, Object* layerDup)
 void ParallaxBackground::Update()
 {
     // 카메라 위치를 기준으로 패럴럭스 효과 적용
-    Vector3 camPos = CAMERA->GetPosition();
+    Vector3 camPos = Camera::Get()->GetPosition();
 
     for (int i = 0; i < layerCount; i++)
     {

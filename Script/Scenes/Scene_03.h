@@ -7,6 +7,10 @@
 #include "Object/DialogTextBox.h"
 #include "Component/LogPathCreator.h"
 #include "Component/SolidCollider.h"
+#include "Interfaces/IScene.h"
+#include "Objects/TileObject/TileMap.h"
+#include "Objects/ColorObject/ColorLine.h"
+#include "Managers/SceneManager.h"
 
 class Scene_03 : public Scene
 {

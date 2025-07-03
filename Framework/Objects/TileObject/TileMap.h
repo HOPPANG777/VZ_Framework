@@ -1,5 +1,19 @@
 #pragma once
 
+#include "Renders/IA/VertexBuffer.h"
+#include "Renders/IA/IndexBuffer.h"
+#include "Renders/IA/InputLayout.h"
+#include "Renders/Shaders/VertexShader.h"
+#include "Renders/Shaders/PixelShader.h"
+#include "Renders/RenderResources/GlobalBuffers.h"
+#include "Renders/RenderResources/VertexType.h"
+#include "Renders/RenderStates.h"
+#include "Systems/Time.h"
+#include "Systems/Input.h"
+#include "Systems/Camera.h"
+#include "Managers/TileSetManager.h"
+#include "Tile.h"
+
 class TileMap
 {
 private:

@@ -22,7 +22,7 @@ void TypingText::RenderText
 void TypingText::Update()
 {
 	// 여기서 기본 Texts::Update()가 특별한 로직이 없다면 생략하고 타이핑 업데이트만 수행
-	elapsedTime += DELTA;
+	elapsedTime += Time::Get()->GetDeltaTime();
 	if (!complete && elapsedTime >= typingSpeed)
 	{
 		// typingSpeed마다 한 글자씩 노출

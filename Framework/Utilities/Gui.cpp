@@ -30,7 +30,7 @@ void Gui::Init()
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	ImGui_ImplWin32_Init(gHandle);
-	ImGui_ImplDX11_Init(DEVICE, DC);
+	ImGui_ImplDX11_Init(Graphics::Get()->GetDevice(), Graphics::Get()->GetDC());
 
 	ImGui::StyleColorsDark();
 	//ApplyStyle();

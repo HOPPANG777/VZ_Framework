@@ -49,15 +49,15 @@ void AnimationMove::Update()
     UnitAnimationType newState = currentAnimation;
 
     // 예시로 단순하게 처리 (실제 게임에서는 PlayerMove의 물리 상태나 입력을 참조)
-    if (INPUT->KeyDown(VK_SPACE))
+    if (Input::Get()->KeyDown(VK_SPACE))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::JUMP_L : UnitAnimationType::JUMP_R;
     }
-    else if (INPUT->KeyPressed('A'))
+    else if (Input::Get()->KeyPressed('A'))
     {
         newState = UnitAnimationType::RUN_L;
     }
-    else if (INPUT->KeyPressed('D'))
+    else if (Input::Get()->KeyPressed('D'))
     {
         newState = UnitAnimationType::RUN_R;
     }
@@ -67,15 +67,15 @@ void AnimationMove::Update()
     }
 
     // 도끼 관련 입력 처리
-    if (INPUT->MouseDown(2))
+    if (Input::Get()->MouseDown(2))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::AXE_THROW_PREPARE_L : UnitAnimationType::AXE_THROW_PREPARE_R;
     }
-    if (INPUT->MousePressed(2) && INPUT->MouseDown(1))
+    if (Input::Get()->MousePressed(2) && Input::Get()->MouseDown(1))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::AXE_THROW_L : UnitAnimationType::AXE_THROW_R;
     }
-    if (INPUT->KeyDown('E'))
+    if (Input::Get()->KeyDown('E'))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::AXE_RETURN_L : UnitAnimationType::AXE_RETURN_R;
     }

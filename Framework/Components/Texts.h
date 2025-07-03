@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Component.h"
+#include "Structs/FontBrushDesc.h"
+#include "Structs/FontTextDesc.h"
+#include "Utilities/DirectHelper.h"
+#include "Systems/Graphics.h"
+#include "Objects/BaseObject/Object.h"
+
 class Texts : public Component
 {
 public:

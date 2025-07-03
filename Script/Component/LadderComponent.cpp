@@ -7,7 +7,7 @@ void LadderComponent::Update()
     // LadderComponent가 붙은 오브젝트(사다리)에서 BoxCollider를 가져옵니다.
     // 플레이어 오브젝트에서 BoxCollider를 가져옵니다.
     // 플레이어 컨트롤러를 가져옵니다.
-    auto player = SCENE->GetPlayer();
+    auto player = SceneManager::Get()->GetPlayer();
     auto ladderCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     auto playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
     auto playerController = player->GetComponent<PlayerController>("PlayerController");

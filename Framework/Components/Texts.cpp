@@ -26,7 +26,7 @@ void Texts::RenderText
 	static_cast<float>(gWinHeight - finalRect.top)
 	};
 
-	D2DC->DrawTextW
+	Graphics::Get()->GetD2DC()->DrawTextW
 	(
 		text.c_str(),
 		static_cast<UINT32>(text.size()),
@@ -64,7 +64,7 @@ FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 	if (brushIt != fontBrush.end()) return brushIt->get();
 
 	D2D1::ColorF colorF(color.R(), color.G(), color.B(), color.A());
-	HRESULT hr = D2DC->CreateSolidColorBrush(colorF, &newBrushDesc->brush);
+	HRESULT hr = Graphics::Get()->GetD2DC()->CreateSolidColorBrush(colorF, &newBrushDesc->brush);
 	CHECK(hr);
 
 	FontBrushDesc* createdBrush = newBrushDesc.get();
@@ -96,7 +96,7 @@ FontTextDesc* Texts::GetOrCreateTextFormat
 
 	if (textIt != fontText.end()) return textIt->get();
 
-	HRESULT hr = WRITE->CreateTextFormat
+	HRESULT hr = Graphics::Get()->GetWrite()->CreateTextFormat
 	(
 		newTextDesc->font.c_str(),
 		nullptr,

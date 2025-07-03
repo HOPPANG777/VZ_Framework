@@ -2,6 +2,7 @@
 
 #include "LumberAxeComponent.h"
 #include "PlayerController.h"
+#include "Components/BoxCollider.h"
 
 class FloorCollision : public Component
 {

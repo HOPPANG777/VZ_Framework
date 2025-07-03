@@ -52,8 +52,8 @@ void Drawable::Render()
 
 void Drawable::DrawCall(const D3D11_PRIMITIVE_TOPOLOGY& topology, const bool indexed)
 {
-	DC->IASetPrimitiveTopology(topology);
+	Graphics::Get()->GetDC()->IASetPrimitiveTopology(topology);
 
-	if (indexed) DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
-	else DC->Draw(vertexBuffer->GetCount(), 0);
+	if (indexed) Graphics::Get()->GetDC()->DrawIndexed(indexBuffer->GetCount(), 0, 0);
+	else Graphics::Get()->GetDC()->Draw(vertexBuffer->GetCount(), 0);
 }

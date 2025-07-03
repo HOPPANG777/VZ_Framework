@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Components/Component.h"
+//#include "Objects/BaseObject/Object.h"
+#include "Utilities/DirectHelper.h"
+#include "Systems/Camera.h"
+
 class ParallaxBackground : public Component
 {
     static const int MAX_LAYERS = 10; // 최대 레이어 개수

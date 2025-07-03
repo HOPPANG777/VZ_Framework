@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Components/Collider.h"
+#include "Objects/BaseObject/Object.h"
+
 class CollisionManager
 {
 	DECLARE_SINGLETON(CollisionManager);

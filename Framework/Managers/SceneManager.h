@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Interfaces/IScene.h"
+#include "Systems/Camera.h"
 
 class SceneManager
 {

@@ -5,7 +5,7 @@
 Texture2D::Texture2D(const wstring& filePath)
     : filePath(filePath)
 {
-    TEXTURE2D->Load(this);
+    Texture2DManager::Get()->Load(this);
 }
 
 // ReadPixel 멤버 함수
@@ -41,11 +41,11 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
 
     // CreateTexture2D
     ComPtr<ID3D11Texture2D> destTex;
-    HRESULT hr = DEVICE->CreateTexture2D(&destDesc, nullptr, &destTex);
+    HRESULT hr = Graphics::Get()->GetDevice()->CreateTexture2D(&destDesc, nullptr, &destTex);
     CHECK(hr);
 
     // 원본 texture를 복사본 destTex에 로드
-    hr = D3DX11LoadTextureFromTexture(DC, texture.Get(), nullptr, destTex.Get());
+    hr = D3DX11LoadTextureFromTexture(Graphics::Get()->GetDC(), texture.Get(), nullptr, destTex.Get());
     CHECK(hr);
 
     // 픽셀 데이터 담을 메모리(Width * Height)
@@ -56,12 +56,12 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels
 
     // Map을 통해 CPU로 읽어온다
     D3D11_MAPPED_SUBRESOURCE subRe;
-    DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
+    Graphics::Get()->GetDC()->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
     {
         // 복사
         memcpy(colors.get(), subRe.pData, sizeof(UINT) * pixelCount);
     }
-    DC->Unmap(destTex.Get(), 0);
+    Graphics::Get()->GetDC()->Unmap(destTex.Get(), 0);
 
     // OpenGL 호환용(BGR → RGB 순서 교체)
     {

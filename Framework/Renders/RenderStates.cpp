@@ -36,25 +36,25 @@ void RenderStates::GetBlendDesc(D3D11_BLEND_DESC* desc)
 
 void RenderStates::CreateRasterizer(D3D11_RASTERIZER_DESC* desc, ID3D11RasterizerState** state)
 {
-	HRESULT hr = DEVICE->CreateRasterizerState(desc, state);
+	HRESULT hr = Graphics::Get()->GetDevice()->CreateRasterizerState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateDepthStencil(D3D11_DEPTH_STENCIL_DESC* desc, ID3D11DepthStencilState** state)
 {
-	HRESULT hr = DEVICE->CreateDepthStencilState(desc, state);
+	HRESULT hr = Graphics::Get()->GetDevice()->CreateDepthStencilState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateSampler(D3D11_SAMPLER_DESC* desc, ID3D11SamplerState** state)
 {
-	HRESULT hr = DEVICE->CreateSamplerState(desc, state);
+	HRESULT hr = Graphics::Get()->GetDevice()->CreateSamplerState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateBlend(D3D11_BLEND_DESC* desc, ID3D11BlendState** state)
 {
-	HRESULT hr = DEVICE->CreateBlendState(desc, state);
+	HRESULT hr = Graphics::Get()->GetDevice()->CreateBlendState(desc, state);
 	CHECK(hr);
 }
 

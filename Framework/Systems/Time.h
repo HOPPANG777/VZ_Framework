@@ -7,8 +7,8 @@ class Time
 public:
 	void Update();
 
-	float GetRealDeltaTime() const { return float(deltaTime); }
-	float GetDeltaTime() const { return scaledDeltaTime; }
+	double GetRealDeltaTime() const { return float(deltaTime); }
+	double GetDeltaTime() const { return scaledDeltaTime; }
 	UINT GetFPS() const { return fps; }
 	double GetWorldTime() const { return worldTime; }
 	

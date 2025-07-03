@@ -1,6 +1,10 @@
 // Animator.h
 #pragma once
 
+#include "Component.h"
+#include "Utilities/AnimationClip.h"
+#include "Systems/Time.h"
+
 // Animator가 Component를 상속받도록 변경
 class Animator : public Component
 {

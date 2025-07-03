@@ -1,5 +1,10 @@
 #pragma once
 
+#include "../BaseObject/Drawable.h"
+#include "Interfaces/IColorable.h"
+#include "Renders/RenderResources/VertexType.h"
+#include "Utilities/DirectHelper.h"
+
 class ColorRect : public Drawable, public IColorable
 {
 private:
@@ -24,7 +29,7 @@ public:
 	{
 		this->color = color;
 		D3D11_MAPPED_SUBRESOURCE mappedSubResource;
-		DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
+		Graphics::Get()->GetDC()->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
 		{ // 맵핑중인 공간
 
 			// vertices에다가 변경된 color값을 넣어주고
@@ -33,7 +38,7 @@ public:
 			// 변경된 color값을 vertices에다가 넣어준다.
 			memcpy(mappedSubResource.pData, vertices.data(), vertexBuffer->GetCount() * vertexBuffer->GetStride());
 		}
-		DC->Unmap(vertexBuffer->GetResource(), 0);
+		Graphics::Get()->GetDC()->Unmap(vertexBuffer->GetResource(), 0);
 	}
 
 

@@ -2,6 +2,8 @@
 
 #include "Component/LumberAxeComponent.h"
 #include "PlayerController.h"
+#include "Components/BoxCollider.h"
+
 
 class WallCollision : public Component
 {

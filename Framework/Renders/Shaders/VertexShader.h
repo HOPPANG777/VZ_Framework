@@ -1,4 +1,5 @@
 #pragma once
+#include "IShader.h"
 
 class VertexShader : public IShader
 {
@@ -12,7 +13,7 @@ public:
 		this->entryName = entryName;
 
 		CompileShader(path, entryName, "vs_5_0", blob.GetAddressOf());
-		HRESULT hr = DEVICE->CreateVertexShader
+		HRESULT hr = Graphics::Get()->GetDevice()->CreateVertexShader
 		(
 			blob->GetBufferPointer(),
 			blob->GetBufferSize(),
@@ -30,7 +31,7 @@ public:
 
 	void SetShader() override
 	{
-		DC->VSSetShader(shader.Get(), nullptr, 0);
+		Graphics::Get()->GetDC()->VSSetShader(shader.Get(), nullptr, 0);
 	}
 
 public:

@@ -67,7 +67,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		// 시계방향 설정 (false == 시계 방향 // true == 반 시계 방향)
 		desc.FrontCounterClockwise = false;
 
-		HRESULT hr = DEVICE->CreateRasterizerState(&desc, rs.GetAddressOf());
+		HRESULT hr = Graphics::Get()->GetDevice()->CreateRasterizerState(&desc, rs.GetAddressOf());
 		CHECK(hr);
 	}
 
@@ -96,7 +96,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 	{
 		HRESULT hr = D3DX11CreateShaderResourceViewFromFile
 		(
-			DEVICE,
+			Graphics::Get()->GetDevice(),
 			path.c_str(),
 			nullptr,
 			nullptr,
@@ -129,14 +129,14 @@ void TextureRect::Render()
 	// 먼저, 픽셀 셰이더의 상수 버퍼 슬롯(예: b2)에 ColorBuffer를 업데이트 및 바인딩합니다.
 	colorBuffer->SetPSBuffer(2);  // b2 슬롯에 바인딩 (셰이더 코드와 일치해야 함)
 
-	DC->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
+	Graphics::Get()->GetDC()->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 	
 	//// SRV를 픽셀 셰이더에 바인딩
-	DC->PSSetShaderResources(0, 1, srv.GetAddressOf());
+	Graphics::Get()->GetDC()->PSSetShaderResources(0, 1, srv.GetAddressOf());
 	// 레스터라이저 및 블렌드 상태 설정
-	DC->RSSetState(rs.Get());
+	Graphics::Get()->GetDC()->RSSetState(rs.Get());
 
-	DC->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
+	Graphics::Get()->GetDC()->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
 
 	// 드로우 호출
 	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

@@ -14,7 +14,7 @@ void BoxCollider::Update()
 
 void BoxCollider::Render()
 {
-    if (!COLLISION->GetColliderDebug()) return;
+    if (!CollisionManager::Get()->GetColliderDebug()) return;
 
     // collider의 center(월드 좌표)
     Vector3 center = GetCenter(); // 예: Transform 등에서 가져옴
@@ -25,5 +25,5 @@ void BoxCollider::Render()
 
     // 기즈모 그리기
     // size(박스 크기)는 그대로, center만 screenCenter로
-    GIZMO->DrawBox(screenCenter, size, color, 1.0f);
+    Gizmo::Get()->DrawBox(screenCenter, size, color, 1.0f);
 }

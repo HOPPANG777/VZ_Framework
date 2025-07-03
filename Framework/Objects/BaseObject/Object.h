@@ -1,5 +1,11 @@
 #pragma once
 
+#include "Renders/RenderResources/GlobalBuffers.h"
+#include "Systems/Graphics.h"
+#include "Components/Component.h"
+#include "Components/Transform.h"
+#include "Components/RectTransform.h"
+
 enum class TransformType 
 {
 	Normal,   // 일반 게임 월드용 Transform

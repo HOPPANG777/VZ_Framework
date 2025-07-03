@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework.h"
+#include "Systems/Graphics.h"
 
 class IShader
 {

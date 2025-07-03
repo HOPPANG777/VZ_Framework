@@ -1,5 +1,9 @@
 #pragma once
 
+#include "Component.h"
+#include "Objects/BaseObject/Object.h"
+#include "Systems/Input.h"
+
 class MoveComponent : public Component
 {
 public:
