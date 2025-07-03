@@ -6,18 +6,18 @@ void Scene_01::Awake()
 	isLoaded = false;
 
 	{
-		objects.push_back(std::make_shared<TextureRect>(Values::Center, Vector3(Values::WinDefaultWidth, Values::WinDefaultHeight, 0), 0.0f, TexturePath + L"UI/NordicLumberJacTitleBackground.png"));
-		objects.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(-260, 210, 0), Vector3(700, 700, 0), 0.0f, TexturePath + L"UI/NordicLumberJackTitle.png"));
-		objects.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(495, -120, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
-		objects.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(495, -180, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
-		objects.push_back(std::make_shared<TextureRect>(Values::Center + Vector3(495, -240, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(std::make_shared<TextureRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, TexturePath + L"UI/NordicLumberJacTitleBackground.png"));
+		objects.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-260, 210, 0), Vector3(700, 700, 0), 0.0f, TexturePath + L"UI/NordicLumberJackTitle.png"));
+		objects.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(495, -120, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(495, -180, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
+		objects.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(495, -240, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect));
 		objects[2]->AddComponent(std::make_shared<Texts>());
 		objects[3]->AddComponent(std::make_shared<Texts>());
 		objects[4]->AddComponent(std::make_shared<Texts>());
 	}
 
 	{
-		startButton = std::make_shared<TextureRect>(Values::Center + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect);
+		startButton = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(495, -60, 0), Vector3(150, 100, 0), 0.0f, TexturePath + L"UI/Button02.png", TransformType::Rect);
 		startButton->AddComponent(std::make_shared<Texts>());
 	}
 	
@@ -51,7 +51,7 @@ void Scene_01::Update()
 	{
 		SceneManager::Get()->LoadScene("GeometryScene");
 	}
-	std::cout << Values::CenterX << std::endl;
+	//std::cout << Values::GetCenterX() << std::endl;
 	for (const auto& obj : objects) if (obj != nullptr) obj->Update();
 	if (startButton != nullptr) startButton->Update();
 }

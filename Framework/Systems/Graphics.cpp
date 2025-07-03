@@ -170,8 +170,8 @@ bool Graphics::EnumerateAdapterOutput(D3DEnumAdapterInfo* adapterInfo)
 	for (UINT i = 0; i < numModes; i++)
 	{
 		bool bCheck = true;
-		bCheck &= displayModes[i].Width == Values::WinDefaultWidth;
-		bCheck &= displayModes[i].Height == Values::WinDefaultHeight;
+		bCheck &= displayModes[i].Width == Values::GetWinWidth();
+		bCheck &= displayModes[i].Height == Values::GetWinHeight();
 
 		if (bCheck == true)
 		{

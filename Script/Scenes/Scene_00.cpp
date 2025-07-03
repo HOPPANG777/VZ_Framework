@@ -8,12 +8,12 @@ void Scene_00::Start()
 	isLoaded = false;
 
 	{
-		objects.push_back(std::make_shared<ColorRect>(Values::Center, Vector3(Values::WinDefaultWidth, Values::WinDefaultHeight, 0), 0.0f, BLACK));
-		objects.push_back(std::make_shared<JumpHoppang>(Values::Center + Vector3(Values::WinDefaultWidth * 0.93f, Values::WinDefaultHeight * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/LoadingIcon.png"));
+		objects.push_back(std::make_shared<ColorRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, BLACK));
+		objects.push_back(std::make_shared<JumpHoppang>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 0.93f, Values::GetWinHeight() * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/LoadingIcon.png"));
 	}
 	
 	{
-		LoadingTextObject = std::make_shared<Object>("LoadingText", Values::Center + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+		LoadingTextObject = std::make_shared<Object>("LoadingText", Values::GetCenter() + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
 		LoadingTextObject->AddComponent(std::make_shared<Texts>());
 	}
 	
