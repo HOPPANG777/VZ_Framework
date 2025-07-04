@@ -7,10 +7,10 @@ class Time
 public:
 	void Update();
 
-	double GetRealDeltaTime() const { return float(deltaTime); }
-	double GetDeltaTime() const { return scaledDeltaTime; }
+	float GetRealDeltaTime() const { return float(deltaTime); }
+	float GetDeltaTime() const { return float(scaledDeltaTime); }
 	UINT GetFPS() const { return fps; }
-	double GetWorldTime() const { return worldTime; }
+	float GetWorldTime() const { return float(worldTime); }
 	
 	void SetTimeScale(float scale) { timeScale = scale; }
 	float GetTimeScale() const { return timeScale; }

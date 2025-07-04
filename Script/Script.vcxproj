@@ -29,12 +29,12 @@
     <ClCompile Include="Component\LumberAxeComponent.cpp" />
     <ClCompile Include="Component\FloorCollision.cpp" />
     <ClCompile Include="Component\LumberAxeAnimation.cpp" />
-    <ClCompile Include="Object\DialogTextBox.cpp" />
-    <ClCompile Include="Object\EnemyUnit.cpp" />
-    <ClCompile Include="Object\UnitBase.cpp" />
-    <ClCompile Include="Object\LumberAxe.cpp" />
-    <ClCompile Include="Object\JumpHoppang.cpp" />
-    <ClCompile Include="Object\PlayerUnit.cpp" />
+    <ClCompile Include="GameObject\DialogTextBox.cpp" />
+    <ClCompile Include="GameObject\EnemyUnit.cpp" />
+    <ClCompile Include="GameObject\UnitBase.cpp" />
+    <ClCompile Include="GameObject\LumberAxe.cpp" />
+    <ClCompile Include="GameObject\JumpHoppang.cpp" />
+    <ClCompile Include="GameObject\PlayerUnit.cpp" />
     <ClCompile Include="Component\ParallaxBackground.cpp" />
     <ClCompile Include="Component\PlayerController.cpp" />
     <ClCompile Include="Component\PushableComponent.cpp" />
@@ -55,7 +55,7 @@
     </ClCompile>
     <ClCompile Include="Component\WallCollision.cpp" />
     <ClCompile Include="Component\WindZone.cpp" />
-    <ClCompile Include="Object\Wind.cpp" />
+    <ClCompile Include="GameObject\Wind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enum\BattleState.h" />
@@ -70,12 +70,12 @@
     <ClInclude Include="Component\LumberAxeComponent.h" />
     <ClInclude Include="Component\FloorCollision.h" />
     <ClInclude Include="Component\LumberAxeAnimation.h" />
-    <ClInclude Include="Object\DialogTextBox.h" />
-    <ClInclude Include="Object\EnemyUnit.h" />
-    <ClInclude Include="Object\UnitBase.h" />
-    <ClInclude Include="Object\LumberAxe.h" />
-    <ClInclude Include="Object\JumpHoppang.h" />
-    <ClInclude Include="Object\PlayerUnit.h" />
+    <ClInclude Include="GameObject\DialogTextBox.h" />
+    <ClInclude Include="GameObject\EnemyUnit.h" />
+    <ClInclude Include="GameObject\UnitBase.h" />
+    <ClInclude Include="GameObject\LumberAxe.h" />
+    <ClInclude Include="GameObject\JumpHoppang.h" />
+    <ClInclude Include="GameObject\PlayerUnit.h" />
     <ClInclude Include="Component\ParallaxBackground.h" />
     <ClInclude Include="Component\PlayerController.h" />
     <ClInclude Include="Component\PushableComponent.h" />
@@ -92,7 +92,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Component\WallCollision.h" />
     <ClInclude Include="Component\WindZone.h" />
-    <ClInclude Include="Object\Wind.h" />
+    <ClInclude Include="GameObject\Wind.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

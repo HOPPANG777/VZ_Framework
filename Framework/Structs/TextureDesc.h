@@ -3,8 +3,8 @@
 struct TextureDesc
 {
     std::wstring filePath = L"";
-    UINT width = 0;
-    UINT height = 0;
+    size_t width = 0;
+    size_t height = 0;
 
     // COM 인터페이스는 ComPtr로 관리
     ComPtr<ID3D11ShaderResourceView> srv;

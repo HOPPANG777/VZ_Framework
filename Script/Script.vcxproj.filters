@@ -5,17 +5,11 @@
       <Filter>Scenes\Scene_00_Loading</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="GameObject\JumpHoppang.cpp">
-      <Filter>GameObject\LoadingObject</Filter>
-    </ClCompile>
     <ClCompile Include="Scenes\Scene_01.cpp">
       <Filter>Scenes\Scene_01_TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_02.cpp">
       <Filter>Scenes\Scene_02_SplashScene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\LumberAxe.cpp">
-      <Filter>GameObject\LumberAxe</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Scene_03.cpp">
       <Filter>Scenes\Scene_03_StartStage</Filter>
@@ -29,17 +23,8 @@
     <ClCompile Include="Scenes\Scene_06.cpp">
       <Filter>Scenes\Scene_06_Stage03</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\UnitBase.cpp">
-      <Filter>GameObject\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\PlayerUnit.cpp">
-      <Filter>GameObject\Unit\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Component\EnemyAI.cpp">
       <Filter>Component\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\EnemyUnit.cpp">
-      <Filter>GameObject\Unit\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Component\LumberAxeComponent.cpp">
       <Filter>Component\LumberAxeComponent</Filter>
@@ -52,9 +37,6 @@
     </ClCompile>
     <ClCompile Include="Component\LumberAxeAnimation.cpp">
       <Filter>Component\LumberAxeAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject\DialogTextBox.cpp">
-      <Filter>GameObject\DialogTextBox</Filter>
     </ClCompile>
     <ClCompile Include="Manager\BattleManager.cpp">
       <Filter>Manager\BattleManager</Filter>
@@ -83,9 +65,6 @@
     <ClCompile Include="Component\WindZone.cpp">
       <Filter>Component\WindZone</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\Wind.cpp">
-      <Filter>GameObject\Wind</Filter>
-    </ClCompile>
     <ClCompile Include="Component\LadderTransComponent.cpp">
       <Filter>Component\LadderComponent</Filter>
     </ClCompile>
@@ -94,6 +73,27 @@
     </ClCompile>
     <ClCompile Include="Scenes\Scene_07.cpp">
       <Filter>Scenes\Scene_07_PuzzleStage</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\DialogTextBox.cpp">
+      <Filter>GameObject\DialogTextBox</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\EnemyUnit.cpp">
+      <Filter>GameObject\Unit\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\PlayerUnit.cpp">
+      <Filter>GameObject\Unit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\UnitBase.cpp">
+      <Filter>GameObject\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Wind.cpp">
+      <Filter>GameObject\Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\LumberAxe.cpp">
+      <Filter>GameObject\LumberAxe</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\JumpHoppang.cpp">
+      <Filter>GameObject\LoadingObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,17 +104,11 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="GameObject\JumpHoppang.h">
-      <Filter>GameObject\LoadingObject</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\Scene_01.h">
       <Filter>Scenes\Scene_01_TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_02.h">
       <Filter>Scenes\Scene_02_SplashScene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\LumberAxe.h">
-      <Filter>GameObject\LumberAxe</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Scene_03.h">
       <Filter>Scenes\Scene_03_StartStage</Filter>
@@ -128,17 +122,8 @@
     <ClInclude Include="Scenes\Scene_06.h">
       <Filter>Scenes\Scene_06_Stage03</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\UnitBase.h">
-      <Filter>GameObject\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\PlayerUnit.h">
-      <Filter>GameObject\Unit\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Component\EnemyAI.h">
       <Filter>Component\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\EnemyUnit.h">
-      <Filter>GameObject\Unit\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Component\LumberAxeComponent.h">
       <Filter>Component\LumberAxeComponent</Filter>
@@ -151,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="Component\LumberAxeAnimation.h">
       <Filter>Component\LumberAxeAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject\DialogTextBox.h">
-      <Filter>GameObject\DialogTextBox</Filter>
     </ClInclude>
     <ClInclude Include="Manager\BattleManager.h">
       <Filter>Manager\BattleManager</Filter>
@@ -188,9 +170,6 @@
     <ClInclude Include="Component\WindZone.h">
       <Filter>Component\WindZone</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\Wind.h">
-      <Filter>GameObject\Wind</Filter>
-    </ClInclude>
     <ClInclude Include="Component\LadderTransComponent.h">
       <Filter>Component\LadderComponent</Filter>
     </ClInclude>
@@ -199,6 +178,27 @@
     </ClInclude>
     <ClInclude Include="Scenes\Scene_07.h">
       <Filter>Scenes\Scene_07_PuzzleStage</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\DialogTextBox.h">
+      <Filter>GameObject\DialogTextBox</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\PlayerUnit.h">
+      <Filter>GameObject\Unit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\EnemyUnit.h">
+      <Filter>GameObject\Unit\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\UnitBase.h">
+      <Filter>GameObject\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Wind.h">
+      <Filter>GameObject\Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\LumberAxe.h">
+      <Filter>GameObject\LumberAxe</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\JumpHoppang.h">
+      <Filter>GameObject\LoadingObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

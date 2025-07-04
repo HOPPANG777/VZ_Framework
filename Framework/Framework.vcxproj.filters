@@ -146,7 +146,9 @@
     <ClCompile Include="Managers\RendererManager.cpp">
       <Filter>Managers\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
+    <ClCompile Include="Objects\BaseObject\GameObject.cpp">
+      <Filter>Objects\BaseObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -372,7 +374,9 @@
     <ClInclude Include="Enums\RenderAPI.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\BaseObject\GameObject.h" />
+    <ClInclude Include="Objects\BaseObject\GameObject.h">
+      <Filter>Objects\BaseObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

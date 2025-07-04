@@ -49,9 +49,9 @@ void Scene_04::Awake()
 
 	// TileMap
 	{
-		UINT spacing = 50;
-		UINT width = (Values::GetWinWidth() * 2) / spacing;
-		UINT height = (Values::GetWinHeight() * 2) / spacing;
+		float spacing = 50;
+		float width = (Values::GetWinWidth() * 2) / spacing;
+		float height = (Values::GetWinHeight() * 2) / spacing;
 
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map02.data");
