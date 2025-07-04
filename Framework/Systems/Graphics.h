@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /*
 DirectX 11 전용 구현체입니다.

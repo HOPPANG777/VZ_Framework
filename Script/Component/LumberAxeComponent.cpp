@@ -11,7 +11,7 @@ LumberAxeComponent::LumberAxeComponent(const std::string& name)
 // 매 프레임 호출되는 업데이트 함수
 void LumberAxeComponent::Update()
 {
-    float dt = Time::Get()->GetDeltaTime();
+    double dt = Time::Get()->GetDeltaTime();
     if (isDead) return;
 
     switch (state)

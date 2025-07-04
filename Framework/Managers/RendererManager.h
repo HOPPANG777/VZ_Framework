@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Interfaces/IRenderer.h"
 //#include <memory>
 

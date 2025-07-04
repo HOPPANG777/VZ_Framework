@@ -4,8 +4,8 @@ class Values
 public:
 	// Screen related helpers are provided as functions so that
 	// they reflect the current resolution at any time.
-	static UINT GetWinWidth();
-	static UINT GetWinHeight();
+	static float GetWinWidth();
+	static float GetWinHeight();
 	static float GetCenterX();
 	static float GetCenterY();
 	static Vector3 GetCenter();

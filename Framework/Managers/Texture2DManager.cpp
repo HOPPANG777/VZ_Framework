@@ -44,8 +44,8 @@ void Texture2DManager::Load(Texture2D* texture)
     }
     
     // 해당 그림의 너비와 높이를 변수화
-    UINT width = metaData.width;
-    UINT height = metaData.height;
+    size_t width = metaData.width;
+    size_t height = metaData.height;
 
     // Texture2D가 가지고있던 파일 경로 이미지의
     // 주소, 너비, 높이를 desc에 담음

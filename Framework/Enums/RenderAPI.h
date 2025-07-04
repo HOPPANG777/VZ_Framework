@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // 사용할 렌더링 API를 나타내는 열거형 입니다.
 // 추후 OpenGL, Vulkan 등을 추가할 수 있습니다.

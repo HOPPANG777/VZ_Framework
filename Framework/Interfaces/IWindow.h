@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // 플랫폼 별 창 관리 인터페이스입니다.
 class IWindow

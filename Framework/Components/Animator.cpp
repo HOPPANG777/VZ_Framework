@@ -17,7 +17,7 @@ void Animator::Update()
     }
 
     // ▶ 2) normalizedTime 업데이트
-    float dt = Time::Get()->GetDeltaTime();
+    double dt = Time::Get()->GetDeltaTime();
 
     if (currentClip->frameCount > 0 && animationTime > 0.0f)
     {

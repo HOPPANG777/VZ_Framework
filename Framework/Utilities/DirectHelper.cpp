@@ -1,12 +1,12 @@
 #include "Framework.h"
 #include "DirectHelper.h"
 
-UINT Values::GetWinWidth()
+float Values::GetWinWidth()
 {
     return static_cast<UINT>(gWinWidth);
 }
 
-UINT Values::GetWinHeight()
+float Values::GetWinHeight()
 {
     return static_cast<UINT>(gWinHeight);
 }

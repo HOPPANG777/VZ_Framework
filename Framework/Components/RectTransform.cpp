@@ -38,8 +38,8 @@ RECT RectTransform::GetRect()
 {
     // 부모 사각형 (여기서는 전체 창 크기를 사용)
     RECT parentRect = { -(LONG)(Values::GetWinWidth() * 0.5f), -(LONG)(Values::GetWinHeight() * 0.5f), (LONG)(Values::GetWinWidth() * 0.5f), (LONG)(Values::GetWinHeight() * 0.5f) };
-    float parentWidth  = (parentRect.right  - parentRect.left);
-    float parentHeight = (parentRect.bottom - parentRect.top);
+    LONG parentWidth  = (parentRect.right  - parentRect.left);
+    LONG parentHeight = (parentRect.bottom - parentRect.top);
 
 
     // 앵커와 오프셋을 이용하여 기본 사각형 계산

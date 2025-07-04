@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Managers/Texture2DManager.h"
 #include "Systems/Graphics.h"
 #include "Interfaces/ITexture.h"

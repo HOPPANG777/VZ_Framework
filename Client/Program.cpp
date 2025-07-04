@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Program.h"
 #include "Script/Scenes/SceneList.h"
 

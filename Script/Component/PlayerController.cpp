@@ -29,7 +29,7 @@ PlayerController::PlayerController(const std::string& name, float spd)
 
 void PlayerController::Update()
 {
-    float dt = Time::Get()->GetDeltaTime();
+    double dt = Time::Get()->GetDeltaTime();
     UpdateMovement(dt);
     //UpdateAxeInput();
     UpdateAnimation();

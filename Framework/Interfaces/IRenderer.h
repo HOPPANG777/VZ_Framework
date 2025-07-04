@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Enums/RenderAPI.h"
 
 // 렌더러 공통 인터페이스입니다.
