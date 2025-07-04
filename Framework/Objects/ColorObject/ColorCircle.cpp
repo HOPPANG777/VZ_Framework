@@ -6,14 +6,14 @@ ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const fl
 {
 	//vertices
 	{
-		vertices.assign(segments + 1, VertexColor());
+        vertices.assign(segments + 1, VertexColor());
 
-		for (size_t i = 0; i <= segments; ++i)
-		{
-			float theta = 2 * Values::PI * i / segments;
+        for (size_t i = 0; i <= segments; ++i)
+        {
+                float theta = 2 * Values::PI * i / segments;
 
-			vertices[i].position = Vector2(sinf(theta), cosf(theta)) * 0.5f;
-		}
+                vertices[i].position = Vector3(sinf(theta), cosf(theta), 0) * 0.5f;
+        }
 
 		for (VertexColor& vertex : vertices) vertex.color = color;
 	}

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Framework.h"
 
 #include "Structs/WinDesc.h"
 #include "Camera.h"

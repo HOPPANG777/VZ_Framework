@@ -1,5 +1,6 @@
 ﻿#include "Framework.h"
 #include "Graphics.h"
+#include "Camera.h"
 
 Graphics::Graphics()
 {

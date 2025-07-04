@@ -1,5 +1,6 @@
-﻿// Animator.h
+// Animator.h
 #pragma once
+#include "Framework.h"
 
 #include "Component.h"
 #include "Utilities/AnimationClip.h"

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Framework.h"
 
 /*
 DirectX 11 전용 구현체입니다.
@@ -6,7 +7,6 @@ DirectX 11 전용 구현체입니다.
 */
 #include "Interfaces/IRenderer.h"
 #include "Utilities/DirectHelper.h"
-#include "Camera.h"
 class D3DEnumAdapterInfo;
 class D3DEnumOutputInfo;
 

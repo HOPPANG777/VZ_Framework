@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Framework.h"
 
 #include "Renders/RenderResources/GlobalBuffers.h"
 #include "Systems/Graphics.h"
