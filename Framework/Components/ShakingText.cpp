@@ -1,6 +1,4 @@
-﻿#include "Framework.h"
 #include "ShakingText.h"
-
 void ShakingText::RenderText(
     const std::wstring& text, 
     const RECT& rect, 

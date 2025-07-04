@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+﻿#include <string>
 #include "String.h"
 
 #include <iomanip>	// 입출력 스트림의 조작자를 정의하는 헤더, 스트림의 출력 형식을 제어하는 데 사용

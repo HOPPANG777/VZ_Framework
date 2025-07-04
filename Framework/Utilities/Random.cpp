@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+﻿#include <random>
 #include "Random.h"
 
 int Random::Range(int p_Min, int p_Max)

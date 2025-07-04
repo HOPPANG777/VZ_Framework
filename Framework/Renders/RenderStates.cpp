@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "RenderStates.h"
 
 D3D11_RASTERIZER_DESC		RenderStates::rasterizerDesc;

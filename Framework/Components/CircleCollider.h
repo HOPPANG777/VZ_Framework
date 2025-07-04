@@ -1,5 +1,5 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
+#include <cmath>
 
 #include "Component.h"
 #include "Collider.h"

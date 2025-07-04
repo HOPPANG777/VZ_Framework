@@ -1,5 +1,8 @@
 ﻿#pragma once
-#include "Framework.h"
+#include <string>
+#include <vector>
+#include <functional>
+#include <windows.h>
 
 #include "String.h"
 

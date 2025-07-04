@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include "Framework.h"
-
 /*
 DirectX 11 전용 구현체입니다.
 다른 그래픽 API를 사용하려면 IRenderer 인터페이스를 상속받아 구현합니다.

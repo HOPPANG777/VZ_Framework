@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+﻿#include <cassert>
 #include "FileStream.h"
 
 FileStream::FileStream(std::string path, UINT flags)

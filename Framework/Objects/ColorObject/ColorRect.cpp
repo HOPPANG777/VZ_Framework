@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "ColorRect.h"
 
 ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float rotation, const Color& color)

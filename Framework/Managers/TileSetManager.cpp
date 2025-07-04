@@ -1,5 +1,5 @@
-﻿#include "Framework.h"
 #include "TileSetManager.h"
+#include <memory>
 
 TileSetManager::TileSetManager()
 {

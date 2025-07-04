@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "ColorFilledCircle.h"
 
 ColorFilledCircle::ColorFilledCircle(const Vector3& position, const Vector3& scale, const float rotation, const size_t& segments, const Color& color)
