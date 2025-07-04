@@ -3,12 +3,12 @@
 
 float Values::GetWinWidth()
 {
-    return static_cast<UINT>(gWinWidth);
+    return gWinWidth;
 }
 
 float Values::GetWinHeight()
 {
-    return static_cast<UINT>(gWinHeight);
+    return gWinHeight;
 }
 
 float Values::GetCenterX()
