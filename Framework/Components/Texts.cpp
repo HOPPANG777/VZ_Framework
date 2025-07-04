@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Texts.h"
 
 void Texts::RenderText
@@ -35,7 +35,7 @@ void Texts::RenderText
 		brush->brush.Get()
 	);
 
-	// ÅØ½ºÆ® Á¤·Ä ¼³Á¤
+	// í…ìŠ¤íŠ¸ ì •ë ¬ ì„¤ì •
 	textDesc->format->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 	textDesc->format->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 }
@@ -119,7 +119,7 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 	RECT adjustedRect;
 	if (attachedObject)
 	{
-		// RectTransformÀÌ ÀÖ´Ù¸é ±× °ªÀ» »ç¿ë
+		// RectTransformì´ ìˆë‹¤ë©´ ê·¸ ê°’ì„ ì‚¬ìš©
 		const auto& rectTrans = attachedObject->GetComponent<RectTransform>("RectTransform");
 		if (rectTrans)
 		{
@@ -127,7 +127,7 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 		}
 		else
 		{
-			// ¾øÀ¸¸é ±âº»ÀûÀ¸·Î °´Ã¼ÀÇ À§Ä¡¿Í offsetÀ» ´õÇÔ
+			// ì—†ìœ¼ë©´ ê¸°ë³¸ì ìœ¼ë¡œ ê°ì²´ì˜ ìœ„ì¹˜ì™€ offsetì„ ë”í•¨
 			Vector3 objectPos = attachedObject->GetPosition();
 			adjustedRect = rect;
 			adjustedRect.left += static_cast<LONG>(objectPos.x + offset.x);
@@ -135,19 +135,19 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 			adjustedRect.top += static_cast<LONG>(objectPos.y + offset.y);
 			adjustedRect.bottom += static_cast<LONG>(objectPos.y + offset.y);
 		}
-		// º¸Á¤ ÇÔ¼ö È£Ãâ: DX3D ÁÂÇ¥°è -> À©µµ¿ì ÁÂÇ¥°è·Î º¯È¯
+		// ë³´ì • í•¨ìˆ˜ í˜¸ì¶œ: DX3D ì¢Œí‘œê³„ -> ìœˆë„ìš° ì¢Œí‘œê³„ë¡œ ë³€í™˜
 		return ConvertToWindowCoordinates(adjustedRect, gWinHeight);
 	}
 	return rect;
 }
 
-// ÁÂÇ¥°è¸¦ º¸Á¤ÇÏ´Â ÇïÆÛ ÇÔ¼ö: DX3D(¿øÁ¡: ÁÂÇÏ´Ü) -> DX2D(¿øÁ¡: ÁÂ»ó´Ü)
+// ì¢Œí‘œê³„ë¥¼ ë³´ì •í•˜ëŠ” í—¬í¼ í•¨ìˆ˜: DX3D(ì›ì : ì¢Œí•˜ë‹¨) -> DX2D(ì›ì : ì¢Œìƒë‹¨)
 RECT Texts::ConvertToWindowCoordinates(const RECT& rect, float screenHeight)
 {
 	RECT windowRect;
 	windowRect.left = rect.left;
 	windowRect.right = rect.right;
-	windowRect.top = static_cast<LONG>(screenHeight) - rect.bottom; // bottom °ª¿¡¼­ º¸Á¤
+	windowRect.top = static_cast<LONG>(screenHeight) - rect.bottom; // bottom ê°’ì—ì„œ ë³´ì •
 	windowRect.bottom = static_cast<LONG>(screenHeight) - rect.top;
 	return windowRect;
 }

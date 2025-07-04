@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Objects/BaseObject/GameObject.h"
 #include "Objects/TextureObject/TextureRect.h"
@@ -17,17 +17,17 @@ public:
 	virtual void PostRender();
 
 public:
-    // ´ëÈ­Ã¢ È°¼º/ºñÈ°¼º »óÅÂ Á¦¾î
+    // ëŒ€í™”ì°½ í™œì„±/ë¹„í™œì„± ìƒíƒœ ì œì–´
     void Activate() { active = true; }
     void Deactivate() { active = false; }
 
 private:
-    // ´ëÈ­ ÅØ½ºÆ®
+    // ëŒ€í™” í…ìŠ¤íŠ¸
     std::shared_ptr<GameObject> background;
     std::shared_ptr<GameObject> arrowIndicator;
 	std::shared_ptr<GameObject> playerTexture;
 
-    // ¹è°æ, ÅØ½ºÆ®, È­»ìÇ¥ ¾ÆÀÌÄÜ °´Ã¼
+    // ë°°ê²½, í…ìŠ¤íŠ¸, í™”ì‚´í‘œ ì•„ì´ì½˜ ê°ì²´
     std::wstring dialogText;
 	std::wstring fontName;
 	Color fontColor;

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "AnimationMove.h"
 
 AnimationMove::AnimationMove(const std::string& name)
@@ -8,7 +8,7 @@ AnimationMove::AnimationMove(const std::string& name)
 
 bool AnimationMove::IsFacingLeft(UnitAnimationType anim) const
 {
-    // ¿ŞÂÊ »óÅÂ·Î °£ÁÖÇÒ ¾Ö´Ï¸ŞÀÌ¼Ç (»óÅÂ¸í¿¡ _L Æ÷ÇÔ)
+    // ì™¼ìª½ ìƒíƒœë¡œ ê°„ì£¼í•  ì• ë‹ˆë©”ì´ì…˜ (ìƒíƒœëª…ì— _L í¬í•¨)
     switch (anim)
     {
     case UnitAnimationType::IDLE_L:
@@ -32,7 +32,7 @@ void AnimationMove::Update()
     const auto& animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
-    // (A) »ç¸Á »óÅÂ Ã¼Å©: »ç¸ÁÀÌ¸é ¹Ù·Î Á×À½ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àç»ı
+    // (A) ì‚¬ë§ ìƒíƒœ ì²´í¬: ì‚¬ë§ì´ë©´ ë°”ë¡œ ì£½ìŒ ì• ë‹ˆë©”ì´ì…˜ì„ ì¬ìƒ
     if (isDead)
     {
         UnitAnimationType deathState = IsFacingLeft(currentAnimation) ? UnitAnimationType::DIE_L : UnitAnimationType::DIE_R;
@@ -45,10 +45,10 @@ void AnimationMove::Update()
         return;
     }
 
-    // (B) »ì¾ÆÀÖ´Â °æ¿ì: ÀÔ·Â¿¡ µû¶ó »õ·Î¿î ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ °áÁ¤
+    // (B) ì‚´ì•„ìˆëŠ” ê²½ìš°: ì…ë ¥ì— ë”°ë¼ ìƒˆë¡œìš´ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ ê²°ì •
     UnitAnimationType newState = currentAnimation;
 
-    // ¿¹½Ã·Î ´Ü¼øÇÏ°Ô Ã³¸® (½ÇÁ¦ °ÔÀÓ¿¡¼­´Â PlayerMoveÀÇ ¹°¸® »óÅÂ³ª ÀÔ·ÂÀ» ÂüÁ¶)
+    // ì˜ˆì‹œë¡œ ë‹¨ìˆœí•˜ê²Œ ì²˜ë¦¬ (ì‹¤ì œ ê²Œì„ì—ì„œëŠ” PlayerMoveì˜ ë¬¼ë¦¬ ìƒíƒœë‚˜ ì…ë ¥ì„ ì°¸ì¡°)
     if (Input::Get()->KeyDown(VK_SPACE))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::JUMP_L : UnitAnimationType::JUMP_R;
@@ -66,7 +66,7 @@ void AnimationMove::Update()
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::IDLE_L : UnitAnimationType::IDLE_R;
     }
 
-    // µµ³¢ °ü·Ã ÀÔ·Â Ã³¸®
+    // ë„ë¼ ê´€ë ¨ ì…ë ¥ ì²˜ë¦¬
     if (Input::Get()->MouseDown(2))
     {
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::AXE_THROW_PREPARE_L : UnitAnimationType::AXE_THROW_PREPARE_R;
@@ -80,7 +80,7 @@ void AnimationMove::Update()
         newState = IsFacingLeft(currentAnimation) ? UnitAnimationType::AXE_RETURN_L : UnitAnimationType::AXE_RETURN_R;
     }
 
-    // »óÅÂ º¯È­°¡ ÀÖÀ¸¸é ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ ÀüÈ¯
+    // ìƒíƒœ ë³€í™”ê°€ ìˆìœ¼ë©´ ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ì „í™˜
     if (newState != currentAnimation)
     {
         currentAnimation = newState;
@@ -111,5 +111,5 @@ void AnimationMove::Update()
 
 void AnimationMove::Render()
 {
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ÄÄÆ÷³ÍÆ®´Â º°µµÀÇ ·»´õ¸µ ¾øÀÌ Animator¸¦ ¾÷µ¥ÀÌÆ®ÇÔ.
+    // ì• ë‹ˆë©”ì´ì…˜ ì»´í¬ë„ŒíŠ¸ëŠ” ë³„ë„ì˜ ë Œë”ë§ ì—†ì´ Animatorë¥¼ ì—…ë°ì´íŠ¸í•¨.
 }

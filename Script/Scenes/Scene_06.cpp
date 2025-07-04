@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Scene_06.h"
 
 void Scene_06::Awake()

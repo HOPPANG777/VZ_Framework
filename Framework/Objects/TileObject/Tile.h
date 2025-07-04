@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Utilities/DirectHelper.h"
 
@@ -11,7 +11,7 @@ private:
     Vector2 startUV = Values::ZeroVec2;
     Vector2 endUV = Values::ZeroVec2;
 
-    ComPtr<ID3D11ShaderResourceView> srv; // D3D ¸®¼Ò½º´Â ComPtr·Î °ü¸®
+    ComPtr<ID3D11ShaderResourceView> srv; // D3D ë¦¬ì†ŒìŠ¤ëŠ” ComPtrë¡œ ê´€ë¦¬
 
     UINT index = -1;
 

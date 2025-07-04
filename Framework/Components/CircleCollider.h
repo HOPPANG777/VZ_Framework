@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component.h"
 #include "Collider.h"
@@ -13,7 +13,7 @@ public:
     ~CircleCollider() override = default;
 
 public:
-    // ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void Update() override;
     void Render() override;
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameObject.h"
 #include "Renders/Shaders/VertexShader.h"
@@ -36,10 +36,10 @@ public:
 	{
 		if (this != &other)
 		{
-			GameObject::operator=(other); // »óÀ§ °´Ã¼ º¹»ç
+			GameObject::operator=(other); // ìƒìœ„ ê°ì²´ ë³µì‚¬
 			type = other.type;
 			shaderPath = other.shaderPath;
-			// ±âÅ¸ ¸®¼Ò½º º¹»ç
+			// ê¸°íƒ€ ë¦¬ì†ŒìŠ¤ ë³µì‚¬
 		}
 		return *this;
 	}

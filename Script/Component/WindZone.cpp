@@ -1,7 +1,7 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "WindZone.h"
 
-// ÇïÆÛ ÇÔ¼ö: ÇÃ·¹ÀÌ¾î À§Ä¡°¡ ¿µ¿ª ³»¿¡ ÀÖ´ÂÁö È®ÀÎ
+// í—¬í¼ í•¨ìˆ˜: í”Œë ˆì´ì–´ ìœ„ì¹˜ê°€ ì˜ì—­ ë‚´ì— ìˆëŠ”ì§€ í™•ì¸
 bool IsInsideRegion(const Vector3& pos, const Vector3& min, const Vector3& max)
 {
     return pos.x >= min.x && pos.x <= max.x && pos.y >= min.y && pos.y <= max.y && pos.z >= min.z && pos.z <= max.z;
@@ -12,23 +12,23 @@ void WindZone::Update()
     auto player = SceneManager::Get()->GetPlayer();
     if (!player) return;
 
-    // InteractionComponent¸¦ ÅëÇØ ÇÃ·¹ÀÌ¾î°¡ »óÈ£ÀÛ¿ë ÁßÀÎÁö È®ÀÎ
+    // InteractionComponentë¥¼ í†µí•´ í”Œë ˆì´ì–´ê°€ ìƒí˜¸ì‘ìš© ì¤‘ì¸ì§€ í™•ì¸
     auto interactionComp = player->GetComponent<InteractionComponent>("InteractionComponent");
     if (interactionComp && interactionComp->IsInteracting())
     {
         IInteractable* activeInteractable = interactionComp->GetActiveInteractable();
         if (activeInteractable) return;
 
-        // IInteractable ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÑ °´Ã¼°¡ ComponentÀÓÀ» °¡Á¤ÇÕ´Ï´Ù.
+        // IInteractable ì¸í„°í˜ì´ìŠ¤ë¥¼ êµ¬í˜„í•œ ê°ì²´ê°€ Componentì„ì„ ê°€ì •í•©ë‹ˆë‹¤.
         if (auto interactComp = dynamic_cast<Component*>(activeInteractable))
         {
-            // Component°¡ °¡Áö°í ÀÖ´Â GetOwner()¸¦ ÀÌ¿ëÇØ »óÈ£ÀÛ¿ë ´ë»óÀÇ ¼ÒÀ¯ÀÚ¸¦ È®ÀÎÇÕ´Ï´Ù.
-            // ÇÃ·¹ÀÌ¾î°¡ PuzzleRock°ú »óÈ£ÀÛ¿ë ÁßÀÌ¸é ¹Ù¶÷ È¿°ú¸¦ Àû¿ëÇÏÁö ¾Ê½À´Ï´Ù.
+            // Componentê°€ ê°€ì§€ê³  ìˆëŠ” GetOwner()ë¥¼ ì´ìš©í•´ ìƒí˜¸ì‘ìš© ëŒ€ìƒì˜ ì†Œìœ ìë¥¼ í™•ì¸í•©ë‹ˆë‹¤.
+            // í”Œë ˆì´ì–´ê°€ PuzzleRockê³¼ ìƒí˜¸ì‘ìš© ì¤‘ì´ë©´ ë°”ëŒ íš¨ê³¼ë¥¼ ì ìš©í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
             if (interactComp->GetOwner() && interactComp->GetOwner()->GetName() == "PuzzleRock") return;
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ WindZone ¿µ¿ª ³»¿¡ ÀÖÀ¸¸é ¹Ù¶÷ ÀÌµ¿ Àû¿ë
+    // í”Œë ˆì´ì–´ê°€ WindZone ì˜ì—­ ë‚´ì— ìˆìœ¼ë©´ ë°”ëŒ ì´ë™ ì ìš©
     Vector3 playerPos = player->GetPosition();
     if (IsInsideRegion(playerPos, mRegionMin, mRegionMax))
     {

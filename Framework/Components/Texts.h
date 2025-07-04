@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component.h"
 #include "Structs/FontBrushDesc.h"
@@ -25,7 +25,7 @@ public:
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL
     );
 
-    virtual void Update() override {} // ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ±¸ÇöÇÏ·Á¸é ¾÷µ¥ÀÌÆ® ¸Ş¼­µå »ç¿ë
+    virtual void Update() override {} // ì• ë‹ˆë©”ì´ì…˜ì„ êµ¬í˜„í•˜ë ¤ë©´ ì—…ë°ì´íŠ¸ ë©”ì„œë“œ ì‚¬ìš©
     virtual void Render() override {}
 
 public:
@@ -48,8 +48,8 @@ protected:
         const DWRITE_FONT_STRETCH& stretch
     );
 
-    GameObject* attachedObject = nullptr; // ÅØ½ºÆ®°¡ µû¶ó´Ù´Ò °´Ã¼
-    Vector3 offset = Values::ZeroVec3;  // °´Ã¼ À§Ä¡¿¡ ´õÇÒ ¿ÀÇÁ¼Â
+    GameObject* attachedObject = nullptr; // í…ìŠ¤íŠ¸ê°€ ë”°ë¼ë‹¤ë‹ ê°ì²´
+    Vector3 offset = Values::ZeroVec3;  // ê°ì²´ ìœ„ì¹˜ì— ë”í•  ì˜¤í”„ì…‹
 
     bool textOut = false;
 

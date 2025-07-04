@@ -1,4 +1,4 @@
-#include "Framework.h"
+О╩©#include "Framework.h"
 #include "ColorRect.h"
 
 ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float rotation, const Color& color)
@@ -8,13 +8,13 @@ ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float 
 	{
 		vertices.assign(4, VertexColor());
 
-		// аб го╢э
+		// Л╒▄ М∙≤К▀╗
 		vertices[0].position = { -0.5f, -0.5f, 0 };
-		// аб ╩С╢э
+		// Л╒▄ Л┐│К▀╗
 		vertices[1].position = { -0.5f, 0.5f, 0 };
-		// ©Л го╢э
+		// Л ╟ М∙≤К▀╗
 		vertices[2].position = { 0.5f, -0.5f, 0 };
-		// ©Л ╩С╢э
+		// Л ╟ Л┐│К▀╗
 		vertices[3].position = { 0.5f, 0.5f, 0 };
 	
 		for (VertexColor& vertex : vertices) vertex.color = color;
@@ -22,7 +22,7 @@ ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float 
 
 	//vertexBuffer
 	{
-		//╟╢ц╪╦╕ ╦╦╣И╬Н аж╬Н╬ъ гя╢ы.
+		//Й╟²Л╡╢К╔╪ К╖▄К⌠╓Л√╢ Лё╪Л√╢Л∙╪ М∙°К▀╓.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 
@@ -66,13 +66,13 @@ void ColorRect::Render()
 //{
 //	vertices.assign(4, VertexColor());
 //
-//	// аб го╢э
+//	// Л╒▄ М∙≤К▀╗
 //	vertices[0].position = { -0.5f, -0.5f };
-//	// аб ╩С╢э
+//	// Л╒▄ Л┐│К▀╗
 //	vertices[1].position = { -0.5f, 0.5f };
-//	// ©Л го╢э
+//	// Л ╟ М∙≤К▀╗
 //	vertices[2].position = { 0.5f, -0.5f };
-//	// ©Л ╩С╢э
+//	// Л ╟ Л┐│К▀╗
 //	vertices[3].position = { 0.5f, 0.5f };
 //
 //	for (auto& vertex : vertices) vertex.color = color;
@@ -80,7 +80,7 @@ void ColorRect::Render()
 //
 ////vertexBuffer
 //{
-//	//╟╢ц╪╦╕ ╦╦╣И╬Н аж╬Н╬ъ гя╢ы.
+//	//Й╟²Л╡╢К╔╪ К╖▄К⌠╓Л√╢ Лё╪Л√╢Л∙╪ М∙°К▀╓.
 //	//vertexBuffer = std::make_unique<VertexBuffer>();
 //	vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 //}

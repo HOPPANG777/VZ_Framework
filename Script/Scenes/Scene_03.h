@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameObject/PlayerUnit.h"
 #include "GameObject/LumberAxe.h"
@@ -15,7 +15,7 @@
 class Scene_03 : public Scene
 {
 public:
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Awake() override;
 	void Start() override;
 

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ColorLine.h"
 
 ColorLine::ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color)
@@ -8,9 +8,9 @@ ColorLine::ColorLine(const Vector3& position, const float& length, const float r
 	{
 		vertices.assign(2, VertexColor());
 
-		// ÁÂ ÇÏ´Ü
+		// ì¢Œ í•˜ë‹¨
 		vertices[0].position = Vector2();
-		// ÁÂ »ó´Ü
+		// ì¢Œ ìƒë‹¨
 		vertices[1].position = Vector2(1, 0);
 
 		for (VertexColor& vertex : vertices) vertex.color = color;
@@ -18,7 +18,7 @@ ColorLine::ColorLine(const Vector3& position, const float& length, const float r
 
 	//vertexBuffer
 	{
-		//°´Ã¼¸¦ ¸¸µé¾î ÁÖ¾î¾ß ÇÑ´Ù.
+		//ê°ì²´ë¥¼ ë§Œë“¤ì–´ ì£¼ì–´ì•¼ í•œë‹¤.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 

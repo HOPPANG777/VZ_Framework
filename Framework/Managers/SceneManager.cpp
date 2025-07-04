@@ -1,12 +1,12 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "SceneManager.h"
 
 SceneManager::SceneManager() {}
 
-// SceneManager ¼Ò¸êÀÚ: ¸ğµç ¾ÀÀ» Destroy() È£Ãâ ÈÄ sceneList¸¦ clearÇÕ´Ï´Ù.
+// SceneManager ì†Œë©¸ì: ëª¨ë“  ì”¬ì„ Destroy() í˜¸ì¶œ í›„ sceneListë¥¼ clearí•©ë‹ˆë‹¤.
 SceneManager::~SceneManager()
 {
-	// std::unordered_map<std::string, std::shared_ptr<Scene>>::iterator »ç¿ë
+	// std::unordered_map<std::string, std::shared_ptr<Scene>>::iterator ì‚¬ìš©
 	for (auto& scene : sceneList)
 	{
 		scene.second->Destroy();
@@ -14,30 +14,30 @@ SceneManager::~SceneManager()
 	sceneList.clear();
 }
 
-// ¾ÀÀ» Ãß°¡ÇÕ´Ï´Ù.
+// ì”¬ì„ ì¶”ê°€í•©ë‹ˆë‹¤.
 void SceneManager::AddScene(const std::string& sceneName, std::shared_ptr<Scene> newScene)
 {
-	// °°Àº ÀÌ¸§ÀÇ ¾ÀÀÌ ÀÌ¹Ì Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+	// ê°™ì€ ì´ë¦„ì˜ ì”¬ì´ ì´ë¯¸ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸
 	if (sceneList.find(sceneName) != sceneList.end())
 	{
 		printf("Scene '%s' already exists.\n", sceneName.c_str());
 		return;
 	}
-	// ¾À Ãß°¡
+	// ì”¬ ì¶”ê°€
 	sceneList[sceneName] = newScene;
 }
 
-// ¾ÀÀ» ·ÎµåÇÏ´Â ÇÔ¼ö: sceneName¿¡ ÇØ´çÇÏ´Â ¾ÀÀ» nextSceneÀ¸·Î ÁöÁ¤ÇÏ°í, Ã¹ ½ÇÇàÀÎ °æ¿ì ¹Ù·Î ÀüÈ¯ÇÕ´Ï´Ù.
+// ì”¬ì„ ë¡œë“œí•˜ëŠ” í•¨ìˆ˜: sceneNameì— í•´ë‹¹í•˜ëŠ” ì”¬ì„ nextSceneìœ¼ë¡œ ì§€ì •í•˜ê³ , ì²« ì‹¤í–‰ì¸ ê²½ìš° ë°”ë¡œ ì „í™˜í•©ë‹ˆë‹¤.
 void SceneManager::LoadScene(const std::string& sceneName)
 {
-	// ¸í½ÃÀû iterator Å¸ÀÔ »ç¿ë
+	// ëª…ì‹œì  iterator íƒ€ì… ì‚¬ìš©
 	const auto& it = sceneList.find(sceneName);
 	if (it == sceneList.end())
 	{
 		printf("Scene '%s' not found.\n", sceneName.c_str());
 		return;
 	}
-	// ÀÌ¹Ì ·Îµù ÁßÀÌ¸é ¹«½Ã
+	// ì´ë¯¸ ë¡œë”© ì¤‘ì´ë©´ ë¬´ì‹œ
 	if (isLoading)
 	{
 		return;
@@ -46,7 +46,7 @@ void SceneManager::LoadScene(const std::string& sceneName)
 	nextScene = it->second;
 	sceneChangeRequested = true;
 
-	// ¸¸¾à ÃÖÃÊ ½ÇÇàÀÌ¸é ¹Ù·Î ÀüÈ¯ (deferred Ã³¸® ¾øÀÌ)
+	// ë§Œì•½ ìµœì´ˆ ì‹¤í–‰ì´ë©´ ë°”ë¡œ ì „í™˜ (deferred ì²˜ë¦¬ ì—†ì´)
 	if (isFirstLaunch)
 	{
 		isFirstLaunch = false;
@@ -63,7 +63,7 @@ void SceneManager::LoadScene(const std::string& sceneName)
 	}
 }
 
-// Loading SceneÀ» ¼³Á¤ÇÏ´Â ÇÔ¼ö
+// Loading Sceneì„ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜
 void SceneManager::SetLoadingScene(const std::string& sceneName)
 {
 	const auto& it = sceneList.find(sceneName);
@@ -77,7 +77,7 @@ void SceneManager::SetLoadingScene(const std::string& sceneName)
 	}
 }
 
-// Splash SceneÀ» ¼³Á¤ÇÏ´Â ÇÔ¼ö
+// Splash Sceneì„ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜
 void SceneManager::SetSplashScene(const std::string& sceneName)
 {
 	const auto& it = sceneList.find(sceneName);
@@ -93,63 +93,63 @@ void SceneManager::SetSplashScene(const std::string& sceneName)
 
 void SceneManager::StartGame(const std::string& titleSceneName)
 {
-	// ¡Ú °ÔÀÓÀ» Ã³À½ ½ÃÀÛÇÒ ¶§ ·Îµù¾À ¾øÀÌ ¡°½ºÇÃ·¡½Ã ¾À¡±ºÎÅÍ º¸¿©ÁÖ°í,
-	//   ½ºÇÃ·¡½Ã ¾ÀÀÌ ³¡³ª¸é titleSceneName(Å¸ÀÌÆ² ¾À)À» LoadScene() ¹æ½ÄÀ¸·Î ÀüÈ¯
-	//   ÀÌ¶§ LoadScene("Å¸ÀÌÆ²")À» È£ÃâÇÏ¸é ±×¶§ºÎÅÍ´Â ·Îµù¾ÀÀÌ ¾²ÀÏ ¼öµµ ÀÖÀ½.
+	// â˜… ê²Œì„ì„ ì²˜ìŒ ì‹œì‘í•  ë•Œ ë¡œë”©ì”¬ ì—†ì´ â€œìŠ¤í”Œë˜ì‹œ ì”¬â€ë¶€í„° ë³´ì—¬ì£¼ê³ ,
+	//   ìŠ¤í”Œë˜ì‹œ ì”¬ì´ ëë‚˜ë©´ titleSceneName(íƒ€ì´í‹€ ì”¬)ì„ LoadScene() ë°©ì‹ìœ¼ë¡œ ì „í™˜
+	//   ì´ë•Œ LoadScene("íƒ€ì´í‹€")ì„ í˜¸ì¶œí•˜ë©´ ê·¸ë•Œë¶€í„°ëŠ” ë¡œë”©ì”¬ì´ ì“°ì¼ ìˆ˜ë„ ìˆìŒ.
 
 	if (!splashScene)
 	{
-		// ½ºÇÃ·¡½Ã ¾ÀÀÌ ¾ø´Ù¸é, ¹Ù·Î Å¸ÀÌÆ² ¾ÀÀ¸·Î
+		// ìŠ¤í”Œë˜ì‹œ ì”¬ì´ ì—†ë‹¤ë©´, ë°”ë¡œ íƒ€ì´í‹€ ì”¬ìœ¼ë¡œ
 		LoadScene(titleSceneName);
 		return;
 	}
 
-	// isFirstLaunch°¡ trueÀÌ¸é ·Îµù °úÁ¤À» ½ºÅµÇÏ´Â ·ÎÁ÷À»
-	// ¡°LoadScene¡±¿¡¼­ Âü°íÇÒ ¼ö ÀÖµµ·Ï ÇØµµ µÇ°í,
-	// È¤Àº ¿©±â¼­ ±×³É currentSceneÀ» ¹Ù·Î ½ºÇÃ·¡½Ã·Î ¼¼ÆÃÇØµµ µË´Ï´Ù.
+	// isFirstLaunchê°€ trueì´ë©´ ë¡œë”© ê³¼ì •ì„ ìŠ¤í‚µí•˜ëŠ” ë¡œì§ì„
+	// â€œLoadSceneâ€ì—ì„œ ì°¸ê³ í•  ìˆ˜ ìˆë„ë¡ í•´ë„ ë˜ê³ ,
+	// í˜¹ì€ ì—¬ê¸°ì„œ ê·¸ëƒ¥ currentSceneì„ ë°”ë¡œ ìŠ¤í”Œë˜ì‹œë¡œ ì„¸íŒ…í•´ë„ ë©ë‹ˆë‹¤.
 	isFirstLaunch = true;
 
-	// ±âÁ¸ currentSceneÀÌ ÀÖ´Ù¸é Destroy
+	// ê¸°ì¡´ currentSceneì´ ìˆë‹¤ë©´ Destroy
 	if (currentScene)
 	{
 		currentScene->Destroy();
 		Camera::Get()->Reset();
 	}
 
-	// ½ºÇÃ·¡½Ã ¾ÀÀ» ÇöÀç ¾ÀÀ¸·Î ±³Ã¼
+	// ìŠ¤í”Œë˜ì‹œ ì”¬ì„ í˜„ì¬ ì”¬ìœ¼ë¡œ êµì²´
 	currentScene = splashScene;
 	currentScene->Awake();
 
-	// ¡°½ºÇÃ·¡½Ã -> Å¸ÀÌÆ²¡± ÀüÈ¯Àº SplashScene ³»ºÎ ·ÎÁ÷(¿¹: ÀÏÁ¤ ½Ã°£ ÈÄ)¿¡¼­
-	// SceneManager::LoadScene(titleSceneName)À» È£ÃâÇØ Ã³¸®ÇÑ´Ù°í °¡Á¤
+	// â€œìŠ¤í”Œë˜ì‹œ -> íƒ€ì´í‹€â€ ì „í™˜ì€ SplashScene ë‚´ë¶€ ë¡œì§(ì˜ˆ: ì¼ì • ì‹œê°„ í›„)ì—ì„œ
+	// SceneManager::LoadScene(titleSceneName)ì„ í˜¸ì¶œí•´ ì²˜ë¦¬í•œë‹¤ê³  ê°€ì •
 }
 
 void SceneManager::ProcessSceneChange()
 {
 	if (sceneChangeRequested && nextScene)
 	{
-		// ·Îµù¾ÀÀÌ Á¸ÀçÇÏ¸é ·Îµù¾ÀÀ» °ÅÄ¡´Â ·ÎÁ÷
+		// ë¡œë”©ì”¬ì´ ì¡´ì¬í•˜ë©´ ë¡œë”©ì”¬ì„ ê±°ì¹˜ëŠ” ë¡œì§
 		if (loadingScene != nullptr)
 		{
-			// ÇöÀç ¾À Á¤¸®
+			// í˜„ì¬ ì”¬ ì •ë¦¬
 			if (currentScene != nullptr)
 			{
 				currentScene->Destroy();
 				Camera::Get()->Reset();
 			}
 
-			// nextSceneÀ» ÇöÀç ¾ÀÀ¸·Î ¼³Á¤ÇÏ°í, ·Îµù¾ÀÀ» ½ÃÀÛÇÕ´Ï´Ù.
+			// nextSceneì„ í˜„ì¬ ì”¬ìœ¼ë¡œ ì„¤ì •í•˜ê³ , ë¡œë”©ì”¬ì„ ì‹œì‘í•©ë‹ˆë‹¤.
 			currentScene = nextScene;
 			currentScene->Awake();
 			loadingScene->Start();
 
-			// ·Îµù ÇÃ·¡±×¸¦ È°¼ºÈ­ÇÏ°í ÁøÇà·ü ÃÊ±âÈ­
+			// ë¡œë”© í”Œë˜ê·¸ë¥¼ í™œì„±í™”í•˜ê³  ì§„í–‰ë¥  ì´ˆê¸°í™”
 			isLoading = true;
 			loadingProgress = 0.0f;
 		}
 		else
 		{
-			// ·Îµù¾ÀÀÌ ¾ø´Â °æ¿ì¿£ Áï½Ã ÀüÈ¯
+			// ë¡œë”©ì”¬ì´ ì—†ëŠ” ê²½ìš°ì—” ì¦‰ì‹œ ì „í™˜
 			if (currentScene != nullptr)
 			{
 				currentScene->Destroy();
@@ -168,7 +168,7 @@ void SceneManager::Start()
 	if (isLoading == true)
 	{
 		if (loadingScene != nullptr) loadingScene->Start();
-		// È¤Àº º°µµÀÇ ·Îµù UI¸¸ ±×¸± ¼öµµ ÀÖÀ½
+		// í˜¹ì€ ë³„ë„ì˜ ë¡œë”© UIë§Œ ê·¸ë¦´ ìˆ˜ë„ ìˆìŒ
 	}
 	else
 	{
@@ -180,17 +180,17 @@ void SceneManager::Update()
 {
     if (isLoading)
     {
-        // ·Îµù¾À Update
+        // ë¡œë”©ì”¬ Update
         if (loadingScene) loadingScene->Update();
 
-        // ·Îµù ÁøÇà·ü(¿¹½Ã)
+        // ë¡œë”© ì§„í–‰ë¥ (ì˜ˆì‹œ)
         if (nextScene->IsLoaded())
         {
-            // ·Îµù ³¡³µ´Ù°í °¡Á¤
-            // ·Îµù¾À -> nextScene ÀüÈ¯
+            // ë¡œë”© ëë‚¬ë‹¤ê³  ê°€ì •
+            // ë¡œë”©ì”¬ -> nextScene ì „í™˜
             if (nextScene)
             {
-                loadingScene->Destroy(); // ·Îµù¾À Destroy
+                loadingScene->Destroy(); // ë¡œë”©ì”¬ Destroy
                 //currentScene = nextScene;
                 currentScene->Start();
                 nextScene = nullptr;
@@ -201,7 +201,7 @@ void SceneManager::Update()
     }
     else
     {
-        // ÀÏ¹İ ¾À Update
+        // ì¼ë°˜ ì”¬ Update
         if (currentScene)
         {
             currentScene->FixedUpdate();
@@ -210,7 +210,7 @@ void SceneManager::Update()
         }
     }
 
-	// deferred ¾À ÀüÈ¯ Ã³¸®
+	// deferred ì”¬ ì „í™˜ ì²˜ë¦¬
 	ProcessSceneChange();
 }
 
@@ -219,7 +219,7 @@ void SceneManager::Render()
 	if (isLoading == true)
 	{
 		if (loadingScene != nullptr) loadingScene->Render();
-		// È¤Àº º°µµÀÇ ·Îµù UI¸¸ ±×¸± ¼öµµ ÀÖÀ½
+		// í˜¹ì€ ë³„ë„ì˜ ë¡œë”© UIë§Œ ê·¸ë¦´ ìˆ˜ë„ ìˆìŒ
 	}
 	else
 	{

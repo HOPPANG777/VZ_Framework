@@ -1,19 +1,19 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "DialogTextBox.h"
 
 DialogTextBox::DialogTextBox(const std::string& name, const Vector3& position, const Vector3& texturePosition, const Vector3& scale, const float rotation, const std::wstring& backgroundTexturePath, const std::wstring& arrowTexturePath, const std::wstring& text, const float fontSize, const std::wstring& font, const Color& fontColor)
 	: GameObject(name, position, scale, rotation, TransformType::Rect), dialogText(text), fontSize(fontSize), fontName(font), fontColor(fontColor)
 {
-    // ¹è°æ »ı¼º
+    // ë°°ê²½ ìƒì„±
     background = std::make_shared<TextureRect>(texturePosition, scale + Vector3(200, 0, 0), rotation, backgroundTexturePath, TransformType::Rect);
 
 	playerTexture = std::make_shared<TextureRect>(texturePosition + Vector3(-400, 100, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/Player.png");
 
-    // TypingText ÄÄÆ÷³ÍÆ® Ãß°¡ (Å¸ÀÌÇÎ È¿°ú)
+    // TypingText ì»´í¬ë„ŒíŠ¸ ì¶”ê°€ (íƒ€ì´í•‘ íš¨ê³¼)
     std::shared_ptr<TypingText> typing = std::make_shared<TypingText>();
     this->AddComponent(typing);
 
-    // È­»ìÇ¥ ÀÎµğÄÉÀÌÅÍ »ı¼º (¹è°æ ¿À¸¥ÂÊ ¾Æ·¡ À§Ä¡¿¡)
+    // í™”ì‚´í‘œ ì¸ë””ì¼€ì´í„° ìƒì„± (ë°°ê²½ ì˜¤ë¥¸ìª½ ì•„ë˜ ìœ„ì¹˜ì—)
     Vector3 arrowPos = texturePosition + Vector3((scale.x + 200) * 0.45f, -scale.y * 0.18f, 0.0f);
     arrowIndicator = std::make_shared<TextureRect>(arrowPos, Vector3(25, 25, 0), 0.0f, TexturePath + L"UI/Arrow.png");
 }
@@ -32,22 +32,22 @@ void DialogTextBox::Update()
 
     std::shared_ptr<TypingText> typing = this->GetComponent<TypingText>("TypingText");
 
-    // »ç¿ëÀÚ°¡ Å¬¸¯ÇÏ¸é...
+    // ì‚¬ìš©ìê°€ í´ë¦­í•˜ë©´...
     if (Input::Get()->MouseDown(0))
     {
-        // ¸¸¾à ¾ÆÁ÷ ÅØ½ºÆ®°¡ ¸ğµÎ Ãâ·ÂµÇÁö ¾Ê¾Ò´Ù¸é Å¸ÀÌÇÎ È¿°ú °Ç³Ê¶Ù±â
+        // ë§Œì•½ ì•„ì§ í…ìŠ¤íŠ¸ê°€ ëª¨ë‘ ì¶œë ¥ë˜ì§€ ì•Šì•˜ë‹¤ë©´ íƒ€ì´í•‘ íš¨ê³¼ ê±´ë„ˆë›°ê¸°
         if (!typing->IsComplete()) typing->SkipToEnd();
         else
         {
-            active = false; // ÀÌ¹Ì ÅØ½ºÆ®°¡ ¸ğµÎ Ãâ·ÂµÇ¾úÀ¸¸é Ã¢ ´İÈû
+            active = false; // ì´ë¯¸ í…ìŠ¤íŠ¸ê°€ ëª¨ë‘ ì¶œë ¥ë˜ì—ˆìœ¼ë©´ ì°½ ë‹«í˜
             typing->SetTextOut(true);
         }
     }
 
-    // TypingText ¾÷µ¥ÀÌÆ®
+    // TypingText ì—…ë°ì´íŠ¸
     typing->Update();
 
-    // ÅØ½ºÆ® Ãâ·ÂÀÌ ¿Ï·áµÇ¸é È­»ìÇ¥ Ç¥½Ã
+    // í…ìŠ¤íŠ¸ ì¶œë ¥ì´ ì™„ë£Œë˜ë©´ í™”ì‚´í‘œ í‘œì‹œ
     if (typing->IsComplete()) arrowVisible = true;
 }
 
@@ -59,10 +59,10 @@ void DialogTextBox::Render()
 
 	playerTexture->Render();
 
-    // ¹è°æ ·»´õ¸µ
+    // ë°°ê²½ ë Œë”ë§
     background->Render();
 
-    // ÅØ½ºÆ® Ãâ·Â ¿Ï·á ½Ã È­»ìÇ¥ ·»´õ¸µ
+    // í…ìŠ¤íŠ¸ ì¶œë ¥ ì™„ë£Œ ì‹œ í™”ì‚´í‘œ ë Œë”ë§
     if (arrowVisible && arrowIndicator) arrowIndicator->Render();
 }
 
@@ -70,7 +70,7 @@ void DialogTextBox::PostRender()
 {
 	if (!active) return;
 
-    // TypingTextÀÇ RenderText¸¦ ÅëÇØ ÅØ½ºÆ® Ãâ·Â (Ç×»ó RenderText¸¦ »ç¿ë)
+    // TypingTextì˜ RenderTextë¥¼ í†µí•´ í…ìŠ¤íŠ¸ ì¶œë ¥ (í•­ìƒ RenderTextë¥¼ ì‚¬ìš©)
     std::shared_ptr<TypingText> typing = this->GetComponent<TypingText>("TypingText");
     typing->RenderText(dialogText, this->GetRect(), fontSize, fontColor, fontName);
 }

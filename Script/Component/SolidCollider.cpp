@@ -1,43 +1,43 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "SolidCollider.h"
 
 
-// Update(): ColliderÀÇ À§Ä¡´Â ¼ÒÀ¯ °´Ã¼ÀÇ À§Ä¡ + offsetÀ¸·Î °»½Å
+// Update(): Colliderì˜ ìœ„ì¹˜ëŠ” ì†Œìœ  ê°ì²´ì˜ ìœ„ì¹˜ + offsetìœ¼ë¡œ ê°±ì‹ 
 void SolidCollider::Update()
 {
-    // ¿©±â¼­´Â º°µµÀÇ ³»ºÎ º¯¼ö ¾øÀÌ GetCenter()·Î °è»êÇÏµµ·Ï ÇÔ.
-    // ÇÊ¿ä¿¡ µû¶ó ColliderÀÇ AABB µ¥ÀÌÅÍ¸¦ °»½ÅÇÒ ¼ö ÀÖÀ½.
+    // ì—¬ê¸°ì„œëŠ” ë³„ë„ì˜ ë‚´ë¶€ ë³€ìˆ˜ ì—†ì´ GetCenter()ë¡œ ê³„ì‚°í•˜ë„ë¡ í•¨.
+    // í•„ìš”ì— ë”°ë¼ Colliderì˜ AABB ë°ì´í„°ë¥¼ ê°±ì‹ í•  ìˆ˜ ìˆìŒ.
 }
 
-// Render(): µğ¹ö±×¿ëÀ¸·Î Ãæµ¹ ¿µ¿ª »ç°¢ÇüÀ» ±×¸³´Ï´Ù.
+// Render(): ë””ë²„ê·¸ìš©ìœ¼ë¡œ ì¶©ëŒ ì˜ì—­ ì‚¬ê°í˜•ì„ ê·¸ë¦½ë‹ˆë‹¤.
 void SolidCollider::Render()
 {
-    // Gizmo¸¦ ÀÌ¿ëÇÏ¿© »ç°¢Çü ±×¸®±â (µğ¹ö±× ¿ëµµ)
+    // Gizmoë¥¼ ì´ìš©í•˜ì—¬ ì‚¬ê°í˜• ê·¸ë¦¬ê¸° (ë””ë²„ê·¸ ìš©ë„)
     Vector3 center = GetCenter();
     Vector3 half = GetHalfSize();
     Vector3 topLeft = center - half;
     Vector3 bottoisRight = center + half;
-    // ¿¹: Gizmo¿¡¼­ DrawBox()¸¦ È£ÃâÇØ »ç°¢Çü °æ°è¼± Ç¥½Ã
+    // ì˜ˆ: Gizmoì—ì„œ DrawBox()ë¥¼ í˜¸ì¶œí•´ ì‚¬ê°í˜• ê²½ê³„ì„  í‘œì‹œ
     Gizmo::Get()->DrawBox(center, size, color, 1.0f);
 }
 
-// GetCenter(): ¼ÒÀ¯ °´Ã¼ À§Ä¡ + offset ¹İÈ¯
+// GetCenter(): ì†Œìœ  ê°ì²´ ìœ„ì¹˜ + offset ë°˜í™˜
 Vector3 SolidCollider::GetCenter() const
 {
     return GetOwner()->GetPosition() + offset;
 }
 
-// GetHalfSize(): sizeÀÇ Àı¹İ °è»ê
+// GetHalfSize(): sizeì˜ ì ˆë°˜ ê³„ì‚°
 Vector3 SolidCollider::GetHalfSize() const
 {
     return size * 0.5f;
 }
 
-// ResolveCollision(): ´Ù¸¥ Collider¿ÍÀÇ AABB Ãæµ¹À» ÇØ¼Ò
-// ¿©±â¼­´Â °£´ÜÇÏ°Ô µÎ AABBÀÇ °ãÄ§ Á¤µµ¸¦ °è»êÇÏ°í, ´õ ÀÛÀº Ãà ¹æÇâÀ¸·Î ºĞ¸®ÇÏ´Â ¿¹Á¦
+// ResolveCollision(): ë‹¤ë¥¸ Colliderì™€ì˜ AABB ì¶©ëŒì„ í•´ì†Œ
+// ì—¬ê¸°ì„œëŠ” ê°„ë‹¨í•˜ê²Œ ë‘ AABBì˜ ê²¹ì¹¨ ì •ë„ë¥¼ ê³„ì‚°í•˜ê³ , ë” ì‘ì€ ì¶• ë°©í–¥ìœ¼ë¡œ ë¶„ë¦¬í•˜ëŠ” ì˜ˆì œ
 void SolidCollider::ResolveCollision(Collider* other)
 {
-    // ÀÌ ¿¹Á¦´Â ´Ù¸¥ Collider°¡ SolidCollider¶ó°í °¡Á¤ÇÕ´Ï´Ù.
+    // ì´ ì˜ˆì œëŠ” ë‹¤ë¥¸ Colliderê°€ SolidColliderë¼ê³  ê°€ì •í•©ë‹ˆë‹¤.
     SolidCollider* otherSolid = dynamic_cast<SolidCollider*>(other);
     if (!otherSolid) return;
 
@@ -46,26 +46,26 @@ void SolidCollider::ResolveCollision(Collider* other)
     Vector3 myHalf = GetHalfSize();
     Vector3 otherHalf = otherSolid->GetHalfSize();
 
-    // µÎ AABBÀÇ °ãÄ§À» Ãàº°·Î °è»ê
+    // ë‘ AABBì˜ ê²¹ì¹¨ì„ ì¶•ë³„ë¡œ ê³„ì‚°
     float deltaX = myCenter.x - otherCenter.x;
     float overlapX = myHalf.x + otherHalf.x - abs(deltaX);
 
     float deltaY = myCenter.y - otherCenter.y;
     float overlapY = myHalf.y + otherHalf.y - abs(deltaY);
 
-    // °ãÄ§ÀÌ ¾øÀ¸¸é return
+    // ê²¹ì¹¨ì´ ì—†ìœ¼ë©´ return
     if (overlapX <= 0 || overlapY <= 0) return;
 
-    // ´õ ÀÛÀº °ãÄ§ ¹æÇâÀ» ¼±ÅÃÇØ ºĞ¸® º¤ÅÍ °è»ê
+    // ë” ì‘ì€ ê²¹ì¹¨ ë°©í–¥ì„ ì„ íƒí•´ ë¶„ë¦¬ ë²¡í„° ê³„ì‚°
     if (overlapX < overlapY)
     {
-        // XÃà ¹æÇâ ºĞ¸®
+        // Xì¶• ë°©í–¥ ë¶„ë¦¬
         float pushX = (deltaX < 0) ? -overlapX : overlapX;
         GetOwner()->SetPosition(GetOwner()->GetPosition() + Vector3(pushX, 0, 0));
     }
     else
     {
-        // YÃà ¹æÇâ ºĞ¸®
+        // Yì¶• ë°©í–¥ ë¶„ë¦¬
         float pushY = (deltaY < 0) ? -overlapY : overlapY;
         GetOwner()->SetPosition(GetOwner()->GetPosition() + Vector3(0, pushY, 0));
     }

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ResourcesManager.h"
 
 ResourcesManager::ResourcesManager() {}
@@ -7,16 +7,16 @@ ResourcesManager::~ResourcesManager() {}
 
 void ResourcesManager::LoadResource(const std::string& resource)
 {
-	// ÀÌ¹Ì ·ÎµåµÈ °æ¿ì´Â ³Ñ¾î°¨
+	// ì´ë¯¸ ë¡œë“œëœ ê²½ìš°ëŠ” ë„˜ì–´ê°
 	{
 		std::lock_guard<std::mutex> lock(mtx);
 		if (loadedResources.find(resource) != loadedResources.end()) return;
 	}
 
-	// ½ÇÁ¦ ·Îµù ÀÛ¾÷ (¿¹: ÆÄÀÏ ÀĞ±â, µğÄÚµù µî)
+	// ì‹¤ì œ ë¡œë”© ì‘ì—… (ì˜ˆ: íŒŒì¼ ì½ê¸°, ë””ì½”ë”© ë“±)
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-	// ·Îµù ¿Ï·á ÈÄ ±â·Ï
+	// ë¡œë”© ì™„ë£Œ í›„ ê¸°ë¡
 	{
 		std::lock_guard<std::mutex> lock(mtx);
 		loadedResources.insert(resource);

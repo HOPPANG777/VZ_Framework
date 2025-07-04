@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../BaseObject/Drawable.h"
 #include "Interfaces/IColorable.h"
@@ -29,12 +29,12 @@ public:
 		this->color = color;
 		D3D11_MAPPED_SUBRESOURCE mappedSubResource;
 		Graphics::Get()->GetDC()->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
-		{ // ¸ÊÇÎÁßÀÎ °ø°£
+		{ // ë§µí•‘ì¤‘ì¸ ê³µê°„
 
-			// vertices¿¡´Ù°¡ º¯°æµÈ color°ªÀ» ³Ö¾îÁÖ°í
+			// verticesì—ë‹¤ê°€ ë³€ê²½ëœ colorê°’ì„ ë„£ì–´ì£¼ê³ 
 			for (VertexColor& vertex : vertices) vertex.color = color;
 
-			// º¯°æµÈ color°ªÀ» vertices¿¡´Ù°¡ ³Ö¾îÁØ´Ù.
+			// ë³€ê²½ëœ colorê°’ì„ verticesì—ë‹¤ê°€ ë„£ì–´ì¤€ë‹¤.
 			memcpy(mappedSubResource.pData, vertices.data(), vertexBuffer->GetCount() * vertexBuffer->GetStride());
 		}
 		Graphics::Get()->GetDC()->Unmap(vertexBuffer->GetResource(), 0);

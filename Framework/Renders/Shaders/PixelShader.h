@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "IShader.h"
 
 class PixelShader : public IShader

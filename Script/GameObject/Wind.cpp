@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Wind.h"
 
 Wind::Wind(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path)

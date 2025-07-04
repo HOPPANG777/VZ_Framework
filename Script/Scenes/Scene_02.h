@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Interfaces/IScene.h"
 #include "Objects/TextureObject/TextureRect.h"
@@ -8,7 +8,7 @@
 class Scene_02 : public Scene
 {
 public:
-    // SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void Awake() override;
     void Start() override;
 

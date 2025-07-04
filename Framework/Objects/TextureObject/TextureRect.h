@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../BaseObject/Drawable.h"
 #include "Interfaces/IColorable.h"
@@ -21,7 +21,7 @@ private:
 
 	ComPtr<ID3D11ShaderResourceView> srv = nullptr;
 
-	// ÄÃ·¯ º¯È¯À» À§ÇÑ »ó¼ö ¹öÆÛ (ColorBuffer)
+	// ì»¬ëŸ¬ ë³€í™˜ì„ ìœ„í•œ ìƒìˆ˜ ë²„í¼ (ColorBuffer)
 	std::unique_ptr<ColorBuffer> colorBuffer;
 
 public:
@@ -37,7 +37,7 @@ public:
 
 	void SetImage(std::wstring imagePath)
 	{
-		// SRV ÃßÃâ // ±×¸² µ¥ÀÌÅÍ ÃßÃâ
+		// SRV ì¶”ì¶œ // ê·¸ë¦¼ ë°ì´í„° ì¶”ì¶œ
 		HRESULT hr = D3DX11CreateShaderResourceViewFromFile
 		(
 			Graphics::Get()->GetDevice(),
@@ -56,8 +56,8 @@ public:
 	virtual void SetColor(const Color& color) override
 	{
 		colorBuffer->SetColor(color);
-		// º°µµ·Î Á¤Á¡ ¹öÆÛÀÇ µ¥ÀÌÅÍ¸¦ º¯°æÇÒ ÇÊ¿ä´Â ¾ø½À´Ï´Ù.
-		// ÇÈ¼¿ ¼ÎÀÌ´õ¿¡¼­´Â »ó¼ö ¹öÆÛÀÇ »ö»ó °ªÀ» »ç¿ëÇÏ¿© ÅØ½ºÃ³ »ö»óÀ» º¯°æÇÕ´Ï´Ù.
+		// ë³„ë„ë¡œ ì •ì  ë²„í¼ì˜ ë°ì´í„°ë¥¼ ë³€ê²½í•  í•„ìš”ëŠ” ì—†ìŠµë‹ˆë‹¤.
+		// í”½ì…€ ì…°ì´ë”ì—ì„œëŠ” ìƒìˆ˜ ë²„í¼ì˜ ìƒ‰ìƒ ê°’ì„ ì‚¬ìš©í•˜ì—¬ í…ìŠ¤ì²˜ ìƒ‰ìƒì„ ë³€ê²½í•©ë‹ˆë‹¤.
 	}
 };
 

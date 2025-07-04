@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component.h"
 #include "Objects/BaseObject/GameObject.h"
@@ -11,7 +11,7 @@ public:
 	~MoveComponent() override = default;
 
 public:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Update() override;
 	void Render() override;
 

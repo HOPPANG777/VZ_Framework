@@ -1,18 +1,18 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Button.h"
 
 void Button::Update()
 {
-	bool over = IsMouseOver();         // ¹öÆ° ¿µ¿ª ³»¿¡ ¸¶¿ì½º Á¸Àç ¿©ºÎ
-	bool pressedNow = Input::Get()->MousePressed(0);   // ÇöÀç ÇÁ·¹ÀÓ¿¡ ¹öÆ°ÀÌ ´­¸° »óÅÂ
-	bool downNow = Input::Get()->MouseDown(0);    // ÀÌ¹ø ÇÁ·¹ÀÓ¿¡ »õ·Ó°Ô ´­¸²
-	bool upNow = Input::Get()->MouseUp(0);        // ÀÌ¹ø ÇÁ·¹ÀÓ¿¡ ¹öÆ°À» ¶¾ »óÅÂ
+	bool over = IsMouseOver();         // ë²„íŠ¼ ì˜ì—­ ë‚´ì— ë§ˆìš°ìŠ¤ ì¡´ì¬ ì—¬ë¶€
+	bool pressedNow = Input::Get()->MousePressed(0);   // í˜„ì¬ í”„ë ˆì„ì— ë²„íŠ¼ì´ ëˆŒë¦° ìƒíƒœ
+	bool downNow = Input::Get()->MouseDown(0);    // ì´ë²ˆ í”„ë ˆì„ì— ìƒˆë¡­ê²Œ ëˆŒë¦¼
+	bool upNow = Input::Get()->MouseUp(0);        // ì´ë²ˆ í”„ë ˆì„ì— ë²„íŠ¼ì„ ë—€ ìƒíƒœ
 
 	IColorable* colorableOwner = dynamic_cast<IColorable*>(GetOwner());
 
 	if (over)
 	{
-		// »ö»ó È¿°ú: ¹öÆ°ÀÌ ´­·ÁÀÖ°Å³ª ´ÜÀÏ Å¬¸¯ È¿°ú ½Ã°£ÀÌ ³²¾Æ ÀÖ´Ù¸é ¾îµÓ°Ô Ç¥½Ã
+		// ìƒ‰ìƒ íš¨ê³¼: ë²„íŠ¼ì´ ëˆŒë ¤ìˆê±°ë‚˜ ë‹¨ì¼ í´ë¦­ íš¨ê³¼ ì‹œê°„ì´ ë‚¨ì•„ ìˆë‹¤ë©´ ì–´ë‘¡ê²Œ í‘œì‹œ
 		if (pressedNow || clickEffectTime > 0.0f)
 		{
 			colorableOwner->SetColor(Color(0.7f, 0.7f, 0.7f, 1.0f));
@@ -22,32 +22,32 @@ void Button::Update()
 			colorableOwner->SetColor(Color(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 
-		// ¸¶¿ì½º¸¦ ´©¸£°í ÀÖ´Â µ¿¾È
+		// ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ê³  ìˆëŠ” ë™ì•ˆ
 		if (downNow)
 		{
-			clickEffectTime = 0.1f; // ´ÜÀÏ Å¬¸¯ ½Ã È¿°ú (¿¹: 0.1ÃÊ)
-			wasPressed = true; // ´­·È´Ù´Â »óÅÂ ÀúÀå
+			clickEffectTime = 0.1f; // ë‹¨ì¼ í´ë¦­ ì‹œ íš¨ê³¼ (ì˜ˆ: 0.1ì´ˆ)
+			wasPressed = true; // ëˆŒë ¸ë‹¤ëŠ” ìƒíƒœ ì €ì¥
 		}
 
-		// ¸¶¿ì½º¸¦ ´­·¶´Ù°¡ ¶¿ ¶§ onClick ½ÇÇà
+		// ë§ˆìš°ìŠ¤ë¥¼ ëˆŒë €ë‹¤ê°€ ë—„ ë•Œ onClick ì‹¤í–‰
 		if (upNow && wasPressed)
 		{
-			wasPressed = false; // ´­¸² »óÅÂ ÃÊ±âÈ­
+			wasPressed = false; // ëˆŒë¦¼ ìƒíƒœ ì´ˆê¸°í™”
 
 			if (onClick) onClick();
 		}
 
-		// onPress: ´©¸£°í ÀÖ´Â µ¿¾È ¸Å ÇÁ·¹ÀÓ È£Ãâ (µî·ÏµÈ °æ¿ì)
+		// onPress: ëˆ„ë¥´ê³  ìˆëŠ” ë™ì•ˆ ë§¤ í”„ë ˆì„ í˜¸ì¶œ (ë“±ë¡ëœ ê²½ìš°)
 		if (onPress && pressedNow) onPress();
 	}
 	else
 	{
 		colorableOwner->SetColor(Color(1.0f, 1.0f, 1.0f, 1.0f));
 		clickEffectTime = 0.0f;
-		wasPressed = false; // ¿µ¿ªÀ» ¹ş¾î³ª¸é ÃÊ±âÈ­
+		wasPressed = false; // ì˜ì—­ì„ ë²—ì–´ë‚˜ë©´ ì´ˆê¸°í™”
 	}
 
-	// Å¸ÀÌ¸Ó ¾÷µ¥ÀÌÆ®: ¸¸¾à È¿°ú ½Ã°£ÀÌ ³²¾Æ ÀÖ´Ù¸é °¨¼Ò
+	// íƒ€ì´ë¨¸ ì—…ë°ì´íŠ¸: ë§Œì•½ íš¨ê³¼ ì‹œê°„ì´ ë‚¨ì•„ ìˆë‹¤ë©´ ê°ì†Œ
 	if (clickEffectTime > 0.0f) clickEffectTime -= Time::Get()->GetDeltaTime();
 }
 
@@ -58,19 +58,19 @@ void Button::Render()
 
 bool Button::IsMouseOver()
 {
-	// ButtonÀÌ ¼ÓÇÑ GameObject¿¡ RectTransformÀÌ ÀÖ´Ù°í °¡Á¤
+	// Buttonì´ ì†í•œ GameObjectì— RectTransformì´ ìˆë‹¤ê³  ê°€ì •
 	std::shared_ptr<RectTransform> rectTrans = GetOwner()->GetComponent<RectTransform>("RectTransform");
 	rectTrans->SetAnchorAndOffset({ 0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, 0.0f }, { 0.0f, 0.0f });
 	if (!rectTrans) return false;
 
-	// RectTransform¿¡¼­ ÇÈ¼¿ ÁÂÇ¥ RECT °¡Á®¿À±â
+	// RectTransformì—ì„œ í”½ì…€ ì¢Œí‘œ RECT ê°€ì ¸ì˜¤ê¸°
 	RECT rect = rectTrans->GetRect();
 
-	// ¸¶¿ì½º ÇöÀç À§Ä¡
+	// ë§ˆìš°ìŠ¤ í˜„ì¬ ìœ„ì¹˜
 	Vector3 mousePos = Input::Get()->GetMousePos();
-	// (¿À½î±×·¡ÇÈ ¸ÅÆ®¸¯½º³ª ±âÅ¸ º¯È¯ÀÌ ÀÖ´Ù¸é º°µµ º¸Á¤ ÇÊ¿ä)
+	// (ì˜¤ì˜ê·¸ë˜í”½ ë§¤íŠ¸ë¦­ìŠ¤ë‚˜ ê¸°íƒ€ ë³€í™˜ì´ ìˆë‹¤ë©´ ë³„ë„ ë³´ì • í•„ìš”)
 
-	// RECT ³»ºÎ ÆÇÁ¤
+	// RECT ë‚´ë¶€ íŒì •
 	bool inside = (mousePos.x >= rect.left && mousePos.x <= rect.right && mousePos.y >= rect.top && mousePos.y <= rect.bottom);
 
 	return inside;

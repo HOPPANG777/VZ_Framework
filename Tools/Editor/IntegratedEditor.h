@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Interfaces/IScene.h"
 #include "IEditorPanel.h"

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component/ParallaxBackground.h"
 #include "Component/FloorCollision.h"
@@ -14,7 +14,7 @@
 class Scene_05 : public Scene
 {
 public:
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Awake() override;
 	void Start() override;
 

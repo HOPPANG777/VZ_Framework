@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "IEditorPanel.h"
 #include "Systems/Camera.h"

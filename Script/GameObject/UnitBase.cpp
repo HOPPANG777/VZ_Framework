@@ -1,10 +1,10 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "UnitBase.h"
 
 UnitBase::UnitBase(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring& path)
     : AnimationRect(position, scale, rotation, path)
 {
-    // ÇÃ·¹ÀÌ¾î´Â Á¶ÀÛ °¡´ÉÇÏµµ·Ï MoveComponent¸¦ Ãß°¡ÇÕ´Ï´Ù.
+    // í”Œë ˆì´ì–´ëŠ” ì¡°ì‘ ê°€ëŠ¥í•˜ë„ë¡ MoveComponentë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
     
 }
 

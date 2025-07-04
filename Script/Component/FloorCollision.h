@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "LumberAxeComponent.h"
 #include "PlayerController.h"
@@ -7,13 +7,13 @@
 class FloorCollision : public Component
 {
 public:
-    // player: Ãæµ¹ °Ë»ç ´ë»óÀÎ ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® (std::shared_ptr ¶Ç´Â raw pointer)
+    // player: ì¶©ëŒ ê²€ì‚¬ ëŒ€ìƒì¸ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ (std::shared_ptr ë˜ëŠ” raw pointer)
     FloorCollision(const std::string& name) : Component(name) {}
     virtual ~FloorCollision() override = default;
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ·»´õ¸µÀº ÇÊ¿ä¾øÀ¸¹Ç·Î ºñ¿öµÎÀÚ.
+    virtual void Render() override {} // ë Œë”ë§ì€ í•„ìš”ì—†ìœ¼ë¯€ë¡œ ë¹„ì›Œë‘ì.
 
 public:
     void SetPlayer(GameObject* player) { this->player = player; }
@@ -23,7 +23,7 @@ public:
     GameObject* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
-    // ÀÌÀü ÇÁ·¹ÀÓ Ãæµ¹ ¿©ºÎ ÀúÀå
+    // ì´ì „ í”„ë ˆì„ ì¶©ëŒ ì—¬ë¶€ ì €ì¥
     bool wasColliding = false;
     
     const float EPSILON = 0.01f;

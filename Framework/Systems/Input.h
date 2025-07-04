@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Utilities/DirectHelper.h"
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -12,19 +12,19 @@ class Input
     DECLARE_SINGLETON(Input);
 
 public:
-    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù Å°º¸µå¿Í ¸¶¿ì½º ¾÷µ¥ÀÌÆ® È£Ãâ
+    // ë§¤ í”„ë ˆìž„ë§ˆë‹¤ í‚¤ë³´ë“œì™€ ë§ˆìš°ìŠ¤ ì—…ë°ì´íŠ¸ í˜¸ì¶œ
     void Update()
     {
         Keyboard::Get()->Update();
         Mouse::Get()->Update();
     }
 
-    // Keyboard °ü·Ã ·¡ÆÛ ÇÔ¼öµé
+    // Keyboard ê´€ë ¨ ëž˜í¼ í•¨ìˆ˜ë“¤
     bool KeyDown(DWORD key) const { return Keyboard::Get()->Down(key); }
     bool KeyUp(DWORD key) const { return Keyboard::Get()->Up(key); }
     bool KeyPressed(DWORD key) const { return Keyboard::Get()->Press(key); }
 
-    // Mouse °ü·Ã ·¡ÆÛ ÇÔ¼öµé
+    // Mouse ê´€ë ¨ ëž˜í¼ í•¨ìˆ˜ë“¤
     DirectX::SimpleMath::Vector3 GetMousePos() const { return Mouse::Get()->GetMousePos(); }
     bool MouseDown(DWORD button) const { return Mouse::Get()->Down(button); }
     bool MouseUp(DWORD button) const { return Mouse::Get()->Up(button); }

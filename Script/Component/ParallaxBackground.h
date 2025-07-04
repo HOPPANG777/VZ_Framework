@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Components/Component.h"
 //#include "Objects/BaseObject/GameObject.h"
@@ -7,31 +7,31 @@
 
 class ParallaxBackground : public Component
 {
-    static const int MAX_LAYERS = 10; // ÃÖ´ë ·¹ÀÌ¾î °³¼ö
+    static const int MAX_LAYERS = 10; // ìµœëŒ€ ë ˆì´ì–´ ê°œìˆ˜
 
 public:
-    // »ı¼ºÀÚ: layerCount´Â ½ÇÁ¦ »ç¿ëÇÏ´Â ·¹ÀÌ¾î ¼ö (±âº» 5)
+    // ìƒì„±ì: layerCountëŠ” ì‹¤ì œ ì‚¬ìš©í•˜ëŠ” ë ˆì´ì–´ ìˆ˜ (ê¸°ë³¸ 5)
     ParallaxBackground(const std::string& compName = "ParallaxBackground", int layerCount = 5);
     virtual ~ParallaxBackground() override = default;
 
 public:
-    // Component ÀÎÅÍÆäÀÌ½º ±¸Çö
+    // Component ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„
     virtual void Update() override;
     virtual void Render() override;
 
 public:
-    // ¹è°æ ¿ÀºêÁ§Æ®¿Í º¹Á¦ ¿ÀºêÁ§Æ®¸¦ ¼¼ÆÃÇÏ´Â ÇÔ¼ö (¿ÜºÎ¿¡¼­ È£Ãâ)
+    // ë°°ê²½ ì˜¤ë¸Œì íŠ¸ì™€ ë³µì œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì„¸íŒ…í•˜ëŠ” í•¨ìˆ˜ (ì™¸ë¶€ì—ì„œ í˜¸ì¶œ)
     void SetLayer(int index, GameObject* layer, GameObject* layerDup);
 
 private:
-    // ½ÇÁ¦ »ç¿ëÇÏ´Â ·¹ÀÌ¾î ¼ö
+    // ì‹¤ì œ ì‚¬ìš©í•˜ëŠ” ë ˆì´ì–´ ìˆ˜
     int layerCount = 5;
 
-    // °¢ ·¹ÀÌ¾îÀÇ ¹è°æ ¿ÀºêÁ§Æ®¿Í º¹Á¦º» (¹è°æ ¿ÀºêÁ§Æ®´Â TextureRect µîÀÇ °´Ã¼¶ó°í °¡Á¤)
+    // ê° ë ˆì´ì–´ì˜ ë°°ê²½ ì˜¤ë¸Œì íŠ¸ì™€ ë³µì œë³¸ (ë°°ê²½ ì˜¤ë¸Œì íŠ¸ëŠ” TextureRect ë“±ì˜ ê°ì²´ë¼ê³  ê°€ì •)
     GameObject* bgLayer[MAX_LAYERS];
     GameObject* bgLayerDup[MAX_LAYERS];
 
-    // °¢ ¹è°æÀÇ ÃÊ±â(¿øº») À§Ä¡ (¿ùµå ÁÂÇ¥)
+    // ê° ë°°ê²½ì˜ ì´ˆê¸°(ì›ë³¸) ìœ„ì¹˜ (ì›”ë“œ ì¢Œí‘œ)
     Vector3 bgOrigin[MAX_LAYERS];
     Vector3 bgOriginDup[MAX_LAYERS];
 

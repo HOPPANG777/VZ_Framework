@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "AssetPipeline.h"
 
 void AssetPipeline::RegisterConverter(const std::string& name, std::shared_ptr<IAssetConverter> converter)

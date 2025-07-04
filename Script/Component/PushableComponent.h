@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Interface/IInteractable.h"
 #include "Objects/BaseObject/GameObject.h"
@@ -15,15 +15,15 @@ public:
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ·»´õ¸µÀº ÇÊ¿ä ¾øÀ½
+    virtual void Render() override {} // ë Œë”ë§ì€ í•„ìš” ì—†ìŒ
 
 public:
-    // IInteractable ÀÎÅÍÆäÀÌ½º ±¸Çö
+    // IInteractable ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„
     virtual void Interact() override;
 	virtual void StopInteract() override;
 
 public:
-    // ³»ºÎ ¹Ğ±â µ¿ÀÛ ½ÃÀÛ/Á¾·á
+    // ë‚´ë¶€ ë°€ê¸° ë™ì‘ ì‹œì‘/ì¢…ë£Œ
     void StartPushing() { isBeingPushed = true; }
     void StopPushing() { isBeingPushed = false; }
 

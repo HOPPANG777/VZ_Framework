@@ -1,9 +1,9 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Gui.h"
 
 LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// ImGui°¡ ¸Þ½ÃÁö¸¦ Ã³¸®ÇÑ °æ¿ì
+	// ImGuiê°€ ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•œ ê²½ìš°
 	return ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam);
 }
 

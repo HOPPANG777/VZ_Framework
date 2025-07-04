@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameObject/PlayerUnit.h"
 #include "Managers/SceneManager.h"
@@ -7,8 +7,8 @@
 class WindZone : public Component
 {
 public:
-    // regionMin, regionMax: ¹Ù¶÷ÀÌ Àû¿ëµÉ ¿µ¿ª, windDirection: ¹Ù¶÷ÀÇ ¹æÇâ (Á¤±ÔÈ­µÇ¾î ÀÖ¾î¾ß ÇÔ)
-    // intensity: ¹Ù¶÷ ¼¼±â (¼Óµµ ´ÜÀ§, ¿¹: ÇÈ¼¿/ÃÊ ¶Ç´Â °ÔÀÓ ´ÜÀ§)
+    // regionMin, regionMax: ë°”ëŒì´ ì ìš©ë  ì˜ì—­, windDirection: ë°”ëŒì˜ ë°©í–¥ (ì •ê·œí™”ë˜ì–´ ìˆì–´ì•¼ í•¨)
+    // intensity: ë°”ëŒ ì„¸ê¸° (ì†ë„ ë‹¨ìœ„, ì˜ˆ: í”½ì…€/ì´ˆ ë˜ëŠ” ê²Œì„ ë‹¨ìœ„)
     WindZone(const std::string& name,
         const Vector3& regionMin,
         const Vector3& regionMax,
@@ -27,7 +27,7 @@ public:
 
 public:
     virtual void Update() override;
-    virtual void Render() override {}  // ·»´õ¸µÀº ÇÊ¿äÇÏÁö ¾ÊÀº °æ¿ì ºó ±¸Çö
+    virtual void Render() override {}  // ë Œë”ë§ì€ í•„ìš”í•˜ì§€ ì•Šì€ ê²½ìš° ë¹ˆ êµ¬í˜„
 
 private:
     Vector3 mRegionMin;

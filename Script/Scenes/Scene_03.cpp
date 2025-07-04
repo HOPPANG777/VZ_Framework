@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Scene_03.h"
 
 void Scene_03::Awake()
@@ -43,9 +43,9 @@ void Scene_03::Awake()
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"Á¦100È¸ÆÈ¾¾¸§Ã¨ÇÇ¾ğ¼±¹ßÅä³Ê¸ÕÆ® ¼±¼ö µî·Ï ¸¶°¨ ±îÁö ÀÏÁÖÀÏ... ¼±¼ö µî·ÏÀ» ÁøÇàÇÏ´Â µµ½Ã±îÁö Àü¼Ó·ÂÀ¸·Î ´Ş¸°´Ù!", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì œ100íšŒíŒ”ì”¨ë¦„ì±”í”¼ì–¸ì„ ë°œí† ë„ˆë¨¼íŠ¸ ì„ ìˆ˜ ë“±ë¡ ë§ˆê° ê¹Œì§€ ì¼ì£¼ì¼... ì„ ìˆ˜ ë“±ë¡ì„ ì§„í–‰í•˜ëŠ” ë„ì‹œê¹Œì§€ ì „ì†ë ¥ìœ¼ë¡œ ë‹¬ë¦°ë‹¤!", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
 		textPoint.push_back(std::make_shared<GameObject>("TextPoint_01", Values::GetCenter() + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1920, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ÀÌÁ¦ ÀÌ°÷À» ¶°³¯ ¶§°¡ µÇ¾ú³ª? (Enter¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.)", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1920, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì´ì œ ì´ê³³ì„ ë– ë‚  ë•Œê°€ ë˜ì—ˆë‚˜? (Enterë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.)", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
 		textPoint.push_back(std::make_shared<GameObject>("TextPoint_02", Values::GetCenter() + Vector3(2400, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 

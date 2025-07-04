@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component/LumberAxeComponent.h"
 #include "PlayerController.h"
@@ -8,13 +8,13 @@
 class WallCollision : public Component
 {
 public:
-    // player: Ãæµ¹ °Ë»ç ´ë»óÀÎ ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®,
+    // player: ì¶©ëŒ ê²€ì‚¬ ëŒ€ìƒì¸ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸,
     WallCollision(const std::string& name, bool isRight) : Component(name), rightWall(isRight) {}
     virtual ~WallCollision() override = default;
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ·»´õ¸µÀº ÇÊ¿ä ¾øÀ¸¹Ç·Î ºó ±¸Çö
+    virtual void Render() override {} // ë Œë”ë§ì€ í•„ìš” ì—†ìœ¼ë¯€ë¡œ ë¹ˆ êµ¬í˜„
 
 public:
     void SetPlayer(GameObject* player) { this->player = player; }
@@ -26,7 +26,7 @@ public:
 private:
     GameObject* player = nullptr;
     GameObject* lumberAxe = nullptr;
-    bool rightWall; // true: ¿À¸¥ÂÊ º®, false: ¿ÞÂÊ º®
+    bool rightWall; // true: ì˜¤ë¥¸ìª½ ë²½, false: ì™¼ìª½ ë²½
 
 };
 
