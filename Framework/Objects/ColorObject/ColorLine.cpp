@@ -6,12 +6,12 @@ ColorLine::ColorLine(const Vector3& position, const float& length, const float r
 {
 	//vertices
 	{
-		vertices.assign(2, VertexColor());
+        vertices.assign(2, VertexColor());
 
-		// 좌 하단
-		vertices[0].position = Vector2();
-		// 좌 상단
-		vertices[1].position = Vector2(1, 0);
+        // 시작 지점
+        vertices[0].position = Vector3(0, 0, 0);
+        // 끝 지점 (길이만큼 X축으로 이동)
+        vertices[1].position = Vector3(1, 0, 0);
 
 		for (VertexColor& vertex : vertices) vertex.color = color;
 	}

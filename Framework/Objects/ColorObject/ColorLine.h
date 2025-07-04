@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Framework.h"
 
 #include "../BaseObject/Drawable.h"
 #include "Interfaces/IColorable.h"

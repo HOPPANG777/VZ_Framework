@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Framework.h"
 
 #include "Renders/RenderResources/Texture2D.h"
 #include "DirectHelper.h"

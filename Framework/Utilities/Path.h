@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Framework.h"
 
 #include "String.h"
 
