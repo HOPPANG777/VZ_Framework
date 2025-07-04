@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "DirectHelper.h"
 
 float Values::GetWinWidth()

@@ -1,12 +1,12 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "LadderComponent.h"
 
 void LadderComponent::Update()
 {
-    // ÇöÀç ¾À¿¡¼­ ÇÃ·¹ÀÌ¾î¸¦ °¡Á®¿É´Ï´Ù.
-    // LadderComponent°¡ ºÙÀº ¿ÀºêÁ§Æ®(»ç´Ù¸®)¿¡¼­ BoxCollider¸¦ °¡Á®¿É´Ï´Ù.
-    // ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®¿¡¼­ BoxCollider¸¦ °¡Á®¿É´Ï´Ù.
-    // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯¸¦ °¡Á®¿É´Ï´Ù.
+    // í˜„ìž¬ ì”¬ì—ì„œ í”Œë ˆì´ì–´ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    // LadderComponentê°€ ë¶™ì€ ì˜¤ë¸Œì íŠ¸(ì‚¬ë‹¤ë¦¬)ì—ì„œ BoxColliderë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    // í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ì—ì„œ BoxColliderë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    // í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
     auto player = SceneManager::Get()->GetPlayer();
     auto ladderCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     auto playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
@@ -14,26 +14,26 @@ void LadderComponent::Update()
 
     if (!player || !ladderCollider || !playerCollider || !playerController) return;
 
-    // ÇÃ·¹ÀÌ¾î¿Í »ç´Ù¸®ÀÇ BoxCollider°¡ Ãæµ¹ÇÏ°í ÀÖ´Ù¸é
+    // í”Œë ˆì´ì–´ì™€ ì‚¬ë‹¤ë¦¬ì˜ BoxColliderê°€ ì¶©ëŒí•˜ê³  ìžˆë‹¤ë©´
     //if (!ladderCollider->IsColliding(playerCollider.get())) return;
 
     bool onLadder = ladderCollider->IsColliding(playerCollider.get());
     if (!onLadder)
     {
-        // ´õ ÀÌ»ó »ç´Ù¸® À§¿¡ ÀÖÁö ¾ÊÀ½ ¡æ Climbing ºñÈ°¼ºÈ­
+        // ë” ì´ìƒ ì‚¬ë‹¤ë¦¬ ìœ„ì— ìžˆì§€ ì•ŠìŒ â†’ Climbing ë¹„í™œì„±í™”
         playerController->SetClimbing(false);
         return;
     }
 
-    // ¸¸¾à ÇÃ·¹ÀÌ¾î°¡ W Å°¸¦ ´©¸¥´Ù¸é
+    // ë§Œì•½ í”Œë ˆì´ì–´ê°€ W í‚¤ë¥¼ ëˆ„ë¥¸ë‹¤ë©´
     if (Input::Get()->KeyPressed('W'))
     {
-        // »ç´Ù¸® ¿À¸£±â ½ÃÀÛ
+        // ì‚¬ë‹¤ë¦¬ ì˜¤ë¥´ê¸° ì‹œìž‘
         playerController->SetClimbing(true);
         playerController->SetCollision(false);
         playerController->SetFall(false);
 
-        // ÇÃ·¹ÀÌ¾îÀÇ Transform ÄÄÆ÷³ÍÆ®¸¦ ÅëÇØ À§Ä¡¸¦ ¼öÁ¤ÇØ À§·Î ÀÌµ¿½ÃÅµ´Ï´Ù.
+        // í”Œë ˆì´ì–´ì˜ Transform ì»´í¬ë„ŒíŠ¸ë¥¼ í†µí•´ ìœ„ì¹˜ë¥¼ ìˆ˜ì •í•´ ìœ„ë¡œ ì´ë™ì‹œí‚µë‹ˆë‹¤.
         auto playerTransform = player->GetComponent<Transform>("Transform");
         if (playerTransform)
         {

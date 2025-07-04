@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "PushableComponent.h"
 
 void PushableComponent::Update()
@@ -25,12 +25,12 @@ void PushableComponent::Update()
 
 void PushableComponent::Interact()
 {
-    // »óÈ£ÀÛ¿ë ¿äÃ»ÀÌ ¿À¸é ¹Ğ±â¸¦ ½ÃÀÛÇÕ´Ï´Ù.
+    // ìƒí˜¸ì‘ìš© ìš”ì²­ì´ ì˜¤ë©´ ë°€ê¸°ë¥¼ ì‹œì‘í•©ë‹ˆë‹¤.
     StartPushing();
 }
 
 void PushableComponent::StopInteract()
 {
-	// »óÈ£ÀÛ¿ë ÁßÁö ¿äÃ»ÀÌ ¿À¸é ¹Ğ±â¸¦ ¸ØÃä´Ï´Ù.
+	// ìƒí˜¸ì‘ìš© ì¤‘ì§€ ìš”ì²­ì´ ì˜¤ë©´ ë°€ê¸°ë¥¼ ë©ˆì¶¥ë‹ˆë‹¤.
 	StopPushing();
 }

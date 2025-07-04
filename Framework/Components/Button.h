@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Objects/BaseObject/GameObject.h"
 #include "Component.h"
@@ -14,29 +14,29 @@ public:
 	~Button() override = default;
 
 public:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Update() override;
 	void Render() override;
 
 public:
-	// ¿ÜºÎ¿¡¼­ Äİ¹éÀ» µî·ÏÇÒ ¼ö ÀÖµµ·Ï SetOnClick ÇÔ¼ö¸¦ Á¦°ø
+	// ì™¸ë¶€ì—ì„œ ì½œë°±ì„ ë“±ë¡í•  ìˆ˜ ìˆë„ë¡ SetOnClick í•¨ìˆ˜ë¥¼ ì œê³µ
 	void SetOnClick(const std::function<void()>& callback) { onClick = callback; }
 	void SetOnPress(const std::function<void()>& callback) { onPress = callback; }
 
 private:
-	bool IsMouseOver(); // ³»ºÎ¿¡¼­ ¸¶¿ì½º°¡ ¹öÆ° À§¿¡ ÀÖ´ÂÁö ÆÇ´Ü
+	bool IsMouseOver(); // ë‚´ë¶€ì—ì„œ ë§ˆìš°ìŠ¤ê°€ ë²„íŠ¼ ìœ„ì— ìˆëŠ”ì§€ íŒë‹¨
 
 private:
-	// Å¬¸¯ ÀÌº¥Æ®¸¦ Ã³¸®ÇÒ Äİ¹é ÇÔ¼ö
+	// í´ë¦­ ì´ë²¤íŠ¸ë¥¼ ì²˜ë¦¬í•  ì½œë°± í•¨ìˆ˜
 	std::function<void()> onClick = nullptr;
 	std::function<void()> onPress = nullptr;
 
-	// Å¬¸¯ ¿©ºÎ¸¦ °ü¸®ÇÒ °£´ÜÇÑ »óÅÂ º¯¼ö
-	bool wasPressed = false; // ÀÌÀü ÇÁ·¹ÀÓ¿¡¼­ ¸¶¿ì½º¸¦ ´©¸£°í ÀÖ¾ú´ÂÁö
+	// í´ë¦­ ì—¬ë¶€ë¥¼ ê´€ë¦¬í•  ê°„ë‹¨í•œ ìƒíƒœ ë³€ìˆ˜
+	bool wasPressed = false; // ì´ì „ í”„ë ˆì„ì—ì„œ ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ê³  ìˆì—ˆëŠ”ì§€
 
-	// Å¬¸¯ ÇÑ¹ø ¾¿¸¸.
+	// í´ë¦­ í•œë²ˆ ì”©ë§Œ.
 	bool clickLock = false;
 
-	float clickEffectTime = 0.0f; // ´ÜÀÏ Å¬¸¯ ½Ã È¿°ú Áö¼Ó ½Ã°£ (ÃÊ ´ÜÀ§)
+	float clickEffectTime = 0.0f; // ë‹¨ì¼ í´ë¦­ ì‹œ íš¨ê³¼ ì§€ì† ì‹œê°„ (ì´ˆ ë‹¨ìœ„)
 
 };

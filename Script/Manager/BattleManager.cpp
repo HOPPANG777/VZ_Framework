@@ -1,15 +1,15 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "BattleManager.h"
 
 BattleManager::BattleManager()
 {
-    // ÀüÅõ °ü·Ã ÃÊ±âÈ­ ÄÚµå (¿¹: ÇÃ·¹ÀÌ¾î ¹× Àû À¯´Ö »ı¼º)
+    // ì „íˆ¬ ê´€ë ¨ ì´ˆê¸°í™” ì½”ë“œ (ì˜ˆ: í”Œë ˆì´ì–´ ë° ì  ìœ ë‹› ìƒì„±)
 	currentState = BattleState::PLAYER_COMMAND;
 }
 
 BattleManager::~BattleManager() 
 {
-    // ÀÚ¿ø Á¤¸®
+    // ìì› ì •ë¦¬
     for (std::shared_ptr<UnitBase>& p : playerUnits)
     {
         p.reset();
@@ -23,8 +23,8 @@ BattleManager::~BattleManager()
 
 void BattleManager::Initialize() 
 {
-    // ÀüÅõ ¾ÀÀÌ ½ÃÀÛµÉ ¶§ È£Ãâ, À¯´Ö »ı¼º ¹× UI ÃÊ±âÈ­
-    // ¿¹: 
+    // ì „íˆ¬ ì”¬ì´ ì‹œì‘ë  ë•Œ í˜¸ì¶œ, ìœ ë‹› ìƒì„± ë° UI ì´ˆê¸°í™”
+    // ì˜ˆ: 
     // playerUnits.push_back(std::make_shared<PlayerUnit>(...));
     // enemyUnits.push_back(std::make_shared<EnemyUnit>(...));
 
@@ -33,7 +33,7 @@ void BattleManager::Initialize()
 
 void BattleManager::Reset() 
 {
-    // ÀüÅõ°¡ »õ·Î ½ÃÀÛµÇ°Å³ª Àç½ÃÀÛµÉ ¶§ È£Ãâ
+    // ì „íˆ¬ê°€ ìƒˆë¡œ ì‹œì‘ë˜ê±°ë‚˜ ì¬ì‹œì‘ë  ë•Œ í˜¸ì¶œ
     for (std::shared_ptr<UnitBase>& p : playerUnits)
     {
         p.reset();
@@ -49,7 +49,7 @@ void BattleManager::Reset()
 
 void BattleManager::Update() 
 {
-    // ÀüÅõ ÁøÇà »óÅÂ¿¡ µû¶ó °¢ ´Ü°èÀÇ ·ÎÁ÷À» Ã³¸®
+    // ì „íˆ¬ ì§„í–‰ ìƒíƒœì— ë”°ë¼ ê° ë‹¨ê³„ì˜ ë¡œì§ì„ ì²˜ë¦¬
     switch (currentState)
     {
     case BattleState::PLAYER_COMMAND:
@@ -65,73 +65,73 @@ void BattleManager::Update()
         EndTurn();
         break;
     case BattleState::VICTORY:
-        // ½Â¸® Ã³¸® (¿¹: º¸»ó, ¾À ÀüÈ¯)
+        // ìŠ¹ë¦¬ ì²˜ë¦¬ (ì˜ˆ: ë³´ìƒ, ì”¬ ì „í™˜)
         break;
     case BattleState::DEFEAT:
-        // ÆĞ¹è Ã³¸® (¿¹: °ÔÀÓ ¿À¹ö, Àç½Ãµµ)
+        // íŒ¨ë°° ì²˜ë¦¬ (ì˜ˆ: ê²Œì„ ì˜¤ë²„, ì¬ì‹œë„)
         break;
     default:
         break;
     }
 
-    // ÀüÅõ Áß À¯´Ö ¾÷µ¥ÀÌÆ® (ÇÊ¿ä½Ã)
+    // ì „íˆ¬ ì¤‘ ìœ ë‹› ì—…ë°ì´íŠ¸ (í•„ìš”ì‹œ)
     for (std::shared_ptr<UnitBase>& unit : playerUnits) unit->Update();
     for (std::shared_ptr<UnitBase>& unit : enemyUnits) unit->Update();
 }
 
 void BattleManager::ProcessPlayerCommand() 
 {
-    // ÇÃ·¹ÀÌ¾î ¸í·É ¼±ÅÃ UI°¡ È°¼ºÈ­µÈ »óÅÂ·Î ´ë±â
-    // UI¿¡¼­ OnPlayerCommandSelected()¸¦ È£ÃâÇÏ¸é ¸í·ÉÀÌ ¼³Á¤µÇ¾î »óÅÂ ÀüÈ¯.
-    // ¿©±â¼­´Â º°µµÀÇ ·ÎÁ÷ ¾øÀÌ UI ÀÔ·ÂÀ» ±â´Ù¸°´Ù°í °¡Á¤.
+    // í”Œë ˆì´ì–´ ëª…ë ¹ ì„ íƒ UIê°€ í™œì„±í™”ëœ ìƒíƒœë¡œ ëŒ€ê¸°
+    // UIì—ì„œ OnPlayerCommandSelected()ë¥¼ í˜¸ì¶œí•˜ë©´ ëª…ë ¹ì´ ì„¤ì •ë˜ì–´ ìƒíƒœ ì „í™˜.
+    // ì—¬ê¸°ì„œëŠ” ë³„ë„ì˜ ë¡œì§ ì—†ì´ UI ì…ë ¥ì„ ê¸°ë‹¤ë¦°ë‹¤ê³  ê°€ì •.
 }
 
 void BattleManager::OnPlayerCommandSelected(int commandIndex) 
 {
-    // ÇÃ·¹ÀÌ¾î°¡ ¸í·É ¹öÆ°À» Å¬¸¯ÇßÀ» ¶§ È£Ãâ.
-    // commandIndex¿¡ µû¶ó ÇÃ·¹ÀÌ¾îÀÇ Çàµ¿À» ¼³Á¤ÇÑ´Ù.
-    // ¿¹: 0 = °ø°İ, 1 = ¸¶¹ı, 2 = ¾ÆÀÌÅÛ, 3 = ¹æ¾î µî
-    // ÀÌ ¿¹Á¦¿¡¼­´Â ´Ü¼øÈ÷ PLAYER_ACTION »óÅÂ·Î ÀüÈ¯
+    // í”Œë ˆì´ì–´ê°€ ëª…ë ¹ ë²„íŠ¼ì„ í´ë¦­í–ˆì„ ë•Œ í˜¸ì¶œ.
+    // commandIndexì— ë”°ë¼ í”Œë ˆì´ì–´ì˜ í–‰ë™ì„ ì„¤ì •í•œë‹¤.
+    // ì˜ˆ: 0 = ê³µê²©, 1 = ë§ˆë²•, 2 = ì•„ì´í…œ, 3 = ë°©ì–´ ë“±
+    // ì´ ì˜ˆì œì—ì„œëŠ” ë‹¨ìˆœíˆ PLAYER_ACTION ìƒíƒœë¡œ ì „í™˜
     currentState = BattleState::PLAYER_ACTION;
 }
 
 void BattleManager::ProcessPlayerAction() 
 {
-    // ÇÃ·¹ÀÌ¾îÀÇ ¼±ÅÃÇÑ ¸í·ÉÀ» ½ÇÇà.
-    // °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà, µ¥¹ÌÁö °è»ê, È¿°ú Ã³¸® µîÀ» Æ÷ÇÔÇÒ ¼ö ÀÖ´Ù.
-    // ½ÇÇà ÈÄ »óÅÂ¸¦ ENEMY_ACTIONÀ¸·Î ÀüÈ¯.
+    // í”Œë ˆì´ì–´ì˜ ì„ íƒí•œ ëª…ë ¹ì„ ì‹¤í–‰.
+    // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰, ë°ë¯¸ì§€ ê³„ì‚°, íš¨ê³¼ ì²˜ë¦¬ ë“±ì„ í¬í•¨í•  ìˆ˜ ìˆë‹¤.
+    // ì‹¤í–‰ í›„ ìƒíƒœë¥¼ ENEMY_ACTIONìœ¼ë¡œ ì „í™˜.
     currentState = BattleState::ENEMY_ACTION;
 }
 
 void BattleManager::ProcessEnemyAction() 
 {
-    // Àû À¯´ÖÀÇ AI Çàµ¿ ½ÇÇà.
-    // °¢ Àû À¯´ÖÀÌ Çàµ¿À» ¼±ÅÃÇÏ°í ½ÇÇàÇÏµµ·Ï Ã³¸®.
-    // ¸ğµç ÀûÀÇ Çàµ¿ÀÌ ³¡³ª¸é »óÅÂ¸¦ TURN_END·Î ÀüÈ¯.
+    // ì  ìœ ë‹›ì˜ AI í–‰ë™ ì‹¤í–‰.
+    // ê° ì  ìœ ë‹›ì´ í–‰ë™ì„ ì„ íƒí•˜ê³  ì‹¤í–‰í•˜ë„ë¡ ì²˜ë¦¬.
+    // ëª¨ë“  ì ì˜ í–‰ë™ì´ ëë‚˜ë©´ ìƒíƒœë¥¼ TURN_ENDë¡œ ì „í™˜.
     currentState = BattleState::TURN_END;
 }
 
 void BattleManager::EndTurn() 
 {
-    // ÅÏ Á¾·á ½Ã °¢ À¯´ÖÀÇ »óÅÂ ¾÷µ¥ÀÌÆ®, È¸º¹, ¹öÇÁ/µğ¹öÇÁ Á¤¸® µîÀ» Ã³¸®.
+    // í„´ ì¢…ë£Œ ì‹œ ê° ìœ ë‹›ì˜ ìƒíƒœ ì—…ë°ì´íŠ¸, íšŒë³µ, ë²„í”„/ë””ë²„í”„ ì •ë¦¬ ë“±ì„ ì²˜ë¦¬.
     CheckBattleOutcome();
-    // ´ÙÀ½ ÅÏ ½ÃÀÛÀ» À§ÇØ »óÅÂ¸¦ PLAYER_COMMAND·Î ÀüÈ¯.
+    // ë‹¤ìŒ í„´ ì‹œì‘ì„ ìœ„í•´ ìƒíƒœë¥¼ PLAYER_COMMANDë¡œ ì „í™˜.
     currentState = BattleState::PLAYER_COMMAND;
 }
 
 void BattleManager::CheckBattleOutcome() 
 {
-    // ÇÃ·¹ÀÌ¾î¿Í Àû À¯´ÖÀÇ Ã¼·ÂÀ» È®ÀÎÇÏ¿© ½Â¸® ¶Ç´Â ÆĞ¹è Á¶°ÇÀ» °Ë»ç.
+    // í”Œë ˆì´ì–´ì™€ ì  ìœ ë‹›ì˜ ì²´ë ¥ì„ í™•ì¸í•˜ì—¬ ìŠ¹ë¦¬ ë˜ëŠ” íŒ¨ë°° ì¡°ê±´ì„ ê²€ì‚¬.
     bool allEnemiesDefeated = true;
     for (std::shared_ptr<UnitBase>& enemy : enemyUnits)
     {
-        // ¿¹½Ã: if (enemy->GetHP() > 0) { allEnemiesDefeated = false; break; }
+        // ì˜ˆì‹œ: if (enemy->GetHP() > 0) { allEnemiesDefeated = false; break; }
     }
     
     bool allPlayersDefeated = true;
     for (std::shared_ptr<UnitBase>& player : playerUnits)
     {
-        // ¿¹½Ã: if (player->GetHP() > 0) { allPlayersDefeated = false; break; }
+        // ì˜ˆì‹œ: if (player->GetHP() > 0) { allPlayersDefeated = false; break; }
     }
 
     if (allEnemiesDefeated) currentState = BattleState::VICTORY;

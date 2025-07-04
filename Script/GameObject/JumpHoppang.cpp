@@ -1,21 +1,21 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "JumpHoppang.h"
 
 JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring& path)
     : AnimationRect(position, scale, rotation, path)
 {
-    // "path"·ÎºÎÅÍ Texture2D ·Îµå & Animator »ı¼ºÀº 
-    // AnimationRect »ı¼ºÀÚ¿¡¼­ ÀÌ¹Ì Ã³¸®µÊ
+    // "path"ë¡œë¶€í„° Texture2D ë¡œë“œ & Animator ìƒì„±ì€ 
+    // AnimationRect ìƒì„±ìì—ì„œ ì´ë¯¸ ì²˜ë¦¬ë¨
 
-    // ÀÌÁ¦ ·Îµù ¾ÆÀÌÄÜ¿¡ ¸Â´Â ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³À» µî·Ï
-    // ¿¹: °¡·Î 7ÇÁ·¹ÀÓ
-    //    ÇÑ ÇÁ·¹ÀÓ Å©±â´Â 50x50, ÃÑ ÀÌ¹ÌÁö(350¡¿50)¶ó °¡Á¤
+    // ì´ì œ ë¡œë”© ì•„ì´ì½˜ì— ë§ëŠ” ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ì„ ë“±ë¡
+    // ì˜ˆ: ê°€ë¡œ 7í”„ë ˆì„
+    //    í•œ í”„ë ˆì„ í¬ê¸°ëŠ” 50x50, ì´ ì´ë¯¸ì§€(350Ã—50)ë¼ ê°€ì •
     const std::shared_ptr<Texture2D>& tex = std::make_shared<Texture2D>(path);
 
-    // AnimationClip »ı¼º (ÀÌ¸§: "Loading")
+    // AnimationClip ìƒì„± (ì´ë¦„: "Loading")
     // - frameCount : 7
     // - startPos   : (0, 0)
-    // - endPos     : (350, 50)  (tex->GetWidth(), tex->GetHeight() ¶ó°í °¡Á¤)
+    // - endPos     : (350, 50)  (tex->GetWidth(), tex->GetHeight() ë¼ê³  ê°€ì •)
     const std::shared_ptr<AnimationClip>& loadingClip = std::make_shared<AnimationClip>
     (
         L"Loading",      // clipName
@@ -27,9 +27,9 @@ JumpHoppang::JumpHoppang(const Vector3& position, const Vector3& scale, const fl
         false            // bReversed?
     );
 
-    // AnimationRect ³»ºÎÀÇ animator ¸â¹ö¿¡ Ãß°¡
+    // AnimationRect ë‚´ë¶€ì˜ animator ë©¤ë²„ì— ì¶”ê°€
     GetAnimator()->AddAnimClip(loadingClip);
-    // ±âº» Å¬¸³À¸·Î "Loading" Àç»ı
+    // ê¸°ë³¸ í´ë¦½ìœ¼ë¡œ "Loading" ì¬ìƒ
     GetAnimator()->SetCurrentAnimClip(L"Loading");
 
     GetAnimator()->SetAnimationTime(1.0f / 7.5f);

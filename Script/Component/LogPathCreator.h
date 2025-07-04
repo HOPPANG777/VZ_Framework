@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "HitComponent.h"
 #include "Components/BoxCollider.h"
@@ -14,7 +14,7 @@ public:
     virtual void Render() override {}
 
 public:
-    // µµ³¢¿Í Ãæµ¹ ½Ã È£ÃâµÉ ÇÔ¼ö
+    // ë„ë¼ì™€ ì¶©ëŒ ì‹œ í˜¸ì¶œë  í•¨ìˆ˜
     void OnAxeCollision();
 	void OnLogCollision(Collider* other);
 
@@ -22,8 +22,8 @@ public:
 	bool GetTransformed() const { return transformed; }
 
 private:
-    int collisionCount;    // µµ³¢¿Í Ãæµ¹ÇÑ È½¼ö
-    bool transformed;      // ÀÌ¹Ì º¯È¯ÀÌ ¿Ï·áµÇ¾ú´ÂÁö ¿©ºÎ
-    Vector3 newColliderSize; // »õ·Î Àû¿ëÇÒ BoxCollider Å©±â
+    int collisionCount;    // ë„ë¼ì™€ ì¶©ëŒí•œ íšŸìˆ˜
+    bool transformed;      // ì´ë¯¸ ë³€í™˜ì´ ì™„ë£Œë˜ì—ˆëŠ”ì§€ ì—¬ë¶€
+    Vector3 newColliderSize; // ìƒˆë¡œ ì ìš©í•  BoxCollider í¬ê¸°
 };
 

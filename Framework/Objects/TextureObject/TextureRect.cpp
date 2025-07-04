@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "TextureRect.h"
 
 //, texture(std::make_shared<Texture2D>(path))
@@ -9,26 +9,26 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 	{
 		vertices.assign(4, VertexTexture());
 
-		// ÁÂ ÇÏ´Ü
+		// ì¢Œ í•˜ë‹¨
 		vertices[0].position = { -0.5f, -0.5f, 0 };
 		vertices[0].uv = Vector2(0, 1);
 
-		// ÁÂ »ó´Ü
+		// ì¢Œ ìƒë‹¨
 		vertices[1].position = { -0.5f, 0.5f, 0 };
 		vertices[1].uv = Vector2(0, 0);
 
-		// ¿ì ÇÏ´Ü
+		// ìš° í•˜ë‹¨
 		vertices[2].position = { 0.5f, -0.5f, 0 };
 		vertices[2].uv = Vector2(1, 1);
 
-		// ¿ì »ó´Ü
+		// ìš° ìƒë‹¨
 		vertices[3].position = { 0.5f, 0.5f, 0 };
 		vertices[3].uv = Vector2(1, 0);
 	}
 
 	//vertexBuffer
 	{
-		//°´Ã¼¸¦ ¸¸µé¾î ÁÖ¾î¾ß ÇÑ´Ù.
+		//ê°ì²´ë¥¼ ë§Œë“¤ì–´ ì£¼ì–´ì•¼ í•œë‹¤.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 
@@ -48,23 +48,23 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 	}
 
 	// Rasterizer State
-	// ·¹½ºÅÍ¶óÀÌÀú´Â ¹öÅØ½º ½¦ÀÌ´õ·Î ÂïÀº Á¤Á¡µéÀÇ »çÀÌ¿Í ³»ºÎ¸¦
-	// Ã¤¿öÁÖ´Â ¿ªÇÒÀÌ´Ù.
-	// ÀÌ°Å ¾È¸¸µé¸é ±âº»°ªÀ¸·Î ³Ö¾îÁÖ°í ¸¸µé¸é ¸¸µç°Å ³Ö¾îÁÜ
+	// ë ˆìŠ¤í„°ë¼ì´ì €ëŠ” ë²„í…ìŠ¤ ì‰ì´ë”ë¡œ ì°ì€ ì •ì ë“¤ì˜ ì‚¬ì´ì™€ ë‚´ë¶€ë¥¼
+	// ì±„ì›Œì£¼ëŠ” ì—­í• ì´ë‹¤.
+	// ì´ê±° ì•ˆë§Œë“¤ë©´ ê¸°ë³¸ê°’ìœ¼ë¡œ ë„£ì–´ì£¼ê³  ë§Œë“¤ë©´ ë§Œë“ ê±° ë„£ì–´ì¤Œ
 	{
 		D3D11_RASTERIZER_DESC desc;
 		ZeroMemory(&desc, sizeof(D3D11_RASTERIZER_DESC));
 
-		// CullMode : ±×¸®Áö ¾ÊÀ» ºÎºĞ ¼³Á¤
-		// d3d11_cull_back == µŞ¸é Áö¿ì°Ú´Ù. (¹İ½Ã°è ¹æÇâ ¾È±×¸²)
+		// CullMode : ê·¸ë¦¬ì§€ ì•Šì„ ë¶€ë¶„ ì„¤ì •
+		// d3d11_cull_back == ë’·ë©´ ì§€ìš°ê² ë‹¤. (ë°˜ì‹œê³„ ë°©í–¥ ì•ˆê·¸ë¦¼)
 		desc.CullMode = D3D11_CULL_BACK;
 		//desc.CullMode = D3D11_CULL_NONE;
 
-		// FillMode : Ã¼¿ì´Â ¹æ½Ä ¼³Á¤
-		// d3d11_fill_solid == ÀüºÎ Ã¼¿ì°Ú´Ù. (ºó°ø°£ ¾È¸¸µç´Ù)
+		// FillMode : ì²´ìš°ëŠ” ë°©ì‹ ì„¤ì •
+		// d3d11_fill_solid == ì „ë¶€ ì²´ìš°ê² ë‹¤. (ë¹ˆê³µê°„ ì•ˆë§Œë“ ë‹¤)
 		desc.FillMode = D3D11_FILL_SOLID;
 
-		// ½Ã°è¹æÇâ ¼³Á¤ (false == ½Ã°è ¹æÇâ // true == ¹İ ½Ã°è ¹æÇâ)
+		// ì‹œê³„ë°©í–¥ ì„¤ì • (false == ì‹œê³„ ë°©í–¥ // true == ë°˜ ì‹œê³„ ë°©í–¥)
 		desc.FrontCounterClockwise = false;
 
 		HRESULT hr = Graphics::Get()->GetDevice()->CreateRasterizerState(&desc, rs.GetAddressOf());
@@ -77,7 +77,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		RenderStates::GetSamplerDesc(&desc);
 		RenderStates::CreateSampler(&desc, sampler[0].GetAddressOf());
 
-		// ¼±Çüº¸°£
+		// ì„ í˜•ë³´ê°„
 		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
 		RenderStates::CreateSampler(&desc, sampler[1].GetAddressOf());
 	}
@@ -92,7 +92,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		RenderStates::CreateBlend(&desc, blend[1].GetAddressOf());
 	}
 
-	// SRV ÃßÃâ // ±×¸² µ¥ÀÌÅÍ ÃßÃâ
+	// SRV ì¶”ì¶œ // ê·¸ë¦¼ ë°ì´í„° ì¶”ì¶œ
 	{
 		HRESULT hr = D3DX11CreateShaderResourceViewFromFile
 		(
@@ -106,7 +106,7 @@ TextureRect::TextureRect(const Vector3& position, const Vector3& scale, const fl
 		CHECK(hr);
 	}
 
-	// ColorBuffer »ı¼º
+	// ColorBuffer ìƒì„±
 	{
 		colorBuffer = std::make_unique<ColorBuffer>();
 	}
@@ -126,18 +126,18 @@ void TextureRect::Render()
 {
 	BASE::Render();
 
-	// ¸ÕÀú, ÇÈ¼¿ ¼ÎÀÌ´õÀÇ »ó¼ö ¹öÆÛ ½½·Ô(¿¹: b2)¿¡ ColorBuffer¸¦ ¾÷µ¥ÀÌÆ® ¹× ¹ÙÀÎµùÇÕ´Ï´Ù.
-	colorBuffer->SetPSBuffer(2);  // b2 ½½·Ô¿¡ ¹ÙÀÎµù (¼ÎÀÌ´õ ÄÚµå¿Í ÀÏÄ¡ÇØ¾ß ÇÔ)
+	// ë¨¼ì €, í”½ì…€ ì…°ì´ë”ì˜ ìƒìˆ˜ ë²„í¼ ìŠ¬ë¡¯(ì˜ˆ: b2)ì— ColorBufferë¥¼ ì—…ë°ì´íŠ¸ ë° ë°”ì¸ë”©í•©ë‹ˆë‹¤.
+	colorBuffer->SetPSBuffer(2);  // b2 ìŠ¬ë¡¯ì— ë°”ì¸ë”© (ì…°ì´ë” ì½”ë“œì™€ ì¼ì¹˜í•´ì•¼ í•¨)
 
 	Graphics::Get()->GetDC()->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 	
-	//// SRV¸¦ ÇÈ¼¿ ¼ÎÀÌ´õ¿¡ ¹ÙÀÎµù
+	//// SRVë¥¼ í”½ì…€ ì…°ì´ë”ì— ë°”ì¸ë”©
 	Graphics::Get()->GetDC()->PSSetShaderResources(0, 1, srv.GetAddressOf());
-	// ·¹½ºÅÍ¶óÀÌÀú ¹× ºí·»µå »óÅÂ ¼³Á¤
+	// ë ˆìŠ¤í„°ë¼ì´ì € ë° ë¸”ë Œë“œ ìƒíƒœ ì„¤ì •
 	Graphics::Get()->GetDC()->RSSetState(rs.Get());
 
 	Graphics::Get()->GetDC()->OMSetBlendState(blend[1].Get(), nullptr, (UINT)0xFFFFFFFF);
 
-	// µå·Î¿ì È£Ãâ
+	// ë“œë¡œìš° í˜¸ì¶œ
 	DrawCall(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }

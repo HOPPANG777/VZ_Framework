@@ -1,24 +1,24 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "String.h"
 
-#include <iomanip>	// ÀÔÃâ·Â ½ºÆ®¸²ÀÇ Á¶ÀÛÀÚ¸¦ Á¤ÀÇÇÏ´Â Çì´õ, ½ºÆ®¸²ÀÇ Ãâ·Â Çü½ÄÀ» Á¦¾îÇÏ´Â µ¥ »ç¿ë
-#include <sstream>	// ¹®ÀÚ¿­ ½ºÆ®¸²À» Á¤ÀÇ, ¸Ş¸ğ¸® ¹öÆÛ¿¡ µ¥ÀÌÅÍ¸¦ ÀĞ°í ¾²´Âµ¥ »ç¿ë
+#include <iomanip>	// ì…ì¶œë ¥ ìŠ¤íŠ¸ë¦¼ì˜ ì¡°ì‘ìë¥¼ ì •ì˜í•˜ëŠ” í—¤ë”, ìŠ¤íŠ¸ë¦¼ì˜ ì¶œë ¥ í˜•ì‹ì„ ì œì–´í•˜ëŠ” ë° ì‚¬ìš©
+#include <sstream>	// ë¬¸ìì—´ ìŠ¤íŠ¸ë¦¼ì„ ì •ì˜, ë©”ëª¨ë¦¬ ë²„í¼ì— ë°ì´í„°ë¥¼ ì½ê³  ì“°ëŠ”ë° ì‚¬ìš©
 
-// ¹®ÀÚ¿­À» ÁöÁ¤µÈ ±¸ºĞÀÚ·Î ºĞÇÒÇÏ´Â ±â´É
+// ë¬¸ìì—´ì„ ì§€ì •ëœ êµ¬ë¶„ìë¡œ ë¶„í• í•˜ëŠ” ê¸°ëŠ¥
 #pragma region SplitString
 void String::SplitString(std::vector<std::string>* result, std::string origin, std::string tok)
 {
 	result->clear();
-	int cutAt = 0; //ÀÚ¸¦ À§Ä¡
+	int cutAt = 0; //ìë¥¼ ìœ„ì¹˜
 	while ((cutAt = (int)origin.find_first_of(tok)) != origin.npos)
 	{
-		//ÀÚ¸£´Â À§Ä¡°¡ 0º¸´Ù Å©´Ù¸é
+		//ìë¥´ëŠ” ìœ„ì¹˜ê°€ 0ë³´ë‹¤ í¬ë‹¤ë©´
 		if (cutAt > 0) result->push_back(origin.substr(0, cutAt));
 
 		origin = origin.substr(cutAt + 1);
 	}
 
-	//ÀÚ¸£°íµµ ³²Àº°ÍÀÌ ÀÖ´Ù¸é
+	//ìë¥´ê³ ë„ ë‚¨ì€ê²ƒì´ ìˆë‹¤ë©´
 	if (origin.length() > 0) result->push_back(origin.substr(0, cutAt));
 }
 
@@ -26,25 +26,25 @@ void String::SplitString(std::vector<std::wstring>* result, std::wstring origin,
 {
 	result->clear();
 
-	int cutAt = 0; //ÀÚ¸¦ À§Ä¡
+	int cutAt = 0; //ìë¥¼ ìœ„ì¹˜
 	while ((cutAt = (int)origin.find_first_of(tok)) != origin.npos)
 	{
-		//ÀÚ¸£´Â À§Ä¡°¡ 0º¸´Ù Å©´Ù¸é
+		//ìë¥´ëŠ” ìœ„ì¹˜ê°€ 0ë³´ë‹¤ í¬ë‹¤ë©´
 		if (cutAt > 0)	result->push_back(origin.substr(0, cutAt));
 
 		origin = origin.substr(cutAt + 1);
 	}
 
-	//ÀÚ¸£°íµµ ³²Àº°ÍÀÌ ÀÕ´Ù¸é
+	//ìë¥´ê³ ë„ ë‚¨ì€ê²ƒì´ ì‡ë‹¤ë©´
 	if (origin.length() > 0) result->push_back(origin.substr(0, cutAt));
 }
 #pragma endregion
 
-// Æ¯Á¤ÇÑ ¹®ÀÚ·Î ½ÃÀÛÇÏ´ÂÁö Ã¼Å©
+// íŠ¹ì •í•œ ë¬¸ìë¡œ ì‹œì‘í•˜ëŠ”ì§€ ì²´í¬
 #pragma region StartWith
 bool String::StartWith(std::string str, std::string comp)
 {
-	//npos no position Áï ¾ø´Ù´Â ¼Ò¸®
+	//npos no position ì¦‰ ì—†ë‹¤ëŠ” ì†Œë¦¬
 	std::wstring::size_type index = str.find(comp);
 	if (index != std::wstring::npos && (int)index == 0) return true;
 
@@ -59,7 +59,7 @@ bool String::StartWith(std::wstring str, std::wstring comp)
 }
 #pragma endregion
 
-// Æ¯Á¤ÇÑ ¹®ÀÚ¸¦ Æ÷ÇÔÇÏ´ÂÁö Ã¼Å©
+// íŠ¹ì •í•œ ë¬¸ìë¥¼ í¬í•¨í•˜ëŠ”ì§€ ì²´í¬
 #pragma region Contain
 bool String::Contain(std::string str, std::string comp)
 {
@@ -76,7 +76,7 @@ bool String::Contain(std::wstring str, std::wstring comp)
 }
 #pragma endregion
 
-// Æ¯Á¤ÇÑ ¹®ÀÚµéÀ» ´Ù¸¥ ¹®ÀÚµé·Î ´ëÃ¼
+// íŠ¹ì •í•œ ë¬¸ìë“¤ì„ ë‹¤ë¥¸ ë¬¸ìë“¤ë¡œ ëŒ€ì²´
 #pragma region Replace
 void String::Replace(std::string* str, std::string comp, std::string rep)
 {
@@ -107,9 +107,9 @@ void String::Replace(std::wstring* str, std::wstring comp, std::wstring rep)
 }
 #pragma endregion
 
-// º¤ÅÍ¸¦ ¹®ÀÚ¿­·Î ¹Ù²ã¼­ Ãâ·Â
+// ë²¡í„°ë¥¼ ë¬¸ìì—´ë¡œ ë°”ê¿”ì„œ ì¶œë ¥
 #pragma region ToString
-// setprecision : ºÎµ¿ ¼Ò¼öÁ¡ ¼ıÀÚÀÇ Á¤¹Ğµµ¸¦ ¼³Á¤ÇÏ´Â Á¶ÀÛÀÚ
+// setprecision : ë¶€ë™ ì†Œìˆ˜ì  ìˆ«ìì˜ ì •ë°€ë„ë¥¼ ì„¤ì •í•˜ëŠ” ì¡°ì‘ì
 
 std::string String::ToString(Vector3 vec3, int precision)
 {

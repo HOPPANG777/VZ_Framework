@@ -1,49 +1,49 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "LogPathCreator.h"
 
 void LogPathCreator::OnAxeCollision()
 {
-    // ÀÌ¹Ì º¯È¯µÈ °æ¿ì¿¡´Â ´õ ÀÌ»ó Ã³¸®ÇÏÁö ¾ÊÀ½
+    // ì´ë¯¸ ë³€í™˜ëœ ê²½ìš°ì—ëŠ” ë” ì´ìƒ ì²˜ë¦¬í•˜ì§€ ì•ŠìŒ
     if (transformed) return;
 
-    // Ãæµ¹ È½¼ö¸¦ Áõ°¡
+    // ì¶©ëŒ íšŸìˆ˜ë¥¼ ì¦ê°€
     collisionCount++;
 
     GameObject* owner = GetOwner();
 
-    // ÇÇ°İ È¿°ú È°¼ºÈ­: HitComponent°¡ ÀÖ´Ù¸é Activate() È£Ãâ
+    // í”¼ê²© íš¨ê³¼ í™œì„±í™”: HitComponentê°€ ìˆë‹¤ë©´ Activate() í˜¸ì¶œ
     owner->GetComponent<HitComponent>("HitComponent")->Activate();
 
-    // 3È¸ ÀÌ»ó Ãæµ¹ÇÏ¸é º¯È¯ Ã³¸®
+    // 3íšŒ ì´ìƒ ì¶©ëŒí•˜ë©´ ë³€í™˜ ì²˜ë¦¬
     if (collisionCount >= 3)
     {
-        // log ¿ÀºêÁ§Æ®(Owner)ÀÇ È¸ÀüÀ» ¿À¸¥ÂÊÀ¸·Î 90µµ º¯°æ
-        // (¿¹: 90µµ)
+        // log ì˜¤ë¸Œì íŠ¸(Owner)ì˜ íšŒì „ì„ ì˜¤ë¥¸ìª½ìœ¼ë¡œ 90ë„ ë³€ê²½
+        // (ì˜ˆ: 90ë„)
         owner->SetRotation(-90);
 
         owner->SetPosition(owner->GetPosition() + Vector3(300, -280, 0));
 
-        // ±âÁ¸ BoxCollider Á¦°Å
+        // ê¸°ì¡´ BoxCollider ì œê±°
         owner->RemoveComponent("BoxCollider");
 
-        // »õ·Î¿î BoxCollider »ı¼º (Å©±â: 500,300,0)
+        // ìƒˆë¡œìš´ BoxCollider ìƒì„± (í¬ê¸°: 500,300,0)
         const std::shared_ptr<BoxCollider>& newCollider = std::make_shared<BoxCollider>(Vector3(0, 0, 0), newColliderSize, GREEN);
         owner->AddComponent(newCollider);
 
-        // CollisionManager¿¡ »õ Äİ¶óÀÌ´õ µî·Ï
+        // CollisionManagerì— ìƒˆ ì½œë¼ì´ë” ë“±ë¡
         CollisionManager::Get()->AddCollider(newCollider);
 
         transformed = true;
     }
 }
 
-// ¿¹½Ã Äİ¹é (·Î±× ¿ÀºêÁ§Æ®ÀÇ BoxCollider¿¡ ¿¬°áµÈ OnCollision)
+// ì˜ˆì‹œ ì½œë°± (ë¡œê·¸ ì˜¤ë¸Œì íŠ¸ì˜ BoxColliderì— ì—°ê²°ëœ OnCollision)
 void LogPathCreator::OnLogCollision(Collider* other)
 {
-    // »ó´ë ¿ÀºêÁ§Æ®°¡ LumberAxeÀÎÁö Ã¼Å© (¿¹: ÀÌ¸§¿¡ "LumberAxe" Æ÷ÇÔ)
+    // ìƒëŒ€ ì˜¤ë¸Œì íŠ¸ê°€ LumberAxeì¸ì§€ ì²´í¬ (ì˜ˆ: ì´ë¦„ì— "LumberAxe" í¬í•¨)
     if (other->GetOwner()->GetName().find("LumberAxe") != std::string::npos)
     {
-        // log[0]ÀÇ LogPathCreator ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Æ OnAxeCollision() È£Ãâ
+        // log[0]ì˜ LogPathCreator ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì•„ OnAxeCollision() í˜¸ì¶œ
         const std::shared_ptr<LogPathCreator>& logPathComp = GetOwner()->GetComponent<LogPathCreator>("LogPathCreator");
         if (logPathComp) logPathComp->OnAxeCollision();
     }

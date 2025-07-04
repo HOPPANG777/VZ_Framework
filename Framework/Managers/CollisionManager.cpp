@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "CollisionManager.h"
 
 CollisionManager::CollisionManager() {}
@@ -22,7 +22,7 @@ void CollisionManager::RemoveAllCollider()
 
 void CollisionManager::Update()
 {
-    // ¸ğµç Äİ¶óÀÌ´õ¿¡ ´ëÇØ Ãæµ¹ °Ë»ç
+    // ëª¨ë“  ì½œë¼ì´ë”ì— ëŒ€í•´ ì¶©ëŒ ê²€ì‚¬
     for (size_t i = 0; i < colliders.size(); ++i)
     {
         for (size_t j = i + 1; j < colliders.size(); ++j)
@@ -56,27 +56,27 @@ std::vector<GameObject*> CollisionManager::GetCollidingObjects(GameObject* obj) 
     std::vector<GameObject*> result;
     if (!obj) return result;
 
-    // GameObject¿¡¼­ Collider ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÏ´Â ¸ğµç ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿É´Ï´Ù.
+    // GameObjectì—ì„œ Collider ì¸í„°í˜ì´ìŠ¤ë¥¼ êµ¬í˜„í•˜ëŠ” ëª¨ë“  ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
     std::vector<Collider*> myColliders = obj->GetAllComponentsByInterface<Collider>();
     if (myColliders.empty()) return result;
 
-    // CollisionManager¿¡ µî·ÏµÈ ¸ğµç Collider¿Í ºñ±³ÇÕ´Ï´Ù.
+    // CollisionManagerì— ë“±ë¡ëœ ëª¨ë“  Colliderì™€ ë¹„êµí•©ë‹ˆë‹¤.
     for (const auto& otherCollider : colliders)
     {
-        // ÀÚ±â ÀÚ½ÅÀº Á¦¿Ü
+        // ìê¸° ìì‹ ì€ ì œì™¸
         if (otherCollider->GetOwner() == obj) continue;
 
-        // objÀÇ ¸ğµç Collider¿Í Ãæµ¹ÇÏ´ÂÁö °Ë»çÇÕ´Ï´Ù.
+        // objì˜ ëª¨ë“  Colliderì™€ ì¶©ëŒí•˜ëŠ”ì§€ ê²€ì‚¬í•©ë‹ˆë‹¤.
         for (Collider* myCol : myColliders)
         {
             if (myCol->IsColliding(otherCollider.get()))
             {
-                // °á°ú¿¡ ¾ÆÁ÷ Ãß°¡µÇÁö ¾Ê¾Ò´Ù¸é Ãß°¡ÇÕ´Ï´Ù.
+                // ê²°ê³¼ì— ì•„ì§ ì¶”ê°€ë˜ì§€ ì•Šì•˜ë‹¤ë©´ ì¶”ê°€í•©ë‹ˆë‹¤.
                 if (find(result.begin(), result.end(), otherCollider->GetOwner()) == result.end())
                 {
                     result.push_back(otherCollider->GetOwner());
                 }
-                break; // ÇÑ Collider¿¡¼­ Ãæµ¹ÀÌ ¹ß°ßµÇ¸é ´Ù¸¥ Collider´Â °Ë»çÇÒ ÇÊ¿ä ¾øÀ½.
+                break; // í•œ Colliderì—ì„œ ì¶©ëŒì´ ë°œê²¬ë˜ë©´ ë‹¤ë¥¸ ColliderëŠ” ê²€ì‚¬í•  í•„ìš” ì—†ìŒ.
             }
         }
     }

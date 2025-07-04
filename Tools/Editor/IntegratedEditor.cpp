@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "IntegratedEditor.h"
 #include "SceneEditorPanel.h"
 #include "AnimationEditorPanel.h"

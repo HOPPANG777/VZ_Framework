@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "IEditorPanel.h"
 #include "Objects/TileObject/TileMap.h"
@@ -30,7 +30,7 @@ private:
 
     ImVec2 mapOrigin = ImVec2(400, 50);
 
-    // ¸Ê ÆíÁı ½Ã »ç¿ëµÉ Ä«¸Ş¶ó
+    // ë§µ í¸ì§‘ ì‹œ ì‚¬ìš©ë  ì¹´ë©”ë¼
     Camera* previewCamera = nullptr;
 private:
     void CreateDefaultMap();

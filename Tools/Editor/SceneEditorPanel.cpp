@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "SceneEditorPanel.h"
 
 void SceneEditorPanel::Init()

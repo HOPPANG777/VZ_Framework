@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "AnimationEditorPanel.h"
 
 void AnimationEditorPanel::Init()

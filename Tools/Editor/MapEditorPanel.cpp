@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "MapEditorPanel.h"
 #include "Managers/TileSetManager.h"
 #include "Utilities/String.h"

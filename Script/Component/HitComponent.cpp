@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "HitComponent.h"
 
 void HitComponent::Activate(float dur, const Color& flash)
@@ -8,12 +8,12 @@ void HitComponent::Activate(float dur, const Color& flash)
     timer = 0.0f;
     active = true;
 
-    // ¼ÒÀ¯ °´Ã¼°¡ IColorable ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÑ´Ù°í °¡Á¤ÇÕ´Ï´Ù.
+    // ì†Œìœ  ê°ì²´ê°€ IColorable ì¸í„°í˜ì´ìŠ¤ë¥¼ êµ¬í˜„í•œë‹¤ê³  ê°€ì •í•©ë‹ˆë‹¤.
     IColorable* colorable = dynamic_cast<IColorable*>(GetOwner());
     if (colorable)
     {
-        originalColor = colorable->GetColor(); // ÇöÀç »ö»ó ÀúÀå
-        colorable->SetColor(flashColor);       // Áï½Ã »¡°£»öÀ¸·Î º¯°æ
+        originalColor = colorable->GetColor(); // í˜„ì¬ ìƒ‰ìƒ ì €ì¥
+        colorable->SetColor(flashColor);       // ì¦‰ì‹œ ë¹¨ê°„ìƒ‰ìœ¼ë¡œ ë³€ê²½
     }
 }
 
@@ -21,7 +21,7 @@ void HitComponent::Update()
 {
     if (!active) return;
 
-    // È¿°ú ÁøÇà ½Ã°£ Áõ°¡
+    // íš¨ê³¼ ì§„í–‰ ì‹œê°„ ì¦ê°€
     timer += Time::Get()->GetDeltaTime();
     float t = timer / duration;
     if (t >= 1.0f)
@@ -30,7 +30,7 @@ void HitComponent::Update()
         active = false;
     }
 
-    // ¼±Çü º¸°£À» ÅëÇØ flashColor¿¡¼­ originalColor·Î ÀüÈ¯
+    // ì„ í˜• ë³´ê°„ì„ í†µí•´ flashColorì—ì„œ originalColorë¡œ ì „í™˜
     float r = flashColor.R() + (originalColor.R() - flashColor.R()) * t;
     float g = flashColor.G() + (originalColor.G() - flashColor.G()) * t;
     float b = flashColor.B() + (originalColor.B() - flashColor.B()) * t;

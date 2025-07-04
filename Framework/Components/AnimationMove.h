@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Component.h"
 #include "Enums/UnitAnimationType.h"
@@ -19,11 +19,11 @@ public:
     void SetPlayerDead(bool dead) { isDead = dead; }
 
 private:
-    // ÇöÀç ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ (¿¹: Idle_R, Run_R, Jump_R µî)
+    // í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ (ì˜ˆ: Idle_R, Run_R, Jump_R ë“±)
     UnitAnimationType currentAnimation;
     bool isDead;
 
-    // ÇöÀç »óÅÂ°¡ ¿ŞÂÊÀ» ÇâÇÏ´ÂÁö ÆÇ´Ü (¾Ö´Ï¸ŞÀÌ¼Ç ÀÌ¸§ ±âÁØ)
+    // í˜„ì¬ ìƒíƒœê°€ ì™¼ìª½ì„ í–¥í•˜ëŠ”ì§€ íŒë‹¨ (ì• ë‹ˆë©”ì´ì…˜ ì´ë¦„ ê¸°ì¤€)
     bool IsFacingLeft(UnitAnimationType anim) const;
 };
 

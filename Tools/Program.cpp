@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Program.h"
 #include "Editor/EditorList.h"
 

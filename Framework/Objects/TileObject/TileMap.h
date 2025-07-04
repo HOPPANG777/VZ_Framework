@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Renders/IA/VertexBuffer.h"
 #include "Renders/IA/IndexBuffer.h"
@@ -45,14 +45,14 @@ private:
 
     D3D11_MAPPED_SUBRESOURCE subResource;
 
-    // 2Â÷¿ø Å¸ÀÏ ¹è¿­: rows x cols, row-major ¼ø¼­
+    // 2ì°¨ì› íƒ€ì¼ ë°°ì—´: rows x cols, row-major ìˆœì„œ
     std::vector<std::vector<std::shared_ptr<Tile>>> tiles;
     
-    // ÀüÃ¼ ¹öÅØ½º ¹× ÀÎµ¦½º ¼ö
+    // ì „ì²´ ë²„í…ìŠ¤ ë° ì¸ë±ìŠ¤ ìˆ˜
     UINT totalVertexCount = 0;
     UINT totalIndexCount = 0;
 
-    // Dirty ÇÃ·¡±×: Å¸ÀÏ Á¤º¸°¡ º¯°æµÇ¾úÀ» ¶§¸¸ ¹öÅØ½º ¹öÆÛ ¾÷µ¥ÀÌÆ®
+    // Dirty í”Œë˜ê·¸: íƒ€ì¼ ì •ë³´ê°€ ë³€ê²½ë˜ì—ˆì„ ë•Œë§Œ ë²„í…ìŠ¤ ë²„í¼ ì—…ë°ì´íŠ¸
     bool needUpdateVB = true;
 
     bool editNow = false;
@@ -80,7 +80,7 @@ public:
     void Load(const std::string& path);
 
 public:
-    // Å¸ÀÏ ÇÏ³ª¸¦ ¹İÈ¯ (Çà,¿­ °è»ê)
+    // íƒ€ì¼ í•˜ë‚˜ë¥¼ ë°˜í™˜ (í–‰,ì—´ ê³„ì‚°)
     Tile* GetTile(Vector3 mPos);
 
 };

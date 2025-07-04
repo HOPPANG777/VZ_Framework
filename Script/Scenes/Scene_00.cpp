@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Scene_00.h"
 
 void Scene_00::Awake() {}
@@ -46,7 +46,7 @@ void Scene_00::Render()
 
 void Scene_00::PostRender() 
 {
-	LoadingTextObject->GetComponent<Texts>("Texts")->RenderText(L"ºÒ·¯¿À´Â Áß", LoadingTextObject->GetRect(), 25.0f);
+	LoadingTextObject->GetComponent<Texts>("Texts")->RenderText(L"ë¶ˆëŸ¬ì˜¤ëŠ” ì¤‘", LoadingTextObject->GetRect(), 25.0f);
 }
 
 void Scene_00::ImGUI() {}

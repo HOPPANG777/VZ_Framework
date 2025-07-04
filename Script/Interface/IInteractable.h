@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 
 class IInteractable
 {
 public:
     virtual ~IInteractable() = default;
-    virtual void Interact() = 0; // »óÈ£ÀÛ¿ë ¿äÃ» ½Ã ½ÇÇàÇÒ ÇÔ¼ö
-	virtual void StopInteract() = 0; // »óÈ£ÀÛ¿ë ÁßÁö ¿äÃ» ½Ã ½ÇÇàÇÒ ÇÔ¼ö
+    virtual void Interact() = 0; // ìƒí˜¸ì‘ìš© ìš”ì²­ ì‹œ ì‹¤í–‰í•  í•¨ìˆ˜
+	virtual void StopInteract() = 0; // ìƒí˜¸ì‘ìš© ì¤‘ì§€ ìš”ì²­ ì‹œ ì‹¤í–‰í•  í•¨ìˆ˜
 };

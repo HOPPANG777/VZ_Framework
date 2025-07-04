@@ -1,9 +1,9 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "RectTransform.h"
 
 void RectTransform::Update()
 {
-    // S, R, T Çà·Ä °è»ê
+    // S, R, T í–‰ë ¬ ê³„ì‚°
     Matrix S = XMMatrixScalingFromVector(scale);
     Matrix R = XMMatrixRotationZ(rotation);
     Matrix T = XMMatrixTranslationFromVector(position);
@@ -13,8 +13,8 @@ void RectTransform::Update()
 
 void RectTransform::Render()
 {
-    // RectTransformÀº ½Ã°¢ÀûÀ¸·Î ±×¸± ¿ä¼Ò°¡ ¾øÀ¸¹Ç·Î º¸Åë ºñ¿ó´Ï´Ù.
-    // (ÇÊ¿ä ½Ã, µğ¹ö±×¿ë ±âÁî¸ğ µîÀ¸·Î È®Àå °¡´É)
+    // RectTransformì€ ì‹œê°ì ìœ¼ë¡œ ê·¸ë¦´ ìš”ì†Œê°€ ì—†ìœ¼ë¯€ë¡œ ë³´í†µ ë¹„ì›ë‹ˆë‹¤.
+    // (í•„ìš” ì‹œ, ë””ë²„ê·¸ìš© ê¸°ì¦ˆëª¨ ë“±ìœ¼ë¡œ í™•ì¥ ê°€ëŠ¥)
 }
 
 Vector3 RectTransform::GetPosition() const
@@ -29,40 +29,40 @@ Vector3 RectTransform::GetScale() const
 
 float RectTransform::GetRotation() const
 {
-    // ³»ºÎ´Â ¶óµğ¾ÈÀÌÁö¸¸, ¿ÜºÎ¿£ °¢µµ(µµ)·Î ¹İÈ¯
+    // ë‚´ë¶€ëŠ” ë¼ë””ì•ˆì´ì§€ë§Œ, ì™¸ë¶€ì—” ê°ë„(ë„)ë¡œ ë°˜í™˜
     return XMConvertToDegrees(rotation);
 }
 
-// ºÎ¸ğÀÇ RECT Á¤º¸°¡ ¾ø´Ù¸é, Àü¿ª º¯¼ö·Î °ü¸®µÇ´Â Ã¢ Å©±â¸¦ »ç¿ëÇÕ´Ï´Ù.
+// ë¶€ëª¨ì˜ RECT ì •ë³´ê°€ ì—†ë‹¤ë©´, ì „ì—­ ë³€ìˆ˜ë¡œ ê´€ë¦¬ë˜ëŠ” ì°½ í¬ê¸°ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
 RECT RectTransform::GetRect()
 {
-    // ºÎ¸ğ »ç°¢Çü (¿©±â¼­´Â ÀüÃ¼ Ã¢ Å©±â¸¦ »ç¿ë)
+    // ë¶€ëª¨ ì‚¬ê°í˜• (ì—¬ê¸°ì„œëŠ” ì „ì²´ ì°½ í¬ê¸°ë¥¼ ì‚¬ìš©)
     RECT parentRect = { -(LONG)(Values::GetWinWidth() * 0.5f), -(LONG)(Values::GetWinHeight() * 0.5f), (LONG)(Values::GetWinWidth() * 0.5f), (LONG)(Values::GetWinHeight() * 0.5f) };
     LONG parentWidth  = (parentRect.right  - parentRect.left);
     LONG parentHeight = (parentRect.bottom - parentRect.top);
 
 
-    // ¾ŞÄ¿¿Í ¿ÀÇÁ¼ÂÀ» ÀÌ¿ëÇÏ¿© ±âº» »ç°¢Çü °è»ê
+    // ì•µì»¤ì™€ ì˜¤í”„ì…‹ì„ ì´ìš©í•˜ì—¬ ê¸°ë³¸ ì‚¬ê°í˜• ê³„ì‚°
     float anchorPosMinX = parentRect.left + anchorMin.x * parentWidth  + offsetMin.x;
     float anchorPosMinY = parentRect.top  + anchorMin.y * parentHeight + offsetMin.y;
     float anchorPosMaxX = parentRect.left + anchorMax.x * parentWidth  + offsetMax.x;
     float anchorPosMaxY = parentRect.top  + anchorMax.y * parentHeight + offsetMax.y;
 
-    // ±âº» »ç°¢ÇüÀÇ Áß½É ¹× Å©±â
+    // ê¸°ë³¸ ì‚¬ê°í˜•ì˜ ì¤‘ì‹¬ ë° í¬ê¸°
     float anchoredCenterX = (anchorPosMinX + anchorPosMaxX) * 0.5f;
     float anchoredCenterY = (anchorPosMinY + anchorPosMaxY) * 0.5f;
     float anchoredWidth   = anchorPosMaxX - anchorPosMinX;
     float anchoredHeight  = anchorPosMaxY - anchorPosMinY;
 
-    // Ãß°¡·Î position °ªÀ» ´õÇØ ÃÖÁ¾ Áß½É °è»ê (¾ŞÄ¿ ±âÁØ ¿ÀÇÁ¼Â)
+    // ì¶”ê°€ë¡œ position ê°’ì„ ë”í•´ ìµœì¢… ì¤‘ì‹¬ ê³„ì‚° (ì•µì»¤ ê¸°ì¤€ ì˜¤í”„ì…‹)
     float finalCenterX = anchoredCenterX + position.x;
     float finalCenterY = anchoredCenterY + position.y;
 
-    // Ãß°¡ scaleÀ» ±âº» Å©±â¿¡ ¹İ¿µ (³Êºñ, ³ôÀÌ º¯È­·®)
+    // ì¶”ê°€ scaleì„ ê¸°ë³¸ í¬ê¸°ì— ë°˜ì˜ (ë„ˆë¹„, ë†’ì´ ë³€í™”ëŸ‰)
     float finalWidth  = anchoredWidth + scale.x;
     float finalHeight = anchoredHeight + scale.y;
 
-    // ÃÖÁ¾ Áß½É°ú Å©±â¸¦ ÀÌ¿ëÇØ RECT °è»ê (Áß½É ±âÁØ ÁÂÇ¥)
+    // ìµœì¢… ì¤‘ì‹¬ê³¼ í¬ê¸°ë¥¼ ì´ìš©í•´ RECT ê³„ì‚° (ì¤‘ì‹¬ ê¸°ì¤€ ì¢Œí‘œ)
     LONG left   = (LONG)(finalCenterX - finalWidth * 0.5f);
     LONG right  = (LONG)(finalCenterX + finalWidth * 0.5f);
     LONG top    = (LONG)(finalCenterY - finalHeight * 0.5f);
@@ -74,7 +74,7 @@ RECT RectTransform::GetRect()
 
 RECT RectTransform::GetCorrectedRect()
 {
-    // 1) (0,0)ÀÌ ÁÂÃø »ó´Ü, Y ¾Æ·¡·Î Áõ°¡ÇÏ´Â GetRect()
+    // 1) (0,0)ì´ ì¢Œì¸¡ ìƒë‹¨, Y ì•„ë˜ë¡œ ì¦ê°€í•˜ëŠ” GetRect()
     RECT rect = GetRect();
 
     return rect;
@@ -109,10 +109,10 @@ void RectTransform::SetAnchorAndOffset(const Vector2& newAnchorMin, const Vector
     offsetMax = newOffsetMax;
 }
 
-// ±âº» ¹öÀü: ±âº» ¾ŞÄ¿/¿ÀÇÁ¼Â °ª Àû¿ë (ÀÌ¹Ì ÃÊ±â°ªÀÌ ÀÖÀ¸¹Ç·Î ±×´ë·Î µÒ)
+// ê¸°ë³¸ ë²„ì „: ê¸°ë³¸ ì•µì»¤/ì˜¤í”„ì…‹ ê°’ ì ìš© (ì´ë¯¸ ì´ˆê¸°ê°’ì´ ìˆìœ¼ë¯€ë¡œ ê·¸ëŒ€ë¡œ ë‘ )
 void RectTransform::SetAnchorAndOffset()
 {
-    // ¿©±â¿¡¼­ Ãß°¡ÀûÀÎ ·ÎÁ÷À» ³ÖÀ» ¼öµµ ÀÖ½À´Ï´Ù.
+    // ì—¬ê¸°ì—ì„œ ì¶”ê°€ì ì¸ ë¡œì§ì„ ë„£ì„ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
 }
 
 void RectTransform::Move(const Vector3& speed)

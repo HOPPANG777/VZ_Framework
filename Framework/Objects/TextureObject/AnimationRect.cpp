@@ -1,26 +1,26 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "AnimationRect.h"
 
 AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path)
     : Drawable("AnimationRect", position, scale, rotation, TransformType::Normal, ShaderPath + L"VertexTexture.hlsl")
 {
-    // Vertex ¼³Á¤
+    // Vertex ì„¤ì •
     {
         vertices.assign(4, VertexTexture());
 
-        // ÁÂ ÇÏ´Ü
+        // ì¢Œ í•˜ë‹¨
         vertices[0].position = { -0.5f, -0.5f, 0 };
         vertices[0].uv = Vector2(0, 1);
 
-        // ÁÂ »ó´Ü
+        // ì¢Œ ìƒë‹¨
         vertices[1].position = { -0.5f, 0.5f, 0 };
         vertices[1].uv = Vector2(0, 0);
 
-        // ¿ì ÇÏ´Ü
+        // ìš° í•˜ë‹¨
         vertices[2].position = { 0.5f, -0.5f, 0 };
         vertices[2].uv = Vector2(1, 1);
 
-        // ¿ì »ó´Ü
+        // ìš° ìƒë‹¨
         vertices[3].position = { 0.5f, 0.5f, 0 };
         vertices[3].uv = Vector2(1, 0);
     }
@@ -30,7 +30,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
     }
 
-    // Index ¼³Á¤
+    // Index ì„¤ì •
     {
         indices = { 0, 1, 2, 2, 1, 3 };
     }
@@ -58,7 +58,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         CHECK(hr);
     }
 
-    // SRV ·Îµå (¾Ö´Ï¸ŞÀÌ¼Ç ¾ÆÆ²¶ó½º¸¦ ÅëÂ°·Î)
+    // SRV ë¡œë“œ (ì• ë‹ˆë©”ì´ì…˜ ì•„í‹€ë¼ìŠ¤ë¥¼ í†µì§¸ë¡œ)
     {
         HRESULT hr = D3DX11CreateShaderResourceViewFromFile
         (
@@ -78,7 +78,7 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         RenderStates::GetSamplerDesc(&desc);
         RenderStates::CreateSampler(&desc, sampler[0].GetAddressOf());
 
-        // ¿¹: POINT ÇÊÅÍ
+        // ì˜ˆ: POINT í•„í„°
         desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
         RenderStates::CreateSampler(&desc, sampler[1].GetAddressOf());
     }
@@ -93,36 +93,36 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
         RenderStates::CreateBlend(&desc, blend[1].GetAddressOf());
     }
 
-    // 4) Animator ÄÄÆ÷³ÍÆ®¸¦ µî·Ï
+    // 4) Animator ì»´í¬ë„ŒíŠ¸ë¥¼ ë“±ë¡
     {
         const std::shared_ptr<Animator>& animatorComp = std::make_shared<Animator>("Animator");
         AddComponent(animatorComp);
 
-        // ¡Ø ¿©±â¼­ ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³µéÀ» µî·ÏÇÒ ¼öµµ ÀÖÀ½
-        // ¿¹: 
+        // â€» ì—¬ê¸°ì„œ ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ë“¤ì„ ë“±ë¡í•  ìˆ˜ë„ ìˆìŒ
+        // ì˜ˆ: 
         //   auto runClip = std::make_shared<AnimationClip>(L"Run", ... );
         //   animatorComp->AddAnimClip(runClip);
         //   animatorComp->SetCurrentAnimClip(L"Run");
     }
 
-    // 5) ColorBuffer »ı¼º
+    // 5) ColorBuffer ìƒì„±
     {
         colorBuffer = std::make_unique<ColorBuffer>();
     }
 
     #pragma region OldTestClip
-    //// AnimationClip »ı¼º
+    //// AnimationClip ìƒì„±
     //{
-    //    // Texture2D¸¦ std::shared_ptr·Î °ü¸® (Animator, AnimationClip°ú µ¿ÀÏ »ı¸íÁÖ±â »ç¿ë)
+    //    // Texture2Dë¥¼ std::shared_ptrë¡œ ê´€ë¦¬ (Animator, AnimationClipê³¼ ë™ì¼ ìƒëª…ì£¼ê¸° ì‚¬ìš©)
     //    std::shared_ptr<Texture2D> srcTex = std::make_shared<Texture2D>(path);
     
-    //    // ¿¹: ¾Æ·¡ µÎ Å¬¸³À» ¸¸µç´Ù°í °¡Á¤
+    //    // ì˜ˆ: ì•„ë˜ ë‘ í´ë¦½ì„ ë§Œë“ ë‹¤ê³  ê°€ì •
     //    auto RunD = std::make_shared<AnimationClip>(
     //        L"RunD",
     //        srcTex.get(),
     //        4,
     //        1,
-    //        Values::ZeroVec2, // (0,0)¿¡¼­ ½ÃÀÛ
+    //        Values::ZeroVec2, // (0,0)ì—ì„œ ì‹œì‘
     //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f)
     //    );
     
@@ -135,11 +135,11 @@ AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, cons
     //        Vector2(srcTex->GetWidth() * 0.5f, srcTex->GetHeight() * 0.125f * 3)
     //    );
     
-    //    // Animator¿¡ Ãß°¡
+    //    // Animatorì— ì¶”ê°€
     //    animator->AddAnimClip(RunD);
     //    animator->AddAnimClip(RunL);
     
-    //    // ÇöÀç Àç»ıÇÒ ±âº» Å¬¸³
+    //    // í˜„ì¬ ì¬ìƒí•  ê¸°ë³¸ í´ë¦½
     //    animator->SetCurrentAnimClip(L"RunL");
     //}
     #pragma endregion
@@ -152,7 +152,7 @@ AnimationRect::~AnimationRect()
 void AnimationRect::Update()
 {
     #pragma region OldTestClipControll
-    //// Å° ÀÔ·Â¿¡ µû¶ó Å¬¸³ ±³Ã¼
+    //// í‚¤ ì…ë ¥ì— ë”°ë¼ í´ë¦½ êµì²´
     //if (Keyboard::Get()->Press('A'))
     //{
     //    animator->SetCurrentAnimClip(L"RunL");
@@ -163,31 +163,31 @@ void AnimationRect::Update()
     //}
     #pragma endregion
 
-     // 1) Animator °¡Á®¿À±â & ¾Ö´Ï¸ŞÀÌ¼Ç Update
+     // 1) Animator ê°€ì ¸ì˜¤ê¸° & ì• ë‹ˆë©”ì´ì…˜ Update
     const auto& animator = GetComponent<Animator>("Animator");
     if (animator)
     {
         animator->Update();
 
-        // 2) ¾Ö´Ï¸ŞÀÌ¼Ç¿¡ µû¸¥ UV °»½Å
+        // 2) ì• ë‹ˆë©”ì´ì…˜ì— ë”°ë¥¸ UV ê°±ì‹ 
         Graphics::Get()->GetDC()->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &subRe);
         {
             Vector2 framePos = animator->GetCurrentFrame();
             Vector2 frameSize = animator->GetTexelFrameSize();
 
-            // ÁÂ ÇÏ´Ü
+            // ì¢Œ í•˜ë‹¨
             vertices[0].uv.x = framePos.x;
             vertices[0].uv.y = framePos.y + frameSize.y;
 
-            // ÁÂ »ó´Ü
+            // ì¢Œ ìƒë‹¨
             vertices[1].uv.x = framePos.x;
             vertices[1].uv.y = framePos.y;
 
-            // ¿ì ÇÏ´Ü
+            // ìš° í•˜ë‹¨
             vertices[2].uv.x = framePos.x + frameSize.x;
             vertices[2].uv.y = framePos.y + frameSize.y;
 
-            // ¿ì »ó´Ü
+            // ìš° ìƒë‹¨
             vertices[3].uv.x = framePos.x + frameSize.x;
             vertices[3].uv.y = framePos.y;
 
@@ -195,11 +195,11 @@ void AnimationRect::Update()
         }
         Graphics::Get()->GetDC()->Unmap(vertexBuffer->GetResource(), 0);
 
-        // SRV °»½Å (Animator°¡ ÇöÀç Àç»ıÁßÀÎ Å¬¸³ÀÇ SRV)
+        // SRV ê°±ì‹  (Animatorê°€ í˜„ì¬ ì¬ìƒì¤‘ì¸ í´ë¦½ì˜ SRV)
         srv = animator->GetCurrentSRV();
     }
 
-    // Drawable Update (Çà·Ä °è»ê µî)
+    // Drawable Update (í–‰ë ¬ ê³„ì‚° ë“±)
     BASE::Update();
 }
 
@@ -207,10 +207,10 @@ void AnimationRect::Render()
 {
     BASE::Render();
 
-    // ¸ÕÀú, ÇÈ¼¿ ¼ÎÀÌ´õÀÇ »ó¼ö ¹öÆÛ ½½·Ô(¿¹: b2)¿¡ ColorBuffer¸¦ ¾÷µ¥ÀÌÆ® ¹× ¹ÙÀÎµùÇÕ´Ï´Ù.
-    colorBuffer->SetPSBuffer(2);  // b2 ½½·Ô¿¡ ¹ÙÀÎµù (¼ÎÀÌ´õ ÄÚµå¿Í ÀÏÄ¡ÇØ¾ß ÇÔ)
+    // ë¨¼ì €, í”½ì…€ ì…°ì´ë”ì˜ ìƒìˆ˜ ë²„í¼ ìŠ¬ë¡¯(ì˜ˆ: b2)ì— ColorBufferë¥¼ ì—…ë°ì´íŠ¸ ë° ë°”ì¸ë”©í•©ë‹ˆë‹¤.
+    colorBuffer->SetPSBuffer(2);  // b2 ìŠ¬ë¡¯ì— ë°”ì¸ë”© (ì…°ì´ë” ì½”ë“œì™€ ì¼ì¹˜í•´ì•¼ í•¨)
 
-    // Sampler / RS / Blend State ¼¼ÆÃ
+    // Sampler / RS / Blend State ì„¸íŒ…
     Graphics::Get()->GetDC()->PSSetSamplers(0, 1, sampler[1].GetAddressOf());
 
     Graphics::Get()->GetDC()->PSSetShaderResources(0, 1, srv.GetAddressOf());

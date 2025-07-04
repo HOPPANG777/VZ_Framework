@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Interface/IInteractable.h"
 #include "Components/Component.h"
@@ -13,18 +13,18 @@ public:
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ·»´õ¸µÀº º°µµ ¾øÀ½
+    virtual void Render() override {} // ë Œë”ë§ì€ ë³„ë„ ì—†ìŒ
 
 public:
-    // »óÈ£ÀÛ¿ë »óÅÂ¸¦ ¿ÜºÎ¿¡¼­ Á¶È¸ÇÒ ¼ö ÀÖµµ·Ï °ÔÅÍ Ãß°¡
+    // ìƒí˜¸ì‘ìš© ìƒíƒœë¥¼ ì™¸ë¶€ì—ì„œ ì¡°íšŒí•  ìˆ˜ ìˆë„ë¡ ê²Œí„° ì¶”ê°€
     bool IsInteracting() const { return isInteracting; }
     IInteractable* GetActiveInteractable() const { return activeInteractable; }
 
 private:
-    // ÇöÀç »óÈ£ÀÛ¿ë ÁßÀÎ ´ë»óÀÇ ÀÎÅÍÆäÀÌ½º Æ÷ÀÎÅÍ
+    // í˜„ì¬ ìƒí˜¸ì‘ìš© ì¤‘ì¸ ëŒ€ìƒì˜ ì¸í„°í˜ì´ìŠ¤ í¬ì¸í„°
     IInteractable* activeInteractable = nullptr;
 
-    // »óÈ£ÀÛ¿ë »óÅÂ¸¦ ³ªÅ¸³»´Â ÇÃ·¡±×
+    // ìƒí˜¸ì‘ìš© ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” í”Œë˜ê·¸
     bool isInteracting = false;
 
 };

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ColorCircle.h"
 
 ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const float rotation, const size_t& segments, const Color& color)
@@ -20,7 +20,7 @@ ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const fl
 
 	//vertexBuffer
 	{
-		//°´Ã¼¸¦ ¸¸µé¾î ÁÖ¾î¾ß ÇÑ´Ù.
+		//ê°ì²´ë¥¼ ë§Œë“¤ì–´ ì£¼ì–´ì•¼ í•œë‹¤.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 

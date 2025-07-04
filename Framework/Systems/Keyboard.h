@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define MAX_INPUT_KEY 256
 

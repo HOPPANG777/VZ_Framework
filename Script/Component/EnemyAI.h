@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Components/Component.h"
 
@@ -9,7 +9,7 @@ public:
 	~EnemyAI() override = default;
 
 public:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Update() override;
 	void Render() override;
 

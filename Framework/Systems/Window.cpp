@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Window.h"
 #include "../Client/Program.h"
 
@@ -85,27 +85,27 @@ WPARAM Window::Run()
 
 	MSG msg = { 0 };
 
-	// ±âº» ¸Ş½ÃÁö ·çÇÁÀÔ´Ï´Ù:
+	// ê¸°ë³¸ ë©”ì‹œì§€ ë£¨í”„ì…ë‹ˆë‹¤:
 	while (true)
 	{
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			// ¸Ş½ÃÁö Á¾·á ÇÔ¼ö ¹İÈ¯½Ã while¹® Å»Ãâ
+			// ë©”ì‹œì§€ ì¢…ë£Œ í•¨ìˆ˜ ë°˜í™˜ì‹œ whileë¬¸ íƒˆì¶œ
 			if (msg.message == WM_QUIT) break;
 
-			// ¸Ş¼¼Áö º¯¿ª
+			// ë©”ì„¸ì§€ ë³€ì—­
 			TranslateMessage(&msg);
 
 			//INPUT->InputProc(msg.message, msg.lParam);
 			Input::Get()->MouseProc(msg.message, msg.wParam, msg.lParam);
 			if (Gui::Get()->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
 
-			// ¸Ş½ÃÁö Ã³¸®ÇÔ¼ö·Î Àü´Ş
+			// ë©”ì‹œì§€ ì²˜ë¦¬í•¨ìˆ˜ë¡œ ì „ë‹¬
 			DispatchMessage(&msg);
 		}
 		else
 		{
-			// ¾÷µ¥ÀÌÆ®¿Í ·»´õ
+			// ì—…ë°ì´íŠ¸ì™€ ë Œë”
 			MainRender();
 		}
 	}
@@ -149,7 +149,7 @@ void Window::SetBorderlessWindow()
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// ImGui°¡ ¸Ş½ÃÁö¸¦ Ã³¸®Çß´Ù¸é ¹Ù·Î ¹İÈ¯
+	// ImGuiê°€ ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í–ˆë‹¤ë©´ ë°”ë¡œ ë°˜í™˜
 	//if (ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam)) return 1;
 
 	switch (message)
@@ -163,7 +163,7 @@ LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_DESTROY:
 	case WM_CLOSE:
-		//if (MessageBox(handle, L"Á¤¸» Á¾·áÇÏ½Ã°Ú½À´Ï±î?", L"WinAPI Á¾·á", MB_OKCANCEL) == IDOK)
+		//if (MessageBox(handle, L"ì •ë§ ì¢…ë£Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?", L"WinAPI ì¢…ë£Œ", MB_OKCANCEL) == IDOK)
 		PostQuitMessage(0);
 
 		return 0;

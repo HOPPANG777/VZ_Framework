@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// C++ÀÇ struct´Â ±âº» Á¢±Ù Á¦¾î°¡ publicÀÌ¶ó´Â Â÷ÀÌÁ¡ÀÌ CÀÇ struct¿ÍÀÇ À¯ÀÏÇÑ Â÷ÀÌÁ¡ÀÌ´Ù
+// C++ì˜ structëŠ” ê¸°ë³¸ ì ‘ê·¼ ì œì–´ê°€ publicì´ë¼ëŠ” ì°¨ì´ì ì´ Cì˜ structì™€ì˜ ìœ ì¼í•œ ì°¨ì´ì ì´ë‹¤
 struct VertexColor
 {
 	Vector2 position;

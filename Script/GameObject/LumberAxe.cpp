@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "LumberAxe.h"
 
 LumberAxe::LumberAxe(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring& path)
@@ -55,7 +55,7 @@ void LumberAxe::Update()
 {
 	BASE::Update();
 
-    // 'E' Å° ÀÔ·Â°ú Å¸°ÙÀÌ ¼³Á¤µÇ¾î ÀÖÀ» °æ¿ì È¸¼ö ½ÃÀÛ
+    // 'E' í‚¤ ìž…ë ¥ê³¼ íƒ€ê²Ÿì´ ì„¤ì •ë˜ì–´ ìžˆì„ ê²½ìš° íšŒìˆ˜ ì‹œìž‘
     if (Input::Get()->KeyPressed('E'))
     {
 		lumberAxeComponent->Recall();
