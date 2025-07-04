@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Enum/BattleState.h"
-#include "Object/UnitBase.h"
+#include "GameObject/UnitBase.h"
 
 class BattleManager
 {

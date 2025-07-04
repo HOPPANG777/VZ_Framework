@@ -43,7 +43,7 @@ void Scene_04::Awake()
 			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
-		backgroundObject = std::make_shared<Object>("Background");
+		backgroundObject = std::make_shared<GameObject>("Background");
 		backgroundObject->AddComponent(parallax);
 	}
 
@@ -59,7 +59,7 @@ void Scene_04::Awake()
 
 	// Puzzle Rock
 	{
-		puzzleRock = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
+		puzzleRock = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"GameObject/PuzzleRock.png");
 		puzzleRock->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
 		CollisionManager::Get()->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
 		puzzleRock->AddComponent(std::make_shared<PushableComponent>());
@@ -68,7 +68,7 @@ void Scene_04::Awake()
 
 	// bridge
 	{
-		bridge = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
+		bridge = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"GameObject/ObjectBridge.png");
 	}
 
 	// Wind
@@ -81,16 +81,16 @@ void Scene_04::Awake()
 		Vector3 windDirection = { -1, 0, 0 };
 		float windIntensity = 220.0f; // 적절한 값 조절
 		
-		windObject = std::make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
+		windObject = std::make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"GameObject/Wind.png");
 		windObject->AddComponent(std::make_shared<WindZone>("WindZone", Values::GetCenter() + windRegionMin, Values::GetCenter() + windRegionMax, windDirection, windIntensity));
 	}
 
 	// Text
 	{
 		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"저기 엄청난 바람이 불어오는군, 저 바위를 들고가면 밀려나지 않을 수 있겠어.", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+		textPoint.push_back(std::make_shared<GameObject>("TextPoint_01", Values::GetCenter() + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 다음으로 가자. (Enter를 입력해주세요.)", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+		textPoint.push_back(std::make_shared<GameObject>("TextPoint_02", Values::GetCenter() + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider

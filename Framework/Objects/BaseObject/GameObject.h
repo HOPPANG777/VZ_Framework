@@ -12,7 +12,7 @@ enum class TransformType
 	Rect      // UI용 RectTransform
 };
 
-class Object
+class GameObject
 {
 protected:
 	std::string name;
@@ -21,15 +21,15 @@ protected:
 	std::unique_ptr<WorldBuffer> worldBuffer;
 
 public:
-	// 기본 생성자 (Object 이름만 지정)
-	Object(const std::string& name, TransformType type = TransformType::Normal);
+	// 기본 생성자 (GameObject 이름만 지정)
+	GameObject(const std::string& name, TransformType type = TransformType::Normal);
 
 	// 위치/스케일/회전을 초기에 지정하는 생성자
-	Object(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type = TransformType::Normal);
+	GameObject(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type = TransformType::Normal);
 
 	// 복사 생성/대입 연산자
-	Object(const Object& other);
-	Object& operator=(const Object& other)
+	GameObject(const GameObject& other);
+	GameObject& operator=(const GameObject& other)
 	{
 		if (this != &other)
 		{
@@ -39,7 +39,7 @@ public:
 		return *this;
 	}
 
-	virtual ~Object() = default;
+	virtual ~GameObject() = default;
 
 public:
 	void AddComponent(const std::shared_ptr<Component>& component);

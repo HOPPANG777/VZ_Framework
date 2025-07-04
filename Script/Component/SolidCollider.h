@@ -3,7 +3,7 @@
 #include "Components/Collider.h"
 #include "Components/Component.h"
 #include "Utilities/Gizmo.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 
 class SolidCollider : public Collider
 {

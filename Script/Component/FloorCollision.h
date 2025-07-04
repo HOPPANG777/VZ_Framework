@@ -16,11 +16,11 @@ public:
     virtual void Render() override {} // 렌더링은 필요없으므로 비워두자.
 
 public:
-    void SetPlayer(Object* player) { this->player = player; }
-    Object* GetPlayer() const { return this->player; }
+    void SetPlayer(GameObject* player) { this->player = player; }
+    GameObject* GetPlayer() const { return this->player; }
 
-    void SetLumberAxe(Object* lumberAxe) { this->lumberAxe = lumberAxe; }
-    Object* GetLumberAxe() const { return this->lumberAxe; }
+    void SetLumberAxe(GameObject* lumberAxe) { this->lumberAxe = lumberAxe; }
+    GameObject* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
     // 이전 프레임 충돌 여부 저장
@@ -28,7 +28,7 @@ private:
     
     const float EPSILON = 0.01f;
     
-    Object* player = nullptr;
-    Object* lumberAxe = nullptr;
+    GameObject* player = nullptr;
+    GameObject* lumberAxe = nullptr;
 };
 

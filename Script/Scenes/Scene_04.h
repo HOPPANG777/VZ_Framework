@@ -3,11 +3,11 @@
 #include "Component/ParallaxBackground.h"
 #include "Component/FloorCollision.h"
 #include "Component/PushableComponent.h"
-#include "Object/PlayerUnit.h"
-#include "Object/LumberAxe.h"
-#include "Object/Wind.h"
+#include "GameObject/PlayerUnit.h"
+#include "GameObject/LumberAxe.h"
+#include "GameObject/Wind.h"
 #include "Component/WindZone.h"
-#include "Object/DialogTextBox.h"
+#include "GameObject/DialogTextBox.h"
 #include "Objects/ColorObject/ColorLine.h"
 #include "Systems/Sounds.h"
 #include "Objects/TileObject/TileMap.h"
@@ -37,22 +37,22 @@ private:
 	bool isTest = false;
 	bool isTest1 = false;
 
-	std::shared_ptr<Object> testPlayer;
-	std::shared_ptr<Object> lumberAxe;
+	std::shared_ptr<GameObject> testPlayer;
+	std::shared_ptr<GameObject> lumberAxe;
 
-	std::vector<std::shared_ptr<Object>> floor;
-	std::vector<std::shared_ptr<Object>> text;
-	std::vector<std::shared_ptr<Object>> textPoint;
+	std::vector<std::shared_ptr<GameObject>> floor;
+	std::vector<std::shared_ptr<GameObject>> text;
+	std::vector<std::shared_ptr<GameObject>> textPoint;
 
-	std::shared_ptr<Object> puzzleRock;
-	std::shared_ptr<Object> bridge;
+	std::shared_ptr<GameObject> puzzleRock;
+	std::shared_ptr<GameObject> bridge;
 
-	std::shared_ptr<Object> windObject;
+	std::shared_ptr<GameObject> windObject;
 
-	std::shared_ptr<Object> backgroundObject;
+	std::shared_ptr<GameObject> backgroundObject;
 
-	std::shared_ptr<Object> bgLayer[5];
-	std::shared_ptr<Object> bgLayerDup[5];
+	std::shared_ptr<GameObject> bgLayer[5];
+	std::shared_ptr<GameObject> bgLayerDup[5];
 	Vector3 bgOrigin[5];
 	Vector3 bgOriginDup[5];
 

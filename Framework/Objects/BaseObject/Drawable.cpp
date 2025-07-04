@@ -2,7 +2,7 @@
 #include "Drawable.h"
 
 Drawable::Drawable(const std::string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const std::wstring& shaderPath)
-	: Object(name, position, scale, rotation, type), shaderPath(shaderPath)
+	: GameObject(name, position, scale, rotation, type), shaderPath(shaderPath)
 {
 	//VertexBuffer
 	{

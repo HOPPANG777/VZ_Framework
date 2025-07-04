@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Object/PlayerUnit.h"
-#include "Object/LumberAxe.h"
+#include "GameObject/PlayerUnit.h"
+#include "GameObject/LumberAxe.h"
 #include "Component/ParallaxBackground.h"
 #include "Component/FloorCollision.h"
-#include "Object/DialogTextBox.h"
+#include "GameObject/DialogTextBox.h"
 #include "Component/LogPathCreator.h"
 #include "Component/SolidCollider.h"
 #include "Interfaces/IScene.h"
@@ -38,19 +38,19 @@ private:
 	bool isTest = false;
 	bool isTest2 = false;
 
-	std::vector<std::shared_ptr<Object>> floor;
-	std::vector<std::shared_ptr<Object>> house;
-	std::vector<std::shared_ptr<Object>> text;
-	std::vector<std::shared_ptr<Object>> textPoint;
-	std::vector<std::shared_ptr<Object>> log;
+	std::vector<std::shared_ptr<GameObject>> floor;
+	std::vector<std::shared_ptr<GameObject>> house;
+	std::vector<std::shared_ptr<GameObject>> text;
+	std::vector<std::shared_ptr<GameObject>> textPoint;
+	std::vector<std::shared_ptr<GameObject>> log;
 
-	std::shared_ptr<Object> lumberAxe;
-	std::shared_ptr<Object> testPlayer;
+	std::shared_ptr<GameObject> lumberAxe;
+	std::shared_ptr<GameObject> testPlayer;
 
-	std::shared_ptr<Object> backgroundObject;
+	std::shared_ptr<GameObject> backgroundObject;
 
-	std::shared_ptr<Object> bgLayer[5];
-	std::shared_ptr<Object> bgLayerDup[5];
+	std::shared_ptr<GameObject> bgLayer[5];
+	std::shared_ptr<GameObject> bgLayerDup[5];
 	Vector3 bgOrigin[5];
 	Vector3 bgOriginDup[5];
 

@@ -1,7 +1,7 @@
 #include "Framework.h"
-#include "Object.h"
+#include "GameObject.h"
 
-Object::Object(const std::string& name, TransformType type)
+GameObject::GameObject(const std::string& name, TransformType type)
     : name(name)
 {
     worldBuffer = std::make_unique<WorldBuffer>();
@@ -19,8 +19,8 @@ Object::Object(const std::string& name, TransformType type)
     }
 }
 
-Object::Object(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
-    : Object(name, type)
+GameObject::GameObject(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
+    : GameObject(name, type)
 {
     // 타입에 따라 초기값 설정
     if (type == TransformType::Normal)
@@ -45,13 +45,13 @@ Object::Object(const std::string& name, const Vector3& initPos, const Vector3& i
     }
 }
 
-Object::Object(const Object& other)
-    : Object(other.name, TransformType::Normal) // 복사 생성자 로직은 필요에 따라 수정
+GameObject::GameObject(const GameObject& other)
+    : GameObject(other.name, TransformType::Normal) // 복사 생성자 로직은 필요에 따라 수정
 {
     // 복사 생성자 구현 (필요 시 components 복사)
 }
 
-void Object::AddComponent(const std::shared_ptr<Component>& component)
+void GameObject::AddComponent(const std::shared_ptr<Component>& component)
 {
     if (components.count(component->GetName())) return;
 
@@ -59,22 +59,22 @@ void Object::AddComponent(const std::shared_ptr<Component>& component)
     components.emplace(component->GetName(), component);
 }
 
-void Object::RemoveComponent(const std::string& compName)
+void GameObject::RemoveComponent(const std::string& compName)
 {
     components.erase(compName);
 }
 
-std::shared_ptr<Transform> Object::GetTransform() const
+std::shared_ptr<Transform> GameObject::GetTransform() const
 {
     return GetComponent<Transform>("Transform");
 }
 
-std::shared_ptr<RectTransform> Object::GetRectTransform() const
+std::shared_ptr<RectTransform> GameObject::GetRectTransform() const
 {
     return GetComponent<RectTransform>("RectTransform");
 }
 
-void Object::Update()
+void GameObject::Update()
 {
     // 등록된 모든 컴포넌트 업데이트
     // 여기서 each element의 타입은 std::pair<const std::string, std::shared_ptr<Component>>
@@ -102,7 +102,7 @@ void Object::Update()
     }
 }
 
-void Object::Render()
+void GameObject::Render()
 {
     // 등록된 모든 컴포넌트 Render
     for (const auto& element : components)
@@ -120,7 +120,7 @@ void Object::Render()
 // ------------------------------------------------------
 // Transform 접근 편의 함수들
 // ------------------------------------------------------
-Vector3 Object::GetPosition() const
+Vector3 GameObject::GetPosition() const
 {
     // RectTransform이 있으면 그것을 사용하고, 없으면 기본 Transform 사용
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
@@ -130,7 +130,7 @@ Vector3 Object::GetPosition() const
     return trans ? trans->GetPosition() : Vector3(0, 0, 0);
 }
 
-Vector3 Object::GetScale() const
+Vector3 GameObject::GetScale() const
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetScale();
@@ -139,7 +139,7 @@ Vector3 Object::GetScale() const
     return trans ? trans->GetScale() : Vector3(1, 1, 1);
 }
 
-float Object::GetRotation() const
+float GameObject::GetRotation() const
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetRotation();
@@ -148,7 +148,7 @@ float Object::GetRotation() const
     return trans ? trans->GetRotation() : 0.0f;
 }
 
-void Object::SetPosition(const Vector3& position)
+void GameObject::SetPosition(const Vector3& position)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetPosition(position);
@@ -157,7 +157,7 @@ void Object::SetPosition(const Vector3& position)
     return trans->SetPosition(position);
 }
 
-void Object::SetScale(const Vector3& scale)
+void GameObject::SetScale(const Vector3& scale)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetScale(scale);
@@ -166,7 +166,7 @@ void Object::SetScale(const Vector3& scale)
     return trans->SetScale(scale);
 }
 
-void Object::SetRotation(const float& rotation)
+void GameObject::SetRotation(const float& rotation)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetRotation(rotation);
@@ -175,19 +175,19 @@ void Object::SetRotation(const float& rotation)
     return trans->SetRotation(rotation);
 }
 
-RECT Object::GetRect()
+RECT GameObject::GetRect()
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetRect();
 }
 
-RECT Object::GetCorrectedRect()
+RECT GameObject::GetCorrectedRect()
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetCorrectedRect();
 }
 
-void Object::Move(const Vector3& speed)
+void GameObject::Move(const Vector3& speed)
 {
     // 상황에 따라 RectTransform이나 Transform을 선택적으로 업데이트할 수 있습니다.
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
@@ -202,7 +202,7 @@ void Object::Move(const Vector3& speed)
     }
 }
 
-void Object::Rotate(float rot)
+void GameObject::Rotate(float rot)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
@@ -216,7 +216,7 @@ void Object::Rotate(float rot)
     }
 }
 
-void Object::Scale(const Vector3& scaleChange)
+void GameObject::Scale(const Vector3& scaleChange)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)

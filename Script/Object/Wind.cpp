@@ -4,7 +4,7 @@
 Wind::Wind(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path)
 	: AnimationRect(position, scale, rotation, path)
 {
-	const std::shared_ptr<Texture2D>& srcWindIdle = std::make_shared<Texture2D>(TexturePath + L"Object/Wind.png");
+	const std::shared_ptr<Texture2D>& srcWindIdle = std::make_shared<Texture2D>(TexturePath + L"GameObject/Wind.png");
 	const std::shared_ptr<AnimationClip>& playerIdle = std::make_shared<AnimationClip>
 		(
 			L"Idle", srcWindIdle.get(), 

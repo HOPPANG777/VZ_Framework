@@ -3,7 +3,7 @@
 #include "LumberAxeComponent.h"
 #include "Components/Component.h"
 #include "Components/Animator.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 
 class LumberAxeAnimation : public Component
 {

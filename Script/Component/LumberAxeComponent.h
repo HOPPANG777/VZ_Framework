@@ -3,7 +3,7 @@
 #include "Enums/AxeState.h"
 #include "Enums/UnitAnimationType.h"
 #include "Components/Component.h"
-//#include "Objects/BaseObject/Object.h"
+//#include "Objects/BaseObject/GameObject.h"
 #include "Utilities/Gizmo.h"
 #include "Systems/Time.h"
 #include "Systems/Input.h"
@@ -25,7 +25,7 @@ public:
 
 public:
     // 타겟(플레이어) 설정 함수
-    void SetTarget(Object* target) { this->target = target; }
+    void SetTarget(GameObject* target) { this->target = target; }
 
 public:
     // 도끼를 던지거나 회수하는 외부 인터페이스
@@ -78,7 +78,7 @@ private:
     Vector3 returnStart;                                            // 회수 시작 시 도끼 위치
     Vector3 returnControl;                                          // 베지어 곡선 제어점
 
-    Object* target = nullptr;                                       // 도끼를 회수할 타겟(플레이어)
+    GameObject* target = nullptr;                                       // 도끼를 회수할 타겟(플레이어)
     UnitAnimationType currentAnimation = UnitAnimationType::IDLE_R; // 플레이어 애니메이션 상태 (초기값: 오른쪽 Idle)
 
     bool isDead = false;                                            // 플레이어가 사망한 상태인지 여부

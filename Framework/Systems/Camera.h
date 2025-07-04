@@ -1,6 +1,5 @@
 #pragma once
-#include "Objects/BaseObject/Object.h"
-#include "Renders/RenderResources/GlobalBuffers.h"
+#include "Objects/BaseObject/GameObject.h"
 #include "Utilities/DirectHelper.h"
 #include "Systems/Input.h"
 #include "Systems/Time.h"
@@ -28,15 +27,15 @@ public:
 	Vector3 GetPosition() const { return position; }
 	void SetPosition(const Vector3& position) { this->position = position; }
 
-	void SetTarget(Object* target) { this->target = target; }
-	void RemoveTarget() { this->target = nullptr; }
+	void SetTarget(GameObject* target) { this->cameraTarget = target; }
+	void RemoveTarget() { this->cameraTarget = nullptr; }
 
-	Object* GetTarget() { return target; }
+	GameObject* GetTarget() { return cameraTarget; }
 
 public:
 	void UpdateFollow();
-	void UpdateHorizontalScroll(Object* target, float minRatio = 0.5f, float maxRatio = 2.5f);
-	void UpdateVerticalScroll(Object* target, float minRatio = 0.5f, float maxRatio = 2.5f);
+	void UpdateHorizontalScroll(GameObject* target, float minRatio = 0.5f, float maxRatio = 2.5f);
+	void UpdateVerticalScroll(GameObject* target, float minRatio = 0.5f, float maxRatio = 2.5f);
 
 private:
 	Matrix view, proj;
@@ -44,7 +43,7 @@ private:
 
 	Vector3 position = Values::ZeroVec3;
 
-	Object* target = nullptr;
+	GameObject* cameraTarget = nullptr;
 
 	bool isMove = false;
 	float moveSpeed = 150.0f;

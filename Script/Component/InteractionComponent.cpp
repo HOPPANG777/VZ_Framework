@@ -12,10 +12,10 @@ void InteractionComponent::Update()
             try
             {
                 // 예시로, CollisionManager에서 현재 오너(플레이어)와 충돌 중인 오브젝트 목록을 가져옴
-                std::vector<Object*> collidingObjects = CollisionManager::Get()->GetCollidingObjects(owner);
-                for (Object* obj : collidingObjects)
+                std::vector<GameObject*> collidingObjects = CollisionManager::Get()->GetCollidingObjects(owner);
+                for (GameObject* obj : collidingObjects)
                 {
-                    // 캡슐화를 위해 Object 내부의 컴포넌트 접근은 템플릿 함수를 사용
+                    // 캡슐화를 위해 GameObject 내부의 컴포넌트 접근은 템플릿 함수를 사용
                     IInteractable* interactable = obj->FindComponentByInterface<IInteractable>();
                     if (interactable)
                     {

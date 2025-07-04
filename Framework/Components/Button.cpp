@@ -58,7 +58,7 @@ void Button::Render()
 
 bool Button::IsMouseOver()
 {
-	// Button이 속한 Object에 RectTransform이 있다고 가정
+	// Button이 속한 GameObject에 RectTransform이 있다고 가정
 	std::shared_ptr<RectTransform> rectTrans = GetOwner()->GetComponent<RectTransform>("RectTransform");
 	rectTrans->SetAnchorAndOffset({ 0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, 0.0f }, { 0.0f, 0.0f });
 	if (!rectTrans) return false;

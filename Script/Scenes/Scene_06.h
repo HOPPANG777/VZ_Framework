@@ -26,8 +26,8 @@ public:
 private:
 	bool isLoaded = false;
 
-	std::shared_ptr<Object> bgLayer[5];
-	std::shared_ptr<Object> bgLayerDup[5];
+	std::shared_ptr<GameObject> bgLayer[5];
+	std::shared_ptr<GameObject> bgLayerDup[5];
 	Vector3 bgOrigin[5];
 	Vector3 bgOriginDup[5];
 

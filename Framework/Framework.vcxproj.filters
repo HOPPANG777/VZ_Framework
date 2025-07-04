@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Framework.cpp" />
-    <ClCompile Include="Objects\BaseObject\Object.cpp">
-      <Filter>Objects\BaseObject</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\Window.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -149,14 +146,12 @@
     <ClCompile Include="Managers\RendererManager.cpp">
       <Filter>Managers\Render</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Components\Component.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\BaseObject\Object.h">
-      <Filter>Objects\BaseObject</Filter>
     </ClInclude>
     <ClInclude Include="Systems\Window.h">
       <Filter>Systems</Filter>
@@ -377,6 +372,7 @@
     <ClInclude Include="Enums\RenderAPI.h">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\BaseObject\GameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">

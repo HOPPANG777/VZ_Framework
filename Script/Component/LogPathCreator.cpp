@@ -9,7 +9,7 @@ void LogPathCreator::OnAxeCollision()
     // 충돌 횟수를 증가
     collisionCount++;
 
-    Object* owner = GetOwner();
+    GameObject* owner = GetOwner();
 
     // 피격 효과 활성화: HitComponent가 있다면 Activate() 호출
     owner->GetComponent<HitComponent>("HitComponent")->Activate();

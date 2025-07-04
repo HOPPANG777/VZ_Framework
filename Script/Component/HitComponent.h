@@ -2,7 +2,7 @@
 
 #include "Components/Component.h"
 #include "Interfaces/IColorable.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 
 class HitComponent : public Component
 {

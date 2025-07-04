@@ -5,7 +5,7 @@
 #include "Structs/FontTextDesc.h"
 #include "Utilities/DirectHelper.h"
 #include "Systems/Graphics.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 
 class Texts : public Component
 {
@@ -29,7 +29,7 @@ public:
     virtual void Render() override {}
 
 public:
-    void AttachToObject(Object* object);
+    void AttachToObject(GameObject* object);
     void Detach();
 	void SetTextOut(const bool textOut) { this->textOut = textOut; }
 	bool GetTextOut() const { return textOut; }
@@ -48,7 +48,7 @@ protected:
         const DWRITE_FONT_STRETCH& stretch
     );
 
-    Object* attachedObject = nullptr; // 텍스트가 따라다닐 객체
+    GameObject* attachedObject = nullptr; // 텍스트가 따라다닐 객체
     Vector3 offset = Values::ZeroVec3;  // 객체 위치에 더할 오프셋
 
     bool textOut = false;

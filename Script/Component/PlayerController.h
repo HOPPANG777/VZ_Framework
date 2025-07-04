@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Systems/Input.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 #include "Enums/UnitAnimationType.h"
 #include "Components/Animator.h"
 #include "Components/Component.h"

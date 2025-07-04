@@ -51,12 +51,12 @@ void CollisionManager::RenderDebug()
     }
 }
 
-std::vector<Object*> CollisionManager::GetCollidingObjects(Object* obj) const
+std::vector<GameObject*> CollisionManager::GetCollidingObjects(GameObject* obj) const
 {
-    std::vector<Object*> result;
+    std::vector<GameObject*> result;
     if (!obj) return result;
 
-    // Object에서 Collider 인터페이스를 구현하는 모든 컴포넌트를 가져옵니다.
+    // GameObject에서 Collider 인터페이스를 구현하는 모든 컴포넌트를 가져옵니다.
     std::vector<Collider*> myColliders = obj->GetAllComponentsByInterface<Collider>();
     if (myColliders.empty()) return result;
 

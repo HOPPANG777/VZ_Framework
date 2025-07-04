@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Object.h"
+#include "GameObject.h"
 #include "Renders/Shaders/VertexShader.h"
 #include "Renders/Shaders/PixelShader.h"
 #include "Renders/IA/VertexBuffer.h"
 #include "Renders/IA/IndexBuffer.h"
 #include "Renders/IA/InputLayout.h"
 
-class Drawable : public Object
+class Drawable : public GameObject
 {
 protected:
 	std::unique_ptr<VertexBuffer> vertexBuffer;
@@ -36,7 +36,7 @@ public:
 	{
 		if (this != &other)
 		{
-			Object::operator=(other); // 상위 객체 복사
+			GameObject::operator=(other); // 상위 객체 복사
 			type = other.type;
 			shaderPath = other.shaderPath;
 			// 기타 리소스 복사

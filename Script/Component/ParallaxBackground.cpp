@@ -14,7 +14,7 @@ ParallaxBackground::ParallaxBackground(const std::string& compName, int layerCou
     }
 }
 
-void ParallaxBackground::SetLayer(int index, Object* layer, Object* layerDup)
+void ParallaxBackground::SetLayer(int index, GameObject* layer, GameObject* layerDup)
 {
     if (index < 0 || index >= layerCount) return;
     bgLayer[index] = layer;

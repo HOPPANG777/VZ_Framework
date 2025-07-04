@@ -27,9 +27,9 @@ public:
 	bool IsLoaded() const override { return isLoaded; }
 
 private:
-	std::vector<std::shared_ptr<Object>> objects;
+	std::vector<std::shared_ptr<GameObject>> objects;
 
-	std::shared_ptr<Object> startButton;
+	std::shared_ptr<GameObject> startButton;
 
 	bool isLoaded = false;
 };

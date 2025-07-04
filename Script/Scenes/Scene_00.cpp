@@ -13,7 +13,7 @@ void Scene_00::Start()
 	}
 	
 	{
-		LoadingTextObject = std::make_shared<Object>("LoadingText", Values::GetCenter() + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+		LoadingTextObject = std::make_shared<GameObject>("LoadingText", Values::GetCenter() + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
 		LoadingTextObject->AddComponent(std::make_shared<Texts>());
 	}
 	

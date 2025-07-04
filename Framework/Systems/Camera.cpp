@@ -60,10 +60,10 @@ void Camera::UpdateView()
 void Camera::Move()
 {
     // 타겟이 있을 경우
-    if (target != nullptr)
+    if (cameraTarget != nullptr)
     {
-        position.x = target->GetPosition().x - Values::GetWinWidth() * 0.5f;
-        position.y = target->GetPosition().y - Values::GetWinHeight() * 0.5f;
+        position.x = cameraTarget->GetPosition().x - Values::GetWinWidth() * 0.5f;
+        position.y = cameraTarget->GetPosition().y - Values::GetWinHeight() * 0.5f;
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
@@ -130,17 +130,17 @@ const Vector3 Camera::Drag()
 void Camera::Reset()
 {
 	position = { 0, 0, 0 };  // 월드 좌표 (0, 0, 0)으로 초기화
-	target = nullptr;        // 타겟 제거
+    cameraTarget = nullptr;        // 타겟 제거
 	UpdateView();            // 초기화 후 뷰 갱신
 }
 
 void Camera::UpdateFollow()
 {
-    if (target == nullptr) return;
+    if (cameraTarget == nullptr) return;
 
     // (1) 현재 카메라의 좌측 상단을 camPos로 가정
     Vector3 camPos = position;
-    Vector3 targetPos = target->GetPosition();
+    Vector3 targetPos = cameraTarget->GetPosition();
 
     // (2) 데드존(marginX, marginY) 밖이면 카메라를 이동
     float marginX = 600.0f;
@@ -171,7 +171,7 @@ void Camera::UpdateFollow()
     UpdateView();
 }
 
-void Camera::UpdateHorizontalScroll(Object* target, float minRatio, float maxRatio)
+void Camera::UpdateHorizontalScroll(GameObject* target, float minRatio, float maxRatio)
 {
     if (target == nullptr) return;
 
@@ -189,7 +189,7 @@ void Camera::UpdateHorizontalScroll(Object* target, float minRatio, float maxRat
 
 }
 
-void Camera::UpdateVerticalScroll(Object* target, float minRatio, float maxRatio)
+void Camera::UpdateVerticalScroll(GameObject* target, float minRatio, float maxRatio)
 {
     if (target == nullptr) return;
 

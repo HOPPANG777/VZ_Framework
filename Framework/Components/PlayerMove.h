@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 #include "Systems/Input.h"
 #include "Systems/Time.h"
 
@@ -48,5 +48,5 @@ private:
     bool isCollision;     // 땅과 충돌(접촉) 여부
 
     // 충돌 대상(바닥 등)을 설정할 수 있다면 추가
-    std::shared_ptr<Object> overObject;
+    std::shared_ptr<GameObject> overObject;
 };

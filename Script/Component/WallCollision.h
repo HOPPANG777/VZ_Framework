@@ -17,15 +17,15 @@ public:
     virtual void Render() override {} // 렌더링은 필요 없으므로 빈 구현
 
 public:
-    void SetPlayer(Object* player) { this->player = player; }
-    Object* GetPlayer() const { return this->player; }
+    void SetPlayer(GameObject* player) { this->player = player; }
+    GameObject* GetPlayer() const { return this->player; }
 
-    void SetLumberAxe(Object* lumberAxe) { this->lumberAxe = lumberAxe; }
-    Object* GetLumberAxe() const { return this->lumberAxe; }
+    void SetLumberAxe(GameObject* lumberAxe) { this->lumberAxe = lumberAxe; }
+    GameObject* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
-    Object* player = nullptr;
-    Object* lumberAxe = nullptr;
+    GameObject* player = nullptr;
+    GameObject* lumberAxe = nullptr;
     bool rightWall; // true: 오른쪽 벽, false: 왼쪽 벽
 
 };

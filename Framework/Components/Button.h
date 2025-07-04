@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 #include "Component.h"
 #include "RectTransform.h"
 #include "Systems/Input.h"

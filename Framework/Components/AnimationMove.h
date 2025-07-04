@@ -2,7 +2,7 @@
 
 #include "Component.h"
 #include "Enums/UnitAnimationType.h"
-#include "Objects/BaseObject/Object.h"
+#include "Objects/BaseObject/GameObject.h"
 #include "Systems/Input.h"
 #include "Animator.h"
 

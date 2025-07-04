@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Object/JumpHoppang.h"
+#include "GameObject/JumpHoppang.h"
 #include "Components/Texts.h"
 #include "Objects/ColorObject/ColorRect.h"
 #include "Interfaces/IScene.h"
@@ -27,9 +27,9 @@ public:
 	bool IsLoaded() const override { return isLoaded; }
 
 private:
-	std::vector<std::shared_ptr<Object>> objects;
+	std::vector<std::shared_ptr<GameObject>> objects;
 
-	std::shared_ptr<Object> LoadingTextObject;
+	std::shared_ptr<GameObject> LoadingTextObject;
 
 	bool isLoaded = false;
 };

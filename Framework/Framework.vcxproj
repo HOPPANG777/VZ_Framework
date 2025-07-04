@@ -242,7 +242,7 @@
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\MoveComponent.h" />
     <ClInclude Include="Objects\BaseObject\Drawable.h" />
-    <ClInclude Include="Objects\BaseObject\Object.h" />
+    <ClInclude Include="Objects\BaseObject\GameObject.h" />
     <ClInclude Include="Interfaces\IScene.h" />
     <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Objects\ColorObject\ColorRect.h" />
@@ -303,7 +303,7 @@
     <ClCompile Include="Objects\ColorObject\ColorCircle.cpp" />
     <ClCompile Include="Components\MoveComponent.cpp" />
     <ClCompile Include="Objects\BaseObject\Drawable.cpp" />
-    <ClCompile Include="Objects\BaseObject\Object.cpp" />
+    <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
     <ClCompile Include="Renders\RenderResources\VertexType.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorRect.cpp" />

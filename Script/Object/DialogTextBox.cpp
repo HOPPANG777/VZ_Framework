@@ -2,7 +2,7 @@
 #include "DialogTextBox.h"
 
 DialogTextBox::DialogTextBox(const std::string& name, const Vector3& position, const Vector3& texturePosition, const Vector3& scale, const float rotation, const std::wstring& backgroundTexturePath, const std::wstring& arrowTexturePath, const std::wstring& text, const float fontSize, const std::wstring& font, const Color& fontColor)
-	: Object(name, position, scale, rotation, TransformType::Rect), dialogText(text), fontSize(fontSize), fontName(font), fontColor(fontColor)
+	: GameObject(name, position, scale, rotation, TransformType::Rect), dialogText(text), fontSize(fontSize), fontName(font), fontColor(fontColor)
 {
     // 배경 생성
     background = std::make_shared<TextureRect>(texturePosition, scale + Vector3(200, 0, 0), rotation, backgroundTexturePath, TransformType::Rect);

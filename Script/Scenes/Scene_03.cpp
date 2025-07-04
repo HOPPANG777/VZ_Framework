@@ -33,20 +33,20 @@ void Scene_03::Awake()
 	
 	// House
 	{
-		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House02.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House03.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-300, -280, 0), Vector3(70, 70, 0), 0.0f, TexturePath + L"Object/Wood.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(1300, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse01.png"));
-		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(2100, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"Object/ObjectHouse02.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"GameObject/House01.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"GameObject/House02.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"GameObject/House03.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-300, -280, 0), Vector3(70, 70, 0), 0.0f, TexturePath + L"GameObject/Wood.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(1300, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"GameObject/ObjectHouse01.png"));
+		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(2100, -190, 0), Vector3(250, 250, 0), 0.0f, TexturePath + L"GameObject/ObjectHouse02.png"));
 	}
 
 	// Text
 	{
 		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"제100회팔씨름챔피언선발토너먼트 선수 등록 마감 까지 일주일... 선수 등록을 진행하는 도시까지 전속력으로 달린다!", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
+		textPoint.push_back(std::make_shared<GameObject>("TextPoint_01", Values::GetCenter() + Vector3(-300, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
 		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1920, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"이제 이곳을 떠날 때가 되었나? (Enter를 입력해주세요.)", 25.0f, L"메이플스토리 OTF", BLACK));
-		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(2400, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
+		textPoint.push_back(std::make_shared<GameObject>("TextPoint_02", Values::GetCenter() + Vector3(2400, -330, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider
@@ -70,7 +70,7 @@ void Scene_03::Awake()
 			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
-		backgroundObject = std::make_shared<Object>("Background");
+		backgroundObject = std::make_shared<GameObject>("Background");
 		backgroundObject->AddComponent(parallax);
 	}
 
@@ -86,7 +86,7 @@ void Scene_03::Awake()
 	
 	// Log
 	{
-		const auto& logRect = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
+		const auto& logRect = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"GameObject/Log.png");
 		logRect->AddComponent(std::make_shared<HitComponent>("HitComponent"));
 		logRect->AddComponent(std::make_shared<LogPathCreator>());
 		logRect->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 500, 0), BLACK));
