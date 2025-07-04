@@ -1,7 +1,6 @@
-﻿// Animator.cpp
-#include "Framework.h"
+// Animator.cpp
 #include "Animator.h"
-
+#include <cassert>
 void Animator::Update()
 {
     // 재생할 클립이 없거나, 한 번만 재생 후 완료된 상태면 리턴

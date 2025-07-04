@@ -1,5 +1,5 @@
-﻿#include "Framework.h"
 #include "CollisionManager.h"
+#include <algorithm>
 
 CollisionManager::CollisionManager() {}
 

@@ -1,6 +1,5 @@
-﻿#include "Framework.h"
+#include <cmath>
 #include "CircleCollider.h"
-
 void CircleCollider::Update()
 {
     if (GetOwner())

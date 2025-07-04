@@ -1,5 +1,10 @@
 ﻿#pragma once
-#include "Framework.h"
+#include <exception>
+#include <iostream>
+#include <map>
+#include <memory>
+#include <string>
+#include <vector>
 
 #include "Renders/RenderResources/GlobalBuffers.h"
 #include "Systems/Graphics.h"

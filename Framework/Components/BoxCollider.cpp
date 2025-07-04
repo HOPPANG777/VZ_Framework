@@ -1,6 +1,5 @@
-﻿#include "Framework.h"
+#include <cmath>
 #include "BoxCollider.h"
-
 void BoxCollider::Update()
 {
     if (GetOwner())

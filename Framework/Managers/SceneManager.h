@@ -3,6 +3,10 @@
 #include "Interfaces/IScene.h"
 #include "Systems/Camera.h"
 
+#include <memory>
+#include <string>
+#include <unordered_map>
+
 class SceneManager
 {
     DECLARE_SINGLETON(SceneManager);    

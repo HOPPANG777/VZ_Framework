@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "Texture2D.h"
 
 // Texture2D 생성자

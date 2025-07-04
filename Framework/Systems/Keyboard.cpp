@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "Keyboard.h"
 
 Keyboard::Keyboard() {}

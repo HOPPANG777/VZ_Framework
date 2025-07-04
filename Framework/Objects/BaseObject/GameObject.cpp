@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "GameObject.h"
 
 GameObject::GameObject(const std::string& name, TransformType type)
