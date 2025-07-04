@@ -1,4 +1,6 @@
+﻿#include "Framework.h"
 #include "PlayerMove.h"
+
 PlayerMove::PlayerMove(const std::string& name, float spd)
     : Component(name), speed(spd), currentSpeed(spd),
       gravity(150.0f), originGravity(150.0f), jumpVelocity(0.0f),

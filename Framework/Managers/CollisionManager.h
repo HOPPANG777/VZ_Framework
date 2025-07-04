@@ -3,9 +3,6 @@
 #include "Components/Collider.h"
 #include "Objects/BaseObject/GameObject.h"
 
-#include <memory>
-#include <vector>
-
 class CollisionManager
 {
 	DECLARE_SINGLETON(CollisionManager);

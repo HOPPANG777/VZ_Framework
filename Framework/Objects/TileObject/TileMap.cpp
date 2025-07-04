@@ -1,5 +1,5 @@
+﻿#include "Framework.h"
 #include "TileMap.h"
-#include <cassert>
 
 TileMap::TileMap(UINT width, UINT height, UINT spacing, bool editNow)
 	: width(width), height(height), spacing(spacing), editNow(editNow)

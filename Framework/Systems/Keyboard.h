@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include <array>
+#include "Framework.h"
 
 #define MAX_INPUT_KEY 256
 

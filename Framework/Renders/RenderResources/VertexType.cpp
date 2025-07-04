@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "VertexType.h"
 
 std::vector<D3D11_INPUT_ELEMENT_DESC> VertexColor::ieDescs

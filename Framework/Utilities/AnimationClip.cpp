@@ -1,3 +1,4 @@
+﻿#include "Framework.h"
 #include "AnimationClip.h"
 
 AnimationClip::AnimationClip

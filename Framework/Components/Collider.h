@@ -1,6 +1,4 @@
-#pragma once
-#include <functional>
-#include <string>
+﻿#pragma once
 
 #include "Component.h"
 

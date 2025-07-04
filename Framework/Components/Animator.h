@@ -1,9 +1,6 @@
 // Animator.h
 #pragma once
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <wrl/client.h>
+#include "Framework.h"
 
 #include "Component.h"
 #include "Utilities/AnimationClip.h"

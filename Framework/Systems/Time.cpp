@@ -1,3 +1,4 @@
+﻿#include "Framework.h"
 #include "Time.h"
 
 Time::Time()

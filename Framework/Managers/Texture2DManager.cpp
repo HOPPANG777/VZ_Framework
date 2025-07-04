@@ -1,5 +1,5 @@
+﻿#include "Framework.h"
 #include "Texture2DManager.h"
-#include <memory>
 
 std::vector<TextureDesc> Texture2DManager::descs;
 

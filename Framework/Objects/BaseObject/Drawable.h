@@ -7,9 +7,6 @@
 #include "Renders/IA/IndexBuffer.h"
 #include "Renders/IA/InputLayout.h"
 
-#include <memory>
-#include <string>
-
 class Drawable : public GameObject
 {
 protected:

@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include "Framework.h"
+#include "Utilities/DirectHelper.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 

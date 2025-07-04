@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-#include <memory>
-#include <string>
-#include <vector>
 #include "Component.h"
 #include "Structs/FontBrushDesc.h"
 #include "Structs/FontTextDesc.h"

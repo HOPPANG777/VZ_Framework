@@ -1,5 +1,5 @@
-#pragma once
-#include <string>
+﻿#pragma once
+#include "Framework.h"
 
 #include "Component.h"
 #include "Enums/UnitAnimationType.h"

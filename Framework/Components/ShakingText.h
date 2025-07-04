@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <cstdlib>
 #include "Texts.h"
 
 class ShakingText : public Texts

@@ -1,7 +1,6 @@
-#include <algorithm>
-#include <memory>
-#include <utility>
+﻿#include "Framework.h"
 #include "Texts.h"
+
 void Texts::RenderText
 (
 	const std::wstring& text,

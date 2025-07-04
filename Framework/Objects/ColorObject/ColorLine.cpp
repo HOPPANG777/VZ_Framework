@@ -1,3 +1,4 @@
+﻿#include "Framework.h"
 #include "ColorLine.h"
 
 ColorLine::ColorLine(const Vector3& position, const float& length, const float rotation, const Color& color)

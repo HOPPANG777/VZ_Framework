@@ -3,8 +3,6 @@
 #include "Renders/RenderResources/Texture2D.h"
 #include "Utilities/Path.h"
 
-#include <vector>
-
 class Texture2D;
 
 class Texture2DManager

@@ -1,4 +1,6 @@
+﻿#include "Framework.h"
 #include "TypingText.h"
+
 void TypingText::RenderText
 (
 	const std::wstring& text,

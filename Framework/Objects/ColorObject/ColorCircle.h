@@ -1,11 +1,10 @@
 ﻿#pragma once
+#include "Framework.h"
+
 #include "../BaseObject/Drawable.h"
 #include "Interfaces/IColorable.h"
 #include "Renders/RenderResources/VertexType.h"
 #include "Utilities/DirectHelper.h"
-
-#include <cstddef>
-#include <vector>
 
 class ColorCircle : public Drawable, public IColorable
 {

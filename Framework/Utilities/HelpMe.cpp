@@ -1,5 +1,4 @@
-﻿#include <iostream>
-#include <ctime>
+﻿#include "Framework.h"
 #include "HelpMe.h"
 
 HelpMe::HelpMe()

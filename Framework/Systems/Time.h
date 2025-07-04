@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include "Framework.h"
 
 class Time
 {

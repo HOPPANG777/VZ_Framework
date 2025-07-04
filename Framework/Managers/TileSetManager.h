@@ -3,8 +3,6 @@
 #include "Renders/RenderResources/Texture2D.h"
 #include "Utilities/DirectHelper.h"
 
-#include <string>
-
 class TileSetManager
 {
     DECLARE_SINGLETON(TileSetManager);

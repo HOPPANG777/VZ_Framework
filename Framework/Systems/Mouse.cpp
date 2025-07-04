@@ -1,3 +1,4 @@
+﻿#include "Framework.h"
 #include "Mouse.h"
 
 Mouse::Mouse() 
