@@ -1,6 +1,5 @@
 ﻿#pragma once
-#include "Framework.h"
-
+#include <array>
 #include "Utilities/DirectHelper.h"
 
 #define MAX_INPUT_MOUSE 8

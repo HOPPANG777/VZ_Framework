@@ -1,8 +1,7 @@
 ﻿#pragma once
-#include "Framework.h"
-#include "Managers/Texture2DManager.h"
 #include "Systems/Graphics.h"
 #include "Interfaces/ITexture.h"
+#include <vector>
 
 class Texture2DManager;
 

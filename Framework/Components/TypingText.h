@@ -1,5 +1,6 @@
-﻿#pragma once
+#pragma once
 
+#include <string>
 #include "Texts.h"
 
 class TypingText : public Texts

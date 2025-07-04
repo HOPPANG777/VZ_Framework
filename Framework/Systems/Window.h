@@ -1,14 +1,6 @@
 ﻿#pragma once
-#include "Framework.h"
-
 #include "Structs/WinDesc.h"
-#include "Camera.h"
-#include "Graphics.h"
-#include "Input.h"
-#include "Sounds.h"
-#include "Time.h"
 #include "Utilities/Gui.h"
-#include "Managers/CollisionManager.h"
 #include "Interfaces/IWindow.h"
 
 // Windows 플랫폼 전용 창 구현체입니다.

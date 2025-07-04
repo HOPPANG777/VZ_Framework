@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "AnimationRect.h"
 
 AnimationRect::AnimationRect(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring path)

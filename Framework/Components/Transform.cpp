@@ -1,6 +1,4 @@
-﻿#include "Framework.h"
 #include "Transform.h"
-
 void Transform::Update()
 {
     // S, R, T 행렬 계산

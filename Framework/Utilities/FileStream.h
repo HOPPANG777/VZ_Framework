@@ -1,4 +1,8 @@
 ﻿#pragma once
+#include <fstream>
+#include <string>
+#include <type_traits>
+#include <directxtk/SimpleMath.h>
 
 enum  EFileStream : UINT
 {

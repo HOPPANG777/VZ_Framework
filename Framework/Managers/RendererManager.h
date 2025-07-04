@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Interfaces/IRenderer.h"
-//#include <memory>
 
 // 렌더러 생성 및 접근을 관리하는 매니저 클래스입니다.
 class RendererManager

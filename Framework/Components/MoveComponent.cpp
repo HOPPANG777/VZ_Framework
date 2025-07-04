@@ -1,6 +1,5 @@
-﻿#include "Framework.h"
+#include <cmath>
 #include "MoveComponent.h"
-
 void MoveComponent::Update()
 {
 	ResetKeyCount();

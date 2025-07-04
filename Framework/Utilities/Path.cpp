@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+﻿#include <windows.h>
 #include "Path.h"
 
 // 파일 존재 여부

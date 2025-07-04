@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include <string>
+#include <vector>
+#include <directxtk/SimpleMath.h>
 
 class String
 {

@@ -1,10 +1,8 @@
 ﻿#pragma once
-#include "Framework.h"
-#include "Objects/BaseObject/GameObject.h"
-#include "Renders/RenderResources/GlobalBuffers.h"
 #include "Utilities/DirectHelper.h"
-#include "Systems/Input.h"
-#include "Systems/Time.h"
+
+class GameObject;
+class ViewProjectionBuffer;
 
 class Camera
 {

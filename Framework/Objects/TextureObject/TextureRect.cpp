@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "TextureRect.h"
 
 //, texture(std::make_shared<Texture2D>(path))

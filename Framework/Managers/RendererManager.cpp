@@ -1,4 +1,3 @@
-﻿#include "Framework.h"
 #include "RendererManager.h"
 #include "Systems/Graphics.h"
 
