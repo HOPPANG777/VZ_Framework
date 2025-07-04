@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Objects/BaseObject/GameObject.h"
 #include "Utilities/DirectHelper.h"
 #include "Systems/Input.h"

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Framework.h"
 #include "Systems/Graphics.h"
 
@@ -23,7 +23,7 @@ public:
 	{
 		MapData(data, dataSize);
 
-		Graphics::Get()->GetDC()->PSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
+		Graphics::Get()->GetDC()->CSSetConstantBuffers(slot, 1, buffer.GetAddressOf());
 	}
 
 protected:
