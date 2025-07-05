@@ -16,4 +16,7 @@
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Client.aps" />
+  </ItemGroup>
 </Project>

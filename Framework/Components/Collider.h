@@ -1,6 +1,4 @@
-﻿#pragma once
-
-#include "Component.h"
+#pragma once
 
 class Collider : public Component
 {
@@ -11,12 +9,12 @@ public:
         Circle,
     };
 
-    Collider(const std::string& name, Type type) : Component(name), type(type) {}
+    Collider(const string& name, Type type) : Component(name), type(type) {}
     virtual ~Collider() = default;
 
     Type GetType() const { return type; }
 
-    void SetCollision(std::function<void(Collider*)> setCollision)
+    void SetCollision(function<void(Collider*)> setCollision)
     {
         collisionCallback = setCollision;
     }
@@ -30,5 +28,5 @@ public:
 
 protected:
     Type type;
-    std::function<void(Collider*)> collisionCallback;
+    function<void(Collider*)> collisionCallback;
 };

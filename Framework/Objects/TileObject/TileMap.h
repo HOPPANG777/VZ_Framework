@@ -1,37 +1,23 @@
-ï»¿#pragma once
-
-#include "Renders/IA/VertexBuffer.h"
-#include "Renders/IA/IndexBuffer.h"
-#include "Renders/IA/InputLayout.h"
-#include "Renders/Shaders/VertexShader.h"
-#include "Renders/Shaders/PixelShader.h"
-#include "Renders/RenderResources/GlobalBuffers.h"
-#include "Renders/RenderResources/VertexType.h"
-#include "Renders/RenderStates.h"
-#include "Systems/Time.h"
-#include "Systems/Input.h"
-#include "Systems/Camera.h"
-#include "Managers/TileSetManager.h"
-#include "Tile.h"
+#pragma once
 
 class TileMap
 {
 private:
-    std::vector<VertexTile> vertices;
-    std::vector<UINT> indices;
+    vector<VertexTile> vertices;
+    vector<UINT> indices;
 
-    std::unique_ptr<VertexBuffer> vertexBuffer;
-    std::unique_ptr<IndexBuffer> indexBuffer;
+    unique_ptr<VertexBuffer> vertexBuffer;
+    unique_ptr<IndexBuffer> indexBuffer;
 
-    std::unique_ptr<VertexShader> vertexShader;
+    unique_ptr<VertexShader> vertexShader;
 
-    std::unique_ptr<InputLayout> inputLayout;
+    unique_ptr<InputLayout> inputLayout;
     
-    std::unique_ptr<PixelShader> pixelShader;
+    unique_ptr<PixelShader> pixelShader;
 
-    std::unique_ptr<WorldBuffer> worldBuffer;
+    unique_ptr<WorldBuffer> worldBuffer;
 
-    std::unique_ptr<IndexNumBuffer> indexNumBuffer;
+    unique_ptr<IndexNumBuffer> indexNumBuffer;
 
     ComPtr<ID3D11RasterizerState> rs = nullptr;
 
@@ -45,14 +31,14 @@ private:
 
     D3D11_MAPPED_SUBRESOURCE subResource;
 
-    // 2ì°¨ì› íƒ€ì¼ ë°°ì—´: rows x cols, row-major ìˆœì„œ
-    std::vector<std::vector<std::shared_ptr<Tile>>> tiles;
+    // 2Â÷¿ø Å¸ÀÏ ¹è¿­: rows x cols, row-major ¼ø¼­
+    vector<vector<shared_ptr<Tile>>> tiles;
     
-    // ì „ì²´ ë²„í…ìŠ¤ ë° ì¸ë±ìŠ¤ ìˆ˜
+    // ÀüÃ¼ ¹öÅØ½º ¹× ÀÎµ¦½º ¼ö
     UINT totalVertexCount = 0;
     UINT totalIndexCount = 0;
 
-    // Dirty í”Œë˜ê·¸: íƒ€ì¼ ì •ë³´ê°€ ë³€ê²½ë˜ì—ˆì„ ë•Œë§Œ ë²„í…ìŠ¤ ë²„í¼ ì—…ë°ì´íŠ¸
+    // Dirty ÇÃ·¡±×: Å¸ÀÏ Á¤º¸°¡ º¯°æµÇ¾úÀ» ¶§¸¸ ¹öÅØ½º ¹öÆÛ ¾÷µ¥ÀÌÆ®
     bool needUpdateVB = true;
 
     bool editNow = false;
@@ -76,11 +62,11 @@ public:
     void ResizeMap(UINT newWidth, UINT newHeight);
 
 public:
-    void Save(const std::string& path);
-    void Load(const std::string& path);
+    void Save(const string& path);
+    void Load(const string& path);
 
 public:
-    // íƒ€ì¼ í•˜ë‚˜ë¥¼ ë°˜í™˜ (í–‰,ì—´ ê³„ì‚°)
+    // Å¸ÀÏ ÇÏ³ª¸¦ ¹İÈ¯ (Çà,¿­ °è»ê)
     Tile* GetTile(Vector3 mPos);
 
 };

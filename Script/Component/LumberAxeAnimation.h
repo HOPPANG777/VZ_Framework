@@ -1,21 +1,18 @@
-ï»¿#pragma once
+#pragma once
 
 #include "LumberAxeComponent.h"
-#include "Components/Component.h"
-#include "Components/Animator.h"
-#include "Objects/BaseObject/GameObject.h"
 
 class LumberAxeAnimation : public Component
 {
 public:
-    LumberAxeAnimation(const std::string& name = "LumberAxeAnimation") : Component(name) {};
+    LumberAxeAnimation(const string& name = "LumberAxeAnimation") : Component(name) {};
     virtual ~LumberAxeAnimation() override = default;
 
-    // Component ì¸í„°í˜ì´ìŠ¤
+    // Component ÀÎÅÍÆäÀÌ½º
     virtual void Update() override;
-    virtual void Render() override; // ë Œë”ë§ì€ í•„ìš” ì—†ìœ¼ë¯€ë¡œ ë¹ˆ êµ¬í˜„
+    virtual void Render() override; // ·»´õ¸µÀº ÇÊ¿ä ¾øÀ¸¹Ç·Î ºó ±¸Çö
 
 private:
-    // í•„ìš”ì— ë”°ë¼ ë‚´ë¶€ì ìœ¼ë¡œ ìƒíƒœë¥¼ ìºì‹±í•˜ëŠ” ë©¤ë²„ ë³€ìˆ˜ë¥¼ ì¶”ê°€í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+    // ÇÊ¿ä¿¡ µû¶ó ³»ºÎÀûÀ¸·Î »óÅÂ¸¦ Ä³½ÌÇÏ´Â ¸â¹ö º¯¼ö¸¦ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
 };
 

@@ -1,30 +1,23 @@
-Ôªø#pragma once
+#pragma once
 
-#include "GameObject.h"
-#include "Renders/Shaders/VertexShader.h"
-#include "Renders/Shaders/PixelShader.h"
-#include "Renders/IA/VertexBuffer.h"
-#include "Renders/IA/IndexBuffer.h"
-#include "Renders/IA/InputLayout.h"
-
-class Drawable : public GameObject
+class Drawable : public Object
 {
 protected:
-	std::unique_ptr<VertexBuffer> vertexBuffer;
-	std::unique_ptr<IndexBuffer> indexBuffer;
+	unique_ptr<VertexBuffer> vertexBuffer;
+	unique_ptr<IndexBuffer> indexBuffer;
 
-	std::unique_ptr<VertexShader> vertexShader;
+	unique_ptr<VertexShader> vertexShader;
 
-	std::unique_ptr<InputLayout> inputLayout;
+	unique_ptr<InputLayout> inputLayout;
 
-	std::unique_ptr<PixelShader> pixelShader;
+	unique_ptr<PixelShader> pixelShader;
 
-	std::wstring shaderPath = L"";
+	wstring shaderPath = L"";
 
 	TransformType type;
 
 public:
-	Drawable(const std::string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const std::wstring& shaderPath = L"");
+	Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const wstring& shaderPath = L"");
 	
 	Drawable(const Drawable& other)
 		: Drawable(other.name, other.GetPosition(), other.GetScale(), other.GetRotation(), other.type, other.shaderPath)
@@ -36,10 +29,10 @@ public:
 	{
 		if (this != &other)
 		{
-			GameObject::operator=(other); // ÏÉÅÏúÑ Í∞ùÏ≤¥ Î≥µÏÇ¨
+			Object::operator=(other); // ªÛ¿ß ∞¥√º ∫πªÁ
 			type = other.type;
 			shaderPath = other.shaderPath;
-			// Í∏∞ÌÉÄ Î¶¨ÏÜåÏä§ Î≥µÏÇ¨
+			// ±‚≈∏ ∏Æº“Ω∫ ∫πªÁ
 		}
 		return *this;
 	}

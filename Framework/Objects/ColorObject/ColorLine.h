@@ -1,17 +1,11 @@
-ï»¿#pragma once
-#include "Framework.h"
-
-#include "../BaseObject/Drawable.h"
-#include "Interfaces/IColorable.h"
-#include "Renders/RenderResources/VertexType.h"
-#include "Utilities/DirectHelper.h"
+#pragma once
 
 class ColorLine : public Drawable, public IColorable
 {
 private:
-	std::vector<VertexColor> vertices;
+	vector<VertexColor> vertices;
 
-	std::vector<UINT> indices;
+	vector<UINT> indices;
 
 	Color color;
 
@@ -29,16 +23,16 @@ public:
 	{
 		this->color = color;
 		D3D11_MAPPED_SUBRESOURCE mappedSubResource;
-		Graphics::Get()->GetDC()->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
-		{ // ë§µí•‘ì¤‘ì¸ ê³µê°„
+		DC->Map(vertexBuffer->GetResource(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
+		{ // ¸ÊÇÎÁßÀÎ °ø°£
 
-			// verticesì—ë‹¤ê°€ ë³€ê²½ëœ colorê°’ì„ ë„£ì–´ì£¼ê³ 
+			// vertices¿¡´Ù°¡ º¯°æµÈ color°ªÀ» ³Ö¾îÁÖ°í
 			for (VertexColor& vertex : vertices) vertex.color = color;
 
-			// ë³€ê²½ëœ colorê°’ì„ verticesì—ë‹¤ê°€ ë„£ì–´ì¤€ë‹¤.
+			// º¯°æµÈ color°ªÀ» vertices¿¡´Ù°¡ ³Ö¾îÁØ´Ù.
 			memcpy(mappedSubResource.pData, vertices.data(), vertexBuffer->GetCount() * vertexBuffer->GetStride());
 		}
-		Graphics::Get()->GetDC()->Unmap(vertexBuffer->GetResource(), 0);
+		DC->Unmap(vertexBuffer->GetResource(), 0);
 	}
 
 };

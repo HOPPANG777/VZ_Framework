@@ -2,7 +2,7 @@
 #include "LumberAxeComponent.h"
 
 // 생성자: 초기 상태, 속도, 중력, 직선 이동 시간 설정
-LumberAxeComponent::LumberAxeComponent(const std::string& name)
+LumberAxeComponent::LumberAxeComponent(const string& name)
     : Component(name), state(AxeState::AXE_IDLE_R), velocity(Vector3::Zero), gravity(980.0f), returnDuration(0.5f), straightFlightTime(0.3f)
 {
 
@@ -11,7 +11,7 @@ LumberAxeComponent::LumberAxeComponent(const std::string& name)
 // 매 프레임 호출되는 업데이트 함수
 void LumberAxeComponent::Update()
 {
-    float dt = Time::Get()->GetDeltaTime();
+    float dt = DELTA;
     if (isDead) return;
 
     switch (state)
@@ -45,7 +45,7 @@ void LumberAxeComponent::Render()
         Vector3 throwDir = ComputeThrowDirection();
         float throwSpeed = 1000.0f;
         Vector3 initialVel = throwDir * throwSpeed;
-        std::vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
+        vector<Vector3> trajPoints = SimulateTrajectory(owner->GetPosition(), initialVel, 0.02f, 64);
         DrawTrajectory(trajPoints, 3.0f, WHITE);
     }
 }
@@ -120,7 +120,7 @@ void LumberAxeComponent::UpdateIdleState(float dt)
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     }
 
-    if (Input::Get()->MousePressed(1) && !isLand)
+    if (INPUT->MousePressed(1) && !isLand)
     {
         straightFlightTime = 0.3f;
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_PREPARE_L : AxeState::AXE_PREPARE_R;
@@ -134,9 +134,9 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
     Vector3 offset(10.0f, 0.0f, 0.0f);
     owner->SetPosition(targetPos + offset);
 
-    if (Input::Get()->MousePressed(0))
+    if (INPUT->MousePressed(0))
     {
-        Vector3 mousePos = Input::Get()->GetMousePos() + Camera::Get()->GetPosition();
+        Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
         Vector3 throwDir = mousePos - owner->GetPosition();
         if (throwDir.Length() > 0.001f) throwDir.Normalize();
         else throwDir = IsFacingLeft(currentAnimation) ? Vector3(-1, 0, 0) : Vector3(1, 0, 0);
@@ -144,7 +144,7 @@ void LumberAxeComponent::UpdatePrepareState(float dt)
         velocity = throwDir * throwSpeed;
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_THROWN_L : AxeState::AXE_THROWN_R;
     }
-    else if (Input::Get()->MouseUp(1))
+    else if (INPUT->MouseUp(1))
     {
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
     }
@@ -158,7 +158,8 @@ void LumberAxeComponent::UpdateThrownState(float dt)
     {
         pos += velocity * dt;
         straightFlightTime -= dt;
-        if (straightFlightTime < 0.0f) straightFlightTime = 0.0f;
+        if (straightFlightTime < 0.0f)
+            straightFlightTime = 0.0f;
     }
     else
     {
@@ -192,7 +193,7 @@ void LumberAxeComponent::UpdateReturningState(float dt)
 Vector3 LumberAxeComponent::ComputeThrowDirection()
 {
     Vector3 startPos = owner->GetPosition();
-    Vector3 mousePos = Input::Get()->GetMousePos() + Camera::Get()->GetPosition();
+    Vector3 mousePos = INPUT->GetMousePos() + CAMERA->GetPosition();
     Vector3 throwDir = mousePos - startPos;
 
     if (throwDir.Length() > 0.001f) throwDir.Normalize();
@@ -202,9 +203,9 @@ Vector3 LumberAxeComponent::ComputeThrowDirection()
 }
 
 // 궤적 시뮬레이션 함수
-std::vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps)
+vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps)
 {
-    std::vector<Vector3> points;
+    vector<Vector3> points;
     points.reserve(numSteps);
 
     Vector3 simPos = startPos;
@@ -231,10 +232,10 @@ std::vector<Vector3> LumberAxeComponent::SimulateTrajectory(const Vector3& start
 }
 
 // 궤적 그리기 함수
-void LumberAxeComponent::DrawTrajectory(const std::vector<Vector3>& points, float thickness, const Color& color)
+void LumberAxeComponent::DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color)
 {
     for (size_t i = 0; i < points.size() - 1; i += 2)
     {
-        Gizmo::Get()->DrawLine(points[i] - Camera::Get()->GetPosition(), points[i + 1] - Camera::Get()->GetPosition(), color, thickness);
+        GIZMO->DrawLine(points[i] - CAMERA->GetPosition(), points[i + 1] - CAMERA->GetPosition(), color, thickness);
     }
 }

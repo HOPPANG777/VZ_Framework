@@ -1,21 +1,17 @@
-Ôªø#pragma once
+#pragma once
 
-#include "GameObject/PlayerUnit.h"
-#include "GameObject/LumberAxe.h"
+#include "Object/PlayerUnit.h"
+#include "Object/LumberAxe.h"
 #include "Component/ParallaxBackground.h"
 #include "Component/FloorCollision.h"
-#include "GameObject/DialogTextBox.h"
+#include "Object/DialogTextBox.h"
 #include "Component/LogPathCreator.h"
 #include "Component/SolidCollider.h"
-#include "Interfaces/IScene.h"
-#include "Objects/TileObject/TileMap.h"
-#include "Objects/ColorObject/ColorLine.h"
-#include "Managers/SceneManager.h"
 
 class Scene_03 : public Scene
 {
 public:
-	// SceneÏùÑ(Î•º) ÌÜµÌï¥ ÏÉÅÏÜçÎê®
+	// Scene¿ª(∏¶) ≈Î«ÿ ªÛº”µ 
 	void Awake() override;
 	void Start() override;
 
@@ -38,23 +34,23 @@ private:
 	bool isTest = false;
 	bool isTest2 = false;
 
-	std::vector<std::shared_ptr<GameObject>> floor;
-	std::vector<std::shared_ptr<GameObject>> house;
-	std::vector<std::shared_ptr<GameObject>> text;
-	std::vector<std::shared_ptr<GameObject>> textPoint;
-	std::vector<std::shared_ptr<GameObject>> log;
+	vector<shared_ptr<Object>> floor;
+	vector<shared_ptr<Object>> house;
+	vector<shared_ptr<Object>> text;
+	vector<shared_ptr<Object>> textPoint;
+	vector<shared_ptr<Object>> log;
 
-	std::shared_ptr<GameObject> lumberAxe;
-	std::shared_ptr<GameObject> testPlayer;
+	shared_ptr<Object> lumberAxe;
+	shared_ptr<Object> testPlayer;
 
-	std::shared_ptr<GameObject> backgroundObject;
+	shared_ptr<Object> backgroundObject;
 
-	std::shared_ptr<GameObject> bgLayer[5];
-	std::shared_ptr<GameObject> bgLayerDup[5];
+	shared_ptr<Object> bgLayer[5];
+	shared_ptr<Object> bgLayerDup[5];
 	Vector3 bgOrigin[5];
 	Vector3 bgOriginDup[5];
 
-	std::unique_ptr<TileMap> tmap;
+	unique_ptr<TileMap> tmap;
 
 };
 

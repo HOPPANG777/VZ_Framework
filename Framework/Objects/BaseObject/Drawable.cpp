@@ -1,33 +1,33 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 #include "Drawable.h"
 
-Drawable::Drawable(const std::string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const std::wstring& shaderPath)
-	: GameObject(name, position, scale, rotation, type), shaderPath(shaderPath)
+Drawable::Drawable(const string& name, const Vector3& position, const Vector3& scale, const float rotation, TransformType type, const wstring& shaderPath)
+	: Object(name, position, scale, rotation, type), shaderPath(shaderPath)
 {
 	//VertexBuffer
 	{
-		vertexBuffer = std::make_unique<VertexBuffer>();
+		vertexBuffer = make_unique<VertexBuffer>();
 	}
 
 	//VertexShader
 	{
-		vertexShader = std::make_unique<VertexShader>();
+		vertexShader = make_unique<VertexShader>();
 		vertexShader->Create(shaderPath, "VS");
 	}
 
 	//IndexBuffer
 	{
-		indexBuffer = std::make_unique<IndexBuffer>();
+		indexBuffer = make_unique<IndexBuffer>();
 	}
 
 	//InputLayout
 	{
-		inputLayout = std::make_unique<InputLayout>();
+		inputLayout = make_unique<InputLayout>();
 	}
 
 	//PixelShader
 	{
-		pixelShader = std::make_unique <PixelShader>();
+		pixelShader = make_unique <PixelShader>();
 		pixelShader->Create(shaderPath, "PS");
 	}
 }
@@ -52,8 +52,8 @@ void Drawable::Render()
 
 void Drawable::DrawCall(const D3D11_PRIMITIVE_TOPOLOGY& topology, const bool indexed)
 {
-	Graphics::Get()->GetDC()->IASetPrimitiveTopology(topology);
+	DC->IASetPrimitiveTopology(topology);
 
-	if (indexed) Graphics::Get()->GetDC()->DrawIndexed(indexBuffer->GetCount(), 0, 0);
-	else Graphics::Get()->GetDC()->Draw(vertexBuffer->GetCount(), 0);
+	if (indexed) DC->DrawIndexed(indexBuffer->GetCount(), 0, 0);
+	else DC->Draw(vertexBuffer->GetCount(), 0);
 }

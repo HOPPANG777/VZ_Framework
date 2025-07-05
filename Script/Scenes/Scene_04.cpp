@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "Scene_04.h"
 
 void Scene_04::Awake()
@@ -7,16 +7,16 @@ void Scene_04::Awake()
 
 	// Player
 	{
-		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -45, 0));
-		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
+		testPlayer = make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -45, 0));
+		lumberAxe = make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
-		SceneManager::Get()->SetPlayer(testPlayer);
+		SCENE->SetPlayer(testPlayer);
 	}
 
 	// Floor
 	{
-		floor.push_back(std::make_shared<ColorLine>(Values::GetCenter() + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
-		floor[0]->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
+		floor.push_back(make_shared<ColorLine>(Values::GetCenter() + Vector3(-550, -60, 0), 0, 0.0f, CLEAR));
+		floor[0]->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(10000, 1, 0), GREEN));
 	}
 
 	// Floor Collider
@@ -24,18 +24,18 @@ void Scene_04::Awake()
 		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision"));
 		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetPlayer(testPlayer.get());
 		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
-		for (const auto& flr : floor) if (flr != nullptr) CollisionManager::Get()->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Background
 	{
-		const auto& parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
+		const auto& parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
-		// ë°°ê²½ ë ˆì´ì–´ 2ê°œì”© ìƒì„±
+		// ¹è°æ ·¹ÀÌ¾î 2°³¾¿ »ı¼º
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 1.2f, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = make_shared<TextureRect>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 1.2f, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -43,66 +43,66 @@ void Scene_04::Awake()
 			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
-		backgroundObject = std::make_shared<GameObject>("Background");
+		backgroundObject = make_shared<Object>("Background");
 		backgroundObject->AddComponent(parallax);
 	}
 
 	// TileMap
 	{
-		float spacing = 50;
-		float width = (Values::GetWinWidth() * 2) / spacing;
-		float height = (Values::GetWinHeight() * 2) / spacing;
+		UINT spacing = 50;
+		UINT width = (Values::GetWinWidth() * 2) / spacing;
+		UINT height = (Values::GetWinHeight() * 2) / spacing;
 
-		tmap = std::make_unique<TileMap>(width, height, spacing);
+		tmap = make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map02.data");
 	}
 
 	// Puzzle Rock
 	{
-		puzzleRock = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"GameObject/PuzzleRock.png");
-		puzzleRock->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
-		CollisionManager::Get()->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
-		puzzleRock->AddComponent(std::make_shared<PushableComponent>());
+		puzzleRock = make_shared<TextureRect>(Values::GetCenter() + Vector3(-50, 45, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"Object/PuzzleRock.png");
+		puzzleRock->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(200, 200, 0), BLACK));
+		COLLISION->AddCollider(puzzleRock->GetComponent<BoxCollider>("BoxCollider"));
+		puzzleRock->AddComponent(make_shared<PushableComponent>());
 		puzzleRock->SetName("PuzzleRock");
 	}
 
 	// bridge
 	{
-		bridge = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"GameObject/ObjectBridge.png");
+		bridge = make_shared<TextureRect>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 200, 0), 0.0f, TexturePath + L"Object/ObjectBridge.png");
 	}
 
 	// Wind
 	{
-		// ì˜ˆì‹œ: í”Œë ˆì´ì–´ë¥¼ ë’¤ë¡œ ë°€ì–´ë‚´ëŠ” ë°”ëŒ ì˜ì—­ ìƒì„± 
-		// ì˜ˆë¥¼ ë“¤ì–´, xì¶• ê¸°ì¤€ìœ¼ë¡œ 300~500 ì‚¬ì´, yì¶•ì€ ì „ì²´, zëŠ” 0 (2D ê²Œì„ì´ë¼ ê°€ì •)
+		// ¿¹½Ã: ÇÃ·¹ÀÌ¾î¸¦ µÚ·Î ¹Ğ¾î³»´Â ¹Ù¶÷ ¿µ¿ª »ı¼º 
+		// ¿¹¸¦ µé¾î, xÃà ±âÁØÀ¸·Î 300~500 »çÀÌ, yÃàÀº ÀüÃ¼, z´Â 0 (2D °ÔÀÓÀÌ¶ó °¡Á¤)
 		Vector3 windRegionMin = { 45, -1000, 0 };
 		Vector3 windRegionMax = { 600, 1000, 0 };
-		// ë°”ëŒ ë°©í–¥: í”Œë ˆì´ì–´ë¥¼ ì™¼ìª½ìœ¼ë¡œ ë°€ì–´ë‚¸ë‹¤ê³  í•˜ë©´, (-1, 0, 0)
+		// ¹Ù¶÷ ¹æÇâ: ÇÃ·¹ÀÌ¾î¸¦ ¿ŞÂÊÀ¸·Î ¹Ğ¾î³½´Ù°í ÇÏ¸é, (-1, 0, 0)
 		Vector3 windDirection = { -1, 0, 0 };
-		float windIntensity = 220.0f; // ì ì ˆí•œ ê°’ ì¡°ì ˆ
+		float windIntensity = 220.0f; // ÀûÀıÇÑ °ª Á¶Àı
 		
-		windObject = std::make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"GameObject/Wind.png");
-		windObject->AddComponent(std::make_shared<WindZone>("WindZone", Values::GetCenter() + windRegionMin, Values::GetCenter() + windRegionMax, windDirection, windIntensity));
+		windObject = make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
+		windObject->AddComponent(make_shared<WindZone>("WindZone", Values::GetCenter() + windRegionMin, Values::GetCenter() + windRegionMax, windDirection, windIntensity));
 	}
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì €ê¸° ì—„ì²­ë‚œ ë°”ëŒì´ ë¶ˆì–´ì˜¤ëŠ”êµ°, ì € ë°”ìœ„ë¥¼ ë“¤ê³ ê°€ë©´ ë°€ë ¤ë‚˜ì§€ ì•Šì„ ìˆ˜ ìˆê² ì–´.", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
-		textPoint.push_back(std::make_shared<GameObject>("TextPoint_01", Values::GetCenter() + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì´ì œ ë‹¤ìŒìœ¼ë¡œ ê°€ì. (Enterë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.)", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
-		textPoint.push_back(std::make_shared<GameObject>("TextPoint_02", Values::GetCenter() + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"Àú±â ¾öÃ»³­ ¹Ù¶÷ÀÌ ºÒ¾î¿À´Â±º, Àú ¹ÙÀ§¸¦ µé°í°¡¸é ¹Ğ·Á³ªÁö ¾ÊÀ» ¼ö ÀÖ°Ú¾î.", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ÀÌÁ¦ ´ÙÀ½À¸·Î °¡ÀÚ. (Enter¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.)", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider
 	{
 		for (const auto& textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-		for (const auto& textP : textPoint) CollisionManager::Get()->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Sound
 	{
-		Sounds::Get()->AddSound("Wind", SoundPath + L"_NordicLumberJack/Wind.wav", true);
-		Sounds::Get()->SetVolume("Wind", 0.2f);
+		SOUNDS->AddSound("Wind", SoundPath + L"_NordicLumberJack/Wind.wav", true);
+		SOUNDS->SetVolume("Wind", 0.2f);
 	}
 
 	isLoaded = true;
@@ -111,9 +111,9 @@ void Scene_04::Awake()
 void Scene_04::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
-	std::dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
-	std::dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
-	Sounds::Get()->Play("Wind");
+	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
+	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
+	SOUNDS->Play("Wind");
 }
 
 void Scene_04::Destroy()
@@ -130,10 +130,10 @@ void Scene_04::Destroy()
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
 	for (auto& t : text) if (t != nullptr) t.reset();
 	for (auto& tp : textPoint) if (tp != nullptr) tp.reset();
-	SceneManager::Get()->ResetPlayer();
-	CollisionManager::Get()->RemoveAllCollider();
-	Sounds::Get()->Stop("Wind");
-	Sounds::Get()->RemoveSound("Wind");
+	SCENE->ResetPlayer();
+	COLLISION->RemoveAllCollider();
+	SOUNDS->Stop("Wind");
+	SOUNDS->RemoveSound("Wind");
 }
 
 void Scene_04::FixedUpdate()
@@ -155,19 +155,19 @@ void Scene_04::Update()
 	if (windObject != nullptr) windObject->Update();
 	if (bridge != nullptr) bridge->Update();
 
-	Camera::Get()->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
+	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		std::dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
+		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
-		std::dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
-		if (Input::Get()->KeyDown(VK_RETURN))
+		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
+		if (INPUT->KeyDown(VK_RETURN))
 		{
-			SceneManager::Get()->LoadScene("Stage02");
+			SCENE->LoadScene("Stage02");
 		}
 	}
 }
@@ -192,8 +192,8 @@ void Scene_04::Render()
 
 void Scene_04::PostRender()
 {
-	if (text[0] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
-	if (text[1] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
+	if (text[0] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
+	if (text[1] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
 }
 
 void Scene_04::ImGUI()

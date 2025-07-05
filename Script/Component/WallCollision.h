@@ -1,32 +1,30 @@
-ï»¿#pragma once
+#pragma once
 
 #include "Component/LumberAxeComponent.h"
 #include "PlayerController.h"
-#include "Components/BoxCollider.h"
-
 
 class WallCollision : public Component
 {
 public:
-    // player: ì¶©ëŒ ê²€ì‚¬ ëŒ€ìƒì¸ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸,
-    WallCollision(const std::string& name, bool isRight) : Component(name), rightWall(isRight) {}
+    // player: Ãæµ¹ °Ë»ç ´ë»óÀÎ ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®,
+    WallCollision(const string& name, bool isRight) : Component(name), rightWall(isRight) {}
     virtual ~WallCollision() override = default;
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ë Œë”ë§ì€ í•„ìš” ì—†ìœ¼ë¯€ë¡œ ë¹ˆ êµ¬í˜„
+    virtual void Render() override {} // ·»´õ¸µÀº ÇÊ¿ä ¾øÀ¸¹Ç·Î ºó ±¸Çö
 
 public:
-    void SetPlayer(GameObject* player) { this->player = player; }
-    GameObject* GetPlayer() const { return this->player; }
+    void SetPlayer(Object* player) { this->player = player; }
+    Object* GetPlayer() const { return this->player; }
 
-    void SetLumberAxe(GameObject* lumberAxe) { this->lumberAxe = lumberAxe; }
-    GameObject* GetLumberAxe() const { return this->lumberAxe; }
+    void SetLumberAxe(Object* lumberAxe) { this->lumberAxe = lumberAxe; }
+    Object* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
-    GameObject* player = nullptr;
-    GameObject* lumberAxe = nullptr;
-    bool rightWall; // true: ì˜¤ë¥¸ìª½ ë²½, false: ì™¼ìª½ ë²½
+    Object* player = nullptr;
+    Object* lumberAxe = nullptr;
+    bool rightWall; // true: ¿À¸¥ÂÊ º®, false: ¿ÞÂÊ º®
 
 };
 

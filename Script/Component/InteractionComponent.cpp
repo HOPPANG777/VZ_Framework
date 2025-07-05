@@ -4,7 +4,7 @@
 void InteractionComponent::Update()
 {
     // E 키가 눌린 순간(KeyDown) – 상호작용 시작 처리
-    if (Input::Get()->KeyDown('E'))
+    if (INPUT->KeyDown('E'))
     {
         // 만약 현재 상호작용이 진행 중이 아니라면 시작
         if (!isInteracting)
@@ -12,10 +12,10 @@ void InteractionComponent::Update()
             try
             {
                 // 예시로, CollisionManager에서 현재 오너(플레이어)와 충돌 중인 오브젝트 목록을 가져옴
-                std::vector<GameObject*> collidingObjects = CollisionManager::Get()->GetCollidingObjects(owner);
-                for (GameObject* obj : collidingObjects)
+                vector<Object*> collidingObjects = COLLISION->GetCollidingObjects(owner);
+                for (Object* obj : collidingObjects)
                 {
-                    // 캡슐화를 위해 GameObject 내부의 컴포넌트 접근은 템플릿 함수를 사용
+                    // 캡슐화를 위해 Object 내부의 컴포넌트 접근은 템플릿 함수를 사용
                     IInteractable* interactable = obj->FindComponentByInterface<IInteractable>();
                     if (interactable)
                     {
@@ -34,7 +34,7 @@ void InteractionComponent::Update()
     }
 
     // E 키가 떼진 순간(KeyUp) – 상호작용 취소 처리, 상호작용이 실제 진행 중일 때만 처리
-    if (Input::Get()->KeyUp('E'))
+    if (INPUT->KeyUp('E'))
     {
         if (isInteracting)  // 상호작용 중일 때만 처리
         {

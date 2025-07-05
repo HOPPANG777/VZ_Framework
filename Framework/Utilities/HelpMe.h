@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
 
 class HelpMe
 {
@@ -18,8 +17,8 @@ public:
 	void Log(float p_Value);
 	void Log(double p_Value);
 	void Log(bool p_Value);
-	void Log(std::wstring p_Value);
-	void Log(std::string p_Value);
+	void Log(wstring p_Value);
+	void Log(string p_Value);
 	void Log(char p_Value);
 	void Log(char& p_Value);
 	void Log(char p_Value[]);

@@ -232,6 +232,9 @@ call "$(SolutionDir)CopyData.bat" "$(SolutionDir)_Build\$(Platform)\$(Configurat
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Client.aps" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

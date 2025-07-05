@@ -1,27 +1,23 @@
-ï»¿#pragma once
-
-#include "Component.h"
-#include "Systems/Time.h"
-#include "Utilities/DirectHelper.h"
+#pragma once
 
 class RectTransform : public Component
 {
 private:
     Vector3 position = { 0, 0, 0 };
     Vector3 scale = { 1, 1, 1 };
-    float   rotation = 0.0f;   // ë¼ë””ì•ˆ(radian)ìœ¼ë¡œ ë³´ê´€
+    float   rotation = 0.0f;   // ¶óµğ¾È(radian)À¸·Î º¸°ü
 
-    Matrix  world = XMMatrixIdentity(); // S*R*T ê²°ê³¼
+    Matrix  world = XMMatrixIdentity(); // S*R*T °á°ú
 
 private:
-    // ì¶”ê°€: UI ë ˆì´ì•„ì›ƒì„ ìœ„í•œ ì•µì»¤ì™€ ì˜¤í”„ì…‹
-    Vector2 anchorMin = { 0.5f, 0.5f };   // ë¶€ëª¨ ê¸°ì¤€ ìµœì†Œ ì•µì»¤ (0~1)
-    Vector2 anchorMax = { 0.5f, 0.5f };   // ë¶€ëª¨ ê¸°ì¤€ ìµœëŒ€ ì•µì»¤ (0~1)
-    Vector2 offsetMin = { -50.0f, -50.0f }; // ì•µì»¤ì— ìƒëŒ€ì ì¸ ìµœì†Œ ì˜¤í”„ì…‹ (í”½ì…€ ë‹¨ìœ„)
-    Vector2 offsetMax = { 50.0f,  50.0f }; // ì•µì»¤ì— ìƒëŒ€ì ì¸ ìµœëŒ€ ì˜¤í”„ì…‹ (í”½ì…€ ë‹¨ìœ„)
+    // Ãß°¡: UI ·¹ÀÌ¾Æ¿ôÀ» À§ÇÑ ¾ŞÄ¿¿Í ¿ÀÇÁ¼Â
+    Vector2 anchorMin = { 0.5f, 0.5f };   // ºÎ¸ğ ±âÁØ ÃÖ¼Ò ¾ŞÄ¿ (0~1)
+    Vector2 anchorMax = { 0.5f, 0.5f };   // ºÎ¸ğ ±âÁØ ÃÖ´ë ¾ŞÄ¿ (0~1)
+    Vector2 offsetMin = { -50.0f, -50.0f }; // ¾ŞÄ¿¿¡ »ó´ëÀûÀÎ ÃÖ¼Ò ¿ÀÇÁ¼Â (ÇÈ¼¿ ´ÜÀ§)
+    Vector2 offsetMax = { 50.0f,  50.0f }; // ¾ŞÄ¿¿¡ »ó´ëÀûÀÎ ÃÖ´ë ¿ÀÇÁ¼Â (ÇÈ¼¿ ´ÜÀ§)
 
 public:
-    RectTransform(const std::string& compName = "RectTransform") : Component(compName) {}
+    RectTransform(const string& compName = "RectTransform") : Component(compName) {}
     virtual ~RectTransform() override = default;
 
     virtual void Update() override;
@@ -33,9 +29,9 @@ public:
 
     Vector3 GetPosition() const;
     Vector3 GetScale() const;
-    float GetRotation() const; // ë°˜í™˜ ì‹œì—ëŠ” Degree(ê°ë„)
+    float GetRotation() const; // ¹İÈ¯ ½Ã¿¡´Â Degree(°¢µµ)
 
-    // í™”ë©´ í¬ê¸°ë¥¼ ê¸°ì¤€ìœ¼ë¡œ UI ìš”ì†Œì˜ RECT ë°˜í™˜
+    // È­¸é Å©±â¸¦ ±âÁØÀ¸·Î UI ¿ä¼ÒÀÇ RECT ¹İÈ¯
     RECT GetRect();
     RECT GetCorrectedRect();
 
@@ -43,16 +39,16 @@ public:
     // Setter
     void SetPosition(const Vector3& pos);
     void SetScale(const Vector3& sca);
-    void SetRotation(float degrees); // ì™¸ë¶€ ì…ë ¥ì€ ê°ë„(Â°), ë‚´ë¶€ëŠ” ë¼ë””ì•ˆ
+    void SetRotation(float degrees); // ¿ÜºÎ ÀÔ·ÂÀº °¢µµ(¡Æ), ³»ºÎ´Â ¶óµğ¾È
 
-    // UI ë ˆì´ì•„ì›ƒ ì„¤ì •: ì•µì»¤ ë° ì˜¤í”„ì…‹ ì§€ì • (ì›í•˜ëŠ” ê°’ìœ¼ë¡œ ì˜¤ë²„ë¡œë“œ ê°€ëŠ¥)
+    // UI ·¹ÀÌ¾Æ¿ô ¼³Á¤: ¾ŞÄ¿ ¹× ¿ÀÇÁ¼Â ÁöÁ¤ (¿øÇÏ´Â °ªÀ¸·Î ¿À¹ö·Îµå °¡´É)
     void SetAnchorAndOffset(const Vector2& newAnchorMin, const Vector2& newAnchorMax, const Vector2& newOffsetMin, const Vector2& newOffsetMax);
 
-    // ê¸°ì¡´ ë§¤ê°œë³€ìˆ˜ ì—†ëŠ” ë²„ì „ (í•„ìš”ì‹œ ê¸°ë³¸ê°’ ì ìš©)
+    // ±âÁ¸ ¸Å°³º¯¼ö ¾ø´Â ¹öÀü (ÇÊ¿ä½Ã ±âº»°ª Àû¿ë)
     void SetAnchorAndOffset();
 
 public:
-    // ì´ë™/íšŒì „/ìŠ¤ì¼€ì¼ ë³€í™”ë¥¼ DELTA ê¸°ë°˜ìœ¼ë¡œ ì ìš©í•  ìˆ˜ ìˆëŠ” í•¨ìˆ˜ë“¤
+    // ÀÌµ¿/È¸Àü/½ºÄÉÀÏ º¯È­¸¦ DELTA ±â¹İÀ¸·Î Àû¿ëÇÒ ¼ö ÀÖ´Â ÇÔ¼öµé
     void Move(const Vector3& speed);
     void Rotate(float degrees);
     void Scale(const Vector3& scale);

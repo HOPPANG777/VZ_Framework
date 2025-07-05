@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "my-app",
   "version": "0.0.1",
@@ -13,9 +13,6 @@
     {
       "name": "imgui",
       "features": [ "win32-binding", "dx11-binding", "docking-experimental" ]
-    },
-    {
-      "name": "sdl3"
     }
   ]
 }

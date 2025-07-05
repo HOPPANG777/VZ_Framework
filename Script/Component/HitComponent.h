@@ -1,33 +1,29 @@
-ï»¿#pragma once
-
-#include "Components/Component.h"
-#include "Interfaces/IColorable.h"
-#include "Objects/BaseObject/GameObject.h"
+#pragma once
 
 class HitComponent : public Component
 {
 public:
-    HitComponent(const std::string& name = "HitComponent") : Component(name), active(false), timer(0.0f), duration(0.0f), originalColor(WHITE), flashColor(Color(1, 0, 0, 1))
+    HitComponent(const string& name = "HitComponent") : Component(name), active(false), timer(0.0f), duration(0.0f), originalColor(WHITE), flashColor(Color(1, 0, 0, 1))
     {
 
     }
     virtual ~HitComponent() override = default;
 
     virtual void Update() override;
-    virtual void Render() override {} // RenderëŠ” í•„ìš” ì—†ìœ¼ë¯€ë¡œ ë¹ˆ êµ¬í˜„
+    virtual void Render() override {} // Render´Â ÇÊ¿ä ¾øÀ¸¹Ç·Î ºó ±¸Çö
 
-    // í”¼ê²© íš¨ê³¼ë¥¼ í™œì„±í™”í•©ë‹ˆë‹¤.
-    // flashColor: í”¼ê²© ì‹œ í‘œì‹œí•  ìƒ‰ìƒ (ê¸°ë³¸ ë¹¨ê°„ìƒ‰)
-    // duration: íš¨ê³¼ ì§€ì† ì‹œê°„ (ì´ˆ)
+    // ÇÇ°İ È¿°ú¸¦ È°¼ºÈ­ÇÕ´Ï´Ù.
+    // flashColor: ÇÇ°İ ½Ã Ç¥½ÃÇÒ »ö»ó (±âº» »¡°£»ö)
+    // duration: È¿°ú Áö¼Ó ½Ã°£ (ÃÊ)
     void Activate(float duration = 1.0f, const Color& flashColor = Color(1, 0, 0, 1));
 
 private:
-    bool active;         // í˜„ì¬ í”¼ê²© íš¨ê³¼ê°€ í™œì„±í™” ë˜ì—ˆëŠ”ì§€ ì—¬ë¶€
-    float timer;         // ê²½ê³¼ ì‹œê°„
-    float duration;      // ì „ì²´ íš¨ê³¼ ì§€ì† ì‹œê°„
+    bool active;         // ÇöÀç ÇÇ°İ È¿°ú°¡ È°¼ºÈ­ µÇ¾ú´ÂÁö ¿©ºÎ
+    float timer;         // °æ°ú ½Ã°£
+    float duration;      // ÀüÃ¼ È¿°ú Áö¼Ó ½Ã°£
 
-    Color originalColor; // ì›ë˜ ìƒ‰ìƒ (í”¼ê²© ì „)
-    Color flashColor;    // í”¼ê²© ì‹œ ìƒ‰ìƒ
+    Color originalColor; // ¿ø·¡ »ö»ó (ÇÇ°İ Àü)
+    Color flashColor;    // ÇÇ°İ ½Ã »ö»ó
 
 };
 

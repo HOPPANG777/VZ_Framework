@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "IShader.h"
+#pragma once
 
 class VertexShader : public IShader
 {
@@ -7,13 +6,13 @@ private:
 	ComPtr<ID3D11VertexShader> shader;
 
 public:
-	void Create(const std::wstring& path, const std::string& entryName) override
+	void Create(const wstring& path, const string& entryName) override
 	{
 		this->path = path;
 		this->entryName = entryName;
 
 		CompileShader(path, entryName, "vs_5_0", blob.GetAddressOf());
-		HRESULT hr = Graphics::Get()->GetDevice()->CreateVertexShader
+		HRESULT hr = DEVICE->CreateVertexShader
 		(
 			blob->GetBufferPointer(),
 			blob->GetBufferSize(),
@@ -31,7 +30,7 @@ public:
 
 	void SetShader() override
 	{
-		Graphics::Get()->GetDC()->VSSetShader(shader.Get(), nullptr, 0);
+		DC->VSSetShader(shader.Get(), nullptr, 0);
 	}
 
 public:

@@ -1,4 +1,4 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "TileSetManager.h"
 
 TileSetManager::TileSetManager()
@@ -8,21 +8,21 @@ TileSetManager::TileSetManager()
 
 TileSetManager::~TileSetManager()
 {
-    // ComPtrì€ ìë™ìœ¼ë¡œ Release()ë¥¼ í˜¸ì¶œí•˜ë¯€ë¡œ ë³„ë„ ì²˜ë¦¬ ë¶ˆí•„ìš”
+    // ComPtrÀº ÀÚµ¿À¸·Î Release()¸¦ È£ÃâÇÏ¹Ç·Î º°µµ Ã³¸® ºÒÇÊ¿ä
 }
 
 void TileSetManager::Init()
 {
-    // ê¸°ë³¸ íƒ€ì¼ì…‹ ê²½ë¡œ ì„¤ì •
+    // ±âº» Å¸ÀÏ¼Â °æ·Î ¼³Á¤
     tilePath = TexturePath + L"Tilesets/tile.png";
 
-    // Texture2D ê°ì²´ë¥¼ std::unique_ptrë¡œ ìƒì„±
+    // Texture2D °´Ã¼¸¦ unique_ptr·Î »ı¼º
     const auto& tex = std::make_unique<Texture2D>(tilePath);
-    // Texture2D ë‚´ë¶€ì—ì„œ ComPtr<ID3D11ShaderResourceView>ë¥¼ ê´€ë¦¬í•˜ê³  ìˆë‹¤ë©´ GetSRV()ë¥¼ ì‚¬ìš©
+    // Texture2D ³»ºÎ¿¡¼­ ComPtr<ID3D11ShaderResourceView>¸¦ °ü¸®ÇÏ°í ÀÖ´Ù¸é GetSRV()¸¦ »ç¿ë
     tileSRV = tex->GetSRV();
-    // texëŠ” scope ì¢…ë£Œ ì‹œ ìë™ ì‚­ì œë¨
+    // tex´Â scope Á¾·á ½Ã ÀÚµ¿ »èÁ¦µÊ
 
-    // GUIì—ì„œ í‘œí˜„í•  íƒ€ì¼ì…‹ì˜ ê°€ë¡œ, ì„¸ë¡œ ë¶„í•  ê°œìˆ˜
+    // GUI¿¡¼­ Ç¥ÇöÇÒ Å¸ÀÏ¼ÂÀÇ °¡·Î, ¼¼·Î ºĞÇÒ °³¼ö
     tileXCount = 11;
     tileYCount = 7;
 
@@ -33,7 +33,7 @@ void TileSetManager::ImGUI()
 {
     ImGui::Begin("TileSetManager");
     {
-        // ìŠ¤í¬ë¡¤ ê°€ëŠ¥í•œ ì˜ì—­ (ê°€ë¡œ + ì„¸ë¡œ ìŠ¤í¬ë¡¤ ì ìš©)
+        // ½ºÅ©·Ñ °¡´ÉÇÑ ¿µ¿ª (°¡·Î + ¼¼·Î ½ºÅ©·Ñ Àû¿ë)
         ImGui::BeginChild("TileScrollRegion", ImVec2(700, 500), true, ImGuiWindowFlags_HorizontalScrollbar);
 
         int count = 0;
@@ -54,13 +54,13 @@ void TileSetManager::ImGUI()
 
                 count++;
 
-                // ë‹¤ìŒ íƒ€ì¼ì´ ê°€ë¡œ ë„ˆë¹„ë¥¼ ë„˜ì–´ê°€ë©´ ì¤„ë°”ê¿ˆ
+                // ´ÙÀ½ Å¸ÀÏÀÌ °¡·Î ³Êºñ¸¦ ³Ñ¾î°¡¸é ÁÙ¹Ù²Ş
                 if ((count % tileXCount) != 0)
                     ImGui::SameLine();
             }
         }
 
-        ImGui::EndChild(); // ìŠ¤í¬ë¡¤ ê°€ëŠ¥í•œ ì»¨í…Œì´ë„ˆ ì¢…ë£Œ
+        ImGui::EndChild(); // ½ºÅ©·Ñ °¡´ÉÇÑ ÄÁÅ×ÀÌ³Ê Á¾·á
     }
     ImGui::End();
 }

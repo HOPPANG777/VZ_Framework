@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "Scene_02.h"
 
 void Scene_02::Awake() 
@@ -13,11 +13,11 @@ void Scene_02::Start()
     timer = 0.0f;
     isDone = false;
 
-    // ìŠ¤í”Œë˜ì‹œ ì”¬ ì´ˆê¸°í™”
-    objects.push_back(std::make_shared<ColorRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, BLACK));
-    splash = std::make_shared<TextureRect>(Values::GetCenter(), Vector3(300, 300, 0), 0.0f, TexturePath + L"UI/SplashLogo2.png");
+    // ½ºÇÃ·¡½Ã ¾À ÃÊ±âÈ­
+    objects.push_back(make_shared<ColorRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, BLACK));
+    splash = make_shared<TextureRect>(Values::GetCenter(), Vector3(300, 300, 0), 0.0f, TexturePath + L"UI/SplashLogo2.png");
    
-    // ì˜ˆ) ë¡œê³  ì´ë¯¸ì§€ ë¡œë“œ, ì‚¬ìš´ë“œ ì¬ìƒ ë“±
+    // ¿¹) ·Î°í ÀÌ¹ÌÁö ·Îµå, »ç¿îµå Àç»ı µî
 
     isLoaded = true;
 }
@@ -32,24 +32,24 @@ void Scene_02::FixedUpdate() {}
 
 void Scene_02::Update()
 {
-    const auto& rect = std::dynamic_pointer_cast<TextureRect>(splash);
+    const auto& rect = dynamic_pointer_cast<TextureRect>(splash);
     
     if (!isDone)
     {
-        timer += Time::Get()->GetDeltaTime();
-        // ì˜ˆ: 3ì´ˆ í›„ ìë™ìœ¼ë¡œ íƒ€ì´í‹€ ì”¬ìœ¼ë¡œ
+        timer += DELTA;
+        // ¿¹: 3ÃÊ ÈÄ ÀÚµ¿À¸·Î Å¸ÀÌÆ² ¾ÀÀ¸·Î
 
         rect->SetColor(Color(1.0f, 1.0f, 1.0f, timer));
 
         if (timer >= 2.0f)
         {
             isDone = true;
-            // ìŠ¤í”Œë˜ì‹œ ì¢…ë£Œ í›„ íƒ€ì´í‹€ ì”¬ìœ¼ë¡œ ì´ë™
-            SceneManager::Get()->LoadScene("TitleScene");
+            // ½ºÇÃ·¡½Ã Á¾·á ÈÄ Å¸ÀÌÆ² ¾ÀÀ¸·Î ÀÌµ¿
+            SCENE->LoadScene("TitleScene");
             //SCENE->LoadScene("GeometryScene");
         }
     }
-    // ê·¸ ì™¸ ìŠ¤í”Œë˜ì‹œ ì• ë‹ˆë©”ì´ì…˜ ì—…ë°ì´íŠ¸
+    // ±× ¿Ü ½ºÇÃ·¡½Ã ¾Ö´Ï¸ŞÀÌ¼Ç ¾÷µ¥ÀÌÆ®
 
     for (const auto& obj : objects) if (obj != nullptr) obj->Update();
     if (splash != nullptr) splash->Update();

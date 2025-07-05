@@ -1,4 +1,4 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "ColorRect.h"
 
 ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float rotation, const Color& color)
@@ -8,13 +8,13 @@ ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float 
 	{
 		vertices.assign(4, VertexColor());
 
-		// ì¢Œ í•˜ë‹¨
+		// ÁÂ ÇÏ´Ü
 		vertices[0].position = { -0.5f, -0.5f, 0 };
-		// ì¢Œ ìƒë‹¨
+		// ÁÂ »ó´Ü
 		vertices[1].position = { -0.5f, 0.5f, 0 };
-		// ìš° í•˜ë‹¨
+		// ¿ì ÇÏ´Ü
 		vertices[2].position = { 0.5f, -0.5f, 0 };
-		// ìš° ìƒë‹¨
+		// ¿ì »ó´Ü
 		vertices[3].position = { 0.5f, 0.5f, 0 };
 	
 		for (VertexColor& vertex : vertices) vertex.color = color;
@@ -22,7 +22,7 @@ ColorRect::ColorRect(const Vector3& position, const Vector3& scale, const float 
 
 	//vertexBuffer
 	{
-		//ê°ì²´ë¥¼ ë§Œë“¤ì–´ ì£¼ì–´ì•¼ í•œë‹¤.
+		//°´Ã¼¸¦ ¸¸µé¾î ÁÖ¾î¾ß ÇÑ´Ù.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 
@@ -66,13 +66,13 @@ void ColorRect::Render()
 //{
 //	vertices.assign(4, VertexColor());
 //
-//	// ì¢Œ í•˜ë‹¨
+//	// ÁÂ ÇÏ´Ü
 //	vertices[0].position = { -0.5f, -0.5f };
-//	// ì¢Œ ìƒë‹¨
+//	// ÁÂ »ó´Ü
 //	vertices[1].position = { -0.5f, 0.5f };
-//	// ìš° í•˜ë‹¨
+//	// ¿ì ÇÏ´Ü
 //	vertices[2].position = { 0.5f, -0.5f };
-//	// ìš° ìƒë‹¨
+//	// ¿ì »ó´Ü
 //	vertices[3].position = { 0.5f, 0.5f };
 //
 //	for (auto& vertex : vertices) vertex.color = color;
@@ -80,8 +80,8 @@ void ColorRect::Render()
 //
 ////vertexBuffer
 //{
-//	//ê°ì²´ë¥¼ ë§Œë“¤ì–´ ì£¼ì–´ì•¼ í•œë‹¤.
-//	//vertexBuffer = std::make_unique<VertexBuffer>();
+//	//°´Ã¼¸¦ ¸¸µé¾î ÁÖ¾î¾ß ÇÑ´Ù.
+//	//vertexBuffer = make_unique<VertexBuffer>();
 //	vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 //}
 //
@@ -92,25 +92,25 @@ void ColorRect::Render()
 //
 ////indexBuffer
 //{
-//	//indexBuffer = std::make_unique<IndexBuffer>();
+//	//indexBuffer = make_unique<IndexBuffer>();
 //	indexBuffer->Create(indices, D3D11_USAGE_IMMUTABLE);
 //}
 //
 ////vertexShader
 //{
-//	//vertexShader = std::make_unique <VertexShader>();
+//	//vertexShader = make_unique <VertexShader>();
 //	//vertexShader->Create(L"../_Shaders/VertexColor.hlsl", "VS");
 //}
 //
 ////inputLayout
 //{
-//	//inputLayout = std::make_unique<InputLayout>();
+//	//inputLayout = make_unique<InputLayout>();
 //	//inputLayout->Create(VertexColor::ieDescs.data(), VertexColor::ieDescs.size(), vertexShader->GetBlob());
 //}
 //
 ////pixelShader
 //{
-//	//pixelShader = std::make_unique<PixelShader>();
+//	//pixelShader = make_unique<PixelShader>();
 //	//pixelShader->Create(L"../_Shaders/VertexColor.hlsl", "PS");
 //}
 //
@@ -128,7 +128,7 @@ void ColorRect::Render()
 //
 ////worldBuffer
 //{
-//	//worldBuffer = std::make_unique<WorldBuffer>();
+//	//worldBuffer = make_unique<WorldBuffer>();
 //	//worldBuffer->SetWorld(world);
 //}
 #pragma endregion

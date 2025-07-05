@@ -1,89 +1,89 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "String.h"
 
-#include <iomanip>	// ì…ì¶œë ¥ ìŠ¤íŠ¸ë¦¼ì˜ ì¡°ì‘ìë¥¼ ì •ì˜í•˜ëŠ” í—¤ë”, ìŠ¤íŠ¸ë¦¼ì˜ ì¶œë ¥ í˜•ì‹ì„ ì œì–´í•˜ëŠ” ë° ì‚¬ìš©
-#include <sstream>	// ë¬¸ìì—´ ìŠ¤íŠ¸ë¦¼ì„ ì •ì˜, ë©”ëª¨ë¦¬ ë²„í¼ì— ë°ì´í„°ë¥¼ ì½ê³  ì“°ëŠ”ë° ì‚¬ìš©
+#include <iomanip>	// ÀÔÃâ·Â ½ºÆ®¸²ÀÇ Á¶ÀÛÀÚ¸¦ Á¤ÀÇÇÏ´Â Çì´õ, ½ºÆ®¸²ÀÇ Ãâ·Â Çü½ÄÀ» Á¦¾îÇÏ´Â µ¥ »ç¿ë
+#include <sstream>	// ¹®ÀÚ¿­ ½ºÆ®¸²À» Á¤ÀÇ, ¸Ş¸ğ¸® ¹öÆÛ¿¡ µ¥ÀÌÅÍ¸¦ ÀĞ°í ¾²´Âµ¥ »ç¿ë
 
-// ë¬¸ìì—´ì„ ì§€ì •ëœ êµ¬ë¶„ìë¡œ ë¶„í• í•˜ëŠ” ê¸°ëŠ¥
+// ¹®ÀÚ¿­À» ÁöÁ¤µÈ ±¸ºĞÀÚ·Î ºĞÇÒÇÏ´Â ±â´É
 #pragma region SplitString
-void String::SplitString(std::vector<std::string>* result, std::string origin, std::string tok)
+void String::SplitString(vector<string>* result, string origin, string tok)
 {
 	result->clear();
-	int cutAt = 0; //ìë¥¼ ìœ„ì¹˜
+	int cutAt = 0; //ÀÚ¸¦ À§Ä¡
 	while ((cutAt = (int)origin.find_first_of(tok)) != origin.npos)
 	{
-		//ìë¥´ëŠ” ìœ„ì¹˜ê°€ 0ë³´ë‹¤ í¬ë‹¤ë©´
+		//ÀÚ¸£´Â À§Ä¡°¡ 0º¸´Ù Å©´Ù¸é
 		if (cutAt > 0) result->push_back(origin.substr(0, cutAt));
 
 		origin = origin.substr(cutAt + 1);
 	}
 
-	//ìë¥´ê³ ë„ ë‚¨ì€ê²ƒì´ ìˆë‹¤ë©´
+	//ÀÚ¸£°íµµ ³²Àº°ÍÀÌ ÀÖ´Ù¸é
 	if (origin.length() > 0) result->push_back(origin.substr(0, cutAt));
 }
 
-void String::SplitString(std::vector<std::wstring>* result, std::wstring origin, std::wstring tok)
+void String::SplitString(vector<wstring>* result, wstring origin, wstring tok)
 {
 	result->clear();
 
-	int cutAt = 0; //ìë¥¼ ìœ„ì¹˜
+	int cutAt = 0; //ÀÚ¸¦ À§Ä¡
 	while ((cutAt = (int)origin.find_first_of(tok)) != origin.npos)
 	{
-		//ìë¥´ëŠ” ìœ„ì¹˜ê°€ 0ë³´ë‹¤ í¬ë‹¤ë©´
+		//ÀÚ¸£´Â À§Ä¡°¡ 0º¸´Ù Å©´Ù¸é
 		if (cutAt > 0)	result->push_back(origin.substr(0, cutAt));
 
 		origin = origin.substr(cutAt + 1);
 	}
 
-	//ìë¥´ê³ ë„ ë‚¨ì€ê²ƒì´ ì‡ë‹¤ë©´
+	//ÀÚ¸£°íµµ ³²Àº°ÍÀÌ ÀÕ´Ù¸é
 	if (origin.length() > 0) result->push_back(origin.substr(0, cutAt));
 }
 #pragma endregion
 
-// íŠ¹ì •í•œ ë¬¸ìë¡œ ì‹œì‘í•˜ëŠ”ì§€ ì²´í¬
+// Æ¯Á¤ÇÑ ¹®ÀÚ·Î ½ÃÀÛÇÏ´ÂÁö Ã¼Å©
 #pragma region StartWith
-bool String::StartWith(std::string str, std::string comp)
+bool String::StartWith(string str, string comp)
 {
-	//npos no position ì¦‰ ì—†ë‹¤ëŠ” ì†Œë¦¬
-	std::wstring::size_type index = str.find(comp);
-	if (index != std::wstring::npos && (int)index == 0) return true;
+	//npos no position Áï ¾ø´Ù´Â ¼Ò¸®
+	wstring::size_type index = str.find(comp);
+	if (index != wstring::npos && (int)index == 0) return true;
 
 	return false;
 }
 
-bool String::StartWith(std::wstring str, std::wstring comp)
+bool String::StartWith(wstring str, wstring comp)
 {
-	std::wstring::size_type index = str.find(comp);
-	if (index != std::wstring::npos && (int)index == 0) return true;
+	wstring::size_type index = str.find(comp);
+	if (index != wstring::npos && (int)index == 0) return true;
 	return false;
 }
 #pragma endregion
 
-// íŠ¹ì •í•œ ë¬¸ìë¥¼ í¬í•¨í•˜ëŠ”ì§€ ì²´í¬
+// Æ¯Á¤ÇÑ ¹®ÀÚ¸¦ Æ÷ÇÔÇÏ´ÂÁö Ã¼Å©
 #pragma region Contain
-bool String::Contain(std::string str, std::string comp)
+bool String::Contain(string str, string comp)
 {
 	size_t found = str.find(comp);
 
-	return found != std::wstring::npos;
+	return found != wstring::npos;
 }
 
-bool String::Contain(std::wstring str, std::wstring comp)
+bool String::Contain(wstring str, wstring comp)
 {
 	size_t found = str.find(comp);
 
-	return found != std::wstring::npos;
+	return found != wstring::npos;
 }
 #pragma endregion
 
-// íŠ¹ì •í•œ ë¬¸ìë“¤ì„ ë‹¤ë¥¸ ë¬¸ìë“¤ë¡œ ëŒ€ì²´
+// Æ¯Á¤ÇÑ ¹®ÀÚµéÀ» ´Ù¸¥ ¹®ÀÚµé·Î ´ëÃ¼
 #pragma region Replace
-void String::Replace(std::string* str, std::string comp, std::string rep)
+void String::Replace(string* str, string comp, string rep)
 {
-	std::string temp = *str;
+	string temp = *str;
 
 	size_t startPos = 0;
-	while ((startPos = temp.find(comp, startPos)) != std::wstring::npos)
+	while ((startPos = temp.find(comp, startPos)) != wstring::npos)
 	{
 		temp.replace(startPos, comp.length(), rep);
 		startPos += rep.length();
@@ -92,12 +92,12 @@ void String::Replace(std::string* str, std::string comp, std::string rep)
 	*str = temp;
 }
 
-void String::Replace(std::wstring* str, std::wstring comp, std::wstring rep)
+void String::Replace(wstring* str, wstring comp, wstring rep)
 {
-	std::wstring temp = *str;
+	wstring temp = *str;
 
 	size_t startPos = 0;
-	while ((startPos = temp.find(comp, startPos)) != std::wstring::npos)
+	while ((startPos = temp.find(comp, startPos)) != wstring::npos)
 	{
 		temp.replace(startPos, comp.length(), rep);
 		startPos += rep.length();
@@ -107,45 +107,45 @@ void String::Replace(std::wstring* str, std::wstring comp, std::wstring rep)
 }
 #pragma endregion
 
-// ë²¡í„°ë¥¼ ë¬¸ìì—´ë¡œ ë°”ê¿”ì„œ ì¶œë ¥
+// º¤ÅÍ¸¦ ¹®ÀÚ¿­·Î ¹Ù²ã¼­ Ãâ·Â
 #pragma region ToString
-// setprecision : ë¶€ë™ ì†Œìˆ˜ì  ìˆ«ìì˜ ì •ë°€ë„ë¥¼ ì„¤ì •í•˜ëŠ” ì¡°ì‘ì
+// setprecision : ºÎµ¿ ¼Ò¼öÁ¡ ¼ıÀÚÀÇ Á¤¹Ğµµ¸¦ ¼³Á¤ÇÏ´Â Á¶ÀÛÀÚ
 
-std::string String::ToString(Vector3 vec3, int precision)
+string String::ToString(Vector3 vec3, int precision)
 {
-	std::string temp;
-	std::stringstream stream1, stream2, stream3;
-	stream1 << std::fixed << std::setprecision(precision) << vec3.x;
-	stream2 << std::fixed << std::setprecision(precision) << vec3.y;
-	stream3 << std::fixed << std::setprecision(precision) << vec3.z;
+	string temp;
+	stringstream stream1, stream2, stream3;
+	stream1 << fixed << setprecision(precision) << vec3.x;
+	stream2 << fixed << setprecision(precision) << vec3.y;
+	stream3 << fixed << setprecision(precision) << vec3.z;
 	temp = "X : " + stream1.str() + " Y : " + stream2.str() + " Z : " + stream3.str();
 	return temp;
 }
 
-std::wstring String::ToWstring(Vector3 vec3, int precision)
+wstring String::ToWstring(Vector3 vec3, int precision)
 {
-	std::wstring temp;
-	std::wstringstream stream1, stream2, stream3;
-	stream1 << std::fixed << std::setprecision(precision) << vec3.x;
-	stream2 << std::fixed << std::setprecision(precision) << vec3.y;
-	stream3 << std::fixed << std::setprecision(precision) << vec3.z;
+	wstring temp;
+	wstringstream stream1, stream2, stream3;
+	stream1 << fixed << setprecision(precision) << vec3.x;
+	stream2 << fixed << setprecision(precision) << vec3.y;
+	stream3 << fixed << setprecision(precision) << vec3.z;
 	temp = L"X : " + stream1.str() + L" Y : " + stream2.str() + L" Z : " + stream3.str();
 	return temp;
 }
 #pragma endregion
 
-// std::string -> std::wstring
-std::wstring String::ToWstring(std::string str)
+// string -> wstring
+wstring String::ToWstring(string str)
 {
-	std::wstring temp = L"";
+	wstring temp = L"";
 	temp.assign(str.begin(), str.end());
 	return temp;
 }
 
-// std::wstring -> std::string
-std::string String::ToString(std::wstring str)
+// wstring -> string
+string String::ToString(wstring str)
 {
-	std::string temp = "";
+	string temp = "";
 	temp.assign(str.begin(), str.end());
 	return temp;
 }

@@ -1,4 +1,4 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "RenderStates.h"
 
 D3D11_RASTERIZER_DESC		RenderStates::rasterizerDesc;
@@ -36,129 +36,129 @@ void RenderStates::GetBlendDesc(D3D11_BLEND_DESC* desc)
 
 void RenderStates::CreateRasterizer(D3D11_RASTERIZER_DESC* desc, ID3D11RasterizerState** state)
 {
-	HRESULT hr = Graphics::Get()->GetDevice()->CreateRasterizerState(desc, state);
+	HRESULT hr = DEVICE->CreateRasterizerState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateDepthStencil(D3D11_DEPTH_STENCIL_DESC* desc, ID3D11DepthStencilState** state)
 {
-	HRESULT hr = Graphics::Get()->GetDevice()->CreateDepthStencilState(desc, state);
+	HRESULT hr = DEVICE->CreateDepthStencilState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateSampler(D3D11_SAMPLER_DESC* desc, ID3D11SamplerState** state)
 {
-	HRESULT hr = Graphics::Get()->GetDevice()->CreateSamplerState(desc, state);
+	HRESULT hr = DEVICE->CreateSamplerState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateBlend(D3D11_BLEND_DESC* desc, ID3D11BlendState** state)
 {
-	HRESULT hr = Graphics::Get()->GetDevice()->CreateBlendState(desc, state);
+	HRESULT hr = DEVICE->CreateBlendState(desc, state);
 	CHECK(hr);
 }
 
 void RenderStates::CreateRasterizerDesc()
 {
 	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
-	rasterizerDesc.AntialiasedLineEnable = false;	// ì„  ì•ˆí‹°ì—˜ë¦¬ì–´ì‹± ì‚¬ìš© ì„¤ì • (ì„ ì˜ ê²½ê³„ë¥¼ ë¶€ë“œëŸ½ê²Œ)
-	rasterizerDesc.CullMode = D3D11_CULL_BACK;		// í›„ë©´ ì»¬ë§ ì‚¬ìš© ì„¤ì •
-	rasterizerDesc.DepthBias = 0;					// ê¹Šì´ ë°”ì´ì–´ìŠ¤ ê°’
-	rasterizerDesc.DepthBiasClamp = 0.0f;			// ê¹Šì´ ë°”ì´ì–´ìŠ¤ í´ë¨í”„ ê°’
-	rasterizerDesc.FillMode = D3D11_FILL_SOLID;		// ë‹¤ê°í˜•ì˜ ì±„ìš°ê¸° ëª¨ë“œ SOLID (ì™„ì „íˆ ì±„ì›€)
-	rasterizerDesc.FrontCounterClockwise = false;	// ì „ë©´ ë©´ì˜ ë°©í–¥ì„ ì‹œê³„ ë°©í–¥ìœ¼ë¡œ ì„¤ì •
-	rasterizerDesc.MultisampleEnable = false;		// ë©€í‹° ìƒ˜í”Œë§ ì‚¬ìš© ì„¤ì • (í”½ì…€ ê²½ê³„ì˜ ë¶€ë“œëŸ¬ì›€ì„ ì¦ê°€ì‹œì¼œì„œ ì´ë¯¸ì§€ì˜ í’ˆì§ˆì„ í–¥ìƒ)
-	rasterizerDesc.ScissorEnable = false;			// ê°€ìœ„ í…ŒìŠ¤íŠ¸ ì‚¬ìš© ì„¤ì • (ë Œë”ë§ ëŒ€ìƒì˜ íŠ¹ì • ì˜ì—­ë§Œ ë Œë”ë§í•˜ëŠ”ë° ì‚¬ìš©)
-	rasterizerDesc.SlopeScaledDepthBias = 0.0f;		// ê²½ì‚¬ë„ì— ë”°ë¥¸ ê¹Šì´ ë°”ì´ì–´ìŠ¤ ê°’
+	rasterizerDesc.AntialiasedLineEnable = false;	// ¼± ¾ÈÆ¼¿¤¸®¾î½Ì »ç¿ë ¼³Á¤ (¼±ÀÇ °æ°è¸¦ ºÎµå·´°Ô)
+	rasterizerDesc.CullMode = D3D11_CULL_BACK;		// ÈÄ¸é ÄÃ¸µ »ç¿ë ¼³Á¤
+	rasterizerDesc.DepthBias = 0;					// ±íÀÌ ¹ÙÀÌ¾î½º °ª
+	rasterizerDesc.DepthBiasClamp = 0.0f;			// ±íÀÌ ¹ÙÀÌ¾î½º Å¬·¥ÇÁ °ª
+	rasterizerDesc.FillMode = D3D11_FILL_SOLID;		// ´Ù°¢ÇüÀÇ Ã¤¿ì±â ¸ğµå SOLID (¿ÏÀüÈ÷ Ã¤¿ò)
+	rasterizerDesc.FrontCounterClockwise = false;	// Àü¸é ¸éÀÇ ¹æÇâÀ» ½Ã°è ¹æÇâÀ¸·Î ¼³Á¤
+	rasterizerDesc.MultisampleEnable = false;		// ¸ÖÆ¼ »ùÇÃ¸µ »ç¿ë ¼³Á¤ (ÇÈ¼¿ °æ°èÀÇ ºÎµå·¯¿òÀ» Áõ°¡½ÃÄÑ¼­ ÀÌ¹ÌÁöÀÇ Ç°ÁúÀ» Çâ»ó)
+	rasterizerDesc.ScissorEnable = false;			// °¡À§ Å×½ºÆ® »ç¿ë ¼³Á¤ (·»´õ¸µ ´ë»óÀÇ Æ¯Á¤ ¿µ¿ª¸¸ ·»´õ¸µÇÏ´Âµ¥ »ç¿ë)
+	rasterizerDesc.SlopeScaledDepthBias = 0.0f;		// °æ»çµµ¿¡ µû¸¥ ±íÀÌ ¹ÙÀÌ¾î½º °ª
 }
 
 void RenderStates::CreateDepthStencilDesc()
 {
 	ZeroMemory(&depthStencilDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
-	depthStencilDesc.DepthEnable = true;										// ê¹Šì´ í…ŒìŠ¤íŠ¸ ì‚¬ìš© ì„¤ì •
-	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;				// ê¹Šì´ ë²„í¼ì˜ ëª¨ë“  ë¹„íŠ¸ì— ëŒ€í•´ ì“°ê¸° ì‘ì—…ì„ í—ˆìš©
-	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;						// ê¹Šì´ í…ŒìŠ¤íŠ¸ í•¨ìˆ˜ë¥¼ LESSë¡œ ì„¤ì •
+	depthStencilDesc.DepthEnable = true;										// ±íÀÌ Å×½ºÆ® »ç¿ë ¼³Á¤
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;				// ±íÀÌ ¹öÆÛÀÇ ¸ğµç ºñÆ®¿¡ ´ëÇØ ¾²±â ÀÛ¾÷À» Çã¿ë
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;						// ±íÀÌ Å×½ºÆ® ÇÔ¼ö¸¦ LESS·Î ¼³Á¤
 
-	depthStencilDesc.StencilEnable = true;									// ìŠ¤í…ì‹¤ í…ŒìŠ¤íŠ¸ ì‚¬ìš© ì„¤ì •
-	depthStencilDesc.StencilReadMask = 0XFF;									// ìŠ¤í…ì‹¤ ë²„í¼ì—ì„œ ì½ì„ ìˆ˜ ìˆëŠ” ë¹„íŠ¸ ë§ˆìŠ¤í¬ ì„¤ì •
-	depthStencilDesc.StencilWriteMask = 0XFF;									// ìŠ¤í…ì‹¤ í…ŒìŠ¤íŠ¸ë¥¼ ì‚¬ìš©í•˜ë„ë¡ ì„¤ì •
+	depthStencilDesc.StencilEnable = true;									// ½ºÅÙ½Ç Å×½ºÆ® »ç¿ë ¼³Á¤
+	depthStencilDesc.StencilReadMask = 0XFF;									// ½ºÅÙ½Ç ¹öÆÛ¿¡¼­ ÀĞÀ» ¼ö ÀÖ´Â ºñÆ® ¸¶½ºÅ© ¼³Á¤
+	depthStencilDesc.StencilWriteMask = 0XFF;									// ½ºÅÙ½Ç Å×½ºÆ®¸¦ »ç¿ëÇÏµµ·Ï ¼³Á¤
 
-	depthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;			// ì „ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ ì‹¤íŒ¨ ì‘ì—… ì„¤ì •
-	depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;	// ì „ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ ê¹Šì´ ì‹¤íŒ¨ ì‘ì—… ì„¤ì •
-	depthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;			// ì „ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ íŒ¨ìŠ¤ ì‘ì—… ì„¤ì •
-	depthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;			// ì „ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ í•¨ìˆ˜ ì„¤ì •
+	depthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;			// Àü¸é ¸éÀÇ ½ºÅÙ½Ç ½ÇÆĞ ÀÛ¾÷ ¼³Á¤
+	depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;	// Àü¸é ¸éÀÇ ½ºÅÙ½Ç ±íÀÌ ½ÇÆĞ ÀÛ¾÷ ¼³Á¤
+	depthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;			// Àü¸é ¸éÀÇ ½ºÅÙ½Ç ÆĞ½º ÀÛ¾÷ ¼³Á¤
+	depthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;			// Àü¸é ¸éÀÇ ½ºÅÙ½Ç ÇÔ¼ö ¼³Á¤
 
-	depthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;			// í›„ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ ì‹¤íŒ¨ ì‘ì—… ì„¤ì •
-	depthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;		// í›„ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ ê¹Šì´ ì‹¤íŒ¨ ì‘ì—… ì„¤ì •
-	depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;			// í›„ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ íŒ¨ìŠ¤ ì‘ì—… ì„¤ì •
-	depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;			// í›„ë©´ ë©´ì˜ ìŠ¤í…ì‹¤ í•¨ìˆ˜ ì„¤ì •
+	depthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;			// ÈÄ¸é ¸éÀÇ ½ºÅÙ½Ç ½ÇÆĞ ÀÛ¾÷ ¼³Á¤
+	depthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;		// ÈÄ¸é ¸éÀÇ ½ºÅÙ½Ç ±íÀÌ ½ÇÆĞ ÀÛ¾÷ ¼³Á¤
+	depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;			// ÈÄ¸é ¸éÀÇ ½ºÅÙ½Ç ÆĞ½º ÀÛ¾÷ ¼³Á¤
+	depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;			// ÈÄ¸é ¸éÀÇ ½ºÅÙ½Ç ÇÔ¼ö ¼³Á¤
 }
 
 void RenderStates::CreateSamplerDesc()
 {
 	ZeroMemory(&samplerDesc, sizeof(D3D11_SAMPLER_DESC));
-	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;	// ì„ í˜• í•„í„°ë§ì„ ì‚¬ìš©í•˜ì—¬ í…ìŠ¤ì²˜ë¥¼ ìƒ˜í”Œë§
-	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;		// U ì¢Œí‘œì— ëŒ€í•´ í…ìŠ¤ì²˜ ì¢Œí‘œë¥¼ ë˜í•‘
-	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;		// V ì¢Œí‘œì— ëŒ€í•´ í…ìŠ¤ì²˜ ì¢Œí‘œë¥¼ ë˜í•‘
-	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;		// W ì¢Œí‘œì— ëŒ€í•´ í…ìŠ¤ì²˜ ì¢Œí‘œë¥¼ ë˜í•‘
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;	// ¼±Çü ÇÊÅÍ¸µÀ» »ç¿ëÇÏ¿© ÅØ½ºÃ³¸¦ »ùÇÃ¸µ
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;		// U ÁÂÇ¥¿¡ ´ëÇØ ÅØ½ºÃ³ ÁÂÇ¥¸¦ ·¡ÇÎ
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;		// V ÁÂÇ¥¿¡ ´ëÇØ ÅØ½ºÃ³ ÁÂÇ¥¸¦ ·¡ÇÎ
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;		// W ÁÂÇ¥¿¡ ´ëÇØ ÅØ½ºÃ³ ÁÂÇ¥¸¦ ·¡ÇÎ
 	samplerDesc.MipLODBias = 0.0f;
-	samplerDesc.MaxAnisotropy = 1;							// ì•„ë‹ˆì†ŒíŠ¸ë¡œí”¼ í•„í„°ë§ì—ì„œ ì‚¬ìš© (ì—¬ê¸°ì„œëŠ” ì‚¬ìš©ì•ˆí•¨)
-	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;	// ë¹„êµ ìƒ˜í”Œë§ì—ì„œ ì‚¬ìš© (ì—¬ê¸°ì„œëŠ” ì‚¬ìš©ì•ˆí•¨)
-	samplerDesc.MinLOD = FLT_MIN;							// í…ìŠ¤ì²˜ì˜ ìµœì†Œ LOD ë ˆë²¨ ì„¤ì •
-	samplerDesc.MaxLOD = FLT_MAX;							// í…ìŠ¤ì²˜ì˜ ìµœëŒ€ LOD ë ˆë²¨ ì„¤ì •
+	samplerDesc.MaxAnisotropy = 1;							// ¾Æ´Ï¼ÒÆ®·ÎÇÇ ÇÊÅÍ¸µ¿¡¼­ »ç¿ë (¿©±â¼­´Â »ç¿ë¾ÈÇÔ)
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;	// ºñ±³ »ùÇÃ¸µ¿¡¼­ »ç¿ë (¿©±â¼­´Â »ç¿ë¾ÈÇÔ)
+	samplerDesc.MinLOD = FLT_MIN;							// ÅØ½ºÃ³ÀÇ ÃÖ¼Ò LOD ·¹º§ ¼³Á¤
+	samplerDesc.MaxLOD = FLT_MAX;							// ÅØ½ºÃ³ÀÇ ÃÖ´ë LOD ·¹º§ ¼³Á¤
 }
 
 void RenderStates::CreateBlendDesc()
 {
 	ZeroMemory(&blendDesc, sizeof(D3D11_BLEND_DESC));
-	blendDesc.AlphaToCoverageEnable = false;											// Alpha To Coverage ì‚¬ìš© ì—¬ë¶€
-	blendDesc.IndependentBlendEnable = false;											// ë…ë¦½ì ì¸ ë¸”ëœë“œ ì‚¬ìš© ì—¬ë¶€
+	blendDesc.AlphaToCoverageEnable = false;											// Alpha To Coverage »ç¿ë ¿©ºÎ
+	blendDesc.IndependentBlendEnable = false;											// µ¶¸³ÀûÀÎ ºí·£µå »ç¿ë ¿©ºÎ
 
-	blendDesc.RenderTarget[0].BlendEnable = false;										// ë Œë” íƒ€ê²Ÿì— ëŒ€í•œ ë¸”ë Œë”© ì‚¬ìš© ì—¬ë¶€
-	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;					// ëª©ì ì§€ ìƒ‰ìƒì— ëŒ€í•œ ë¸”ë Œë“œ ì¸ìˆ˜ë¥¼ ì„¤ì •
-	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;						// ì†ŒìŠ¤ ìƒ‰ìƒì— ëŒ€í•œ ë¸”ë Œë“œ ì¸ìˆ˜ë¥¼ ì„¤ì •
-	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;							// ìƒ‰ìƒì— ëŒ€í•œ ë¸”ë Œë“œ ì—°ì‚°ì„ ì„¤ì •
+	blendDesc.RenderTarget[0].BlendEnable = false;										// ·»´õ Å¸°Ù¿¡ ´ëÇÑ ºí·»µù »ç¿ë ¿©ºÎ
+	blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;					// ¸ñÀûÁö »ö»ó¿¡ ´ëÇÑ ºí·»µå ÀÎ¼ö¸¦ ¼³Á¤
+	blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;						// ¼Ò½º »ö»ó¿¡ ´ëÇÑ ºí·»µå ÀÎ¼ö¸¦ ¼³Á¤
+	blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;							// »ö»ó¿¡ ´ëÇÑ ºí·»µå ¿¬»êÀ» ¼³Á¤
 
-	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;						// ëª©ì ì§€ ì•ŒíŒŒì— ëŒ€í•œ ë¸”ë Œë“œ ì¸ìˆ˜ë¥¼ ì„¤ì •
-	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;						// ì†ŒìŠ¤ ì•ŒíŒŒì— ëŒ€í•œ ë¸”ë Œë“œ ì¸ìˆ˜ë¥¼ ì„¤ì •
-	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;						// ì•ŒíŒŒì— ëŒ€í•œ ë¸”ë Œë“œ ì—°ì‚°ì„ ì„¤ì •
+	blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;						// ¸ñÀûÁö ¾ËÆÄ¿¡ ´ëÇÑ ºí·»µå ÀÎ¼ö¸¦ ¼³Á¤
+	blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ZERO;						// ¼Ò½º ¾ËÆÄ¿¡ ´ëÇÑ ºí·»µå ÀÎ¼ö¸¦ ¼³Á¤
+	blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;						// ¾ËÆÄ¿¡ ´ëÇÑ ºí·»µå ¿¬»êÀ» ¼³Á¤
 
-	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;	// ëª¨ë“  ìƒ‰ìƒ ì±„ë„ì´ ë Œë” íƒ€ê²Ÿì— ê¸°ë¡
+	blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;	// ¸ğµç »ö»ó Ã¤³ÎÀÌ ·»´õ Å¸°Ù¿¡ ±â·Ï
 }
 
 /*
 Depth
-- 3D ê·¸ë˜í”½ì—ì„œ í”½ì…€ì˜ ê¹Šì´ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ê°’
-- ë³´í†µ ê¹Šì´ ë²„í¼ë¼ëŠ” 2D ì´ë¯¸ì§€ ë²„í¼ì— ì €ì¥
-- ê¹Šì´ ë²„í¼ëŠ” ê° í”½ì…€ì— ëŒ€í•´ ê¹Šì´ ê°’ì„ ì €ì¥, ì´ ê°’ì€ ë Œë”ë§ ì¤‘ì— í…ŒìŠ¤íŠ¸ ë° ì—…ë°ì´íŠ¸
-- ê¹Šì´ ë²„í¼ë¥¼ ì‚¬ìš©í•˜ë©´ 3D ì¥ë©´ì—ì„œ ë¬¼ì²´ë“¤ì´ ì˜¬ë°”ë¥¸ ìˆœì„œë¡œ ê²¹ì²˜ì§€ë„ë¡ í•  ìˆ˜ ìˆìŒ
+- 3D ±×·¡ÇÈ¿¡¼­ ÇÈ¼¿ÀÇ ±íÀÌ¸¦ ³ªÅ¸³»´Â °ª
+- º¸Åë ±íÀÌ ¹öÆÛ¶ó´Â 2D ÀÌ¹ÌÁö ¹öÆÛ¿¡ ÀúÀå
+- ±íÀÌ ¹öÆÛ´Â °¢ ÇÈ¼¿¿¡ ´ëÇØ ±íÀÌ °ªÀ» ÀúÀå, ÀÌ °ªÀº ·»´õ¸µ Áß¿¡ Å×½ºÆ® ¹× ¾÷µ¥ÀÌÆ®
+- ±íÀÌ ¹öÆÛ¸¦ »ç¿ëÇÏ¸é 3D Àå¸é¿¡¼­ ¹°Ã¼µéÀÌ ¿Ã¹Ù¸¥ ¼ø¼­·Î °ãÃ³Áöµµ·Ï ÇÒ ¼ö ÀÖÀ½
 
 Depth Test
-- ë Œë”ë§ëœ í”½ì…€ì˜ ê¹Šì´ ê°’ì„ ê²€ì‚¬í•˜ì—¬ ë Œë”ë§ ì—¬ë¶€ë¥¼ ê²°ì •í•˜ëŠ” ë° ì‚¬ìš©
-- ê¹Šì´ í…ŒìŠ¤íŠ¸ëŠ” ì‚¬ìš©ìê°€ ì •ì˜í•œ ê¹Šì´ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ë Œë”ë§ëœ í”½ì…€ì˜ ê¹Šì´ ë²„í¼ì˜ ê°’ì„ ë¹„êµ
-- ì„±ê³µí•˜ë©´ ë Œë”ë§, ì‹¤íŒ¨í•˜ë©´ ê±¸ëŸ¬ì§
+- ·»´õ¸µµÈ ÇÈ¼¿ÀÇ ±íÀÌ °ªÀ» °Ë»çÇÏ¿© ·»´õ¸µ ¿©ºÎ¸¦ °áÁ¤ÇÏ´Â µ¥ »ç¿ë
+- ±íÀÌ Å×½ºÆ®´Â »ç¿ëÀÚ°¡ Á¤ÀÇÇÑ ±íÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ·»´õ¸µµÈ ÇÈ¼¿ÀÇ ±íÀÌ ¹öÆÛÀÇ °ªÀ» ºñ±³
+- ¼º°øÇÏ¸é ·»´õ¸µ, ½ÇÆĞÇÏ¸é °É·¯Áü
 
 Stencil
-- ê¹Šì´ ë²„í¼ì™€ í•¨ê»˜ ì‚¬ìš©ë˜ëŠ” 2D ì´ë¯¸ì§€ ë²„í¼
-- ê° í”½ì…€ì— ëŒ€í•´ ìŠ¤í…ì‹¤ ê°’ì„ ì €ì¥í•˜ë©°, ì´ ê°’ì€ ë Œë”ë§ ì¤‘ì— í…ŒìŠ¤íŠ¸ ë° ì—…ë°ì´íŠ¸
-- ë‹¤ì–‘í•œ ë Œë”ë§ ê¸°ìˆ ì—ì„œ ì‚¬ìš©
-  ex) ê·¸ë¦¼ì ë¶ˆë¥¨, í´ë¦¬í•‘ í‰ë©´, í¬í„¸ ë Œë”ë§ ë“±
+- ±íÀÌ ¹öÆÛ¿Í ÇÔ²² »ç¿ëµÇ´Â 2D ÀÌ¹ÌÁö ¹öÆÛ
+- °¢ ÇÈ¼¿¿¡ ´ëÇØ ½ºÅÙ½Ç °ªÀ» ÀúÀåÇÏ¸ç, ÀÌ °ªÀº ·»´õ¸µ Áß¿¡ Å×½ºÆ® ¹× ¾÷µ¥ÀÌÆ®
+- ´Ù¾çÇÑ ·»´õ¸µ ±â¼ú¿¡¼­ »ç¿ë
+  ex) ±×¸²ÀÚ ºÒ·ı, Å¬¸®ÇÎ Æò¸é, Æ÷ÅĞ ·»´õ¸µ µî
 
 Stencil Test
-- ë Œë”ë§ëœ í”½ì…€ì˜ ìŠ¤í…ì‹¤ ê°’ì„ ê²€ì‚¬í•˜ì—¬ ë Œë”ë§ ì—¬ë¶€ë¥¼ ê²°ì •í•˜ëŠ”ë° ì‚¬ìš©
-- ì‚¬ìš©ìê°€ ì •ì˜í•œ ìŠ¤í…ì‹¤ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ ë Œë”ë§ëœ í”½ì…€ì˜ ìŠ¤í…ì‹¤ ê°’ê³¼ ìŠ¤í…ì‹¤ ë²„í¼ì˜ ê°’ì„ ë¹„êµ
-- ìŠ¤í…ì‹¤ í…ŒìŠ¤íŠ¸ì— ì„±ê³µí•˜ë©´ í”½ì…€ì´ ë Œë”ë§, ì‹¤íŒ¨í•˜ë©´ ê±¸ëŸ¬ì§
+- ·»´õ¸µµÈ ÇÈ¼¿ÀÇ ½ºÅÙ½Ç °ªÀ» °Ë»çÇÏ¿© ·»´õ¸µ ¿©ºÎ¸¦ °áÁ¤ÇÏ´Âµ¥ »ç¿ë
+- »ç¿ëÀÚ°¡ Á¤ÀÇÇÑ ½ºÅÙ½Ç ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ·»´õ¸µµÈ ÇÈ¼¿ÀÇ ½ºÅÙ½Ç °ª°ú ½ºÅÙ½Ç ¹öÆÛÀÇ °ªÀ» ºñ±³
+- ½ºÅÙ½Ç Å×½ºÆ®¿¡ ¼º°øÇÏ¸é ÇÈ¼¿ÀÌ ·»´õ¸µ, ½ÇÆĞÇÏ¸é °É·¯Áü
 
 Blending
-- ë Œë”ë§ëœ í”½ì…€ì˜ ìƒ‰ìƒì„ ê²°ì •í•˜ëŠ” ë°©ë²• ì¤‘ í•˜ë‚˜
-- ë Œë”ë§ëœ í”½ì…€ì˜ ìƒ‰ìƒê³¼ ë Œë” íƒ€ê²Ÿì˜ í˜„ì¬ ìƒ‰ìƒì„ ê²°í•©í•˜ëŠ” ê³¼ì •
+- ·»´õ¸µµÈ ÇÈ¼¿ÀÇ »ö»óÀ» °áÁ¤ÇÏ´Â ¹æ¹ı Áß ÇÏ³ª
+- ·»´õ¸µµÈ ÇÈ¼¿ÀÇ »ö»ó°ú ·»´õ Å¸°ÙÀÇ ÇöÀç »ö»óÀ» °áÇÕÇÏ´Â °úÁ¤
 */
 
 /*
 Alpha To Coverage
-- ë©€í‹°ìƒ˜í”Œë§ì¸ ì•ˆí‹°ì—ì¼ë¦¬ì–´ì‹±(MSAA)ì„ ì‚¬ìš©í•  ë•Œ ì•ŒíŒŒê°’ì„ ì»¤ë²„ë¦¬ì§€ ë§ˆìŠ¤í¬ë¡œ ë³€í™˜í•˜ì—¬ íˆ¬ëª…ë„ë¥¼ êµ¬í˜„í•˜ëŠ” ê¸°ìˆ 
-- íˆ¬ëª…í•œ ê°ì²´ì˜ ê°€ì¥ìë¦¬ë¥¼ ë” ë¶€ë“œëŸ½ê²Œ ì²˜ë¦¬í•  ìˆ˜ ìˆìŒ
+- ¸ÖÆ¼»ùÇÃ¸µÀÎ ¾ÈÆ¼¿¡ÀÏ¸®¾î½Ì(MSAA)À» »ç¿ëÇÒ ¶§ ¾ËÆÄ°ªÀ» Ä¿¹ö¸®Áö ¸¶½ºÅ©·Î º¯È¯ÇÏ¿© Åõ¸íµµ¸¦ ±¸ÇöÇÏ´Â ±â¼ú
+- Åõ¸íÇÑ °´Ã¼ÀÇ °¡ÀåÀÚ¸®¸¦ ´õ ºÎµå·´°Ô Ã³¸®ÇÒ ¼ö ÀÖÀ½
 
 Independent Blend
-- ì—¬ëŸ¬ ë Œë” íƒ€ê²Ÿì— ëŒ€í•´ ê°ê° ë‹¤ë¥¸ ë¸”ë Œë“œ ìƒíƒœë¥¼ ì„¤ì •í•  ìˆ˜ ìˆë„ë¡ í•˜ëŠ” ê¸°ëŠ¥
+- ¿©·¯ ·»´õ Å¸°Ù¿¡ ´ëÇØ °¢°¢ ´Ù¸¥ ºí·»µå »óÅÂ¸¦ ¼³Á¤ÇÒ ¼ö ÀÖµµ·Ï ÇÏ´Â ±â´É
 */

@@ -1,31 +1,31 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "TypingText.h"
 
 void TypingText::RenderText
 (
-	const std::wstring& text,
+	const wstring& text,
 	const RECT& rect,
 	const float size,
 	const Color& color,
-	const std::wstring& font,
+	const wstring& font,
 	const DWRITE_FONT_WEIGHT& weight,
 	const DWRITE_FONT_STYLE& style,
 	const DWRITE_FONT_STRETCH& stretch
 )
 {
-	// ì „ì²´ í…ìŠ¤íŠ¸(fullText) ëŒ€ì‹ , visibleCharactersë§Œí¼ ìžë¥¸ í…ìŠ¤íŠ¸ë¥¼ ë Œë”ë§
-	std::wstring visibleText = text.substr(0, visibleCharacters);
+	// ÀüÃ¼ ÅØ½ºÆ®(fullText) ´ë½Å, visibleCharacters¸¸Å­ ÀÚ¸¥ ÅØ½ºÆ®¸¦ ·»´õ¸µ
+	wstring visibleText = text.substr(0, visibleCharacters);
 	fullText = text;
 	Texts::RenderText(visibleText, rect, size, color, font, weight, style, stretch);
 }
 
 void TypingText::Update()
 {
-	// ì—¬ê¸°ì„œ ê¸°ë³¸ Texts::Update()ê°€ íŠ¹ë³„í•œ ë¡œì§ì´ ì—†ë‹¤ë©´ ìƒëžµí•˜ê³  íƒ€ì´í•‘ ì—…ë°ì´íŠ¸ë§Œ ìˆ˜í–‰
-	elapsedTime += Time::Get()->GetDeltaTime();
+	// ¿©±â¼­ ±âº» Texts::Update()°¡ Æ¯º°ÇÑ ·ÎÁ÷ÀÌ ¾ø´Ù¸é »ý·«ÇÏ°í Å¸ÀÌÇÎ ¾÷µ¥ÀÌÆ®¸¸ ¼öÇà
+	elapsedTime += DELTA;
 	if (!complete && elapsedTime >= typingSpeed)
 	{
-		// typingSpeedë§ˆë‹¤ í•œ ê¸€ìžì”© ë…¸ì¶œ
+		// typingSpeed¸¶´Ù ÇÑ ±ÛÀÚ¾¿ ³ëÃâ
 		visibleCharacters++;
 		elapsedTime = 0.0f;
 		if (visibleCharacters >= fullText.size())

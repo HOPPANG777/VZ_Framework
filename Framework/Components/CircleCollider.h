@@ -1,11 +1,4 @@
-ï»¿#pragma once
-#include "Framework.h"
-
-#include "Component.h"
-#include "Collider.h"
-#include "Managers/CollisionManager.h"
-#include "Systems/Camera.h"
-#include "Utilities/Gizmo.h"
+#pragma once
 
 class CircleCollider : public Collider
 {
@@ -14,7 +7,7 @@ public:
     ~CircleCollider() override = default;
 
 public:
-    // Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
+    // ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
     void Update() override;
     void Render() override;
 

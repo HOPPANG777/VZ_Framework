@@ -1,9 +1,9 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "RectTransform.h"
 
 void RectTransform::Update()
 {
-    // S, R, T í–‰ë ¬ ê³„ì‚°
+    // S, R, T Çà·Ä °è»ê
     Matrix S = XMMatrixScalingFromVector(scale);
     Matrix R = XMMatrixRotationZ(rotation);
     Matrix T = XMMatrixTranslationFromVector(position);
@@ -13,8 +13,8 @@ void RectTransform::Update()
 
 void RectTransform::Render()
 {
-    // RectTransformì€ ì‹œê°ì ìœ¼ë¡œ ê·¸ë¦´ ìš”ì†Œê°€ ì—†ìœ¼ë¯€ë¡œ ë³´í†µ ë¹„ì›ë‹ˆë‹¤.
-    // (í•„ìš” ì‹œ, ë””ë²„ê·¸ìš© ê¸°ì¦ˆëª¨ ë“±ìœ¼ë¡œ í™•ìž¥ ê°€ëŠ¥)
+    // RectTransformÀº ½Ã°¢ÀûÀ¸·Î ±×¸± ¿ä¼Ò°¡ ¾øÀ¸¹Ç·Î º¸Åë ºñ¿ó´Ï´Ù.
+    // (ÇÊ¿ä ½Ã, µð¹ö±×¿ë ±âÁî¸ð µîÀ¸·Î È®Àå °¡´É)
 }
 
 Vector3 RectTransform::GetPosition() const
@@ -29,40 +29,40 @@ Vector3 RectTransform::GetScale() const
 
 float RectTransform::GetRotation() const
 {
-    // ë‚´ë¶€ëŠ” ë¼ë””ì•ˆì´ì§€ë§Œ, ì™¸ë¶€ì—” ê°ë„(ë„)ë¡œ ë°˜í™˜
+    // ³»ºÎ´Â ¶óµð¾ÈÀÌÁö¸¸, ¿ÜºÎ¿£ °¢µµ(µµ)·Î ¹ÝÈ¯
     return XMConvertToDegrees(rotation);
 }
 
-// ë¶€ëª¨ì˜ RECT ì •ë³´ê°€ ì—†ë‹¤ë©´, ì „ì—­ ë³€ìˆ˜ë¡œ ê´€ë¦¬ë˜ëŠ” ì°½ í¬ê¸°ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
+// ºÎ¸ðÀÇ RECT Á¤º¸°¡ ¾ø´Ù¸é, Àü¿ª º¯¼ö·Î °ü¸®µÇ´Â Ã¢ Å©±â¸¦ »ç¿ëÇÕ´Ï´Ù.
 RECT RectTransform::GetRect()
 {
-    // ë¶€ëª¨ ì‚¬ê°í˜• (ì—¬ê¸°ì„œëŠ” ì „ì²´ ì°½ í¬ê¸°ë¥¼ ì‚¬ìš©)
-    RECT parentRect = { -(LONG)(Values::GetWinWidth() * 0.5f), -(LONG)(Values::GetWinHeight() * 0.5f), (LONG)(Values::GetWinWidth() * 0.5f), (LONG)(Values::GetWinHeight() * 0.5f) };
-    LONG parentWidth  = (parentRect.right  - parentRect.left);
-    LONG parentHeight = (parentRect.bottom - parentRect.top);
+    // ºÎ¸ð »ç°¢Çü (¿©±â¼­´Â ÀüÃ¼ Ã¢ Å©±â¸¦ »ç¿ë)
+    RECT parentRect = { -(LONG)(gWinWidth * 0.5f), -(LONG)(gWinHeight * 0.5f), (LONG)(gWinWidth * 0.5f), (LONG)(gWinHeight * 0.5f) };
+    float parentWidth  = (parentRect.right  - parentRect.left);
+    float parentHeight = (parentRect.bottom - parentRect.top);
 
 
-    // ì•µì»¤ì™€ ì˜¤í”„ì…‹ì„ ì´ìš©í•˜ì—¬ ê¸°ë³¸ ì‚¬ê°í˜• ê³„ì‚°
+    // ¾ÞÄ¿¿Í ¿ÀÇÁ¼ÂÀ» ÀÌ¿ëÇÏ¿© ±âº» »ç°¢Çü °è»ê
     float anchorPosMinX = parentRect.left + anchorMin.x * parentWidth  + offsetMin.x;
     float anchorPosMinY = parentRect.top  + anchorMin.y * parentHeight + offsetMin.y;
     float anchorPosMaxX = parentRect.left + anchorMax.x * parentWidth  + offsetMax.x;
     float anchorPosMaxY = parentRect.top  + anchorMax.y * parentHeight + offsetMax.y;
 
-    // ê¸°ë³¸ ì‚¬ê°í˜•ì˜ ì¤‘ì‹¬ ë° í¬ê¸°
+    // ±âº» »ç°¢ÇüÀÇ Áß½É ¹× Å©±â
     float anchoredCenterX = (anchorPosMinX + anchorPosMaxX) * 0.5f;
     float anchoredCenterY = (anchorPosMinY + anchorPosMaxY) * 0.5f;
     float anchoredWidth   = anchorPosMaxX - anchorPosMinX;
     float anchoredHeight  = anchorPosMaxY - anchorPosMinY;
 
-    // ì¶”ê°€ë¡œ position ê°’ì„ ë”í•´ ìµœì¢… ì¤‘ì‹¬ ê³„ì‚° (ì•µì»¤ ê¸°ì¤€ ì˜¤í”„ì…‹)
+    // Ãß°¡·Î position °ªÀ» ´õÇØ ÃÖÁ¾ Áß½É °è»ê (¾ÞÄ¿ ±âÁØ ¿ÀÇÁ¼Â)
     float finalCenterX = anchoredCenterX + position.x;
     float finalCenterY = anchoredCenterY + position.y;
 
-    // ì¶”ê°€ scaleì„ ê¸°ë³¸ í¬ê¸°ì— ë°˜ì˜ (ë„ˆë¹„, ë†’ì´ ë³€í™”ëŸ‰)
+    // Ãß°¡ scaleÀ» ±âº» Å©±â¿¡ ¹Ý¿µ (³Êºñ, ³ôÀÌ º¯È­·®)
     float finalWidth  = anchoredWidth + scale.x;
     float finalHeight = anchoredHeight + scale.y;
 
-    // ìµœì¢… ì¤‘ì‹¬ê³¼ í¬ê¸°ë¥¼ ì´ìš©í•´ RECT ê³„ì‚° (ì¤‘ì‹¬ ê¸°ì¤€ ì¢Œí‘œ)
+    // ÃÖÁ¾ Áß½É°ú Å©±â¸¦ ÀÌ¿ëÇØ RECT °è»ê (Áß½É ±âÁØ ÁÂÇ¥)
     LONG left   = (LONG)(finalCenterX - finalWidth * 0.5f);
     LONG right  = (LONG)(finalCenterX + finalWidth * 0.5f);
     LONG top    = (LONG)(finalCenterY - finalHeight * 0.5f);
@@ -74,7 +74,7 @@ RECT RectTransform::GetRect()
 
 RECT RectTransform::GetCorrectedRect()
 {
-    // 1) (0,0)ì´ ì¢Œì¸¡ ìƒë‹¨, Y ì•„ëž˜ë¡œ ì¦ê°€í•˜ëŠ” GetRect()
+    // 1) (0,0)ÀÌ ÁÂÃø »ó´Ü, Y ¾Æ·¡·Î Áõ°¡ÇÏ´Â GetRect()
     RECT rect = GetRect();
 
     return rect;
@@ -109,23 +109,23 @@ void RectTransform::SetAnchorAndOffset(const Vector2& newAnchorMin, const Vector
     offsetMax = newOffsetMax;
 }
 
-// ê¸°ë³¸ ë²„ì „: ê¸°ë³¸ ì•µì»¤/ì˜¤í”„ì…‹ ê°’ ì ìš© (ì´ë¯¸ ì´ˆê¸°ê°’ì´ ìžˆìœ¼ë¯€ë¡œ ê·¸ëŒ€ë¡œ ë‘ )
+// ±âº» ¹öÀü: ±âº» ¾ÞÄ¿/¿ÀÇÁ¼Â °ª Àû¿ë (ÀÌ¹Ì ÃÊ±â°ªÀÌ ÀÖÀ¸¹Ç·Î ±×´ë·Î µÒ)
 void RectTransform::SetAnchorAndOffset()
 {
-    // ì—¬ê¸°ì—ì„œ ì¶”ê°€ì ì¸ ë¡œì§ì„ ë„£ì„ ìˆ˜ë„ ìžˆìŠµë‹ˆë‹¤.
+    // ¿©±â¿¡¼­ Ãß°¡ÀûÀÎ ·ÎÁ÷À» ³ÖÀ» ¼öµµ ÀÖ½À´Ï´Ù.
 }
 
 void RectTransform::Move(const Vector3& speed)
 {
-    position += speed * Time::Get()->GetDeltaTime();
+    position += speed * DELTA;
 }
 
 void RectTransform::Rotate(float degrees)
 {
-    rotation += XMConvertToRadians(degrees) * Time::Get()->GetDeltaTime();
+    rotation += XMConvertToRadians(degrees) * DELTA;
 }
 
 void RectTransform::Scale(const Vector3& scale)
 {
-    this->scale += scale * Time::Get()->GetDeltaTime();
+    this->scale += scale * DELTA;
 }

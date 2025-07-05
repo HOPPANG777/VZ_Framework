@@ -1,4 +1,4 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Animator.h"
 
 Animator::Animator() {}
@@ -7,10 +7,10 @@ Animator::~Animator() {}
 
 void Animator::Update()
 {
-    // ê²½ê³¼ ì‹œê°„ì´ playRateë³´ë‹¤ ì»¤ì§€ë©´ ë‹¤ìŒ í”„ë ˆì„ìœ¼ë¡œ ë„˜ì–´ê°
+    // °æ°ú ½Ã°£ÀÌ playRateº¸´Ù Ä¿Áö¸é ´ÙÀ½ ÇÁ·¹ÀÓÀ¸·Î ³Ñ¾î°¨
     if (deltaTime >= playRate)
     {
-        // ì •ë°©í–¥ ì¬ìƒ(bReversed == false)
+        // Á¤¹æÇâ Àç»ı(bReversed == false)
         if (currentClip->bReversed == false)
         {
             ++currentFrameIndex;
@@ -19,9 +19,9 @@ void Animator::Update()
 
             currentFrame = currentClip->keyFrames[currentFrameIndex];
         }
-        else // ì—­ì¬ìƒ
+        else // ¿ªÀç»ı
         {
-            // ì—­ì¬ìƒ ì‹œì—ëŠ” ì¸ë±ìŠ¤ë¥¼ ê°ì†Œ
+            // ¿ªÀç»ı ½Ã¿¡´Â ÀÎµ¦½º¸¦ °¨¼Ò
             if (currentFrameIndex == 0)
                 currentFrameIndex = currentClip->frameCount;
 
@@ -33,42 +33,42 @@ void Animator::Update()
     }
     else
     {
-        // playRate ì´ë‚´ë¼ë©´ ê³„ì† ì‹œê°„ì„ ëˆ„ì 
+        // playRate ÀÌ³»¶ó¸é °è¼Ó ½Ã°£À» ´©Àû
         deltaTime += DELTA;
     }
 }
 
-// ì• ë‹ˆë©”ì´í„°ì— í´ë¦½ì„ ì¶”ê°€
+// ¾Ö´Ï¸ŞÀÌÅÍ¿¡ Å¬¸³À» Ãß°¡
 void Animator::AddAnimClip(const std::shared_ptr<AnimationClip>& animClip)
 {
-    // ì¤‘ë³µ ì‚½ì… ì‹œ ë®ì–´ì“°ê±°ë‚˜, í˜¹ì€ ë¬´ì‹œí•˜ëŠ” ë¡œì§ì€ ì„ íƒ
-    // ì—¬ê¸°ì„œëŠ” ê°™ì€ ì´ë¦„ì´ ë“¤ì–´ì˜¤ë©´ ë®ì–´ì“°ëŠ” ê²ƒìœ¼ë¡œ ì²˜ë¦¬
+    // Áßº¹ »ğÀÔ ½Ã µ¤¾î¾²°Å³ª, È¤Àº ¹«½ÃÇÏ´Â ·ÎÁ÷Àº ¼±ÅÃ
+    // ¿©±â¼­´Â °°Àº ÀÌ¸§ÀÌ µé¾î¿À¸é µ¤¾î¾²´Â °ÍÀ¸·Î Ã³¸®
     animClips[animClip->clipName] = animClip;
 }
 
-// íŠ¹ì • ì´ë¦„ì˜ í´ë¦½ì„ í˜„ì¬ ì‹¤í–‰ í´ë¦½ìœ¼ë¡œ ì„¤ì •
+// Æ¯Á¤ ÀÌ¸§ÀÇ Å¬¸³À» ÇöÀç ½ÇÇà Å¬¸³À¸·Î ¼³Á¤
 void Animator::SetCurrentAnimClip(const std::wstring& clipName)
 {
-    // í˜„ì¬ í´ë¦½ê³¼ ìš”ì²­í•œ í´ë¦½ì´ ê°™ë‹¤ë©´ êµì²´ X
+    // ÇöÀç Å¬¸³°ú ¿äÃ»ÇÑ Å¬¸³ÀÌ °°´Ù¸é ±³Ã¼ X
     if (currentClip && (currentClip->clipName == clipName))
         return;
 
-    // í´ë¦½ì´ ì¡´ì¬í•œë‹¤ë©´ êµì²´
+    // Å¬¸³ÀÌ Á¸ÀçÇÑ´Ù¸é ±³Ã¼
     if (CheckExist(clipName))
     {
         currentClip = animClips[clipName];
 
-        // ì‹œì‘ ì‹œì ë§ˆë‹¤ ì‹œê°„ ì´ˆê¸°í™”
+        // ½ÃÀÛ ½ÃÁ¡¸¶´Ù ½Ã°£ ÃÊ±âÈ­
         deltaTime = 0.0f;
 
-        // ì—­ì¬ìƒì´ë¼ë©´ ë§ˆì§€ë§‰ í”„ë ˆì„ì—ì„œ ì‹œì‘
-        // ì•„ë‹ˆë©´ 0ë²ˆ í”„ë ˆì„ì—ì„œ ì‹œì‘
+        // ¿ªÀç»ıÀÌ¶ó¸é ¸¶Áö¸· ÇÁ·¹ÀÓ¿¡¼­ ½ÃÀÛ
+        // ¾Æ´Ï¸é 0¹ø ÇÁ·¹ÀÓ¿¡¼­ ½ÃÀÛ
         if (currentClip->bReversed)
             currentFrameIndex = currentClip->frameCount - 1;
         else
             currentFrameIndex = 0;
 
-        // í˜„ì¬ í”„ë ˆì„ UVë„ ê°±ì‹ 
+        // ÇöÀç ÇÁ·¹ÀÓ UVµµ °»½Å
         currentFrame = currentClip->keyFrames[currentFrameIndex];
     }
 }

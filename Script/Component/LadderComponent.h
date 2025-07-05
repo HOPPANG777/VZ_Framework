@@ -1,15 +1,11 @@
-﻿#pragma once
+#pragma once
 
 #include "PlayerController.h"
-#include "Components/Component.h"
-#include "Components/BoxCollider.h"
-#include "Components/Transform.h"
-#include "Managers/SceneManager.h"
 
 class LadderComponent : public Component
 {
 public:
-	LadderComponent(const std::string& name = "LadderComponent") : Component(name) {}
+	LadderComponent(const string& name = "LadderComponent") : Component(name) {}
 	virtual ~LadderComponent() override = default;
 
 public:

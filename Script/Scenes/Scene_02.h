@@ -1,14 +1,9 @@
-ï»¿#pragma once
-
-#include "Interfaces/IScene.h"
-#include "Objects/TextureObject/TextureRect.h"
-#include "Objects/ColorObject/ColorRect.h"
-#include "Managers/SceneManager.h"
+#pragma once
 
 class Scene_02 : public Scene
 {
 public:
-    // Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
+    // SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
     void Awake() override;
     void Start() override;
 
@@ -29,11 +24,11 @@ private:
     float timer = 0.0f;
     bool isDone = false;
 
-    std::vector<std::shared_ptr<GameObject>> objects;
+    vector<shared_ptr<Object>> objects;
 
-    //std::vector<std::shared_ptr<UIElement>> UIs;
+    //vector<shared_ptr<UIElement>> UIs;
 
-    std::shared_ptr<GameObject> splash;
+    shared_ptr<Object> splash;
 
     bool isLoaded = false;
 

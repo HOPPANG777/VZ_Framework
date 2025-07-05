@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 
 class ResourcesManager
@@ -6,14 +6,14 @@ class ResourcesManager
 	DECLARE_SINGLETON(ResourcesManager);
 
 public:
-    // ë‹¨ìˆœ ì‹œë®¬ë ˆì´ì…˜: ê° ë¦¬ì†ŒìŠ¤ ë‹¹ 100ms ì†Œìš”
-    void LoadResource(const std::string& resource);
-    bool IsResourceLoaded(const std::string& resource);
-    bool AreResourcesLoaded(const std::vector<std::string>& resources);
+    // ´Ü¼ø ½Ã¹Ä·¹ÀÌ¼Ç: °¢ ¸®¼Ò½º ´ç 100ms ¼Ò¿ä
+    void LoadResource(const string& resource);
+    bool IsResourceLoaded(const string& resource);
+    bool AreResourcesLoaded(const vector<string>& resources);
 
 private:
-    std::mutex mtx;
-    std::unordered_set<std::string> loadedResources;
+    mutex mtx;
+    unordered_set<string> loadedResources;
 
 };
 

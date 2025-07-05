@@ -1,16 +1,11 @@
-ï»¿#pragma once
-
-#include "Components/Collider.h"
-#include "Components/Component.h"
-#include "Utilities/Gizmo.h"
-#include "Objects/BaseObject/GameObject.h"
+#pragma once
 
 class SolidCollider : public Collider
 {
 public:
-    // offset: ì†Œìœ  ê°ì²´ì˜ ê¸°ì¤€ ìœ„ì¹˜ì—ì„œì˜ ìƒëŒ€ ì¢Œí‘œ
-    // size: ì¶©ëŒ ì˜ì—­ í¬ê¸° (AABB)
-    SolidCollider(const std::string& name, const Vector3& offset, const Vector3& size, const Color& color = WHITE) : Collider(name, Type::Box), offset(offset), size(size), color(color)
+    // offset: ¼ÒÀ¯ °´Ã¼ÀÇ ±âÁØ À§Ä¡¿¡¼­ÀÇ »ó´ë ÁÂÇ¥
+    // size: Ãæµ¹ ¿µ¿ª Å©±â (AABB)
+    SolidCollider(const string& name, const Vector3& offset, const Vector3& size, const Color& color = WHITE) : Collider(name, Type::Box), offset(offset), size(size), color(color)
     {
 
     }
@@ -21,16 +16,16 @@ public:
     virtual void Render() override;
 
 public:
-    // ë‹¤ë¥¸ Colliderì™€ ì¶©ëŒí–ˆì„ ë•Œ í˜¸ì¶œë˜ì–´ ìœ„ì¹˜ë¥¼ ì¡°ì •í•˜ëŠ” í•¨ìˆ˜
+    // ´Ù¸¥ Collider¿Í Ãæµ¹ÇßÀ» ¶§ È£ÃâµÇ¾î À§Ä¡¸¦ Á¶Á¤ÇÏ´Â ÇÔ¼ö
     void ResolveCollision(Collider* other);
 
 public:
-    // AABB ì •ë³´ ê³„ì‚°ì„ ìœ„í•œ í—¬í¼ í•¨ìˆ˜ë“¤
+    // AABB Á¤º¸ °è»êÀ» À§ÇÑ ÇïÆÛ ÇÔ¼öµé
     Vector3 GetCenter() const;
     Vector3 GetHalfSize() const;
 
 private:
-    Vector3 offset; // ì†Œìœ  ê°ì²´ ê¸°ì¤€ ìƒëŒ€ ìœ„ì¹˜
-    Vector3 size;   // ì¶©ëŒ ì˜ì—­ í¬ê¸°
+    Vector3 offset; // ¼ÒÀ¯ °´Ã¼ ±âÁØ »ó´ë À§Ä¡
+    Vector3 size;   // Ãæµ¹ ¿µ¿ª Å©±â
     Color color;
 };

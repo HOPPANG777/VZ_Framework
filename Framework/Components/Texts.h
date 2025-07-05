@@ -1,55 +1,48 @@
-ï»¿#pragma once
-
-#include "Component.h"
-#include "Structs/FontBrushDesc.h"
-#include "Structs/FontTextDesc.h"
-#include "Utilities/DirectHelper.h"
-#include "Systems/Graphics.h"
-#include "Objects/BaseObject/GameObject.h"
+#pragma once
 
 class Texts : public Component
 {
 public:
-    Texts(const std::string& name = "Texts") : Component(name) {}
+    Texts(const string& name = "Texts") : Component(name) {}
     virtual ~Texts() = default;
 
     virtual void RenderText
     (
-        const std::wstring& text,
+        const wstring& text,
         const RECT& rect,
         const float size = 25.0f,
         const Color& color = WHITE,
-        const std::wstring& font = L"Pretendard JP",
+        const wstring& font = L"Pretendard JP",
         const DWRITE_FONT_WEIGHT& weight = DWRITE_FONT_WEIGHT_NORMAL,
         const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL,
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL
     );
 
-    virtual void Update() override {} // ì• ë‹ˆë©”ì´ì…˜ì„ êµ¬í˜„í•˜ë ¤ë©´ ì—…ë°ì´íŠ¸ ë©”ì„œë“œ ì‚¬ìš©
+    virtual void Update() override {} // ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ±¸ÇöÇÏ·Á¸é ¾÷µ¥ÀÌÆ® ¸Ş¼­µå »ç¿ë
     virtual void Render() override {}
 
 public:
-    void AttachToObject(GameObject* object);
+    void AttachToObject(Object* object);
     void Detach();
 	void SetTextOut(const bool textOut) { this->textOut = textOut; }
 	bool GetTextOut() const { return textOut; }
 
 protected:
-    std::vector<std::unique_ptr<FontBrushDesc>> fontBrush;
-    std::vector<std::unique_ptr<FontTextDesc>> fontText;
+    vector<unique_ptr<FontBrushDesc>> fontBrush;
+    vector<unique_ptr<FontTextDesc>> fontText;
 
     FontBrushDesc* GetOrCreateBrush(const Color& color);
     FontTextDesc* GetOrCreateTextFormat
     (
-        const std::wstring& font,
+        const wstring& font,
         float size,
         const DWRITE_FONT_WEIGHT& weight,
         const DWRITE_FONT_STYLE& style,
         const DWRITE_FONT_STRETCH& stretch
     );
 
-    GameObject* attachedObject = nullptr; // í…ìŠ¤íŠ¸ê°€ ë”°ë¼ë‹¤ë‹ ê°ì²´
-    Vector3 offset = Values::ZeroVec3;  // ê°ì²´ ìœ„ì¹˜ì— ë”í•  ì˜¤í”„ì…‹
+    Object* attachedObject = nullptr; // ÅØ½ºÆ®°¡ µû¶ó´Ù´Ò °´Ã¼
+    Vector3 offset = Values::ZeroVec3;  // °´Ã¼ À§Ä¡¿¡ ´õÇÒ ¿ÀÇÁ¼Â
 
     bool textOut = false;
 

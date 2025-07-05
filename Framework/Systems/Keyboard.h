@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
 
 #define MAX_INPUT_KEY 256
 
@@ -23,9 +22,9 @@ public:
 	bool Press(const DWORD key) const { return keyMap[key] == KEY_INPUT_STATUS_PRESS; }
 
 private:
-	std::array<unsigned char, MAX_INPUT_KEY> keyState = { 0 };
-	std::array<unsigned char, MAX_INPUT_KEY> keyOldState = { 0 };
-	std::array<unsigned char, MAX_INPUT_KEY> keyMap = { 0 };
+	array<unsigned char, MAX_INPUT_KEY> keyState = { 0 };
+	array<unsigned char, MAX_INPUT_KEY> keyOldState = { 0 };
+	array<unsigned char, MAX_INPUT_KEY> keyMap = { 0 };
 
 };
 

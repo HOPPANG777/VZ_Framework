@@ -1,7 +1,7 @@
 ﻿#include "Framework.h"
 #include "PlayerMove.h"
 
-PlayerMove::PlayerMove(const std::string& name, float spd)
+PlayerMove::PlayerMove(const string& name, float spd)
     : Component(name), speed(spd), currentSpeed(spd),
       gravity(150.0f), originGravity(150.0f), jumpVelocity(0.0f),
       isJump(false), isBetween(false), isFall(false), isCrouch(false),
@@ -18,24 +18,24 @@ void PlayerMove::Update()
     Vector3 pos = transform->GetPosition();
 
     // 숙이기 상태 업데이트
-    if (Input::Get()->KeyPressed(VK_CONTROL)) isCrouch = true;
-    else if (Input::Get()->KeyUp(VK_CONTROL)) isCrouch = false;
+    if (INPUT->KeyPressed(VK_CONTROL)) isCrouch = true;
+    else if (INPUT->KeyUp(VK_CONTROL)) isCrouch = false;
 
     // 좌우 이동 처리
     currentSpeed = isCrouch ? speed * 0.25f : speed;
-    if (Input::Get()->KeyPressed('A'))
+    if (INPUT->KeyPressed('A'))
     {
         isRight = false;
-        pos.x -= currentSpeed * Time::Get()->GetDeltaTime();
+        pos.x -= currentSpeed * TIME->GetDeltaTime();
     }
-    if (Input::Get()->KeyPressed('D'))
+    if (INPUT->KeyPressed('D'))
     {
         isRight = true;
-        pos.x += currentSpeed * Time::Get()->GetDeltaTime();
+        pos.x += currentSpeed * TIME->GetDeltaTime();
     }
 
     // 점프 시작
-    if (Input::Get()->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall)
+    if (INPUT->KeyDown(VK_SPACE) && !isJump && !isBetween && !isFall)
     {
         isJump = true;
         jumpVelocity = speed * 2.0f;
@@ -45,9 +45,9 @@ void PlayerMove::Update()
     // 수직 이동 및 중력 적용
     if (isJump)
     {
-        pos.y += jumpVelocity * Time::Get()->GetDeltaTime();
-        jumpVelocity -= gravity * Time::Get()->GetDeltaTime();
-        gravity += (gravity * 2.0f) * Time::Get()->GetDeltaTime();
+        pos.y += jumpVelocity * TIME->GetDeltaTime();
+        jumpVelocity -= gravity * TIME->GetDeltaTime();
+        gravity += (gravity * 2.0f) * TIME->GetDeltaTime();
 
         if (gravity > (speed * 1.5f) && gravity < (speed * 2.0f))
         {
@@ -57,9 +57,9 @@ void PlayerMove::Update()
     }
     else if (isBetween)
     {
-        pos.y += jumpVelocity * Time::Get()->GetDeltaTime();
-        pos.y -= gravity * Time::Get()->GetDeltaTime();
-        gravity += (gravity * 2.0f) * Time::Get()->GetDeltaTime();
+        pos.y += jumpVelocity * TIME->GetDeltaTime();
+        pos.y -= gravity * TIME->GetDeltaTime();
+        gravity += (gravity * 2.0f) * TIME->GetDeltaTime();
 
         if (gravity > (speed * 2.0f))
         {
@@ -69,8 +69,8 @@ void PlayerMove::Update()
     }
     else if (isFall)
     {
-        pos.y -= gravity * Time::Get()->GetDeltaTime();
-        gravity += (gravity * 2.0f) * Time::Get()->GetDeltaTime();
+        pos.y -= gravity * TIME->GetDeltaTime();
+        gravity += (gravity * 2.0f) * TIME->GetDeltaTime();
     }
     else
     {

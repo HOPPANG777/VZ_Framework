@@ -1,9 +1,8 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
 
 struct WinDesc
 {
-	std::wstring appName = L"";
+	wstring appName = L"";
 	HINSTANCE instance = nullptr;
 	HWND handle = nullptr;
 	UINT width;

@@ -1,4 +1,4 @@
-ï»¿//class AlphaBuffer : public ConstantBuffer
+//class AlphaBuffer : public ConstantBuffer
 //{
 //	struct AlphaStruct
 //	{
@@ -12,13 +12,13 @@
 //public:
 //	AlphaBuffer() : ConstantBuffer(&data, sizeof(data))
 //	{
-//		// ê¸°ë³¸ê°’ ì„¤ì •
+//		// ±âº»°ª ¼³Á¤
 //		data.alphaColor = CLEAR;
 //		data.alpha = 0.0f;
 //		data.dummy = Vector3(0, 0, 0);
 //	}
 //
-//	// ì•ŒíŒŒê°’ ë° ì•ŒíŒŒ ìƒ‰ìƒì„ ìˆ˜ì •í•˜ê±°ë‚˜ ì–»ì„ ìˆ˜ ìˆëŠ” í•¨ìˆ˜ë“¤
+//	// ¾ËÆÄ°ª ¹× ¾ËÆÄ »ö»óÀ» ¼öÁ¤ÇÏ°Å³ª ¾òÀ» ¼ö ÀÖ´Â ÇÔ¼öµé
 //	float GetAlpha() const { return data.alpha; }
 //	Color GetAlphaColor() const { return data.alphaColor; }
 //
@@ -33,9 +33,9 @@
 //{
 //	struct ShaderStruct
 //	{
-//		int     selection;       // íš¨ê³¼ ì„ íƒ ë²ˆí˜¸ (ì˜ˆ: 0: ì—†ìŒ, 1: ìƒ‰ë°˜ì „, 2: í‘ë°±, 3: ë¸”ëŸ¬ ë“±)
-//		int     blurCount;       // ë¸”ëŸ¬ ê°•ë„ (ìƒ˜í”Œë§ íšŸìˆ˜ ë“±)
-//		Vector2 textureSize;     // í…ìŠ¤ì²˜ ì‚¬ì´ì¦ˆ (ë¸”ëŸ¬ íš¨ê³¼ ê³„ì‚° ë“±ì—ì„œ ì‚¬ìš©)
+//		int     selection;       // È¿°ú ¼±ÅÃ ¹øÈ£ (¿¹: 0: ¾øÀ½, 1: »ö¹İÀü, 2: Èæ¹é, 3: ºí·¯ µî)
+//		int     blurCount;       // ºí·¯ °­µµ (»ùÇÃ¸µ È½¼ö µî)
+//		Vector2 textureSize;     // ÅØ½ºÃ³ »çÀÌÁî (ºí·¯ È¿°ú °è»ê µî¿¡¼­ »ç¿ë)
 //	};
 //
 //	ShaderStruct data;
@@ -43,18 +43,18 @@
 //public:
 //	ShaderBuffer() : ConstantBuffer(&data, sizeof(data))
 //	{
-//		// ê¸°ë³¸ê°’ ì„¤ì •
+//		// ±âº»°ª ¼³Á¤
 //		data.selection = 1;
 //		data.blurCount = 1;
 //		data.textureSize = Vector2(0, 0);
 //	}
 //
-//	// CPUì—ì„œ ë°ì´í„°ë¥¼ ìˆ˜ì •í•  ìˆ˜ ìˆëŠ” í•¨ìˆ˜ë“¤
+//	// CPU¿¡¼­ µ¥ÀÌÅÍ¸¦ ¼öÁ¤ÇÒ ¼ö ÀÖ´Â ÇÔ¼öµé
 //	int* GetSelectionPtr() { return &data.selection; }
 //	int* GetBlurCountPtr() { return &data.blurCount; }
 //	void SetTextureSize(const Vector2 size) { data.textureSize = size; }
 //
-//	// ê°ì²´ ë‚´ë¶€ ë°ì´í„°ë¥¼ ì½ê¸° ì „ìš©ìœ¼ë¡œ ì–»ê³  ì‹¶ì„ ë•Œ
+//	// °´Ã¼ ³»ºÎ µ¥ÀÌÅÍ¸¦ ÀĞ±â Àü¿ëÀ¸·Î ¾ò°í ½ÍÀ» ¶§
 //	const ShaderStruct& GetShaderStruct() const { return data; }
 //};
 
@@ -62,15 +62,15 @@
 //{
 //    if (width == 0 || height == 0 || spacing == 0) assert(false);
 //
-//    // ì „ì²´ íƒ€ì¼ë§µì˜ í¬ê¸°
+//    // ÀüÃ¼ Å¸ÀÏ¸ÊÀÇ Å©±â
 //    float mapWidth = static_cast<float>(width * spacing);
 //    float mapHeight = static_cast<float>(height * spacing);
-//    // ì „ì²´ íƒ€ì¼ë§µì˜ ì¤‘ì‹¬ ì˜¤í”„ì…‹
+//    // ÀüÃ¼ Å¸ÀÏ¸ÊÀÇ Áß½É ¿ÀÇÁ¼Â
 //    float offsetX = mapWidth * 0.5f;
 //    float offsetY = mapHeight * 0.5f;
 //
-//    // CENTERëŠ” í•´ìƒë„ ê¸°ì¤€ í™”ë©´ ì¤‘ì•™ìœ¼ë¡œ ê°€ì • (ì˜ˆ: Values::Center ë˜ëŠ” ì „ì—­ CENTER)
-//    // ì˜ˆì‹œ: Vector3 CENTER = Vector3(WIN_DEFAULT_WIDTH * 0.5f, WIN_DEFAULT_HEIGHT * 0.5f, 0);
+//    // Values::GetCenter()´Â ÇØ»óµµ ±âÁØ È­¸é Áß¾ÓÀ¸·Î °¡Á¤ (¿¹: Values::Center ¶Ç´Â Àü¿ª Values::GetCenter())
+//    // ¿¹½Ã: Vector3 Values::GetCenter() = Vector3(Values::GetWinWidth() * 0.5f, Values::GetWinHeight() * 0.5f, 0);
 //
 //    tiles.resize(height);
 //
@@ -81,9 +81,9 @@
 //        for (UINT x = 0; x < width; x++)
 //        {
 //             tile = <Tile>();
-//            // ê° íƒ€ì¼ì˜ ì›ë˜ ìœ„ì¹˜ ê³„ì‚°: (x * spacing, y * spacing)
-//            // ê·¸ í›„, ì „ì²´ ë§µì˜ ì¤‘ì‹¬ì„ ë¹¼ê³  CENTERë¥¼ ë”í•©ë‹ˆë‹¤.
-//            Vector3 position(static_cast<float>(x * spacing) - offsetX + CENTER.x, static_cast<float>(y * spacing) - offsetY + CENTER.y, 0.0f);
+//            // °¢ Å¸ÀÏÀÇ ¿ø·¡ À§Ä¡ °è»ê: (x * spacing, y * spacing)
+//            // ±× ÈÄ, ÀüÃ¼ ¸ÊÀÇ Áß½ÉÀ» »©°í Values::GetCenter()¸¦ ´õÇÕ´Ï´Ù.
+//            Vector3 position(static_cast<float>(x * spacing) - offsetX + Values::GetCenter().x, static_cast<float>(y * spacing) - offsetY + Values::GetCenter().y, 0.0f);
 //            tile->SetPosition(position);
 //            tile->SetIndex(index++);
 //            tiles[y][x] = tile;
@@ -92,59 +92,34 @@
 //
 //}
 
-// ì¡°ê±´: íƒ€ê²Ÿì˜ xì¢Œí‘œê°€ ìœˆë„ìš°ì˜ ì¤‘ì•™ë³´ë‹¤ ì˜¤ë¥¸ìª½ì´ë©´ì„œ 2.5ë°° ë„ˆë¹„ë³´ë‹¤ ì‘ì„ ê²½ìš°
-//if (targetPos.x > WIN_DEFAULT_WIDTH * minRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxRatio)
+// Á¶°Ç: Å¸°ÙÀÇ xÁÂÇ¥°¡ À©µµ¿ìÀÇ Áß¾Óº¸´Ù ¿À¸¥ÂÊÀÌ¸é¼­ 2.5¹è ³Êºñº¸´Ù ÀÛÀ» °æ¿ì
+//if (targetPos.x > Values::GetWinWidth() * minRatio && targetPos.x < Values::GetWinWidth() * maxRatio)
 //{
-//    // íƒ€ê²Ÿì˜ x ì¢Œí‘œê°€ í™”ë©´ ì¤‘ì•™ì— ì˜¤ë„ë¡ ì¹´ë©”ë¼ x ìœ„ì¹˜ë¥¼ ì¡°ì •
-//    Vector3 newCamPos = Vector3(targetPos.x - WIN_DEFAULT_WIDTH / 2.0f, position.y, position.z);
+//    // Å¸°ÙÀÇ x ÁÂÇ¥°¡ È­¸é Áß¾Ó¿¡ ¿Àµµ·Ï Ä«¸Ş¶ó x À§Ä¡¸¦ Á¶Á¤
+//    Vector3 newCamPos = Vector3(targetPos.x - Values::GetWinWidth() / 2.0f, position.y, position.z);
 //    SetPosition(newCamPos);
 //}
 
-// xì™€ y ëª¨ë‘ ê°ê°ì˜ ì¡°ê±´ ë²”ìœ„ ë‚´ì— ìˆì„ ê²½ìš°ì—ë§Œ ì—…ë°ì´íŠ¸
-//if (targetPos.x > WIN_DEFAULT_WIDTH * minXRatio && targetPos.x < WIN_DEFAULT_WIDTH * maxXRatio &&
-//    targetPos.y > WIN_DEFAULT_HEIGHT * minYRatio && targetPos.y < WIN_DEFAULT_HEIGHT * maxYRatio)
+// x¿Í y ¸ğµÎ °¢°¢ÀÇ Á¶°Ç ¹üÀ§ ³»¿¡ ÀÖÀ» °æ¿ì¿¡¸¸ ¾÷µ¥ÀÌÆ®
+//if (targetPos.x > Values::GetWinWidth() * minXRatio && targetPos.x < Values::GetWinWidth() * maxXRatio &&
+//    targetPos.y > Values::GetWinHeight() * minYRatio && targetPos.y < Values::GetWinHeight() * maxYRatio)
 //{
-//    // targetì˜ ì¤‘ì•™ì´ í™”ë©´ ì¤‘ì•™ì— ì˜¤ë„ë¡ ì¹´ë©”ë¼ ìœ„ì¹˜ ì„¤ì •
-//    float newX = targetPos.x - WIN_DEFAULT_WIDTH / 2.0f;
-//    float newY = targetPos.y - WIN_DEFAULT_HEIGHT / 2.0f;
+//    // targetÀÇ Áß¾ÓÀÌ È­¸é Áß¾Ó¿¡ ¿Àµµ·Ï Ä«¸Ş¶ó À§Ä¡ ¼³Á¤
+//    float newX = targetPos.x - Values::GetWinWidth() / 2.0f;
+//    float newY = targetPos.y - Values::GetWinHeight() / 2.0f;
 //    SetPosition(Vector3(newX, newY, position.z));
 //}
 
-// ë§Œì•½ ì›ë³¸ ë°°ê²½ì´ ì™„ì „íˆ ì™¼ìª½ìœ¼ë¡œ ë²—ì–´ë‚¬ë‹¤ë©´, ë³µì œ ë°°ê²½ì˜ ì˜¤ë¥¸ìª½ì— ì¬ë°°ì¹˜
+// ¸¸¾à ¿øº» ¹è°æÀÌ ¿ÏÀüÈ÷ ¿ŞÂÊÀ¸·Î ¹ş¾î³µ´Ù¸é, º¹Á¦ ¹è°æÀÇ ¿À¸¥ÂÊ¿¡ Àç¹èÄ¡
 //if (newBgPos.x + bgWidth * 0.5f < camPos.x)
 //{
 //    bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
 //    std::swap(bgLayer[i], bgLayerDup[i]);
 //}
 
-// ë°˜ëŒ€ë¡œ ì›ë³¸ ë°°ê²½ì´ ì™„ì „íˆ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë²—ì–´ë‚¬ë‹¤ë©´, ë³µì œ ë°°ê²½ì˜ ì™¼ìª½ì— ì¬ë°°ì¹˜
-//else if (newBgPos.x > camPos.x + WIN_DEFAULT_WIDTH - bgWidth * 0.5f)
+// ¹İ´ë·Î ¿øº» ¹è°æÀÌ ¿ÏÀüÈ÷ ¿À¸¥ÂÊÀ¸·Î ¹ş¾î³µ´Ù¸é, º¹Á¦ ¹è°æÀÇ ¿ŞÂÊ¿¡ Àç¹èÄ¡
+//else if (newBgPos.x > camPos.x + Values::GetWinWidth() - bgWidth * 0.5f)
 //{
 //    bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() - Vector3(bgWidth, 0, 0));
 //    std::swap(bgLayer[i], bgLayerDup[i]);
 //}
-
-////SingletonMacros
-//#define INPUT Input::Get()
-//#define TIME Time::Get()
-//#define DELTA Time::Get()->GetDeltaTime()
-//#define GRAPHICS Graphics::Get()
-//#define DEVICE GRAPHICS->GetDevice()
-//#define DC GRAPHICS->GetDC()
-//#define SWAPCHAIN GRAPHICS->GetSwapChain()
-//#define D2DC GRAPHICS->GetD2DC()
-//#define WRITE GRAPHICS->GetWrite()	
-//#define FONT Texts::Get()
-//#define DEBUG HelpMe::Get()
-//#define CAMERA Camera::Get()
-//#define SCENE SceneManager::Get()
-//#define SOUNDS Sounds::Get()
-//#define IMGUI Gui::Get()
-//#define KEYBOARD Keyboard::Get()
-//#define MOUSE Mouse::Get()
-//#define COLLISION CollisionManager::Get()
-//#define GIZMO Gizmo::Get()
-//#define REALDELTA TIME->GetRealDeltaTime()
-//#define TILESET TileSetManager::Get()
-//#define TEXTURE2D Texture2DManager::Get()
-//#define INPUT Input::Get()

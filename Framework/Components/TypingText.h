@@ -1,24 +1,22 @@
-ï»¿#pragma once
-
-#include "Texts.h"
+#pragma once
 
 class TypingText : public Texts
 {
 public:
-    TypingText(const std::string& name = "TypingText", float typingSpeed = 0.075f)
+    TypingText(const string& name = "TypingText", float typingSpeed = 0.075f)
         : Texts(name), typingSpeed(typingSpeed), elapsedTime(0.0f), visibleCharacters(0)
     {
 
     }
 
-    // RenderText: íƒ€ì´í•‘ íš¨ê³¼ë¡œ ì¶œë ¥ëœ í…ìŠ¤íŠ¸ë¥¼ ë Œë”ë§ (ê¸°ì¡´ Texts::RenderTextë¥¼ ë‚´ë¶€ì ìœ¼ë¡œ í˜¸ì¶œ)
+    // RenderText: Å¸ÀÌÇÎ È¿°ú·Î Ãâ·ÂµÈ ÅØ½ºÆ®¸¦ ·»´õ¸µ (±âÁ¸ Texts::RenderText¸¦ ³»ºÎÀûÀ¸·Î È£Ãâ)
     virtual void RenderText
     (
-        const std::wstring& text,
+        const wstring& text,
         const RECT& rect,
         const float size = 25.0f,
         const Color& color = WHITE,
-        const std::wstring& font = L"Pretendard JP",
+        const wstring& font = L"Pretendard JP",
         const DWRITE_FONT_WEIGHT& weight = DWRITE_FONT_WEIGHT_NORMAL,
         const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL,
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL
@@ -29,16 +27,16 @@ public:
     virtual void Render() override;
 
 public:
-    // í…ìŠ¤íŠ¸ ì¶œë ¥ì´ ëª¨ë‘ ì™„ë£Œë˜ì—ˆëŠ”ì§€ ì—¬ë¶€ ë°˜í™˜
+    // ÅØ½ºÆ® Ãâ·ÂÀÌ ¸ğµÎ ¿Ï·áµÇ¾ú´ÂÁö ¿©ºÎ ¹İÈ¯
     bool IsComplete() const { return complete; }
-    // í…ìŠ¤íŠ¸ ì¶œë ¥ ìŠ¤í‚µ
+    // ÅØ½ºÆ® Ãâ·Â ½ºÅµ
 	void SkipToEnd() { visibleCharacters = fullText.size(); complete = true; }
 
 private:
-    float typingSpeed;        // í•œ ê¸€ì ì¶œë ¥ì— ê±¸ë¦¬ëŠ” ì‹œê°„ (ì´ˆ)
-    float elapsedTime;        // ëˆ„ì  ì‹œê°„
-    size_t visibleCharacters; // í˜„ì¬ê¹Œì§€ ì¶œë ¥ëœ ë¬¸ì ìˆ˜
-    std::wstring fullText;         // ì „ì²´ í…ìŠ¤íŠ¸ ë‚´ìš©
-    bool complete = false;    // í…ìŠ¤íŠ¸ ì¶œë ¥ ì™„ë£Œ ì—¬ë¶€
+    float typingSpeed;        // ÇÑ ±ÛÀÚ Ãâ·Â¿¡ °É¸®´Â ½Ã°£ (ÃÊ)
+    float elapsedTime;        // ´©Àû ½Ã°£
+    size_t visibleCharacters; // ÇöÀç±îÁö Ãâ·ÂµÈ ¹®ÀÚ ¼ö
+    wstring fullText;         // ÀüÃ¼ ÅØ½ºÆ® ³»¿ë
+    bool complete = false;    // ÅØ½ºÆ® Ãâ·Â ¿Ï·á ¿©ºÎ
 
 };

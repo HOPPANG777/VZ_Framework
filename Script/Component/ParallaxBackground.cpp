@@ -1,10 +1,10 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "ParallaxBackground.h"
 
-ParallaxBackground::ParallaxBackground(const std::string& compName, int layerCount)
+ParallaxBackground::ParallaxBackground(const string& compName, int layerCount)
     : Component(compName), layerCount(layerCount)
 {
-    // ì´ˆê¸°í™”
+    // ÃÊ±âÈ­
     for (int i = 0; i < MAX_LAYERS; i++)
     {
         bgLayer[i] = nullptr;
@@ -14,7 +14,7 @@ ParallaxBackground::ParallaxBackground(const std::string& compName, int layerCou
     }
 }
 
-void ParallaxBackground::SetLayer(int index, GameObject* layer, GameObject* layerDup)
+void ParallaxBackground::SetLayer(int index, Object* layer, Object* layerDup)
 {
     if (index < 0 || index >= layerCount) return;
     bgLayer[index] = layer;
@@ -25,31 +25,31 @@ void ParallaxBackground::SetLayer(int index, GameObject* layer, GameObject* laye
 
 void ParallaxBackground::Update()
 {
-    // ì¹´ë©”ë¼ ìœ„ì¹˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ íŒ¨ëŸ´ëŸ­ìŠ¤ íš¨ê³¼ ì ìš©
-    Vector3 camPos = Camera::Get()->GetPosition();
+    // Ä«¸Ş¶ó À§Ä¡¸¦ ±âÁØÀ¸·Î ÆĞ·²·°½º È¿°ú Àû¿ë
+    Vector3 camPos = CAMERA->GetPosition();
 
     for (int i = 0; i < layerCount; i++)
     {
         if (bgLayer[i] && bgLayerDup[i])
         {
-            // ë ˆì´ì–´ë³„ íŒ¨ëŸ´ëŸ­ìŠ¤ íŒ©í„° (ì˜ˆ: i=0ì¼ ë•Œ 0.2, i=layerCount-1ì¼ ë•Œ 1.0)
+            // ·¹ÀÌ¾îº° ÆĞ·²·°½º ÆÑÅÍ (¿¹: i=0ÀÏ ¶§ 0.2, i=layerCount-1ÀÏ ¶§ 1.0)
             float factor = 0.2f + (i * (0.8f / (layerCount - 1)));
 
-            // ì¹´ë©”ë¼ ì´ë™ì— ë”°ë¥¸ X, Yì¶• ì˜¤í”„ì…‹ ê³„ì‚°
+            // Ä«¸Ş¶ó ÀÌµ¿¿¡ µû¸¥ X, YÃà ¿ÀÇÁ¼Â °è»ê
             float offsetX = camPos.x * factor;
             float offsetY = camPos.y * factor;
 
-            // ì›ë³¸ ë° ë³µì œ ë°°ê²½ ìœ„ì¹˜ ê³„ì‚° (X, Y ëª¨ë‘ ì ìš©)
+            // ¿øº» ¹× º¹Á¦ ¹è°æ À§Ä¡ °è»ê (X, Y ¸ğµÎ Àû¿ë)
             Vector3 newBgPos = bgOrigin[i] + Vector3(offsetX, offsetY, 0);
             Vector3 newBgDupPos = bgOriginDup[i] + Vector3(offsetX, offsetY, 0);
 
             bgLayer[i]->SetPosition(newBgPos);
             bgLayerDup[i]->SetPosition(newBgDupPos);
 
-            // ë¬´í•œ X ìŠ¤í¬ë¡¤ ì²˜ë¦¬ (ë°°ê²½ ë„ˆë¹„ëŠ” Values::GetWinWidth() * 1.2ë¡œ ê°€ì •)
+            // ¹«ÇÑ X ½ºÅ©·Ñ Ã³¸® (¹è°æ ³Êºñ´Â Values::GetWinWidth() * 1.2·Î °¡Á¤)
             float bgWidth = Values::GetWinWidth() * 1.2f;
 
-            // ì™¼ìª½ ê²½ê³„ ë„˜ê¹€: bgLayerê°€ í™”ë©´ ì™¼ìª½ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë°°ì¹˜
+            // ¿ŞÂÊ °æ°è ³Ñ±è: bgLayer°¡ È­¸é ¿ŞÂÊ ¹ÛÀ¸·Î ³ª°¡¸é ¿À¸¥ÂÊÀ¸·Î ¹èÄ¡
             while (newBgPos.x + bgWidth * 0.5f < camPos.x)
             {
                 bgLayer[i]->SetPosition(bgLayerDup[i]->GetPosition() + Vector3(bgWidth, 0, 0));
@@ -57,7 +57,7 @@ void ParallaxBackground::Update()
                 newBgPos = bgLayer[i]->GetPosition();
             }
 
-            // ì˜¤ë¥¸ìª½ ê²½ê³„ ë„˜ê¹€: bgLayerê°€ í™”ë©´ ì˜¤ë¥¸ìª½ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ ì™¼ìª½ìœ¼ë¡œ ë°°ì¹˜
+            // ¿À¸¥ÂÊ °æ°è ³Ñ±è: bgLayer°¡ È­¸é ¿À¸¥ÂÊ ¹ÛÀ¸·Î ³ª°¡¸é ¿ŞÂÊÀ¸·Î ¹èÄ¡
             float rightBound = camPos.x + (Values::GetWinWidth() * 1.2f) - bgWidth * 0.5f;
 
             while (newBgPos.x > rightBound)
@@ -72,7 +72,7 @@ void ParallaxBackground::Update()
 
 void ParallaxBackground::Render()
 {
-    // ê° ë ˆì´ì–´ì˜ ë°°ê²½ì„ ë’¤ì—ì„œë¶€í„° ê·¸ë¦½ë‹ˆë‹¤.
+    // °¢ ·¹ÀÌ¾îÀÇ ¹è°æÀ» µÚ¿¡¼­ºÎÅÍ ±×¸³´Ï´Ù.
     for (int i = layerCount - 1; i >= 0; i--)
     {
         if (bgLayer[i])    bgLayer[i]->Render();

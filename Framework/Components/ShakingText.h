@@ -1,11 +1,9 @@
-﻿#pragma once
-
-#include "Texts.h"
+#pragma once
 
 class ShakingText : public Texts
 {
 public:
-    ShakingText(const std::string& name = "ShakingText", float intensity = 2.0f)
+    ShakingText(const string& name = "ShakingText", float intensity = 2.0f)
         : Texts(name), intensity(intensity) 
     {
 
@@ -13,11 +11,11 @@ public:
 
     void RenderText
     (
-        const std::wstring& text,
+        const wstring& text,
         const RECT& rect,
         const float size = 25.0f,
         const Color& color = WHITE,
-        const std::wstring& font = L"Pretendard JP",
+        const wstring& font = L"Pretendard JP",
         const DWRITE_FONT_WEIGHT& weight = DWRITE_FONT_WEIGHT_NORMAL,
         const DWRITE_FONT_STYLE& style = DWRITE_FONT_STYLE_NORMAL,
         const DWRITE_FONT_STRETCH& stretch = DWRITE_FONT_STRETCH_NORMAL

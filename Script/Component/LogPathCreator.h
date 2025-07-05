@@ -1,12 +1,11 @@
-ï»¿#pragma once
+#pragma once
 
 #include "HitComponent.h"
-#include "Components/BoxCollider.h"
 
 class LogPathCreator : public Component
 {
 public:
-    LogPathCreator(const std::string& name = "LogPathCreator") : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0) {}
+    LogPathCreator(const string& name = "LogPathCreator") : Component(name), collisionCount(0), transformed(false), newColliderSize(400, 100, 0) {}
     virtual ~LogPathCreator() override = default;
 
 public:
@@ -14,7 +13,7 @@ public:
     virtual void Render() override {}
 
 public:
-    // ë„ë¼ì™€ ì¶©ëŒ ì‹œ í˜¸ì¶œë  í•¨ìˆ˜
+    // µµ³¢¿Í Ãæµ¹ ½Ã È£ÃâµÉ ÇÔ¼ö
     void OnAxeCollision();
 	void OnLogCollision(Collider* other);
 
@@ -22,8 +21,8 @@ public:
 	bool GetTransformed() const { return transformed; }
 
 private:
-    int collisionCount;    // ë„ë¼ì™€ ì¶©ëŒí•œ íšŸìˆ˜
-    bool transformed;      // ì´ë¯¸ ë³€í™˜ì´ ì™„ë£Œë˜ì—ˆëŠ”ì§€ ì—¬ë¶€
-    Vector3 newColliderSize; // ìƒˆë¡œ ì ìš©í•  BoxCollider í¬ê¸°
+    int collisionCount;    // µµ³¢¿Í Ãæµ¹ÇÑ È½¼ö
+    bool transformed;      // ÀÌ¹Ì º¯È¯ÀÌ ¿Ï·áµÇ¾ú´ÂÁö ¿©ºÎ
+    Vector3 newColliderSize; // »õ·Î Àû¿ëÇÒ BoxCollider Å©±â
 };
 

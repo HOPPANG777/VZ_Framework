@@ -1,4 +1,4 @@
-ï»¿//{{NO_DEPENDENCIES}}
+//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by Client.rc
 
@@ -6,7 +6,7 @@
 #define IDI_SMALLPPANG                      102
 
 
-// ë‹¤ìŒì€ ìƒˆ ê°œì²´ì— ì‚¬ìš©í•  ê¸°ë³¸ê°’ì…ë‹ˆë‹¤.
+// ´ÙÀ½Àº »õ °³Ã¼¿¡ »ç¿ëÇÒ ±âº»°ªÀÔ´Ï´Ù.
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS

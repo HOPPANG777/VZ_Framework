@@ -1,32 +1,32 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Sounds.h"
 
 Sounds::Sounds()
 	: count(150), volum(1.0f)
 {
-	// í•„ìš”í•œ ê²½ìš° ìƒì„±ìì—ì„œ ì‘ì—…
+	// ÇÊ¿äÇÑ °æ¿ì »ı¼ºÀÚ¿¡¼­ ÀÛ¾÷
 	Init();
 }
 Sounds::~Sounds()
 {
-	// smart pointerë“¤ì´ ìë™ìœ¼ë¡œ í•´ì œ ë‹´ë‹¹
-	// system std::unique_ptrë„ ì†Œë©¸ìì—ì„œ close(), release() ìë™ í˜¸ì¶œ
+	// smart pointerµéÀÌ ÀÚµ¿À¸·Î ÇØÁ¦ ´ã´ç
+	// system unique_ptrµµ ¼Ò¸êÀÚ¿¡¼­ close(), release() ÀÚµ¿ È£Ãâ
 }
 ///////////////////////////////////////////////////////////////////////////
 
 void Sounds::Init()
 {
-	// FMOD ì‹œìŠ¤í…œì„ ìœ ë‹ˆí¬ í¬ì¸í„°ë¡œ ìƒì„±
+	// FMOD ½Ã½ºÅÛÀ» À¯´ÏÅ© Æ÷ÀÎÅÍ·Î »ı¼º
 	System* rawSystem = nullptr;
 	System_Create(&rawSystem);
-	if (!rawSystem) throw  std::runtime_error("FMOD System Create Failed.");
+	if (!rawSystem) throw  runtime_error("FMOD System Create Failed.");
 
-	// std::unique_ptrì— ì†Œìœ ê¶Œì„ ë„˜ê¹€
-	system = std::unique_ptr<System, FModSystemDeleter>(rawSystem);
+	// unique_ptr¿¡ ¼ÒÀ¯±ÇÀ» ³Ñ±è
+	system = unique_ptr<System, FModSystemDeleter>(rawSystem);
 
-	// ì‹œìŠ¤í…œ ì´ˆê¸°í™”
+	// ½Ã½ºÅÛ ÃÊ±âÈ­
 	FMOD_RESULT result = system->init(count, FMOD_INIT_NORMAL, nullptr);
-	if (result != FMOD_OK) throw  std::runtime_error("FMOD System init Failed.");
+	if (result != FMOD_OK) throw  runtime_error("FMOD System init Failed.");
 }
 
 void Sounds::Update()
@@ -35,11 +35,11 @@ void Sounds::Update()
 		system->update();
 }
 
-void Sounds::AddSound(const  std::string& name, const  std::wstring& file, bool loop)
+void Sounds::AddSound(const  string& name, const  wstring& file, bool loop)
 {
 	if (!system) return;
 
-	// Sound ìƒì„±
+	// Sound »ı¼º
 	Sound* rawSound = nullptr;
 
 	FMOD_MODE mode = (loop) ? FMOD_LOOP_NORMAL : FMOD_DEFAULT;
@@ -49,65 +49,65 @@ void Sounds::AddSound(const  std::string& name, const  std::wstring& file, bool 
 		&rawSound);
 	if (result != FMOD_OK || !rawSound)
 	{
-		// ì‹¤íŒ¨ ì‹œ ì˜ˆì™¸ë‚˜ ë¡œê·¸
-		throw  std::runtime_error("Failed to create FMOD Sound.");
+		// ½ÇÆĞ ½Ã ¿¹¿Ü³ª ·Î±×
+		throw  runtime_error("Failed to create FMOD Sound.");
 	}
 
-	// std::shared_ptrë¡œ ì†Œìœ  (deleterëŠ” FModSoundDeleter)
-	std::shared_ptr<Sound> spSound(rawSound, FModSoundDeleter());
+	// shared_ptr·Î ¼ÒÀ¯ (deleter´Â FModSoundDeleter)
+	shared_ptr<Sound> spSound(rawSound, FModSoundDeleter());
 
-	// ì±„ë„ì€ ì•„ì§ playSound() í˜¸ì¶œ ì „ì´ë¯€ë¡œ nullptr
-	std::shared_ptr<Channel> spChannel(nullptr, FModChannelDeleter());
+	// Ã¤³ÎÀº ¾ÆÁ÷ playSound() È£Ãâ ÀüÀÌ¹Ç·Î nullptr
+	shared_ptr<Channel> spChannel(nullptr, FModChannelDeleter());
 
-	// mapì— ë“±ë¡ (ê¸°ì¡´ì— ìˆìœ¼ë©´ ë®ì–´ì”€)
+	// map¿¡ µî·Ï (±âÁ¸¿¡ ÀÖÀ¸¸é µ¤¾î¾¸)
 	sounds[name] = make_pair(spSound, spChannel);
 }
 
-void Sounds::RemoveSound(const  std::string& name)
+void Sounds::RemoveSound(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end())
 		return;
 
-	// í˜¹ì‹œ ì¬ìƒ ì¤‘ì¸ ì±„ë„ì´ ìˆë‹¤ë©´ stop() ê°€ëŠ¥
-	if (iter->second.second) // std::shared_ptr<Channel>
+	// È¤½Ã Àç»ı ÁßÀÎ Ã¤³ÎÀÌ ÀÖ´Ù¸é stop() °¡´É
+	if (iter->second.second) // shared_ptr<Channel>
 		iter->second.second->stop();
 
-	// mapì—ì„œ ì‚­ì œ -> ì†Œë©¸ìì—ì„œ sound release ìë™ í˜¸ì¶œ
+	// map¿¡¼­ »èÁ¦ -> ¼Ò¸êÀÚ¿¡¼­ sound release ÀÚµ¿ È£Ãâ
 	sounds.erase(iter);
 }
 
-void Sounds::Play(const  std::string& name, float volume)
+void Sounds::Play(const  string& name, float volume)
 {
 	if (!system) return;
 
-	// nameì— í•´ë‹¹í•˜ëŠ” ì‚¬ìš´ë“œ ì°¾ê¸°
+	// name¿¡ ÇØ´çÇÏ´Â »ç¿îµå Ã£±â
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
 
-	// ì´ë¯¸ ì‚¬ìš´ë“œê°€ ì¡´ì¬
-	std::shared_ptr<Sound>  spSound = iter->second.first;
-	std::shared_ptr<Channel> spChannel = iter->second.second;
+	// ÀÌ¹Ì »ç¿îµå°¡ Á¸Àç
+	shared_ptr<Sound>  spSound = iter->second.first;
+	shared_ptr<Channel> spChannel = iter->second.second;
 
-	if (!spSound) return; // ì‚¬ìš´ë“œê°€ ì—†ìœ¼ë©´ ì¬ìƒ ë¶ˆê°€
+	if (!spSound) return; // »ç¿îµå°¡ ¾øÀ¸¸é Àç»ı ºÒ°¡
 
-	// ì¬ìƒ(ì¶œë ¥) - ì¬ìƒ ì‹œ ì±„ë„ì´ ìƒˆë¡œ í• ë‹¹ë¨
+	// Àç»ı(Ãâ·Â) - Àç»ı ½Ã Ã¤³ÎÀÌ »õ·Î ÇÒ´çµÊ
 	Channel* rawChannel = nullptr;
 	FMOD_RESULT result = system->playSound(spSound.get(), nullptr, false, &rawChannel);
 	if (result != FMOD_OK)
 		return;
 
-	// ìƒˆë¡œ ë°›ì€ Channel*ì„ std::shared_ptrë¡œ ë³€í™˜
-	std::shared_ptr<Channel> newChannel(rawChannel, FModChannelDeleter());
+	// »õ·Î ¹ŞÀº Channel*À» shared_ptr·Î º¯È¯
+	shared_ptr<Channel> newChannel(rawChannel, FModChannelDeleter());
 
-	// ë³¼ë¥¨ ì„¤ì •
+	// º¼·ı ¼³Á¤
 	newChannel->setVolume(volume);
 
-	// mapì— ê°±ì‹  (ì‚¬ìš´ë“œ í¬ì¸í„°ëŠ” ê·¸ëŒ€ë¡œ, ì±„ë„ í¬ì¸í„°ë§Œ ê°±ì‹ )
+	// map¿¡ °»½Å (»ç¿îµå Æ÷ÀÎÅÍ´Â ±×´ë·Î, Ã¤³Î Æ÷ÀÎÅÍ¸¸ °»½Å)
 	iter->second.second = newChannel;
 }
 
-void Sounds::Stop(const  std::string& name)
+void Sounds::Stop(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -116,7 +116,7 @@ void Sounds::Stop(const  std::string& name)
 		iter->second.second->stop();
 }
 
-void Sounds::Pause(const  std::string& name)
+void Sounds::Pause(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -125,7 +125,7 @@ void Sounds::Pause(const  std::string& name)
 		iter->second.second->setPaused(true);
 }
 
-void Sounds::Resum(const  std::string& name)
+void Sounds::Resum(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -134,7 +134,7 @@ void Sounds::Resum(const  std::string& name)
 		iter->second.second->setPaused(false);
 }
 
-bool Sounds::IsPlaying(const  std::string& name)
+bool Sounds::IsPlaying(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return false;
@@ -147,7 +147,7 @@ bool Sounds::IsPlaying(const  std::string& name)
 	return playing;
 }
 
-bool Sounds::IsPause(const  std::string& name)
+bool Sounds::IsPause(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return false;
@@ -160,7 +160,7 @@ bool Sounds::IsPause(const  std::string& name)
 	return paused;
 }
 
-void Sounds::SetVolume(const  std::string& name, float volume)
+void Sounds::SetVolume(const  string& name, float volume)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return;
@@ -169,7 +169,7 @@ void Sounds::SetVolume(const  std::string& name, float volume)
 		iter->second.second->setVolume(volume);
 }
 
-float Sounds::GetVolume(const  std::string& name)
+float Sounds::GetVolume(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end()) return 0.0f;
@@ -182,23 +182,23 @@ float Sounds::GetVolume(const  std::string& name)
 	return volume;
 }
 
-float Sounds::GetSoundLength(const  std::string& name)
+float Sounds::GetSoundLength(const  string& name)
 {
 	const auto& iter = sounds.find(name);
 	if (iter == sounds.end())
 		return 0.0f;
 
-	std::shared_ptr<Sound> spSound = iter->second.first;
+	shared_ptr<Sound> spSound = iter->second.first;
 	if (!spSound)
 		return 0.0f;
 
-	// FMOD_TIMEUNIT_MS ê¸°ì¤€ìœ¼ë¡œ ê¸¸ì´ë¥¼ ì–»ì–´ì˜¨ë‹¤ (ë°€ë¦¬ì´ˆ ë‹¨ìœ„)
+	// FMOD_TIMEUNIT_MS ±âÁØÀ¸·Î ±æÀÌ¸¦ ¾ò¾î¿Â´Ù (¹Ğ¸®ÃÊ ´ÜÀ§)
 	unsigned int lengthMs = 0;
 	FMOD_RESULT result = spSound->getLength(&lengthMs, FMOD_TIMEUNIT_MS);
 	if (result != FMOD_OK)
 		return 0.0f;
 
-	// ì´ˆ ë‹¨ìœ„ë¡œ ë³€í™˜í•˜ì—¬ ë°˜í™˜ (í•„ìš”í•˜ë‹¤ë©´ ë°€ë¦¬ì´ˆ ê·¸ëŒ€ë¡œ ë°˜í™˜í•´ë„ ë¨)
+	// ÃÊ ´ÜÀ§·Î º¯È¯ÇÏ¿© ¹İÈ¯ (ÇÊ¿äÇÏ´Ù¸é ¹Ğ¸®ÃÊ ±×´ë·Î ¹İÈ¯ÇØµµ µÊ)
 	float lengthSec = lengthMs / 1000.0f;
 	return lengthSec;
 }

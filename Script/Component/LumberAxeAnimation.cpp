@@ -1,21 +1,21 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "LumberAxeAnimation.h"
 
 void LumberAxeAnimation::Update()
 {
-    // ownerì—ì„œ LumberAxeComponentë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    // owner¿¡¼­ LumberAxeComponent¸¦ °¡Á®¿É´Ï´Ù.
     const std::shared_ptr<LumberAxeComponent>& axeComp = owner->GetComponent<LumberAxeComponent>("LumberAxeComponent");
     if (!axeComp) return;
 
-    // í˜„ì¬ ë„ë¼ ìƒíƒœ (ì˜ˆ: AXE_IDLE_R, AXE_THROWN_L ë“±)
+    // ÇöÀç µµ³¢ »óÅÂ (¿¹: AXE_IDLE_R, AXE_THROWN_L µî)
     AxeState state = axeComp->GetState();
 
-    // ownerì—ì„œ Animator ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    // owner¿¡¼­ Animator ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿É´Ï´Ù.
     const std::shared_ptr<Animator>& animator = owner->GetComponent<Animator>("Animator");
     if (!animator) return;
 
-    // ìƒíƒœì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ì´ë¦„ì„ ì„¤ì •í•©ë‹ˆë‹¤.
-    // (ì•„ë˜ clip ì´ë¦„ì€ ì˜ˆì‹œì´ë¯€ë¡œ, ì‹¤ì œ ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ì´ë¦„ì— ë§ê²Œ ìˆ˜ì •í•˜ì„¸ìš”.)
+    // »óÅÂ¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ ÀÌ¸§À» ¼³Á¤ÇÕ´Ï´Ù.
+    // (¾Æ·¡ clip ÀÌ¸§Àº ¿¹½ÃÀÌ¹Ç·Î, ½ÇÁ¦ ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ ÀÌ¸§¿¡ ¸Â°Ô ¼öÁ¤ÇÏ¼¼¿ä.)
     switch (state)
     {
     case AxeState::AXE_IDLE_R:
@@ -43,7 +43,7 @@ void LumberAxeAnimation::Update()
         animator->SetCurrentAnimClip(L"AxeReturning_L");
         break;
     default:
-        // ë‹¤ë¥¸ ìƒíƒœì— ëŒ€í•´ì„œëŠ” ê¸°ë³¸ Idle ì• ë‹ˆë©”ì´ì…˜ì„ ì‚¬ìš©
+        // ´Ù¸¥ »óÅÂ¿¡ ´ëÇØ¼­´Â ±âº» Idle ¾Ö´Ï¸ŞÀÌ¼ÇÀ» »ç¿ë
         animator->SetCurrentAnimClip(L"AxeIdle_R");
         break;
     }

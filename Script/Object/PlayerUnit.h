@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "UnitBase.h"
 #include "LumberAxe.h"
@@ -11,7 +11,7 @@ private:
 
 
 public:
-	PlayerUnit(const Vector3& position, const Vector3& scale = Vector3(100, 100, 0), const float rotation = 0.0f, const std::wstring& path = TexturePath + L"Animation/Player/Player_Idle_R.png");
+	PlayerUnit(const Vector3& position, const Vector3& scale = Vector3(100, 100, 0), const float rotation = 0.0f, const wstring& path = TexturePath + L"Animation/Player/Player_Idle_R.png");
 	~PlayerUnit();
 
 public:

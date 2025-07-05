@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -186,13 +186,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Interfaces\IRenderer.h" />
-    <ClInclude Include="Interfaces\ITexture.h" />
-    <ClInclude Include="Interfaces\IWindow.h" />
-    <ClInclude Include="Managers\RendererManager.h" />
-    <ClInclude Include="Platform\Platform.h" />
-    <ClInclude Include="Platform\Platform_Windows.h" />
-    <ClInclude Include="Enums\RenderAPI.h" />
     <ClInclude Include="Structs\BoxEdge.h" />
     <ClInclude Include="Enums\AxeState.h" />
     <ClInclude Include="Components\AnimationMove.h" />
@@ -242,7 +235,7 @@
     <ClInclude Include="Components\Component.h" />
     <ClInclude Include="Components\MoveComponent.h" />
     <ClInclude Include="Objects\BaseObject\Drawable.h" />
-    <ClInclude Include="Objects\BaseObject\GameObject.h" />
+    <ClInclude Include="Objects\BaseObject\Object.h" />
     <ClInclude Include="Interfaces\IScene.h" />
     <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Objects\ColorObject\ColorRect.h" />
@@ -275,7 +268,6 @@
     <ClCompile Include="Components\TypingText.cpp" />
     <ClCompile Include="Managers\CollisionManager.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
-    <ClCompile Include="Managers\RendererManager.cpp" />
     <ClCompile Include="Objects\TileObject\Tile.cpp" />
     <ClCompile Include="Objects\SpriteObject\Sprite.cpp" />
     <ClCompile Include="Managers\TileSetManager.cpp" />
@@ -303,7 +295,7 @@
     <ClCompile Include="Objects\ColorObject\ColorCircle.cpp" />
     <ClCompile Include="Components\MoveComponent.cpp" />
     <ClCompile Include="Objects\BaseObject\Drawable.cpp" />
-    <ClCompile Include="Objects\BaseObject\GameObject.cpp" />
+    <ClCompile Include="Objects\BaseObject\Object.cpp" />
     <ClCompile Include="Renders\RenderResources\VertexType.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Objects\ColorObject\ColorRect.cpp" />
@@ -320,6 +312,10 @@
     <ClCompile Include="Systems\Input.cpp" />
     <ClCompile Include="Systems\Time.cpp" />
     <ClCompile Include="Systems\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Comment.txt" />
+    <Text Include="BackupCode.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

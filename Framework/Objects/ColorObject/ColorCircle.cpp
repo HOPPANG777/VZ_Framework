@@ -1,4 +1,4 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "ColorCircle.h"
 
 ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const float rotation, const size_t& segments, const Color& color)
@@ -6,21 +6,21 @@ ColorCircle::ColorCircle(const Vector3& position, const Vector3& scale, const fl
 {
 	//vertices
 	{
-        vertices.assign(segments + 1, VertexColor());
+		vertices.assign(segments + 1, VertexColor());
 
-        for (size_t i = 0; i <= segments; ++i)
-        {
-                float theta = 2 * Values::PI * i / segments;
+		for (size_t i = 0; i <= segments; ++i)
+		{
+			float theta = 2 * Values::PI * i / segments;
 
-                vertices[i].position = Vector3(sinf(theta), cosf(theta), 0) * 0.5f;
-        }
+			vertices[i].position = Vector2(sinf(theta), cosf(theta)) * 0.5f;
+		}
 
 		for (VertexColor& vertex : vertices) vertex.color = color;
 	}
 
 	//vertexBuffer
 	{
-		//ê°ì²´ë¥¼ ë§Œë“¤ì–´ ì£¼ì–´ì•¼ í•œë‹¤.
+		//°´Ã¼¸¦ ¸¸µé¾î ÁÖ¾î¾ß ÇÑ´Ù.
 		vertexBuffer->Create(vertices, D3D11_USAGE_DYNAMIC);
 	}
 

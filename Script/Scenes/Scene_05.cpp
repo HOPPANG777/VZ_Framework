@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "Scene_05.h"
 
 void Scene_05::Awake()
@@ -10,7 +10,7 @@ void Scene_05::Awake()
 		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -300, 0));
 		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -310, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
-		SceneManager::Get()->SetPlayer(testPlayer);
+		SCENE->SetPlayer(testPlayer);
 	}
 
 	// Floor
@@ -26,7 +26,7 @@ void Scene_05::Awake()
 		for (const auto& flr : floor) if (flr != nullptr) flr->AddComponent(std::make_shared<FloorCollision>("FloorCollision"));
 		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetPlayer(testPlayer.get());
 		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
-		for (const auto& flr : floor) if (flr != nullptr) CollisionManager::Get()->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Wall
@@ -41,18 +41,18 @@ void Scene_05::Awake()
 		wall[0]->AddComponent(std::make_shared<WallCollision>("WallCollision", false));
 		for (const auto& wal : wall) if (wal != nullptr) wal->GetComponent<WallCollision>("WallCollision")->SetPlayer(testPlayer.get());
 		for (const auto& wal : wall) if (wal != nullptr) wal->GetComponent<WallCollision>("WallCollision")->SetLumberAxe(lumberAxe.get());
-		for (const auto& wal : wall) if (wal != nullptr) CollisionManager::Get()->AddCollider(wal->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& wal : wall) if (wal != nullptr) COLLISION->AddCollider(wal->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Background
 	{
 		std::shared_ptr<ParallaxBackground> parallax = std::make_shared<ParallaxBackground>("Parallax", 5);
 
-		// ë°°ê²½ ë ˆì´ì–´ 2ê°œì”© ìƒì„±
+		// ¹è°æ ·¹ÀÌ¾î 2°³¾¿ »ı¼º
 		for (int i = 0; i < 5; i++)
 		{
-			bgLayer[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
-			bgLayerDup[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 1.2f, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + std::to_wstring(i + 1) + L".png");
+			bgLayer[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
+			bgLayerDup[i] = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 1.2f, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
 
 			bgOrigin[i] = bgLayer[i]->GetPosition();
 			bgOriginDup[i] = bgLayerDup[i]->GetPosition();
@@ -60,15 +60,15 @@ void Scene_05::Awake()
 			parallax->SetLayer(i, bgLayer[i].get(), bgLayerDup[i].get());
 		}
 
-		backgroundObject = std::make_shared<GameObject>("Background");
+		backgroundObject = std::make_shared<Object>("Background");
 		backgroundObject->AddComponent(parallax);
 	}
 
 	// TileMap
 	{
-		float spacing = 50;
-		float width = (Values::GetWinWidth() * 2) / spacing;
-		float height = (Values::GetWinWidth() * 2) / spacing;
+		UINT spacing = 50;
+		UINT width = (Values::GetWinWidth() * 2) / spacing;
+		UINT height = (Values::GetWinHeight() * 2) / spacing;
 
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map03.data");
@@ -76,26 +76,26 @@ void Scene_05::Awake()
 
 	// Ladder
 	{
-		ladder = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(100, 230, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"GameObject/Ladder1.png");
+		ladder = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(100, 230, 0), Vector3(100, 100, 0), 0.0f, TexturePath + L"Object/Ladder1.png");
 		ladder->AddComponent(std::make_shared<LadderTransComponent>());
 		ladder->AddComponent(std::make_shared<HitComponent>());
-		ladder2 = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(100, 0, 0), Vector3(100, 550, 0), 0.0f, TexturePath + L"GameObject/Ladder2.png");
+		ladder2 = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(100, 0, 0), Vector3(100, 550, 0), 0.0f, TexturePath + L"Object/Ladder2.png");
 		ladder->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), GREEN));
-		CollisionManager::Get()->AddCollider(ladder->GetComponent<BoxCollider>("BoxCollider"));
+		COLLISION->AddCollider(ladder->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì € ì ˆë²½ì€ ë„ˆë¬´ ë†’ì•„... ì‚¬ë‹¤ë¦¬ë¥¼ ë‚´ë ¤ì•¼ê² ì–´.", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
-		textPoint.push_back(std::make_shared<GameObject>("TextPoint_01", Values::GetCenter() + Vector3(-320, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(770, -10, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ê°íˆ ë‚´ ì•ê¸¸ì„ ê°€ë¡œë§‰ë‹¤ë‹ˆ! ì£½ì¸ë‹¤!!! (Enterë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”, ì „íˆ¬ ì”¬ìœ¼ë¡œ ë„˜ì–´ê°‘ë‹ˆë‹¤.)", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
-		textPoint.push_back(std::make_shared<GameObject>("TextPoint_02", Values::GetCenter() + Vector3(840, 300, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"Àú Àıº®Àº ³Ê¹« ³ô¾Æ... »ç´Ù¸®¸¦ ³»·Á¾ß°Ú¾î.", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-320, -300, 0), Vector3(Values::ZeroVec3), 0.0f));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(770, -10, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"°¨È÷ ³» ¾Õ±æÀ» °¡·Î¸·´Ù´Ï! Á×ÀÎ´Ù!!! (Enter¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä, ÀüÅõ ¾ÀÀ¸·Î ³Ñ¾î°©´Ï´Ù.)", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(840, 300, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
 	// TextPoint Collider
 	{
 		for (const auto& textP : textPoint) textP->AddComponent(std::make_shared<BoxCollider>(Vector3(0, 0, 0), Vector3(100, 100, 0), BLACK));
-		for (const auto& textP : textPoint) CollisionManager::Get()->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
+		for (const auto& textP : textPoint) COLLISION->AddCollider(textP->GetComponent<BoxCollider>("BoxCollider"));
 	}
 
 	{
@@ -108,9 +108,9 @@ void Scene_05::Awake()
 void Scene_05::Start()
 {
 	lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->Recall();
-	std::dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
-	std::dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
-	std::dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(CLEAR);
+	dynamic_pointer_cast<DialogTextBox>(text[0])->Deactivate();
+	dynamic_pointer_cast<DialogTextBox>(text[1])->Deactivate();
+	dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(CLEAR);
 }
 
 void Scene_05::Destroy()
@@ -128,8 +128,8 @@ void Scene_05::Destroy()
 	if (ladder != nullptr) ladder.reset();
 	if (ladder2 != nullptr) ladder2.reset();
 	if (tmap != nullptr) tmap.reset();
-	CollisionManager::Get()->RemoveAllCollider();
-	SceneManager::Get()->ResetPlayer();
+	COLLISION->RemoveAllCollider();
+	SCENE->ResetPlayer();
 }
 
 void Scene_05::FixedUpdate()
@@ -152,20 +152,20 @@ void Scene_05::Update()
 	if (lumberAxe != nullptr) lumberAxe->Update();
 	if (bback != nullptr) bback->Update();
 
-	Camera::Get()->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.1f);
-	Camera::Get()->UpdateVerticalScroll(testPlayer.get(), 0.5f, 1.5f);
+	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.1f);
+	CAMERA->UpdateVerticalScroll(testPlayer.get(), 0.5f, 1.5f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
-		std::dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
+		dynamic_pointer_cast<DialogTextBox>(text[0])->Activate();
 	}
 
 	if (textPoint[1]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()))
 	{
-		std::dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
-		if (Input::Get()->KeyDown(VK_RETURN))
+		dynamic_pointer_cast<DialogTextBox>(text[1])->Activate();
+		if (INPUT->KeyDown(VK_RETURN))
 		{
-			SceneManager::Get()->LoadScene("Stage03");
+			SCENE->LoadScene("Stage03");
 		}
 	}
 
@@ -191,8 +191,8 @@ void Scene_05::Update()
 		isTest2 = true;
 		if (isTest2 == true)
 		{
-			std::dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
-			std::dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(WHITE);
+			dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
+			dynamic_pointer_cast<TextureRect>(ladder2)->SetColor(WHITE);
 			ladder->AddComponent(std::make_shared<LadderComponent>());
 		}		
 	}
@@ -211,7 +211,7 @@ void Scene_05::Render()
 	for (const auto& wal : wall) if (wal != nullptr) wal->Render();
 	if (ladder->GetComponent<LadderTransComponent>("LadderTransComponent")->GetTransformed() == true)
 	{
-		std::dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
+		dynamic_pointer_cast<TextureRect>(ladder)->SetColor(CLEAR);
 	}
 	if (ladder != nullptr) ladder->Render();
 	if (ladder2 != nullptr) ladder2->Render();
@@ -224,8 +224,8 @@ void Scene_05::Render()
 
 void Scene_05::PostRender()
 {
-	if (text[0] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
-	if (text[1] != nullptr) std::dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
+	if (text[0] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[0])->PostRender();
+	if (text[1] != nullptr) dynamic_pointer_cast<DialogTextBox>(text[1])->PostRender();
 }
 
 void Scene_05::ImGUI()

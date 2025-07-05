@@ -1,28 +1,28 @@
-ï»¿#include "Framework.h"
-#include "GameObject.h"
+#include "Framework.h"
+#include "Object.h"
 
-GameObject::GameObject(const std::string& name, TransformType type)
+Object::Object(const string& name, TransformType type)
     : name(name)
 {
-    worldBuffer = std::make_unique<WorldBuffer>();
+    worldBuffer = make_unique<WorldBuffer>();
 
-    // ì„ íƒì— ë”°ë¼ ì ì ˆí•œ Transform ì»´í¬ë„ŒíŠ¸ ì¶”ê°€
+    // ¼±ÅÃ¿¡ µû¶ó ÀûÀıÇÑ Transform ÄÄÆ÷³ÍÆ® Ãß°¡
     if (type == TransformType::Normal)
     {
-        const auto& transform = std::make_shared<Transform>("Transform");
+        const auto& transform = make_shared<Transform>("Transform");
         AddComponent(transform);
     }
     else if (type == TransformType::Rect)
     {
-        const auto& rectTransform = std::make_shared<RectTransform>("RectTransform");
+        const auto& rectTransform = make_shared<RectTransform>("RectTransform");
         AddComponent(rectTransform);
     }
 }
 
-GameObject::GameObject(const std::string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
-    : GameObject(name, type)
+Object::Object(const string& name, const Vector3& initPos, const Vector3& initScale, float initRot, TransformType type)
+    : Object(name, type)
 {
-    // íƒ€ì…ì— ë”°ë¼ ì´ˆê¸°ê°’ ì„¤ì •
+    // Å¸ÀÔ¿¡ µû¶ó ÃÊ±â°ª ¼³Á¤
     if (type == TransformType::Normal)
     {
         const auto& transform = GetComponent<Transform>("Transform");
@@ -45,13 +45,13 @@ GameObject::GameObject(const std::string& name, const Vector3& initPos, const Ve
     }
 }
 
-GameObject::GameObject(const GameObject& other)
-    : GameObject(other.name, TransformType::Normal) // ë³µì‚¬ ìƒì„±ì ë¡œì§ì€ í•„ìš”ì— ë”°ë¼ ìˆ˜ì •
+Object::Object(const Object& other)
+    : Object(other.name, TransformType::Normal) // º¹»ç »ı¼ºÀÚ ·ÎÁ÷Àº ÇÊ¿ä¿¡ µû¶ó ¼öÁ¤
 {
-    // ë³µì‚¬ ìƒì„±ì êµ¬í˜„ (í•„ìš” ì‹œ components ë³µì‚¬)
+    // º¹»ç »ı¼ºÀÚ ±¸Çö (ÇÊ¿ä ½Ã components º¹»ç)
 }
 
-void GameObject::AddComponent(const std::shared_ptr<Component>& component)
+void Object::AddComponent(const shared_ptr<Component>& component)
 {
     if (components.count(component->GetName())) return;
 
@@ -59,34 +59,34 @@ void GameObject::AddComponent(const std::shared_ptr<Component>& component)
     components.emplace(component->GetName(), component);
 }
 
-void GameObject::RemoveComponent(const std::string& compName)
+void Object::RemoveComponent(const std::string& compName)
 {
     components.erase(compName);
 }
 
-std::shared_ptr<Transform> GameObject::GetTransform() const
+shared_ptr<Transform> Object::GetTransform() const
 {
     return GetComponent<Transform>("Transform");
 }
 
-std::shared_ptr<RectTransform> GameObject::GetRectTransform() const
+shared_ptr<RectTransform> Object::GetRectTransform() const
 {
     return GetComponent<RectTransform>("RectTransform");
 }
 
-void GameObject::Update()
+void Object::Update()
 {
-    // ë“±ë¡ëœ ëª¨ë“  ì»´í¬ë„ŒíŠ¸ ì—…ë°ì´íŠ¸
-    // ì—¬ê¸°ì„œ each elementì˜ íƒ€ì…ì€ std::pair<const std::string, std::shared_ptr<Component>>
+    // µî·ÏµÈ ¸ğµç ÄÄÆ÷³ÍÆ® ¾÷µ¥ÀÌÆ®
+    // ¿©±â¼­ each elementÀÇ Å¸ÀÔÀº std::pair<const std::string, std::shared_ptr<Component>>
     for (const auto& element : components)
     {
-        const auto& compName = element.first;    // ì»´í¬ë„ŒíŠ¸ ì´ë¦„
-        const auto& compPtr = element.second; // ì»´í¬ë„ŒíŠ¸ í¬ì¸í„°
+        const auto& compName = element.first;    // ÄÄÆ÷³ÍÆ® ÀÌ¸§
+        const auto& compPtr = element.second; // ÄÄÆ÷³ÍÆ® Æ÷ÀÎÅÍ
 
         compPtr->Update();
     }
 
-    // RectTransformì´ ìˆë‹¤ë©´ ìš°ì„ ì ìœ¼ë¡œ ì‚¬ìš©í•©ë‹ˆë‹¤.
+    // RectTransformÀÌ ÀÖ´Ù¸é ¿ì¼±ÀûÀ¸·Î »ç¿ëÇÕ´Ï´Ù.
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
     {
@@ -102,9 +102,9 @@ void GameObject::Update()
     }
 }
 
-void GameObject::Render()
+void Object::Render()
 {
-    // ë“±ë¡ëœ ëª¨ë“  ì»´í¬ë„ŒíŠ¸ Render
+    // µî·ÏµÈ ¸ğµç ÄÄÆ÷³ÍÆ® Render
     for (const auto& element : components)
     {
         const auto& compName = element.first;
@@ -113,16 +113,16 @@ void GameObject::Render()
         compPtr->Render();
     }
 
-    // WorldBufferë¥¼ VSì— ë“±ë¡ (ì…°ì´ë”ì—ì„œ ì›”ë“œ í–‰ë ¬ ì‚¬ìš© ê°€ëŠ¥)
+    // WorldBuffer¸¦ VS¿¡ µî·Ï (¼ÎÀÌ´õ¿¡¼­ ¿ùµå Çà·Ä »ç¿ë °¡´É)
     worldBuffer->SetVSBuffer(0);
 }
 
 // ------------------------------------------------------
-// Transform ì ‘ê·¼ í¸ì˜ í•¨ìˆ˜ë“¤
+// Transform Á¢±Ù ÆíÀÇ ÇÔ¼öµé
 // ------------------------------------------------------
-Vector3 GameObject::GetPosition() const
+Vector3 Object::GetPosition() const
 {
-    // RectTransformì´ ìˆìœ¼ë©´ ê·¸ê²ƒì„ ì‚¬ìš©í•˜ê³ , ì—†ìœ¼ë©´ ê¸°ë³¸ Transform ì‚¬ìš©
+    // RectTransformÀÌ ÀÖÀ¸¸é ±×°ÍÀ» »ç¿ëÇÏ°í, ¾øÀ¸¸é ±âº» Transform »ç¿ë
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)return rectTrans->GetPosition();
 
@@ -130,7 +130,7 @@ Vector3 GameObject::GetPosition() const
     return trans ? trans->GetPosition() : Vector3(0, 0, 0);
 }
 
-Vector3 GameObject::GetScale() const
+Vector3 Object::GetScale() const
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetScale();
@@ -139,7 +139,7 @@ Vector3 GameObject::GetScale() const
     return trans ? trans->GetScale() : Vector3(1, 1, 1);
 }
 
-float GameObject::GetRotation() const
+float Object::GetRotation() const
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetRotation();
@@ -148,7 +148,7 @@ float GameObject::GetRotation() const
     return trans ? trans->GetRotation() : 0.0f;
 }
 
-void GameObject::SetPosition(const Vector3& position)
+void Object::SetPosition(const Vector3& position)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetPosition(position);
@@ -157,7 +157,7 @@ void GameObject::SetPosition(const Vector3& position)
     return trans->SetPosition(position);
 }
 
-void GameObject::SetScale(const Vector3& scale)
+void Object::SetScale(const Vector3& scale)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetScale(scale);
@@ -166,7 +166,7 @@ void GameObject::SetScale(const Vector3& scale)
     return trans->SetScale(scale);
 }
 
-void GameObject::SetRotation(const float& rotation)
+void Object::SetRotation(const float& rotation)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->SetRotation(rotation);
@@ -175,21 +175,21 @@ void GameObject::SetRotation(const float& rotation)
     return trans->SetRotation(rotation);
 }
 
-RECT GameObject::GetRect()
+RECT Object::GetRect()
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetRect();
 }
 
-RECT GameObject::GetCorrectedRect()
+RECT Object::GetCorrectedRect()
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans) return rectTrans->GetCorrectedRect();
 }
 
-void GameObject::Move(const Vector3& speed)
+void Object::Move(const Vector3& speed)
 {
-    // ìƒí™©ì— ë”°ë¼ RectTransformì´ë‚˜ Transformì„ ì„ íƒì ìœ¼ë¡œ ì—…ë°ì´íŠ¸í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+    // »óÈ²¿¡ µû¶ó RectTransformÀÌ³ª TransformÀ» ¼±ÅÃÀûÀ¸·Î ¾÷µ¥ÀÌÆ®ÇÒ ¼ö ÀÖ½À´Ï´Ù.
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
     {
@@ -202,7 +202,7 @@ void GameObject::Move(const Vector3& speed)
     }
 }
 
-void GameObject::Rotate(float rot)
+void Object::Rotate(float rot)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)
@@ -216,7 +216,7 @@ void GameObject::Rotate(float rot)
     }
 }
 
-void GameObject::Scale(const Vector3& scaleChange)
+void Object::Scale(const Vector3& scaleChange)
 {
     const auto& rectTrans = GetComponent<RectTransform>("RectTransform");
     if (rectTrans)

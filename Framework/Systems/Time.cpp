@@ -1,9 +1,9 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 #include "Time.h"
 
 Time::Time()
 {
-	currentTime = std::chrono::steady_clock::now();
+	currentTime = chrono::steady_clock::now();
 	lastTime = currentTime;
 }
 
@@ -13,9 +13,9 @@ void Time::Update()
 {
 	lastTime = currentTime;
 
-	currentTime = std::chrono::steady_clock::now();
+	currentTime = chrono::steady_clock::now();
 
-	std::chrono::duration<double> delta = currentTime - lastTime;
+	chrono::duration<double> delta = currentTime - lastTime;
 	deltaTime = delta.count();
 
 	worldTime += deltaTime;

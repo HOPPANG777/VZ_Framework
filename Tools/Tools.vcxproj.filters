@@ -7,52 +7,22 @@
     <ClInclude Include="Editor\EditorList.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\AnimationEditorPanel.h">
-      <Filter>Editor\AnimationEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\AssetViewerPanel.h">
-      <Filter>Editor\AssetViewer</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\IntegratedEditor.h">
-      <Filter>Editor\IntergratedEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\SceneEditorPanel.h">
-      <Filter>Editor\SceneEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\IEditorPanel.h">
-      <Filter>Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\MapEditorPanel.h">
-      <Filter>Editor\MapEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetPipeline\AssetPipeline.h">
-      <Filter>AssetPipeline</Filter>
+    <ClInclude Include="Editor\MapTools.h">
+      <Filter>Editor\MapTools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Editor\MapEditorPanel.cpp">
-      <Filter>Editor\MapEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\AnimationEditorPanel.cpp">
-      <Filter>Editor\AnimationEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\AssetViewerPanel.cpp">
-      <Filter>Editor\AssetViewer</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\IntegratedEditor.cpp">
-      <Filter>Editor\IntergratedEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\SceneEditorPanel.cpp">
-      <Filter>Editor\SceneEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetPipeline\AssetPipeline.cpp">
-      <Filter>AssetPipeline</Filter>
+    <ClCompile Include="Editor\MapTools.cpp">
+      <Filter>Editor\MapTools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tools.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tools.aps" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Tools.ico" />
@@ -62,23 +32,8 @@
     <Filter Include="Editor">
       <UniqueIdentifier>{e440c5b5-24af-4e27-9f73-1cf31ae17ac3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Editor\AnimationEditor">
-      <UniqueIdentifier>{33322e5b-6ad4-4371-8b02-5d4b101112a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\AssetViewer">
-      <UniqueIdentifier>{36eb82db-deb7-4145-9ae4-f6416243f37e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\IntergratedEditor">
-      <UniqueIdentifier>{3199002a-f19b-48b4-a3fc-3d11925c7d06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\SceneEditor">
-      <UniqueIdentifier>{0e35a7b8-c583-46dd-ad84-ffc529a84d26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Editor\MapEditor">
+    <Filter Include="Editor\MapTools">
       <UniqueIdentifier>{10f54a82-1b08-4192-a145-e9d51e323303}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AssetPipeline">
-      <UniqueIdentifier>{8267958a-ea68-4fcb-802b-d6e0bcbdab1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

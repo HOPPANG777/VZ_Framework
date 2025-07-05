@@ -1,6 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
-#include "Systems/Graphics.h"
+#pragma once
 
 class IndexBuffer
 {
@@ -11,7 +9,7 @@ private:
 	UINT count = 0;
 
 public:
-	void Create(const std::vector<UINT>& indices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT)
+	void Create(const vector<UINT>& indices, const D3D11_USAGE& usage = D3D11_USAGE_DEFAULT)
 	{
 		stride = sizeof(UINT);
 		count = UINT(indices.size());
@@ -39,13 +37,13 @@ public:
 		ZeroMemory(&subData, sizeof(subData));
 		subData.pSysMem = indices.data();
 
-		HRESULT hr = Graphics::Get()->GetDevice()->CreateBuffer(&desc, &subData, &buffer);
+		HRESULT hr = DEVICE->CreateBuffer(&desc, &subData, &buffer);
 		CHECK(hr);
 	};
 
 	void SetIA()
 	{
-		Graphics::Get()->GetDC()->IASetIndexBuffer(buffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		DC->IASetIndexBuffer(buffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 	};
 
 public:

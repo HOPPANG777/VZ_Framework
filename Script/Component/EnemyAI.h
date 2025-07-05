@@ -1,15 +1,13 @@
-ï»¿#pragma once
-
-#include "Components/Component.h"
+#pragma once
 
 class EnemyAI : public Component
 {
 public:
-	EnemyAI(const std::string& name = "EnemyAI") : Component(name) {}
+	EnemyAI(const string& name = "EnemyAI") : Component(name) {}
 	~EnemyAI() override = default;
 
 public:
-	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Update() override;
 	void Render() override;
 

@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "Systems/Graphics.h"
+#pragma once
 
 class RenderStates
 {

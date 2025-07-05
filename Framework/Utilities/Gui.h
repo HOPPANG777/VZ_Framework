@@ -1,7 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
-
-#include "Systems/Graphics.h"
+#pragma once
 
 class Gui
 {

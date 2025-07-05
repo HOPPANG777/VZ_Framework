@@ -1,35 +1,35 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "ResourcesManager.h"
 
 ResourcesManager::ResourcesManager() {}
 
 ResourcesManager::~ResourcesManager() {}
 
-void ResourcesManager::LoadResource(const std::string& resource)
+void ResourcesManager::LoadResource(const string& resource)
 {
-	// ì´ë¯¸ ë¡œë“œëœ ê²½ìš°ëŠ” ë„˜ì–´ê°
+	// ÀÌ¹Ì ·ÎµåµÈ °æ¿ì´Â ³Ñ¾î°¨
 	{
-		std::lock_guard<std::mutex> lock(mtx);
+		lock_guard<mutex> lock(mtx);
 		if (loadedResources.find(resource) != loadedResources.end()) return;
 	}
 
-	// ì‹¤ì œ ë¡œë”© ì‘ì—… (ì˜ˆ: íŒŒì¼ ì½ê¸°, ë””ì½”ë”© ë“±)
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	// ½ÇÁ¦ ·Îµù ÀÛ¾÷ (¿¹: ÆÄÀÏ ÀĞ±â, µğÄÚµù µî)
+	this_thread::sleep_for(chrono::milliseconds(100));
 
-	// ë¡œë”© ì™„ë£Œ í›„ ê¸°ë¡
+	// ·Îµù ¿Ï·á ÈÄ ±â·Ï
 	{
-		std::lock_guard<std::mutex> lock(mtx);
+		lock_guard<mutex> lock(mtx);
 		loadedResources.insert(resource);
 	}
 }
 
-bool ResourcesManager::IsResourceLoaded(const std::string& resource)
+bool ResourcesManager::IsResourceLoaded(const string& resource)
 {
-	std::lock_guard<std::mutex> lock(mtx);
+	lock_guard<mutex> lock(mtx);
 	return (loadedResources.find(resource) != loadedResources.end());
 }
 
-bool ResourcesManager::AreResourcesLoaded(const std::vector<std::string>& resources)
+bool ResourcesManager::AreResourcesLoaded(const vector<string>& resources)
 {
 	for (const auto& res : resources)
 	{

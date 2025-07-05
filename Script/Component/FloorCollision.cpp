@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "FloorCollision.h"
 
 void FloorCollision::Update()
@@ -13,10 +13,10 @@ void FloorCollision::Update()
     bool was = wasColliding;
     bool now = floorCollider->IsColliding(playerCollider.get());
 
-    // ì˜¤ë¥´ê¸° ì‹œìž‘
+    // ¿À¸£±â ½ÃÀÛ
     if (playerController && playerController->GetClimbing()) return;
 
-    // (1) ì°©ì§€ ìˆœê°„ì—ë§Œ Land()
+    // (1) ÂøÁö ¼ø°£¿¡¸¸ Land()
     if (now && !was)
     {
         playerController->Land();
@@ -24,7 +24,7 @@ void FloorCollision::Update()
 
     if (now)
     {
-        // í”Œëž«í¼ ìœ„ì—ì„œ collision ìœ ì§€ ë° ìœ„ì¹˜ ë³´ì •
+        // ÇÃ·§Æû À§¿¡¼­ collision À¯Áö ¹× À§Ä¡ º¸Á¤
         playerController->SetCollision(true);
         playerController->SetFall(false);
 
@@ -42,7 +42,7 @@ void FloorCollision::Update()
     }
     else if (was)
     {
-        // í”Œëž«í¼ ë²—ì–´ë‚˜ëŠ” ìˆœê°„ í•œ ë²ˆë§Œ ë‚™í•˜ ì‹œìž‘
+        // ÇÃ·§Æû ¹þ¾î³ª´Â ¼ø°£ ÇÑ ¹ø¸¸ ³«ÇÏ ½ÃÀÛ
         if (!playerController->GetJumping() && !playerController->GetBetween() && !playerController->GetFalling())
         {
             playerController->SetCollision(false);
@@ -51,10 +51,10 @@ void FloorCollision::Update()
         }
     }
 
-    // ë‹¤ìŒ í”„ë ˆìž„ì„ ìœ„í•´ ìƒíƒœ ì €ìž¥
+    // ´ÙÀ½ ÇÁ·¹ÀÓÀ» À§ÇØ »óÅÂ ÀúÀå
     wasColliding = now;
 
-    // -- ë„ë¼ ì¶©ëŒ ì²˜ë¦¬ (ë³€ê²½ ì—†ìŒ) --
+    // -- µµ³¢ Ãæµ¹ Ã³¸® (º¯°æ ¾øÀ½) --
     if (!lumberAxe) return;
     auto axeComponent = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
     AxeState state = axeComponent->GetState();

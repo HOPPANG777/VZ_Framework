@@ -1,33 +1,26 @@
-ï»¿#pragma once
+#pragma once
 
-#include "Systems/Input.h"
-#include "Objects/BaseObject/GameObject.h"
-#include "Enums/UnitAnimationType.h"
-#include "Components/Animator.h"
-#include "Components/Component.h"
-#include "Components/Transform.h"
-
-// PlayerControllerëŠ” í”Œë ˆì´ì–´ì˜ ì´ë™, ì í”„, ì¤‘ë ¥, ê·¸ë¦¬ê³  ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ ì „í™˜ì„ í†µí•© ê´€ë¦¬í•©ë‹ˆë‹¤.
+// PlayerController´Â ÇÃ·¹ÀÌ¾îÀÇ ÀÌµ¿, Á¡ÇÁ, Áß·Â, ±×¸®°í ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ ÀüÈ¯À» ÅëÇÕ °ü¸®ÇÕ´Ï´Ù.
 class PlayerController : public Component
 {
 public:
-    // ìƒì„±ì: ê¸°ë³¸ ì´ë™ ì†ë„(speed)ë¥¼ ì „ë‹¬ (ê¸°ë³¸ê°’ 250)
-    PlayerController(const std::string& name = "PlayerController", float speed = 250.0f);
+    // »ı¼ºÀÚ: ±âº» ÀÌµ¿ ¼Óµµ(speed)¸¦ Àü´Ş (±âº»°ª 250)
+    PlayerController(const string& name = "PlayerController", float speed = 250.0f);
     virtual ~PlayerController() override = default;
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ë Œë”ë§ì€ ë¬¼ë¦¬/ì• ë‹ˆë©”ì´ì…˜ ì—…ë°ì´íŠ¸ì— ì§‘ì¤‘
+    virtual void Render() override {} // ·»´õ¸µÀº ¹°¸®/¾Ö´Ï¸ŞÀÌ¼Ç ¾÷µ¥ÀÌÆ®¿¡ ÁıÁß
 
 public:
-    // ì™¸ë¶€ ì¶©ëŒ(í”Œë«í¼ê³¼ì˜ ì ‘ì´‰) ì—¬ë¶€ë¥¼ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜.
+    // ¿ÜºÎ Ãæµ¹(ÇÃ·§Æû°úÀÇ Á¢ÃË) ¿©ºÎ¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼ö.
     void SetCollision(bool col) { isCollision = col; }
-	void SetFall(bool fall) { isFall = fall; } // ë‚™í•˜ ìƒíƒœ ì„¤ì •
-	void SetGravity(float g) { gravity = g; } // ì¤‘ë ¥ ì„¤ì •
+	void SetFall(bool fall) { isFall = fall; } // ³«ÇÏ »óÅÂ ¼³Á¤
+	void SetGravity(float g) { gravity = g; } // Áß·Â ¼³Á¤
     void SetClimbing(bool c) { isClimbing = c; }
 
 public:
-    // ìƒíƒœ ì ‘ê·¼ì
+    // »óÅÂ Á¢±ÙÀÚ
     bool GetCollision() const { return isCollision; }
     bool GetJumping() const { return isJump; }
     bool GetFalling() const { return isFall; }
@@ -37,43 +30,43 @@ public:
     float GetSpeed() const { return currentSpeed; }
 
 public:
-    // ì¶”ê°€: í”Œë ˆì´ì–´ê°€ ì‚¬ë§í–ˆì„ ë•Œ í˜¸ì¶œ
+    // Ãß°¡: ÇÃ·¹ÀÌ¾î°¡ »ç¸ÁÇßÀ» ¶§ È£Ãâ
     void SetDead(bool dead) { isDead = dead; }
 
-    // ë‚´ë¶€ ì—…ë°ì´íŠ¸ í•¨ìˆ˜
+    // ³»ºÎ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
     void UpdateMovement(float dt);
     void UpdateAnimation();
     void UpdateAxeInput();
 
-    // Land()ë¥¼ í˜¸ì¶œí•˜ë©´ ì í”„/ë‚™í•˜ ìƒíƒœë¥¼ ë¦¬ì…‹
+    // Land()¸¦ È£ÃâÇÏ¸é Á¡ÇÁ/³«ÇÏ »óÅÂ¸¦ ¸®¼Â
     void Land();
 
 private:
-    // ì´ë™/ì í”„ ê´€ë ¨ ë³€ìˆ˜
-    float speed;          // ê¸°ë³¸ ì´ë™ ì†ë„
-    float currentSpeed;   // í˜„ì¬ ì†ë„(ìƒíƒœì— ë”°ë¼ ë³€ë™)
-    float gravity;        // í˜„ì¬ ì¤‘ë ¥ê°’
-    float originGravity;  // ì´ˆê¸° ì¤‘ë ¥ê°’
-    float jumpVelocity;   // ì í”„ ì‹œì‘ ì‹œ ì´ˆê¸° ì†ë„
+    // ÀÌµ¿/Á¡ÇÁ °ü·Ã º¯¼ö
+    float speed;          // ±âº» ÀÌµ¿ ¼Óµµ
+    float currentSpeed;   // ÇöÀç ¼Óµµ(»óÅÂ¿¡ µû¶ó º¯µ¿)
+    float gravity;        // ÇöÀç Áß·Â°ª
+    float originGravity;  // ÃÊ±â Áß·Â°ª
+    float jumpVelocity;   // Á¡ÇÁ ½ÃÀÛ ½Ã ÃÊ±â ¼Óµµ
 
-    // ìƒíƒœ í”Œë˜ê·¸
-    bool isJump;          // ì í”„ ì‹œì‘ ìƒíƒœ
-    bool isBetween;       // ìµœê³ ì (ì í”„ ì¤‘ ì •ì  ê·¼ì²˜) ìƒíƒœ
-    bool isFall;          // ë‚™í•˜ ìƒíƒœ
-    bool isCrouch;        // ìˆ™ì´ê¸° ìƒíƒœ (ì¶”í›„ í™•ì¥)
-    bool isAtking;        // ê³µê²© ìƒíƒœ (ì¶”í›„ í™•ì¥)
-    bool isRolling;       // êµ¬ë¥´ëŠ” ìƒíƒœ (ì¶”í›„ í™•ì¥)
-    bool isCollision;     // ì™¸ë¶€ ì¶©ëŒ(ë°œíŒê³¼ì˜ ì ‘ì´‰) ì—¬ë¶€
-    bool isClimbing;      // ë“±ë°˜ ìƒíƒœ
-	bool isAxeThrow;      // ë„ë¼ ë˜ì§€ëŠ” ìƒíƒœ
-	bool isAxePrepare;      // ë„ë¼ ë˜ì§€ëŠ” ëª¨ì…˜ ì¬ìƒ ìƒíƒœ
-	bool isAxePrepareHold;   // ë„ë¼ ë˜ì§€ëŠ” ëª¨ì…˜ ê³ ì • ì¬ìƒ ìƒíƒœ
-	bool isAxeReturn;     // ë„ë¼ê°€ ëŒì•„ì˜¤ëŠ” ìƒíƒœ
-    bool isRight;         // ë°”ë¼ë³´ëŠ” ë°©í–¥ (true: ì˜¤ë¥¸ìª½)
+    // »óÅÂ ÇÃ·¡±×
+    bool isJump;          // Á¡ÇÁ ½ÃÀÛ »óÅÂ
+    bool isBetween;       // ÃÖ°íÁ¡(Á¡ÇÁ Áß Á¤Á¡ ±ÙÃ³) »óÅÂ
+    bool isFall;          // ³«ÇÏ »óÅÂ
+    bool isCrouch;        // ¼÷ÀÌ±â »óÅÂ (ÃßÈÄ È®Àå)
+    bool isAtking;        // °ø°İ »óÅÂ (ÃßÈÄ È®Àå)
+    bool isRolling;       // ±¸¸£´Â »óÅÂ (ÃßÈÄ È®Àå)
+    bool isCollision;     // ¿ÜºÎ Ãæµ¹(¹ßÆÇ°úÀÇ Á¢ÃË) ¿©ºÎ
+    bool isClimbing;      // µî¹İ »óÅÂ
+	bool isAxeThrow;      // µµ³¢ ´øÁö´Â »óÅÂ
+	bool isAxePrepare;      // µµ³¢ ´øÁö´Â ¸ğ¼Ç Àç»ı »óÅÂ
+	bool isAxePrepareHold;   // µµ³¢ ´øÁö´Â ¸ğ¼Ç °íÁ¤ Àç»ı »óÅÂ
+	bool isAxeReturn;     // µµ³¢°¡ µ¹¾Æ¿À´Â »óÅÂ
+    bool isRight;         // ¹Ù¶óº¸´Â ¹æÇâ (true: ¿À¸¥ÂÊ)
 
-    // ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ ê´€ë¦¬
+    // ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ °ü¸®
     UnitAnimationType currentAnimation;
-    bool isDead;          // ì‚¬ë§ ìƒíƒœ
+    bool isDead;          // »ç¸Á »óÅÂ
    
 
 };

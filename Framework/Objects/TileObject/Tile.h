@@ -1,6 +1,4 @@
-ï»¿#pragma once
-
-#include "Utilities/DirectHelper.h"
+#pragma once
 
 class Tile  
 {
@@ -11,7 +9,7 @@ private:
     Vector2 startUV = Values::ZeroVec2;
     Vector2 endUV = Values::ZeroVec2;
 
-    ComPtr<ID3D11ShaderResourceView> srv; // D3D ë¦¬ì†ŒìŠ¤ëŠ” ComPtrë¡œ ê´€ë¦¬
+    ComPtr<ID3D11ShaderResourceView> srv; // D3D ¸®¼Ò½º´Â ComPtr·Î °ü¸®
 
     UINT index = -1;
 

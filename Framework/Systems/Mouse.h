@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
 
 #include "Utilities/DirectHelper.h"
 
@@ -43,9 +42,9 @@ private:
 	HWND handle;
 	Vector3 mousePos;
 
-	std::array<unsigned char, MAX_INPUT_MOUSE> buttonStatus = { 0 };
-	std::array<unsigned char, MAX_INPUT_MOUSE> buttonOldStatus = { 0 };
-	std::array<unsigned char, MAX_INPUT_MOUSE> buttonMap = { 0 };
+	array<unsigned char, MAX_INPUT_MOUSE> buttonStatus = { 0 };
+	array<unsigned char, MAX_INPUT_MOUSE> buttonOldStatus = { 0 };
+	array<unsigned char, MAX_INPUT_MOUSE> buttonMap = { 0 };
 
 	Vector3 wheelStatus = Values::ZeroVec3;
 	Vector3 wheelOldStatus = Values::ZeroVec3;

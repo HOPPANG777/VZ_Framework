@@ -1,9 +1,9 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Gui.h"
 
 LRESULT Gui::MsgProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// ImGuiê°€ ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•œ ê²½ìš°
+	// ImGui°¡ ¸Þ½ÃÁö¸¦ Ã³¸®ÇÑ °æ¿ì
 	return ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam);
 }
 
@@ -30,7 +30,7 @@ void Gui::Init()
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	ImGui_ImplWin32_Init(gHandle);
-	ImGui_ImplDX11_Init(Graphics::Get()->GetDevice(), Graphics::Get()->GetDC());
+	ImGui_ImplDX11_Init(DEVICE, DC);
 
 	ImGui::StyleColorsDark();
 	//ApplyStyle();

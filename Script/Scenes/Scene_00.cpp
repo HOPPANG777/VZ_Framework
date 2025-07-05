@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "Scene_00.h"
 
 void Scene_00::Awake() {}
@@ -8,16 +8,16 @@ void Scene_00::Start()
 	isLoaded = false;
 
 	{
-		objects.push_back(std::make_shared<ColorRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, BLACK));
-		objects.push_back(std::make_shared<JumpHoppang>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 0.93f, Values::GetWinHeight() * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/LoadingIcon.png"));
+		objects.push_back(make_shared<ColorRect>(Values::GetCenter(), Vector3(Values::GetWinWidth(), Values::GetWinHeight(), 0), 0.0f, BLACK));
+		objects.push_back(make_shared<JumpHoppang>(Values::GetCenter() + Vector3(Values::GetWinWidth() * 0.93f, Values::GetWinHeight() * 0.17f, 0), Vector3(200, 200, 0), 0.0f, TexturePath + L"UI/LoadingIcon.png"));
 	}
 	
 	{
-		LoadingTextObject = std::make_shared<GameObject>("LoadingText", Values::GetCenter() + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
-		LoadingTextObject->AddComponent(std::make_shared<Texts>());
+		LoadingTextObject = make_shared<Object>("LoadingText", Values::GetCenter() + Vector3(380, -360, 0), Vector3(100, 25, 0), 0.0f, TransformType::Rect);
+		LoadingTextObject->AddComponent(make_shared<Texts>());
 	}
 	
-	Camera::Get()->Reset();
+	CAMERA->Reset();
 
 	isLoaded = true;
 }
@@ -46,7 +46,7 @@ void Scene_00::Render()
 
 void Scene_00::PostRender() 
 {
-	LoadingTextObject->GetComponent<Texts>("Texts")->RenderText(L"ë¶ˆëŸ¬ì˜¤ëŠ” ì¤‘", LoadingTextObject->GetRect(), 25.0f);
+	LoadingTextObject->GetComponent<Texts>("Texts")->RenderText(L"ºÒ·¯¿À´Â Áß", LoadingTextObject->GetRect(), 25.0f);
 }
 
 void Scene_00::ImGUI() {}

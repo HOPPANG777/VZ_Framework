@@ -1,13 +1,13 @@
-Ôªø#include "Framework.h"
+#include "Framework.h"
 #include "Texts.h"
 
 void Texts::RenderText
 (
-	const std::wstring& text,
+	const wstring& text,
 	const RECT& rect,
 	const float size,
 	const Color& color,
-	const std::wstring& font,
+	const wstring& font,
 	const DWRITE_FONT_WEIGHT& weight,
 	const DWRITE_FONT_STYLE& style,
 	const DWRITE_FONT_STRETCH& stretch
@@ -26,7 +26,7 @@ void Texts::RenderText
 	static_cast<float>(gWinHeight - finalRect.top)
 	};
 
-	Graphics::Get()->GetD2DC()->DrawTextW
+	D2DC->DrawTextW
 	(
 		text.c_str(),
 		static_cast<UINT32>(text.size()),
@@ -35,12 +35,12 @@ void Texts::RenderText
 		brush->brush.Get()
 	);
 
-	// ÌÖçÏä§Ìä∏ Ï†ïÎ†¨ ÏÑ§Ï†ï
+	// ≈ÿΩ∫∆Æ ¡§∑ƒ º≥¡§
 	textDesc->format->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 	textDesc->format->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 }
 
-void Texts::AttachToObject(GameObject* object)
+void Texts::AttachToObject(Object* object)
 {
 	this->attachedObject = object;
 }
@@ -52,11 +52,11 @@ void Texts::Detach()
 
 FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 {
-	auto newBrushDesc = std::make_unique<FontBrushDesc>();
+	auto newBrushDesc = make_unique<FontBrushDesc>();
 	newBrushDesc->color = color;
 
 	const auto& brushIt = find_if(fontBrush.begin(), fontBrush.end(),
-		[&newBrushDesc](const std::unique_ptr<FontBrushDesc>& ptr)
+		[&newBrushDesc](const unique_ptr<FontBrushDesc>& ptr)
 		{
 			return *ptr == *newBrushDesc;
 		});
@@ -64,7 +64,7 @@ FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 	if (brushIt != fontBrush.end()) return brushIt->get();
 
 	D2D1::ColorF colorF(color.R(), color.G(), color.B(), color.A());
-	HRESULT hr = Graphics::Get()->GetD2DC()->CreateSolidColorBrush(colorF, &newBrushDesc->brush);
+	HRESULT hr = D2DC->CreateSolidColorBrush(colorF, &newBrushDesc->brush);
 	CHECK(hr);
 
 	FontBrushDesc* createdBrush = newBrushDesc.get();
@@ -74,14 +74,14 @@ FontBrushDesc* Texts::GetOrCreateBrush(const Color& color)
 
 FontTextDesc* Texts::GetOrCreateTextFormat
 (
-	const std::wstring& font,
+	const wstring& font,
 	float size,
 	const DWRITE_FONT_WEIGHT& weight,
 	const DWRITE_FONT_STYLE& style,
 	const DWRITE_FONT_STRETCH& stretch
 )
 {
-	auto newTextDesc = std::make_unique<FontTextDesc>();
+	auto newTextDesc = make_unique<FontTextDesc>();
 	newTextDesc->font = font;
 	newTextDesc->fontSize = size;
 	newTextDesc->weight = weight;
@@ -89,14 +89,14 @@ FontTextDesc* Texts::GetOrCreateTextFormat
 	newTextDesc->stretch = stretch;
 
 	const auto& textIt = find_if(fontText.begin(), fontText.end(),
-		[&newTextDesc](const std::unique_ptr<FontTextDesc>& ptr)
+		[&newTextDesc](const unique_ptr<FontTextDesc>& ptr)
 		{
 			return *ptr == *newTextDesc;
 		});
 
 	if (textIt != fontText.end()) return textIt->get();
 
-	HRESULT hr = Graphics::Get()->GetWrite()->CreateTextFormat
+	HRESULT hr = WRITE->CreateTextFormat
 	(
 		newTextDesc->font.c_str(),
 		nullptr,
@@ -119,7 +119,7 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 	RECT adjustedRect;
 	if (attachedObject)
 	{
-		// RectTransformÏù¥ ÏûàÎã§Î©¥ Í∑∏ Í∞íÏùÑ ÏÇ¨Ïö©
+		// RectTransform¿Ã ¿÷¥Ÿ∏È ±◊ ∞™¿ª ªÁøÎ
 		const auto& rectTrans = attachedObject->GetComponent<RectTransform>("RectTransform");
 		if (rectTrans)
 		{
@@ -127,7 +127,7 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 		}
 		else
 		{
-			// ÏóÜÏúºÎ©¥ Í∏∞Î≥∏Ï†ÅÏúºÎ°ú Í∞ùÏ≤¥Ïùò ÏúÑÏπòÏôÄ offsetÏùÑ ÎçîÌï®
+			// æ¯¿∏∏È ±‚∫ª¿˚¿∏∑Œ ∞¥√º¿« ¿ßƒ°øÕ offset¿ª ¥ı«‘
 			Vector3 objectPos = attachedObject->GetPosition();
 			adjustedRect = rect;
 			adjustedRect.left += static_cast<LONG>(objectPos.x + offset.x);
@@ -135,19 +135,19 @@ RECT Texts::CalculateRectFromObject(const RECT& rect)
 			adjustedRect.top += static_cast<LONG>(objectPos.y + offset.y);
 			adjustedRect.bottom += static_cast<LONG>(objectPos.y + offset.y);
 		}
-		// Î≥¥Ï†ï Ìï®Ïàò Ìò∏Ï∂ú: DX3D Ï¢åÌëúÍ≥Ñ -> ÏúàÎèÑÏö∞ Ï¢åÌëúÍ≥ÑÎ°ú Î≥ÄÌôò
+		// ∫∏¡§ «‘ºˆ »£√‚: DX3D ¡¬«•∞Ë -> ¿©µµøÏ ¡¬«•∞Ë∑Œ ∫Ø»Ø
 		return ConvertToWindowCoordinates(adjustedRect, gWinHeight);
 	}
 	return rect;
 }
 
-// Ï¢åÌëúÍ≥ÑÎ•º Î≥¥Ï†ïÌïòÎäî Ìó¨Ìçº Ìï®Ïàò: DX3D(ÏõêÏ†ê: Ï¢åÌïòÎã®) -> DX2D(ÏõêÏ†ê: Ï¢åÏÉÅÎã®)
+// ¡¬«•∞Ë∏¶ ∫∏¡§«œ¥¬ «Ô∆€ «‘ºˆ: DX3D(ø¯¡°: ¡¬«œ¥‹) -> DX2D(ø¯¡°: ¡¬ªÛ¥‹)
 RECT Texts::ConvertToWindowCoordinates(const RECT& rect, float screenHeight)
 {
 	RECT windowRect;
 	windowRect.left = rect.left;
 	windowRect.right = rect.right;
-	windowRect.top = static_cast<LONG>(screenHeight) - rect.bottom; // bottom Í∞íÏóêÏÑú Î≥¥Ï†ï
+	windowRect.top = static_cast<LONG>(screenHeight) - rect.bottom; // bottom ∞™ø°º≠ ∫∏¡§
 	windowRect.bottom = static_cast<LONG>(screenHeight) - rect.top;
 	return windowRect;
 }

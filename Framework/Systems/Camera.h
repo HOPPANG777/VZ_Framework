@@ -1,10 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
-#include "Objects/BaseObject/GameObject.h"
-#include "Renders/RenderResources/GlobalBuffers.h"
-#include "Utilities/DirectHelper.h"
-#include "Systems/Input.h"
-#include "Systems/Time.h"
+#pragma once
 
 class Camera
 {
@@ -18,7 +12,6 @@ public:
 
 public:
 	void SetProjection(const float width, const float height);
-	
 	void UpdateView();
 	void Move();
 	const Vector3 Drag();
@@ -29,31 +22,28 @@ public:
 	Vector3 GetPosition() const { return position; }
 	void SetPosition(const Vector3& position) { this->position = position; }
 
-	void SetTarget(GameObject* target) { this->cameraTarget = target; }
-	void RemoveTarget() { this->cameraTarget = nullptr; }
+	void SetTarget(Object* target) { this->target = target; }
+	void RemoveTarget() { this->target = nullptr; }
 
-	GameObject* GetTarget() { return cameraTarget; }
+	Object* GetTarget() { return target; }
 
 public:
 	void UpdateFollow();
-	void UpdateHorizontalScroll(GameObject* target, float minRatio = 0.5f, float maxRatio = 2.5f);
-	void UpdateVerticalScroll(GameObject* target, float minRatio = 0.5f, float maxRatio = 2.5f);
+	void UpdateHorizontalScroll(Object* target, float minRatio = 0.5f, float maxRatio = 2.5f);
+	void UpdateVerticalScroll(Object* target, float minRatio = 0.5f, float maxRatio = 2.5f);
 
 private:
 	Matrix view, proj;
-	std::unique_ptr<ViewProjectionBuffer> VPBuffer;
+	unique_ptr<ViewProjectionBuffer> VPBuffer;
 
 	Vector3 position = Values::ZeroVec3;
 
-	GameObject* cameraTarget = nullptr;
+	Object* target = nullptr;
 
 	bool isMove = false;
 	float moveSpeed = 150.0f;
 
 	float accelerationTime = 0.0f;
 	float currentSpeed = 0.0f; 
-
-	float prevWidth = 0.0f;
-	float prevHeight = 0.0f;
 };
 

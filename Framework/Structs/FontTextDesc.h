@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 
 struct FontTextDesc
 {
-	std::wstring font;
+	wstring font;
 	float fontSize;
 
 	DWRITE_FONT_WEIGHT weight;

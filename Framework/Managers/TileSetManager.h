@@ -1,7 +1,4 @@
-ï»¿#pragma once
-
-#include "Renders/RenderResources/Texture2D.h"
-#include "Utilities/DirectHelper.h"
+#pragma once
 
 class TileSetManager
 {
@@ -10,34 +7,34 @@ class TileSetManager
 public:
     void Init();
 
-    // GUI ì°½ì—ì„œ íƒ€ì¼ì…‹ íŒ”ë ˆíŠ¸ë¥¼ í‘œì‹œ
+    // GUI Ã¢¿¡¼­ Å¸ÀÏ¼Â ÆÈ·¹Æ®¸¦ Ç¥½Ã
     void ImGUI();
 
-    // SRVë¥¼ ì–»ì„ ë•ŒëŠ” ComPtrì˜ Get()ì„ ì‚¬ìš©
+    // SRV¸¦ ¾òÀ» ¶§´Â ComPtrÀÇ Get()À» »ç¿ë
     ComPtr<ID3D11ShaderResourceView> GetSRV() const { return tileSRV; }
 
-    // íƒ€ì¼ì…‹ ë³€ê²½: ìƒˆë¡œìš´ ì´ë¯¸ì§€ì™€ íƒ€ì¼ ë¶„í•  ì •ë³´ë¥¼ ì ìš©
+    // Å¸ÀÏ¼Â º¯°æ: »õ·Î¿î ÀÌ¹ÌÁö¿Í Å¸ÀÏ ºĞÇÒ Á¤º¸¸¦ Àû¿ë
     void ChangeTileMap(const std::wstring& imagePath, UINT xCount, UINT yCount);
 
 public:
-    std::wstring GetTilePath() { return tilePath; }
+    wstring GetTilePath() { return tilePath; }
 
     UINT GetXCount() { return tileXCount; }
     UINT GetYCount() { return tileYCount; }
 
 public:
-    // í”Œë ˆì´ì–´ê°€ ì„ íƒí•œ íƒ€ì¼ì˜ ì‹œì‘ UVì™€ ì´ë¯¸ì§€ì˜ íƒ€ì¼ í¬ê¸°
+    // ÇÃ·¹ÀÌ¾î°¡ ¼±ÅÃÇÑ Å¸ÀÏÀÇ ½ÃÀÛ UV¿Í ÀÌ¹ÌÁöÀÇ Å¸ÀÏ Å©±â
     Vector2 selectedStartUV = Values::ZeroVec2;
     Vector2 texelTileSize = Values::ZeroVec2;
 
 private:
-    // ComPtrìœ¼ë¡œ ê´€ë¦¬í•˜ì—¬ ìë™ìœ¼ë¡œ í•´ì œë˜ë„ë¡ í•¨
+    // ComPtrÀ¸·Î °ü¸®ÇÏ¿© ÀÚµ¿À¸·Î ÇØÁ¦µÇµµ·Ï ÇÔ
     ComPtr<ID3D11ShaderResourceView> tileSRV;
 
     UINT tileXCount = 0;
     UINT tileYCount = 0;
 
-    std::wstring tilePath = L"";
+    wstring tilePath = L"";
 
 };
 

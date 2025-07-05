@@ -1,7 +1,7 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Texture2DManager.h"
 
-std::vector<TextureDesc> Texture2DManager::descs;
+vector<TextureDesc> Texture2DManager::descs;
 
 Texture2DManager::Texture2DManager() {}
 
@@ -16,17 +16,17 @@ void Texture2DManager::Delete()
     descs.clear();
 }
 
-// í…ìŠ¤ì²˜2Dë¥¼ ìƒì„±í•˜ê±°ë‚˜ ë”°ë¡œ ë§Œë“¤ë•Œ í•´ë‹¹ texture2Dì˜ ë°ì´í„°ë¥¼ ì´ìš©í•´ì„œ
-// ì´ë¯¸ í•´ë‹¹ ê·¸ë¦¼ì˜ ë°ì´í„°ê°€ ìˆëŠ”ì§€ í™•ì¸í•˜ê³  ì—†ë‹¤ë©´ ë§Œë“œëŠ” í•¨ìˆ˜
+// ÅØ½ºÃ³2D¸¦ »ı¼ºÇÏ°Å³ª µû·Î ¸¸µé¶§ ÇØ´ç texture2DÀÇ µ¥ÀÌÅÍ¸¦ ÀÌ¿ëÇØ¼­
+// ÀÌ¹Ì ÇØ´ç ±×¸²ÀÇ µ¥ÀÌÅÍ°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í ¾ø´Ù¸é ¸¸µå´Â ÇÔ¼ö
 void Texture2DManager::Load(Texture2D* texture)
 {
     HRESULT hr;
     TexMetadata metaData;
 
-    // íŒŒì¼ í™•ì¥ì ì¶”ì¶œ
-    std::wstring ext = Path::GetExtension(texture->filePath);
+    // ÆÄÀÏ È®ÀåÀÚ ÃßÃâ
+    wstring ext = Path::GetExtension(texture->filePath);
 
-    // í™•ì¥ìì— ë”°ë¼ ë©”íƒ€ë°ì´í„° ì½ê¸°
+    // È®ÀåÀÚ¿¡ µû¶ó ¸ŞÅ¸µ¥ÀÌÅÍ ÀĞ±â
     if (ext == L"tga")
     {
         hr = GetMetadataFromTGAFile(texture->filePath.c_str(), metaData);
@@ -43,42 +43,42 @@ void Texture2DManager::Load(Texture2D* texture)
         CHECK(hr);
     }
     
-    // í•´ë‹¹ ê·¸ë¦¼ì˜ ë„ˆë¹„ì™€ ë†’ì´ë¥¼ ë³€ìˆ˜í™”
-    size_t width = metaData.width;
-    size_t height = metaData.height;
+    // ÇØ´ç ±×¸²ÀÇ ³Êºñ¿Í ³ôÀÌ¸¦ º¯¼öÈ­
+    UINT width = metaData.width;
+    UINT height = metaData.height;
 
-    // Texture2Dê°€ ê°€ì§€ê³ ìˆë˜ íŒŒì¼ ê²½ë¡œ ì´ë¯¸ì§€ì˜
-    // ì£¼ì†Œ, ë„ˆë¹„, ë†’ì´ë¥¼ descì— ë‹´ìŒ
+    // Texture2D°¡ °¡Áö°íÀÖ´ø ÆÄÀÏ °æ·Î ÀÌ¹ÌÁöÀÇ
+    // ÁÖ¼Ò, ³Êºñ, ³ôÀÌ¸¦ desc¿¡ ´ãÀ½
     TextureDesc desc;
     desc.filePath = texture->filePath;
     desc.width = width;
     desc.height = height;
 
-    // ë§Œì•½ ì´ë¯¸ ê°€ì§€ê³ ìˆëŠ” descsì— ì´ë²ˆì— ë§Œë“¤ë ¤ í•˜ëŠ” Texture2Dì˜
-    // ì£¼ì†Œ, ë„ˆë¹„, ë†’ì´ê°€ ê°™ì€ ì´ë¯¸ì§€ ë°ì´í„°ê°€ ì´ë¯¸ ìˆëŠ”ì§€ ê²€ì‚¬
+    // ¸¸¾à ÀÌ¹Ì °¡Áö°íÀÖ´Â descs¿¡ ÀÌ¹ø¿¡ ¸¸µé·Á ÇÏ´Â Texture2DÀÇ
+    // ÁÖ¼Ò, ³Êºñ, ³ôÀÌ°¡ °°Àº ÀÌ¹ÌÁö µ¥ÀÌÅÍ°¡ ÀÌ¹Ì ÀÖ´ÂÁö °Ë»ç
     bool bExist = false;
     TextureDesc existDesc;
     for (const auto& temp : descs)
     {
         if (desc == temp)
         {
-            // ì£¼ì†Œ, ë„ˆë¹„, ë†’ì´ê°€ ê°™ì€ ì´ë¯¸ì§€ê°€ ìˆì„ê²½ìš°
+            // ÁÖ¼Ò, ³Êºñ, ³ôÀÌ°¡ °°Àº ÀÌ¹ÌÁö°¡ ÀÖÀ»°æ¿ì
             bExist = true;
-            existDesc = temp;   // ì´ë¯¸ ìˆëŠ” ë°ì´í„°ë¥¼ existì— ë„£ê¸°
+            existDesc = temp;   // ÀÌ¹Ì ÀÖ´Â µ¥ÀÌÅÍ¸¦ exist¿¡ ³Ö±â
             break;
         }
     }
 
-    // í…ìŠ¤ì²˜ ë°ì´í„°ê°€ ì´ë¯¸ ìˆë‹¤ë©´
+    // ÅØ½ºÃ³ µ¥ÀÌÅÍ°¡ ÀÌ¹Ì ÀÖ´Ù¸é
     if (bExist)
     {
-        // ê¸°ì¡´ì— ë¡œë“œëœ í…ìŠ¤ì²˜ê°€ ìˆìœ¼ë©´ ìºì‹±ëœ SRV ì‚¬ìš©
+        // ±âÁ¸¿¡ ·ÎµåµÈ ÅØ½ºÃ³°¡ ÀÖÀ¸¸é Ä³½ÌµÈ SRV »ç¿ë
         texture->srv = existDesc.srv;
         texture->metaData = metaData;
     }
-    else // ì´ì „ì— ë§Œë“  í…ìŠ¤ì³ ë°ì´í„°ê°€ ì—†ë‹¤ë©´
+    else // ÀÌÀü¿¡ ¸¸µç ÅØ½ºÃÄ µ¥ÀÌÅÍ°¡ ¾ø´Ù¸é
     {
-        // ì´ë¯¸ì§€ íŒŒì¼ë¡œ ë¶€í„° í…ìŠ¤ì²˜ ë°ì´í„°ë¥¼ ì¶”ì¶œí•˜ëŠ”ë° ì‚¬ìš©
+        // ÀÌ¹ÌÁö ÆÄÀÏ·Î ºÎÅÍ ÅØ½ºÃ³ µ¥ÀÌÅÍ¸¦ ÃßÃâÇÏ´Âµ¥ »ç¿ë
         ScratchImage image;
 
         if (ext == L"tga")
@@ -100,7 +100,7 @@ void Texture2DManager::Load(Texture2D* texture)
         ComPtr<ID3D11ShaderResourceView> shaderResourceView;
         hr = CreateShaderResourceView
         (
-            Graphics::Get()->GetDevice(),
+            DEVICE,
             image.GetImages(),
             image.GetImageCount(),
             metaData,

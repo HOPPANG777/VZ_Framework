@@ -1,12 +1,12 @@
-ï»¿#pragma once
+#pragma once
 
 struct TextureDesc
 {
-    std::wstring filePath = L"";
-    size_t width = 0;
-    size_t height = 0;
+    wstring filePath = L"";
+    UINT width = 0;
+    UINT height = 0;
 
-    // COM ì¸í„°í˜ì´ìŠ¤ëŠ” ComPtrë¡œ ê´€ë¦¬
+    // COM ÀÎÅÍÆäÀÌ½º´Â ComPtr·Î °ü¸®
     ComPtr<ID3D11ShaderResourceView> srv;
 
     bool operator==(const TextureDesc& other) const
@@ -16,8 +16,8 @@ struct TextureDesc
         b &= (width == other.width);
         b &= (height == other.height);
 
-        // srvëŠ” ì‹¤ì œ ë¹„êµì—ì„œ ì œì™¸(ì›ë³¸ ì½”ë“œì™€ ë™ì¼).
-        // í•„ìš”í•˜ë‹¤ë©´ srv.Get()ë¥¼ ë¹„êµí•˜ë„ë¡ ì¶”ê°€ ê°€ëŠ¥.
+        // srv´Â ½ÇÁ¦ ºñ±³¿¡¼­ Á¦¿Ü(¿øº» ÄÚµå¿Í µ¿ÀÏ).
+        // ÇÊ¿äÇÏ´Ù¸é srv.Get()¸¦ ºñ±³ÇÏµµ·Ï Ãß°¡ °¡´É.
         return b;
     }
 };

@@ -7,30 +7,19 @@ Camera::~Camera() {}
 
 void Camera::Init()
 {
-	VPBuffer = std::make_unique<ViewProjectionBuffer>();
+	VPBuffer = make_unique<ViewProjectionBuffer>();
 
 	view = XMMatrixLookAtLH(Vector3(0, 0, 0), Vector3(0, 0, 1), Vector3(0, 1, 0));
 	proj = XMMatrixOrthographicOffCenterLH(0, Values::GetWinWidth(), 0, Values::GetWinHeight(), 0, 1);
 
 	VPBuffer->SetView(view);
 	VPBuffer->SetProjection(proj);
-
-    //prevWidth = gWinWidth;
-    //prevHeight = gWinHeight;
 }
 
 void Camera::Update()
 {
 	Move();
 	UpdateView();
-
-    //if (prevWidth != gWinWidth || prevHeight != gWinHeight)
-    //{
-    //    proj = XMMatrixOrthographicOffCenterLH(0, gWinWidth, 0, gWinHeight, 0, 1);
-    //    VPBuffer->SetProjection(proj);
-    //    prevWidth = gWinWidth;
-    //    prevHeight = gWinHeight;
-    //}
 }
 
 void Camera::Render()
@@ -38,7 +27,7 @@ void Camera::Render()
 	VPBuffer->SetVSBuffer(1);
 }
 
-void Camera::SetProjection(float width, float height)
+void Camera::SetProjection(const float width, const float height)
 {
     proj = XMMatrixOrthographicOffCenterLH(0, width, 0, height, 0, 1);
     if (VPBuffer) VPBuffer->SetProjection(proj);
@@ -60,14 +49,14 @@ void Camera::UpdateView()
 void Camera::Move()
 {
     // 타겟이 있을 경우
-    if (cameraTarget != nullptr)
+    if (target != nullptr)
     {
-        position.x = cameraTarget->GetPosition().x - Values::GetWinWidth() * 0.5f;
-        position.y = cameraTarget->GetPosition().y - Values::GetWinHeight() * 0.5f;
+        position.x = target->GetPosition().x - Values::GetWinWidth() * 0.5f;
+        position.y = target->GetPosition().y - Values::GetWinHeight() * 0.5f;
     }
     else // 타겟이 없을 경우 (개발자 모드)
     {
-        if (Input::Get()->KeyDown(VK_F4))
+        if (INPUT->KeyDown(VK_F4))
         {
             // 토글: 이동 모드 On/Off
             isMove = !isMove;
@@ -79,32 +68,32 @@ void Camera::Move()
         {
             bool moving = false;
             // 기본적으로 현재 속도(currentSpeed)를 사용하여 이동
-            if (Input::Get()->KeyPressed('W'))
+            if (Keyboard::Get()->Press('W'))
             {
-                position.y += currentSpeed * Time::Get()->GetDeltaTime();
+                position.y += currentSpeed * DELTA;
                 moving = true;
             }
-            else if (Input::Get()->KeyPressed('S'))
+            else if (Keyboard::Get()->Press('S'))
             {
-                position.y -= currentSpeed * Time::Get()->GetDeltaTime();
+                position.y -= currentSpeed * DELTA;
                 moving = true;
             }
 
-            if (Input::Get()->KeyPressed('A'))
+            if (Keyboard::Get()->Press('A'))
             {
-                position.x -= currentSpeed * Time::Get()->GetDeltaTime();
+                position.x -= currentSpeed * DELTA;
                 moving = true;
             }
-            else if (Input::Get()->KeyPressed('D'))
+            else if (Keyboard::Get()->Press('D'))
             {
-                position.x += currentSpeed * Time::Get()->GetDeltaTime();
+                position.x += currentSpeed * DELTA;
                 moving = true;
             }
 
             // 만약 한 개 이상의 이동 키가 눌려있으면 가속 누적, 아니면 가속 시간 초기화
             if (moving)
             {
-                accelerationTime += Time::Get()->GetDeltaTime();
+                accelerationTime += DELTA;
                 // 최소 5초 동안 누르고 있어야 최대 가속에 도달 (최대 가속은 5초에 해당)
                 if (accelerationTime > 3.0f) accelerationTime = 3.0f;
             }
@@ -120,7 +109,7 @@ void Camera::Move()
 
 const Vector3 Camera::Drag()
 {
-	Vector3 mousePos = Input::Get()->GetMousePos();
+	Vector3 mousePos = INPUT->GetMousePos();
 
 	mousePos += position;
 
@@ -130,17 +119,17 @@ const Vector3 Camera::Drag()
 void Camera::Reset()
 {
 	position = { 0, 0, 0 };  // 월드 좌표 (0, 0, 0)으로 초기화
-    cameraTarget = nullptr;        // 타겟 제거
+	target = nullptr;        // 타겟 제거
 	UpdateView();            // 초기화 후 뷰 갱신
 }
 
 void Camera::UpdateFollow()
 {
-    if (cameraTarget == nullptr) return;
+    if (target == nullptr) return;
 
     // (1) 현재 카메라의 좌측 상단을 camPos로 가정
     Vector3 camPos = position;
-    Vector3 targetPos = cameraTarget->GetPosition();
+    Vector3 targetPos = target->GetPosition();
 
     // (2) 데드존(marginX, marginY) 밖이면 카메라를 이동
     float marginX = 600.0f;
@@ -171,7 +160,7 @@ void Camera::UpdateFollow()
     UpdateView();
 }
 
-void Camera::UpdateHorizontalScroll(GameObject* target, float minRatio, float maxRatio)
+void Camera::UpdateHorizontalScroll(Object* target, float minRatio, float maxRatio)
 {
     if (target == nullptr) return;
 
@@ -189,7 +178,7 @@ void Camera::UpdateHorizontalScroll(GameObject* target, float minRatio, float ma
 
 }
 
-void Camera::UpdateVerticalScroll(GameObject* target, float minRatio, float maxRatio)
+void Camera::UpdateVerticalScroll(Object* target, float minRatio, float maxRatio)
 {
     if (target == nullptr) return;
 

@@ -1,21 +1,21 @@
-﻿#pragma once
+#pragma once
 
-class GameObject;
+class Object;
 class Component
 {
 protected:
-	std::string name;
-	GameObject* owner = nullptr;
+	string name;
+	Object* owner = nullptr;
 
 public:
-	Component(const std::string& compName) : name(compName) {}
+	Component(const string& compName) : name(compName) {}
 	virtual ~Component() = default;
 
 public:
-	GameObject* GetOwner() const { return owner; }
-	std::string GetName() const { return name; }
+	Object* GetOwner() const { return owner; }
+	string GetName() const { return name; }
 
-	void SetOwner(GameObject* obj) { owner = obj; }
+	void SetOwner(Object* obj) { owner = obj; }
 
 public:
 	virtual void Update() = 0;

@@ -1,12 +1,9 @@
-ï»¿#pragma once
-
-#include "Interfaces/IScene.h"
-#include "Component/ParallaxBackground.h"
+#pragma once
 
 class Scene_06 : public Scene
 {
 public:
-	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Awake() override;
 	void Start() override;
 
@@ -26,8 +23,8 @@ public:
 private:
 	bool isLoaded = false;
 
-	std::shared_ptr<GameObject> bgLayer[5];
-	std::shared_ptr<GameObject> bgLayerDup[5];
+	shared_ptr<Object> bgLayer[5];
+	shared_ptr<Object> bgLayerDup[5];
 	Vector3 bgOrigin[5];
 	Vector3 bgOriginDup[5];
 

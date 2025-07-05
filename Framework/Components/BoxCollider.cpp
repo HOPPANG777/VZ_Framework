@@ -1,11 +1,11 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "BoxCollider.h"
 
 void BoxCollider::Update()
 {
     if (GetOwner())
     {
-        // ì†Œìœ  ê°ì²´ì˜ ìœ„ì¹˜ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì¤‘ì‹¬ì„ ì—…ë°ì´íŠ¸
+        // ¼ÒÀ¯ °´Ã¼ÀÇ À§Ä¡¸¦ ±â¹ÝÀ¸·Î Áß½ÉÀ» ¾÷µ¥ÀÌÆ®
         Vector3 ownerPosition = GetOwner()->GetPosition();
         center = ownerPosition;
         UpdateEdge();
@@ -14,16 +14,16 @@ void BoxCollider::Update()
 
 void BoxCollider::Render()
 {
-    if (!CollisionManager::Get()->GetColliderDebug()) return;
+    if (!COLLISION->GetColliderDebug()) return;
 
-    // colliderì˜ center(ì›”ë“œ ì¢Œí‘œ)
-    Vector3 center = GetCenter(); // ì˜ˆ: Transform ë“±ì—ì„œ ê°€ì ¸ì˜´
-    Vector3 cameraPos = Camera::Get()->GetPosition();
+    // colliderÀÇ center(¿ùµå ÁÂÇ¥)
+    Vector3 center = GetCenter(); // ¿¹: Transform µî¿¡¼­ °¡Á®¿È
+    Vector3 cameraPos = CAMERA->GetPosition();
 
-    // í™”ë©´ ì¢Œí‘œë¡œ ë³€í™˜ (ì¹´ë©”ë¼ê°€ ì´ë™í•œ ë§Œí¼ ë¹¼ê¸°)
+    // È­¸é ÁÂÇ¥·Î º¯È¯ (Ä«¸Þ¶ó°¡ ÀÌµ¿ÇÑ ¸¸Å­ »©±â)
     Vector3 screenCenter = center - cameraPos;
 
-    // ê¸°ì¦ˆëª¨ ê·¸ë¦¬ê¸°
-    // size(ë°•ìŠ¤ í¬ê¸°)ëŠ” ê·¸ëŒ€ë¡œ, centerë§Œ screenCenterë¡œ
-    Gizmo::Get()->DrawBox(screenCenter, size, color, 1.0f);
+    // ±âÁî¸ð ±×¸®±â
+    // size(¹Ú½º Å©±â)´Â ±×´ë·Î, center¸¸ screenCenter·Î
+    GIZMO->DrawBox(screenCenter, size, color, 1.0f);
 }

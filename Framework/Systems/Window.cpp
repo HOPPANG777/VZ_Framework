@@ -1,8 +1,8 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Window.h"
 #include "../Client/Program.h"
 
-std::unique_ptr<Program> Window::program = nullptr;
+unique_ptr<Program> Window::program = nullptr;
 
 Window::Window(const WinDesc& initDesc)
 	: desc(initDesc)
@@ -79,33 +79,33 @@ ATOM Window::MyRegisterClass(const WinDesc& desc)
 
 WPARAM Window::Run()
 {
-	program = std::make_unique<Program>();
+	program = make_unique<Program>();
 	program->Awake();
 	program->Start();
 
 	MSG msg = { 0 };
 
-	// ê¸°ë³¸ ë©”ì‹œì§€ ë£¨í”„ì…ë‹ˆë‹¤:
+	// ±âº» ¸Ş½ÃÁö ·çÇÁÀÔ´Ï´Ù:
 	while (true)
 	{
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			// ë©”ì‹œì§€ ì¢…ë£Œ í•¨ìˆ˜ ë°˜í™˜ì‹œ whileë¬¸ íƒˆì¶œ
+			// ¸Ş½ÃÁö Á¾·á ÇÔ¼ö ¹İÈ¯½Ã while¹® Å»Ãâ
 			if (msg.message == WM_QUIT) break;
 
-			// ë©”ì„¸ì§€ ë³€ì—­
+			// ¸Ş¼¼Áö º¯¿ª
 			TranslateMessage(&msg);
 
 			//INPUT->InputProc(msg.message, msg.lParam);
-			Input::Get()->MouseProc(msg.message, msg.wParam, msg.lParam);
-			if (Gui::Get()->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
+			INPUT->MouseProc(msg.message, msg.wParam, msg.lParam);
+			if (IMGUI->MsgProc(msg.hwnd, msg.message, msg.wParam, msg.lParam)) return true;
 
-			// ë©”ì‹œì§€ ì²˜ë¦¬í•¨ìˆ˜ë¡œ ì „ë‹¬
+			// ¸Ş½ÃÁö Ã³¸®ÇÔ¼ö·Î Àü´Ş
 			DispatchMessage(&msg);
 		}
 		else
 		{
-			// ì—…ë°ì´íŠ¸ì™€ ë Œë”
+			// ¾÷µ¥ÀÌÆ®¿Í ·»´õ
 			MainRender();
 		}
 	}
@@ -115,23 +115,23 @@ WPARAM Window::Run()
 
 void Window::MainRender()
 {
-	Input::Get()->Update();
-	Time::Get()->Update();
-	Sounds::Get()->Update();
-	Gui::Get()->Update();
-	CollisionManager::Get()->Update();
+	INPUT->Update();
+	TIME->Update();
+	SOUNDS->Update();
+	IMGUI->Update();
+	COLLISION->Update();
 
 	program->Update();
 
-	Graphics::Get()->Begin();
+	GRAPHICS->Begin();
 	{
 		program->Render();
 		program->PostRender();
 
 		program->ImGUI();
-		Gui::Get()->Render();
+		IMGUI->Render();
 	}
-	Graphics::Get()->End();
+	GRAPHICS->End();
 }
 
 void Window::SetBorderlessWindow()
@@ -149,7 +149,7 @@ void Window::SetBorderlessWindow()
 
 LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// ImGuiê°€ ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í–ˆë‹¤ë©´ ë°”ë¡œ ë°˜í™˜
+	// ImGui°¡ ¸Ş½ÃÁö¸¦ Ã³¸®Çß´Ù¸é ¹Ù·Î ¹İÈ¯
 	//if (ImGui_ImplWin32_WndProcHandler(handle, message, wParam, lParam)) return 1;
 
 	switch (message)
@@ -163,7 +163,7 @@ LRESULT Window::WndProc(HWND handle, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_DESTROY:
 	case WM_CLOSE:
-		//if (MessageBox(handle, L"ì •ë§ ì¢…ë£Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?", L"WinAPI ì¢…ë£Œ", MB_OKCANCEL) == IDOK)
+		//if (MessageBox(handle, L"Á¤¸» Á¾·áÇÏ½Ã°Ú½À´Ï±î?", L"WinAPI Á¾·á", MB_OKCANCEL) == IDOK)
 		PostQuitMessage(0);
 
 		return 0;

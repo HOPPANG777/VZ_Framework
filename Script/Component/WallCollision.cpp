@@ -1,16 +1,16 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "WallCollision.h"
 
-// í”Œë ˆì´ì–´ì™€ wall(ì†Œìœ ì)ì˜ ì¶©ëŒ íŒì •ì€ BoxCollider::IsColliding()ë¥¼ ì‚¬ìš©í•œë‹¤.
+// ÇÃ·¹ÀÌ¾î¿Í wall(¼ÒÀ¯ÀÚ)ÀÇ Ãæµ¹ ÆÇÁ¤Àº BoxCollider::IsColliding()¸¦ »ç¿ëÇÑ´Ù.
 void WallCollision::Update()
 {
     if (!player) return;
 
-    // í”Œë ˆì´ì–´ì˜ BoxCollider ("BoxCollider"ë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ë“±ë¡)
+    // ÇÃ·¹ÀÌ¾îÀÇ BoxCollider ("BoxCollider"¶ó´Â ÀÌ¸§À¸·Î µî·Ï)
     const std::shared_ptr<BoxCollider>& playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
     if (!playerCollider) return;
 
-    // wall(ì†Œìœ ì)ì˜ BoxCollider
+    // wall(¼ÒÀ¯ÀÚ)ÀÇ BoxCollider
     const std::shared_ptr<BoxCollider>& wallCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     if (!wallCollider) return;
 
@@ -18,44 +18,44 @@ void WallCollision::Update()
     Vector3 wallPos = owner->GetPosition();
     float halfWidth = wallCollider->GetSize().x * 0.5f;
 
-    // í”Œë ˆì´ì–´ì™€ wall ê°„ì˜ ì¶©ëŒ ê²€ì‚¬ (ì¶©ëŒí–ˆì„ ë•Œë§Œ ì²˜ë¦¬)
+    // ÇÃ·¹ÀÌ¾î¿Í wall °£ÀÇ Ãæµ¹ °Ë»ç (Ãæµ¹ÇßÀ» ¶§¸¸ Ã³¸®)
     if (wallCollider->IsColliding(playerCollider.get()))
     {
-        // ë²½ì˜ x ë°©í–¥ ê¸°ì¤€ê°’ ê³„ì‚°:
-        // wallEdgeëŠ” wallì˜ ì¤‘ì•™ x ì¢Œí‘œì—ì„œ ë²½ì˜ ë„ˆë¹„ì˜ 0.6ë°°ë¥¼ ë”í•˜ê±°ë‚˜ ëº€ ê°’ìœ¼ë¡œ íŒë‹¨
-        // rightWall == trueì´ë©´ wallì˜ ì™¼ìª½ ê²½ê³„, falseì´ë©´ wallì˜ ì˜¤ë¥¸ìª½ ê²½ê³„ë¥¼ ì‚¬ìš©
+        // º®ÀÇ x ¹æÇâ ±âÁØ°ª °è»ê:
+        // wallEdge´Â wallÀÇ Áß¾Ó x ÁÂÇ¥¿¡¼­ º®ÀÇ ³ÊºñÀÇ 0.6¹è¸¦ ´õÇÏ°Å³ª »« °ªÀ¸·Î ÆÇ´Ü
+        // rightWall == trueÀÌ¸é wallÀÇ ¿ŞÂÊ °æ°è, falseÀÌ¸é wallÀÇ ¿À¸¥ÂÊ °æ°è¸¦ »ç¿ë
         //float wallEdge = 0.0f;
         //Vector3 wallPos = owner->GetPosition();
         //float halfWidth = wallCollider->GetSize().x * 0.5f;
         if (rightWall)
         {
-            // ë²½ì´ ì˜¤ë¥¸ìª½ì— ìˆìœ¼ë©´, wallì˜ ì™¼ìª½ ê²½ê³„ë¥¼ ê¸°ì¤€ìœ¼ë¡œ í•¨
+            // º®ÀÌ ¿À¸¥ÂÊ¿¡ ÀÖÀ¸¸é, wallÀÇ ¿ŞÂÊ °æ°è¸¦ ±âÁØÀ¸·Î ÇÔ
             wallEdge = wallPos.x - halfWidth + (wallCollider->GetSize().x * 0.6f);
         }
         else
         {
-            // ë²½ì´ ì™¼ìª½ì— ìˆìœ¼ë©´, wallì˜ ì˜¤ë¥¸ìª½ ê²½ê³„ë¥¼ ê¸°ì¤€
+            // º®ÀÌ ¿ŞÂÊ¿¡ ÀÖÀ¸¸é, wallÀÇ ¿À¸¥ÂÊ °æ°è¸¦ ±âÁØ
             wallEdge = wallPos.x + halfWidth - (wallCollider->GetSize().x * 0.6f);
         }
 
-        // í”Œë ˆì´ì–´ì˜ x ì¢Œí‘œ ë¹„êµí•˜ì—¬ ì¶©ëŒ ë³´ì •
+        // ÇÃ·¹ÀÌ¾îÀÇ x ÁÂÇ¥ ºñ±³ÇÏ¿© Ãæµ¹ º¸Á¤
         float playerX = player->GetPosition().x;
 
-        // í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë°©í–¥ê³¼ ì†ë„ ê°’ ì–»ê¸°
+        // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯¿¡¼­ ¹æÇâ°ú ¼Óµµ °ª ¾ò±â
         const std::shared_ptr<PlayerController>& pm = player->GetComponent<PlayerController>("PlayerController");
         if (!pm) return;
         bool playerFacingRight = pm->GetRight();
         float speed = pm->GetSpeed();
 
-        // í”Œë ˆì´ì–´ê°€ ë²½ì˜ ë‚´ì¸¡ìœ¼ë¡œ ì¹¨íˆ¬í–ˆìœ¼ë©´ x ë³´ì • ì‹¤í–‰
+        // ÇÃ·¹ÀÌ¾î°¡ º®ÀÇ ³»ÃøÀ¸·Î Ä§ÅõÇßÀ¸¸é x º¸Á¤ ½ÇÇà
         if (rightWall && playerX < wallEdge && !playerFacingRight)
         {
             Vector3 newPos = player->GetPosition();
-            // ë¡¤ ì¤‘ì´ë©´ ì†ë„ 2ë°° ì ìš©
+            // ·Ñ ÁßÀÌ¸é ¼Óµµ 2¹è Àû¿ë
  /*           if (player->GetmRoll())
                 newPos.x += (speed * 2) * TIME->GetDeltaTime();
             else*/
-                newPos.x += speed * Time::Get()->GetDeltaTime();
+                newPos.x += speed * TIME->GetDeltaTime();
             player->SetPosition(newPos);
         }
         else if (!rightWall && playerX > wallEdge && playerFacingRight)
@@ -64,30 +64,30 @@ void WallCollision::Update()
             //if (player->GetmRoll())
             //    newPos.x -= (speed * 2) * TIME->GetDeltaTime();
             //else
-                newPos.x -= speed * Time::Get()->GetDeltaTime();
+                newPos.x -= speed * TIME->GetDeltaTime();
             player->SetPosition(newPos);
         }
     }
 
-    // ë„ë¼(LumberAxe) ì¶©ëŒ ê²€ì‚¬ (í”Œë ˆì´ì–´ì™€ì˜ ì¶©ëŒì€ ë¬´ì‹œ)
+    // µµ³¢(LumberAxe) Ãæµ¹ °Ë»ç (ÇÃ·¹ÀÌ¾î¿ÍÀÇ Ãæµ¹Àº ¹«½Ã)
     if (lumberAxe)
     {
         const std::shared_ptr<LumberAxeComponent>& la = lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent");
         if (la)
         {
             AxeState axeState = la->GetState();
-            // ë„ë¼ì˜ ìƒíƒœê°€ ë°˜í™˜ì¤‘ ë˜ëŠ” Idle ìƒíƒœì´ë©´ wall ì¶©ëŒ ë¬´ì‹œ
+            // µµ³¢ÀÇ »óÅÂ°¡ ¹İÈ¯Áß ¶Ç´Â Idle »óÅÂÀÌ¸é wall Ãæµ¹ ¹«½Ã
             if (axeState == AxeState::AXE_RETURNING_R || axeState == AxeState::AXE_RETURNING_L ||
                 axeState == AxeState::AXE_IDLE_R || axeState == AxeState::AXE_IDLE_L)
             {
-                // ì•„ë¬´ ì²˜ë¦¬ë„ í•˜ì§€ ì•ŠìŒ
+                // ¾Æ¹« Ã³¸®µµ ÇÏÁö ¾ÊÀ½
             }
             else
             {
                 const std::shared_ptr<BoxCollider>& axeCollider = lumberAxe->GetComponent<BoxCollider>("BoxCollider");
                 if (axeCollider && wallCollider->IsColliding(axeCollider.get()))
                 {
-                    // ë„ë¼ì˜ ë°©í–¥ì€ GetState()ë¥¼ í†µí•´ íŒë‹¨
+                    // µµ³¢ÀÇ ¹æÇâÀº GetState()¸¦ ÅëÇØ ÆÇ´Ü
                     bool axeFacingRight = (axeState == AxeState::AXE_THROWN_R || axeState == AxeState::AXE_RETURNING_R);
                     float axeSpeed = la->GetSpeed();
                     float axeX = lumberAxe->GetPosition().x;
@@ -95,13 +95,13 @@ void WallCollision::Update()
                     if (rightWall && axeX < wallPos.x - halfWidth + (wallCollider->GetSize().x * 0.6f) && !axeFacingRight)
                     {
                         Vector3 newPos = lumberAxe->GetPosition();
-                        newPos.x += axeSpeed * Time::Get()->GetDeltaTime();
+                        newPos.x += axeSpeed * TIME->GetDeltaTime();
                         lumberAxe->SetPosition(newPos);
                     }
                     else if (!rightWall && axeX > wallPos.x + halfWidth - (wallCollider->GetSize().x * 0.6f) && axeFacingRight)
                     {
                         Vector3 newPos = lumberAxe->GetPosition();
-                        newPos.x -= axeSpeed * Time::Get()->GetDeltaTime();
+                        newPos.x -= axeSpeed * TIME->GetDeltaTime();
                         lumberAxe->SetPosition(newPos);
                     }
                 }

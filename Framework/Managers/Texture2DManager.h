@@ -1,9 +1,4 @@
-﻿#pragma once
-#include "Structs/TextureDesc.h"
-#include "Renders/RenderResources/Texture2D.h"
-#include "Utilities/Path.h"
-
-class Texture2D;
+#pragma once
 
 class Texture2DManager
 {
@@ -14,7 +9,7 @@ public:
 	void Delete();
 
 private:
-	static std::vector<TextureDesc> descs;
+	static vector<TextureDesc> descs;
 
 };
 

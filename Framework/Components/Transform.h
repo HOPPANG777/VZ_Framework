@@ -1,24 +1,21 @@
-ï»¿#pragma once
-
-#include "Component.h"
-#include "Systems/Time.h"
+#pragma once
 
 class Transform : public Component
 {
 private:
     Vector3 position = { 0, 0, 0 };
     Vector3 scale = { 1, 1, 1 };
-    float   rotation = 0.0f;   // ë¼ë””ì•ˆ(radian)ìœ¼ë¡œ ë³´ê´€
+    float   rotation = 0.0f;   // ¶óµğ¾È(radian)À¸·Î º¸°ü
 
-    Matrix  world = XMMatrixIdentity(); // S*R*T ê²°ê³¼
+    Matrix  world = XMMatrixIdentity(); // S*R*T °á°ú
 
 public:
-    // ê¸°ë³¸ì ìœ¼ë¡œ "Transform"ì´ë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ìƒì„±
-    Transform(const std::string& compName = "Transform") : Component(compName) {}
+    // ±âº»ÀûÀ¸·Î "Transform"ÀÌ¶ó´Â ÀÌ¸§À¸·Î »ı¼º
+    Transform(const string& compName = "Transform") : Component(compName) {}
     virtual ~Transform() override = default;
 
-    virtual void Update() override;  // ë§¤ í”„ë ˆì„ S*R*T ê³„ì‚°
-    virtual void Render() override;  // íŠ¹ë³„íˆ ê·¸ë¦´ ê²ƒì€ ì—†ìœ¼ë¯€ë¡œ ë³´í†µ ë¹ˆ ìƒíƒœ
+    virtual void Update() override;  // ¸Å ÇÁ·¹ÀÓ S*R*T °è»ê
+    virtual void Render() override;  // Æ¯º°È÷ ±×¸± °ÍÀº ¾øÀ¸¹Ç·Î º¸Åë ºó »óÅÂ
 
     const Matrix& GetWorld() const;
 
@@ -26,16 +23,16 @@ public:
     // Getter
     Vector3 GetPosition() const;
     Vector3 GetScale() const;
-    float GetRotation() const; // ë°˜í™˜ ì‹œì—ëŠ” Degree(ê°ë„)
+    float GetRotation() const; // ¹İÈ¯ ½Ã¿¡´Â Degree(°¢µµ)
 
 public:
     // Setter
     void SetPosition(const Vector3& pos);
     void SetScale(const Vector3& sca);
-    void SetRotation(float degrees); // ì™¸ë¶€ ì…ë ¥ì€ ê°ë„(Â°), ë‚´ë¶€ëŠ” ë¼ë””ì•ˆ
+    void SetRotation(float degrees); // ¿ÜºÎ ÀÔ·ÂÀº °¢µµ(¡Æ), ³»ºÎ´Â ¶óµğ¾È
 
 public:
-    // ì´ë™/íšŒì „/ìŠ¤ì¼€ì¼ ë³€í™”ë¥¼ DELTA ê¸°ë°˜ìœ¼ë¡œ ì ìš©í•  ìˆ˜ ìˆëŠ” í•¨ìˆ˜ë“¤
+    // ÀÌµ¿/È¸Àü/½ºÄÉÀÏ º¯È­¸¦ DELTA ±â¹İÀ¸·Î Àû¿ëÇÒ ¼ö ÀÖ´Â ÇÔ¼öµé
     void Move(const Vector3& speed);
     void Rotate(float degrees);
     void Scale(const Vector3& scale);

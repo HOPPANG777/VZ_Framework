@@ -1,20 +1,19 @@
-ï»¿#pragma once
+#pragma once
 
-// C++ì˜ structëŠ” ê¸°ë³¸ ì ‘ê·¼ ì œì–´ê°€ publicì´ë¼ëŠ” ì°¨ì´ì ì´ Cì˜ structì™€ì˜ ìœ ì¼í•œ ì°¨ì´ì ì´ë‹¤
-
+// C++ÀÇ struct´Â ±âº» Á¢±Ù Á¦¾î°¡ publicÀÌ¶ó´Â Â÷ÀÌÁ¡ÀÌ CÀÇ struct¿ÍÀÇ À¯ÀÏÇÑ Â÷ÀÌÁ¡ÀÌ´Ù
 struct VertexColor
 {
-    Vector3 position;
-    Color color;
+	Vector2 position;
+	Color color;
 
-    VertexColor() = default;
-    VertexColor(const Vector3& position, const Color& color)
-        : position(position), color(color)
-    {
+	VertexColor() = default;
+	VertexColor(const Vector2& position, const Color& color)
+		: position(position), color(color)
+	{
+		
+	};
 
-    };
-
-	static std::vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
+	static vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
 };
 
 
@@ -31,7 +30,7 @@ struct VertexTexture
 
 	}
 
-	static std::vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
+	static vector<D3D11_INPUT_ELEMENT_DESC> ieDescs;
 };
 
 struct VertexTile
@@ -49,7 +48,7 @@ struct VertexTile
 
 	}
 
-	static std::vector<D3D11_INPUT_ELEMENT_DESC> isDescs;
+	static vector<D3D11_INPUT_ELEMENT_DESC> isDescs;
 };
 
 

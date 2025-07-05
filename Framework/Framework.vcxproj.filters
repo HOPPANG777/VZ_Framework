@@ -2,6 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Objects\BaseObject\Object.cpp">
+      <Filter>Objects\BaseObject</Filter>
+    </ClCompile>
     <ClCompile Include="Systems\Window.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -143,17 +146,14 @@
     <ClCompile Include="Components\PlayerMove.cpp">
       <Filter>Components\Move</Filter>
     </ClCompile>
-    <ClCompile Include="Managers\RendererManager.cpp">
-      <Filter>Managers\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\BaseObject\GameObject.cpp">
-      <Filter>Objects\BaseObject</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Components\Component.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\BaseObject\Object.h">
+      <Filter>Objects\BaseObject</Filter>
     </ClInclude>
     <ClInclude Include="Systems\Window.h">
       <Filter>Systems</Filter>
@@ -353,30 +353,6 @@
     <ClInclude Include="Structs\BoxEdge.h">
       <Filter>Structs</Filter>
     </ClInclude>
-    <ClInclude Include="Platform\Platform.h">
-      <Filter>Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform\Platform_Windows.h">
-      <Filter>Platform\Platform_Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IWindow.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\ITexture.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Interfaces\IRenderer.h">
-      <Filter>Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="Managers\RendererManager.h">
-      <Filter>Managers\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Enums\RenderAPI.h">
-      <Filter>Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="Objects\BaseObject\GameObject.h">
-      <Filter>Objects\BaseObject</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Components">
@@ -463,14 +439,9 @@
     <Filter Include="Enums">
       <UniqueIdentifier>{8823b7f9-477d-4b4d-831f-f730a602e7df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform">
-      <UniqueIdentifier>{6c9c6b74-e320-472b-8c3b-ab8a0ebe27ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Platform\Platform_Windows">
-      <UniqueIdentifier>{84cec3a4-6473-48c7-8cc9-33a60352374e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Managers\Render">
-      <UniqueIdentifier>{0c35d2a4-0c62-464c-92f5-c52b59a0618e}</UniqueIdentifier>
-    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Comment.txt" />
+    <Text Include="BackupCode.txt" />
   </ItemGroup>
 </Project>

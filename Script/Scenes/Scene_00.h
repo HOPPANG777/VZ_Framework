@@ -1,15 +1,11 @@
-ï»¿#pragma once
+#pragma once
 
-#include "GameObject/JumpHoppang.h"
-#include "Components/Texts.h"
-#include "Objects/ColorObject/ColorRect.h"
-#include "Interfaces/IScene.h"
-#include "Systems/Camera.h"
+#include "Object/JumpHoppang.h"
 
 class Scene_00 : public Scene
 {
 public:
-	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Awake() override;
 	void Start() override;
 
@@ -27,9 +23,9 @@ public:
 	bool IsLoaded() const override { return isLoaded; }
 
 private:
-	std::vector<std::shared_ptr<GameObject>> objects;
+	vector<shared_ptr<Object>> objects;
 
-	std::shared_ptr<GameObject> LoadingTextObject;
+	shared_ptr<Object> LoadingTextObject;
 
 	bool isLoaded = false;
 };

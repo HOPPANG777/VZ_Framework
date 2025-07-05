@@ -1,34 +1,27 @@
-ï»¿#pragma once
+#pragma once
 
 #include "Enums/AxeState.h"
-#include "Enums/UnitAnimationType.h"
-#include "Components/Component.h"
-//#include "Objects/BaseObject/GameObject.h"
-#include "Utilities/Gizmo.h"
-#include "Systems/Time.h"
-#include "Systems/Input.h"
-#include "Systems/Camera.h"
 
-// ë„ë¼(axe) ì»´í¬ë„ŒíŠ¸ í´ë˜ìŠ¤
-// - í”Œë ˆì´ì–´(ë˜ëŠ” íƒ€ê²Ÿ)ì™€ ìƒí˜¸ì‘ìš©í•˜ë©° ë„ë¼ë¥¼ ë˜ì§€ê³  íšŒìˆ˜í•˜ëŠ” ê¸°ëŠ¥ ì œê³µ
+// µµ³¢(axe) ÄÄÆ÷³ÍÆ® Å¬·¡½º
+// - ÇÃ·¹ÀÌ¾î(¶Ç´Â Å¸°Ù)¿Í »óÈ£ÀÛ¿ëÇÏ¸ç µµ³¢¸¦ ´øÁö°í È¸¼öÇÏ´Â ±â´É Á¦°ø
 class LumberAxeComponent : public Component
 {
 public:
-    // ìƒì„±ì: ê¸°ë³¸ ì´ë¦„ "LumberAxeComponent"ë¥¼ ì‚¬ìš©í•˜ë©°, ì´ˆê¸° ìƒíƒœëŠ” Idle
-    LumberAxeComponent(const std::string& name = "LumberAxeComponent");
+    // »ı¼ºÀÚ: ±âº» ÀÌ¸§ "LumberAxeComponent"¸¦ »ç¿ëÇÏ¸ç, ÃÊ±â »óÅÂ´Â Idle
+    LumberAxeComponent(const string& name = "LumberAxeComponent");
     ~LumberAxeComponent() override = default;
 
 public:
-    // Component ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ (ì—…ë°ì´íŠ¸ ë° ë Œë”ë§)
+    // Component ÀÎÅÍÆäÀÌ½º ±¸Çö (¾÷µ¥ÀÌÆ® ¹× ·»´õ¸µ)
     void Update() override;
     void Render() override;
 
 public:
-    // íƒ€ê²Ÿ(í”Œë ˆì´ì–´) ì„¤ì • í•¨ìˆ˜
-    void SetTarget(GameObject* target) { this->target = target; }
+    // Å¸°Ù(ÇÃ·¹ÀÌ¾î) ¼³Á¤ ÇÔ¼ö
+    void SetTarget(Object* target) { this->target = target; }
 
 public:
-    // ë„ë¼ë¥¼ ë˜ì§€ê±°ë‚˜ íšŒìˆ˜í•˜ëŠ” ì™¸ë¶€ ì¸í„°í˜ì´ìŠ¤
+    // µµ³¢¸¦ ´øÁö°Å³ª È¸¼öÇÏ´Â ¿ÜºÎ ÀÎÅÍÆäÀÌ½º
     void Throw(const Vector3& initialVelocity);
     void Recall();
 
@@ -36,7 +29,7 @@ public:
     void Land();
 
 public:
-    // ë‚´ë¶€ ìƒíƒœ ë°˜í™˜
+    // ³»ºÎ »óÅÂ ¹İÈ¯
     AxeState GetState() const { return state; }
     float GetSpeed() const 
     { 
@@ -45,43 +38,43 @@ public:
     }
 
 private:
-    // ìƒíƒœë³„ ì—…ë°ì´íŠ¸ í•¨ìˆ˜
-    void UpdateIdleState(float dt);        // Idle ìƒíƒœ: íƒ€ê²Ÿ ë”°ë¼ê°€ê¸° ë° ì…ë ¥ ëŒ€ê¸°
-    void UpdatePrepareState(float dt);     // ë˜ì§€ê¸° ì¤€ë¹„ ìƒíƒœ: ì…ë ¥ì— ë”°ë¼ ë˜ì§€ê¸° ì‹¤í–‰ ë˜ëŠ” ì·¨ì†Œ
-    void UpdateThrownState(float dt);      // ë˜ì§„ ìƒíƒœ: ì§ì„  ë¹„í–‰ í›„ ì¤‘ë ¥ ì ìš©í•˜ì—¬ ì´ë™
-    void UpdateReturningState(float dt);   // íšŒìˆ˜ ìƒíƒœ: ë² ì§€ì–´ ê³¡ì„ ì„ ë”°ë¼ íƒ€ê²Ÿìœ¼ë¡œ íšŒìˆ˜
+    // »óÅÂº° ¾÷µ¥ÀÌÆ® ÇÔ¼ö
+    void UpdateIdleState(float dt);        // Idle »óÅÂ: Å¸°Ù µû¶ó°¡±â ¹× ÀÔ·Â ´ë±â
+    void UpdatePrepareState(float dt);     // ´øÁö±â ÁØºñ »óÅÂ: ÀÔ·Â¿¡ µû¶ó ´øÁö±â ½ÇÇà ¶Ç´Â Ãë¼Ò
+    void UpdateThrownState(float dt);      // ´øÁø »óÅÂ: Á÷¼± ºñÇà ÈÄ Áß·Â Àû¿ëÇÏ¿© ÀÌµ¿
+    void UpdateReturningState(float dt);   // È¸¼ö »óÅÂ: º£Áö¾î °î¼±À» µû¶ó Å¸°ÙÀ¸·Î È¸¼ö
 
 private:
-    // ë„ë¼ ë˜ì§ ê´€ë ¨ í•¨ìˆ˜
-    Vector3 ComputeThrowDirection();                                                                                    // ë§ˆìš°ìŠ¤ ìœ„ì¹˜ ë˜ëŠ” ì• ë‹ˆë©”ì´ì…˜ ë°©í–¥ì— ë”°ë¥¸ ë˜ì§ˆ ë°©í–¥ ê³„ì‚°
-    std::vector<Vector3> SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps);     // ì£¼ì–´ì§„ ì´ˆê¸° ì¡°ê±´ê³¼ ì‹œê°„ ê°„ê²©ì— ë”°ë¼ ê¶¤ì  ì‹œë®¬ë ˆì´ì…˜
-    void DrawTrajectory(const std::vector<Vector3>& points, float thickness, const Color& color);                            // ê³„ì‚°ëœ ê¶¤ì  ì ë“¤ì„ í™”ë©´ì— ì ì„  í˜•íƒœë¡œ ê·¸ë¦¬ê¸°
+    // µµ³¢ ´øÁü °ü·Ã ÇÔ¼ö
+    Vector3 ComputeThrowDirection();                                                                                    // ¸¶¿ì½º À§Ä¡ ¶Ç´Â ¾Ö´Ï¸ŞÀÌ¼Ç ¹æÇâ¿¡ µû¸¥ ´øÁú ¹æÇâ °è»ê
+    vector<Vector3> SimulateTrajectory(const Vector3& startPos, const Vector3& initialVel, float dt, int numSteps);     // ÁÖ¾îÁø ÃÊ±â Á¶°Ç°ú ½Ã°£ °£°İ¿¡ µû¶ó ±ËÀû ½Ã¹Ä·¹ÀÌ¼Ç
+    void DrawTrajectory(const vector<Vector3>& points, float thickness, const Color& color);                            // °è»êµÈ ±ËÀû Á¡µéÀ» È­¸é¿¡ Á¡¼± ÇüÅÂ·Î ±×¸®±â
     
 
 private:
-    // ìœ í‹¸ë¦¬í‹° í•¨ìˆ˜
-    Vector3 QuadraticBezier(const Vector3& p0, const Vector3& p1, const Vector3& p2, float t);  // 2ì°¨ ë² ì§€ì–´ ê³¡ì„  ê³„ì‚° í•¨ìˆ˜
-    bool IsFacingLeft(UnitAnimationType currentAnim) const;                                     // í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœë¥¼ í†µí•´ í”Œë ˆì´ì–´ê°€ ì™¼ìª½ì„ ë°”ë¼ë³´ëŠ”ì§€ íŒë‹¨
+    // À¯Æ¿¸®Æ¼ ÇÔ¼ö
+    Vector3 QuadraticBezier(const Vector3& p0, const Vector3& p1, const Vector3& p2, float t);  // 2Â÷ º£Áö¾î °î¼± °è»ê ÇÔ¼ö
+    bool IsFacingLeft(UnitAnimationType currentAnim) const;                                     // ÇöÀç ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ¸¦ ÅëÇØ ÇÃ·¹ÀÌ¾î°¡ ¿ŞÂÊÀ» ¹Ù¶óº¸´ÂÁö ÆÇ´Ü
     
 
 private:
-    AxeState state;                            // í˜„ì¬ ë„ë¼ ìƒíƒœ (ì´ˆê¸°ê°’: Idle)
+    AxeState state;                            // ÇöÀç µµ³¢ »óÅÂ (ÃÊ±â°ª: Idle)
 
-    // ë˜ì§„ ìƒíƒœ ê´€ë ¨ ë¬¼ë¦¬ ë³€ìˆ˜
-    Vector3 velocity;                                               // ë„ë¼ì˜ í˜„ì¬ ì†ë„
-    float gravity = 980.0f;                                         // ì¤‘ë ¥ ê°€ì†ë„
-    float straightFlightTime = 0.3f;                                // ë˜ì§„ í›„ ì¼ì • ì‹œê°„ ë™ì•ˆ ì§ì„  ì´ë™ ì‹œê°„ (ì¤‘ë ¥ ë¬´ì‹œ)
+    // ´øÁø »óÅÂ °ü·Ã ¹°¸® º¯¼ö
+    Vector3 velocity;                                               // µµ³¢ÀÇ ÇöÀç ¼Óµµ
+    float gravity = 980.0f;                                         // Áß·Â °¡¼Óµµ
+    float straightFlightTime = 0.3f;                                // ´øÁø ÈÄ ÀÏÁ¤ ½Ã°£ µ¿¾È Á÷¼± ÀÌµ¿ ½Ã°£ (Áß·Â ¹«½Ã)
 
-    // íšŒìˆ˜ ìƒíƒœ ê´€ë ¨ ë² ì§€ì–´ ê³¡ì„  ë³€ìˆ˜
-    float returnTimer = 0.0f;                                       // íšŒìˆ˜ ì§„í–‰ ì‹œê°„ ëˆ„ì 
-    float returnDuration = 1.0f;                                    // íšŒìˆ˜ ì „ì²´ ì§€ì† ì‹œê°„ (ì´ˆ)
-    Vector3 returnStart;                                            // íšŒìˆ˜ ì‹œì‘ ì‹œ ë„ë¼ ìœ„ì¹˜
-    Vector3 returnControl;                                          // ë² ì§€ì–´ ê³¡ì„  ì œì–´ì 
+    // È¸¼ö »óÅÂ °ü·Ã º£Áö¾î °î¼± º¯¼ö
+    float returnTimer = 0.0f;                                       // È¸¼ö ÁøÇà ½Ã°£ ´©Àû
+    float returnDuration = 1.0f;                                    // È¸¼ö ÀüÃ¼ Áö¼Ó ½Ã°£ (ÃÊ)
+    Vector3 returnStart;                                            // È¸¼ö ½ÃÀÛ ½Ã µµ³¢ À§Ä¡
+    Vector3 returnControl;                                          // º£Áö¾î °î¼± Á¦¾îÁ¡
 
-    GameObject* target = nullptr;                                       // ë„ë¼ë¥¼ íšŒìˆ˜í•  íƒ€ê²Ÿ(í”Œë ˆì´ì–´)
-    UnitAnimationType currentAnimation = UnitAnimationType::IDLE_R; // í”Œë ˆì´ì–´ ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ (ì´ˆê¸°ê°’: ì˜¤ë¥¸ìª½ Idle)
+    Object* target = nullptr;                                       // µµ³¢¸¦ È¸¼öÇÒ Å¸°Ù(ÇÃ·¹ÀÌ¾î)
+    UnitAnimationType currentAnimation = UnitAnimationType::IDLE_R; // ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ (ÃÊ±â°ª: ¿À¸¥ÂÊ Idle)
 
-    bool isDead = false;                                            // í”Œë ˆì´ì–´ê°€ ì‚¬ë§í•œ ìƒíƒœì¸ì§€ ì—¬ë¶€
+    bool isDead = false;                                            // ÇÃ·¹ÀÌ¾î°¡ »ç¸ÁÇÑ »óÅÂÀÎÁö ¿©ºÎ
     bool isLand = false;
 
 };

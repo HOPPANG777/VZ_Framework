@@ -1,22 +1,20 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
 
 /*
-DirectX 11 전용 구현체입니다.
-다른 그래픽 API를 사용하려면 IRenderer 인터페이스를 상속받아 구현합니다.
+DirectX 11
+DirectX June 2010 SDK
+software development kit
 */
-#include "Interfaces/IRenderer.h"
-#include "Utilities/DirectHelper.h"
 class D3DEnumAdapterInfo;
 class D3DEnumOutputInfo;
 
-class Graphics : public IRenderer
+class Graphics
 {
 	DECLARE_SINGLETON(Graphics);
 
 public:
-	void Init() override;                            // 렌더러 초기화
-	void CreateBackBuffer();                        // 백 버퍼 생성
+	void Init();
+	void CreateBackBuffer();
 
 	ID3D11Device* GetDevice() const { return device.Get(); }
 	ID3D11DeviceContext* GetDC() const { return deviceContext.Get(); }
@@ -24,18 +22,18 @@ public:
 	ID2D1DeviceContext* GetD2DC() const { return d2DeviceContext.Get(); }
 	IDWriteFactory* GetWrite() const { return writeFactory.Get(); }
 
-	void Begin() override;                          // 프레임 시작
-	void End() override;                            // 프레임 종료
+	void Begin();
+	void End();
 
 	void GUI();
 
-	void SetFullScreen(bool fullscreen) override;   // 전체 화면 설정
+	void SetFullScreen(bool fullscreen);
 
-	void SetResolution(UINT width, UINT height) override; // 해상도 변경
+	void SetResolution(UINT width, UINT height);
 
-	bool LoadCustomFont(const std::wstring& fontFilePath);
+	bool LoadCustomFont(const wstring& fontFilePath);
 
-	bool UnloadCustomFont(const std::wstring& fontFilePath);
+	bool UnloadCustomFont(const wstring& fontFilePath);
 
 public:
 	void LoadFont();
@@ -74,9 +72,9 @@ private:
 	UINT denominator = 1;
 
 	UINT gpuMemorySize;
-	std::wstring gpuName;
+	wstring gpuName;
 
-	std::vector<std::unique_ptr<D3DEnumAdapterInfo>> adapterInfos;
+	vector<unique_ptr<D3DEnumAdapterInfo>> adapterInfos;
 	int selectedAdapterIndex = 0;
 
 	bool bVsync = true;
@@ -93,7 +91,7 @@ public:
 	ComPtr<IDXGIAdapter1> adapter = nullptr;
 	DXGI_ADAPTER_DESC1 adapterDesc = { 0 };
 
-	std::shared_ptr<D3DEnumOutputInfo> outputInfo = nullptr;
+	shared_ptr<D3DEnumOutputInfo> outputInfo = nullptr;
 };
 
 class D3DEnumOutputInfo

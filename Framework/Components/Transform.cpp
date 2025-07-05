@@ -1,9 +1,9 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Transform.h"
 
 void Transform::Update()
 {
-    // S, R, T í–‰ë ¬ ê³„ì‚°
+    // S, R, T Çà·Ä °è»ê
     Matrix S = XMMatrixScalingFromVector(scale);
     Matrix R = XMMatrixRotationZ(rotation);
     Matrix T = XMMatrixTranslationFromVector(position);
@@ -13,8 +13,8 @@ void Transform::Update()
 
 void Transform::Render()
 {
-    // Transformì€ ì‹œê°ì ìœ¼ë¡œ ê·¸ë¦´ ìš”ì†Œê°€ ì—†ìœ¼ë¯€ë¡œ ë³´í†µ ë¹„ì›ë‹ˆë‹¤.
-    // (í•„ìš” ì‹œ, ë””ë²„ê·¸ìš© ê¸°ì¦ˆëª¨ ë“±ìœ¼ë¡œ í™•ìž¥ ê°€ëŠ¥)
+    // TransformÀº ½Ã°¢ÀûÀ¸·Î ±×¸± ¿ä¼Ò°¡ ¾øÀ¸¹Ç·Î º¸Åë ºñ¿ó´Ï´Ù.
+    // (ÇÊ¿ä ½Ã, µð¹ö±×¿ë ±âÁî¸ð µîÀ¸·Î È®Àå °¡´É)
 }
 
 Vector3 Transform::GetPosition() const
@@ -29,7 +29,7 @@ Vector3 Transform::GetScale() const
 
 float Transform::GetRotation() const
 {
-    // ë‚´ë¶€ëŠ” ë¼ë””ì•ˆì´ì§€ë§Œ, ì™¸ë¶€ì—” ê°ë„(ë„)ë¡œ ë°˜í™˜
+    // ³»ºÎ´Â ¶óµð¾ÈÀÌÁö¸¸, ¿ÜºÎ¿£ °¢µµ(µµ)·Î ¹ÝÈ¯
     return XMConvertToDegrees(rotation);
 }
 
@@ -55,15 +55,15 @@ void Transform::SetRotation(float degrees)
 
 void Transform::Move(const Vector3& speed)
 {
-    position += speed * Time::Get()->GetDeltaTime();
+    position += speed * DELTA;
 }
 
 void Transform::Rotate(float degrees)
 {
-    rotation += XMConvertToRadians(degrees) * Time::Get()->GetDeltaTime();
+    rotation += XMConvertToRadians(degrees) * DELTA;
 }
 
 void Transform::Scale(const Vector3& scale)
 {
-    this->scale += scale * Time::Get()->GetDeltaTime();
+    this->scale += scale * DELTA;
 }

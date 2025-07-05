@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "PushableComponent.h"
 
 void PushableComponent::Update()
@@ -6,8 +6,8 @@ void PushableComponent::Update()
     if (isBeingPushed)
     {
         Vector3 pushDir = Vector3::Zero;
-        if (Input::Get()->KeyPressed('A')) pushDir.x = -1;
-        if (Input::Get()->KeyPressed('D')) pushDir.x = 1;
+        if (Keyboard::Get()->Press('A')) pushDir.x = -1;
+        if (Keyboard::Get()->Press('D')) pushDir.x = 1;
 
         if (pushDir.x != 0)
         {
@@ -16,7 +16,7 @@ void PushableComponent::Update()
             if (transform)
             {
                 Vector3 pos = transform->GetPosition();
-                pos += pushDir * pushSpeed * Time::Get()->GetDeltaTime();
+                pos += pushDir * pushSpeed * TIME->GetDeltaTime();
                 transform->SetPosition(pos);
             }
         }
@@ -25,12 +25,12 @@ void PushableComponent::Update()
 
 void PushableComponent::Interact()
 {
-    // ìƒí˜¸ì‘ìš© ìš”ì²­ì´ ì˜¤ë©´ ë°€ê¸°ë¥¼ ì‹œì‘í•©ë‹ˆë‹¤.
+    // »óÈ£ÀÛ¿ë ¿äÃ»ÀÌ ¿À¸é ¹Ğ±â¸¦ ½ÃÀÛÇÕ´Ï´Ù.
     StartPushing();
 }
 
 void PushableComponent::StopInteract()
 {
-	// ìƒí˜¸ì‘ìš© ì¤‘ì§€ ìš”ì²­ì´ ì˜¤ë©´ ë°€ê¸°ë¥¼ ë©ˆì¶¥ë‹ˆë‹¤.
+	// »óÈ£ÀÛ¿ë ÁßÁö ¿äÃ»ÀÌ ¿À¸é ¹Ğ±â¸¦ ¸ØÃä´Ï´Ù.
 	StopPushing();
 }

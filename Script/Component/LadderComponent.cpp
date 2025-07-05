@@ -1,45 +1,45 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "LadderComponent.h"
 
 void LadderComponent::Update()
 {
-    // í˜„ìž¬ ì”¬ì—ì„œ í”Œë ˆì´ì–´ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
-    // LadderComponentê°€ ë¶™ì€ ì˜¤ë¸Œì íŠ¸(ì‚¬ë‹¤ë¦¬)ì—ì„œ BoxColliderë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
-    // í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ì—ì„œ BoxColliderë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
-    // í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
-    auto player = SceneManager::Get()->GetPlayer();
+    // ÇöÀç ¾À¿¡¼­ ÇÃ·¹ÀÌ¾î¸¦ °¡Á®¿É´Ï´Ù.
+    // LadderComponent°¡ ºÙÀº ¿ÀºêÁ§Æ®(»ç´Ù¸®)¿¡¼­ BoxCollider¸¦ °¡Á®¿É´Ï´Ù.
+    // ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®¿¡¼­ BoxCollider¸¦ °¡Á®¿É´Ï´Ù.
+    // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯¸¦ °¡Á®¿É´Ï´Ù.
+    auto player = SCENE->GetPlayer();
     auto ladderCollider = owner->GetComponent<BoxCollider>("BoxCollider");
     auto playerCollider = player->GetComponent<BoxCollider>("BoxCollider");
     auto playerController = player->GetComponent<PlayerController>("PlayerController");
 
     if (!player || !ladderCollider || !playerCollider || !playerController) return;
 
-    // í”Œë ˆì´ì–´ì™€ ì‚¬ë‹¤ë¦¬ì˜ BoxColliderê°€ ì¶©ëŒí•˜ê³  ìžˆë‹¤ë©´
+    // ÇÃ·¹ÀÌ¾î¿Í »ç´Ù¸®ÀÇ BoxCollider°¡ Ãæµ¹ÇÏ°í ÀÖ´Ù¸é
     //if (!ladderCollider->IsColliding(playerCollider.get())) return;
 
     bool onLadder = ladderCollider->IsColliding(playerCollider.get());
     if (!onLadder)
     {
-        // ë” ì´ìƒ ì‚¬ë‹¤ë¦¬ ìœ„ì— ìžˆì§€ ì•ŠìŒ â†’ Climbing ë¹„í™œì„±í™”
+        // ´õ ÀÌ»ó »ç´Ù¸® À§¿¡ ÀÖÁö ¾ÊÀ½ ¡æ Climbing ºñÈ°¼ºÈ­
         playerController->SetClimbing(false);
         return;
     }
 
-    // ë§Œì•½ í”Œë ˆì´ì–´ê°€ W í‚¤ë¥¼ ëˆ„ë¥¸ë‹¤ë©´
-    if (Input::Get()->KeyPressed('W'))
+    // ¸¸¾à ÇÃ·¹ÀÌ¾î°¡ W Å°¸¦ ´©¸¥´Ù¸é
+    if (INPUT->KeyPressed('W'))
     {
-        // ì‚¬ë‹¤ë¦¬ ì˜¤ë¥´ê¸° ì‹œìž‘
+        // »ç´Ù¸® ¿À¸£±â ½ÃÀÛ
         playerController->SetClimbing(true);
         playerController->SetCollision(false);
         playerController->SetFall(false);
 
-        // í”Œë ˆì´ì–´ì˜ Transform ì»´í¬ë„ŒíŠ¸ë¥¼ í†µí•´ ìœ„ì¹˜ë¥¼ ìˆ˜ì •í•´ ìœ„ë¡œ ì´ë™ì‹œí‚µë‹ˆë‹¤.
+        // ÇÃ·¹ÀÌ¾îÀÇ Transform ÄÄÆ÷³ÍÆ®¸¦ ÅëÇØ À§Ä¡¸¦ ¼öÁ¤ÇØ À§·Î ÀÌµ¿½ÃÅµ´Ï´Ù.
         auto playerTransform = player->GetComponent<Transform>("Transform");
         if (playerTransform)
         {
             const float climbSpeed = 300.0f;
             Vector3 pos = playerTransform->GetPosition();
-            pos.y += climbSpeed * Time::Get()->GetDeltaTime();
+            pos.y += climbSpeed * TIME->GetDeltaTime();
             playerTransform->SetPosition(pos);
         }
     }

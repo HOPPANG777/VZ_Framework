@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "Framework.h"
+#pragma once
 class Values
 {
 public:

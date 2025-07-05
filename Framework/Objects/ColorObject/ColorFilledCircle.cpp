@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 #include "ColorFilledCircle.h"
 
 ColorFilledCircle::ColorFilledCircle(const Vector3& position, const Vector3& scale, const float rotation, const size_t& segments, const Color& color)
@@ -6,14 +6,14 @@ ColorFilledCircle::ColorFilledCircle(const Vector3& position, const Vector3& sca
 {
 	//vertices
 	{
-        vertices.assign(segments + 1, VertexColor());
-        vertices[0].position = Vector3(0, 0, 0);
+		vertices.assign(segments + 1, VertexColor());
+		vertices[0].position = Vector2();
 
 		for (size_t i = 1; i <= segments; ++i)
 		{
 			float theta = 2 * Values::PI * i / segments;
 
-                vertices[i].position = Vector3(sinf(theta), cosf(theta), 0) * 0.5f;
+			vertices[i].position = Vector2(sinf(theta), cosf(theta)) * 0.5f;
 		}
 
 		for (VertexColor& vertex : vertices) vertex.color = color;

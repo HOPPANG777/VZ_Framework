@@ -1,11 +1,9 @@
-ï»¿#pragma once
-
-#include "Interfaces/IScene.h"
+#pragma once
 
 class Scene_07 : public Scene
 {
 public:
-	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Awake() override;
 	void Start() override;
 

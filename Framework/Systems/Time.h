@@ -1,5 +1,4 @@
-ï»¿#pragma once
-#include "Framework.h"
+#pragma once
 
 class Time
 {
@@ -9,37 +8,37 @@ public:
 	void Update();
 
 	float GetRealDeltaTime() const { return float(deltaTime); }
-	float GetDeltaTime() const { return float(scaledDeltaTime); }
+	float GetDeltaTime() const { return scaledDeltaTime; }
 	UINT GetFPS() const { return fps; }
-	float GetWorldTime() const { return float(worldTime); }
+	double GetWorldTime() const { return worldTime; }
 	
 	void SetTimeScale(float scale) { timeScale = scale; }
 	float GetTimeScale() const { return timeScale; }
 
 	void CheckTime() const
 	{
-		std::cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime << ", WorldTime : " << worldTime << '\n';
+		cout << "FPS : " << fps << ", DeltaTime : " << scaledDeltaTime << ", WorldTime : " << worldTime << '\n';
 	}
 
-	// UTC ì‹œê°„ ë°˜í™˜
+	// UTC ½Ã°£ ¹ÝÈ¯
 	SYSTEMTIME GetUTCTime() const
 	{
 		SYSTEMTIME st;
-		::GetSystemTime(&st);  // í˜„ìž¬ ë¡œì»¬ ì‹œê°„ì„ stì— ì €ìž¥
+		::GetSystemTime(&st);  // ÇöÀç ·ÎÄÃ ½Ã°£À» st¿¡ ÀúÀå
 		return st;
 	}
 
-	// ì»´í“¨í„° ë¡œì»¬ ì‹œê°„ ë°˜í™˜
+	// ÄÄÇ»ÅÍ ·ÎÄÃ ½Ã°£ ¹ÝÈ¯
 	SYSTEMTIME GetLocalPCTime() const
 	{
 		SYSTEMTIME st;
-		::GetLocalTime(&st);  // í˜„ìž¬ ë¡œì»¬ ì‹œê°„ì„ stì— ì €ìž¥
+		::GetLocalTime(&st);  // ÇöÀç ·ÎÄÃ ½Ã°£À» st¿¡ ÀúÀå
 		return st;
 	}
 
 private:
-	std::chrono::steady_clock::time_point currentTime;
-	std::chrono::steady_clock::time_point lastTime;
+	chrono::steady_clock::time_point currentTime;
+	chrono::steady_clock::time_point lastTime;
 	double deltaTime = 0.0;
 	double scaledDeltaTime = 0.0;
 
@@ -50,5 +49,5 @@ private:
 	double fpsTimeElapsed = 0.0;
 
 	float scaleDeltaTime = 0.0f;
-	float timeScale = 1.0f;		// íƒ€ìž„ìŠ¤ì¼€ì¼
+	float timeScale = 1.0f;		// Å¸ÀÓ½ºÄÉÀÏ
 };

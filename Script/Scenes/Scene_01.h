@@ -1,15 +1,9 @@
-ï»¿#pragma once
-
-#include "Interfaces/IScene.h"
-#include "Objects/TextureObject/TextureRect.h"
-#include "Components/Button.h"
-#include "Components/Texts.h"
-#include "Managers/SceneManager.h"
+#pragma once
 
 class Scene_01 : public Scene
 {
 public:
-	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Awake() override;
 	void Start() override;
 
@@ -27,9 +21,9 @@ public:
 	bool IsLoaded() const override { return isLoaded; }
 
 private:
-	std::vector<std::shared_ptr<GameObject>> objects;
+	vector<shared_ptr<Object>> objects;
 
-	std::shared_ptr<GameObject> startButton;
+	shared_ptr<Object> startButton;
 
 	bool isLoaded = false;
 };

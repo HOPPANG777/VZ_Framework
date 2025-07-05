@@ -1,17 +1,17 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "Texture2D.h"
 
-// Texture2D ìƒì„±ì
-Texture2D::Texture2D(const std::wstring& filePath)
+// Texture2D »ı¼ºÀÚ
+Texture2D::Texture2D(const wstring& filePath)
     : filePath(filePath)
 {
-    Texture2DManager::Get()->Load(this);
+    TEXTURE2D->Load(this);
 }
 
-// ReadPixel ë©¤ë²„ í•¨ìˆ˜
-void Texture2D::ReadPixel(std::vector<Color>* pixels)
+// ReadPixel ¸â¹ö ÇÔ¼ö
+void Texture2D::ReadPixel(vector<Color>* pixels)
 {
-    // srvì—ì„œ ì‹¤ì œ Texture2D COM í¬ì¸í„° ê°€ì ¸ì˜¤ê¸°
+    // srv¿¡¼­ ½ÇÁ¦ Texture2D COM Æ÷ÀÎÅÍ °¡Á®¿À±â
     ComPtr<ID3D11Resource> resource;
     srv->GetResource(&resource);
 
@@ -21,14 +21,14 @@ void Texture2D::ReadPixel(std::vector<Color>* pixels)
     ReadPixel(texture2D, pixels);
 }
 
-// ReadPixel ì •ì  í•¨ìˆ˜
-void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, std::vector<Color>* pixels)
+// ReadPixel Á¤Àû ÇÔ¼ö
+void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, vector<Color>* pixels)
 {
-    // ì›ë³¸ í…ìŠ¤ì²˜ ì •ë³´
+    // ¿øº» ÅØ½ºÃ³ Á¤º¸
     D3D11_TEXTURE2D_DESC srvDesc;
     texture->GetDesc(&srvDesc);
 
-    // ë³µì‚¬ë³¸ desc ì„¤ì •
+    // º¹»çº» desc ¼³Á¤
     D3D11_TEXTURE2D_DESC destDesc = {};
     destDesc.Usage = D3D11_USAGE_STAGING;
     destDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
@@ -41,35 +41,35 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, std::vector<Color>* p
 
     // CreateTexture2D
     ComPtr<ID3D11Texture2D> destTex;
-    HRESULT hr = Graphics::Get()->GetDevice()->CreateTexture2D(&destDesc, nullptr, &destTex);
+    HRESULT hr = DEVICE->CreateTexture2D(&destDesc, nullptr, &destTex);
     CHECK(hr);
 
-    // ì›ë³¸ textureë¥¼ ë³µì‚¬ë³¸ destTexì— ë¡œë“œ
-    hr = D3DX11LoadTextureFromTexture(Graphics::Get()->GetDC(), texture.Get(), nullptr, destTex.Get());
+    // ¿øº» texture¸¦ º¹»çº» destTex¿¡ ·Îµå
+    hr = D3DX11LoadTextureFromTexture(DC, texture.Get(), nullptr, destTex.Get());
     CHECK(hr);
 
-    // í”½ì…€ ë°ì´í„° ë‹´ì„ ë©”ëª¨ë¦¬(Width * Height)
+    // ÇÈ¼¿ µ¥ÀÌÅÍ ´ãÀ» ¸Ş¸ğ¸®(Width * Height)
     const size_t pixelCount = static_cast<size_t>(destDesc.Width) * static_cast<size_t>(destDesc.Height);
 
-    // std::unique_ptrë¡œ ë°°ì—´ ê´€ë¦¬
-    const std::unique_ptr<UINT[]>& colors = std::make_unique<UINT[]>(pixelCount);
+    // unique_ptr·Î ¹è¿­ °ü¸®
+    const unique_ptr<UINT[]>& colors = make_unique<UINT[]>(pixelCount);
 
-    // Mapì„ í†µí•´ CPUë¡œ ì½ì–´ì˜¨ë‹¤
+    // MapÀ» ÅëÇØ CPU·Î ÀĞ¾î¿Â´Ù
     D3D11_MAPPED_SUBRESOURCE subRe;
-    Graphics::Get()->GetDC()->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
+    DC->Map(destTex.Get(), 0, D3D11_MAP_READ, 0, &subRe);
     {
-        // ë³µì‚¬
+        // º¹»ç
         memcpy(colors.get(), subRe.pData, sizeof(UINT) * pixelCount);
     }
-    Graphics::Get()->GetDC()->Unmap(destTex.Get(), 0);
+    DC->Unmap(destTex.Get(), 0);
 
-    // OpenGL í˜¸í™˜ìš©(BGR â†’ RGB ìˆœì„œ êµì²´)
+    // OpenGL È£È¯¿ë(BGR ¡æ RGB ¼ø¼­ ±³Ã¼)
     {
-        // ì„ì‹œ ë²„í¼ë“¤
-        const std::unique_ptr<UINT[]>& alpha = std::make_unique<UINT[]>(pixelCount);
-        const std::unique_ptr<UINT[]>& red = std::make_unique<UINT[]>(pixelCount);
-        const std::unique_ptr<UINT[]>& green = std::make_unique<UINT[]>(pixelCount);
-        const std::unique_ptr<UINT[]>& blue = std::make_unique<UINT[]>(pixelCount);
+        // ÀÓ½Ã ¹öÆÛµé
+        const unique_ptr<UINT[]>& alpha = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& red = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& green = make_unique<UINT[]>(pixelCount);
+        const unique_ptr<UINT[]>& blue = make_unique<UINT[]>(pixelCount);
 
         for (size_t i = 0; i < pixelCount; i++)
         {
@@ -78,14 +78,14 @@ void Texture2D::ReadPixel(ComPtr<ID3D11Texture2D> texture, std::vector<Color>* p
             green[i] = (colors[i] & 0x0000FF00);
             blue[i] = (colors[i] & 0x000000FF);
 
-            // Rê³¼ B ìœ„ì¹˜ êµì²´
-            red[i] = colors[i] >> 16;    // 16ë¹„íŠ¸ ì‰¬í”„íŠ¸ â†’ R ì¶”ì¶œ
-            blue[i] = colors[i] << 16;    // <<16 â†’ Bë¥¼ ìƒìœ„ ë¹„íŠ¸ë¡œ
+            // R°ú B À§Ä¡ ±³Ã¼
+            red[i] = colors[i] >> 16;    // 16ºñÆ® ½¬ÇÁÆ® ¡æ R ÃßÃâ
+            blue[i] = colors[i] << 16;    // <<16 ¡æ B¸¦ »óÀ§ ºñÆ®·Î
 
             colors[i] = alpha[i] | red[i] | green[i] | blue[i];
         }
 
-        // ìµœì¢… í”½ì…€ì„ ê²°ê³¼ ë²¡í„°ì— ì €ì¥
+        // ÃÖÁ¾ ÇÈ¼¿À» °á°ú º¤ÅÍ¿¡ ÀúÀå
         pixels->assign(colors.get(), colors.get() + pixelCount);
     }
 }

@@ -1,12 +1,12 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 #include "ShakingText.h"
 
 void ShakingText::RenderText(
-    const std::wstring& text, 
+    const wstring& text, 
     const RECT& rect, 
     const float size, 
     const Color& color, 
-    const std::wstring& font, 
+    const wstring& font, 
     const DWRITE_FONT_WEIGHT& weight, 
     const DWRITE_FONT_STYLE& style, 
     const DWRITE_FONT_STRETCH& stretch)

@@ -1,7 +1,7 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "EnemyUnit.h"
 
-EnemyUnit::EnemyUnit(const Vector3& position, const Vector3& scale, const float rotation, const std::wstring& path)
+EnemyUnit::EnemyUnit(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
 	: UnitBase(position, scale, rotation, path)
 {
 

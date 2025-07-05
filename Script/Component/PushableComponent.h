@@ -1,29 +1,24 @@
-ï»¿#pragma once
+#pragma once
 
 #include "Interface/IInteractable.h"
-#include "Objects/BaseObject/GameObject.h"
-#include "Components/Component.h"
-#include "Components/Transform.h"
-#include "Systems/Input.h"
-//#include "Systems/Time.h"
 
 class PushableComponent : public Component, public IInteractable
 {
 public:
-    PushableComponent(const std::string& name = "PushableComponent", float pushSpeed = 250.0f) : Component(name), pushSpeed(pushSpeed), isBeingPushed(false) {}
+    PushableComponent(const string& name = "PushableComponent", float pushSpeed = 250.0f) : Component(name), pushSpeed(pushSpeed), isBeingPushed(false) {}
     virtual ~PushableComponent() override = default;
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ë Œë”ë§ì€ í•„ìš” ì—†ìŒ
+    virtual void Render() override {} // ·»´õ¸µÀº ÇÊ¿ä ¾øÀ½
 
 public:
-    // IInteractable ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„
+    // IInteractable ÀÎÅÍÆäÀÌ½º ±¸Çö
     virtual void Interact() override;
 	virtual void StopInteract() override;
 
 public:
-    // ë‚´ë¶€ ë°€ê¸° ë™ì‘ ì‹œì‘/ì¢…ë£Œ
+    // ³»ºÎ ¹Ğ±â µ¿ÀÛ ½ÃÀÛ/Á¾·á
     void StartPushing() { isBeingPushed = true; }
     void StopPushing() { isBeingPushed = false; }
 

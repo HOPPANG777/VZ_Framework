@@ -1,4 +1,4 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 #include "DirectHelper.h"
 
 float Values::GetWinWidth()
@@ -41,7 +41,7 @@ const Vector3 Values::RightVec = Vector3(1, 0, 0);
 const Vector3 Values::UpVec = Vector3(0, 1, 0);
 const Vector3 Values::DownVec = Vector3(0, -1, 0);
 const Vector3 Values::FwdVec = Vector3(0, 0, 1);
-const Vector3 Values::ScreenSize = Vector3((float)gWinWidth, (float)gWinWidth, 1);
+const Vector3 Values::ScreenSize = Vector3((float)Values::GetWinWidth(), (float)Values::GetWinHeight(), 1);
 
 const Vector2 Values::ZeroVec2 = Vector2(0, 0);
 const Vector2 Values::OneVec2 = Vector2(1, 1);
@@ -59,7 +59,7 @@ const Color Values::Cyan = Color(0, 1, 1, 1);
 const Color Values::Black = Color(0, 0, 0, 1);
 const Color Values::White = Color(1, 1, 1, 1);
 const Color Values::Transparent = Color(0, 0, 0, 0);
-const Color Values::ClearColor = Color(0xFF555566);
+//const Color Values::ClearColor = 0xFF555566;
 
 const Matrix Values::Identity = { 1, 0, 0, 0,
 								  0, 1, 0, 0,

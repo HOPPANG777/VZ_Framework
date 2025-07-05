@@ -1,34 +1,33 @@
-ï»¿#pragma once
+#pragma once
 
 #include "LumberAxeComponent.h"
 #include "PlayerController.h"
-#include "Components/BoxCollider.h"
 
 class FloorCollision : public Component
 {
 public:
-    // player: ì¶©ëŒ ê²€ì‚¬ ëŒ€ìƒì¸ í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ (std::shared_ptr ë˜ëŠ” raw pointer)
-    FloorCollision(const std::string& name) : Component(name) {}
+    // player: Ãæµ¹ °Ë»ç ´ë»óÀÎ ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® (shared_ptr ¶Ç´Â raw pointer)
+    FloorCollision(const string& name) : Component(name) {}
     virtual ~FloorCollision() override = default;
 
 public:
     virtual void Update() override;
-    virtual void Render() override {} // ë Œë”ë§ì€ í•„ìš”ì—†ìœ¼ë¯€ë¡œ ë¹„ì›Œë‘ì.
+    virtual void Render() override {} // ·»´õ¸µÀº ÇÊ¿ä¾øÀ¸¹Ç·Î ºñ¿öµÎÀÚ.
 
 public:
-    void SetPlayer(GameObject* player) { this->player = player; }
-    GameObject* GetPlayer() const { return this->player; }
+    void SetPlayer(Object* player) { this->player = player; }
+    Object* GetPlayer() const { return this->player; }
 
-    void SetLumberAxe(GameObject* lumberAxe) { this->lumberAxe = lumberAxe; }
-    GameObject* GetLumberAxe() const { return this->lumberAxe; }
+    void SetLumberAxe(Object* lumberAxe) { this->lumberAxe = lumberAxe; }
+    Object* GetLumberAxe() const { return this->lumberAxe; }
 
 private:
-    // ì´ì „ í”„ë ˆì„ ì¶©ëŒ ì—¬ë¶€ ì €ì¥
+    // ÀÌÀü ÇÁ·¹ÀÓ Ãæµ¹ ¿©ºÎ ÀúÀå
     bool wasColliding = false;
     
     const float EPSILON = 0.01f;
     
-    GameObject* player = nullptr;
-    GameObject* lumberAxe = nullptr;
+    Object* player = nullptr;
+    Object* lumberAxe = nullptr;
 };
 

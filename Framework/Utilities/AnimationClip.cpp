@@ -1,46 +1,46 @@
-ï»¿#include "Framework.h"
+#include "Framework.h"
 #include "AnimationClip.h"
 
 AnimationClip::AnimationClip
     (
     const std::wstring& clipName,
     Texture2D* srcTex,
-    UINT columns,    // ê°€ë¡œ í”„ë ˆì„ ìˆ˜
-    UINT rows,       // ì„¸ë¡œ í”„ë ˆì„ ìˆ˜
+    UINT columns,    // °¡·Î ÇÁ·¹ÀÓ ¼ö
+    UINT rows,       // ¼¼·Î ÇÁ·¹ÀÓ ¼ö
     Vector2 startPos,
     Vector2 endPos,
     bool bReversed
     //float playRate
     )
     :   clipName(clipName),
-        frameCount(columns * rows),     // ì „ì²´ í”„ë ˆì„ ìˆ˜ = columns * rows
-        bReversed(bReversed)            //, playRate(playRate) // â˜… ë©¤ë²„ì— ì €ì¥
+        frameCount(columns * rows),     // ÀüÃ¼ ÇÁ·¹ÀÓ ¼ö = columns * rows
+        bReversed(bReversed)            //, playRate(playRate) // ¡Ú ¸â¹ö¿¡ ÀúÀå
 {
     srv = srcTex->GetSRV();
 
     const float imageWidth = srcTex->GetWidth();
     const float imageHeight = srcTex->GetHeight();
 
-    // ì§€ì •ëœ ì˜ì—­
+    // ÁöÁ¤µÈ ¿µ¿ª
     const Vector2 clipSize = endPos - startPos;
 
-    // í”„ë ˆì„ í•˜ë‚˜ì˜ í¬ê¸°(í”½ì…€ ë‹¨ìœ„)
+    // ÇÁ·¹ÀÓ ÇÏ³ªÀÇ Å©±â(ÇÈ¼¿ ´ÜÀ§)
     const float frameWidth = clipSize.x / (float)columns;
     const float frameHeight = clipSize.y / (float)rows;
 
-    // UV ë³€í™˜
+    // UV º¯È¯
     texelFrameSize.x = frameWidth / imageWidth;
     texelFrameSize.y = frameHeight / imageHeight;
 
-    // ì‹œì‘ì  UV
+    // ½ÃÀÛÁ¡ UV
     Vector2 texelStartPos;
     texelStartPos.x = startPos.x / imageWidth;
     texelStartPos.y = startPos.y / imageHeight;
 
-    // ì „ì²´ í”„ë ˆì„ = columns * rows
+    // ÀüÃ¼ ÇÁ·¹ÀÓ = columns * rows
     keyFrames.reserve(frameCount);
 
-    // í–‰(0 ~ rows-1), ì—´(0 ~ columns-1) ìˆœíšŒ
+    // Çà(0 ~ rows-1), ¿­(0 ~ columns-1) ¼øÈ¸
     for (UINT row = 0; row < rows; row++)
     {
         for (UINT col = 0; col < columns; col++)

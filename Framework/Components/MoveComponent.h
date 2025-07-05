@@ -1,17 +1,13 @@
-ï»¿#pragma once
-
-#include "Component.h"
-#include "Objects/BaseObject/GameObject.h"
-#include "Systems/Input.h"
+#pragma once
 
 class MoveComponent : public Component
 {
 public:
-	MoveComponent(const std::string& name = "Move", const float maxSpeed = 300.0f) : Component(name), maxSpeed(maxSpeed) {}
+	MoveComponent(const string& name = "Move", const float maxSpeed = 300.0f) : Component(name), maxSpeed(maxSpeed) {}
 	~MoveComponent() override = default;
 
 public:
-	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
+	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Update() override;
 	void Render() override;
 
