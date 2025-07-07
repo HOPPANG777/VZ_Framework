@@ -23,6 +23,7 @@ public:
 private:
 	bool isLoaded = false;
 
+	vector<std::shared_ptr<Object>> objects;
 
 };
 

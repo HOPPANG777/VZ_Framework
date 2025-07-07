@@ -39,6 +39,7 @@ void Program::Awake()
 		SCENE->SetLoadingScene("LoadingScene");
 
 		SCENE->StartGame("StartStage");
+		//SCENE->StartGame("PuzzleStage");
 		//SCENE->StartGame("Stage02");
 	}
 }
