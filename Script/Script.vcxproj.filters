@@ -95,6 +95,9 @@
     <ClCompile Include="Scenes\Scene_07.cpp">
       <Filter>Scenes\Scene_07_PuzzleStage</Filter>
     </ClCompile>
+    <ClCompile Include="Component\BlinkComponent.cpp">
+      <Filter>Component\BlinkComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\Scene_00.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Scenes\Scene_07.h">
       <Filter>Scenes\Scene_07_PuzzleStage</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\BlinkComponent.h">
+      <Filter>Component\BlinkComponent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +315,9 @@
     </Filter>
     <Filter Include="Scenes\Scene_07_PuzzleStage">
       <UniqueIdentifier>{b6a28d96-eeb1-4a26-a2b1-3273edd2f6ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\BlinkComponent">
+      <UniqueIdentifier>{edac08d0-303d-4bc3-84be-b6c9546aa07c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

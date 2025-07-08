@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Component\BlinkComponent.cpp" />
     <ClCompile Include="Component\LogPathCreator.cpp" />
     <ClCompile Include="Component\HitComponent.cpp" />
     <ClCompile Include="Component\InteractionComponent.cpp" />
@@ -58,6 +59,7 @@
     <ClCompile Include="Object\Wind.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\BlinkComponent.h" />
     <ClInclude Include="Enum\BattleState.h" />
     <ClInclude Include="Component\LogPathCreator.h" />
     <ClInclude Include="Component\HitComponent.h" />

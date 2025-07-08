@@ -40,7 +40,12 @@ private:
 	vector<shared_ptr<Object>> textPoint;
 	vector<shared_ptr<Object>> log;
 	vector<shared_ptr<Object>> heartUI;
-        Vector3 heartUIBase = {0, 0, 0};
+    Vector3 heartUIBase = {0, 0, 0};
+
+	bool isFalling = false;
+	float fallTimer = 0.0f;
+	Vector3 playerStartPos = { 0,0,0 };
+	Vector3 logStartPos = { 0,0,0 };
 
 	shared_ptr<Object> lumberAxe;
 	shared_ptr<Object> testPlayer;

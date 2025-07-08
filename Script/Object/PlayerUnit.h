@@ -4,6 +4,7 @@
 #include "LumberAxe.h"
 #include "Component/PlayerController.h"
 #include "Component/InteractionComponent.h"
+#include "Component/BlinkComponent.h"
 
 class PlayerUnit : public UnitBase
 {

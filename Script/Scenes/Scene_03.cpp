@@ -1,5 +1,6 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Scene_03.h"
+#include "Component/BlinkComponent.h"
 
 void Scene_03::Awake()
 {
@@ -10,12 +11,14 @@ void Scene_03::Awake()
 		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -310, 0));
 		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
-                heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
-		                Vector3 heartPos = Values::GetCenter() + heartUIBase;
+        heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+		Vector3 heartPos = Values::GetCenter() + heartUIBase;
 		for (int i = 0; i < 5; i++) 
 		{
 			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
 		}
+		playerStartPos = Values::GetCenter() + Vector3(-550, -310, 0);
+		logStartPos = Values::GetCenter() + Vector3(260, -65, 0);
 	}
 	
 	// Floor
@@ -185,22 +188,51 @@ void Scene_03::Update()
 		isTest2 = true;
 	}
 
-        Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
-        for (int i = 0; i < heartUI.size(); i++)
-                heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
+    Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
+    for (int i = 0; i < heartUI.size(); i++)
+	{
+		heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
+	}
+	
 	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
 	for (int i = 0; i < heartUI.size(); i++) 
 	{
 		auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
-		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
-		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
+		if (i < hp) 
+		{
+			tex->SetImage(TexturePath + L"UI/FullHearts.png");
+		}
+		else 
+		{
+			tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
+		}
 	}
-	if (testPlayer->GetPosition().y < -100) 
+	if (!isFalling && testPlayer->GetPosition().y < -100)
 	{
-		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
-		Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
-		testPlayer->SetPosition(startPos);
-		if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
+		isFalling = true;
+		fallTimer = 0.0f;
+	}
+
+	if (isFalling)
+	{
+		fallTimer += DELTA;
+		if (fallTimer >= 1.5f)
+		{
+			dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+			testPlayer->SetPosition(Values::GetCenter() + Vector3(260, 165, 0));
+
+			if (lumberAxe != nullptr) 
+			{
+				lumberAxe->SetPosition(Values::GetCenter() + Vector3(260, 165, 0));
+			}
+
+			auto blink = testPlayer->GetComponent<BlinkComponent>("BlinkComponent");
+			if (blink) 
+			{
+				blink->Activate(1.5f);
+			}
+			isFalling = false;
+		}
 	}
 }
 
