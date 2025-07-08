@@ -218,22 +218,31 @@ void Scene_03::Update()
 		fallTimer += DELTA;
 		if (fallTimer >= 1.5f)
 		{
-			dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
-			testPlayer->SetPosition(Values::GetCenter() + Vector3(260, 165, 0));
+                        dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
 
-			if (lumberAxe != nullptr) 
-			{
-				lumberAxe->SetPosition(Values::GetCenter() + Vector3(260, 165, 0));
-			}
+                        Vector3 respawnPos = Values::GetCenter() + Vector3(260, 165, 0);
+                        testPlayer->SetPosition(respawnPos);
 
-			auto blink = testPlayer->GetComponent<BlinkComponent>("BlinkComponent");
-			if (blink) 
-			{
-				blink->Activate(1.5f);
-			}
-			isFalling = false;
-		}
-	}
+                        if (lumberAxe != nullptr)
+                        {
+                                lumberAxe->SetPosition(respawnPos);
+                        }
+
+                        // Reset player controller state to avoid continuing fall
+                        auto controller = testPlayer->GetComponent<PlayerController>("PlayerController");
+                        if (controller)
+                                controller->Land();
+
+                        auto blink = testPlayer->GetComponent<BlinkComponent>("BlinkComponent");
+                        if (blink)
+                        {
+                                blink->Activate(1.5f);
+                        }
+
+                        CAMERA->SetPosition(respawnPos - Values::GetCenter());
+                        isFalling = false;
+                }
+        }
 }
 
 void Scene_03::LateUpdate() {}

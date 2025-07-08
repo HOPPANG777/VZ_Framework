@@ -189,13 +189,18 @@ void Scene_04::Update()
 		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
 		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
 	}
-	if (testPlayer->GetPosition().y < -100)
-	{
-		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
-		Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
-		testPlayer->SetPosition(startPos);
-		if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
-	}
+        if (testPlayer->GetPosition().y < -100)
+        {
+                dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+                Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
+                testPlayer->SetPosition(startPos);
+                if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
+
+                auto controller = testPlayer->GetComponent<PlayerController>("PlayerController");
+                if (controller) controller->Land();
+
+                CAMERA->SetPosition(startPos - Values::GetCenter());
+        }
 }
 
 void Scene_04::LateUpdate()
