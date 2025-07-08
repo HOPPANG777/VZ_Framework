@@ -11,16 +11,16 @@ void Scene_03::Awake()
 		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -310, 0));
 		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
-        heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+		heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
 		Vector3 heartPos = Values::GetCenter() + heartUIBase;
-		for (int i = 0; i < 5; i++) 
+		for (int i = 0; i < 5; i++)
 		{
-			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
+			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(50, 50, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
 		}
 		playerStartPos = Values::GetCenter() + Vector3(-550, -310, 0);
 		logStartPos = Values::GetCenter() + Vector3(260, -65, 0);
 	}
-	
+
 	// Floor
 	{
 		const auto& floorLine1 = std::make_shared<ColorLine>(Values::GetCenter() + Vector3(5800, -320, 0), 0, 0.0f, CLEAR);
@@ -39,7 +39,7 @@ void Scene_03::Awake()
 		for (const auto& flr : floor) if (flr != nullptr) flr->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
 		for (const auto& flr : floor) if (flr != nullptr) COLLISION->AddCollider(flr->GetComponent<BoxCollider>("BoxCollider"));
 	}
-	
+
 	// House
 	{
 		house.push_back(std::make_shared<TextureRect>(Values::GetCenter() + Vector3(-450, -180, 0), Vector3(300, 300, 0), 0.0f, TexturePath + L"Object/House01.png"));
@@ -92,7 +92,7 @@ void Scene_03::Awake()
 		tmap = std::make_unique<TileMap>(width, height, spacing);
 		tmap->Load("_Data/_TileData/map01.data");
 	}
-	
+
 	// Log
 	{
 		const auto& logRect = std::make_shared<TextureRect>(Values::GetCenter() + Vector3(260, -65, 0), Vector3(300, 500, 0), 0.0f, TexturePath + L"Object/Log.png");
@@ -102,7 +102,7 @@ void Scene_03::Awake()
 		COLLISION->AddCollider(logRect->GetComponent<BoxCollider>("BoxCollider"));
 		log.push_back(logRect);
 	}
-	
+
 
 	isLoaded = true;
 }
@@ -150,6 +150,7 @@ void Scene_03::Update()
 	for (const auto& h : heartUI) if (h != nullptr) h->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
+	CAMERA->UpdateVerticalScroll(testPlayer.get(), 0.5f, 0.5f);
 
 	if (textPoint[0]->GetComponent<BoxCollider>("BoxCollider")->IsColliding(testPlayer->GetComponent<BoxCollider>("BoxCollider").get()) && text[0]->GetComponent<TypingText>("TypingText")->GetTextOut() == false)
 	{
@@ -188,21 +189,21 @@ void Scene_03::Update()
 		isTest2 = true;
 	}
 
-    Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
-    for (int i = 0; i < heartUI.size(); i++)
+	Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
+	for (int i = 0; i < heartUI.size(); i++)
 	{
 		heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
 	}
-	
+
 	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
-	for (int i = 0; i < heartUI.size(); i++) 
+	for (int i = 0; i < heartUI.size(); i++)
 	{
 		auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
-		if (i < hp) 
+		if (i < hp)
 		{
 			tex->SetImage(TexturePath + L"UI/FullHearts.png");
 		}
-		else 
+		else
 		{
 			tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
 		}
@@ -218,31 +219,30 @@ void Scene_03::Update()
 		fallTimer += DELTA;
 		if (fallTimer >= 1.5f)
 		{
-                        dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+			dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
 
-                        Vector3 respawnPos = Values::GetCenter() + Vector3(260, 165, 0);
-                        testPlayer->SetPosition(respawnPos);
+			Vector3 respawnPos = Values::GetCenter() + Vector3(260, -310, 0);
+			testPlayer->SetPosition(respawnPos);
 
-                        if (lumberAxe != nullptr)
-                        {
-                                lumberAxe->SetPosition(respawnPos);
-                        }
+			if (lumberAxe != nullptr)
+			{
+				lumberAxe->SetPosition(respawnPos);
+			}
 
-                        // Reset player controller state to avoid continuing fall
-                        auto controller = testPlayer->GetComponent<PlayerController>("PlayerController");
-                        if (controller)
-                                controller->Land();
+			// Reset player controller state to avoid continuing fall
+			//auto controller = testPlayer->GetComponent<PlayerController>("PlayerController");
+			//if (controller) controller->Land();
 
-                        auto blink = testPlayer->GetComponent<BlinkComponent>("BlinkComponent");
-                        if (blink)
-                        {
-                                blink->Activate(1.5f);
-                        }
+			auto blink = testPlayer->GetComponent<BlinkComponent>("BlinkComponent");
+			if (blink)
+			{
+				blink->Activate(1.5f);
+			}
 
-                        CAMERA->SetPosition(respawnPos - Values::GetCenter());
-                        isFalling = false;
-                }
-        }
+			//CAMERA->SetPosition(respawnPos - Values::GetCenter());
+			isFalling = false;
+		}
+	}
 }
 
 void Scene_03::LateUpdate() {}

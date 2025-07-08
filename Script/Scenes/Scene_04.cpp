@@ -11,12 +11,12 @@ void Scene_04::Awake()
 		lumberAxe = make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SCENE->SetPlayer(testPlayer);
-                heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
-                Vector3 heartPos = Values::GetCenter() + heartUIBase;
-                for (int i = 0; i < 5; i++)
-                {
-                        heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
-                }
+		heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+		Vector3 heartPos = Values::GetCenter() + heartUIBase;
+		for (int i = 0; i < 5; i++)
+		{
+			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(50, 50, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
+		}
 	}
 
 	// Floor
@@ -86,7 +86,7 @@ void Scene_04::Awake()
 		// 바람 방향: 플레이어를 왼쪽으로 밀어낸다고 하면, (-1, 0, 0)
 		Vector3 windDirection = { -1, 0, 0 };
 		float windIntensity = 220.0f; // 적절한 값 조절
-		
+
 		windObject = make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
 		windObject->AddComponent(make_shared<WindZone>("WindZone", Values::GetCenter() + windRegionMin, Values::GetCenter() + windRegionMax, windDirection, windIntensity));
 	}
@@ -179,9 +179,9 @@ void Scene_04::Update()
 		}
 	}
 
-        Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
-        for (int i = 0; i < heartUI.size(); i++)
-                heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
+	Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
+	for (int i = 0; i < heartUI.size(); i++)
+		heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
 	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
 	for (int i = 0; i < heartUI.size(); i++)
 	{
@@ -189,18 +189,18 @@ void Scene_04::Update()
 		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
 		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
 	}
-        if (testPlayer->GetPosition().y < -100)
-        {
-                dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
-                Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
-                testPlayer->SetPosition(startPos);
-                if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
+	if (testPlayer->GetPosition().y < -100)
+	{
+		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+		Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
+		testPlayer->SetPosition(startPos);
+		if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
 
-                auto controller = testPlayer->GetComponent<PlayerController>("PlayerController");
-                if (controller) controller->Land();
+		auto controller = testPlayer->GetComponent<PlayerController>("PlayerController");
+		if (controller) controller->Land();
 
-                CAMERA->SetPosition(startPos - Values::GetCenter());
-        }
+		CAMERA->SetPosition(startPos - Values::GetCenter());
+	}
 }
 
 void Scene_04::LateUpdate()
