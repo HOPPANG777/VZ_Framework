@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Scene_03.h"
-#include "Component/BlinkComponent.h"
 
 void Scene_03::Awake()
 {
@@ -17,8 +16,6 @@ void Scene_03::Awake()
 		{
 			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
 		}
-        playerStartPos = Values::GetCenter() + Vector3(-550, -310, 0);
-        logStartPos = Values::GetCenter() + Vector3(260, -65, 0);
 	}
 	
 	// Floor
@@ -198,30 +195,13 @@ void Scene_03::Update()
 		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
 		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
 	}
-        if (!isFalling && testPlayer->GetPosition().y < -100)
-        {
-                isFalling = true;
-                fallTimer = 0.0f;
-        }
-
-        if (isFalling)
-        {
-                fallTimer += DELTA;
-                if (fallTimer >= 1.5f)
-                {
-                        dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
-                        testPlayer->SetPosition(playerStartPos);
-                        if (lumberAxe != nullptr) lumberAxe->SetPosition(playerStartPos + Vector3(0, 110, 0));
-                        if (!log.empty())
-                        {
-                                log[0]->SetPosition(logStartPos);
-                                log[0]->SetRotation(0);
-                        }
-                        auto blink = testPlayer->GetComponent<BlinkComponent>("BlinkComponent");
-                        if (blink) blink->Activate(1.5f);
-                        isFalling = false;
-                }
-        }
+	if (testPlayer->GetPosition().y < -100) 
+	{
+		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+		Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
+		testPlayer->SetPosition(startPos);
+		if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
+	}
 }
 
 void Scene_03::LateUpdate() {}
