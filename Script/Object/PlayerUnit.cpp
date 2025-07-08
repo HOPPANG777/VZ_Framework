@@ -4,6 +4,8 @@
 PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const float rotation, const wstring& path)
 	: UnitBase(position, scale, rotation, path)
 {
+    ResetHealth();
+
     // 咆胶贸 家胶 积己
     const std::shared_ptr<Texture2D>& srcPlayerIdleR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
     const std::shared_ptr<Texture2D>& srcPlayerIdleL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");

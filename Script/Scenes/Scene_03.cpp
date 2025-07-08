@@ -10,6 +10,11 @@ void Scene_03::Awake()
 		testPlayer = std::make_shared<PlayerUnit>(Values::GetCenter() + Vector3(-550, -310, 0));
 		lumberAxe = std::make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -200, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
+		Vector3 heartPos = Values::GetCenter() + Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+		for (int i = 0; i < 5; i++) 
+		{
+			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
+		}
 	}
 	
 	// Floor
@@ -115,9 +120,11 @@ void Scene_03::Destroy()
 	for (auto& t : text)if (t != nullptr) t.reset();
 	for (auto& tp : textPoint)if (tp != nullptr) tp.reset();
 	for (auto& l : log) if (l != nullptr) l.reset();
+	for (auto& hearts : heartUI) if (hearts != nullptr) hearts.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
+
 	COLLISION->RemoveAllCollider();
 }
 
@@ -136,6 +143,7 @@ void Scene_03::Update()
 	if (testPlayer != nullptr) testPlayer->Update();
 	if (lumberAxe != nullptr) lumberAxe->Update();
 	if (backgroundObject != nullptr) backgroundObject->Update();
+	for (const auto& h : heartUI) if (h != nullptr) h->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
 
@@ -175,6 +183,21 @@ void Scene_03::Update()
 		log[0]->GetComponent<FloorCollision>("FloorCollision")->SetLumberAxe(lumberAxe.get());
 		isTest2 = true;
 	}
+
+	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
+	for (int i = 0; i < heartUI.size(); i++) 
+	{
+		auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
+		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
+		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
+	}
+	if (testPlayer->GetPosition().y < -100) 
+	{
+		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+		Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
+		testPlayer->SetPosition(startPos);
+		if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
+	}
 }
 
 void Scene_03::LateUpdate() {}
@@ -195,6 +218,7 @@ void Scene_03::Render()
 	if (house[0] != nullptr) house[0]->Render();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
 	for (const auto& t : text) if (t != nullptr) t->Render();
+	for (const auto& h : heartUI) if (h != nullptr) h->Render();
 }
 
 void Scene_03::PostRender()

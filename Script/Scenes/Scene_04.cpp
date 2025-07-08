@@ -11,6 +11,11 @@ void Scene_04::Awake()
 		lumberAxe = make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SCENE->SetPlayer(testPlayer);
+		Vector3 heartPos = Values::GetCenter() + Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+		for (int i = 0; i < 5; i++)
+		{
+			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
+		}
 	}
 
 	// Floor
@@ -130,6 +135,7 @@ void Scene_04::Destroy()
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
 	for (auto& t : text) if (t != nullptr) t.reset();
 	for (auto& tp : textPoint) if (tp != nullptr) tp.reset();
+	for (auto& hearts : heartUI) if (hearts != nullptr) hearts.reset();
 	SCENE->ResetPlayer();
 	COLLISION->RemoveAllCollider();
 	SOUNDS->Stop("Wind");
@@ -154,6 +160,7 @@ void Scene_04::Update()
 	if (testPlayer != nullptr) testPlayer->Update();
 	if (windObject != nullptr) windObject->Update();
 	if (bridge != nullptr) bridge->Update();
+	for (const auto& h : heartUI) if (h != nullptr) h->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
@@ -169,6 +176,21 @@ void Scene_04::Update()
 		{
 			SCENE->LoadScene("Stage02");
 		}
+	}
+
+	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
+	for (int i = 0; i < heartUI.size(); i++)
+	{
+		auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
+		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
+		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
+	}
+	if (testPlayer->GetPosition().y < -100)
+	{
+		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
+		Vector3 startPos = Values::GetCenter() + Vector3(-550, -310, 0);
+		testPlayer->SetPosition(startPos);
+		if (lumberAxe != nullptr) lumberAxe->SetPosition(startPos + Vector3(0, 110, 0));
 	}
 }
 
@@ -188,6 +210,7 @@ void Scene_04::Render()
 	if (windObject != nullptr) windObject->Render();
 	for (const auto& t : text) if (t != nullptr) t->Render();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
+	for (const auto& h : heartUI) if (h != nullptr) h->Render();
 }
 
 void Scene_04::PostRender()

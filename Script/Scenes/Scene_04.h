@@ -40,6 +40,7 @@ private:
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
+	vector<shared_ptr<Object>> heartUI;
 
 	shared_ptr<Object> puzzleRock;
 	shared_ptr<Object> bridge;

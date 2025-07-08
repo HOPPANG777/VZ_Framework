@@ -36,6 +36,7 @@ private:
 
 	shared_ptr<Object> testPlayer;
 	shared_ptr<Object> lumberAxe;
+	vector<shared_ptr<Object>> heartUI;
 
 	shared_ptr<Object> bback;
 

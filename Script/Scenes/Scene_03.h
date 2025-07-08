@@ -39,6 +39,7 @@ private:
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
 	vector<shared_ptr<Object>> log;
+	vector<shared_ptr<Object>> heartUI;
 
 	shared_ptr<Object> lumberAxe;
 	shared_ptr<Object> testPlayer;
