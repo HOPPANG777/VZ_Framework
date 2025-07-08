@@ -36,6 +36,10 @@ private:
 
 	vector<shared_ptr<Object>> floor;
 	vector<shared_ptr<Object>> house;
+        bool isFalling = false;
+        float fallTimer = 0.0f;
+        Vector3 playerStartPos = {0,0,0};
+        Vector3 logStartPos = {0,0,0};
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
 	vector<shared_ptr<Object>> log;
