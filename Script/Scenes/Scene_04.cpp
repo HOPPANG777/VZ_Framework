@@ -11,11 +11,12 @@ void Scene_04::Awake()
 		lumberAxe = make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SCENE->SetPlayer(testPlayer);
-		Vector3 heartPos = Values::GetCenter() + Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
-		for (int i = 0; i < 5; i++)
-		{
-			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
-		}
+                heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+                Vector3 heartPos = Values::GetCenter() + heartUIBase;
+                for (int i = 0; i < 5; i++)
+                {
+                        heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(30, 30, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
+                }
 	}
 
 	// Floor
@@ -36,7 +37,7 @@ void Scene_04::Awake()
 	{
 		const auto& parallax = make_shared<ParallaxBackground>("Parallax", 5);
 
-		// ¹è°æ ·¹ÀÌ¾î 2°³¾¿ »ı¼º
+		// ë°°ê²½ ë ˆì´ì–´ 2ê°œì”© ìƒì„±
 		for (int i = 0; i < 5; i++)
 		{
 			bgLayer[i] = make_shared<TextureRect>(Values::GetCenter() + Vector3(0, 0, 0), Vector3(Values::GetWinWidth() * 1.2f, Values::GetWinHeight() * 1.2f, 0), 0.0f, TexturePath + L"Background/Stage01/" + to_wstring(i + 1) + L".png");
@@ -78,13 +79,13 @@ void Scene_04::Awake()
 
 	// Wind
 	{
-		// ¿¹½Ã: ÇÃ·¹ÀÌ¾î¸¦ µÚ·Î ¹Ğ¾î³»´Â ¹Ù¶÷ ¿µ¿ª »ı¼º 
-		// ¿¹¸¦ µé¾î, xÃà ±âÁØÀ¸·Î 300~500 »çÀÌ, yÃàÀº ÀüÃ¼, z´Â 0 (2D °ÔÀÓÀÌ¶ó °¡Á¤)
+		// ì˜ˆì‹œ: í”Œë ˆì´ì–´ë¥¼ ë’¤ë¡œ ë°€ì–´ë‚´ëŠ” ë°”ëŒ ì˜ì—­ ìƒì„± 
+		// ì˜ˆë¥¼ ë“¤ì–´, xì¶• ê¸°ì¤€ìœ¼ë¡œ 300~500 ì‚¬ì´, yì¶•ì€ ì „ì²´, zëŠ” 0 (2D ê²Œì„ì´ë¼ ê°€ì •)
 		Vector3 windRegionMin = { 45, -1000, 0 };
 		Vector3 windRegionMax = { 600, 1000, 0 };
-		// ¹Ù¶÷ ¹æÇâ: ÇÃ·¹ÀÌ¾î¸¦ ¿ŞÂÊÀ¸·Î ¹Ğ¾î³½´Ù°í ÇÏ¸é, (-1, 0, 0)
+		// ë°”ëŒ ë°©í–¥: í”Œë ˆì´ì–´ë¥¼ ì™¼ìª½ìœ¼ë¡œ ë°€ì–´ë‚¸ë‹¤ê³  í•˜ë©´, (-1, 0, 0)
 		Vector3 windDirection = { -1, 0, 0 };
-		float windIntensity = 220.0f; // ÀûÀıÇÑ °ª Á¶Àı
+		float windIntensity = 220.0f; // ì ì ˆí•œ ê°’ ì¡°ì ˆ
 		
 		windObject = make_shared<Wind>(Values::GetCenter() + Vector3(360, 0, 0), Vector3(600, 600, 0), 0.0f, TexturePath + L"Object/Wind.png");
 		windObject->AddComponent(make_shared<WindZone>("WindZone", Values::GetCenter() + windRegionMin, Values::GetCenter() + windRegionMax, windDirection, windIntensity));
@@ -92,9 +93,9 @@ void Scene_04::Awake()
 
 	// Text
 	{
-		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"Àú±â ¾öÃ»³­ ¹Ù¶÷ÀÌ ºÒ¾î¿À´Â±º, Àú ¹ÙÀ§¸¦ µé°í°¡¸é ¹Ğ·Á³ªÁö ¾ÊÀ» ¼ö ÀÖ°Ú¾î.", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_01", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(0, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì €ê¸° ì—„ì²­ë‚œ ë°”ëŒì´ ë¶ˆì–´ì˜¤ëŠ”êµ°, ì € ë°”ìœ„ë¥¼ ë“¤ê³ ê°€ë©´ ë°€ë ¤ë‚˜ì§€ ì•Šì„ ìˆ˜ ìˆê² ì–´.", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_01", Values::GetCenter() + Vector3(-300, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
-		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ÀÌÁ¦ ´ÙÀ½À¸·Î °¡ÀÚ. (Enter¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.)", 25.0f, L"¸ŞÀÌÇÃ½ºÅä¸® OTF", BLACK));
+		text.push_back(std::make_shared<DialogTextBox>("Text_02", Values::GetCenter() + Vector3(0, -300, 0), Values::GetCenter() + Vector3(1280, -300, 0), Vector3(640, 200, 0), 0.0f, TexturePath + L"UI/Panel1.png", TexturePath + L"UI/Arrow.png", L"ì´ì œ ë‹¤ìŒìœ¼ë¡œ ê°€ì. (Enterë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.)", 25.0f, L"ë©”ì´í”ŒìŠ¤í† ë¦¬ OTF", BLACK));
 		textPoint.push_back(std::make_shared<Object>("TextPoint_02", Values::GetCenter() + Vector3(1380, 45, 0), Vector3(Values::ZeroVec3), 0.0f));
 	}
 
@@ -178,6 +179,9 @@ void Scene_04::Update()
 		}
 	}
 
+        Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
+        for (int i = 0; i < heartUI.size(); i++)
+                heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
 	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
 	for (int i = 0; i < heartUI.size(); i++)
 	{

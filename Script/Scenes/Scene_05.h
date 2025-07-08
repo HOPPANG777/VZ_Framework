@@ -12,7 +12,8 @@
 class Scene_05 : public Scene
 {
 public:
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+        Vector3 heartUIBase = {0, 0, 0};
+	// SceneÃ€Â»(Â¸Â¦) Ã…Ã«Ã‡Ã˜ Â»Ã³Â¼Ã“ÂµÃŠ
 	void Awake() override;
 	void Start() override;
 

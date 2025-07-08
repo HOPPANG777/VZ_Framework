@@ -12,7 +12,7 @@
 class Scene_04 : public Scene
 {
 public:
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// SceneÃ€Â»(Â¸Â¦) Ã…Ã«Ã‡Ã˜ Â»Ã³Â¼Ã“ÂµÃŠ
 	void Awake() override;
 	void Start() override;
 
@@ -41,6 +41,7 @@ private:
 	vector<shared_ptr<Object>> text;
 	vector<shared_ptr<Object>> textPoint;
 	vector<shared_ptr<Object>> heartUI;
+        Vector3 heartUIBase = {0, 0, 0};
 
 	shared_ptr<Object> puzzleRock;
 	shared_ptr<Object> bridge;
