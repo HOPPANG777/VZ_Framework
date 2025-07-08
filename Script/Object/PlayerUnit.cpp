@@ -6,7 +6,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
 {
     ResetHealth();
 
-    // ÅØ½ºÃ³ ¼Ò½º »ı¼º
+    // í…ìŠ¤ì²˜ ì†ŒìŠ¤ ìƒì„±
     const std::shared_ptr<Texture2D>& srcPlayerIdleR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_R.png");
     const std::shared_ptr<Texture2D>& srcPlayerIdleL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Idle_L.png");
     
@@ -49,7 +49,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
     const std::shared_ptr<Texture2D>& srcPlayerDieR = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Died_R.png");
     const std::shared_ptr<Texture2D>& srcPlayerDieL = make_shared<Texture2D>(TexturePath + L"Animation/Player/Player_Died_L.png");
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ »ı¼º (ÇÁ·¹ÀÓ ¼ö, ½ÃÀÛ À§Ä¡, Á¾·á À§Ä¡, ¿ªÀç»ı ¿©ºÎ µîÀº ÀÌ¹ÌÁö¿¡ ¸Â°Ô Á¶Á¤)
+    // ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ìƒì„± (í”„ë ˆì„ ìˆ˜, ì‹œì‘ ìœ„ì¹˜, ì¢…ë£Œ ìœ„ì¹˜, ì—­ì¬ìƒ ì—¬ë¶€ ë“±ì€ ì´ë¯¸ì§€ì— ë§ê²Œ ì¡°ì •)
     const std::shared_ptr<AnimationClip>& playerIdleR = make_shared<AnimationClip>(L"IdleR", srcPlayerIdleR.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerIdleR->GetWidth(), (float)srcPlayerIdleR->GetHeight()), false);
     const std::shared_ptr<AnimationClip>& playerIdleL = make_shared<AnimationClip>(L"IdleL", srcPlayerIdleL.get(), 4, 1, Values::ZeroVec2, Vector2((float)srcPlayerIdleL->GetWidth(), (float)srcPlayerIdleL->GetHeight()), true);
 
@@ -92,7 +92,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
     const std::shared_ptr<AnimationClip>& playerDieR = make_shared<AnimationClip>(L"DieR", srcPlayerDieR.get(), 27, 1, Values::ZeroVec2, Vector2((float)srcPlayerHitR->GetWidth(), (float)srcPlayerHitR->GetHeight()), false);
     const std::shared_ptr<AnimationClip>& playerDieL = make_shared<AnimationClip>(L"DieL", srcPlayerDieL.get(), 27, 1, Values::ZeroVec2, Vector2((float)srcPlayerHitL->GetWidth(), (float)srcPlayerHitL->GetHeight()), true);
 
-    // ¾Ö´Ï¸ŞÀÌÅÍ¿¡ ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ Ãß°¡
+    // ì• ë‹ˆë©”ì´í„°ì— ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ì¶”ê°€
     GetAnimator()->AddAnimClip(playerIdleR);
     GetAnimator()->AddAnimClip(playerIdleL);
     GetAnimator()->AddAnimClip(playerRunR);
@@ -128,6 +128,7 @@ PlayerUnit::PlayerUnit(const Vector3& position, const Vector3& scale, const floa
 
     this->AddComponent(make_shared<PlayerController>());
 	this->AddComponent(make_shared<InteractionComponent>());
+    this->AddComponent(make_shared<BlinkComponent>());
     this->AddComponent(make_shared<BoxCollider>(Vector3(0, 0, 0), scale, RED));
     if (this->GetComponent<BoxCollider>("BoxCollider")) COLLISION->AddCollider(this->GetComponent<BoxCollider>("BoxCollider"));
 }

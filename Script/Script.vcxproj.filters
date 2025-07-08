@@ -66,6 +66,9 @@
       <Filter>Component\SolidCollider</Filter>
     </ClCompile>
     <ClCompile Include="Component\HitComponent.cpp">
+    <ClCompile Include="Component\BlinkComponent.cpp">
+      <Filter>Component\BlinkComponent</Filter>
+    </ClCompile>
       <Filter>Component\HitComponent</Filter>
     </ClCompile>
     <ClCompile Include="Component\WallCollision.cpp">
@@ -168,6 +171,9 @@
       <Filter>Component\SolidCollider</Filter>
     </ClInclude>
     <ClInclude Include="Component\HitComponent.h">
+    <ClInclude Include="Component\BlinkComponent.h">
+      <Filter>Component\BlinkComponent</Filter>
+    </ClInclude>
       <Filter>Component\HitComponent</Filter>
     </ClInclude>
     <ClInclude Include="Component\WallCollision.h">
@@ -279,6 +285,9 @@
     </Filter>
     <Filter Include="Component\HitComponent">
       <UniqueIdentifier>{913956e3-a403-49e2-baab-7d4d129fd333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\BlinkComponent">
+      <UniqueIdentifier>{953db162-0110-42a0-83a6-a45e9c29a635}</UniqueIdentifier>
     </Filter>
     <Filter Include="Component\Collision">
       <UniqueIdentifier>{534cb469-44af-4d52-aeb9-5f5c2039f6a8}</UniqueIdentifier>
