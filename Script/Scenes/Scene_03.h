@@ -11,7 +11,6 @@
 class Scene_03 : public Scene
 {
 public:
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	void Awake() override;
 	void Start() override;
 

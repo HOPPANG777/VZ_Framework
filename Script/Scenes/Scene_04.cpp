@@ -11,12 +11,17 @@ void Scene_04::Awake()
 		lumberAxe = make_shared<LumberAxe>(Values::GetCenter() + Vector3(-550, -30, 0));
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		SCENE->SetPlayer(testPlayer);
-		heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
-		Vector3 heartPos = Values::GetCenter() + heartUIBase;
-		for (int i = 0; i < 5; i++)
-		{
-			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(50, 50, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
-		}
+		//heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
+		//Vector3 heartPos = Values::GetCenter() + heartUIBase;
+
+		//int maxHp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetMaxHealth();
+		//int curHp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
+
+		//for (int i = 0; i < dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetMaxHealth(); i++)
+		//{
+		//	std::wstring tex = (i < curHp) ? TexturePath + L"UI/FullHearts.png" : TexturePath + L"UI/EmptyHearts.png";
+		//	heartUI.push_back(make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(50, 50, 0), 0.0f, tex, TransformType::Rect));
+		//}
 	}
 
 	// Floor
@@ -136,7 +141,7 @@ void Scene_04::Destroy()
 	for (auto& floors : floor) if (floors != nullptr) floors.reset();
 	for (auto& t : text) if (t != nullptr) t.reset();
 	for (auto& tp : textPoint) if (tp != nullptr) tp.reset();
-	for (auto& hearts : heartUI) if (hearts != nullptr) hearts.reset();
+	//for (auto& hearts : heartUI) if (hearts != nullptr) hearts.reset();
 	SCENE->ResetPlayer();
 	COLLISION->RemoveAllCollider();
 	SOUNDS->Stop("Wind");
@@ -161,7 +166,7 @@ void Scene_04::Update()
 	if (testPlayer != nullptr) testPlayer->Update();
 	if (windObject != nullptr) windObject->Update();
 	if (bridge != nullptr) bridge->Update();
-	for (const auto& h : heartUI) if (h != nullptr) h->Update();
+	//for (const auto& h : heartUI) if (h != nullptr) h->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 1.5f);
 
@@ -179,16 +184,22 @@ void Scene_04::Update()
 		}
 	}
 
-	Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
-	for (int i = 0; i < heartUI.size(); i++)
-		heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
-	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
-	for (int i = 0; i < heartUI.size(); i++)
-	{
-		auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
-		if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
-		else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
-	}
+	//Vector3 base = Values::GetCenter() + heartUIBase;
+	//base.x = std::round(base.x);
+	//base.y = std::round(base.y);
+
+	//for (int i = 0; i < heartUI.size(); i++)
+	//{
+	//	heartUI[i]->SetPosition(base + Vector3(i * 40, 0, 0));
+	//}
+
+	//int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
+	//for (int i = 0; i < heartUI.size(); i++)
+	//{
+	//	auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
+	//	if (i < hp) tex->SetImage(TexturePath + L"UI/FullHearts.png");
+	//	else tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
+	//}
 	if (testPlayer->GetPosition().y < -100)
 	{
 		dynamic_pointer_cast<PlayerUnit>(testPlayer)->DecreaseHealth();
@@ -219,7 +230,7 @@ void Scene_04::Render()
 	if (windObject != nullptr) windObject->Render();
 	for (const auto& t : text) if (t != nullptr) t->Render();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
-	for (const auto& h : heartUI) if (h != nullptr) h->Render();
+	//for (const auto& h : heartUI) if (h != nullptr) h->Render();
 }
 
 void Scene_04::PostRender()

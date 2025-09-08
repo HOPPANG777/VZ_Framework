@@ -8,8 +8,8 @@ struct FontBrushDesc
 	bool operator==(const FontBrushDesc& val) const
 	{
 		return	color.R() == val.color.R() &&
-			color.G() == val.color.G() &&
-			color.B() == val.color.B() &&
-			color.A() == val.color.A();
+				color.G() == val.color.G() &&
+				color.B() == val.color.B() &&
+				color.A() == val.color.A();
 	}
 };

@@ -5,6 +5,8 @@ void Scene_06::Awake()
 {
 	isLoaded = false;
 
+	
+
 	isLoaded = true;
 }
 

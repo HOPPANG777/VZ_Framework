@@ -13,10 +13,14 @@ void Scene_03::Awake()
 		lumberAxe->GetComponent<LumberAxeComponent>("LumberAxeComponent")->SetTarget(testPlayer.get());
 		heartUIBase = Vector3(-Values::GetWinWidth() * 0.45f, Values::GetWinHeight() * 0.45f, 0);
 		Vector3 heartPos = Values::GetCenter() + heartUIBase;
-		for (int i = 0; i < 5; i++)
-		{
-			heartUI.push_back(std::make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(50, 50, 0), 0.0f, TexturePath + L"UI/FullHearts.png", TransformType::Rect));
-		}
+		//int maxHp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetMaxHealth();
+		//int curHp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
+
+		//for (int i = 0; i < dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetMaxHealth(); i++)
+		//{
+		//	std::wstring tex = (i < curHp) ? TexturePath + L"UI/FullHearts.png" : TexturePath + L"UI/EmptyHearts.png";
+		//	heartUI.push_back(make_shared<TextureRect>(heartPos + Vector3(i * 40, 0, 0), Vector3(50, 50, 0), 0.0f, tex, TransformType::Rect));
+		//}
 		playerStartPos = Values::GetCenter() + Vector3(-550, -310, 0);
 		logStartPos = Values::GetCenter() + Vector3(260, -65, 0);
 	}
@@ -124,7 +128,7 @@ void Scene_03::Destroy()
 	for (auto& t : text)if (t != nullptr) t.reset();
 	for (auto& tp : textPoint)if (tp != nullptr) tp.reset();
 	for (auto& l : log) if (l != nullptr) l.reset();
-	for (auto& hearts : heartUI) if (hearts != nullptr) hearts.reset();
+	//for (auto& hearts : heartUI) if (hearts != nullptr) hearts.reset();
 	if (testPlayer != nullptr) testPlayer.reset();
 	if (lumberAxe != nullptr) lumberAxe.reset();
 	if (backgroundObject != nullptr) backgroundObject.reset();
@@ -147,7 +151,7 @@ void Scene_03::Update()
 	if (testPlayer != nullptr) testPlayer->Update();
 	if (lumberAxe != nullptr) lumberAxe->Update();
 	if (backgroundObject != nullptr) backgroundObject->Update();
-	for (const auto& h : heartUI) if (h != nullptr) h->Update();
+	//for (const auto& h : heartUI) if (h != nullptr) h->Update();
 
 	CAMERA->UpdateHorizontalScroll(testPlayer.get(), 0.5f, 2.0f);
 	CAMERA->UpdateVerticalScroll(testPlayer.get(), 0.5f, 0.5f);
@@ -189,29 +193,30 @@ void Scene_03::Update()
 		isTest2 = true;
 	}
 
-	Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
-	for (int i = 0; i < heartUI.size(); i++)
-	{
-		heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
-	}
+	//Vector3 basePos = CAMERA->GetPosition() + Values::GetCenter() + heartUIBase;
+	//for (int i = 0; i < heartUI.size(); i++)
+	//{
+	//	heartUI[i]->SetPosition(basePos + Vector3(i * 40, 0, 0));
+	//}
 
-	int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
-	for (int i = 0; i < heartUI.size(); i++)
-	{
-		auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
-		if (i < hp)
-		{
-			tex->SetImage(TexturePath + L"UI/FullHearts.png");
-		}
-		else
-		{
-			tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
-		}
-	}
+	//int hp = dynamic_pointer_cast<PlayerUnit>(testPlayer)->GetHealth();
+	//for (int i = 0; i < heartUI.size(); i++)
+	//{
+	//	auto tex = dynamic_pointer_cast<TextureRect>(heartUI[i]);
+	//	if (i < hp)
+	//	{
+	//		tex->SetImage(TexturePath + L"UI/FullHearts.png");
+	//	}
+	//	else
+	//	{
+	//		tex->SetImage(TexturePath + L"UI/EmptyHearts.png");
+	//	}
+	//}
 	if (!isFalling && testPlayer->GetPosition().y < -100)
 	{
 		isFalling = true;
 		fallTimer = 0.0f;
+		
 	}
 
 	if (isFalling)
@@ -263,7 +268,7 @@ void Scene_03::Render()
 	if (house[0] != nullptr) house[0]->Render();
 	for (const auto& tp : textPoint) if (tp != nullptr) tp->Render();
 	for (const auto& t : text) if (t != nullptr) t->Render();
-	for (const auto& h : heartUI) if (h != nullptr) h->Render();
+	//for (const auto& h : heartUI) if (h != nullptr) h->Render();
 }
 
 void Scene_03::PostRender()

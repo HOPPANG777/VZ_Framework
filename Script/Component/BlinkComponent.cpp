@@ -37,7 +37,6 @@ void BlinkComponent::Update()
     {
         active = false;
         IColorable* colorable = dynamic_cast<IColorable*>(GetOwner());
-        if (colorable)
-            colorable->SetColor(originalColor);
+        if (colorable) colorable->SetColor(originalColor);
     }
 }

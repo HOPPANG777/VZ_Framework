@@ -20,6 +20,7 @@ public:
 	void ResetHealth() { currentHealth = maxHealth; }
 	void DecreaseHealth(int amount = 1) { currentHealth = max(0, currentHealth - amount); }
 	int GetHealth() const { return currentHealth; }
+	int GetMaxHealth() const { return maxHealth; }
 
 public:
 	void Update();
