@@ -5,7 +5,7 @@ void PushableComponent::Update()
 {
     if (isBeingPushed)
     {
-        Vector3 pushDir = Vector3::Zero;
+        Vector3 pushDir = Values::ZeroVec3;
         if (Keyboard::Get()->Press('A')) pushDir.x = -1;
         if (Keyboard::Get()->Press('D')) pushDir.x = 1;
 

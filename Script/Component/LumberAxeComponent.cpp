@@ -3,7 +3,7 @@
 
 // 생성자: 초기 상태, 속도, 중력, 직선 이동 시간 설정
 LumberAxeComponent::LumberAxeComponent(const string& name)
-    : Component(name), state(AxeState::AXE_IDLE_R), velocity(Vector3::Zero), gravity(980.0f), returnDuration(0.5f), straightFlightTime(0.3f)
+    : Component(name), state(AxeState::AXE_IDLE_R), velocity(Values::ZeroVec3), gravity(980.0f), returnDuration(0.5f), straightFlightTime(0.3f)
 {
 
 }
@@ -105,7 +105,7 @@ void LumberAxeComponent::Recall()
 void LumberAxeComponent::Land()
 {
     state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
-    velocity = Vector3::Zero;
+    velocity = Values::ZeroVec3;
     isLand = true;
 }
 
@@ -176,7 +176,7 @@ void LumberAxeComponent::UpdateReturningState(float dt)
     float t = returnTimer / returnDuration;
     if (t > 1.0f) t = 1.0f;
 
-    Vector3 tPos = target ? target->GetPosition() : Vector3::Zero;
+    Vector3 tPos = target ? target->GetPosition() : Values::ZeroVec3;
     Vector3 newPos = QuadraticBezier(returnStart, returnControl, tPos, t);
     owner->SetPosition(newPos);
 
@@ -184,7 +184,7 @@ void LumberAxeComponent::UpdateReturningState(float dt)
     {
         isLand = false;
         state = IsFacingLeft(currentAnimation) ? AxeState::AXE_IDLE_L : AxeState::AXE_IDLE_R;
-        velocity = Vector3::Zero;
+        velocity = Values::ZeroVec3;
         owner->SetPosition(tPos);
     }
 }
