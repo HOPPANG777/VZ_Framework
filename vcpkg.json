@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "vz-framework",
+  "version": "0.0.1",
+  "dependencies": [
+    { "name": "directxtk" },
+    {
+      "name": "directxtex",
+      "features": [ "dx11" ]
+    },
+    { "name": "directxmesh" },
+    { "name": "xaudio2redist" },
+    {
+      "name": "imgui",
+      "features": [ "win32-binding", "dx11-binding", "docking-experimental" ]
+    },
+    { "name": "imguizmo" },
+    { "name": "freetype" },
+    { "name": "stb" },
+    { "name": "fmt" },
+    { "name": "spdlog" },
+    { "name": "nlohmann-json" },
+    { "name": "magic-enum" },
+    { "name": "tinyxml2" }
+  ]
+}
